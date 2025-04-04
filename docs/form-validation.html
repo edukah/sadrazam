@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sadrazam – Form Validation Showcase</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/bold/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/light/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <script type="text/javascript" src="assets/js/script.js"></script>
+    <link rel="stylesheet" href="assets/sadrazam.min.css">
+    <script type="text/javascript" src="assets/sadrazam.min.js"></script>
+    <style>
+        .demo-form {
+            max-width: 480px;
+        }
+
+        .demo-form .form-group {
+            margin-bottom: 14px;
+        }
+
+        .demo-form .form-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .demo-form .form-group label {
+            display: block;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text-color);
+            margin-bottom: 4px;
+        }
+
+        .demo-form .form-group input,
+        .demo-form .form-group select,
+        .demo-form .form-group textarea {
+            width: 100%;
+        }
+
+        .demo-form .form-actions {
+            margin-top: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .result-box {
+            margin-top: 10px;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            display: none;
+        }
+
+        .result-box.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .result-box.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        body.dark-mode .result-box.success {
+            background: #1e4620;
+            color: #a3d9a5;
+            border-color: #2d6a30;
+        }
+
+        body.dark-mode .result-box.error {
+            background: #4a1a1c;
+            color: #f0a3a5;
+            border-color: #6a2d2f;
+        }
+
+        .radio-group,
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .radio-group label,
+        .checkbox-group label {
+            display: flex !important;
+            align-items: center;
+            gap: 6px;
+            font-weight: normal !important;
+            cursor: pointer;
+        }
+
+        .note {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .form-level-msg {
+            margin-top: 10px;
+            font-size: 0.82rem;
+            color: #d63031;
+        }
+    </style>
+</head>
+
+<body>
+<script>if(localStorage.getItem("dark-mode"))document.body.classList.add("dark-mode")</script>
+    <header>
+        <nav class="top-navbar">
+            <div class="nav-container">
+                <a href="index.html" class="nav-logo">Sadrazam</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li>
+                        <a href="javascript:void(0)" onclick="openPopup(); return false;">Examples</a>
+                        <div class="navi-popup-overlay" id="examplesPopupOverlay"></div>
+                        <div class="navi-popup" id="examplesPopup">
+                            <h3>Examples</h3>
+                            <ul>
+                                <li><a href="buttons.html">Button</a></li>
+                                <li><a href="forms.html">Form</a></li>
+                                <li><a href="form-patterns.html">Form Patterns</a></li>
+                                <li><a href="links.html">Link</a></li>
+                                <li><a href="switches.html">Switch</a></li>
+                                <li><a href="autocomplete.html">Autocomplete</a></li>
+                                <li><a href="backdrop.html">Backdrop</a></li>
+                                <li><a href="hovermenu.html">Hovermenu</a></li>
+                                <li><a href="infinite-scroll.html">Infinite Scroll</a></li>
+                                <li><a href="snackbar.html">Snackbar</a></li>
+                                <li><a href="modals.html">Modal</a></li>
+                                <li><a href="popovers.html">Popover</a></li>
+                                <li><a href="slide-menu.html">Slide Menu</a></li>
+                                <li><a href="spinners.html">Spinner</a></li>
+                                <li><a href="tabs.html">Tabs</a></li>
+                                <li><a href="tooltips.html">Tooltip</a></li>
+                                <li><a href="form-validation.html">Form Validation</a></li>
+                                <li><a href="autosize-textarea.html">Autosize Textarea</a></li>
+                                <li><a href="autosize-select.html">Autosize Select</a></li>
+                                <li><a href="ajax.html">Ajax</a></li>
+                                <li><a href="grid.html">Grid</a></li>
+                                <li><a href="spacing.html">Spacing</a></li>
+                                <li><a href="colors.html">Colors</a></li>
+                                <li><a href="typography.html">Typography</a></li>
+                            </ul>
+                            <button class="close-popup" onclick="closePopup()">&#10005;</button>
+                        </div>
+                    </li>
+                    <li><a href="https://github.com/edukah/sadrazam" target="_blank">GitHub</a></li>
+                </ul>
+                <div class="dark-mode-button-container">
+                    <div class="mode-toggle-switch" onclick="toggleMode()"></div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+
+        <h1>Sadrazam – Form Validation Showcase</h1>
+        <p class="subtitle">Data-attribute driven validation with real-time feedback, powered by <span class="code">Sadrazam.Form</span></p>
+
+        <!-- ==================== HOW IT WORKS ==================== -->
+        <div class="section">
+            <h2 class="section-title">How It Works</h2>
+            <p class="section-desc">The validation system is driven entirely by HTML data attributes -- no extra JS wiring needed per field</p>
+
+            <div class="row">
+                <span class="label">Initialize</span>
+                <span class="code">Sadrazam.Form.perform('form')</span>
+            </div>
+            <div class="row">
+                <span class="label">Mark a field</span>
+                <span class="code">data-fvalidate="required|email"</span>
+            </div>
+            <div class="row">
+                <span class="label">Custom message</span>
+                <span class="code">data-fvalidate-message="Custom error text"</span>
+            </div>
+            <div class="row">
+                <span class="label">Display target</span>
+                <span class="code">data-fvalidate-display="placeholder"</span> or a CSS selector
+            </div>
+            <div class="row">
+                <span class="label">Manual validate</span>
+                <span class="code">Sadrazam.Form.validate(element)</span>
+            </div>
+
+            <hr class="divider">
+
+            <p class="section-desc">Available rules: <span class="code">required</span> <span class="code">email</span> <span class="code">min_length:N</span> <span class="code">max_length:N</span> <span class="code">min_value:N</span> <span class="code">max_value:N</span> <span class="code">matches:fieldName</span> <span class="code">not_match:fieldName</span> <span class="code">less_than:fieldName</span> <span class="code">greater_than:fieldName</span> <span class="code">regex:pattern</span></p>
+        </div>
+
+        <!-- ==================== REQUIRED FIELDS ==================== -->
+        <div class="section">
+            <h2 class="section-title">1. Required Fields</h2>
+            <p class="section-desc">The <span class="code">required</span> rule works on text inputs, selects, checkboxes, and radio buttons. Submit the empty form to see errors.</p>
+
+            <form id="form-required" class="demo-form" novalidate>
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" name="fullname" placeholder="Enter your full name" data-fvalidate="required">
+                </div>
+
+                <div class="form-group">
+                    <label>Country</label>
+                    <select name="country" data-fvalidate="required">
+                        <option value="">-- Select a country --</option>
+                        <option value="us">United States</option>
+                        <option value="uk">United Kingdom</option>
+                        <option value="de">Germany</option>
+                        <option value="tr">Turkey</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Gender</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="gender" value="male" data-fvalidate="required"> Male</label>
+                        <label><input type="radio" name="gender" value="female" data-fvalidate="required"> Female</label>
+                        <label><input type="radio" name="gender" value="other" data-fvalidate="required"> Other</label>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="bttn bttn--md-rectangle bttn--pri">
+                        <i class="ph-bold ph-paper-plane-tilt"></i>&nbsp; Submit
+                    </button>
+                    <button type="reset" class="bttn bttn--md-rectangle bttn--ghost">Reset</button>
+                    <span class="code">data-fvalidate="required"</span>
+                </div>
+                <div class="result-box" id="result-required"></div>
+            </form>
+        </div>
+
+        <!-- ==================== EMAIL VALIDATION ==================== -->
+        <div class="section">
+            <h2 class="section-title">2. Email Validation</h2>
+            <p class="section-desc">Combine <span class="code">required</span> with <span class="code">email</span> to enforce both presence and format. The email rule uses the pattern <span class="code">/^[^\s@]+@[^\s@]+\.[^\s@]+$/</span>.</p>
+
+            <form id="form-email" class="demo-form" novalidate>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="text" name="email" placeholder="user@example.com" data-fvalidate="required|email">
+                </div>
+
+                <div class="form-group">
+                    <label>Optional Email (no required rule)</label>
+                    <input type="text" name="optional_email" placeholder="Leave blank or enter valid email" data-fvalidate="email">
+                    <p class="note">The <span class="code">email</span> rule alone only triggers when the field has a value.</p>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="bttn bttn--md-rectangle bttn--pri">
+                        <i class="ph-bold ph-check"></i>&nbsp; Validate
+                    </button>
+                    <span class="code">data-fvalidate="required|email"</span>
+                </div>
+                <div class="result-box" id="result-email"></div>
+            </form>
+        </div>
+
+        <!-- ==================== MIN/MAX LENGTH ==================== -->
+        <div class="section">
+            <h2 class="section-title">3. Min / Max Length</h2>
+            <p class="section-desc">Use <span class="code">min_length:N</span> and <span class="code">max_length:N</span> to constrain character count. Validation is debounced at 300ms during live typing.</p>
+
+            <form id="form-length" class="demo-form" novalidate>
+                <div class="form-group">
+                    <label>Username (3 to 20 characters)</label>
+                    <input type="text" name="username" placeholder="Pick a username" data-fvalidate="required|min_length:3|max_length:20">
+                    <p class="note">Try typing fewer than 3 or more than 20 characters.</p>
+                </div>
+
+                <div class="form-group">
+                    <label>Bio (max 140 characters)</label>
+                    <textarea name="bio" rows="3" placeholder="Tell us about yourself..." data-fvalidate="max_length:140"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Password (min 8 characters)</label>
+                    <input type="password" name="password_len" placeholder="Enter a strong password" data-fvalidate="required|min_length:8">
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="bttn bttn--md-rectangle bttn--pri">
+                        <i class="ph-bold ph-check"></i>&nbsp; Validate
+                    </button>
+                    <span class="code">data-fvalidate="required|min_length:3|max_length:20"</span>
+                </div>
+                <div class="result-box" id="result-length"></div>
+            </form>
+        </div>
+
+        <!-- ==================== MIN/MAX VALUE ==================== -->
+        <div class="section">
+            <h2 class="section-title">4. Min / Max Value (Numeric)</h2>
+            <p class="section-desc">Use <span class="code">min_value:N</span> and <span class="code">max_value:N</span> for numeric range validation. Also supports <span class="code">less_than:fieldName</span> and <span class="code">greater_than:fieldName</span> for cross-field comparison.</p>
+
+            <form id="form-value" class="demo-form" novalidate>
+                <div class="form-group">
+                    <label>Age (18 to 120)</label>
+                    <input type="number" name="age" placeholder="Enter your age" data-fvalidate="required|min_value:18|max_value:120">
+                </div>
+
+                <div class="form-group">
+                    <label>Min Price</label>
+                    <input type="number" name="min_price" placeholder="e.g. 10" data-fvalidate="required|min_value:0|less_than:max_price">
+                </div>
+
+                <div class="form-group">
+                    <label>Max Price</label>
+                    <input type="number" name="max_price" placeholder="e.g. 1000" data-fvalidate="required|min_value:0|greater_than:min_price">
+                    <p class="note"><span class="code">less_than:max_price</span> on Min Price ensures it stays below Max Price, and vice versa.</p>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="bttn bttn--md-rectangle bttn--pri">
+                        <i class="ph-bold ph-check"></i>&nbsp; Validate
+                    </button>
+                    <span class="code">data-fvalidate="required|min_value:18|max_value:120"</span>
+                </div>
+                <div class="result-box" id="result-value"></div>
+            </form>
+        </div>
+
+        <!-- ==================== FIELD MATCHING ==================== -->
+        <div class="section">
+            <h2 class="section-title">5. Field Matching</h2>
+            <p class="section-desc">Use <span class="code">matches:fieldName</span> to ensure two fields have the same value (e.g. password confirmation). Use <span class="code">not_match:fieldName</span> to ensure they differ (e.g. new password vs old password).</p>
+
+            <form id="form-match" class="demo-form" novalidate>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" name="password" placeholder="Create a password" data-fvalidate="required|min_length:6">
+                </div>
+
+                <div class="form-group">
+                    <label>Confirm Password</label>
+                    <input type="password" name="password_confirm" placeholder="Repeat your password" data-fvalidate="required|matches:password">
+                </div>
+
+                <hr class="divider">
+
+                <div class="form-group">
+                    <label>Current Password</label>
+                    <input type="password" name="current_password" placeholder="Enter current password" data-fvalidate="required">
+                </div>
+
+                <div class="form-group">
+                    <label>New Password (must differ from current)</label>
+                    <input type="password" name="new_password" placeholder="Enter new password" data-fvalidate="required|min_length:6|not_match:current_password">
+                    <p class="note"><span class="code">not_match:current_password</span> prevents reuse of the same password.</p>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="bttn bttn--md-rectangle bttn--pri">
+                        <i class="ph-bold ph-check"></i>&nbsp; Validate
+                    </button>
+                    <span class="code">data-fvalidate="required|matches:password"</span>
+                </div>
+                <div class="result-box" id="result-match"></div>
+            </form>
+        </div>
+
+        <!-- ==================== REGEX VALIDATION ==================== -->
+        <div class="section">
+            <h2 class="section-title">6. Regex Pattern Validation</h2>
+            <p class="section-desc">Use <span class="code">regex:pattern</span> for custom patterns. The value after <span class="code">regex:</span> is passed directly to <span class="code">new RegExp()</span>.</p>
+
+            <form id="form-regex" class="demo-form" novalidate>
+                <div class="form-group">
+                    <label>Phone Number (digits, dashes, spaces only)</label>
+                    <input type="text" name="phone" placeholder="+1 555-123-4567" data-fvalidate="required|regex:^[0-9+\-\s()]+$">
+                </div>
+
+                <div class="form-group">
+                    <label>Hex Color Code</label>
+                    <input type="text" name="hex_color" placeholder="#FF5733" data-fvalidate="required|regex:^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$" data-fvalidate-message="Please enter a valid hex color (e.g. #FF5733)">
+                    <p class="note">This field uses <span class="code">data-fvalidate-message</span> for a custom error instead of the default "Regex mismatch" message.</p>
+                </div>
+
+                <div class="form-group">
+                    <label>Slug (lowercase letters, numbers, hyphens)</label>
+                    <input type="text" name="slug" placeholder="my-page-slug" data-fvalidate="required|regex:^[a-z0-9]+(-[a-z0-9]+)*$" data-fvalidate-message="Only lowercase letters, numbers, and hyphens are allowed.">
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="bttn bttn--md-rectangle bttn--pri">
+                        <i class="ph-bold ph-check"></i>&nbsp; Validate
+                    </button>
+                    <span class="code">data-fvalidate="required|regex:^[a-z0-9-]+$"</span>
+                </div>
+                <div class="result-box" id="result-regex"></div>
+            </form>
+        </div>
+
+        <!-- ==================== CUSTOM ERROR DISPLAY ==================== -->
+        <div class="section">
+            <h2 class="section-title">7. Error Display Options</h2>
+            <p class="section-desc">Control where and how error messages appear using <span class="code">data-fvalidate-display</span> and <span class="code">data-fvalidate-message</span>.</p>
+
+            <form id="form-display" class="demo-form" novalidate>
+                <div class="form-group">
+                    <label>Default (error appended to parent)</label>
+                    <input type="text" name="default_display" placeholder="Leave empty and submit" data-fvalidate="required">
+                    <p class="note">Error message is appended as a <span class="code">&lt;span&gt;</span> inside the parent element.</p>
+                </div>
+
+                <hr class="divider">
+
+                <div class="form-group">
+                    <label>Placeholder Mode</label>
+                    <input type="text" name="placeholder_display" placeholder="This placeholder will change on error" data-fvalidate="required" data-fvalidate-display="placeholder">
+                    <p class="note">With <span class="code">data-fvalidate-display="placeholder"</span>, the error replaces the placeholder text.</p>
+                </div>
+
+                <hr class="divider">
+
+                <div class="form-group">
+                    <label>Custom Target (CSS selector)</label>
+                    <input type="text" name="custom_target" placeholder="Error appears below in the red box" data-fvalidate="required|email" data-fvalidate-display="#custom-error-target">
+                </div>
+                <div id="custom-error-target" style="min-height: 24px; padding: 4px 8px; background: var(--bg-subtle); border-radius: 4px; border: 1px dashed #d63031;"></div>
+                <p class="note">The error is appended to <span class="code">#custom-error-target</span> via <span class="code">data-fvalidate-display="#custom-error-target"</span>.</p>
+
+                <hr class="divider">
+
+                <div class="form-group">
+                    <label>Custom Message Override</label>
+                    <input type="text" name="custom_msg" placeholder="Enter your company name" data-fvalidate="required" data-fvalidate-message="Company name is mandatory for business accounts.">
+                    <p class="note"><span class="code">data-fvalidate-message</span> overrides the default language-based error text.</p>
+                </div>
+
+                <hr class="divider">
+
+                <div class="form-group">
+                    <label>Named Error Container (<span class="code">id="err-fieldname"</span>)</label>
+                    <input type="text" name="named_err" placeholder="Error goes to #err-named_err" data-fvalidate="required">
+                </div>
+                <div id="err-named_err" style="min-height: 20px;"></div>
+                <p class="note">If no <span class="code">data-fvalidate-display</span> is set, the system also checks for an element with <span class="code">id="err-{name}"</span> before falling back to the parent.</p>
+
+                <div class="form-actions">
+                    <button type="submit" class="bttn bttn--md-rectangle bttn--pri">
+                        <i class="ph-bold ph-check"></i>&nbsp; Submit
+                    </button>
+                    <span class="code">data-fvalidate-display="placeholder | #selector"</span>
+                </div>
+                <div class="result-box" id="result-display"></div>
+            </form>
+        </div>
+
+        <!-- ==================== FORM-LEVEL MESSAGE ==================== -->
+        <div class="section">
+            <h2 class="section-title">8. Form-Level Messages</h2>
+            <p class="section-desc">Add <span class="code">data-fvalidate-message</span> on the <span class="code">&lt;form&gt;</span> element itself to show a summary message when validation fails. Use <span class="code">data-fvalidate-display</span> to control where it appears.</p>
+
+            <form id="form-formlevel" class="demo-form" novalidate data-fvalidate-message="Please correct the errors above before submitting." data-fvalidate-display="#form-level-error-area">
+                <div class="form-group">
+                    <label>First Name</label>
+                    <input type="text" name="first_name_fl" placeholder="Required" data-fvalidate="required">
+                </div>
+
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="text" name="email_fl" placeholder="Required + valid email" data-fvalidate="required|email">
+                </div>
+
+                <div id="form-level-error-area" class="form-level-msg"></div>
+
+                <div class="form-actions">
+                    <button type="submit" class="bttn bttn--md-rectangle bttn--danger">
+                        <i class="ph-bold ph-warning"></i>&nbsp; Submit
+                    </button>
+                    <span class="code">data-fvalidate-display="#form-level-error-area"</span>
+                </div>
+                <div class="result-box" id="result-formlevel"></div>
+            </form>
+        </div>
+
+        <!-- ==================== MANUAL VALIDATION ==================== -->
+        <div class="section">
+            <h2 class="section-title">9. Manual / Programmatic Validation</h2>
+            <p class="section-desc">Call <span class="code">Sadrazam.Form.validate(element)</span> directly on a form or a single input for custom validation flows outside of form submission.</p>
+
+            <form id="form-manual" class="demo-form" novalidate>
+                <div class="form-group">
+                    <label>Coupon Code (required, 5-10 chars)</label>
+                    <input type="text" name="coupon" id="coupon-input" placeholder="SAVE20" data-fvalidate="required|min_length:5|max_length:10">
+                </div>
+
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="text" name="manual_email" id="manual-email-input" placeholder="user@example.com" data-fvalidate="required|email">
+                </div>
+
+                <div class="form-actions" style="flex-wrap: wrap;">
+                    <button type="button" class="bttn bttn--md-rectangle bttn--sec" onclick="validateSingleField()">
+                        <i class="ph-bold ph-cursor-click"></i>&nbsp; Validate Coupon Only
+                    </button>
+                    <button type="button" class="bttn bttn--md-rectangle bttn--pri" onclick="validateEntireForm()">
+                        <i class="ph-bold ph-checks"></i>&nbsp; Validate Entire Form
+                    </button>
+                </div>
+                <p class="note" style="margin-top:8px;"><span class="code">Sadrazam.Form.validate(inputEl)</span> validates a single field; <span class="code">Sadrazam.Form.validate(formEl)</span> validates all fields in the form.</p>
+                <div class="result-box" id="result-manual"></div>
+            </form>
+        </div>
+
+        <!-- ==================== PASSWORD VISIBILITY ==================== -->
+        <div class="section">
+            <h2 class="section-title">10. Password Visibility Toggle</h2>
+            <p class="section-desc">Use <span class="code">Sadrazam.Form.togglePasswordVisibility(button)</span> to toggle between password and text input types. The button must be the next sibling of the input.</p>
+
+            <form id="form-pw-toggle" class="demo-form" novalidate>
+                <div class="form-group">
+                    <label>Password</label>
+                    <div class="form-toggle-password-visibility">
+                        <input type="password" name="pw_toggle" placeholder="Enter password" data-fvalidate="required|min_length:8">
+                        <button type="button" onclick="Sadrazam.Form.togglePasswordVisibility(this)">
+                            <i class="ph ph-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="bttn bttn--md-rectangle bttn--pri">
+                        <i class="ph-bold ph-sign-in"></i>&nbsp; Sign In
+                    </button>
+                    <span class="code">Sadrazam.Form.togglePasswordVisibility(button)</span>
+                </div>
+                <div class="result-box" id="result-pw-toggle"></div>
+            </form>
+        </div>
+
+        <!-- ==================== COMPLETE EXAMPLE ==================== -->
+        <div class="section">
+            <h2 class="section-title">11. Complete Registration Form</h2>
+            <p class="section-desc">A realistic example combining multiple validation rules: required, email, min_length, matches, regex, and custom messages.</p>
+
+            <form id="form-complete" class="demo-form" novalidate data-fvalidate-message="Please fix all errors before submitting." data-fvalidate-display="#complete-form-error">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" name="reg_fullname" placeholder="Jane Doe" data-fvalidate="required|min_length:2|max_length:50">
+                </div>
+
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="text" name="reg_email" placeholder="jane@example.com" data-fvalidate="required|email">
+                </div>
+
+                <div class="form-group">
+                    <label>Phone</label>
+                    <input type="text" name="reg_phone" placeholder="+1 555-0123" data-fvalidate="regex:^[0-9+\-\s()]+$" data-fvalidate-message="Please enter a valid phone number.">
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <div class="form-toggle-password-visibility">
+                        <input type="password" name="reg_password" placeholder="Min 8 characters" data-fvalidate="required|min_length:8">
+                        <button type="button" onclick="Sadrazam.Form.togglePasswordVisibility(this)">
+                            <i class="ph ph-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Confirm Password</label>
+                    <input type="password" name="reg_password_confirm" placeholder="Re-enter password" data-fvalidate="required|matches:reg_password">
+                </div>
+
+                <div class="form-group">
+                    <label>Age</label>
+                    <input type="number" name="reg_age" placeholder="Must be 18 or older" data-fvalidate="required|min_value:18|max_value:120">
+                </div>
+
+                <div class="form-group">
+                    <label>Website (optional)</label>
+                    <input type="text" name="reg_website" placeholder="https://example.com" data-fvalidate="regex:^https?://.+" data-fvalidate-message="Please enter a valid URL starting with http:// or https://">
+                </div>
+
+                <div class="form-group">
+                    <label>Account Type</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="reg_type" value="personal" data-fvalidate="required"> Personal</label>
+                        <label><input type="radio" name="reg_type" value="business" data-fvalidate="required"> Business</label>
+                    </div>
+                </div>
+
+                <div id="complete-form-error" class="form-level-msg"></div>
+
+                <div class="form-actions">
+                    <button type="submit" class="bttn bttn--md-rectangle bttn--pri bttn--block">
+                        <i class="ph-bold ph-user-plus"></i>&nbsp; Create Account
+                    </button>
+                </div>
+                <div class="result-box" id="result-complete"></div>
+            </form>
+        </div>
+
+        <!-- ==================== DISABLED FIELD BEHAVIOR ==================== -->
+        <div class="section">
+            <h2 class="section-title">12. Disabled Field Behavior</h2>
+            <p class="section-desc">Disabled inputs are automatically skipped during validation. Errors are cleared when a field becomes disabled. Toggle the checkbox to enable/disable the input and try submitting.</p>
+
+            <form id="form-disabled" class="demo-form" novalidate>
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="toggle-disabled" checked> Enable the field below
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label>Optional Detail</label>
+                    <input type="text" name="optional_detail" id="optional-detail-input" placeholder="This field is required when enabled" data-fvalidate="required|min_length:3">
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="bttn bttn--md-rectangle bttn--pri">
+                        <i class="ph-bold ph-check"></i>&nbsp; Submit
+                    </button>
+                    <span class="code">Disabled inputs are skipped</span>
+                </div>
+                <div class="result-box" id="result-disabled"></div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Initialize form validation on all forms
+        // Language is auto-imported by Form — no manual setup needed
+        Sadrazam.Form.perform('form');
+
+        // Generic submit handler to show success/error feedback
+        function attachSubmitFeedback(formId, resultId) {
+            const form = document.getElementById(formId);
+            const result = document.getElementById(resultId);
+            if (!form || !result) return;
+
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                const isValid = Sadrazam.Form.validate(form);
+                result.style.display = 'block';
+                if (isValid) {
+                    result.className = 'result-box success';
+                    result.textContent = 'All fields are valid! Form would be submitted.';
+                } else {
+                    result.className = 'result-box error';
+                    result.textContent = 'Validation failed. Please correct the errors above.';
+                }
+            });
+        }
+
+        attachSubmitFeedback('form-required', 'result-required');
+        attachSubmitFeedback('form-email', 'result-email');
+        attachSubmitFeedback('form-length', 'result-length');
+        attachSubmitFeedback('form-value', 'result-value');
+        attachSubmitFeedback('form-match', 'result-match');
+        attachSubmitFeedback('form-regex', 'result-regex');
+        attachSubmitFeedback('form-display', 'result-display');
+        attachSubmitFeedback('form-formlevel', 'result-formlevel');
+        attachSubmitFeedback('form-pw-toggle', 'result-pw-toggle');
+        attachSubmitFeedback('form-complete', 'result-complete');
+        attachSubmitFeedback('form-disabled', 'result-disabled');
+
+        // Manual validation handlers (section 9)
+        function validateSingleField() {
+            const input = document.getElementById('coupon-input');
+            const result = document.getElementById('result-manual');
+            const isValid = Sadrazam.Form.validate(input);
+            result.style.display = 'block';
+            result.className = isValid ? 'result-box success' : 'result-box error';
+            result.textContent = isValid ? 'Coupon field is valid!' : 'Coupon field has errors.';
+        }
+
+        function validateEntireForm() {
+            const form = document.getElementById('form-manual');
+            const result = document.getElementById('result-manual');
+            const isValid = Sadrazam.Form.validate(form);
+            result.style.display = 'block';
+            result.className = isValid ? 'result-box success' : 'result-box error';
+            result.textContent = isValid ? 'All fields are valid!' : 'Some fields have errors.';
+        }
+
+        // Disabled field toggle (section 12)
+        document.getElementById('toggle-disabled').addEventListener('change', function () {
+            document.getElementById('optional-detail-input').disabled = !this.checked;
+        });
+    </script>
+</body>
+
+</html>

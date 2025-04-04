@@ -1,0 +1,41 @@
+// === Position ===
+.pos-relative {
+  position: relative;
+}
+
+.pos-absolute {
+  position: absolute;
+}
+
+.pos-fixed {
+  position: fixed;
+}
+
+.pos-sticky {
+  position: sticky;
+  top: 0;
+}
+
+// === Z-Index ===
+// Lokal stacking (parent içinde göreceli sıralama)
+.z-behind { z-index: var(--z-behind); }
+.z-ground { z-index: var(--z-ground); }
+.z-1 { z-index: 1; }
+.z-2 { z-index: 2; }
+
+// Global katman kısayolları (escape hatch)
+.z-base { z-index: var(--z-layer-base); }
+.z-ui { z-index: var(--z-layer-ui); }
+.z-overlay { z-index: var(--z-layer-overlay); }
+.z-floating { z-index: var(--z-layer-floating); }
+.z-toast { z-index: var(--z-layer-toast); }
+.z-ceiling { z-index: var(--z-layer-ceiling); }
+
+// === Float ===
+.fl-l {
+  float: left;
+}
+
+.fl-r {
+  float: right;
+}

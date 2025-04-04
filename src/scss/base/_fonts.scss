@@ -1,0 +1,151 @@
+/* =========================================================================
+   Font Tanımları ve Yardımcı Sınıfları
+   CSS custom property tanımları + bunlara karşılık gelen utility class'lar.
+   Tanım ve class 1:1 eşleştiği için aynı dosyada tutulur.
+   ========================================================================= */
+
+/* ---- Font Aileleri (Tanım) ---- */
+:root {
+  --ffa-sans: "Open Sans", system-ui, -apple-system, sans-serif;
+  --ffa-serif: "Noto Serif", Georgia, serif;
+  --ffa-mono: "Fira Code", monospace;
+}
+
+/* ---- Font Aileleri (Class) ---- */
+.ffa-sans {
+  font-family: var(--ffa-sans);
+}
+
+.ffa-serif {
+  font-family: var(--ffa-serif);
+}
+
+.ffa-mono {
+  font-family: var(--ffa-mono);
+}
+
+/* ---- Font Boyutları (Tanım) ---- */
+:root {
+  --base-font-size: clamp(0.933rem, 0.813rem + 0.25vw, 1.063rem);
+
+  --fsi-8: clamp(0.438rem, 0.325rem + 0.25vw, 0.563rem);
+  /* ~7px → ~9px */
+  --fsi-9: clamp(0.5rem, 0.388rem + 0.25vw, 0.625rem);
+  /* ~8px → ~10px */
+  --fsi-10: clamp(0.563rem, 0.45rem + 0.25vw, 0.688rem);
+  /* ~9px → ~11px */
+  --fsi-11: clamp(0.625rem, 0.5rem + 0.25vw, 0.75rem);
+  /* ~10px → ~12px */
+  --fsi-12: clamp(0.688rem, 0.563rem + 0.25vw, 0.813rem);
+  /* ~11px → ~13px */
+  --fsi-13: clamp(0.75rem, 0.625rem + 0.25vw, 0.875rem);
+  /* ~12px → ~14px */
+  --fsi-14: clamp(0.813rem, 0.688rem + 0.25vw, 0.938rem);
+  /* ~13px → ~15px */
+  --fsi-15: clamp(0.875rem, 0.75rem + 0.25vw, 1rem);
+  /* ~14px → ~16px */
+  --fsi-16: clamp(0.938rem, 0.813rem + 0.25vw, 1.063rem);
+  /* ~15px → ~17px */
+  --fsi-17: clamp(1rem, 0.875rem + 0.25vw, 1.125rem);
+  /* ~16px → ~18px */
+  --fsi-18: clamp(1.063rem, 0.938rem + 0.25vw, 1.188rem);
+  /* ~17px → ~19px */
+  --fsi-19: clamp(1.125rem, 1rem + 0.25vw, 1.25rem);
+  /* ~18px → ~20px */
+  --fsi-20: clamp(1.188rem, 1.063rem + 0.25vw, 1.313rem);
+  /* ~19px → ~21px */
+  --fsi-21: clamp(1.25rem, 1.125rem + 0.25vw, 1.375rem);
+  /* ~20px → ~22px */
+  --fsi-22: clamp(1.313rem, 1.188rem + 0.25vw, 1.438rem);
+  /* ~21px → ~23px */
+  --fsi-23: clamp(1.375rem, 1.25rem + 0.25vw, 1.5rem);
+  /* ~22px → ~24px */
+  --fsi-24: clamp(1.438rem, 1.313rem + 0.25vw, 1.563rem);
+  /* ~23px → ~25px */
+  --fsi-25: clamp(1.5rem, 1.375rem + 0.25vw, 1.625rem);
+  /* ~24px → ~26px */
+  --fsi-26: clamp(1.563rem, 1.438rem + 0.25vw, 1.688rem);
+  /* ~25px → ~27px */
+  --fsi-27: clamp(1.625rem, 1.5rem + 0.25vw, 1.75rem);
+  /* ~26px → ~28px */
+  --fsi-28: clamp(1.688rem, 1.563rem + 0.25vw, 1.813rem);
+  /* ~27px → ~29px */
+  --fsi-29: clamp(1.75rem, 1.625rem + 0.25vw, 1.875rem);
+  /* ~28px → ~30px */
+  --fsi-30: clamp(1.813rem, 1.688rem + 0.25vw, 1.938rem);
+  /* ~29px → ~31px */
+  --fsi-31: clamp(1.875rem, 1.75rem + 0.25vw, 2rem);
+  /* ~30px → ~32px */
+  --fsi-32: clamp(1.938rem, 1.813rem + 0.25vw, 2.063rem);
+  /* ~31px → ~33px */
+  --fsi-33: clamp(2rem, 1.875rem + 0.25vw, 2.125rem);
+  /* ~32px → ~34px */
+  --fsi-34: clamp(2.063rem, 1.938rem + 0.25vw, 2.188rem);
+  /* ~33px → ~35px */
+  --fsi-35: clamp(2.125rem, 2rem + 0.25vw, 2.25rem);
+  /* ~34px → ~36px */
+  --fsi-40: clamp(2.125rem, 2rem + 0.25vw, 2.25rem);
+  /* ~34px → ~36px (isim-değer uyumsuz, geriye uyumluluk için korunuyor) */
+  --fsi-42: clamp(2.188rem, 2.063rem + 0.25vw, 2.313rem);
+  /* ~35px → ~37px (isim-değer uyumsuz, geriye uyumluluk için korunuyor) */
+  --fsi-45: clamp(2.25rem, 2.125rem + 0.25vw, 2.375rem);
+  /* ~36px → ~38px (isim-değer uyumsuz, geriye uyumluluk için korunuyor) */
+}
+
+/* ---- Font Boyutları (Class) ---- */
+.fsi-8 { font-size: var(--fsi-8); }
+.fsi-9 { font-size: var(--fsi-9); }
+.fsi-10 { font-size: var(--fsi-10); }
+.fsi-11 { font-size: var(--fsi-11); }
+.fsi-12 { font-size: var(--fsi-12); }
+.fsi-13 { font-size: var(--fsi-13); }
+.fsi-14 { font-size: var(--fsi-14); }
+.fsi-15 { font-size: var(--fsi-15); }
+.fsi-16 { font-size: var(--fsi-16); }
+.fsi-17 { font-size: var(--fsi-17); }
+.fsi-18 { font-size: var(--fsi-18); }
+.fsi-19 { font-size: var(--fsi-19); }
+.fsi-20 { font-size: var(--fsi-20); }
+.fsi-21 { font-size: var(--fsi-21); }
+.fsi-22 { font-size: var(--fsi-22); }
+.fsi-23 { font-size: var(--fsi-23); }
+.fsi-24 { font-size: var(--fsi-24); }
+.fsi-25 { font-size: var(--fsi-25); }
+.fsi-26 { font-size: var(--fsi-26); }
+.fsi-27 { font-size: var(--fsi-27); }
+.fsi-28 { font-size: var(--fsi-28); }
+.fsi-29 { font-size: var(--fsi-29); }
+.fsi-30 { font-size: var(--fsi-30); }
+.fsi-31 { font-size: var(--fsi-31); }
+.fsi-32 { font-size: var(--fsi-32); }
+.fsi-33 { font-size: var(--fsi-33); }
+.fsi-34 { font-size: var(--fsi-34); }
+.fsi-35 { font-size: var(--fsi-35); }
+.fsi-40 { font-size: var(--fsi-40); }
+.fsi-42 { font-size: var(--fsi-42); }
+.fsi-45 { font-size: var(--fsi-45); }
+
+/* ---- Font Ağırlıkları (Tanım) ---- */
+:root {
+  --fwe-light: 300;
+  --fwe-regular: 400;
+  --fwe-medium: 500;
+  --fwe-semibold: 600;
+  --fwe-bold: 700;
+  --fwe-extrabold: 800;
+}
+
+/* ---- Font Ağırlıkları (Class) ---- */
+.fwe-light { font-weight: var(--fwe-light); }
+.fwe-regular { font-weight: var(--fwe-regular); }
+.fwe-medium { font-weight: var(--fwe-medium); }
+.fwe-semibold { font-weight: var(--fwe-semibold); }
+.fwe-bold { font-weight: var(--fwe-bold); }
+.fwe-extrabold { font-weight: var(--fwe-extrabold); }
+
+/* ---- İkon Boyutları ---- */
+.ficon-2x { font-size: 2em; }
+.ficon-3x { font-size: 3em; }
+.ficon-4x { font-size: 4em; }
+.ficon-5x { font-size: 5em; }
+.ficon-lg { font-size: 1.5em; }

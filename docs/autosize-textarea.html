@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sadrazam – AutosizeTextarea Showcase</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/bold/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/light/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <script type="text/javascript" src="assets/js/script.js"></script>
+    <link rel="stylesheet" href="assets/sadrazam.min.css">
+    <script type="text/javascript" src="assets/sadrazam.min.js"></script>
+    <style>
+        textarea {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-size: 0.9rem;
+            padding: 10px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            resize: vertical;
+            outline: none;
+            transition: border-color 0.2s;
+            color: var(--text-color);
+        }
+
+        textarea:focus {
+            border-color: var(--theme-color-primary);
+        }
+
+        .demo-textarea-sm {
+            width: 300px;
+        }
+
+        .demo-textarea-md {
+            width: 450px;
+        }
+
+        .demo-textarea-lg {
+            width: 100%;
+        }
+
+        .btn-row {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .demo-btn {
+            padding: 6px 14px;
+            font-size: 0.8rem;
+        }
+
+        .demo-btn--primary {
+            background: #0984e3;
+            color: #fff;
+            border-color: #0984e3;
+        }
+
+        .demo-btn--primary:hover {
+            background: #0773c5;
+        }
+
+        .demo-btn--danger {
+            background: #d63031;
+            color: #fff;
+            border-color: #d63031;
+        }
+
+        .demo-btn--danger:hover {
+            background: #c0292a;
+        }
+
+        .event-log {
+            font-family: 'SF Mono', Monaco, Consolas, monospace;
+            font-size: 0.75rem;
+            background: #2d3436;
+            color: #00b894;
+            padding: 10px 14px;
+            border-radius: 6px;
+            margin-top: 10px;
+            max-height: 100px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+
+<body>
+<script>if(localStorage.getItem("dark-mode"))document.body.classList.add("dark-mode")</script>
+    <header>
+        <nav class="top-navbar">
+            <div class="nav-container">
+                <a href="index.html" class="nav-logo">Sadrazam</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li>
+                        <a href="javascript:void(0)" onclick="openPopup(); return false;">Examples</a>
+                        <div class="navi-popup-overlay" id="examplesPopupOverlay"></div>
+                        <div class="navi-popup" id="examplesPopup">
+                            <h3>Examples</h3>
+                            <ul>
+                                <li><a href="buttons.html">Button</a></li>
+                                <li><a href="forms.html">Form</a></li>
+                                <li><a href="form-patterns.html">Form Patterns</a></li>
+                                <li><a href="links.html">Link</a></li>
+                                <li><a href="switches.html">Switch</a></li>
+                                <li><a href="autocomplete.html">Autocomplete</a></li>
+                                <li><a href="backdrop.html">Backdrop</a></li>
+                                <li><a href="hovermenu.html">Hovermenu</a></li>
+                                <li><a href="infinite-scroll.html">Infinite Scroll</a></li>
+                                <li><a href="snackbar.html">Snackbar</a></li>
+                                <li><a href="modals.html">Modal</a></li>
+                                <li><a href="popovers.html">Popover</a></li>
+                                <li><a href="slide-menu.html">Slide Menu</a></li>
+                                <li><a href="spinners.html">Spinner</a></li>
+                                <li><a href="tabs.html">Tabs</a></li>
+                                <li><a href="tooltips.html">Tooltip</a></li>
+                                <li><a href="form-validation.html">Form Validation</a></li>
+                                <li><a href="autosize-textarea.html">Autosize Textarea</a></li>
+                                <li><a href="autosize-select.html">Autosize Select</a></li>
+                                <li><a href="ajax.html">Ajax</a></li>
+                                <li><a href="grid.html">Grid</a></li>
+                                <li><a href="spacing.html">Spacing</a></li>
+                                <li><a href="colors.html">Colors</a></li>
+                                <li><a href="typography.html">Typography</a></li>
+                            </ul>
+                            <button class="close-popup" onclick="closePopup()">&#10005;</button>
+                        </div>
+                    </li>
+                    <li><a href="https://github.com/edukah/sadrazam" target="_blank">GitHub</a></li>
+                </ul>
+                <div class="dark-mode-button-container">
+                    <div class="mode-toggle-switch" onclick="toggleMode()"></div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+
+        <h1>Sadrazam – AutosizeTextarea Showcase</h1>
+        <p class="subtitle">Textareas that automatically resize their height based on content</p>
+
+        <!-- ==================== BASIC USAGE ==================== -->
+        <div class="section">
+            <h2 class="section-title">Basic Usage</h2>
+            <p class="section-desc">Add <span class="code">data-autosize</span> attribute, then call <span class="code">Sadrazam.AutosizeTextarea.listen()</span></p>
+
+            <div class="row">
+                <span class="label">Default</span>
+                <textarea data-autosize class="demo-textarea-md" rows="1" placeholder="Start typing to see the textarea grow..."></textarea>
+            </div>
+
+            <div class="row">
+                <span class="label">With content</span>
+                <textarea data-autosize class="demo-textarea-md" rows="1">This textarea already has content.
+It will auto-resize on initialization to fit these lines of text that are already present.</textarea>
+            </div>
+
+            <div class="row">
+                <span class="label">Code</span>
+                <span class="code">&lt;textarea data-autosize&gt;&lt;/textarea&gt;</span>
+            </div>
+        </div>
+
+        <!-- ==================== DIFFERENT INITIAL SIZES ==================== -->
+        <div class="section">
+            <h2 class="section-title">Different Initial Sizes</h2>
+            <p class="section-desc">Textareas with different initial <span class="code">rows</span> attribute values</p>
+
+            <div class="row">
+                <span class="label">1 Row</span>
+                <textarea data-autosize class="demo-textarea-md" rows="1" placeholder="rows=1 — single line start"></textarea>
+            </div>
+
+            <div class="row">
+                <span class="label">3 Rows</span>
+                <textarea data-autosize class="demo-textarea-md" rows="3" placeholder="rows=3 — starts with three visible lines"></textarea>
+            </div>
+
+            <div class="row">
+                <span class="label">5 Rows</span>
+                <textarea data-autosize class="demo-textarea-md" rows="5" placeholder="rows=5 — starts with five visible lines"></textarea>
+            </div>
+
+            <div class="row">
+                <span class="label">Code</span>
+                <span class="code">&lt;textarea data-autosize rows="3"&gt;&lt;/textarea&gt;</span>
+            </div>
+        </div>
+
+        <!-- ==================== MAX HEIGHT CONSTRAINT ==================== -->
+        <div class="section">
+            <h2 class="section-title">Max Height Constraint</h2>
+            <p class="section-desc">Use CSS <span class="code">max-height</span> to cap how tall the textarea can grow. Overflow becomes scrollable.</p>
+
+            <div class="row">
+                <span class="label">Max 80px</span>
+                <textarea data-autosize class="demo-textarea-md" rows="1" style="max-height: 80px;" placeholder="Max height: 80px — will scroll after that"></textarea>
+            </div>
+
+            <div class="row">
+                <span class="label">Max 150px</span>
+                <textarea data-autosize class="demo-textarea-md" rows="1" style="max-height: 150px;" placeholder="Max height: 150px — more room to grow"></textarea>
+            </div>
+
+            <div class="row">
+                <span class="label">Max 300px</span>
+                <textarea data-autosize class="demo-textarea-md" rows="1" style="max-height: 300px;" placeholder="Max height: 300px — generous limit"></textarea>
+            </div>
+
+            <div class="row">
+                <span class="label">Code</span>
+                <span class="code">&lt;textarea data-autosize style="max-height: 150px"&gt;&lt;/textarea&gt;</span>
+            </div>
+        </div>
+
+        <!-- ==================== DIFFERENT WIDTHS ==================== -->
+        <div class="section">
+            <h2 class="section-title">Different Widths</h2>
+            <p class="section-desc">Width affects how text wraps and consequently how tall the textarea becomes</p>
+
+            <div class="row">
+                <span class="label">Small (300px)</span>
+                <textarea data-autosize class="demo-textarea-sm" rows="1" placeholder="Narrow textarea — text wraps sooner"></textarea>
+            </div>
+
+            <div class="row">
+                <span class="label">Medium (450px)</span>
+                <textarea data-autosize class="demo-textarea-md" rows="1" placeholder="Medium width textarea"></textarea>
+            </div>
+
+            <div class="row">
+                <span class="label">Full Width</span>
+                <textarea data-autosize class="demo-textarea-lg" rows="1" placeholder="Full width textarea — takes all available space"></textarea>
+            </div>
+        </div>
+
+        <!-- ==================== CUSTOM SELECTOR ==================== -->
+        <div class="section">
+            <h2 class="section-title">Custom Selector</h2>
+            <p class="section-desc">Use a custom CSS selector instead of the default <span class="code">data-autosize</span> attribute</p>
+
+            <div class="row">
+                <span class="label">Custom class</span>
+                <textarea class="my-autosize demo-textarea-md" rows="1" placeholder="This uses .my-autosize class selector"></textarea>
+            </div>
+
+            <div class="row">
+                <span class="label">Code</span>
+                <span class="code">Sadrazam.AutosizeTextarea.listen('.my-autosize')</span>
+            </div>
+        </div>
+
+        <!-- ==================== PROGRAMMATIC CONTROL ==================== -->
+        <div class="section">
+            <h2 class="section-title">Programmatic Control</h2>
+            <p class="section-desc">Manual update and destroy via <span class="code">.update()</span> and <span class="code">.destroy()</span></p>
+
+            <div class="row">
+                <span class="label">Controlled</span>
+                <textarea id="controlled-textarea" data-autosize class="demo-textarea-md" rows="1" placeholder="Use the buttons below to control this textarea"></textarea>
+            </div>
+
+            <div class="btn-row">
+                <button class="demo-btn demo-btn--primary" onclick="injectContent()">
+                    <i class="ph-bold ph-text-aa"></i>&nbsp; Inject Content
+                </button>
+                <button class="demo-btn" onclick="manualUpdate()">
+                    <i class="ph-bold ph-arrows-clockwise"></i>&nbsp; Manual Update
+                </button>
+                <button class="demo-btn demo-btn--danger" onclick="destroyAutosize()">
+                    <i class="ph-bold ph-trash"></i>&nbsp; Destroy
+                </button>
+                <button class="demo-btn" onclick="reinitAutosize()">
+                    <i class="ph-bold ph-arrow-counter-clockwise"></i>&nbsp; Re-initialize
+                </button>
+            </div>
+
+            <div class="row" style="margin-top: 10px;">
+                <span class="label">Methods</span>
+                <span class="code">Sadrazam.AutosizeTextarea.update(el)</span>
+                <span class="code">Sadrazam.AutosizeTextarea.destroy(el)</span>
+            </div>
+        </div>
+
+        <!-- ==================== EVENTS ==================== -->
+        <div class="section">
+            <h2 class="section-title">Events</h2>
+            <p class="section-desc">Listen for the <span class="code">autosize:resized</span> event dispatched after each resize</p>
+
+            <div class="row">
+                <span class="label">With events</span>
+                <textarea id="event-textarea" data-autosize class="demo-textarea-md" rows="1" placeholder="Type here and watch the event log below"></textarea>
+            </div>
+
+            <div id="event-log" class="event-log">Waiting for resize events...</div>
+
+            <div class="row" style="margin-top: 10px;">
+                <span class="label">Event name</span>
+                <span class="code">autosize:resized</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize all data-autosize textareas
+        Sadrazam.AutosizeTextarea.listen();
+
+        // Initialize the custom selector textarea
+        Sadrazam.AutosizeTextarea.listen('.my-autosize');
+
+        // --- Programmatic Control ---
+        function injectContent() {
+            const el = document.getElementById('controlled-textarea');
+            el.value = "This content was injected programmatically.\nAfter setting .value, you must call .update() to recalculate height.\n\nLine 4\nLine 5\nLine 6";
+            Sadrazam.AutosizeTextarea.update(el);
+        }
+
+        function manualUpdate() {
+            const el = document.getElementById('controlled-textarea');
+            Sadrazam.AutosizeTextarea.update(el);
+        }
+
+        function destroyAutosize() {
+            const el = document.getElementById('controlled-textarea');
+            Sadrazam.AutosizeTextarea.destroy(el);
+        }
+
+        function reinitAutosize() {
+            const el = document.getElementById('controlled-textarea');
+            Sadrazam.AutosizeTextarea.listen('#controlled-textarea');
+        }
+
+        // --- Event Listener ---
+        const eventTextarea = document.getElementById('event-textarea');
+        const eventLog = document.getElementById('event-log');
+        let eventCount = 0;
+
+        eventTextarea.addEventListener('autosize:resized', function () {
+            eventCount++;
+            const height = this.style.height;
+            const entry = document.createElement('div');
+            entry.textContent = `[${eventCount}] autosize:resized — new height: ${height}`;
+            eventLog.appendChild(entry);
+            eventLog.scrollTop = eventLog.scrollHeight;
+        });
+    </script>
+</body>
+
+</html>

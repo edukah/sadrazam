@@ -1,0 +1,146 @@
+@use 'colors-main' as *;
+
+/** Grey Scale (esit aralikli: 13 birim, simetrik dark mode swap) **/
+$color-grey-50: rgba(250, 250, 250, 1);
+$color-grey-100: rgba(237, 237, 237, 1);
+$color-grey-150: rgba(224, 224, 224, 1);
+$color-grey-200: rgba(211, 211, 211, 1);
+$color-grey-250: rgba(198, 198, 198, 1);
+$color-grey-300: rgba(185, 185, 185, 1);
+$color-grey-350: rgba(172, 172, 172, 1);
+$color-grey-400: rgba(159, 159, 159, 1);
+$color-grey-450: rgba(146, 146, 146, 1);
+$color-grey-500: rgba(133, 133, 133, 1);
+$color-grey-550: rgba(120, 120, 120, 1);
+$color-grey-600: rgba(107, 107, 107, 1);
+$color-grey-650: rgba(94, 94, 94, 1);
+$color-grey-700: rgba(81, 81, 81, 1);
+$color-grey-750: rgba(68, 68, 68, 1);
+$color-grey-800: rgba(55, 55, 55, 1);
+$color-grey-850: rgba(42, 42, 42, 1);
+$color-grey-900: rgba(29, 29, 29, 1);
+$color-grey-910: rgba(23, 23, 23, 1);
+$color-grey-950: rgba(16, 16, 16, 1);
+/** End of Grey Scale **/
+
+:root {
+  // Adaptive — dark mode'da capraz swap
+  --color-grey-zero: #{$color-white};
+  --color-grey-50: #{$color-grey-50};
+  --color-grey-100: #{$color-grey-100};
+  --color-grey-150: #{$color-grey-150};
+  --color-grey-200: #{$color-grey-200};
+  --color-grey-250: #{$color-grey-250};
+  --color-grey-300: #{$color-grey-300};
+  --color-grey-350: #{$color-grey-350};
+  --color-grey-400: #{$color-grey-400};
+  --color-grey-450: #{$color-grey-450};
+  --color-grey-500: #{$color-grey-500};
+  --color-grey-550: #{$color-grey-550};
+  --color-grey-600: #{$color-grey-600};
+  --color-grey-650: #{$color-grey-650};
+  --color-grey-700: #{$color-grey-700};
+  --color-grey-750: #{$color-grey-750};
+  --color-grey-800: #{$color-grey-800};
+  --color-grey-850: #{$color-grey-850};
+  --color-grey-900: #{$color-grey-900};
+  --color-grey-910: #{$color-grey-910};
+  --color-grey-950: #{$color-grey-950};
+
+  // Sabit (--f) — dark mode'da degismez
+  --color-grey-zero--f: #{$color-white};
+  --color-grey-50--f: #{$color-grey-50};
+  --color-grey-100--f: #{$color-grey-100};
+  --color-grey-150--f: #{$color-grey-150};
+  --color-grey-200--f: #{$color-grey-200};
+  --color-grey-250--f: #{$color-grey-250};
+  --color-grey-300--f: #{$color-grey-300};
+  --color-grey-350--f: #{$color-grey-350};
+  --color-grey-400--f: #{$color-grey-400};
+  --color-grey-450--f: #{$color-grey-450};
+  --color-grey-500--f: #{$color-grey-500};
+  --color-grey-550--f: #{$color-grey-550};
+  --color-grey-600--f: #{$color-grey-600};
+  --color-grey-650--f: #{$color-grey-650};
+  --color-grey-700--f: #{$color-grey-700};
+  --color-grey-750--f: #{$color-grey-750};
+  --color-grey-800--f: #{$color-grey-800};
+  --color-grey-850--f: #{$color-grey-850};
+  --color-grey-900--f: #{$color-grey-900};
+  --color-grey-910--f: #{$color-grey-910};
+  --color-grey-950--f: #{$color-grey-950};
+
+  body.dark-mode {
+    --color-grey-zero: #{$color-grey-900};
+    --color-grey-50: #{$color-grey-850};
+    --color-grey-100: #{$color-grey-800};
+    --color-grey-150: #{$color-grey-750};
+    --color-grey-200: #{$color-grey-700};
+    --color-grey-250: #{$color-grey-650};
+    --color-grey-300: #{$color-grey-600};
+    --color-grey-350: #{$color-grey-550};
+    --color-grey-400: #{$color-grey-500};
+    // grey-450 = midpoint, degismez
+    --color-grey-500: #{$color-grey-400};
+    --color-grey-550: #{$color-grey-350};
+    --color-grey-600: #{$color-grey-300};
+    --color-grey-650: #{$color-grey-250};
+    --color-grey-700: #{$color-grey-200};
+    --color-grey-750: #{$color-grey-150};
+    --color-grey-800: #{$color-grey-100};
+    --color-grey-850: #{$color-grey-50};
+    --color-grey-900: #{$color-white};
+    // grey-910, grey-950: dark mode swap'a dahil degil
+    // (text renkleri kendi swap mekanizmasini kullanir)
+  }
+}
+
+/* ---- Arka Plan: Adaptive ---- */
+.tbc-transparent {
+  background-color: transparent;
+}
+
+.tbc-grey-zero { background-color: var(--color-grey-zero); }
+.tbc-grey-50 { background-color: var(--color-grey-50); }
+.tbc-grey-100 { background-color: var(--color-grey-100); }
+.tbc-grey-150 { background-color: var(--color-grey-150); }
+.tbc-grey-200 { background-color: var(--color-grey-200); }
+.tbc-grey-250 { background-color: var(--color-grey-250); }
+.tbc-grey-300 { background-color: var(--color-grey-300); }
+.tbc-grey-350 { background-color: var(--color-grey-350); }
+.tbc-grey-400 { background-color: var(--color-grey-400); }
+.tbc-grey-450 { background-color: var(--color-grey-450); }
+.tbc-grey-500 { background-color: var(--color-grey-500); }
+.tbc-grey-550 { background-color: var(--color-grey-550); }
+.tbc-grey-600 { background-color: var(--color-grey-600); }
+.tbc-grey-650 { background-color: var(--color-grey-650); }
+.tbc-grey-700 { background-color: var(--color-grey-700); }
+.tbc-grey-750 { background-color: var(--color-grey-750); }
+.tbc-grey-800 { background-color: var(--color-grey-800); }
+.tbc-grey-850 { background-color: var(--color-grey-850); }
+.tbc-grey-900 { background-color: var(--color-grey-900); }
+.tbc-grey-910 { background-color: var(--color-grey-910); }
+.tbc-grey-950 { background-color: var(--color-grey-950); }
+
+/* ---- Arka Plan: Sabit (--f) ---- */
+.tbc-grey-zero--f { background-color: var(--color-grey-zero--f); }
+.tbc-grey-50--f { background-color: var(--color-grey-50--f); }
+.tbc-grey-100--f { background-color: var(--color-grey-100--f); }
+.tbc-grey-150--f { background-color: var(--color-grey-150--f); }
+.tbc-grey-200--f { background-color: var(--color-grey-200--f); }
+.tbc-grey-250--f { background-color: var(--color-grey-250--f); }
+.tbc-grey-300--f { background-color: var(--color-grey-300--f); }
+.tbc-grey-350--f { background-color: var(--color-grey-350--f); }
+.tbc-grey-400--f { background-color: var(--color-grey-400--f); }
+.tbc-grey-450--f { background-color: var(--color-grey-450--f); }
+.tbc-grey-500--f { background-color: var(--color-grey-500--f); }
+.tbc-grey-550--f { background-color: var(--color-grey-550--f); }
+.tbc-grey-600--f { background-color: var(--color-grey-600--f); }
+.tbc-grey-650--f { background-color: var(--color-grey-650--f); }
+.tbc-grey-700--f { background-color: var(--color-grey-700--f); }
+.tbc-grey-750--f { background-color: var(--color-grey-750--f); }
+.tbc-grey-800--f { background-color: var(--color-grey-800--f); }
+.tbc-grey-850--f { background-color: var(--color-grey-850--f); }
+.tbc-grey-900--f { background-color: var(--color-grey-900--f); }
+.tbc-grey-910--f { background-color: var(--color-grey-910--f); }
+.tbc-grey-950--f { background-color: var(--color-grey-950--f); }

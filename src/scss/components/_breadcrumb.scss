@@ -1,0 +1,76 @@
+@use '../base/variables';
+
+/* =========================================================================
+   Breadcrumb — Sayfa yol haritası bileşeni
+   Eski yeri: utilities/_breadcrumb.scss → components/_breadcrumb.scss olarak taşındı.
+   NOT: utilities/_breadcrumb.scss dosyası Burtest geriye uyumluluğu için
+   @forward ile bu dosyaya yönlendirir.
+   ========================================================================= */
+
+@mixin font-style {
+  font-size: var(--fsi-14);
+  font-weight: var(--fwe-light);
+  color: var(--color-text-dark-2);
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+
+  width: 100%;
+  list-style: none;
+  margin: var(--space-6) 0;
+  white-space: nowrap;
+  overflow: auto;
+
+  @media only screen and (min-width: variables.$breakpoint-md) {
+    white-space: initial;
+    overflow: initial;
+  }
+
+  & li {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-5);
+
+    @include font-style;
+
+    &:after {
+      content: "›";
+    }
+
+    &:first-child:after {
+      content: "|";
+    }
+
+    &:last-child {
+      color: var(--color-text-dark-3);
+
+      a {
+        color: inherit;
+        pointer-events: none;
+      }
+    }
+
+    &:last-child:after {
+      content: "";
+    }
+
+    a {
+      display: inline-flex;
+      gap: var(--space-4);
+
+      @include font-style;
+    }
+  }
+
+  &.breadcrumb--all-active li:last-child {
+    color: var(--color-text-dark-2);
+
+    a {
+      color: inherit;
+      pointer-events: auto;
+    }
+  }
+}

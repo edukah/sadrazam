@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sadrazam – Hovermenu Showcase</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/bold/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/light/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <script type="text/javascript" src="assets/js/script.js"></script>
+    <link rel="stylesheet" href="assets/sadrazam.min.css">
+    <script type="text/javascript" src="assets/sadrazam.min.js"></script>
+    <style>
+        /* Trigger wrapper needs position:relative so the hovermenu positions correctly */
+        .trigger-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+
+        .demo-trigger {
+            padding: 8px 18px;
+            border: 1px solid var(--border-color);
+            background: var(--card-bg);
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .demo-trigger:hover {
+            background: var(--bg-subtle);
+        }
+
+        /* Menu item styling used inside hovermenu content */
+        .menu-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            min-width: 160px;
+        }
+
+        .menu-list li {
+            padding: 7px 10px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.15s;
+        }
+
+        .menu-list li:hover {
+            background: var(--bg-inset);
+        }
+
+        .menu-list li i {
+            font-size: 1rem;
+            color: var(--text-muted);
+        }
+
+        .menu-divider {
+            border: none;
+            border-top: 1px solid var(--border-color);
+            margin: 4px 0;
+        }
+
+        .menu-list li.danger {
+            color: #d63031;
+        }
+
+        .menu-list li.danger i {
+            color: #d63031;
+        }
+
+        /* User profile trigger demo */
+        .avatar-trigger {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--theme-color-primary);
+            color: #fff;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            border: none;
+        }
+
+        .profile-card {
+            text-align: center;
+            min-width: 180px;
+        }
+
+        .profile-card .profile-name {
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 2px;
+        }
+
+        .profile-card .profile-email {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        /* Badge trigger demo */
+        .badge-trigger {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 10px;
+            background: var(--bg-subtle);
+            border-radius: 12px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            border: none;
+            font-weight: 500;
+        }
+
+        .badge-trigger .count {
+            background: #d63031;
+            color: #fff;
+            font-size: 0.65rem;
+            padding: 1px 5px;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+
+        .notif-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            min-width: 220px;
+        }
+
+        .notif-list li {
+            padding: 6px 4px;
+            font-size: 0.8rem;
+            border-bottom: 1px solid var(--border-color);
+            line-height: 1.4;
+        }
+
+        .notif-list li:last-child {
+            border-bottom: none;
+        }
+
+        .notif-list li strong {
+            color: var(--theme-color-primary);
+        }
+    </style>
+</head>
+
+<body>
+<script>if(localStorage.getItem("dark-mode"))document.body.classList.add("dark-mode")</script>
+    <header>
+        <nav class="top-navbar">
+            <div class="nav-container">
+                <a href="index.html" class="nav-logo">Sadrazam</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li>
+                        <a href="javascript:void(0)" onclick="openPopup(); return false;">Examples</a>
+                        <div class="navi-popup-overlay" id="examplesPopupOverlay"></div>
+                        <div class="navi-popup" id="examplesPopup">
+                            <h3>Examples</h3>
+                            <ul>
+                                <li><a href="buttons.html">Button</a></li>
+                                <li><a href="forms.html">Form</a></li>
+                                <li><a href="form-patterns.html">Form Patterns</a></li>
+                                <li><a href="links.html">Link</a></li>
+                                <li><a href="switches.html">Switch</a></li>
+                                <li><a href="autocomplete.html">Autocomplete</a></li>
+                                <li><a href="backdrop.html">Backdrop</a></li>
+                                <li><a href="hovermenu.html">Hovermenu</a></li>
+                                <li><a href="infinite-scroll.html">Infinite Scroll</a></li>
+                                <li><a href="snackbar.html">Snackbar</a></li>
+                                <li><a href="modals.html">Modal</a></li>
+                                <li><a href="popovers.html">Popover</a></li>
+                                <li><a href="slide-menu.html">Slide Menu</a></li>
+                                <li><a href="spinners.html">Spinner</a></li>
+                                <li><a href="tabs.html">Tabs</a></li>
+                                <li><a href="tooltips.html">Tooltip</a></li>
+                                <li><a href="form-validation.html">Form Validation</a></li>
+                                <li><a href="autosize-textarea.html">Autosize Textarea</a></li>
+                                <li><a href="autosize-select.html">Autosize Select</a></li>
+                                <li><a href="ajax.html">Ajax</a></li>
+                                <li><a href="grid.html">Grid</a></li>
+                                <li><a href="spacing.html">Spacing</a></li>
+                                <li><a href="colors.html">Colors</a></li>
+                                <li><a href="typography.html">Typography</a></li>
+                            </ul>
+                            <button class="close-popup" onclick="closePopup()">&#10005;</button>
+                        </div>
+                    </li>
+                    <li><a href="https://github.com/edukah/sadrazam" target="_blank">GitHub</a></li>
+                </ul>
+                <div class="dark-mode-button-container">
+                    <div class="mode-toggle-switch" onclick="toggleMode()"></div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+
+        <h1>Sadrazam – Hovermenu Showcase</h1>
+        <p class="subtitle">Dropdown menus with click and hover triggers, positioned automatically</p>
+
+        <!-- ==================== OVERVIEW ==================== -->
+        <div class="section">
+            <h2 class="section-title">Overview</h2>
+            <p class="section-desc">
+                The Hovermenu component creates dynamically-positioned dropdown menus attached to a trigger element.
+                It supports <span class="code">click</span> (default) and <span class="code">mouseenter</span> triggers,
+                optional titles, optional backdrop (<span class="code">backdrop</span>), and open/close lifecycle callbacks.
+                Access it via the global: <span class="code">Sadrazam.Hovermenu</span>
+            </p>
+
+            <div class="code-block"><span class="cm">// Configuration options (from Hovermenu.help())</span>
+<span class="prop">selector</span>    <span class="cm">// Target element (Element or CSS selector). Required.</span>
+<span class="prop">trigger</span>     <span class="cm">// Event type: 'click' (default) or 'mouseenter'</span>
+<span class="prop">backdrop</span>   <span class="cm">// Show backdrop overlay. Default: false</span>
+<span class="prop">title</span>       <span class="cm">// Menu title HTML. Default: null</span>
+<span class="prop">content</span>     <span class="cm">// Function returning HTML string or Element. Required.</span>
+<span class="prop">openFunc</span>    <span class="cm">// Callback before opening. Optional.</span>
+<span class="prop">closeFunc</span>   <span class="cm">// Callback before closing. Optional.</span></div>
+        </div>
+
+        <!-- ==================== BASIC CLICK DROPDOWN ==================== -->
+        <div class="section">
+            <h2 class="section-title">1. Basic Click Dropdown</h2>
+            <p class="section-desc">
+                Default trigger is <span class="code">click</span>. Click the button to open, click again to close.
+                The <span class="code">content</span> function returns an HTML string for the menu body.
+            </p>
+
+            <div class="row">
+                <span class="label">Click Trigger</span>
+                <div class="trigger-wrapper">
+                    <button id="basic-click" class="demo-trigger">
+                        <i class="ph-bold ph-list"></i> Actions
+                    </button>
+                </div>
+                <span class="code">trigger: 'click'</span>
+            </div>
+
+            <div class="code-block"><span class="kw">new</span> sadrazam.<span class="fn">Hovermenu</span>({
+  <span class="prop">selector</span>: <span class="str">'#basic-click'</span>,
+  <span class="prop">trigger</span>: <span class="str">'click'</span>,
+  <span class="prop">content</span>: () => <span class="str">`
+    &lt;ul class="menu-list"&gt;
+      &lt;li&gt;&lt;i class="ph-light ph-pencil-simple"&gt;&lt;/i&gt; Edit&lt;/li&gt;
+      &lt;li&gt;&lt;i class="ph-light ph-copy"&gt;&lt;/i&gt; Duplicate&lt;/li&gt;
+      &lt;li&gt;&lt;i class="ph-light ph-archive"&gt;&lt;/i&gt; Archive&lt;/li&gt;
+    &lt;/ul&gt;`</span>
+});</div>
+        </div>
+
+        <!-- ==================== HOVER TRIGGER ==================== -->
+        <div class="section">
+            <h2 class="section-title">2. Hover Trigger</h2>
+            <p class="section-desc">
+                With <span class="code">trigger: 'mouseenter'</span>, the menu opens on hover and stays open while
+                the cursor remains over the trigger or menu (hover protection). Clicking the trigger also closes it.
+            </p>
+
+            <div class="row">
+                <span class="label">Hover Trigger</span>
+                <div class="trigger-wrapper">
+                    <button id="hover-trigger" class="demo-trigger">
+                        <i class="ph-bold ph-cursor"></i> Hover Me
+                    </button>
+                </div>
+                <span class="code">trigger: 'mouseenter'</span>
+            </div>
+
+            <div class="code-block"><span class="kw">new</span> sadrazam.<span class="fn">Hovermenu</span>({
+  <span class="prop">selector</span>: <span class="str">'#hover-trigger'</span>,
+  <span class="prop">trigger</span>: <span class="str">'mouseenter'</span>,
+  <span class="prop">content</span>: () => <span class="str">`
+    &lt;ul class="menu-list"&gt;
+      &lt;li&gt;&lt;i class="ph-light ph-eye"&gt;&lt;/i&gt; Preview&lt;/li&gt;
+      &lt;li&gt;&lt;i class="ph-light ph-download-simple"&gt;&lt;/i&gt; Download&lt;/li&gt;
+      &lt;li&gt;&lt;i class="ph-light ph-share-network"&gt;&lt;/i&gt; Share&lt;/li&gt;
+    &lt;/ul&gt;`</span>
+});</div>
+        </div>
+
+        <!-- ==================== WITH TITLE ==================== -->
+        <div class="section">
+            <h2 class="section-title">3. Menu With Title</h2>
+            <p class="section-desc">
+                Set the <span class="code">title</span> option to render a header above the content area.
+                The title is inserted as raw HTML into the menu container.
+            </p>
+
+            <div class="row">
+                <span class="label">With Title</span>
+                <div class="trigger-wrapper">
+                    <button id="with-title" class="demo-trigger">
+                        <i class="ph-bold ph-sort-ascending"></i> Sort By
+                    </button>
+                </div>
+                <span class="code">title: '&lt;div class="hovermenu-title"&gt;...&lt;/div&gt;'</span>
+            </div>
+
+            <div class="code-block"><span class="kw">new</span> sadrazam.<span class="fn">Hovermenu</span>({
+  <span class="prop">selector</span>: <span class="str">'#with-title'</span>,
+  <span class="prop">title</span>: <span class="str">'&lt;div class="hovermenu-title"&gt;Sort Options&lt;/div&gt;'</span>,
+  <span class="prop">content</span>: () => <span class="str">`
+    &lt;ul class="menu-list"&gt;
+      &lt;li&gt;&lt;i class="ph-light ph-clock"&gt;&lt;/i&gt; Newest First&lt;/li&gt;
+      &lt;li&gt;&lt;i class="ph-light ph-clock-counter-clockwise"&gt;&lt;/i&gt; Oldest First&lt;/li&gt;
+      &lt;li&gt;&lt;i class="ph-light ph-text-aa"&gt;&lt;/i&gt; Alphabetical&lt;/li&gt;
+      &lt;li&gt;&lt;i class="ph-light ph-star"&gt;&lt;/i&gt; Most Popular&lt;/li&gt;
+    &lt;/ul&gt;`</span>
+});</div>
+        </div>
+
+        <!-- ==================== WITH BACKDROP ==================== -->
+        <div class="section">
+            <h2 class="section-title">4. Backdrop (Backdrop Overlay)</h2>
+            <p class="section-desc">
+                Setting <span class="code">backdrop: true</span> renders a semi-transparent overlay behind the menu.
+                Clicking the overlay closes the menu. Uses the <span class="code">Backdrop</span> module internally.
+            </p>
+
+            <div class="row">
+                <span class="label">With Backdrop</span>
+                <div class="trigger-wrapper">
+                    <button id="with-backdrop" class="demo-trigger">
+                        <i class="ph-bold ph-dots-three-outline-vertical"></i> More Options
+                    </button>
+                </div>
+                <span class="code">backdrop: true</span>
+            </div>
+
+            <div class="code-block"><span class="kw">new</span> sadrazam.<span class="fn">Hovermenu</span>({
+  <span class="prop">selector</span>: <span class="str">'#with-backdrop'</span>,
+  <span class="prop">backdrop</span>: <span class="kw">true</span>,
+  <span class="prop">content</span>: () => <span class="str">`
+    &lt;ul class="menu-list"&gt;
+      &lt;li&gt;&lt;i class="ph-light ph-gear"&gt;&lt;/i&gt; Settings&lt;/li&gt;
+      &lt;li&gt;&lt;i class="ph-light ph-question"&gt;&lt;/i&gt; Help &amp; Support&lt;/li&gt;
+      &lt;hr class="menu-divider"&gt;
+      &lt;li class="danger"&gt;&lt;i class="ph-light ph-sign-out"&gt;&lt;/i&gt; Sign Out&lt;/li&gt;
+    &lt;/ul&gt;`</span>
+});</div>
+        </div>
+
+        <!-- ==================== LIFECYCLE CALLBACKS ==================== -->
+        <div class="section">
+            <h2 class="section-title">5. Open / Close Callbacks</h2>
+            <p class="section-desc">
+                Use <span class="code">openFunc</span> and <span class="code">closeFunc</span> to run logic
+                before the menu opens or closes. Check the browser console for log output.
+            </p>
+
+            <div class="row">
+                <span class="label">Callbacks</span>
+                <div class="trigger-wrapper">
+                    <button id="with-callbacks" class="demo-trigger">
+                        <i class="ph-bold ph-terminal"></i> With Callbacks
+                    </button>
+                </div>
+                <span class="code">openFunc / closeFunc</span>
+            </div>
+
+            <div class="code-block"><span class="kw">new</span> sadrazam.<span class="fn">Hovermenu</span>({
+  <span class="prop">selector</span>: <span class="str">'#with-callbacks'</span>,
+  <span class="prop">openFunc</span>: () => console.<span class="fn">log</span>(<span class="str">'Menu opened!'</span>),
+  <span class="prop">closeFunc</span>: () => console.<span class="fn">log</span>(<span class="str">'Menu closed!'</span>),
+  <span class="prop">content</span>: () => <span class="str">`
+    &lt;ul class="menu-list"&gt;
+      &lt;li&gt;&lt;i class="ph-light ph-info"&gt;&lt;/i&gt; Open your console&lt;/li&gt;
+      &lt;li&gt;&lt;i class="ph-light ph-bug"&gt;&lt;/i&gt; Check log output&lt;/li&gt;
+    &lt;/ul&gt;`</span>
+});</div>
+        </div>
+
+        <!-- ==================== ELEMENT SELECTOR ==================== -->
+        <div class="section">
+            <h2 class="section-title">6. Selector as DOM Element</h2>
+            <p class="section-desc">
+                The <span class="code">selector</span> option accepts both a CSS selector string and a direct
+                <span class="code">Element</span> reference. This is useful when you already have a DOM reference.
+            </p>
+
+            <div class="row">
+                <span class="label">DOM Element</span>
+                <div class="trigger-wrapper">
+                    <button id="element-ref" class="demo-trigger">
+                        <i class="ph-bold ph-code"></i> Element Ref
+                    </button>
+                </div>
+                <span class="code">selector: document.querySelector(...)</span>
+            </div>
+
+            <div class="code-block"><span class="kw">const</span> el = document.<span class="fn">querySelector</span>(<span class="str">'#element-ref'</span>);
+
+<span class="kw">new</span> sadrazam.<span class="fn">Hovermenu</span>({
+  <span class="prop">selector</span>: el,
+  <span class="prop">content</span>: () => <span class="str">`
+    &lt;ul class="menu-list"&gt;
+      &lt;li&gt;&lt;i class="ph-light ph-check"&gt;&lt;/i&gt; Passed as Element&lt;/li&gt;
+      &lt;li&gt;&lt;i class="ph-light ph-check"&gt;&lt;/i&gt; Not a string selector&lt;/li&gt;
+    &lt;/ul&gt;`</span>
+});</div>
+        </div>
+
+        <!-- ==================== CONTENT FROM DOM ==================== -->
+        <div class="section">
+            <h2 class="section-title">7. Content From DOM Element</h2>
+            <p class="section-desc">
+                The <span class="code">content</span> function can return a DOM <span class="code">Element</span>
+                instead of a string. Child nodes are moved into the menu while open and restored when closed.
+                The callback receives the trigger element and the Hovermenu instance as arguments.
+            </p>
+
+            <!-- Hidden source element for DOM content -->
+            <div id="dom-content-source" style="display:none;">
+                <ul class="menu-list">
+                    <li><i class="ph-light ph-folder"></i> Documents</li>
+                    <li><i class="ph-light ph-image"></i> Images</li>
+                    <li><i class="ph-light ph-music-note"></i> Music</li>
+                    <li><i class="ph-light ph-film-strip"></i> Videos</li>
+                </ul>
+            </div>
+
+            <div class="row">
+                <span class="label">DOM Content</span>
+                <div class="trigger-wrapper">
+                    <button id="dom-content" class="demo-trigger">
+                        <i class="ph-bold ph-folder-open"></i> Browse Files
+                    </button>
+                </div>
+                <span class="code">content: () => element</span>
+            </div>
+
+            <div class="code-block"><span class="cm">// Hidden source element in the HTML</span>
+<span class="cm">// &lt;div id="dom-content-source" style="display:none"&gt;...&lt;/div&gt;</span>
+
+<span class="kw">const</span> source = document.<span class="fn">querySelector</span>(<span class="str">'#dom-content-source'</span>);
+
+<span class="kw">new</span> sadrazam.<span class="fn">Hovermenu</span>({
+  <span class="prop">selector</span>: <span class="str">'#dom-content'</span>,
+  <span class="prop">content</span>: (triggerEl, instance) => source
+});</div>
+        </div>
+
+        <!-- ==================== DIFFERENT TRIGGER ELEMENTS ==================== -->
+        <div class="section">
+            <h2 class="section-title">8. Different Trigger Elements</h2>
+            <p class="section-desc">
+                Any element can be a trigger. Below are examples with an avatar button, a badge, and an icon-only button.
+                The menu auto-positions below the trigger (or above if there is not enough space below).
+            </p>
+
+            <div class="row">
+                <span class="label">Avatar</span>
+                <div class="trigger-wrapper">
+                    <button id="avatar-trigger" class="avatar-trigger">JD</button>
+                </div>
+                <span class="code">User profile menu</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Badge</span>
+                <div class="trigger-wrapper">
+                    <button id="badge-trigger" class="badge-trigger">
+                        <i class="ph-bold ph-bell"></i>
+                        Notifications
+                        <span class="count">3</span>
+                    </button>
+                </div>
+                <span class="code">Notification dropdown</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Icon Button</span>
+                <div class="trigger-wrapper">
+                    <button id="icon-trigger" class="bttn bttn--md bttn--neutral">
+                        <i class="ph-bold ph-dots-three"></i>
+                    </button>
+                </div>
+                <span class="code">Compact kebab menu</span>
+            </div>
+
+            <div class="code-block"><span class="cm">// Avatar trigger</span>
+<span class="kw">new</span> sadrazam.<span class="fn">Hovermenu</span>({
+  <span class="prop">selector</span>: <span class="str">'#avatar-trigger'</span>,
+  <span class="prop">title</span>: <span class="str">'&lt;div class="hovermenu-title"&gt;Account&lt;/div&gt;'</span>,
+  <span class="prop">content</span>: () => <span class="str">`...profile menu HTML...`</span>
+});
+
+<span class="cm">// Badge trigger</span>
+<span class="kw">new</span> sadrazam.<span class="fn">Hovermenu</span>({
+  <span class="prop">selector</span>: <span class="str">'#badge-trigger'</span>,
+  <span class="prop">title</span>: <span class="str">'&lt;div class="hovermenu-title"&gt;Notifications&lt;/div&gt;'</span>,
+  <span class="prop">content</span>: () => <span class="str">`...notification list HTML...`</span>
+});
+
+<span class="cm">// Icon button trigger</span>
+<span class="kw">new</span> sadrazam.<span class="fn">Hovermenu</span>({
+  <span class="prop">selector</span>: <span class="str">'#icon-trigger'</span>,
+  <span class="prop">content</span>: () => <span class="str">`...kebab menu HTML...`</span>
+});</div>
+        </div>
+
+        <!-- ==================== STATIC REMOVE ==================== -->
+        <div class="section">
+            <h2 class="section-title">9. Programmatic Close &amp; Destroy</h2>
+            <p class="section-desc">
+                Use <span class="code">Hovermenu.remove(element)</span> to programmatically close a hovermenu.
+                Use <span class="code">Hovermenu.destroy(element)</span> or <span class="code">instance.destroy()</span>
+                for full teardown: closes the menu, removes the trigger listener, and clears the instance reference.
+                Pass any element inside the trigger or the trigger itself. It finds the nearest
+                <span class="code">[data-hovermenu-id]</span> ancestor.
+                Use <span class="code">Hovermenu.getInstance(element)</span> to retrieve the instance from any child element.
+            </p>
+
+            <div class="row">
+                <span class="label">Auto-Close</span>
+                <div class="trigger-wrapper">
+                    <button id="auto-close" class="demo-trigger">
+                        <i class="ph-bold ph-timer"></i> Opens for 2s
+                    </button>
+                </div>
+                <span class="code">Hovermenu.remove(el)</span>
+            </div>
+
+            <div class="code-block"><span class="kw">new</span> sadrazam.<span class="fn">Hovermenu</span>({
+  <span class="prop">selector</span>: <span class="str">'#auto-close'</span>,
+  <span class="prop">openFunc</span>: () => {
+    <span class="fn">setTimeout</span>(() => {
+      <span class="kw">const</span> el = document.<span class="fn">querySelector</span>(<span class="str">'#auto-close'</span>);
+      Sadrazam.Hovermenu.<span class="fn">remove</span>(el);
+    }, <span class="str">2000</span>);
+  },
+  <span class="prop">content</span>: () => <span class="str">`&lt;p style="padding:4px"&gt;This will close in 2 seconds...&lt;/p&gt;`</span>
+});</div>
+        </div>
+
+        <!-- ==================== COMBINED EXAMPLE ==================== -->
+        <div class="section">
+            <h2 class="section-title">10. Combined: Title + Backdrop + Hover + Callbacks</h2>
+            <p class="section-desc">
+                All configuration options used together. Hover to open, with a title bar,
+                backdrop overlay, and lifecycle callbacks logging to the console.
+            </p>
+
+            <div class="row">
+                <span class="label">All Options</span>
+                <div class="trigger-wrapper">
+                    <button id="combined" class="demo-trigger">
+                        <i class="ph-bold ph-stack"></i> Full Example
+                    </button>
+                </div>
+                <span class="code">All config options active</span>
+            </div>
+
+            <div class="code-block"><span class="kw">new</span> sadrazam.<span class="fn">Hovermenu</span>({
+  <span class="prop">selector</span>: <span class="str">'#combined'</span>,
+  <span class="prop">trigger</span>: <span class="str">'mouseenter'</span>,
+  <span class="prop">backdrop</span>: <span class="kw">true</span>,
+  <span class="prop">title</span>: <span class="str">'&lt;div class="hovermenu-title"&gt;Quick Actions&lt;/div&gt;'</span>,
+  <span class="prop">openFunc</span>: () => console.<span class="fn">log</span>(<span class="str">'Combined: opened'</span>),
+  <span class="prop">closeFunc</span>: () => console.<span class="fn">log</span>(<span class="str">'Combined: closed'</span>),
+  <span class="prop">content</span>: () => <span class="str">`
+    &lt;ul class="menu-list"&gt;
+      &lt;li&gt;&lt;i class="ph-light ph-plus"&gt;&lt;/i&gt; New Item&lt;/li&gt;
+      &lt;li&gt;&lt;i class="ph-light ph-upload-simple"&gt;&lt;/i&gt; Import&lt;/li&gt;
+      &lt;li&gt;&lt;i class="ph-light ph-export"&gt;&lt;/i&gt; Export&lt;/li&gt;
+      &lt;hr class="menu-divider"&gt;
+      &lt;li class="danger"&gt;&lt;i class="ph-light ph-trash"&gt;&lt;/i&gt; Delete All&lt;/li&gt;
+    &lt;/ul&gt;`</span>
+});</div>
+        </div>
+
+        <!-- ==================== CSS STRUCTURE ==================== -->
+        <div class="section">
+            <h2 class="section-title">CSS Structure Reference</h2>
+            <p class="section-desc">
+                The component generates the following DOM structure. Styles are defined in
+                <span class="code">hovermenu.scss</span> under the <span class="code">.hovermenu</span> namespace.
+            </p>
+
+            <div class="code-block"><span class="cm">&lt;!-- Generated DOM structure --&gt;</span>
+&lt;<span class="kw">div</span> class=<span class="str">"hovermenu"</span> id=<span class="str">"hovermenu-{timestamp}"</span>&gt;
+  &lt;<span class="kw">div</span> class=<span class="str">"hovermenu-arrow-up"</span>&gt;&lt;/<span class="kw">div</span>&gt;     <span class="cm">&lt;!-- or hovermenu-arrow-down --&gt;</span>
+  &lt;<span class="kw">div</span>&gt;...title HTML...&lt;/<span class="kw">div</span>&gt;           <span class="cm">&lt;!-- only if title option is set --&gt;</span>
+  &lt;<span class="kw">div</span> class=<span class="str">"hovermenu-content"</span>&gt;
+    ...content...                       <span class="cm">&lt;!-- from content() function --&gt;</span>
+  &lt;/<span class="kw">div</span>&gt;
+&lt;/<span class="kw">div</span>&gt;
+
+<span class="cm">/* Key CSS classes */</span>
+<span class="prop">.hovermenu</span>              <span class="cm">/* Main container: absolute, min-width 200px, bordered */</span>
+<span class="prop">.hovermenu-arrow-up</span>     <span class="cm">/* Arrow pointing up (menu below trigger) */</span>
+<span class="prop">.hovermenu-arrow-down</span>   <span class="cm">/* Arrow pointing down (menu above trigger) */</span>
+<span class="prop">.hovermenu-title</span>        <span class="cm">/* Title bar with background */</span>
+<span class="prop">.hovermenu-content</span>      <span class="cm">/* Content area with padding */</span></div>
+        </div>
+
+    </div>
+
+    <script>
+        // 1. Basic Click Dropdown
+        new Sadrazam.Hovermenu({
+            selector: '#basic-click',
+            trigger: 'click',
+            content: () => `
+                <ul class="menu-list">
+                    <li><i class="ph-light ph-pencil-simple"></i> Edit</li>
+                    <li><i class="ph-light ph-copy"></i> Duplicate</li>
+                    <li><i class="ph-light ph-archive"></i> Archive</li>
+                    <hr class="menu-divider">
+                    <li class="danger"><i class="ph-light ph-trash"></i> Delete</li>
+                </ul>`
+        });
+
+        // 2. Hover Trigger
+        new Sadrazam.Hovermenu({
+            selector: '#hover-trigger',
+            trigger: 'mouseenter',
+            content: () => `
+                <ul class="menu-list">
+                    <li><i class="ph-light ph-eye"></i> Preview</li>
+                    <li><i class="ph-light ph-download-simple"></i> Download</li>
+                    <li><i class="ph-light ph-share-network"></i> Share</li>
+                </ul>`
+        });
+
+        // 3. With Title
+        new Sadrazam.Hovermenu({
+            selector: '#with-title',
+            title: '<div class="hovermenu-title">Sort Options</div>',
+            content: () => `
+                <ul class="menu-list">
+                    <li><i class="ph-light ph-clock"></i> Newest First</li>
+                    <li><i class="ph-light ph-clock-counter-clockwise"></i> Oldest First</li>
+                    <li><i class="ph-light ph-text-aa"></i> Alphabetical</li>
+                    <li><i class="ph-light ph-star"></i> Most Popular</li>
+                </ul>`
+        });
+
+        // 4. With Backdrop
+        new Sadrazam.Hovermenu({
+            selector: '#with-backdrop',
+            backdrop: true,
+            content: () => `
+                <ul class="menu-list">
+                    <li><i class="ph-light ph-gear"></i> Settings</li>
+                    <li><i class="ph-light ph-question"></i> Help & Support</li>
+                    <hr class="menu-divider">
+                    <li class="danger"><i class="ph-light ph-sign-out"></i> Sign Out</li>
+                </ul>`
+        });
+
+        // 5. With Callbacks
+        new Sadrazam.Hovermenu({
+            selector: '#with-callbacks',
+            openFunc: () => console.log('Hovermenu opened!'),
+            closeFunc: () => console.log('Hovermenu closed!'),
+            content: () => `
+                <ul class="menu-list">
+                    <li><i class="ph-light ph-info"></i> Open your console</li>
+                    <li><i class="ph-light ph-bug"></i> Check log output</li>
+                </ul>`
+        });
+
+        // 6. Selector as DOM Element
+        new Sadrazam.Hovermenu({
+            selector: document.querySelector('#element-ref'),
+            content: () => `
+                <ul class="menu-list">
+                    <li><i class="ph-light ph-check"></i> Passed as Element</li>
+                    <li><i class="ph-light ph-check"></i> Not a string selector</li>
+                </ul>`
+        });
+
+        // 7. Content From DOM Element
+        new Sadrazam.Hovermenu({
+            selector: '#dom-content',
+            content: (triggerEl, instance) => document.querySelector('#dom-content-source')
+        });
+
+        // 8a. Avatar trigger
+        new Sadrazam.Hovermenu({
+            selector: '#avatar-trigger',
+            title: '<div class="hovermenu-title">Account</div>',
+            content: () => `
+                <div class="profile-card">
+                    <div class="profile-name">John Doe</div>
+                    <div class="profile-email">john@example.com</div>
+                </div>
+                <hr class="menu-divider">
+                <ul class="menu-list">
+                    <li><i class="ph-light ph-user"></i> Profile</li>
+                    <li><i class="ph-light ph-gear"></i> Settings</li>
+                    <hr class="menu-divider">
+                    <li class="danger"><i class="ph-light ph-sign-out"></i> Sign Out</li>
+                </ul>`
+        });
+
+        // 8b. Badge trigger
+        new Sadrazam.Hovermenu({
+            selector: '#badge-trigger',
+            title: '<div class="hovermenu-title">Notifications</div>',
+            content: () => `
+                <ul class="notif-list">
+                    <li><strong>Alice</strong> commented on your post</li>
+                    <li><strong>Bob</strong> liked your photo</li>
+                    <li><strong>Carol</strong> sent you a message</li>
+                </ul>`
+        });
+
+        // 8c. Icon button trigger
+        new Sadrazam.Hovermenu({
+            selector: '#icon-trigger',
+            content: () => `
+                <ul class="menu-list">
+                    <li><i class="ph-light ph-pencil-simple"></i> Edit</li>
+                    <li><i class="ph-light ph-link"></i> Copy Link</li>
+                    <li><i class="ph-light ph-flag"></i> Report</li>
+                </ul>`
+        });
+
+        // 9. Programmatic Removal
+        new Sadrazam.Hovermenu({
+            selector: '#auto-close',
+            openFunc: () => {
+                setTimeout(() => {
+                    const el = document.querySelector('#auto-close');
+                    Sadrazam.Hovermenu.remove(el);
+                }, 2000);
+            },
+            content: () => `<p style="padding:4px;font-size:0.85rem;">This will close automatically in 2 seconds...</p>`
+        });
+
+        // 10. Combined Example
+        new Sadrazam.Hovermenu({
+            selector: '#combined',
+            trigger: 'mouseenter',
+            backdrop: true,
+            title: '<div class="hovermenu-title">Quick Actions</div>',
+            openFunc: () => console.log('Combined: opened'),
+            closeFunc: () => console.log('Combined: closed'),
+            content: () => `
+                <ul class="menu-list">
+                    <li><i class="ph-light ph-plus"></i> New Item</li>
+                    <li><i class="ph-light ph-upload-simple"></i> Import</li>
+                    <li><i class="ph-light ph-export"></i> Export</li>
+                    <hr class="menu-divider">
+                    <li class="danger"><i class="ph-light ph-trash"></i> Delete All</li>
+                </ul>`
+        });
+    </script>
+</body>
+
+</html>

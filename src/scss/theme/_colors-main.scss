@@ -1,0 +1,75 @@
+@use 'sass:color';
+@use 'colors-pri' as *;
+@use 'colors-sec' as *;
+@use 'colors-ter' as *;
+@use 'colors-accent' as *;
+
+@forward 'colors-pri';
+@forward 'colors-sec';
+@forward 'colors-ter';
+@forward 'colors-accent';
+
+@function tweak-alpha($color, $alpha) {
+  @return color.change($color, $alpha: $alpha);
+}
+
+/** Common Colors **/
+$color-white: rgba(255, 255, 255, 1);
+$color-black: rgba(0, 0, 0, 1);
+$color-red: rgba(255, 0, 0, 1);
+/** End of Common Colors **/
+
+/** Dark Opacity **/
+$backdrop-background-light: rgba(25, 25, 25, 0.4);
+$backdrop-background-dark: rgba(25, 25, 25, 0.8);
+/** End of Dark Opacity **/
+
+/** Action Color **/
+$color-action-delete: rgba(239, 129, 119, 1);
+$color-action-insert: rgba(166, 224, 148, 1);
+/** End of Action Color **/
+
+/** Browser Override Colors (dark mode) **/
+$color-selection-bg: rgba(23, 96, 185, 1);
+$color-autofill-bg: rgba(91, 95, 19, 1);
+$color-autofill-text: rgba(229, 225, 216, 1);
+/** End of Browser Override Colors **/
+
+/** Logo Colors **/
+$color-facebook-dark: rgba(66, 103, 178, 1);
+$color-google-dark: rgba(221, 75, 57, 1);
+$color-twitter-dark: rgba(85, 172, 238, 1);
+/** End of Logo Colors **/
+
+:root {
+  --color-white: #{$color-white};
+  --color-black: #{$color-black};
+  --color-red: #{$color-red};
+
+  body.dark-mode {
+    --color-white: #{$color-black};
+    --color-black: #{$color-white};
+  }
+
+  --color-white--f: #{$color-white};
+  --color-black--f: #{$color-black};
+
+  --backdrop-background: #{$backdrop-background-light};
+
+  body.dark-mode {
+    --backdrop-background: #{$backdrop-background-dark};
+  }
+
+  --color-action-delete: #{$color-action-delete};
+  --color-action-insert: #{$color-action-insert};
+
+  /** Browser Override Colors **/
+  --color-selection-bg: #{$color-selection-bg};
+  --color-autofill-bg: #{$color-autofill-bg};
+  --color-autofill-text: #{$color-autofill-text};
+
+  /** Other Colors **/
+  --color-facebook-dark: #{$color-facebook-dark};
+  --color-google-dark: #{$color-google-dark};
+  --color-twitter-dark: #{$color-twitter-dark};
+}

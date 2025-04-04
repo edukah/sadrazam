@@ -1,0 +1,26 @@
+/* =========================================================================
+   Backdrop — Arka plan perdesi
+   JS modülü: modules/backdrop.js
+   Backdrop.insert() ile açılır, Backdrop.remove() ile kapanır.
+   z-index değeri --z-overlay-backdrop CSS variable'ından gelir.
+   ========================================================================= */
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--backdrop-background);
+  backdrop-filter: blur(var(--backdrop-blur));
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s;
+
+  &.is-visible {
+    opacity: 1;
+    visibility: visible;
+  }
+}

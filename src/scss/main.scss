@@ -1,0 +1,75 @@
+/* =========================================================================
+   SADRAZAM — Ana Stil Dosyası
+   Tüm framework stillerini sıralı olarak yükler.
+
+   Yükleme sırası önemlidir:
+   1. Theme    → Renkler (tema, etkileşim, grey, text, accent)
+   2. Base     → Değişkenler, reset, tipografi (temeller)
+   3. Layout   → Grid, kutu modeli, genel sayfa yapısı
+   4. Components → Form elementleri, linkler (HTML elementlerinin stilleri)
+   5. Modules  → JS ile eşleşen interaktif bileşenler
+   6. Utilities → Yardımcı class'lar (en son — override edebilmeleri için)
+   ========================================================================= */
+
+/* -------------------------------------------------------------------------
+   1. THEME — Renkler
+   Sıra: pri → sec → ter → accent → main → interaction → grey → text
+   ------------------------------------------------------------------------- */
+@use 'theme/colors-pri';
+@use 'theme/colors-sec';
+@use 'theme/colors-ter';
+@use 'theme/colors-accent';
+@use 'theme/colors-main';
+@use 'theme/colors-interaction';
+@use 'theme/colors-grey';
+@use 'theme/colors-text';
+
+/* -------------------------------------------------------------------------
+   2. BASE — Temel tanımlar, değişkenler
+   ------------------------------------------------------------------------- */
+@use 'base/variables';
+@use 'base/normalize';
+@use 'base/reset';
+@use 'base/fonts';
+@use 'base/base';
+@use 'base/typography';
+
+/* -------------------------------------------------------------------------
+   3. LAYOUT — Sayfa yapısı, grid sistemi, kutular
+   ------------------------------------------------------------------------- */
+@use 'layout/grid';
+@use 'layout/box';
+
+/* -------------------------------------------------------------------------
+   4. COMPONENTS — HTML elementlerinin genel stilleri
+   Form, link gibi temel bileşenler. JS modülü olmayan, saf CSS bileşenleri.
+   ------------------------------------------------------------------------- */
+@use 'components/form';
+@use 'components/link';
+@use 'components/data-table';
+@use 'components/dialog-box';
+@use 'components/breadcrumb';
+
+/* -------------------------------------------------------------------------
+   5. MODULES — JS modülleriyle eşleşen interaktif bileşenler
+   Her SCSS dosyasının bir JS karşılığı (modules/ veya services/) vardır.
+   ------------------------------------------------------------------------- */
+@use 'modules/autocomplete';
+@use 'modules/backdrop';
+@use 'modules/hovermenu';
+@use 'modules/snackbar';
+@use 'modules/modal';
+@use 'modules/toast';
+@use 'modules/popover';
+@use 'modules/slide-menu';
+@use 'modules/progress-bar';
+@use 'modules/spinner';
+@use 'modules/tabs';
+@use 'modules/tooltip';
+
+/* -------------------------------------------------------------------------
+   6. UTILITIES — Yardımcı class'lar (en son yüklenir)
+   Spacing, display, visibility, fade, breadcrumb vb.
+   Sıralama: En son oldukları için diğer katmanları override edebilirler.
+   ------------------------------------------------------------------------- */
+@use 'utilities/utilities';

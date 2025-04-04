@@ -1,0 +1,293 @@
+@use '../base/variables';
+
+/* =========================================================================
+   Form — HTML form elementlerinin temel stilleri
+   Bu dosya barrel görevi görür: alt bileşenleri toplar ve
+   kendi içinde temel element stillerini (input, textarea, select,
+   checkbox, radio, button) barındırır.
+
+   Alt dosyalar:
+     _button.scss        → .bttn class sistemi
+     _switch.scss        → Toggle switch bileşeni
+     _form-patterns.scss → Label combileri, helper text, divider
+   ========================================================================= */
+
+// Alt bileşenleri yükle
+@use 'button';
+@use 'switch';
+@use 'form-patterns';
+
+/* ---- Fieldset & Legend ---- */
+fieldset {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  min-width: 0;
+}
+
+legend.styled {
+  display: block;
+  width: 100%;
+  padding: 0;
+  padding-bottom: 3px;
+  margin-bottom: 17px;
+  font-size: var(--fsi-18);
+  line-height: inherit;
+  color: var(--color-text-dark-2);
+  border: 0;
+  border-bottom: var(--border-width-sm) solid var(--color-grey-150);
+}
+
+/* ---- Input, Textarea, Select — ortak stiller ---- */
+input,
+textarea,
+select {
+  display: block;
+  margin: 0;
+  width: 100%;
+  max-width: 100%;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 400;
+  box-shadow: none;
+  border: var(--border-width-sm) solid var(--color-grey-150);
+  background-color: var(--color-grey-zero);
+  border-radius: var(--radius-sm);
+  line-height: 1.4;
+  padding: 0.5em 0.5em;
+  height: auto;
+
+  body.dark-mode &:-webkit-autofill {
+    background-color: var(--color-autofill-bg) !important;
+    color: var(--color-autofill-text) !important;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: var(--color-pri-300);
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-pri-500) 15%, transparent);
+  }
+
+  &[disabled] {
+    background-color: var(--color-grey-100);
+    border-color: var(--color-grey-250);
+    color: var(--color-text-dark-3);
+    opacity: 0.8;
+    cursor: not-allowed;
+
+    &:hover {
+      background-color: var(--color-grey-100);
+      border-color: var(--color-grey-250);
+    }
+  }
+}
+
+/* ---- Text & Password — appearance reset ---- */
+input[type="text"],
+input[type="password"],
+textarea {
+  appearance: none;
+}
+
+/* ---- Textarea ---- */
+textarea {
+  min-width: 100%;
+  max-width: 100%;
+
+  &.autoexpand {
+    padding: 2px;
+    overflow: hidden;
+    resize: none;
+  }
+}
+
+/* ---- Number Input — spinner butonları ---- */
+input[type="number"] {
+  appearance: textfield; // Firefox spinner gizle
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    appearance: none;
+    margin: 0;
+  }
+
+  // Spinner göstermek istenirse
+  &.with-spinner {
+    appearance: auto;
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      appearance: auto;
+    }
+  }
+}
+
+/* ---- Select — custom ok ikonu ---- */
+select {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg fill='%23999' height='12' viewBox='0 0 24 24' width='12' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: 1.7em;
+  padding-right: 2em; // ok ikonu için yer aç
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+
+  &:hover:not(:disabled) {
+    @media (hover: hover) and (pointer: fine) {
+      border-color: var(--color-grey-250);
+    }
+  }
+
+  &:focus {
+    outline: none;
+    border-color: var(--color-pri-500);
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-pri-500) 20%, transparent);
+  }
+
+  &:disabled {
+    background-color: var(--color-grey-100);
+    color: var(--color-text-dark-3);
+    border-color: var(--color-grey-150);
+    cursor: not-allowed;
+  }
+}
+
+/* ---- Checkbox — custom tik işareti ---- */
+input[type="checkbox"] {
+  appearance: none;
+  width: 1.2em;
+  height: 1.2em;
+  border: 0.15em solid var(--color-grey-250);
+  border-radius: 0.2em;
+  background-color: var(--color-grey-zero);
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+
+  &:checked {
+    border-color: var(--color-link-blue-dark-hover);
+
+    // İç dolgu kutusu
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: var(--color-link-blue-dark-hover);
+      border-radius: 0;
+    }
+
+    // Tik işareti
+    &::before {
+      content: "";
+      position: absolute;
+      top: 10%;
+      left: 35%;
+      width: 32%;
+      height: 63%;
+      border: solid white;
+      border-width: 0 0.17em 0.17em 0;
+      transform: rotate(45deg);
+      z-index: 1;
+    }
+  }
+
+  // Devre dışı bırakılmış durum
+  &:disabled {
+    cursor: not-allowed;
+    background-color: var(--color-grey-100);
+    border-color: var(--color-grey-150);
+    opacity: 0.7;
+
+    // Hem seçili hem de devre dışı bırakılmışsa
+    &:checked {
+      background-color: var(--color-grey-150);
+      border-color: var(--color-grey-150);
+
+      &::after {
+        background-color: var(--color-grey-150);
+      }
+    }
+  }
+}
+
+/* ---- Radio — custom daire ---- */
+input[type="radio"] {
+  appearance: none;
+  width: 1.2em;
+  height: 1.2em;
+  border: 0.15em solid var(--color-grey-250);
+  border-radius: var(--radius-pill);
+  background-color: var(--color-grey-zero);
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+
+  &.block {
+    display: block;
+  }
+
+  &:checked::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 67%;
+    height: 67%;
+    background-color: var(--color-link-blue-dark-hover);
+    border-radius: var(--radius-pill);
+    transform: translate(-50%, -50%);
+  }
+
+  // Devre dışı bırakılmış durum
+  &:disabled {
+    cursor: not-allowed;
+    background-color: var(--color-grey-100);
+    border-color: var(--color-grey-150);
+    opacity: 0.7;
+
+    // Hem seçili hem de devre dışı bırakılmışsa
+    &:checked::after {
+      background-color: var(--color-grey-250);
+    }
+  }
+}
+
+/* ---- Button element — temel HTML button stili ---- */
+button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0.625rem 1.25rem; // 10px 20px
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: 1.2;
+  border-radius: var(--radius-md);
+
+  font-family: inherit;
+  outline: none;
+  appearance: none;
+
+  &[disabled] {
+    background-color: var(--color-grey-100);
+    border-color: var(--color-grey-100);
+    color: var(--color-text-dark-3);
+    opacity: 0.8;
+    cursor: not-allowed;
+
+    &:hover,
+    &:active,
+    &:focus {
+      background-color: var(--color-grey-100);
+      border-color: var(--color-grey-100);
+      filter: brightness(1);
+    }
+  }
+}

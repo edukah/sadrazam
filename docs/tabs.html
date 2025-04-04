@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sadrazam – Tabs Showcase</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/bold/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/light/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <script type="text/javascript" src="assets/js/script.js"></script>
+    <link rel="stylesheet" href="assets/sadrazam.min.css">
+    <script type="text/javascript" src="assets/sadrazam.min.js"></script>
+    <style>
+        .demo-panel-content {
+            padding: 1rem 0;
+            line-height: 1.6;
+            font-size: 0.9rem;
+        }
+
+        .attr-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.82rem;
+            margin-top: 0.5rem;
+        }
+
+        .attr-table th,
+        .attr-table td {
+            text-align: left;
+            padding: 6px 10px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .attr-table th {
+            font-weight: 600;
+            color: var(--text-muted);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+    </style>
+</head>
+
+<body>
+<script>if(localStorage.getItem("dark-mode"))document.body.classList.add("dark-mode")</script>
+    <header>
+        <nav class="top-navbar">
+            <div class="nav-container">
+                <a href="index.html" class="nav-logo">Sadrazam</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li>
+                        <a href="javascript:void(0)" onclick="openPopup(); return false;">Examples</a>
+                        <div class="navi-popup-overlay" id="examplesPopupOverlay"></div>
+                        <div class="navi-popup" id="examplesPopup">
+                            <h3>Examples</h3>
+                            <ul>
+                                <li><a href="buttons.html">Button</a></li>
+                                <li><a href="forms.html">Form</a></li>
+                                <li><a href="form-patterns.html">Form Patterns</a></li>
+                                <li><a href="links.html">Link</a></li>
+                                <li><a href="switches.html">Switch</a></li>
+                                <li><a href="autocomplete.html">Autocomplete</a></li>
+                                <li><a href="backdrop.html">Backdrop</a></li>
+                                <li><a href="hovermenu.html">Hovermenu</a></li>
+                                <li><a href="infinite-scroll.html">Infinite Scroll</a></li>
+                                <li><a href="snackbar.html">Snackbar</a></li>
+                                <li><a href="modals.html">Modal</a></li>
+                                <li><a href="popovers.html">Popover</a></li>
+                                <li><a href="slide-menu.html">Slide Menu</a></li>
+                                <li><a href="spinners.html">Spinner</a></li>
+                                <li><a href="tabs.html">Tabs</a></li>
+                                <li><a href="tooltips.html">Tooltip</a></li>
+                                <li><a href="form-validation.html">Form Validation</a></li>
+                                <li><a href="autosize-textarea.html">Autosize Textarea</a></li>
+                                <li><a href="autosize-select.html">Autosize Select</a></li>
+                                <li><a href="ajax.html">Ajax</a></li>
+                                <li><a href="grid.html">Grid</a></li>
+                                <li><a href="spacing.html">Spacing</a></li>
+                                <li><a href="colors.html">Colors</a></li>
+                                <li><a href="typography.html">Typography</a></li>
+                            </ul>
+                            <button class="close-popup" onclick="closePopup()">&#10005;</button>
+                        </div>
+                    </li>
+                    <li><a href="https://github.com/edukah/sadrazam" target="_blank">GitHub</a></li>
+                </ul>
+                <div class="dark-mode-button-container">
+                    <div class="mode-toggle-switch" onclick="toggleMode()"></div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1>Sadrazam – Tabs Showcase</h1>
+        <p class="subtitle">Four visual variants sharing one JS module, with data-attribute configuration</p>
+
+        <!-- ==================== HOW IT WORKS ==================== -->
+        <div class="section">
+            <h2 class="section-title">How It Works</h2>
+            <p class="section-desc">The Tabs module is initialized via <span class="code">Sadrazam.Tabs.listen()</span> which scans for all tab heading containers.</p>
+
+            <table class="attr-table">
+                <thead>
+                    <tr>
+                        <th>Attribute / Selector</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="code">div[class*="tab-classic__heading"]</span></td>
+                        <td>Wrapper element containing all tab heads. The JS auto-discovers these.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="code">data-tab-id</span></td>
+                        <td>Placed on each tab head. Its value must match the <span class="code">id</span> of the corresponding panel.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="code">id="tab-{name}"</span></td>
+                        <td>The content panel ID. Must match the <span class="code">data-tab-id</span> value on the head.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="code">.is-active</span> (class)</td>
+                        <td>Marks which tab is active on initial page load.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="code">data-tab-edit-url-hash</span></td>
+                        <td>When present, selecting the tab updates the browser URL hash.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="code">data-tab-external-target-id</span></td>
+                        <td>Allows an element outside the tab group to activate a specific tab.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="code">data-tab-scroll-to-target</span></td>
+                        <td>Combined with external target, scrolls the panel into view on click.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- ==================== V1: CLASSIC TAB ==================== -->
+        <div class="section">
+            <h2 class="section-title">tab-classic — Classic Tab</h2>
+            <p class="section-desc">
+                Top-bordered heads, active tab removes bottom border to merge with panel.
+                Container: <span class="code">.tab-classic__container</span> &rarr;
+                Heading: <span class="code">.tab-classic__heading</span> &rarr;
+                Head: <span class="code">.tab-classic__head</span> &rarr;
+                Body: <span class="code">.tab-classic__body</span> &rarr;
+                Panel: <span class="code">.tab-classic__panel</span>
+            </p>
+
+            <div class="tab-classic__container">
+                <div class="tab-classic__heading">
+                    <div class="tab-classic__head is-active" data-tab-id="tab-v1-overview">
+                        <i class="ph-bold ph-info"></i>&nbsp; Overview
+                    </div>
+                    <div class="tab-classic__head" data-tab-id="tab-v1-features">
+                        <i class="ph-bold ph-list-checks"></i>&nbsp; Features
+                    </div>
+                    <div class="tab-classic__head" data-tab-id="tab-v1-specs">
+                        <i class="ph-bold ph-gear"></i>&nbsp; Specifications
+                    </div>
+                </div>
+                <div class="tab-classic__body">
+                    <div class="tab-classic__panel" id="tab-v1-overview">
+                        <div class="demo-panel-content">
+                            This is the <strong>Overview</strong> panel for V1 classic tabs.
+                            The classic variant uses a top border on each head and hides the bottom border
+                            on the active tab, creating a visual merge between the head and the panel below.
+                        </div>
+                    </div>
+                    <div class="tab-classic__panel" id="tab-v1-features">
+                        <div class="demo-panel-content">
+                            <strong>Features</strong> panel content. The heading uses
+                            <span class="code">flex-wrap: nowrap</span> with horizontal overflow scroll,
+                            making it suitable for narrow viewports with many tabs.
+                        </div>
+                    </div>
+                    <div class="tab-classic__panel" id="tab-v1-specs">
+                        <div class="demo-panel-content">
+                            <strong>Specifications</strong> panel content. Each
+                            <span class="code">.tab-classic__head</span> uses
+                            <span class="code">flex-grow: 1</span> so tabs distribute evenly.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== V2: BORDER + UNDERLINE ==================== -->
+        <div class="section">
+            <h2 class="section-title">tab-card — Border + Underline Accent</h2>
+            <p class="section-desc">
+                Bordered heads with a colored bottom accent line on the active tab. Wraps on smaller screens, no-wrap on XL.
+                Container: <span class="code">.tab-card__container</span> &rarr;
+                Heading: <span class="code">.tab-card__heading</span> &rarr;
+                Head: <span class="code">.tab-card__head</span> &rarr;
+                Body: <span class="code">.tab-card__body</span> &rarr;
+                Panel: <span class="code">.tab-card__panel</span>
+            </p>
+
+            <div class="tab-card__container">
+                <div class="tab-card__heading">
+                    <div class="tab-card__head is-active" data-tab-id="tab-v2-dashboard">
+                        <i class="ph-bold ph-chart-line-up"></i>&nbsp; Dashboard
+                    </div>
+                    <div class="tab-card__head" data-tab-id="tab-v2-analytics">
+                        <i class="ph-bold ph-chart-bar"></i>&nbsp; Analytics
+                    </div>
+                    <div class="tab-card__head" data-tab-id="tab-v2-reports">
+                        <i class="ph-bold ph-file-text"></i>&nbsp; Reports
+                    </div>
+                    <div class="tab-card__head" data-tab-id="tab-v2-settings">
+                        <i class="ph-bold ph-sliders"></i>&nbsp; Settings
+                    </div>
+                </div>
+                <div class="tab-card__body">
+                    <div class="tab-card__panel" id="tab-v2-dashboard">
+                        <div class="demo-panel-content">
+                            <strong>Dashboard</strong> panel for V2. This variant has a
+                            <span class="code">3px solid</span> primary-colored bottom border on the
+                            active head, and uses <span class="code">flex-wrap: wrap</span> on small
+                            screens, switching to <span class="code">nowrap</span> at the XL breakpoint.
+                        </div>
+                    </div>
+                    <div class="tab-card__panel" id="tab-v2-analytics">
+                        <div class="demo-panel-content">
+                            <strong>Analytics</strong> panel. Heads use
+                            <span class="code">text-overflow: ellipsis</span> to gracefully handle long labels.
+                            Background switches from light gray to white on activation.
+                        </div>
+                    </div>
+                    <div class="tab-card__panel" id="tab-v2-reports">
+                        <div class="demo-panel-content">
+                            <strong>Reports</strong> panel. The body has a
+                            <span class="code">margin-top: 7px</span> gap on small screens that
+                            collapses to <span class="code">0px</span> on XL to achieve a seamless connection.
+                        </div>
+                    </div>
+                    <div class="tab-card__panel" id="tab-v2-settings">
+                        <div class="demo-panel-content">
+                            <strong>Settings</strong> panel. Heads have a
+                            <span class="code">border-radius</span> on top corners and flat bottom corners,
+                            giving them a folder-tab appearance.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== V3: HORIZONTAL SCROLL + DETACHED BODY ==================== -->
+        <div class="section">
+            <h2 class="section-title">tab-scroll — Horizontal Scroll + Detached Body</h2>
+            <p class="section-desc">
+                Similar to V2 but with horizontal scroll, a margin gap between heading and body, and wrap at LG breakpoint.
+                Container: <span class="code">.tab-scroll__container</span> &rarr;
+                Heading: <span class="code">.tab-scroll__heading</span> &rarr;
+                Head: <span class="code">.tab-scroll__head</span> &rarr;
+                Body: <span class="code">.tab-scroll__body</span> &rarr;
+                Panel: <span class="code">.tab-scroll__panel</span>
+            </p>
+
+            <div class="tab-scroll__container">
+                <div class="tab-scroll__heading">
+                    <div class="tab-scroll__head is-active" data-tab-id="tab-v3-products">
+                        <i class="ph-bold ph-package"></i>&nbsp; Products
+                    </div>
+                    <div class="tab-scroll__head" data-tab-id="tab-v3-orders">
+                        <i class="ph-bold ph-shopping-cart"></i>&nbsp; Orders
+                    </div>
+                    <div class="tab-scroll__head" data-tab-id="tab-v3-customers">
+                        <i class="ph-bold ph-users"></i>&nbsp; Customers
+                    </div>
+                    <div class="tab-scroll__head" data-tab-id="tab-v3-inventory">
+                        <i class="ph-bold ph-warehouse"></i>&nbsp; Inventory
+                    </div>
+                    <div class="tab-scroll__head" data-tab-id="tab-v3-shipping">
+                        <i class="ph-bold ph-truck"></i>&nbsp; Shipping
+                    </div>
+                </div>
+                <div class="tab-scroll__body">
+                    <div class="tab-scroll__panel" id="tab-v3-products">
+                        <div class="demo-panel-content">
+                            <strong>Products</strong> panel for V3. The heading scrolls horizontally
+                            on small screens (<span class="code">overflow: auto</span>) and wraps at
+                            the LG breakpoint. Notice the
+                            <span class="code">margin-bottom</span> on the heading that visually
+                            separates it from the body panel.
+                        </div>
+                    </div>
+                    <div class="tab-scroll__panel" id="tab-v3-orders">
+                        <div class="demo-panel-content">
+                            <strong>Orders</strong> panel. V3 heads also get a
+                            <span class="code">3px solid</span> primary bottom border when active,
+                            just like V2, maintaining visual consistency.
+                        </div>
+                    </div>
+                    <div class="tab-scroll__panel" id="tab-v3-customers">
+                        <div class="demo-panel-content">
+                            <strong>Customers</strong> panel. Try resizing the window to see the
+                            horizontal scroll behavior on narrow viewports.
+                        </div>
+                    </div>
+                    <div class="tab-scroll__panel" id="tab-v3-inventory">
+                        <div class="demo-panel-content">
+                            <strong>Inventory</strong> panel. The detached body design is ideal
+                            for layouts where the tab headings and content need visual separation.
+                        </div>
+                    </div>
+                    <div class="tab-scroll__panel" id="tab-v3-shipping">
+                        <div class="demo-panel-content">
+                            <strong>Shipping</strong> panel. With five tabs, this example demonstrates
+                            how horizontal scroll accommodates many items without wrapping.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== V4: PILL / SEGMENT ==================== -->
+        <div class="section">
+            <h2 class="section-title">tab-capsule — Capsule / Segment</h2>
+            <p class="section-desc">
+                Modern segment-control style. Active tab gets a filled primary background with shadow. Hover shows primary color text.
+                Container: <span class="code">.tab-capsule__container</span> &rarr;
+                Heading: <span class="code">.tab-capsule__heading</span> &rarr;
+                Head: <span class="code">.tab-capsule__head</span> &rarr;
+                Body: <span class="code">.tab-capsule__body</span> &rarr;
+                Panel: <span class="code">.tab-capsule__panel</span>
+            </p>
+
+            <div class="tab-capsule__container">
+                <div class="tab-capsule__heading">
+                    <div class="tab-capsule__head is-active" data-tab-id="tab-v4-monthly">
+                        <i class="ph-bold ph-calendar"></i>&nbsp; Monthly
+                    </div>
+                    <div class="tab-capsule__head" data-tab-id="tab-v4-yearly">
+                        <i class="ph-bold ph-calendar-check"></i>&nbsp; Yearly
+                    </div>
+                    <div class="tab-capsule__head" data-tab-id="tab-v4-lifetime">
+                        <i class="ph-bold ph-infinity"></i>&nbsp; Lifetime
+                    </div>
+                </div>
+                <div class="tab-capsule__body">
+                    <div class="tab-capsule__panel" id="tab-v4-monthly">
+                        <div class="demo-panel-content">
+                            <strong>Monthly</strong> plan panel. V4 uses a pill/segment design:
+                            the heading has a light gray background (<span class="code">border-radius: var(--radius-md)</span>),
+                            and the active head gets a primary-colored fill with
+                            <span class="code">box-shadow</span> and white text. Transition on
+                            <span class="code">background-color</span> and <span class="code">color</span>
+                            is animated via <span class="code">var(--ease-fast)</span>.
+                        </div>
+                    </div>
+                    <div class="tab-capsule__panel" id="tab-v4-yearly">
+                        <div class="demo-panel-content">
+                            <strong>Yearly</strong> plan panel. Heads use
+                            <span class="code">text-align: center</span> and
+                            <span class="code">flex-grow: 1</span> for equal width distribution,
+                            making it ideal for pricing toggles or segmented controls.
+                        </div>
+                    </div>
+                    <div class="tab-capsule__panel" id="tab-v4-lifetime">
+                        <div class="demo-panel-content">
+                            <strong>Lifetime</strong> plan panel. The panel has a bordered,
+                            rounded container with a subtle background
+                            (<span class="code">.tab-capsule__panel</span>).
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== V4: NEUTRAL PANEL VARIANT ==================== -->
+        <div class="section">
+            <h2 class="section-title">tab-capsule — Neutral Panel Variant</h2>
+            <p class="section-desc">
+                Uses <span class="code">.tab-capsule__panel--neutral</span> for a borderless, background-free panel.
+                Useful when the content itself provides its own container styling.
+            </p>
+
+            <div class="tab-capsule__container">
+                <div class="tab-capsule__heading">
+                    <div class="tab-capsule__head is-active" data-tab-id="tab-v4n-all">
+                        All Items
+                    </div>
+                    <div class="tab-capsule__head" data-tab-id="tab-v4n-active">
+                        Active
+                    </div>
+                    <div class="tab-capsule__head" data-tab-id="tab-v4n-archived">
+                        Archived
+                    </div>
+                </div>
+                <div class="tab-capsule__body">
+                    <div class="tab-capsule__panel--neutral" id="tab-v4n-all">
+                        <div class="demo-panel-content">
+                            <strong>All Items</strong> — This panel uses <span class="code">.tab-capsule__panel--neutral</span>,
+                            which has no border, no background, and no padding. The content floats freely beneath the pill heading.
+                        </div>
+                    </div>
+                    <div class="tab-capsule__panel--neutral" id="tab-v4n-active">
+                        <div class="demo-panel-content">
+                            <strong>Active</strong> items panel. The neutral variant is ideal for
+                            cases where the panel content contains cards or other already-styled elements.
+                        </div>
+                    </div>
+                    <div class="tab-capsule__panel--neutral" id="tab-v4n-archived">
+                        <div class="demo-panel-content">
+                            <strong>Archived</strong> items panel. Compare with the bordered
+                            <span class="code">.tab-capsule__panel</span> in the section above.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== IS-ACTIVE: DEFAULT ACTIVE TAB ==================== -->
+        <div class="section">
+            <h2 class="section-title">Default Active Tab</h2>
+            <p class="section-desc">
+                The <span class="code">.is-active</span> class controls which tab is shown on page load.
+                Here the second tab is set as default.
+            </p>
+
+            <div class="tab-card__container">
+                <div class="tab-card__heading">
+                    <div class="tab-card__head" data-tab-id="tab-da-first">
+                        First Tab
+                    </div>
+                    <div class="tab-card__head is-active" data-tab-id="tab-da-second">
+                        Second Tab (default)
+                    </div>
+                    <div class="tab-card__head" data-tab-id="tab-da-third">
+                        Third Tab
+                    </div>
+                </div>
+                <div class="tab-card__body">
+                    <div class="tab-card__panel" id="tab-da-first">
+                        <div class="demo-panel-content">
+                            This is the <strong>first</strong> tab. It was not set as the default.
+                        </div>
+                    </div>
+                    <div class="tab-card__panel" id="tab-da-second">
+                        <div class="demo-panel-content">
+                            This is the <strong>second</strong> tab. It opens by default because
+                            <span class="code">.is-active</span> class is placed on its head element.
+                        </div>
+                    </div>
+                    <div class="tab-card__panel" id="tab-da-third">
+                        <div class="demo-panel-content">
+                            This is the <strong>third</strong> tab.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== URL HASH INTEGRATION ==================== -->
+        <div class="section">
+            <h2 class="section-title">URL Hash Integration</h2>
+            <p class="section-desc">
+                Add <span class="code">data-tab-edit-url-hash</span> to each tab head. When selected,
+                the browser URL updates to <span class="code">#tab-name</span>. Refreshing the page
+                restores the active tab from the hash.
+            </p>
+
+            <div class="tab-scroll__container">
+                <div class="tab-scroll__heading">
+                    <div class="tab-scroll__head is-active" data-tab-id="tab-hash-general" data-tab-edit-url-hash>
+                        <i class="ph-bold ph-house"></i>&nbsp; General
+                    </div>
+                    <div class="tab-scroll__head" data-tab-id="tab-hash-security" data-tab-edit-url-hash>
+                        <i class="ph-bold ph-lock"></i>&nbsp; Security
+                    </div>
+                    <div class="tab-scroll__head" data-tab-id="tab-hash-notifications" data-tab-edit-url-hash>
+                        <i class="ph-bold ph-bell"></i>&nbsp; Notifications
+                    </div>
+                </div>
+                <div class="tab-scroll__body">
+                    <div class="tab-scroll__panel" id="tab-hash-general">
+                        <div class="demo-panel-content">
+                            <strong>General</strong> settings. Click each tab and watch the URL hash change
+                            in your browser address bar. The format is
+                            <span class="code">#hash-general</span>,
+                            <span class="code">#hash-security</span>, etc.
+                            (the <span class="code">tab-</span> prefix is stripped from the hash).
+                        </div>
+                    </div>
+                    <div class="tab-scroll__panel" id="tab-hash-security">
+                        <div class="demo-panel-content">
+                            <strong>Security</strong> settings. Copy the URL with the hash and paste it in a
+                            new tab to see the correct panel restored automatically via
+                            <span class="code">#determineInitialTab()</span>.
+                        </div>
+                    </div>
+                    <div class="tab-scroll__panel" id="tab-hash-notifications">
+                        <div class="demo-panel-content">
+                            <strong>Notifications</strong> settings. The hash update uses
+                            <span class="code">history.pushState()</span> so it does not trigger a
+                            page reload.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== EXTERNAL TRIGGER ==================== -->
+        <div class="section">
+            <h2 class="section-title">External Trigger</h2>
+            <p class="section-desc">
+                Buttons outside the tab group can activate a specific tab using
+                <span class="code">data-tab-external-target-id</span>. Add
+                <span class="code">data-tab-scroll-to-target</span> to also scroll the panel into view.
+            </p>
+
+            <div class="row" style="margin-bottom: 1.2rem;">
+                <span class="label">Trigger Buttons</span>
+                <button class="bttn bttn--sm-rectangle bttn--pri" data-tab-external-target-id="tab-ext-red" data-tab-scroll-to-target>
+                    <i class="ph-bold ph-paint-bucket"></i>&nbsp; Show Red
+                </button>
+                <button class="bttn bttn--sm-rectangle bttn--sec" data-tab-external-target-id="tab-ext-green" data-tab-scroll-to-target>
+                    <i class="ph-bold ph-leaf"></i>&nbsp; Show Green
+                </button>
+                <button class="bttn bttn--sm-rectangle bttn--neutral" data-tab-external-target-id="tab-ext-blue" data-tab-scroll-to-target>
+                    <i class="ph-bold ph-drop"></i>&nbsp; Show Blue
+                </button>
+            </div>
+
+            <div class="tab-capsule__container">
+                <div class="tab-capsule__heading">
+                    <div class="tab-capsule__head is-active" data-tab-id="tab-ext-red">
+                        Red
+                    </div>
+                    <div class="tab-capsule__head" data-tab-id="tab-ext-green">
+                        Green
+                    </div>
+                    <div class="tab-capsule__head" data-tab-id="tab-ext-blue">
+                        Blue
+                    </div>
+                </div>
+                <div class="tab-capsule__body">
+                    <div class="tab-capsule__panel" id="tab-ext-red">
+                        <div class="demo-panel-content" style="color: #d63031;">
+                            <strong>Red</strong> panel activated. This can be triggered by clicking the
+                            tab head above or the external "Show Red" button. The external button uses
+                            <span class="code">data-tab-external-target-id="tab-ext-red"</span>.
+                        </div>
+                    </div>
+                    <div class="tab-capsule__panel" id="tab-ext-green">
+                        <div class="demo-panel-content" style="color: #00b894;">
+                            <strong>Green</strong> panel activated. The
+                            <span class="code">data-tab-scroll-to-target</span> attribute on the
+                            external button also scrolls this panel into view via
+                            <span class="code">Elem.scrollToView()</span>.
+                        </div>
+                    </div>
+                    <div class="tab-capsule__panel" id="tab-ext-blue">
+                        <div class="demo-panel-content" style="color: #0984e3;">
+                            <strong>Blue</strong> panel activated. External triggers are useful for
+                            sidebar navigation, call-to-action buttons, or cross-component communication.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== V4: INNER PANEL VARIANT ==================== -->
+        <div class="section">
+            <h2 class="section-title">tab-capsule — Inner Panel Variant</h2>
+            <p class="section-desc">
+                The <span class="code">.tab-capsule__panel--inner</span> class creates bordered, rounded sections
+                inside a neutral panel. Stacked inner panels get automatic top margin via the adjacent sibling selector
+                <span class="code">.tab-capsule__panel--inner + .tab-capsule__panel--inner</span>.
+            </p>
+
+            <div class="tab-capsule__container">
+                <div class="tab-capsule__heading">
+                    <div class="tab-capsule__head is-active" data-tab-id="tab-v4i-profile">
+                        <i class="ph-bold ph-user"></i>&nbsp; Profile
+                    </div>
+                    <div class="tab-capsule__head" data-tab-id="tab-v4i-billing">
+                        <i class="ph-bold ph-credit-card"></i>&nbsp; Billing
+                    </div>
+                </div>
+                <div class="tab-capsule__body">
+                    <div class="tab-capsule__panel--neutral" id="tab-v4i-profile">
+                        <div class="tab-capsule__panel--inner">
+                            <strong>Personal Information</strong>
+                            <p style="margin-top: 0.5rem; font-size: 0.85rem; color: var(--text-muted);">
+                                Name, email, and avatar settings. This is the first
+                                <span class="code">.tab-capsule__panel--inner</span> block.
+                            </p>
+                        </div>
+                        <div class="tab-capsule__panel--inner">
+                            <strong>Preferences</strong>
+                            <p style="margin-top: 0.5rem; font-size: 0.85rem; color: var(--text-muted);">
+                                Language, timezone, and theme preferences. This second inner panel
+                                receives automatic spacing from the adjacent sibling rule.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="tab-capsule__panel--neutral" id="tab-v4i-billing">
+                        <div class="tab-capsule__panel--inner">
+                            <strong>Payment Method</strong>
+                            <p style="margin-top: 0.5rem; font-size: 0.85rem; color: var(--text-muted);">
+                                Credit card and billing address configuration.
+                            </p>
+                        </div>
+                        <div class="tab-capsule__panel--inner">
+                            <strong>Invoice History</strong>
+                            <p style="margin-top: 0.5rem; font-size: 0.85rem; color: var(--text-muted);">
+                                Past invoices and receipts displayed here.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== CSS CLASS REFERENCE ==================== -->
+        <div class="section">
+            <h2 class="section-title">CSS Class Reference</h2>
+            <p class="section-desc">All four variants share the same JS module. Only the CSS class prefix changes.</p>
+
+            <table class="attr-table">
+                <thead>
+                    <tr>
+                        <th>Variant</th>
+                        <th>Prefix</th>
+                        <th>Style</th>
+                        <th>Key Feature</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Classic</td>
+                        <td><span class="code">.tab-classic__*</span></td>
+                        <td>Classic</td>
+                        <td>Top border, active removes bottom border</td>
+                    </tr>
+                    <tr>
+                        <td>Card</td>
+                        <td><span class="code">.tab-card__*</span></td>
+                        <td>Border + underline accent</td>
+                        <td>Responsive wrap, 3px bottom accent on active</td>
+                    </tr>
+                    <tr>
+                        <td>Scroll</td>
+                        <td><span class="code">.tab-scroll__*</span></td>
+                        <td>Horizontal scroll</td>
+                        <td>Scrollable heading, detached body with margin gap</td>
+                    </tr>
+                    <tr>
+                        <td>Capsule</td>
+                        <td><span class="code">.tab-capsule__*</span></td>
+                        <td>Capsule / segment</td>
+                        <td>Filled active background, transition animation, shadow</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <hr class="divider">
+
+            <div class="row">
+                <span class="label">V4 Panel Types</span>
+                <span class="code">.tab-capsule__panel</span> (bordered) &nbsp;
+                <span class="code">.tab-capsule__panel--neutral</span> (no styles) &nbsp;
+                <span class="code">.tab-capsule__panel--inner</span> (sub-section card)
+            </div>
+        </div>
+
+        <!-- ==================== JS API REFERENCE ==================== -->
+        <div class="section">
+            <h2 class="section-title">JS API Reference</h2>
+            <p class="section-desc">Available via the global <span class="code">Sadrazam.Tabs</span> object.</p>
+
+            <div class="row">
+                <span class="label">Initialize</span>
+                <span class="code">Sadrazam.Tabs.listen()</span>
+                <span style="font-size: 0.82rem; color: var(--text-muted);">
+                    Scans the DOM for all tab heading containers and binds events.
+                </span>
+            </div>
+
+            <div class="row">
+                <span class="label">Help</span>
+                <span class="code">Sadrazam.Tabs.help()</span>
+                <span style="font-size: 0.82rem; color: var(--text-muted);">
+                    Prints all available config attributes to the console.
+                </span>
+            </div>
+
+            <div class="row">
+                <span class="label">getInstance()</span>
+                <span class="code">Sadrazam.Tabs.getInstance(element)</span>
+                <span style="font-size: 0.82rem; color: var(--text-muted);">
+                    Returns the Tabs instance from a tab head or container element.
+                </span>
+            </div>
+
+            <div class="row">
+                <span class="label">Activate</span>
+                <span class="code">instance.activateTab(tabHeadElement)</span>
+                <span style="font-size: 0.82rem; color: var(--text-muted);">
+                    Programmatically activate a tab. Access instance via
+                    <span class="code">element.__tabs</span>.
+                </span>
+            </div>
+
+            <div class="row">
+                <span class="label">destroy()</span>
+                <span class="code">instance.destroy()</span>
+                <span style="font-size: 0.82rem; color: var(--text-muted);">
+                    Removes all click handlers and clears instance references from DOM elements.
+                </span>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Initialize all tab groups on the page
+        Sadrazam.Tabs.listen();
+    </script>
+</body>
+
+</html>

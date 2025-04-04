@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sadrazam – Colors Showcase</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/bold/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/light/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <script type="text/javascript" src="assets/js/script.js"></script>
+    <link rel="stylesheet" href="assets/sadrazam.min.css">
+    <script type="text/javascript" src="assets/sadrazam.min.js"></script>
+    <style>
+        /* Color swatch grid */
+        .swatch-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 12px;
+        }
+
+        .swatch {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 140px;
+        }
+
+        .swatch-box {
+            width: 100%;
+            height: 64px;
+            border-radius: 8px;
+            border: 1px solid rgba(0,0,0,0.08);
+            margin-bottom: 6px;
+        }
+
+        .swatch-name {
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--text-color);
+            text-align: center;
+            word-break: break-all;
+            line-height: 1.3;
+        }
+
+        .swatch-hex {
+            font-family: 'SF Mono', Monaco, Consolas, monospace;
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            text-align: center;
+            margin-top: 2px;
+        }
+
+        .swatch-var {
+            font-family: 'SF Mono', Monaco, Consolas, monospace;
+            font-size: 0.6rem;
+            color: #e17055;
+            background: var(--bg-inset);
+            padding: 1px 4px;
+            border-radius: 3px;
+            text-align: center;
+            margin-top: 3px;
+            word-break: break-all;
+        }
+
+        .dark-section .swatch-name {
+            color: #dfe6e9;
+        }
+
+        .dark-section .swatch-hex {
+            color: #b2bec3;
+        }
+
+        .dark-section .swatch-var {
+            background: #3d3d3d;
+            color: #fab1a0;
+        }
+
+        .dark-section .swatch-box {
+            border-color: rgba(255,255,255,0.1);
+        }
+
+        /* Text color preview */
+        .text-preview {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
+        .text-sample {
+            font-size: 1rem;
+            font-weight: 600;
+            min-width: 180px;
+        }
+
+        .swatch-row {
+            display: flex;
+            align-items: stretch;
+            gap: 0;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 12px;
+            border: 1px solid rgba(0,0,0,0.08);
+        }
+
+        .swatch-row-item {
+            flex: 1;
+            min-width: 120px;
+            padding: 16px 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            min-height: 80px;
+        }
+
+        .swatch-row-item .swatch-label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .swatch-row-item .swatch-value {
+            font-family: 'SF Mono', Monaco, Consolas, monospace;
+            font-size: 0.62rem;
+            opacity: 0.85;
+        }
+    </style>
+</head>
+
+<body>
+<script>if(localStorage.getItem("dark-mode"))document.body.classList.add("dark-mode")</script>
+    <header>
+        <nav class="top-navbar">
+            <div class="nav-container">
+                <a href="index.html" class="nav-logo">Sadrazam</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li>
+                        <a href="javascript:void(0)" onclick="openPopup(); return false;">Examples</a>
+                        <div class="navi-popup-overlay" id="examplesPopupOverlay"></div>
+                        <div class="navi-popup" id="examplesPopup">
+                            <h3>Examples</h3>
+                            <ul>
+                                <li><a href="buttons.html">Button</a></li>
+                                <li><a href="forms.html">Form</a></li>
+                                <li><a href="form-patterns.html">Form Patterns</a></li>
+                                <li><a href="links.html">Link</a></li>
+                                <li><a href="switches.html">Switch</a></li>
+                                <li><a href="autocomplete.html">Autocomplete</a></li>
+                                <li><a href="backdrop.html">Backdrop</a></li>
+                                <li><a href="hovermenu.html">Hovermenu</a></li>
+                                <li><a href="infinite-scroll.html">Infinite Scroll</a></li>
+                                <li><a href="snackbar.html">Snackbar</a></li>
+                                <li><a href="modals.html">Modal</a></li>
+                                <li><a href="popovers.html">Popover</a></li>
+                                <li><a href="slide-menu.html">Slide Menu</a></li>
+                                <li><a href="spinners.html">Spinner</a></li>
+                                <li><a href="tabs.html">Tabs</a></li>
+                                <li><a href="tooltips.html">Tooltip</a></li>
+                                <li><a href="form-validation.html">Form Validation</a></li>
+                                <li><a href="autosize-textarea.html">Autosize Textarea</a></li>
+                                <li><a href="autosize-select.html">Autosize Select</a></li>
+                                <li><a href="ajax.html">Ajax</a></li>
+                                <li><a href="grid.html">Grid</a></li>
+                                <li><a href="spacing.html">Spacing</a></li>
+                                <li><a href="colors.html">Colors</a></li>
+                                <li><a href="typography.html">Typography</a></li>
+                            </ul>
+                            <button class="close-popup" onclick="closePopup()">&#10005;</button>
+                        </div>
+                    </li>
+                    <li><a href="https://github.com/edukah/sadrazam" target="_blank">GitHub</a></li>
+                </ul>
+                <div class="dark-mode-button-container">
+                    <div class="mode-toggle-switch" onclick="toggleMode()"></div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+
+        <h1>Sadrazam – Colors Showcase</h1>
+        <p class="subtitle">Complete color system: theme, neutral, semantic, background, text, and interaction colors</p>
+
+        <!-- ==================== PRIMARY PALETTE ==================== -->
+        <div class="section">
+            <h2 class="section-title">Primary Palette</h2>
+            <p class="section-desc">Core brand colors used across all primary UI elements</p>
+
+            <div class="swatch-row">
+                <div class="swatch-row-item" style="background: rgba(84, 180, 203, 1); color: #fff;">
+                    <span class="swatch-label">Light</span>
+                    <span class="swatch-value">#54B4CB</span>
+                </div>
+                <div class="swatch-row-item" style="background: rgba(10, 150, 183, 1); color: #fff;">
+                    <span class="swatch-label">Base</span>
+                    <span class="swatch-value">#0A96B7</span>
+                </div>
+                <div class="swatch-row-item" style="background: rgba(2, 91, 112, 1); color: #fff;">
+                    <span class="swatch-label">Dark</span>
+                    <span class="swatch-value">#025B70</span>
+                </div>
+            </div>
+
+            <div class="row">
+                <span class="label">CSS Variables</span>
+                <span class="code">--color-pri-300</span>
+                <span class="code">--color-pri-500</span>
+                <span class="code">--color-pri-700</span>
+            </div>
+            <div class="row">
+                <span class="label">BG Classes</span>
+                <span class="code">.tbc-pri-300</span>
+                <span class="code">.tbc-pri-500</span>
+                <span class="code">.tbc-pri-700</span>
+            </div>
+            <div class="row">
+                <span class="label">Text Classes</span>
+                <span class="code">.tc-pri-300</span>
+                <span class="code">.tc-pri-500</span>
+                <span class="code">.tc-pri-700</span>
+            </div>
+        </div>
+
+        <!-- ==================== SECONDARY PALETTE ==================== -->
+        <div class="section">
+            <h2 class="section-title">Secondary Palette</h2>
+            <p class="section-desc">Warm accent colors for secondary actions and highlights</p>
+
+            <div class="swatch-row">
+                <div class="swatch-row-item" style="background: rgba(252, 238, 191, 1); color: #2d3436;">
+                    <span class="swatch-label">Light</span>
+                    <span class="swatch-value">#FCEEBF</span>
+                </div>
+                <div class="swatch-row-item" style="background: rgba(254, 163, 96, 1); color: #fff;">
+                    <span class="swatch-label">Base</span>
+                    <span class="swatch-value">#FEA360</span>
+                </div>
+                <div class="swatch-row-item" style="background: rgba(241, 101, 29, 1); color: #fff;">
+                    <span class="swatch-label">Dark</span>
+                    <span class="swatch-value">#F1651D</span>
+                </div>
+            </div>
+
+            <div class="row">
+                <span class="label">CSS Variables</span>
+                <span class="code">--color-sec-300</span>
+                <span class="code">--color-sec-500</span>
+                <span class="code">--color-sec-700</span>
+            </div>
+            <div class="row">
+                <span class="label">BG Classes</span>
+                <span class="code">.tbc-sec-300</span>
+                <span class="code">.tbc-sec-500</span>
+                <span class="code">.tbc-sec-700</span>
+            </div>
+            <div class="row">
+                <span class="label">Text Classes</span>
+                <span class="code">.tc-sec-300</span>
+                <span class="code">.tc-sec-500</span>
+                <span class="code">.tc-sec-700</span>
+            </div>
+        </div>
+
+        <!-- ==================== TERTIARY PALETTE ==================== -->
+        <div class="section">
+            <h2 class="section-title">Tertiary Palette</h2>
+            <p class="section-desc">Purple accent colors for distinctive UI elements</p>
+
+            <div class="swatch-row">
+                <div class="swatch-row-item" style="background: rgba(235, 218, 255, 1); color: #2d3436;">
+                    <span class="swatch-label">Light</span>
+                    <span class="swatch-value">#EBDAFF</span>
+                </div>
+                <div class="swatch-row-item" style="background: rgba(160, 98, 227, 1); color: #fff;">
+                    <span class="swatch-label">Base</span>
+                    <span class="swatch-value">#A062E3</span>
+                </div>
+                <div class="swatch-row-item" style="background: rgba(94, 45, 145, 1); color: #fff;">
+                    <span class="swatch-label">Dark</span>
+                    <span class="swatch-value">#5E2D91</span>
+                </div>
+            </div>
+
+            <div class="row">
+                <span class="label">CSS Variables</span>
+                <span class="code">--color-ter-300</span>
+                <span class="code">--color-ter-500</span>
+                <span class="code">--color-ter-700</span>
+            </div>
+            <div class="row">
+                <span class="label">BG Classes</span>
+                <span class="code">.tbc-ter-300</span>
+                <span class="code">.tbc-ter-500</span>
+                <span class="code">.tbc-ter-700</span>
+            </div>
+            <div class="row">
+                <span class="label">Text Classes</span>
+                <span class="code">.tc-ter-300</span>
+                <span class="code">.tc-ter-500</span>
+                <span class="code">.tc-ter-700</span>
+            </div>
+        </div>
+
+        <!-- ==================== NEUTRAL / GREY PALETTE ==================== -->
+        <div class="section">
+            <h2 class="section-title">Neutral Palette</h2>
+            <p class="section-desc">Full grey scale from white to near-black, used for backgrounds, borders, and text</p>
+
+            <p style="font-size: 0.75rem; color: var(--color-text-dark-3); margin-bottom: 8px;">13-unit RGB intervals. Dark mode swap: N &harr; (900 &minus; N + 50)</p>
+
+            <div class="swatch-row">
+                <div class="swatch-row-item" style="background: rgba(255, 255, 255, 1); color: #2d3436; border-right: 1px solid #eee;">
+                    <span class="swatch-label">Zero</span>
+                    <span class="swatch-value">#FFFFFF</span>
+                </div>
+                <div class="swatch-row-item" style="background: rgba(250, 250, 250, 1); color: #2d3436;">
+                    <span class="swatch-label">Grey 50</span>
+                    <span class="swatch-value">#FAFAFA</span>
+                </div>
+                <div class="swatch-row-item" style="background: rgba(237, 237, 237, 1); color: #2d3436;">
+                    <span class="swatch-label">Grey 100</span>
+                    <span class="swatch-value">#EDEDED</span>
+                </div>
+                <div class="swatch-row-item" style="background: rgba(224, 224, 224, 1); color: #2d3436;">
+                    <span class="swatch-label">Grey 150</span>
+                    <span class="swatch-value">#E0E0E0</span>
+                </div>
+                <div class="swatch-row-item" style="background: rgba(211, 211, 211, 1); color: #2d3436;">
+                    <span class="swatch-label">Grey 200</span>
+                    <span class="swatch-value">#D3D3D3</span>
+                </div>
+                <div class="swatch-row-item" style="background: rgba(198, 198, 198, 1); color: #2d3436;">
+                    <span class="swatch-label">Grey 250</span>
+                    <span class="swatch-value">#C6C6C6</span>
+                </div>
+                <div class="swatch-row-item" style="background: rgba(185, 185, 185, 1); color: #2d3436;">
+                    <span class="swatch-label">Grey 300</span>
+                    <span class="swatch-value">#B9B9B9</span>
+                </div>
+            </div>
+
+            <div class="swatch-row">
+                <div class="swatch-row-item" style="background: rgba(172, 172, 172, 1); color: #2d3436;">
+                    <span class="swatch-label">Grey 350</span>
+                    <span class="swatch-value">#ACACAC</span>
+                </div>
+                <div class="swatch-row-item" style="background: rgba(159, 159, 159, 1); color: #fff;">
+                    <span class="swatch-label">Grey 400</span>
+                    <span class="swatch-value">#9F9F9F</span>
+                </div>
+                <div class="swatch-row-item" style="background: rgba(146, 146, 146, 1); color: #fff;">
+                    <span class="swatch-label">Grey 450</span>
+                    <span class="swatch-value">#929292</span>
+                </div>
+                <div class="swatch-row-item" style="background: rgba(133, 133, 133, 1); color: #fff;">
+                    <span class="swatch-label">Grey 500</span>
+                    <span class="swatch-value">#858585</span>
+                </div>
+                <div class="swatch-row-item" style="background: rgba(120, 120, 120, 1); color: #fff;">
+                    <span class="swatch-label">Grey 550</span>
+                    <span class="swatch-value">#787878</span>
+                </div>
+                <div class="swatch-row-item" style="background: rgba(107, 107, 107, 1); color: #fff;">
+                    <span class="swatch-label">Grey 600</span>
+                    <span class="swatch-value">#6B6B6B</span>
+                </div>
+                <div class="swatch-row-item" style="background: rgba(94, 94, 94, 1); color: #fff;">
+                    <span class="swatch-label">Grey 650</span>
+                    <span class="swatch-value">#5E5E5E</span>
+                </div>
+            </div>
+
+            <div class="swatch-row">
+                <div class="swatch-row-item" style="background: rgba(81, 81, 81, 1); color: #fff;">
+                    <span class="swatch-label">Grey 700</span>
+                    <span class="swatch-value">#515151</span>
+                </div>
+                <div class="swatch-row-item" style="background: rgba(68, 68, 68, 1); color: #fff;">
+                    <span class="swatch-label">Grey 750</span>
+                    <span class="swatch-value">#444444</span>
+                </div>
+                <div class="swatch-row-item" style="background: rgba(55, 55, 55, 1); color: #fff;">
+                    <span class="swatch-label">Grey 800</span>
+                    <span class="swatch-value">#373737</span>
+                </div>
+                <div class="swatch-row-item" style="background: rgba(42, 42, 42, 1); color: #fff;">
+                    <span class="swatch-label">Grey 850</span>
+                    <span class="swatch-value">#2A2A2A</span>
+                </div>
+                <div class="swatch-row-item" style="background: rgba(29, 29, 29, 1); color: #fff;">
+                    <span class="swatch-label">Grey 900</span>
+                    <span class="swatch-value">#1D1D1D</span>
+                </div>
+                <div class="swatch-row-item" style="background: rgba(23, 23, 23, 1); color: #fff;">
+                    <span class="swatch-label">Grey 910</span>
+                    <span class="swatch-value">#171717</span>
+                </div>
+                <div class="swatch-row-item" style="background: rgba(16, 16, 16, 1); color: #fff;">
+                    <span class="swatch-label">Grey 950</span>
+                    <span class="swatch-value">#101010</span>
+                </div>
+            </div>
+
+            <div class="row">
+                <span class="label">Constants</span>
+                <span class="code">--color-white</span>
+                <span class="code">--color-black</span>
+                <span class="code">--color-white--f</span>
+                <span class="code">--color-black--f</span>
+            </div>
+        </div>
+
+        <!-- ==================== SEMANTIC / INTERACTION COLORS ==================== -->
+        <div class="section">
+            <h2 class="section-title">Semantic Colors</h2>
+            <p class="section-desc">Interaction feedback: safe, notice, caution, warning, and danger states in three tints</p>
+
+            <!-- Safe -->
+            <div class="row"><span class="label">Safe</span></div>
+            <div class="swatch-row">
+                <div class="swatch-row-item" style="background: rgba(238, 249, 216, 1); color: #2d3436;">
+                    <span class="swatch-label">Safe 50</span>
+                    <span class="swatch-value">#EEF9D8</span>
+                </div>
+                <div class="swatch-row-item" style="background: rgba(122, 150, 61, 1); color: #fff;">
+                    <span class="swatch-label">Safe 500</span>
+                    <span class="swatch-value">#7A963D</span>
+                </div>
+                <div class="swatch-row-item" style="background: rgba(68, 88, 30, 1); color: #fff;">
+                    <span class="swatch-label">Safe 800</span>
+                    <span class="swatch-value">#44581E</span>
+                </div>
+            </div>
+
+            <div class="row">
+                <span class="label">BG Variables</span>
+                <span class="code">--bg-safe-50</span>
+                <span class="code">--bg-safe-500</span>
+                <span class="code">--bg-safe-800</span>
+            </div>
+            <div class="row">
+                <span class="label">Text Variables</span>
+                <span class="code">--color-safe-50</span>
+                <span class="code">--color-safe-500</span>
+                <span class="code">--color-safe-800</span>
+            </div>
+
+            <hr class="divider">
+
+            <!-- Notice -->
+            <div class="row"><span class="label">Notice</span></div>
+            <div class="swatch-row">
+                <div class="swatch-row-item" style="background: rgba(238, 243, 251, 1); color: #2d3436;">
+                    <span class="swatch-label">Notice 50</span>
+                    <span class="swatch-value">#EEF3FB</span>
+                </div>
+                <div class="swatch-row-item" style="background: rgba(4, 60, 150, 1); color: #fff;">
+                    <span class="swatch-label">Notice 500</span>
+                    <span class="swatch-value">#043C96</span>
+                </div>
+                <div class="swatch-row-item" style="background: rgba(5, 31, 72, 1); color: #fff;">
+                    <span class="swatch-label">Notice 800</span>
+                    <span class="swatch-value">#051F48</span>
+                </div>
+            </div>
+
+            <div class="row">
+                <span class="label">BG Variables</span>
+                <span class="code">--bg-notice-50</span>
+                <span class="code">--bg-notice-500</span>
+                <span class="code">--bg-notice-800</span>
+            </div>
+            <div class="row">
+                <span class="label">Text Variables</span>
+                <span class="code">--color-notice-50</span>
+                <span class="code">--color-notice-500</span>
+                <span class="code">--color-notice-800</span>
+            </div>
+
+            <hr class="divider">
+
+            <!-- Caution -->
+            <div class="row"><span class="label">Caution</span></div>
+            <div class="swatch-row">
+                <div class="swatch-row-item" style="background: rgba(251, 230, 244, 1); color: #2d3436;">
+                    <span class="swatch-label">Caution 50</span>
+                    <span class="swatch-value">#FBE6F4</span>
+                </div>
+                <div class="swatch-row-item" style="background: rgba(230, 0, 160, 1); color: #fff;">
+                    <span class="swatch-label">Caution 500</span>
+                    <span class="swatch-value">#E600A0</span>
+                </div>
+                <div class="swatch-row-item" style="background: rgba(146, 39, 116, 1); color: #fff;">
+                    <span class="swatch-label">Caution 800</span>
+                    <span class="swatch-value">#922774</span>
+                </div>
+            </div>
+
+            <div class="row">
+                <span class="label">BG Variables</span>
+                <span class="code">--bg-caution-50</span>
+                <span class="code">--bg-caution-500</span>
+                <span class="code">--bg-caution-800</span>
+            </div>
+            <div class="row">
+                <span class="label">Text Variables</span>
+                <span class="code">--color-caution-50</span>
+                <span class="code">--color-caution-500</span>
+                <span class="code">--color-caution-800</span>
+            </div>
+
+            <hr class="divider">
+
+            <!-- Warning -->
+            <div class="row"><span class="label">Warning</span></div>
+            <div class="swatch-row">
+                <div class="swatch-row-item" style="background: rgba(255, 248, 225, 1); color: #2d3436;">
+                    <span class="swatch-label">Warning 50</span>
+                    <span class="swatch-value">#FFF8E1</span>
+                </div>
+                <div class="swatch-row-item" style="background: rgba(255, 179, 0, 1); color: #fff;">
+                    <span class="swatch-label">Warning 500</span>
+                    <span class="swatch-value">#FFB300</span>
+                </div>
+                <div class="swatch-row-item" style="background: rgba(161, 116, 22, 1); color: #fff;">
+                    <span class="swatch-label">Warning 800</span>
+                    <span class="swatch-value">#A17416</span>
+                </div>
+            </div>
+
+            <div class="row">
+                <span class="label">BG Variables</span>
+                <span class="code">--bg-warning-50</span>
+                <span class="code">--bg-warning-500</span>
+                <span class="code">--bg-warning-800</span>
+            </div>
+            <div class="row">
+                <span class="label">Text Variables</span>
+                <span class="code">--color-warning-50</span>
+                <span class="code">--color-warning-500</span>
+                <span class="code">--color-warning-800</span>
+            </div>
+
+            <hr class="divider">
+
+            <!-- Danger -->
+            <div class="row"><span class="label">Danger</span></div>
+            <div class="swatch-row">
+                <div class="swatch-row-item" style="background: rgba(255, 235, 238, 1); color: #2d3436;">
+                    <span class="swatch-label">Danger 50</span>
+                    <span class="swatch-value">#FFEBEE</span>
+                </div>
+                <div class="swatch-row-item" style="background: rgba(211, 47, 47, 1); color: #fff;">
+                    <span class="swatch-label">Danger 500</span>
+                    <span class="swatch-value">#D32F2F</span>
+                </div>
+                <div class="swatch-row-item" style="background: rgba(154, 36, 36, 1); color: #fff;">
+                    <span class="swatch-label">Danger 800</span>
+                    <span class="swatch-value">#9A2424</span>
+                </div>
+            </div>
+
+            <div class="row">
+                <span class="label">BG Variables</span>
+                <span class="code">--bg-danger-50</span>
+                <span class="code">--bg-danger-500</span>
+                <span class="code">--bg-danger-800</span>
+            </div>
+            <div class="row">
+                <span class="label">Text Variables</span>
+                <span class="code">--color-danger-50</span>
+                <span class="code">--color-danger-500</span>
+                <span class="code">--color-danger-800</span>
+            </div>
+
+            <hr class="divider">
+
+            <div class="row">
+                <span class="label">Border Variables</span>
+                <span class="code">--color-border-safe</span>
+                <span class="code">--color-border-notice</span>
+                <span class="code">--color-border-caution</span>
+                <span class="code">--color-border-warning</span>
+                <span class="code">--color-border-danger</span>
+            </div>
+        </div>
+
+        <!-- ==================== BACKGROUND COLORS ==================== -->
+        <div class="section">
+            <h2 class="section-title">Background Colors</h2>
+            <p class="section-desc">Light and dark grey background variables with their theme-adaptive behavior</p>
+
+            <p style="font-size: 0.75rem; color: var(--color-text-dark-3); margin-bottom: 8px;">Adaptive variants swap in dark mode. Fixed (--f) variants stay constant.</p>
+
+            <div class="row"><span class="label">Light BGs (adaptive)</span></div>
+            <div class="swatch-row">
+                <div class="swatch-row-item" style="background: rgba(255, 255, 255, 1); color: #2d3436; border-right: 1px solid #eee;">
+                    <span class="swatch-label">Zero</span>
+                    <span class="swatch-value">#FFFFFF</span>
+                </div>
+                <div class="swatch-row-item" style="background: rgba(250, 250, 250, 1); color: #2d3436;">
+                    <span class="swatch-label">50</span>
+                    <span class="swatch-value">#FAFAFA</span>
+                </div>
+                <div class="swatch-row-item" style="background: rgba(237, 237, 237, 1); color: #2d3436;">
+                    <span class="swatch-label">100</span>
+                    <span class="swatch-value">#EDEDED</span>
+                </div>
+                <div class="swatch-row-item" style="background: rgba(224, 224, 224, 1); color: #2d3436;">
+                    <span class="swatch-label">150</span>
+                    <span class="swatch-value">#E0E0E0</span>
+                </div>
+                <div class="swatch-row-item" style="background: rgba(211, 211, 211, 1); color: #2d3436;">
+                    <span class="swatch-label">200</span>
+                    <span class="swatch-value">#D3D3D3</span>
+                </div>
+            </div>
+
+            <div class="row">
+                <span class="label">Classes</span>
+                <span class="code">.tbc-grey-zero</span>
+                <span class="code">.tbc-grey-50</span>
+                <span class="code">.tbc-grey-100</span>
+                <span class="code">.tbc-grey-150</span>
+                <span class="code">.tbc-grey-200</span>
+            </div>
+
+            <hr class="divider">
+
+            <div class="row"><span class="label">Dark BGs (fixed)</span></div>
+            <div class="swatch-row">
+                <div class="swatch-row-item" style="background: rgba(81, 81, 81, 1); color: #fff;">
+                    <span class="swatch-label">700</span>
+                    <span class="swatch-value">#515151</span>
+                </div>
+                <div class="swatch-row-item" style="background: rgba(55, 55, 55, 1); color: #fff;">
+                    <span class="swatch-label">800</span>
+                    <span class="swatch-value">#373737</span>
+                </div>
+                <div class="swatch-row-item" style="background: rgba(42, 42, 42, 1); color: #fff;">
+                    <span class="swatch-label">850</span>
+                    <span class="swatch-value">#2A2A2A</span>
+                </div>
+                <div class="swatch-row-item" style="background: rgba(29, 29, 29, 1); color: #fff;">
+                    <span class="swatch-label">900</span>
+                    <span class="swatch-value">#1D1D1D</span>
+                </div>
+            </div>
+
+            <div class="row">
+                <span class="label">Classes</span>
+                <span class="code">.tbc-grey-700--f</span>
+                <span class="code">.tbc-grey-800--f</span>
+                <span class="code">.tbc-grey-850--f</span>
+                <span class="code">.tbc-grey-900--f</span>
+            </div>
+        </div>
+
+        <!-- ==================== TEXT COLORS ==================== -->
+        <div class="section">
+            <h2 class="section-title">Text Colors – Light Theme</h2>
+            <p class="section-desc">Text hierarchy for light backgrounds: primary, secondary, hint, and divider</p>
+
+            <div class="row">
+                <span class="label">Primary</span>
+                <span class="text-sample" style="color: rgba(23, 23, 23, 1);">The quick brown fox</span>
+                <span class="code">--text-dark-1</span>
+                <span class="code" style="color: var(--text-muted);">#171717</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Secondary</span>
+                <span class="text-sample" style="color: rgba(80, 80, 80, 1);">The quick brown fox</span>
+                <span class="code">--text-dark-2</span>
+                <span class="code" style="color: var(--text-muted);">#505050</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Hint</span>
+                <span class="text-sample" style="color: rgba(132, 132, 132, 1);">The quick brown fox</span>
+                <span class="code">--text-dark-3</span>
+                <span class="code" style="color: var(--text-muted);">#848484</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Divider</span>
+                <span class="text-sample" style="color: rgba(185, 185, 185, 1);">The quick brown fox</span>
+                <span class="code">--text-dark-4</span>
+                <span class="code" style="color: var(--text-muted);">#B9B9B9</span>
+            </div>
+
+            <hr class="divider">
+
+            <div class="row">
+                <span class="label">Classes</span>
+                <span class="code">.tc-text-dark-1</span>
+                <span class="code">.tc-text-dark-2</span>
+                <span class="code">.tc-text-dark-3</span>
+                <span class="code">.tc-text-dark-4</span>
+            </div>
+            <div class="row">
+                <span class="label">Special</span>
+                <span class="code">.tc-text-black</span>
+                <span class="code">.tc-text-black--f</span>
+            </div>
+        </div>
+
+        <!-- ==================== TEXT COLORS (DARK) ==================== -->
+        <div class="section dark-section">
+            <h2 class="section-title">Text Colors – Dark Theme</h2>
+            <p class="section-desc">Text hierarchy for dark backgrounds: primary, secondary, hint, and divider</p>
+
+            <div class="row">
+                <span class="label">Primary</span>
+                <span class="text-sample" style="color: rgba(235, 231, 222, 1);">The quick brown fox</span>
+                <span class="code">--text-light-1</span>
+                <span class="code" style="color: #b2bec3;">#EBE7DE</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Secondary</span>
+                <span class="text-sample" style="color: rgba(200, 195, 184, 1);">The quick brown fox</span>
+                <span class="code">--text-light-2</span>
+                <span class="code" style="color: #b2bec3;">#C8C3B8</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Hint</span>
+                <span class="text-sample" style="color: rgba(165, 158, 165, 1);">The quick brown fox</span>
+                <span class="code">--text-light-3</span>
+                <span class="code" style="color: #b2bec3;">#A59EA5</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Divider</span>
+                <span class="text-sample" style="color: rgba(123, 123, 123, 1);">The quick brown fox</span>
+                <span class="code">--text-light-4</span>
+                <span class="code" style="color: #b2bec3;">#7B7B7B</span>
+            </div>
+
+            <hr class="divider" style="border-top-color: var(--border-color);">
+
+            <div class="row">
+                <span class="label">Classes</span>
+                <span class="code">.tc-text-light-1</span>
+                <span class="code">.tc-text-light-2</span>
+                <span class="code">.tc-text-light-3</span>
+                <span class="code">.tc-text-light-4</span>
+            </div>
+            <div class="row">
+                <span class="label">Special</span>
+                <span class="code">.tc-text-white</span>
+                <span class="code">.tc-text-white--f</span>
+            </div>
+        </div>
+
+        <!-- ==================== LINK COLORS ==================== -->
+        <div class="section">
+            <h2 class="section-title">Link Colors</h2>
+            <p class="section-desc">Dedicated link colors for light and dark themes, including blue link variants</p>
+
+            <div class="row">
+                <span class="label">Dark Link</span>
+                <span class="text-sample" style="color: rgba(23, 23, 23, 1); text-decoration: underline;">Click this link</span>
+                <span class="code">--color-link-dark</span>
+                <span class="code" style="color: var(--text-muted);">#171717</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Dark Hover</span>
+                <span class="text-sample" style="color: rgba(28, 28, 28, 1); text-decoration: underline;">Click this link</span>
+                <span class="code">--color-link-dark-hover</span>
+                <span class="code" style="color: var(--text-muted);">#1C1C1C</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Blue Link</span>
+                <span class="text-sample" style="color: rgba(0, 102, 204, 1); text-decoration: underline;">Click this link</span>
+                <span class="code">--link-blue-dark</span>
+                <span class="code" style="color: var(--text-muted);">#0066CC</span>
+            </div>
+
+            <hr class="divider">
+
+            <div class="row">
+                <span class="label">Light Link</span>
+                <span class="text-sample" style="color: rgba(235, 231, 222, 1); text-decoration: underline; background: #2d3436; padding: 4px 10px; border-radius: 4px;">Click this link</span>
+                <span class="code">--color-link-light</span>
+                <span class="code" style="color: var(--text-muted);">#EBE7DE</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Blue Light</span>
+                <span class="text-sample" style="color: rgba(130, 130, 255, 1); text-decoration: underline; background: #2d3436; padding: 4px 10px; border-radius: 4px;">Click this link</span>
+                <span class="code">--color-link-blue-light</span>
+                <span class="code" style="color: var(--text-muted);">#8282FF</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Class</span>
+                <span class="code">.tc-link-blue-dark</span>
+            </div>
+        </div>
+
+        <!-- ==================== BORDER COLORS ==================== -->
+        <div class="section">
+            <h2 class="section-title">Border Colors</h2>
+            <p class="section-desc">Light and dark border variables for cards, inputs, and dividers</p>
+
+            <div class="row"><span class="label">Light Borders</span></div>
+            <div class="swatch-grid">
+                <div class="swatch">
+                    <div class="swatch-box" style="background: #fff; border: 3px solid rgba(237, 237, 237, 1);"></div>
+                    <span class="swatch-name">100</span>
+                    <span class="swatch-hex">#EDEDED</span>
+                    <span class="swatch-var">--color-grey-100</span>
+                </div>
+                <div class="swatch">
+                    <div class="swatch-box" style="background: #fff; border: 3px solid rgba(224, 224, 224, 1);"></div>
+                    <span class="swatch-name">150</span>
+                    <span class="swatch-hex">#E0E0E0</span>
+                    <span class="swatch-var">--color-grey-150</span>
+                </div>
+                <div class="swatch">
+                    <div class="swatch-box" style="background: #fff; border: 3px solid rgba(198, 198, 198, 1);"></div>
+                    <span class="swatch-name">250</span>
+                    <span class="swatch-hex">#C6C6C6</span>
+                    <span class="swatch-var">--color-grey-250</span>
+                </div>
+                <div class="swatch">
+                    <div class="swatch-box" style="background: #fff; border: 3px solid rgba(159, 159, 159, 1);"></div>
+                    <span class="swatch-name">400</span>
+                    <span class="swatch-hex">#9F9F9F</span>
+                    <span class="swatch-var">--color-grey-400</span>
+                </div>
+            </div>
+
+            <hr class="divider">
+
+            <div class="row"><span class="label">Dark Borders</span></div>
+            <div class="swatch-grid">
+                <div class="swatch">
+                    <div class="swatch-box" style="background: #2d3436; border: 3px solid rgba(81, 81, 81, 1);"></div>
+                    <span class="swatch-name">700</span>
+                    <span class="swatch-hex">#515151</span>
+                    <span class="swatch-var">--color-grey-700--f</span>
+                </div>
+                <div class="swatch">
+                    <div class="swatch-box" style="background: #2d3436; border: 3px solid rgba(55, 55, 55, 1);"></div>
+                    <span class="swatch-name">800</span>
+                    <span class="swatch-hex">#373737</span>
+                    <span class="swatch-var">--color-grey-800--f</span>
+                </div>
+                <div class="swatch">
+                    <div class="swatch-box" style="background: #2d3436; border: 3px solid rgba(42, 42, 42, 1);"></div>
+                    <span class="swatch-name">850</span>
+                    <span class="swatch-hex">#2A2A2A</span>
+                    <span class="swatch-var">--color-grey-850--f</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== ACTION & BRAND COLORS ==================== -->
+        <div class="section">
+            <h2 class="section-title">Action &amp; Brand Colors</h2>
+            <p class="section-desc">Action feedback colors and third-party brand colors</p>
+
+            <div class="row"><span class="label">Actions</span></div>
+            <div class="swatch-grid">
+                <div class="swatch">
+                    <div class="swatch-box" style="background: rgba(239, 129, 119, 1);"></div>
+                    <span class="swatch-name">Delete</span>
+                    <span class="swatch-hex">#EF8177</span>
+                    <span class="swatch-var">--color-action-delete</span>
+                </div>
+                <div class="swatch">
+                    <div class="swatch-box" style="background: rgba(166, 224, 148, 1);"></div>
+                    <span class="swatch-name">Insert</span>
+                    <span class="swatch-hex">#A6E094</span>
+                    <span class="swatch-var">--color-action-insert</span>
+                </div>
+                <div class="swatch">
+                    <div class="swatch-box" style="background: rgba(255, 0, 0, 1);"></div>
+                    <span class="swatch-name">Red</span>
+                    <span class="swatch-hex">#FF0000</span>
+                    <span class="swatch-var">--color-red</span>
+                </div>
+            </div>
+
+            <hr class="divider">
+
+            <div class="row"><span class="label">Brand</span></div>
+            <div class="swatch-grid">
+                <div class="swatch">
+                    <div class="swatch-box" style="background: rgba(66, 103, 178, 1);"></div>
+                    <span class="swatch-name">Facebook</span>
+                    <span class="swatch-hex">#4267B2</span>
+                    <span class="swatch-var">--color-facebook-dark</span>
+                </div>
+                <div class="swatch">
+                    <div class="swatch-box" style="background: rgba(221, 75, 57, 1);"></div>
+                    <span class="swatch-name">Google</span>
+                    <span class="swatch-hex">#DD4B39</span>
+                    <span class="swatch-var">--color-google-dark</span>
+                </div>
+                <div class="swatch">
+                    <div class="swatch-box" style="background: rgba(85, 172, 238, 1);"></div>
+                    <span class="swatch-name">Twitter</span>
+                    <span class="swatch-hex">#55ACEE</span>
+                    <span class="swatch-var">--color-twitter-dark</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== BACKDROP / OVERLAY ==================== -->
+        <div class="section">
+            <h2 class="section-title">Backdrop &amp; Overlay</h2>
+            <p class="section-desc">Semi-transparent overlays for modals and drawers</p>
+
+            <div class="swatch-grid">
+                <div class="swatch">
+                    <div class="swatch-box" style="background: linear-gradient(135deg, #74b9ff, #a29bfe); position: relative;">
+                        <div style="position: absolute; inset: 0; background: rgba(25, 25, 25, 0.4); border-radius: 8px;"></div>
+                    </div>
+                    <span class="swatch-name">Light Backdrop</span>
+                    <span class="swatch-hex">rgba(25,25,25, 0.4)</span>
+                    <span class="swatch-var">--backdrop-background</span>
+                </div>
+                <div class="swatch">
+                    <div class="swatch-box" style="background: linear-gradient(135deg, #74b9ff, #a29bfe); position: relative;">
+                        <div style="position: absolute; inset: 0; background: rgba(25, 25, 25, 0.8); border-radius: 8px;"></div>
+                    </div>
+                    <span class="swatch-name">Dark Backdrop</span>
+                    <span class="swatch-hex">rgba(25,25,25, 0.8)</span>
+                    <span class="swatch-var">--backdrop-background (dark)</span>
+                </div>
+            </div>
+
+            <div class="row">
+                <span class="label">Blur</span>
+                <span class="code">--backdrop-blur: 1px</span>
+            </div>
+        </div>
+
+        <!-- ==================== SEMANTIC PREVIEW ==================== -->
+        <div class="section">
+            <h2 class="section-title">Semantic Colors – Live Preview</h2>
+            <p class="section-desc">How semantic colors look as alert-style cards using actual CSS variables</p>
+
+            <div style="padding: 12px 16px; border-radius: 8px; margin-bottom: 10px; background: var(--bg-safe-50); border: 1px solid var(--color-border-safe); color: var(--color-safe-800);">
+                <strong>Safe:</strong> Your changes have been saved successfully.
+            </div>
+            <div style="padding: 12px 16px; border-radius: 8px; margin-bottom: 10px; background: var(--bg-notice-50); border: 1px solid var(--color-border-notice); color: var(--color-notice-800);">
+                <strong>Notice:</strong> A new version is available for download.
+            </div>
+            <div style="padding: 12px 16px; border-radius: 8px; margin-bottom: 10px; background: var(--bg-caution-50); border: 1px solid var(--color-border-caution); color: var(--color-caution-800);">
+                <strong>Caution:</strong> This action requires elevated permissions.
+            </div>
+            <div style="padding: 12px 16px; border-radius: 8px; margin-bottom: 10px; background: var(--bg-warning-50); border: 1px solid var(--color-border-warning); color: var(--color-warning-800);">
+                <strong>Warning:</strong> Your session will expire in 5 minutes.
+            </div>
+            <div style="padding: 12px 16px; border-radius: 8px; margin-bottom: 10px; background: var(--bg-danger-50); border: 1px solid var(--color-border-danger); color: var(--color-danger-800);">
+                <strong>Danger:</strong> This action cannot be undone. Proceed with caution.
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>

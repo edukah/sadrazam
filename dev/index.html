@@ -1,0 +1,1328 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sadrazam – Development Sandbox</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/bold/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/light/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css">
+    <link rel="stylesheet" href="_hot/build.dev.css">
+    <script type="text/javascript" src="_hot/build.dev.js"></script>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        .container {
+            max-width: 1200px;
+            margin-inline: auto;
+            padding-inline: 1rem;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--color-grey-100);
+            color: var(--color-text-dark-1);
+            padding: 2rem 1rem;
+        }
+
+        .dev-header {
+            max-width: 1200px;
+            margin: 0 auto 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .dev-header h1 {
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        .dev-header h1 span {
+            font-size: 0.7rem;
+            font-weight: 400;
+            color: var(--color-text-safe-500);
+            vertical-align: middle;
+            margin-left: 6px;
+        }
+
+        .dev-nav {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .dev-nav a {
+            font-size: 0.75rem;
+            color: var(--color-text-dark-3);
+            text-decoration: none;
+            padding: 4px 10px;
+            border: 1px solid var(--color-grey-300);
+            border-radius: 6px;
+            transition: all 0.15s;
+        }
+
+        .dev-nav a:hover {
+            border-color: var(--color-pri-500);
+            color: var(--color-pri-500);
+        }
+
+        .dev-toc {
+            max-width: 1200px;
+            margin: 0 auto 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .dev-toc a {
+            font-size: 0.7rem;
+            color: var(--color-pri-700);
+            text-decoration: none;
+            padding: 3px 8px;
+            border-radius: 4px;
+            background: var(--color-pri-100);
+            transition: all 0.15s;
+        }
+
+        .dev-toc a:hover {
+            background: var(--color-pri-300);
+            color: var(--color-text-white--f);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section {
+            background: var(--color-grey-zero);
+            border-radius: 10px;
+            padding: 1.5rem 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow);
+        }
+
+        .section-title {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--color-pri-500);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--color-grey-200);
+        }
+
+        .section-title code {
+            font-size: 0.65rem;
+            color: var(--color-text-dark-3);
+            font-weight: 400;
+            margin-left: 8px;
+        }
+
+        .sub-title {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--color-text-dark-2);
+            margin: 16px 0 8px;
+        }
+
+        .sub-title:first-child { margin-top: 0; }
+
+        .row {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .row:last-child { margin-bottom: 0; }
+
+        .label {
+            font-size: 0.65rem;
+            color: var(--color-text-dark-3);
+            min-width: 90px;
+            flex-shrink: 0;
+        }
+
+        .sandbox {
+            min-height: 60px;
+            border: 2px dashed var(--color-grey-300);
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: border-color 0.2s;
+        }
+
+        .sandbox:focus-within {
+            border-color: var(--color-pri-300);
+        }
+
+        .console-output {
+            background: var(--color-grey-900--f);
+            color: var(--color-text-light-2);
+            border-radius: 8px;
+            padding: 1rem 1.25rem;
+            font-family: 'SF Mono', Monaco, Consolas, monospace;
+            font-size: 0.8rem;
+            min-height: 80px;
+            max-height: 200px;
+            overflow-y: auto;
+            line-height: 1.6;
+        }
+
+        .console-output .log-line { color: var(--color-text-light-2); }
+        .console-output .log-line.success { color: #55efc4; }
+        .console-output .log-line.error { color: #ff7675; }
+        .console-output .log-line.warn { color: #ffeaa7; }
+        .console-output .log-line.info { color: #74b9ff; }
+
+        .demo-grid-item {
+            background: var(--color-pri-100);
+            border: 1px solid var(--color-pri-300);
+            border-radius: 4px;
+            padding: 8px 12px;
+            font-size: 0.75rem;
+            text-align: center;
+        }
+
+        .demo-spacing-box {
+            background: var(--color-sec-100);
+            border: 1px dashed var(--color-sec-500);
+            font-size: 0.7rem;
+            text-align: center;
+            color: var(--color-sec-700);
+        }
+
+        .color-swatch {
+            width: 40px;
+            height: 40px;
+            border-radius: 6px;
+            border: 1px solid var(--color-grey-300);
+            display: inline-flex;
+            align-items: flex-end;
+            justify-content: center;
+        }
+
+        hr.dev-sep {
+            border: none;
+            border-top: 1px dashed var(--color-grey-300);
+            margin: 16px 0;
+        }
+    </style>
+</head>
+
+<body>
+<script>if(localStorage.getItem("dark-mode"))document.body.classList.add("dark-mode")</script>
+
+    <!-- HEADER -->
+    <div class="dev-header">
+        <h1>Sadrazam – Dev Sandbox <span>&#9679; hot reload</span></h1>
+        <div class="dev-nav">
+            <a href="../docs/index.html">Docs</a>
+            <a href="javascript:void(0)" onclick="document.body.classList.toggle('dark-mode'); document.body.classList.contains('dark-mode') ? localStorage.setItem('dark-mode','1') : localStorage.removeItem('dark-mode')">Toggle Dark Mode</a>
+            <a href="javascript:void(0)" onclick="logModules()">Log Modules</a>
+            <a href="javascript:void(0)" onclick="clearConsole()">Clear Console</a>
+        </div>
+    </div>
+
+    <!-- TABLE OF CONTENTS -->
+    <div class="dev-toc">
+        <a href="#sec-buttons">Buttons</a>
+        <a href="#sec-forms">Forms</a>
+        <a href="#sec-switch">Switch</a>
+        <a href="#sec-dialog-boxes">Dialog Boxes</a>
+        <a href="#sec-breadcrumb">Breadcrumb</a>
+        <a href="#sec-tabs">Tabs</a>
+        <a href="#sec-modal">Modal</a>
+        <a href="#sec-toast">Toast</a>
+        <a href="#sec-slide-menu">SlideMenu</a>
+        <a href="#sec-tooltip">Tooltip</a>
+        <a href="#sec-popover">Popover</a>
+        <a href="#sec-snackbar">Snackbar</a>
+        <a href="#sec-spinner">Spinner</a>
+        <a href="#sec-progress-bar">ProgressBar</a>
+        <a href="#sec-autocomplete">Autocomplete</a>
+        <a href="#sec-hovermenu">Hovermenu</a>
+        <a href="#sec-autosize">Autosize</a>
+        <a href="#sec-form-validation">Form Validation</a>
+        <a href="#sec-helpers">Helpers</a>
+        <a href="#sec-layout">Layout Utilities</a>
+        <a href="#sec-spacing">Spacing</a>
+        <a href="#sec-typography">Typography</a>
+        <a href="#sec-image">Image</a>
+        <a href="#sec-visibility">Visibility</a>
+        <a href="#sec-console">Console</a>
+    </div>
+
+    <div class="container">
+
+        <!-- ================================================================
+             BUTTONS
+             ================================================================ -->
+        <div class="section" id="sec-buttons">
+            <div class="section-title">Buttons <code>.bttn</code></div>
+
+            <!-- Sizes -->
+            <div class="sub-title">Sizes</div>
+            <div class="row">
+                <span class="label">--lg</span>
+                <button class="bttn bttn--lg bttn--pri">LG</button>
+                <button class="bttn bttn--lg-rectangle bttn--pri">LG Rectangle</button>
+            </div>
+            <div class="row">
+                <span class="label">--md</span>
+                <button class="bttn bttn--md bttn--pri">MD</button>
+                <button class="bttn bttn--md-rectangle bttn--pri">MD Rectangle</button>
+            </div>
+            <div class="row">
+                <span class="label">--sm</span>
+                <button class="bttn bttn--sm bttn--pri">SM</button>
+                <button class="bttn bttn--sm-rectangle bttn--pri">SM Rectangle</button>
+            </div>
+            <div class="row">
+                <span class="label">--xs</span>
+                <button class="bttn bttn--xs bttn--pri">XS</button>
+                <button class="bttn bttn--xs-rectangle bttn--pri">XS Rectangle</button>
+            </div>
+
+            <hr class="dev-sep">
+
+            <!-- Tier System: Filled / Soft / Outline -->
+            <div class="sub-title">Tier System — Filled (default) / Soft / Outline</div>
+
+            <div class="row">
+                <span class="label">pri</span>
+                <button class="bttn bttn--md-rectangle bttn--pri">Filled</button>
+                <button class="bttn bttn--md-rectangle bttn--pri bttn--soft">Soft</button>
+                <button class="bttn bttn--md-rectangle bttn--pri bttn--outline">Outline</button>
+            </div>
+            <div class="row">
+                <span class="label">sec</span>
+                <button class="bttn bttn--md-rectangle bttn--sec">Filled</button>
+                <button class="bttn bttn--md-rectangle bttn--sec bttn--soft">Soft</button>
+                <button class="bttn bttn--md-rectangle bttn--sec bttn--outline">Outline</button>
+            </div>
+            <div class="row">
+                <span class="label">ter</span>
+                <button class="bttn bttn--md-rectangle bttn--ter">Filled</button>
+                <button class="bttn bttn--md-rectangle bttn--ter bttn--soft">Soft</button>
+                <button class="bttn bttn--md-rectangle bttn--ter bttn--outline">Outline</button>
+            </div>
+            <div class="row">
+                <span class="label">neutral</span>
+                <button class="bttn bttn--md-rectangle bttn--neutral">Filled</button>
+                <button class="bttn bttn--md-rectangle bttn--neutral bttn--soft">Soft</button>
+                <button class="bttn bttn--md-rectangle bttn--neutral bttn--outline">Outline</button>
+            </div>
+
+            <hr class="dev-sep">
+
+            <!-- Semantic Colors -->
+            <div class="sub-title">Semantic Colors — Filled / Soft / Outline</div>
+            <div class="row">
+                <span class="label">danger</span>
+                <button class="bttn bttn--md-rectangle bttn--danger">Filled</button>
+                <button class="bttn bttn--md-rectangle bttn--danger bttn--soft">Soft</button>
+                <button class="bttn bttn--md-rectangle bttn--danger bttn--outline">Outline</button>
+            </div>
+            <div class="row">
+                <span class="label">safe</span>
+                <button class="bttn bttn--md-rectangle bttn--safe">Filled</button>
+                <button class="bttn bttn--md-rectangle bttn--safe bttn--soft">Soft</button>
+                <button class="bttn bttn--md-rectangle bttn--safe bttn--outline">Outline</button>
+            </div>
+            <div class="row">
+                <span class="label">warning</span>
+                <button class="bttn bttn--md-rectangle bttn--warning">Filled</button>
+                <button class="bttn bttn--md-rectangle bttn--warning bttn--soft">Soft</button>
+                <button class="bttn bttn--md-rectangle bttn--warning bttn--outline">Outline</button>
+            </div>
+            <div class="row">
+                <span class="label">notice</span>
+                <button class="bttn bttn--md-rectangle bttn--notice">Filled</button>
+                <button class="bttn bttn--md-rectangle bttn--notice bttn--soft">Soft</button>
+                <button class="bttn bttn--md-rectangle bttn--notice bttn--outline">Outline</button>
+            </div>
+            <div class="row">
+                <span class="label">caution</span>
+                <button class="bttn bttn--md-rectangle bttn--caution">Filled</button>
+                <button class="bttn bttn--md-rectangle bttn--caution bttn--soft">Soft</button>
+                <button class="bttn bttn--md-rectangle bttn--caution bttn--outline">Outline</button>
+            </div>
+
+            <hr class="dev-sep">
+
+            <!-- Ghost (standalone) -->
+            <div class="sub-title">Ghost (standalone)</div>
+            <div class="row">
+                <button class="bttn bttn--md-rectangle bttn--ghost"><i class="ph-bold ph-x"></i>&nbsp; Cancel</button>
+                <button class="bttn bttn--md bttn--ghost"><i class="ph-bold ph-dots-three"></i></button>
+            </div>
+
+            <hr class="dev-sep">
+
+            <!-- Custom Color -->
+            <div class="sub-title">Custom Color <code>style="--button-color: ..."</code></div>
+            <div class="row">
+                <button class="bttn bttn--md-rectangle" style="--button-color: #e91e63;">Custom Filled</button>
+                <button class="bttn bttn--md-rectangle bttn--soft" style="--button-color: #e91e63;">Custom Soft</button>
+                <button class="bttn bttn--md-rectangle bttn--outline" style="--button-color: #e91e63;">Custom Outline</button>
+            </div>
+            <div class="row">
+                <button class="bttn bttn--md-rectangle" style="--button-color: #00bcd4;">Teal Filled</button>
+                <button class="bttn bttn--md-rectangle bttn--soft" style="--button-color: #00bcd4;">Teal Soft</button>
+                <button class="bttn bttn--md-rectangle bttn--outline" style="--button-color: #00bcd4;">Teal Outline</button>
+            </div>
+
+            <hr class="dev-sep">
+
+            <!-- With Icons -->
+            <div class="sub-title">With Icons</div>
+            <div class="row">
+                <button class="bttn bttn--md-rectangle bttn--pri"><i class="ph-bold ph-plus"></i>&nbsp; Add</button>
+                <button class="bttn bttn--md-rectangle bttn--danger bttn--soft"><i class="ph-bold ph-trash"></i>&nbsp; Delete</button>
+                <button class="bttn bttn--md-rectangle bttn--neutral bttn--outline"><i class="ph-bold ph-gear"></i>&nbsp; Settings</button>
+                <button class="bttn bttn--md bttn--pri bttn--outline"><i class="ph-bold ph-heart"></i></button>
+                <button class="bttn bttn--md bttn--ghost"><i class="ph-bold ph-x"></i></button>
+            </div>
+
+            <hr class="dev-sep">
+
+            <!-- Action Hierarchy Examples -->
+            <div class="sub-title">Action Hierarchy Examples</div>
+            <div class="row">
+                <span class="label">Modal footer</span>
+                <button class="bttn bttn--md-rectangle bttn--pri">Save</button>
+                <button class="bttn bttn--md-rectangle bttn--neutral bttn--outline">Cancel</button>
+            </div>
+            <div class="row">
+                <span class="label">Delete confirm</span>
+                <button class="bttn bttn--md-rectangle bttn--danger">Delete</button>
+                <button class="bttn bttn--md-rectangle bttn--danger bttn--soft">Keep</button>
+                <button class="bttn bttn--md-rectangle bttn--ghost">Cancel</button>
+            </div>
+            <div class="row">
+                <span class="label">Form actions</span>
+                <button class="bttn bttn--md-rectangle bttn--pri">Submit</button>
+                <button class="bttn bttn--md-rectangle bttn--pri bttn--soft">Save Draft</button>
+                <button class="bttn bttn--md-rectangle bttn--ghost">Discard</button>
+            </div>
+
+            <hr class="dev-sep">
+
+            <!-- Loading & Disabled -->
+            <div class="sub-title">Loading &amp; Disabled States</div>
+            <p style="font-size:0.75rem; color:var(--color-text-dark-3); margin-bottom:10px;">Click to toggle loading (2s auto-reset)</p>
+            <div class="row">
+                <button class="bttn bttn--md-rectangle bttn--pri" onclick="toggleLoading(this, 2000)"><i class="ph-bold ph-paper-plane-tilt"></i>&nbsp; Send</button>
+                <button class="bttn bttn--md-rectangle bttn--danger" onclick="toggleLoading(this, 2000)"><i class="ph-bold ph-trash"></i>&nbsp; Delete</button>
+                <button class="bttn bttn--md-rectangle bttn--neutral" onclick="toggleLoading(this, 2000)"><i class="ph-bold ph-gear"></i>&nbsp; Process</button>
+            </div>
+            <div class="row">
+                <span class="label">Static loading</span>
+                <button class="bttn bttn--md-rectangle bttn--pri bttn--loading">Loading</button>
+                <button class="bttn bttn--md-rectangle bttn--danger bttn--loading">Loading</button>
+            </div>
+            <div class="row">
+                <span class="label">Disabled</span>
+                <button class="bttn bttn--md-rectangle bttn--pri bttn--disabled">Disabled</button>
+                <button class="bttn bttn--md-rectangle bttn--pri bttn--soft bttn--disabled">Disabled Soft</button>
+                <button class="bttn bttn--md-rectangle bttn--pri bttn--outline bttn--disabled">Disabled Outline</button>
+            </div>
+
+            <hr class="dev-sep">
+
+            <!-- Block Button -->
+            <div class="sub-title">Block Button <code>.bttn--block</code></div>
+            <div style="max-width:400px;">
+                <button class="bttn bttn--md-rectangle bttn--pri bttn--block"><i class="ph-bold ph-sign-in"></i>&nbsp; Sign In</button>
+                <button class="bttn bttn--md-rectangle bttn--neutral bttn--outline bttn--block">Register</button>
+            </div>
+        </div>
+
+        <!-- ================================================================
+             FORM ELEMENTS
+             ================================================================ -->
+        <div class="section" id="sec-forms">
+            <div class="section-title">Form Elements <code>input, textarea, select, checkbox, radio</code></div>
+
+            <div class="sub-title">Text Inputs</div>
+            <div class="row">
+                <input type="text" placeholder="Text input">
+                <input type="email" placeholder="Email input">
+                <input type="password" placeholder="Password" value="secret123">
+                <input type="number" placeholder="Number" value="42">
+            </div>
+
+            <div class="sub-title">Textarea</div>
+            <div class="row">
+                <textarea rows="3" style="width:100%; max-width:400px;" placeholder="Type something here..."></textarea>
+            </div>
+
+            <div class="sub-title">Select</div>
+            <div class="row">
+                <select>
+                    <option>Select an option</option>
+                    <option>Option A</option>
+                    <option>Option B</option>
+                    <option>Option C</option>
+                </select>
+            </div>
+
+            <div class="sub-title">Checkbox</div>
+            <div class="row">
+                <label style="display:flex; align-items:center; gap:8px;">
+                    <input type="checkbox"> Unchecked
+                </label>
+                <label style="display:flex; align-items:center; gap:8px;">
+                    <input type="checkbox" checked> Checked
+                </label>
+                <label style="display:flex; align-items:center; gap:8px;">
+                    <input type="checkbox" disabled> Disabled
+                </label>
+            </div>
+
+            <div class="sub-title">Radio</div>
+            <div class="row">
+                <label style="display:flex; align-items:center; gap:8px;">
+                    <input type="radio" name="demo-radio" checked> Option 1
+                </label>
+                <label style="display:flex; align-items:center; gap:8px;">
+                    <input type="radio" name="demo-radio"> Option 2
+                </label>
+                <label style="display:flex; align-items:center; gap:8px;">
+                    <input type="radio" name="demo-radio" disabled> Disabled
+                </label>
+            </div>
+
+            <div class="sub-title">Disabled Input</div>
+            <div class="row">
+                <input type="text" disabled value="Disabled input">
+                <select disabled><option>Disabled select</option></select>
+            </div>
+        </div>
+
+        <!-- ================================================================
+             SWITCH
+             ================================================================ -->
+        <div class="section" id="sec-switch">
+            <div class="section-title">Switch <code>.switch</code></div>
+
+            <div class="row">
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="switch__slider"></span>
+                </label>
+                <span style="font-size:0.8rem;">Off</span>
+            </div>
+            <div class="row">
+                <label class="switch">
+                    <input type="checkbox" checked>
+                    <span class="switch__slider"></span>
+                </label>
+                <span style="font-size:0.8rem;">On</span>
+            </div>
+
+            <div class="sub-title">Switch Container (with label)</div>
+            <div class="switch__container" style="max-width: 300px;">
+                <div style="display:flex; align-items:center; gap:12px;">
+                    <label class="switch">
+                        <input type="checkbox" checked>
+                        <span class="switch__slider"></span>
+                    </label>
+                    <span class="switch__label" style="font-size:0.85rem;">Enable notifications</span>
+                </div>
+                <div style="display:flex; align-items:center; gap:12px;">
+                    <label class="switch">
+                        <input type="checkbox">
+                        <span class="switch__slider"></span>
+                    </label>
+                    <span class="switch__label" style="font-size:0.85rem;">Dark mode</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================================================================
+             DIALOG BOXES
+             ================================================================ -->
+        <div class="section" id="sec-dialog-boxes">
+            <div class="section-title">Dialog Boxes <code>.dialog-box--*</code></div>
+
+            <div style="display:flex; flex-direction:column; gap:10px;">
+                <div class="dialog-box--safe">dialog-box--safe: Operation completed successfully.</div>
+                <div class="dialog-box--notice">dialog-box--notice: This is an informational notice.</div>
+                <div class="dialog-box--hint">dialog-box--hint: Here's a helpful tip for you.</div>
+                <div class="dialog-box--caution">dialog-box--caution: Please proceed with caution.</div>
+                <div class="dialog-box--warning">dialog-box--warning: This action may have consequences.</div>
+                <div class="dialog-box--danger">dialog-box--danger: This action is irreversible!</div>
+            </div>
+        </div>
+
+        <!-- ================================================================
+             BREADCRUMB
+             ================================================================ -->
+        <div class="section" id="sec-breadcrumb">
+            <div class="section-title">Breadcrumb <code>ul.breadcrumb</code></div>
+
+            <div class="sub-title">Default (last item inactive)</div>
+            <ul class="breadcrumb">
+                <li><a href="javascript:void(0)"><i class="ph-bold ph-house"></i> Home</a></li>
+                <li><a href="javascript:void(0)">Products</a></li>
+                <li><a href="javascript:void(0)">Electronics</a></li>
+                <li><a href="javascript:void(0)">Smartphones</a></li>
+            </ul>
+
+            <div class="sub-title">All Active <code>.breadcrumb--all-active</code></div>
+            <ul class="breadcrumb breadcrumb--all-active">
+                <li><a href="javascript:void(0)"><i class="ph-bold ph-house"></i> Home</a></li>
+                <li><a href="javascript:void(0)">Products</a></li>
+                <li><a href="javascript:void(0)">Electronics</a></li>
+                <li><a href="javascript:void(0)">Smartphones</a></li>
+            </ul>
+        </div>
+
+        <!-- ================================================================
+             TABS
+             ================================================================ -->
+        <div class="section" id="sec-tabs">
+            <div class="section-title">Tabs <code>Sadrazam.Tabs</code></div>
+
+            <!-- tab-classic -->
+            <div class="sub-title">tab-classic <code>.tab-classic__*</code></div>
+            <div class="tab-classic__container">
+                <div class="tab-classic__heading">
+                    <div class="tab-classic__head is-active" data-tab-id="v1-tab1">Tab 1</div>
+                    <div class="tab-classic__head" data-tab-id="v1-tab2">Tab 2</div>
+                    <div class="tab-classic__head" data-tab-id="v1-tab3">Tab 3</div>
+                </div>
+            </div>
+            <div class="tab-classic__body">
+                <div class="tab-classic__panel" id="v1-tab1">Content for Tab 1. Classic style with top border.</div>
+                <div class="tab-classic__panel" id="v1-tab2">Content for Tab 2.</div>
+                <div class="tab-classic__panel" id="v1-tab3">Content for Tab 3.</div>
+            </div>
+
+            <hr class="dev-sep">
+
+            <!-- tab-card -->
+            <div class="sub-title">tab-card <code>.tab-card__*</code></div>
+            <div class="tab-card__container">
+                <div class="tab-card__heading">
+                    <div class="tab-card__head is-active" data-tab-id="v2-tab1">Overview</div>
+                    <div class="tab-card__head" data-tab-id="v2-tab2">Details</div>
+                    <div class="tab-card__head" data-tab-id="v2-tab3">Settings</div>
+                </div>
+            </div>
+            <div class="tab-card__body">
+                <div class="tab-card__panel" id="v2-tab1">v2 Tab content - Overview panel with border and accent underline.</div>
+                <div class="tab-card__panel" id="v2-tab2">v2 Tab content - Details panel.</div>
+                <div class="tab-card__panel" id="v2-tab3">v2 Tab content - Settings panel.</div>
+            </div>
+
+            <hr class="dev-sep">
+
+            <!-- tab-scroll -->
+            <div class="sub-title">tab-scroll <code>.tab-scroll__*</code></div>
+            <div class="tab-scroll__container">
+                <div class="tab-scroll__heading">
+                    <div class="tab-scroll__head is-active" data-tab-id="v3-tab1">General</div>
+                    <div class="tab-scroll__head" data-tab-id="v3-tab2">Advanced</div>
+                    <div class="tab-scroll__head" data-tab-id="v3-tab3">Integrations</div>
+                    <div class="tab-scroll__head" data-tab-id="v3-tab4">Logs</div>
+                </div>
+            </div>
+            <div class="tab-scroll__body">
+                <div class="tab-scroll__panel" id="v3-tab1">v3 panel - General settings. Scrollable tabs with separated body.</div>
+                <div class="tab-scroll__panel" id="v3-tab2">v3 panel - Advanced configuration.</div>
+                <div class="tab-scroll__panel" id="v3-tab3">v3 panel - Third-party integrations.</div>
+                <div class="tab-scroll__panel" id="v3-tab4">v3 panel - Application logs.</div>
+            </div>
+
+            <hr class="dev-sep">
+
+            <!-- tab-capsule -->
+            <div class="sub-title">tab-capsule <code>.tab-capsule__*</code></div>
+            <div class="tab-capsule__container">
+                <div class="tab-capsule__heading">
+                    <div class="tab-capsule__head is-active" data-tab-id="v4-tab1">Monthly</div>
+                    <div class="tab-capsule__head" data-tab-id="v4-tab2">Yearly</div>
+                    <div class="tab-capsule__head" data-tab-id="v4-tab3">Lifetime</div>
+                </div>
+            </div>
+            <div class="tab-capsule__body">
+                <div class="tab-capsule__panel" id="v4-tab1">v4 panel - Monthly pricing. Capsule/segment style tabs.</div>
+                <div class="tab-capsule__panel" id="v4-tab2">v4 panel - Yearly pricing (save 20%).</div>
+                <div class="tab-capsule__panel" id="v4-tab3">v4 panel - Lifetime access.</div>
+            </div>
+        </div>
+
+        <!-- ================================================================
+             MODAL
+             ================================================================ -->
+        <div class="section" id="sec-modal">
+            <div class="section-title">Modal <code>Sadrazam.Modal</code></div>
+
+            <div class="row">
+                <button class="bttn bttn--md-rectangle bttn--pri" onclick="openModal('sm')">Small Modal</button>
+                <button class="bttn bttn--md-rectangle bttn--sec" onclick="openModal('md')">Medium Modal</button>
+                <button class="bttn bttn--md-rectangle bttn--ter" onclick="openModal('lg')">Large Modal</button>
+                <button class="bttn bttn--md-rectangle bttn--neutral" onclick="openModalAutoClose()">Auto-close (2s)</button>
+                <button class="bttn bttn--md-rectangle bttn--neutral bttn--outline" onclick="openModalOuterClick()">Close on Outer Click</button>
+            </div>
+        </div>
+
+        <!-- ================================================================
+             TOAST
+             ================================================================ -->
+        <div class="section" id="sec-toast">
+            <div class="section-title">Toast <code>Sadrazam.Toast</code></div>
+
+            <div class="row">
+                <button class="bttn bttn--sm-rectangle bttn--safe" onclick="Sadrazam.Toast.insert({ message: { success: 'Operation completed successfully!' }, dismissButton: true })">Success</button>
+                <button class="bttn bttn--sm-rectangle bttn--danger" onclick="Sadrazam.Toast.insert({ message: { error: 'Something went wrong. Please try again.' }, dismissButton: true })">Error</button>
+                <button class="bttn bttn--sm-rectangle bttn--warning" onclick="Sadrazam.Toast.insert({ message: { warning: 'Be careful with this action.' }, dismissButton: true })">Warning</button>
+                <button class="bttn bttn--sm-rectangle bttn--pri" onclick="Sadrazam.Toast.insert({ message: { success: 'Small modal message' }, size: 'small', dismissButton: true })">Small Size</button>
+                <button class="bttn bttn--sm-rectangle bttn--sec" onclick="Sadrazam.Toast.insert({ message: { success: 'Large font modal message' }, fontSize: 'lg', dismissButton: true })">Large Font</button>
+            </div>
+
+            <div class="sub-title">data-toggle="toast" (declarative)</div>
+            <div class="row">
+                <button class="bttn bttn--sm-rectangle bttn--neutral bttn--outline"
+                    data-toggle="toast"
+                    data-type="success"
+                    data-message="Declarative modal message works!">
+                    Trigger via data-toggle
+                </button>
+            </div>
+        </div>
+
+        <!-- ================================================================
+             SLIDE MENU
+             ================================================================ -->
+        <div class="section" id="sec-slide-menu">
+            <div class="section-title">Slide Menu <code>Sadrazam.SlideMenu</code></div>
+
+            <div class="row">
+                <button class="bttn bttn--md-rectangle bttn--pri" id="slide-menu-trigger">Open Slide Menu</button>
+                <button class="bttn bttn--md-rectangle bttn--neutral" id="slide-menu-trigger-backdrop">With Backdrop</button>
+            </div>
+        </div>
+
+        <!-- ================================================================
+             TOOLTIP
+             ================================================================ -->
+        <div class="section" id="sec-tooltip">
+            <div class="section-title">Tooltip <code>data-toggle="tooltip"</code></div>
+
+            <div class="row">
+                <button class="bttn bttn--md-rectangle bttn--neutral bttn--outline" data-toggle="tooltip" title="Tooltip on top" data-placement="top">Top</button>
+                <button class="bttn bttn--md-rectangle bttn--neutral bttn--outline" data-toggle="tooltip" title="Tooltip on right" data-placement="right">Right</button>
+                <button class="bttn bttn--md-rectangle bttn--neutral bttn--outline" data-toggle="tooltip" title="Tooltip on bottom" data-placement="bottom">Bottom</button>
+                <button class="bttn bttn--md-rectangle bttn--neutral bttn--outline" data-toggle="tooltip" title="Tooltip on left" data-placement="left">Left</button>
+            </div>
+            <div class="row">
+                <span data-toggle="tooltip" title="Tooltip on inline text" style="border-bottom: 1px dashed var(--color-grey-400); cursor:help; font-size:0.85rem;">Hover this text for tooltip</span>
+            </div>
+        </div>
+
+        <!-- ================================================================
+             POPOVER
+             ================================================================ -->
+        <div class="section" id="sec-popover">
+            <div class="section-title">Popover <code>Sadrazam.Popover</code></div>
+
+            <div class="row">
+                <button class="bttn bttn--md-rectangle bttn--pri" id="popover-bottom">Popover Bottom</button>
+                <button class="bttn bttn--md-rectangle bttn--sec" id="popover-top">Popover Top</button>
+                <button class="bttn bttn--md-rectangle bttn--neutral" id="popover-right">Popover Right</button>
+            </div>
+        </div>
+
+        <!-- ================================================================
+             MESSAGE (TOAST)
+             ================================================================ -->
+        <div class="section" id="sec-snackbar">
+            <div class="section-title">Snackbar <code>Sadrazam.Snackbar</code></div>
+
+            <div class="sub-title">Popup Toast (top of page)</div>
+            <div class="row">
+                <button class="bttn bttn--sm-rectangle bttn--safe" onclick="Sadrazam.Snackbar.insert({success: 'This is a success message!'})">Success</button>
+                <button class="bttn bttn--sm-rectangle bttn--danger" onclick="Sadrazam.Snackbar.insert({error: 'This is an error message!'})">Error</button>
+                <button class="bttn bttn--sm-rectangle bttn--warning" onclick="Sadrazam.Snackbar.insert({warning: 'This is a warning message!'})">Warning</button>
+                <button class="bttn bttn--sm-rectangle bttn--notice" onclick="Sadrazam.Snackbar.insert({notice: 'This is a notice message!'})">Notice</button>
+            </div>
+            <div class="row">
+                <button class="bttn bttn--sm-rectangle bttn--pri" onclick="Sadrazam.Snackbar.insert({success: ['Multiple messages', 'Second message', 'Third message']})">Multiple Messages</button>
+                <button class="bttn bttn--sm-rectangle bttn--neutral" onclick="Sadrazam.Snackbar.insert({success: 'Persistent message (click X to close)'}, false)">No Auto-close</button>
+            </div>
+
+            <div class="sub-title">Static Notifications (inline)</div>
+            <div style="display:flex; flex-direction:column; gap:10px; margin-top:8px;">
+                <div class="snackbar__static-container snackbar__static-container--success">
+                    <ul class="snackbar__static-list">
+                        <li>Successfully saved changes.</li>
+                    </ul>
+                    <button class="snackbar__static-close" onclick="this.parentElement.remove()">&times;</button>
+                </div>
+                <div class="snackbar__static-container snackbar__static-container--error">
+                    <ul class="snackbar__static-list">
+                        <li>Email is required.</li>
+                        <li>Password must be at least 8 characters.</li>
+                    </ul>
+                    <button class="snackbar__static-close" onclick="this.parentElement.remove()">&times;</button>
+                </div>
+                <div class="snackbar__static-container snackbar__static-container--warning">
+                    <ul class="snackbar__static-list">
+                        <li>Your session will expire in 5 minutes.</li>
+                    </ul>
+                </div>
+                <div class="snackbar__static-container snackbar__static-container--notice">
+                    <ul class="snackbar__static-list">
+                        <li>New updates are available.</li>
+                    </ul>
+                </div>
+                <div class="snackbar__static-container snackbar__static-container--hint">
+                    <ul class="snackbar__static-list">
+                        <li>Tip: Use keyboard shortcuts for faster navigation.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================================================================
+             SPINNER
+             ================================================================ -->
+        <div class="section" id="sec-spinner">
+            <div class="section-title">Spinner <code>Sadrazam.Spinner</code></div>
+
+            <div class="row">
+                <button class="bttn bttn--md-rectangle bttn--pri" onclick="Sadrazam.Spinner.show({type:'main'}); setTimeout(() => Sadrazam.Spinner.hide(), 2000); devLog('Spinner main shown (2s)', 'info')">Main Spinner (2s)</button>
+                <button class="bttn bttn--md-rectangle bttn--sec" onclick="Sadrazam.Spinner.show({type:'helper'}); setTimeout(() => Sadrazam.Spinner.hide(), 2000); devLog('Spinner helper shown (2s)', 'info')">Helper Spinner (2s)</button>
+                <button class="bttn bttn--sm-rectangle bttn--neutral" onclick="Sadrazam.Spinner.show({type:'main'}); Sadrazam.Spinner.show({type:'main'}); setTimeout(() => Sadrazam.Spinner.hide(), 1000); setTimeout(() => Sadrazam.Spinner.hide(), 3000); devLog('Stacked spinner: 2 show() calls, hide at 1s and 3s', 'info')">Stacked (ref count)</button>
+            </div>
+        </div>
+
+        <!-- ================================================================
+             PROGRESS BAR
+             ================================================================ -->
+        <div class="section" id="sec-progress-bar">
+            <div class="section-title">Progress Bar <code>Sadrazam.ProgressBar</code></div>
+
+            <div class="row">
+                <button class="bttn bttn--md-rectangle bttn--pri" onclick="Sadrazam.ProgressBar.start(); setTimeout(() => Sadrazam.ProgressBar.done(), 3000); devLog('ProgressBar started (3s)', 'info')">Start (auto-done 3s)</button>
+                <button class="bttn bttn--md-rectangle bttn--sec" onclick="Sadrazam.ProgressBar.start(); devLog('ProgressBar started (manual)', 'info')">Start (manual)</button>
+                <button class="bttn bttn--sm-rectangle bttn--safe" onclick="Sadrazam.ProgressBar.set(0.5); devLog('ProgressBar set to 50%', 'info')">Set 50%</button>
+                <button class="bttn bttn--sm-rectangle bttn--safe" onclick="Sadrazam.ProgressBar.set(0.8); devLog('ProgressBar set to 80%', 'info')">Set 80%</button>
+                <button class="bttn bttn--sm-rectangle bttn--danger" onclick="Sadrazam.ProgressBar.done(); devLog('ProgressBar done', 'info')">Done</button>
+            </div>
+        </div>
+
+        <!-- ================================================================
+             AUTOCOMPLETE
+             ================================================================ -->
+        <div class="section" id="sec-autocomplete">
+            <div class="section-title">Autocomplete <code>Sadrazam.Autocomplete</code></div>
+            <p style="font-size:0.75rem; color:var(--color-text-dark-3); margin-bottom:10px;">Requires a server endpoint. Below is a mock setup for visual reference.</p>
+            <div class="row">
+                <input type="text" id="autocomplete-demo" placeholder="Type to search... (mock)" style="width:100%; max-width:400px;">
+            </div>
+        </div>
+
+        <!-- ================================================================
+             HOVERMENU
+             ================================================================ -->
+        <div class="section" id="sec-hovermenu">
+            <div class="section-title">Hovermenu <code>Sadrazam.Hovermenu</code></div>
+
+            <div class="row">
+                <button class="bttn bttn--md-rectangle bttn--pri" id="hovermenu-click">Click Menu</button>
+                <button class="bttn bttn--md-rectangle bttn--neutral" id="hovermenu-options">Options Menu</button>
+            </div>
+        </div>
+
+        <!-- ================================================================
+             AUTOSIZE
+             ================================================================ -->
+        <div class="section" id="sec-autosize">
+            <div class="section-title">Autosize <code>Sadrazam.AutosizeTextarea / AutosizeSelect</code></div>
+
+            <div class="sub-title">AutosizeTextarea <code>data-autosize</code></div>
+            <div class="row">
+                <textarea data-autosize placeholder="Type here and the textarea will grow..." style="width:100%; max-width:500px;" rows="1"></textarea>
+            </div>
+
+            <div class="sub-title">AutosizeSelect <code>data-autosize-select</code></div>
+            <div class="row">
+                <select data-autosize-select>
+                    <option>Short</option>
+                    <option>Medium option text</option>
+                    <option>A very long option that should resize the select</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- ================================================================
+             FORM VALIDATION
+             ================================================================ -->
+        <div class="section" id="sec-form-validation">
+            <div class="section-title">Form Validation <code>Sadrazam.Form</code></div>
+
+            <form id="demo-validation-form" onsubmit="return false" style="max-width: 500px;">
+                <div style="display:flex; flex-direction:column; gap:12px;">
+                    <div>
+                        <label style="font-size:0.8rem; display:block; margin-bottom:4px;">Name (required)</label>
+                        <input type="text" data-fvalidate="required" placeholder="Enter your name" style="width:100%;">
+                    </div>
+                    <div>
+                        <label style="font-size:0.8rem; display:block; margin-bottom:4px;">Email (required, email format)</label>
+                        <input type="text" data-fvalidate="required|email" placeholder="user@example.com" style="width:100%;">
+                    </div>
+                    <div>
+                        <label style="font-size:0.8rem; display:block; margin-bottom:4px;">Password (min 6 chars)</label>
+                        <input type="password" name="password" data-fvalidate="required|min_length:6" placeholder="Min 6 characters" style="width:100%;">
+                    </div>
+                    <div>
+                        <label style="font-size:0.8rem; display:block; margin-bottom:4px;">Confirm Password (must match)</label>
+                        <input type="password" data-fvalidate="required|matches:password" placeholder="Repeat password" style="width:100%;">
+                    </div>
+                    <div>
+                        <button type="submit" class="bttn bttn--md-rectangle bttn--pri">Validate &amp; Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- ================================================================
+             HELPERS
+             ================================================================ -->
+        <div class="section" id="sec-helpers">
+            <div class="section-title">Helpers <code>Cookie, Url, Viewport, Document, Device, Browser</code></div>
+
+            <div class="sub-title">Cookie</div>
+            <div class="row">
+                <button class="bttn bttn--sm-rectangle bttn--pri" onclick="Sadrazam.Cookie.set('dev_test', 'hello_sadrazam'); devLog('Cookie set: dev_test = hello_sadrazam', 'success')">Set Cookie</button>
+                <button class="bttn bttn--sm-rectangle bttn--sec" onclick="devLog('Cookie dev_test = ' + (Sadrazam.Cookie.get('dev_test') || '(not found)'), 'info')">Get Cookie</button>
+                <button class="bttn bttn--sm-rectangle bttn--danger" onclick="Sadrazam.Cookie.delete('dev_test'); devLog('Cookie dev_test deleted', 'warn')">Delete Cookie</button>
+            </div>
+
+            <div class="sub-title">URL Params</div>
+            <div class="row">
+                <button class="bttn bttn--sm-rectangle bttn--pri" onclick="devLog('All params: ' + JSON.stringify(Sadrazam.Url.getAll()), 'info')">Get All Params</button>
+                <button class="bttn bttn--sm-rectangle bttn--sec" onclick="devLog('Has &quot;test&quot;: ' + Sadrazam.Url.has('test'), 'info')">Has "test"</button>
+            </div>
+
+            <div class="sub-title">Viewport</div>
+            <div class="row">
+                <button class="bttn bttn--sm-rectangle bttn--pri" onclick="const d = Sadrazam.Viewport.getDimensions(); devLog('Viewport: ' + d.width + 'x' + d.height + ' (ratio: ' + Sadrazam.Viewport.aspectRatio().toFixed(2) + ')', 'info')">Get Dimensions</button>
+            </div>
+
+            <div class="sub-title">Document</div>
+            <div class="row">
+                <button class="bttn bttn--sm-rectangle bttn--pri" onclick="devLog('UUID: ' + Sadrazam.Document.uniqueId(), 'info')">Generate UUID</button>
+                <span style="font-size:0.8rem; display:flex; align-items:center; gap:6px;">
+                    <input type="text" id="copy-demo-input" value="Copy this text!" readonly style="width:200px;">
+                    <button class="bttn bttn--sm bttn--neutral bttn--outline" onclick="Sadrazam.Document.copyInputText(this)" data-target-input-id="copy-demo-input"><i class="ph-bold ph-copy"></i></button>
+                </span>
+            </div>
+
+            <div class="sub-title">Device &amp; Browser</div>
+            <div class="row">
+                <button class="bttn bttn--sm-rectangle bttn--pri" onclick="devLog('Is touch device: ' + Sadrazam.Device.isTouch(), 'info')">Is Touch?</button>
+                <button class="bttn bttn--sm-rectangle bttn--sec" onclick="devLog('Page visible: ' + !document.hidden, 'info')">Page Visible?</button>
+                <button class="bttn bttn--sm-rectangle bttn--neutral" onclick="devLog('Scrollbar width: ' + Sadrazam.Elem.getScrollbarWidth() + 'px', 'info')">Scrollbar Width</button>
+            </div>
+        </div>
+
+        <!-- ================================================================
+             LAYOUT UTILITIES
+             ================================================================ -->
+        <div class="section" id="sec-layout">
+            <div class="section-title">Layout Utilities <code>.d-flex, .flex-*, .grid-cols-*</code></div>
+
+            <div class="sub-title">Flexbox <code>.d-flex + .flex-*</code></div>
+            <div class="d-flex flex-gap-md flex-vcenter" style="margin-bottom:12px;">
+                <div class="demo-grid-item">d-flex</div>
+                <div class="demo-grid-item">flex-gap-md</div>
+                <div class="demo-grid-item">flex-vcenter</div>
+            </div>
+
+            <div class="d-flex flex-gap-sm flex-between" style="margin-bottom:12px;">
+                <div class="demo-grid-item">between - start</div>
+                <div class="demo-grid-item">between - middle</div>
+                <div class="demo-grid-item">between - end</div>
+            </div>
+
+            <div class="d-flex flex-gap-sm flex-center" style="margin-bottom:12px; min-height:60px; border:1px dashed var(--color-grey-300); border-radius:6px;">
+                <div class="demo-grid-item">flex-center (both axes)</div>
+            </div>
+
+            <div class="sub-title">Grid <code>.grid-cols-*</code></div>
+            <div class="grid-cols-3" style="gap: var(--space-2); margin-bottom:12px;">
+                <div class="demo-grid-item">Col 1</div>
+                <div class="demo-grid-item">Col 2</div>
+                <div class="demo-grid-item">Col 3</div>
+            </div>
+
+            <div class="grid-cols-4" style="gap: var(--space-2);">
+                <div class="demo-grid-item">1/4</div>
+                <div class="demo-grid-item">2/4</div>
+                <div class="demo-grid-item">3/4</div>
+                <div class="demo-grid-item">4/4</div>
+            </div>
+        </div>
+
+        <!-- ================================================================
+             SPACING
+             ================================================================ -->
+        <div class="section" id="sec-spacing">
+            <div class="section-title">Spacing <code>.padding-*, .margin-*</code></div>
+
+            <div class="sub-title">Padding (numeric)</div>
+            <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:12px;">
+                <div class="demo-spacing-box padding-2">padding-2</div>
+                <div class="demo-spacing-box padding-5">padding-5</div>
+                <div class="demo-spacing-box padding-8">padding-8</div>
+            </div>
+
+            <div class="sub-title">Margin (shown with outline)</div>
+            <div style="display:flex; gap:0; flex-wrap:wrap; margin-bottom:12px;">
+                <div style="outline:1px dashed var(--color-danger-300);">
+                    <div class="demo-spacing-box margin-t-3">margin-t-3</div>
+                </div>
+                <div style="outline:1px dashed var(--color-danger-300);">
+                    <div class="demo-spacing-box margin-5">margin-5</div>
+                </div>
+            </div>
+
+            <div class="sub-title">Margin Flow <code>.margin-flow</code></div>
+            <div class="margin-flow" style="max-width:300px;">
+                <div class="demo-spacing-box" style="padding:8px;">First item</div>
+                <div class="demo-spacing-box" style="padding:8px;">Second item (auto margin-top)</div>
+                <div class="demo-spacing-box" style="padding:8px;">Third item (auto margin-top)</div>
+            </div>
+        </div>
+
+        <!-- ================================================================
+             TYPOGRAPHY
+             ================================================================ -->
+        <div class="section" id="sec-typography">
+            <div class="section-title">Typography Utilities</div>
+
+            <div class="row">
+                <span class="text-left demo-grid-item" style="width:120px;">.text-left</span>
+                <span class="text-center demo-grid-item" style="width:120px;">.text-center</span>
+                <span class="text-right demo-grid-item" style="width:120px;">.text-right</span>
+            </div>
+            <div class="row">
+                <span class="text-lowercase">.text-lowercase: HELLO WORLD</span>
+            </div>
+            <div class="row">
+                <span class="text-uppercase">.text-uppercase: hello world</span>
+            </div>
+            <div class="row">
+                <span class="text-capitalize">.text-capitalize: hello world</span>
+            </div>
+            <div class="row">
+                <span class="text-underline">.text-underline</span>
+                <span class="text-underline-hover">.text-underline-hover (hover me)</span>
+                <span class="text-nowrap">.text-nowrap: This text will never wrap regardless of container width</span>
+            </div>
+        </div>
+
+        <!-- ================================================================
+             IMAGE UTILITIES
+             ================================================================ -->
+        <div class="section" id="sec-image">
+            <div class="section-title">Image Utilities</div>
+
+            <div class="row">
+                <div style="width:80px; height:80px; background:var(--color-pri-300);" class="img-rounded"></div>
+                <span class="label">.img-rounded</span>
+
+                <div style="width:80px; height:80px; background:var(--color-sec-300);" class="img-circle"></div>
+                <span class="label">.img-circle</span>
+
+                <div style="width:80px; height:80px; background:var(--color-ter-300);" class="img-thumbnail"></div>
+                <span class="label">.img-thumbnail</span>
+            </div>
+            <div class="row">
+                <div style="width:80px; height:80px; background:linear-gradient(135deg, #f093fb, #f5576c);" class="img-grayscale--hover img-rounded"></div>
+                <span class="label">.img-grayscale--hover (hover to see color)</span>
+            </div>
+        </div>
+
+        <!-- ================================================================
+             VISIBILITY
+             ================================================================ -->
+        <div class="section" id="sec-visibility">
+            <div class="section-title">Visibility Utilities <code>.d-none--, .d-show--</code></div>
+
+            <div style="display:flex; flex-direction:column; gap:8px;">
+                <div class="demo-grid-item d-none--md-up">I am hidden on md (768px) and up <code>.d-none--md-up</code></div>
+                <div class="demo-grid-item d-none--md-down">I am hidden below md (768px) <code>.d-none--md-down</code></div>
+                <div class="demo-grid-item d-show--lg-up">I only show on lg (992px) and up <code>.d-show--lg-up</code></div>
+                <div class="demo-grid-item">
+                    <code>.anim-fade</code>:
+                    <span class="anim-fade">Hidden (opacity 0)</span> |
+                    <span class="anim-fade is-visible">Visible (fade in)</span>
+                </div>
+                <div class="demo-grid-item">
+                    <code>.vis-hidden</code>:
+                    <span class="vis-hidden">Hidden but takes space</span> (invisible text here)
+                </div>
+            </div>
+
+            <div class="sub-title">Interactivity</div>
+            <div class="row">
+                <span class="cursor-pointer demo-grid-item">.cursor-pointer (cursor: pointer)</span>
+                <span class="sel-none demo-grid-item">.sel-none (try selecting this text)</span>
+            </div>
+        </div>
+
+        <!-- ================================================================
+             CONSOLE
+             ================================================================ -->
+        <div class="section" id="sec-console">
+            <div class="section-title">Console Output</div>
+            <div class="console-output" id="console-output">
+                <div class="log-line info">Ready. Sadrazam loaded.</div>
+            </div>
+        </div>
+
+    </div>
+
+    <script type="text/javascript">
+        // ---- Console output helper ----
+        const consoleEl = document.getElementById('console-output');
+
+        function devLog(msg, type = '') {
+            const line = document.createElement('div');
+            line.className = 'log-line' + (type ? ' ' + type : '');
+            line.textContent = '[' + new Date().toLocaleTimeString() + '] ' + msg;
+            consoleEl.appendChild(line);
+            consoleEl.scrollTop = consoleEl.scrollHeight;
+        }
+
+        function clearConsole() {
+            consoleEl.innerHTML = '<div class="log-line info">Console cleared.</div>';
+        }
+
+        function logModules() {
+            const keys = Object.keys(Sadrazam).filter(k => typeof Sadrazam[k] === 'object' || typeof Sadrazam[k] === 'function');
+            devLog('Available modules: ' + keys.join(', '), 'info');
+        }
+
+        // ---- Loading button toggle ----
+        function toggleLoading(btn, duration) {
+            btn.classList.add('bttn--loading');
+            devLog('Loading started: "' + btn.textContent.trim() + '"', 'info');
+            setTimeout(() => {
+                btn.classList.remove('bttn--loading');
+                devLog('Loading finished: "' + btn.textContent.trim() + '"', 'success');
+            }, duration);
+        }
+
+        // ---- Modal demos ----
+        function openModal(size) {
+            Sadrazam.Modal.insert({
+                size: size,
+                content: `
+                    <div class="modal__header">
+                        <h1>${size.toUpperCase()} Modal</h1>
+                        <button class="modal__close-button" data-modal-close>&times;</button>
+                    </div>
+                    <div class="modal__body">
+                        <p>This is a <strong>${size}</strong> modal dialog. Click the X or press Escape to close.</p>
+                        <p style="margin-top:8px; color:var(--color-text-dark-3); font-size:0.85rem;">Modal size: <code>${size}</code></p>
+                    </div>
+                    <div class="modal__footer">
+                        <button class="bttn bttn--sm-rectangle bttn--neutral" data-modal-close>Cancel</button>
+                        <button class="bttn bttn--sm-rectangle bttn--pri" data-modal-close>Confirm</button>
+                    </div>`
+            });
+            devLog('Modal opened: ' + size, 'success');
+        }
+
+        function openModalAutoClose() {
+            Sadrazam.Modal.insert({
+                size: 'sm',
+                time: 2000,
+                content: `
+                    <div class="modal__body" style="text-align:center; padding:2rem;">
+                        <i class="ph-bold ph-check-circle" style="font-size:3rem; color:var(--color-safe-500);"></i>
+                        <p style="margin-top:12px;">This modal will auto-close in 2 seconds.</p>
+                    </div>`
+            });
+            devLog('Modal opened: auto-close 2s', 'info');
+        }
+
+        function openModalOuterClick() {
+            Sadrazam.Modal.insert({
+                size: 'sm',
+                closeOnOuterClick: true,
+                content: `
+                    <div class="modal__body" style="padding:2rem;">
+                        <p>Click outside this dialog to close it.</p>
+                        <p style="margin-top:8px; font-size:0.8rem; color:var(--color-text-dark-3);">closeOnOuterClick: true</p>
+                    </div>`
+            });
+            devLog('Modal opened: closeOnOuterClick', 'info');
+        }
+
+        // ---- Initialize modules on DOM ready ----
+        document.addEventListener('DOMContentLoaded', function () {
+
+            // Tabs
+            Sadrazam.Tabs.listen();
+
+            // Tooltips
+            Sadrazam.Tooltip.listen();
+
+            // Toast declarative
+            if (Sadrazam.Toast.listen) {
+                Sadrazam.Toast.listen();
+            }
+
+            // Form validation
+            Sadrazam.Form.perform('#demo-validation-form');
+
+            // Autosize
+            Sadrazam.AutosizeTextarea.listen();
+            Sadrazam.AutosizeSelect.listen();
+
+            // Browser visibility (static class — accessed via Sadrazam.browser which is an instance)
+            // Note: Browser methods are static, so isVisible/onChange are on the class, not instance.
+            // Use buttons in Helpers section to test.
+
+            // Popover demos
+            new Sadrazam.Popover({
+                referenceElement: document.getElementById('popover-bottom'),
+                placement: 'bottom',
+                title: 'Popover Title',
+                content: function () {
+                    const div = document.createElement('div');
+                    div.innerHTML = '<p style="font-size:0.85rem;">This is popover content placed at the <strong>bottom</strong>.</p>';
+                    return div;
+                }
+            });
+
+            new Sadrazam.Popover({
+                referenceElement: document.getElementById('popover-top'),
+                placement: 'top',
+                content: function () {
+                    const div = document.createElement('div');
+                    div.innerHTML = '<p style="font-size:0.85rem;">Popover on <strong>top</strong> without title.</p>';
+                    return div;
+                }
+            });
+
+            new Sadrazam.Popover({
+                referenceElement: document.getElementById('popover-right'),
+                placement: 'right',
+                title: 'Right Popover',
+                content: function () {
+                    const div = document.createElement('div');
+                    div.innerHTML = '<p style="font-size:0.85rem;">Content on the <strong>right</strong> side.</p>';
+                    return div;
+                }
+            });
+
+            // Hovermenu demos
+            new Sadrazam.Hovermenu({
+                selector: document.getElementById('hovermenu-click'),
+                trigger: 'click',
+                title: 'Actions',
+                content: function () {
+                    const div = document.createElement('div');
+                    div.className = 'slide-menu__option-container';
+                    div.innerHTML = `
+                        <div class="slide-menu__option-item"><i class="ph-bold ph-pencil-simple"></i> Edit</div>
+                        <div class="slide-menu__option-item"><i class="ph-bold ph-copy"></i> Duplicate</div>
+                        <div class="slide-menu__option-item"><i class="ph-bold ph-trash"></i> Delete</div>
+                    `;
+                    return div;
+                }
+            });
+
+            new Sadrazam.Hovermenu({
+                selector: document.getElementById('hovermenu-options'),
+                trigger: 'click',
+                content: function () {
+                    const div = document.createElement('div');
+                    div.style.padding = '10px';
+                    div.innerHTML = `
+                        <div style="display:flex; flex-direction:column; gap:6px; font-size:0.85rem;">
+                            <label style="display:flex; align-items:center; gap:8px;"><input type="checkbox" checked> Show labels</label>
+                            <label style="display:flex; align-items:center; gap:8px;"><input type="checkbox"> Compact mode</label>
+                            <label style="display:flex; align-items:center; gap:8px;"><input type="checkbox" checked> Auto-save</label>
+                        </div>
+                    `;
+                    return div;
+                }
+            });
+
+            // SlideMenu demos
+            new Sadrazam.SlideMenu({
+                selector: document.getElementById('slide-menu-trigger'),
+                trigger: 'click',
+                content: function () {
+                    const div = document.createElement('div');
+                    div.innerHTML = `
+                        <div class="slide-menu__inner">
+                            <div class="slide-menu__header">
+                                <header>Slide Menu</header>
+                                <button class="slide-menu__close-button" onclick="Sadrazam.SlideMenu.remove(this)">&times;</button>
+                            </div>
+                            <div class="slide-menu__content">
+                                <div class="slide-menu__option-container">
+                                    <div class="slide-menu__option-item"><i class="ph-bold ph-user"></i> Profile</div>
+                                    <div class="slide-menu__option-item"><i class="ph-bold ph-gear"></i> Settings</div>
+                                    <div class="slide-menu__option-item"><i class="ph-bold ph-bell"></i> Notifications</div>
+                                    <div class="slide-menu__option-item"><i class="ph-bold ph-sign-out"></i> Logout</div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    return div;
+                }
+            });
+
+            new Sadrazam.SlideMenu({
+                selector: document.getElementById('slide-menu-trigger-backdrop'),
+                trigger: 'click',
+                backdrop: true,
+                content: function () {
+                    const div = document.createElement('div');
+                    div.innerHTML = `
+                        <div class="slide-menu__inner">
+                            <div class="slide-menu__header">
+                                <header>With Backdrop</header>
+                                <button class="slide-menu__close-button" onclick="Sadrazam.SlideMenu.remove(this)">&times;</button>
+                            </div>
+                            <div class="slide-menu__content">
+                                <p style="font-size:0.85rem; margin-bottom:12px;">This slide menu has a backdrop overlay (backdrop: true).</p>
+                                <div class="slide-menu__option-container">
+                                    <div class="slide-menu__option-item"><i class="ph-bold ph-check"></i> Option A</div>
+                                    <div class="slide-menu__option-item"><i class="ph-bold ph-check"></i> Option B</div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    return div;
+                }
+            });
+
+            // Log init
+            devLog('Sadrazam v' + (Sadrazam.version || '1.0.0') + ' initialized', 'success');
+            devLog('All modules initialized: Tabs, Tooltip, Popover, Hovermenu, SlideMenu, Form, Autosize', 'success');
+        });
+    </script>
+
+</body>
+
+</html>

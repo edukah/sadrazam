@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sadrazam – Form Elements Showcase</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/bold/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/light/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <script type="text/javascript" src="assets/js/script.js"></script>
+    <link rel="stylesheet" href="assets/sadrazam.min.css">
+    <script type="text/javascript" src="assets/sadrazam.min.js"></script>
+    <style>
+        .demo-input-wrap {
+            width: 280px;
+            flex-shrink: 0;
+        }
+
+        .demo-input-wide {
+            width: 400px;
+            flex-shrink: 0;
+        }
+
+        .demo-inline-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .demo-checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .demo-radio-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+
+<body>
+<script>if(localStorage.getItem("dark-mode"))document.body.classList.add("dark-mode")</script>
+    <header>
+        <nav class="top-navbar">
+            <div class="nav-container">
+                <a href="index.html" class="nav-logo">Sadrazam</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li>
+                        <a href="javascript:void(0)" onclick="openPopup(); return false;">Examples</a>
+                        <div class="navi-popup-overlay" id="examplesPopupOverlay"></div>
+                        <div class="navi-popup" id="examplesPopup">
+                            <h3>Examples</h3>
+                            <ul>
+                                <li><a href="buttons.html">Button</a></li>
+                                <li><a href="forms.html">Form</a></li>
+                                <li><a href="form-patterns.html">Form Patterns</a></li>
+                                <li><a href="links.html">Link</a></li>
+                                <li><a href="switches.html">Switch</a></li>
+                                <li><a href="autocomplete.html">Autocomplete</a></li>
+                                <li><a href="backdrop.html">Backdrop</a></li>
+                                <li><a href="hovermenu.html">Hovermenu</a></li>
+                                <li><a href="infinite-scroll.html">Infinite Scroll</a></li>
+                                <li><a href="snackbar.html">Snackbar</a></li>
+                                <li><a href="modals.html">Modal</a></li>
+                                <li><a href="popovers.html">Popover</a></li>
+                                <li><a href="slide-menu.html">Slide Menu</a></li>
+                                <li><a href="spinners.html">Spinner</a></li>
+                                <li><a href="tabs.html">Tabs</a></li>
+                                <li><a href="tooltips.html">Tooltip</a></li>
+                                <li><a href="form-validation.html">Form Validation</a></li>
+                                <li><a href="autosize-textarea.html">Autosize Textarea</a></li>
+                                <li><a href="autosize-select.html">Autosize Select</a></li>
+                                <li><a href="ajax.html">Ajax</a></li>
+                                <li><a href="grid.html">Grid</a></li>
+                                <li><a href="spacing.html">Spacing</a></li>
+                                <li><a href="colors.html">Colors</a></li>
+                                <li><a href="typography.html">Typography</a></li>
+                            </ul>
+                            <button class="close-popup" onclick="closePopup()">&#10005;</button>
+                        </div>
+                    </li>
+                    <li><a href="https://github.com/edukah/sadrazam" target="_blank">GitHub</a></li>
+                </ul>
+                <div class="dark-mode-button-container">
+                    <div class="mode-toggle-switch" onclick="toggleMode()"></div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1>Sadrazam – Form Elements Showcase</h1>
+        <p class="subtitle">Inputs, textareas, selects, checkboxes, radios, switches, fieldsets, patterns and states</p>
+
+        <!-- ==================== TEXT INPUTS ==================== -->
+        <div class="section">
+            <h2 class="section-title">Text Inputs</h2>
+            <p class="section-desc">Base input styles applied to all input, textarea, and select elements globally</p>
+
+            <div class="row">
+                <span class="label">Text</span>
+                <div class="demo-input-wrap">
+                    <input type="text" placeholder="Enter your name">
+                </div>
+                <span class="code">input[type="text"]</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Email</span>
+                <div class="demo-input-wrap">
+                    <input type="email" placeholder="user@example.com">
+                </div>
+                <span class="code">input[type="email"]</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Password</span>
+                <div class="demo-input-wrap">
+                    <input type="password" placeholder="Enter password">
+                </div>
+                <span class="code">input[type="password"]</span>
+            </div>
+
+            <div class="row">
+                <span class="label">URL</span>
+                <div class="demo-input-wrap">
+                    <input type="url" placeholder="https://example.com">
+                </div>
+                <span class="code">input[type="url"]</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Search</span>
+                <div class="demo-input-wrap">
+                    <input type="search" placeholder="Search...">
+                </div>
+                <span class="code">input[type="search"]</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Tel</span>
+                <div class="demo-input-wrap">
+                    <input type="tel" placeholder="+1 (555) 123-4567">
+                </div>
+                <span class="code">input[type="tel"]</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Date</span>
+                <div class="demo-input-wrap">
+                    <input type="date">
+                </div>
+                <span class="code">input[type="date"]</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Time</span>
+                <div class="demo-input-wrap">
+                    <input type="time">
+                </div>
+                <span class="code">input[type="time"]</span>
+            </div>
+        </div>
+
+        <!-- ==================== NUMBER INPUT ==================== -->
+        <div class="section">
+            <h2 class="section-title">Number Input</h2>
+            <p class="section-desc">Spinner buttons hidden by default; use <span class="code">.with-spinner</span> to show them</p>
+
+            <div class="row">
+                <span class="label">Default (no spinner)</span>
+                <div class="demo-input-wrap">
+                    <input type="number" placeholder="0" value="42">
+                </div>
+                <span class="code">input[type="number"]</span>
+            </div>
+
+            <div class="row">
+                <span class="label">With Spinner</span>
+                <div class="demo-input-wrap">
+                    <input type="number" class="with-spinner" placeholder="0" value="42">
+                </div>
+                <span class="code">input[type="number"].with-spinner</span>
+            </div>
+        </div>
+
+        <!-- ==================== TEXTAREA ==================== -->
+        <div class="section">
+            <h2 class="section-title">Textarea</h2>
+            <p class="section-desc">Full-width textarea with optional <span class="code">.autoexpand</span> class</p>
+
+            <div class="row">
+                <span class="label">Default</span>
+                <div class="demo-input-wide">
+                    <textarea rows="3" placeholder="Type your message here..."></textarea>
+                </div>
+                <span class="code">textarea</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Autoexpand</span>
+                <div class="demo-input-wide">
+                    <textarea class="autoexpand" rows="2" placeholder="This textarea has overflow hidden and no resize..."></textarea>
+                </div>
+                <span class="code">textarea.autoexpand</span>
+            </div>
+        </div>
+
+        <!-- ==================== SELECT ==================== -->
+        <div class="section">
+            <h2 class="section-title">Select</h2>
+            <p class="section-desc">Custom dropdown arrow icon, hover/focus states, and disabled variant</p>
+
+            <div class="row">
+                <span class="label">Default</span>
+                <div class="demo-input-wrap">
+                    <select>
+                        <option value="" disabled selected>Choose an option</option>
+                        <option value="1">Option One</option>
+                        <option value="2">Option Two</option>
+                        <option value="3">Option Three</option>
+                    </select>
+                </div>
+                <span class="code">select</span>
+            </div>
+
+            <div class="row">
+                <span class="label">With Selection</span>
+                <div class="demo-input-wrap">
+                    <select>
+                        <option value="1">Option One</option>
+                        <option value="2" selected>Option Two (selected)</option>
+                        <option value="3">Option Three</option>
+                    </select>
+                </div>
+                <span class="code">select</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Disabled</span>
+                <div class="demo-input-wrap">
+                    <select disabled>
+                        <option value="1" selected>Cannot change this</option>
+                        <option value="2">Option Two</option>
+                    </select>
+                </div>
+                <span class="code">select:disabled</span>
+            </div>
+        </div>
+
+        <!-- ==================== DISABLED STATES ==================== -->
+        <div class="section">
+            <h2 class="section-title">Disabled States</h2>
+            <p class="section-desc">All form elements support <span class="code">[disabled]</span> attribute with reduced opacity and not-allowed cursor</p>
+
+            <div class="row">
+                <span class="label">Disabled Text</span>
+                <div class="demo-input-wrap">
+                    <input type="text" disabled value="Cannot edit this">
+                </div>
+                <span class="code">input[disabled]</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Disabled Textarea</span>
+                <div class="demo-input-wrap">
+                    <textarea disabled rows="2">This textarea is disabled</textarea>
+                </div>
+                <span class="code">textarea[disabled]</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Disabled Select</span>
+                <div class="demo-input-wrap">
+                    <select disabled>
+                        <option selected>Locked option</option>
+                    </select>
+                </div>
+                <span class="code">select[disabled]</span>
+            </div>
+        </div>
+
+        <!-- ==================== INPUT ERROR STATE ==================== -->
+        <div class="section">
+            <h2 class="section-title">Error State</h2>
+            <p class="section-desc">Add <span class="code">.input--error</span> to highlight invalid fields with a red border</p>
+
+            <div class="row">
+                <span class="label">Error Input</span>
+                <div class="demo-input-wrap">
+                    <input type="text" class="input--error" value="Invalid value">
+                </div>
+                <span class="code">.input--error</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Error Textarea</span>
+                <div class="demo-input-wide">
+                    <textarea class="input--error" rows="2">This field has an error</textarea>
+                </div>
+                <span class="code">.input--error</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Error Select</span>
+                <div class="demo-input-wrap">
+                    <select class="input--error">
+                        <option value="" disabled selected>Please select</option>
+                        <option value="1">Option One</option>
+                    </select>
+                </div>
+                <span class="code">.input--error</span>
+            </div>
+        </div>
+
+        <!-- ==================== CHECKBOX ==================== -->
+        <div class="section">
+            <h2 class="section-title">Checkbox</h2>
+            <p class="section-desc">Custom styled checkbox with checkmark — checked, unchecked, and disabled states</p>
+
+            <div class="row">
+                <span class="label">Unchecked</span>
+                <label class="demo-checkbox-label">
+                    <input type="checkbox">
+                    <span>Accept terms and conditions</span>
+                </label>
+                <span class="code">input[type="checkbox"]</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Checked</span>
+                <label class="demo-checkbox-label">
+                    <input type="checkbox" checked>
+                    <span>I agree to the privacy policy</span>
+                </label>
+                <span class="code">input[type="checkbox"]:checked</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Disabled</span>
+                <label class="demo-checkbox-label">
+                    <input type="checkbox" disabled>
+                    <span>Disabled unchecked</span>
+                </label>
+                <span class="code">input[type="checkbox"]:disabled</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Disabled + Checked</span>
+                <label class="demo-checkbox-label">
+                    <input type="checkbox" checked disabled>
+                    <span>Disabled checked</span>
+                </label>
+                <span class="code">input[type="checkbox"]:disabled:checked</span>
+            </div>
+        </div>
+
+        <!-- ==================== RADIO ==================== -->
+        <div class="section">
+            <h2 class="section-title">Radio Buttons</h2>
+            <p class="section-desc">Custom styled radio with inner dot — supports <span class="code">.block</span> variant for display:block</p>
+
+            <div class="row">
+                <span class="label">Default (inline)</span>
+                <label class="demo-radio-label">
+                    <input type="radio" name="demo-radio" value="1" checked>
+                    <span>Option A</span>
+                </label>
+                <label class="demo-radio-label">
+                    <input type="radio" name="demo-radio" value="2">
+                    <span>Option B</span>
+                </label>
+                <label class="demo-radio-label">
+                    <input type="radio" name="demo-radio" value="3">
+                    <span>Option C</span>
+                </label>
+                <span class="code">input[type="radio"]</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Disabled</span>
+                <label class="demo-radio-label">
+                    <input type="radio" name="demo-radio-dis" value="1" disabled>
+                    <span>Disabled unchecked</span>
+                </label>
+                <label class="demo-radio-label">
+                    <input type="radio" name="demo-radio-dis" value="2" checked disabled>
+                    <span>Disabled checked</span>
+                </label>
+                <span class="code">input[type="radio"]:disabled</span>
+            </div>
+
+            <hr class="divider">
+
+            <div class="row-vertical">
+                <span class="label">Block Variant</span>
+                <label class="demo-radio-label">
+                    <input type="radio" class="block" name="demo-radio-block" value="1" checked>
+                    <span>Block radio A</span>
+                </label>
+                <label class="demo-radio-label">
+                    <input type="radio" class="block" name="demo-radio-block" value="2">
+                    <span>Block radio B</span>
+                </label>
+                <span class="code">input[type="radio"].block</span>
+            </div>
+        </div>
+
+        <!-- ==================== SWITCH / TOGGLE ==================== -->
+        <div class="section">
+            <h2 class="section-title">Switch / Toggle</h2>
+            <p class="section-desc">Toggle switch component with <span class="code">.slider.round</span> for rounded variant</p>
+
+            <div class="row">
+                <span class="label">Off</span>
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider round"></span>
+                </label>
+                <span class="code">.switch > .slider.round</span>
+            </div>
+
+            <div class="row">
+                <span class="label">On</span>
+                <label class="switch">
+                    <input type="checkbox" checked>
+                    <span class="slider round"></span>
+                </label>
+                <span class="code">.switch > .slider.round (checked)</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Square Slider</span>
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider"></span>
+                </label>
+                <label class="switch">
+                    <input type="checkbox" checked>
+                    <span class="slider"></span>
+                </label>
+                <span class="code">.switch > .slider</span>
+            </div>
+
+            <hr class="divider">
+
+            <div class="row">
+                <span class="label">Switch Container</span>
+                <div class="switch-container" style="width: 300px;">
+                    <div style="display:flex; align-items:center; gap:10px;">
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="slider round"></span>
+                        </label>
+                        <span class="switch-label">Enable notifications</span>
+                    </div>
+                    <div style="display:flex; align-items:center; gap:10px;">
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider round"></span>
+                        </label>
+                        <span class="switch-label">Dark mode</span>
+                    </div>
+                </div>
+                <span class="code">.switch-container</span>
+            </div>
+        </div>
+
+        <!-- ==================== FIELDSET & LEGEND ==================== -->
+        <div class="section">
+            <h2 class="section-title">Fieldset &amp; Legend</h2>
+            <p class="section-desc">Fieldset resets padding/margin/border; use <span class="code">legend.styled</span> for a bordered section title</p>
+
+            <div class="row-vertical">
+                <span class="label">Default Fieldset</span>
+                <fieldset style="max-width: 450px;">
+                    <div style="display:flex; flex-direction:column; gap:10px;">
+                        <input type="text" placeholder="First name">
+                        <input type="text" placeholder="Last name">
+                    </div>
+                </fieldset>
+                <span class="code">fieldset (reset: no border, no padding, no margin)</span>
+            </div>
+
+            <hr class="divider">
+
+            <div class="row-vertical">
+                <span class="label">Styled Legend</span>
+                <fieldset style="max-width: 450px;">
+                    <legend class="styled">Personal Information</legend>
+                    <div style="display:flex; flex-direction:column; gap:10px;">
+                        <input type="text" placeholder="First name">
+                        <input type="text" placeholder="Last name">
+                        <input type="email" placeholder="Email address">
+                    </div>
+                </fieldset>
+                <span class="code">legend.styled</span>
+            </div>
+        </div>
+
+        <!-- ==================== PASSWORD VISIBILITY TOGGLE ==================== -->
+        <div class="section">
+            <h2 class="section-title">Password Visibility Toggle</h2>
+            <p class="section-desc">Wrap input and button in <span class="code">.form-toggle-password-visibility</span></p>
+
+            <div class="row">
+                <span class="label">Toggle Password</span>
+                <div class="demo-input-wrap">
+                    <div class="form-toggle-password-visibility">
+                        <input type="password" placeholder="Enter password" id="demo-pw">
+                        <button type="button" onclick="togglePw()">
+                            <i class="ph-bold ph-eye" id="demo-pw-icon"></i>
+                        </button>
+                    </div>
+                </div>
+                <span class="code">.form-toggle-password-visibility</span>
+            </div>
+        </div>
+
+        <!-- ==================== LABEL-INPUT TYPE ONE ==================== -->
+        <div class="section">
+            <h2 class="section-title">Label-Input Combo Type One</h2>
+            <p class="section-desc">Label on top with shared background, bottom-border input — <span class="code">.form-field--top-label</span></p>
+
+            <div class="row">
+                <span class="label">Text Input</span>
+                <div class="demo-input-wrap">
+                    <label class="form-field--top-label">
+                        <span>Full Name</span>
+                        <input type="text" placeholder="John Doe">
+                    </label>
+                </div>
+                <span class="code">.form-field--top-label</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Email Input</span>
+                <div class="demo-input-wrap">
+                    <label class="form-field--top-label">
+                        <span>Email Address</span>
+                        <input type="email" placeholder="user@example.com">
+                    </label>
+                </div>
+                <span class="code">.form-field--top-label</span>
+            </div>
+
+            <hr class="divider">
+
+            <div class="row">
+                <span class="label">Checkbox Type One</span>
+                <div class="demo-input-wrap">
+                    <label class="form-field--checkbox">
+                        <div>
+                            <input type="checkbox">
+                            <span>I accept the terms and conditions</span>
+                        </div>
+                    </label>
+                </div>
+                <span class="code">.form-field--checkbox</span>
+            </div>
+        </div>
+
+        <!-- ==================== LABEL-INPUT TYPE TWO ==================== -->
+        <div class="section">
+            <h2 class="section-title">Label-Input Combo Type Two</h2>
+            <p class="section-desc">Label on top, standard bordered input below — <span class="code">.label-text-input-type-two</span></p>
+
+            <div class="row">
+                <span class="label">Text Input</span>
+                <div class="demo-input-wrap">
+                    <label class="label-text-input-type-two">
+                        <span>Username</span>
+                        <input type="text" placeholder="Enter username">
+                    </label>
+                </div>
+                <span class="code">.label-text-input-type-two</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Password Input</span>
+                <div class="demo-input-wrap">
+                    <label class="label-text-input-type-two">
+                        <span>Password</span>
+                        <input type="password" placeholder="Enter password">
+                    </label>
+                </div>
+                <span class="code">.label-text-input-type-two</span>
+            </div>
+
+            <hr class="divider">
+
+            <div class="row">
+                <span class="label">Checkbox Type Two</span>
+                <div class="demo-input-wrap">
+                    <label class="label-checkbox-input-type-two">
+                        <div>
+                            <input type="checkbox" checked>
+                            <span>Subscribe to newsletter</span>
+                        </div>
+                    </label>
+                </div>
+                <span class="code">.label-checkbox-input-type-two</span>
+            </div>
+        </div>
+
+        <!-- ==================== HELPER TEXT ==================== -->
+        <div class="section">
+            <h2 class="section-title">Input Helper Text</h2>
+            <p class="section-desc">Descriptive text below form fields — with optional question mark prefix</p>
+
+            <div class="row-vertical">
+                <span class="label">Default Helper</span>
+                <div class="demo-input-wide">
+                    <input type="text" placeholder="Enter your email">
+                    <span class="input-helper-text">We will never share your email with anyone else.</span>
+                </div>
+                <span class="code">.input-helper-text</span>
+            </div>
+
+            <hr class="divider">
+
+            <div class="row-vertical">
+                <span class="label">Helper with ? Mark</span>
+                <div class="demo-input-wide">
+                    <input type="password" placeholder="Create a password">
+                    <span class="input-helper-text input-helper-text--with-qmark">Password must be at least 8 characters long and contain at least one number.</span>
+                </div>
+                <span class="code">.input-helper-text--with-qmark</span>
+            </div>
+        </div>
+
+        <!-- ==================== FORM DIVIDER ==================== -->
+        <div class="section">
+            <h2 class="section-title">Form Divider</h2>
+            <p class="section-desc">Section heading with a line extending to the right — <span class="code">.form-divider</span></p>
+
+            <div class="form-divider">Account Details</div>
+            <div style="display:flex; flex-direction:column; gap:10px; max-width:450px; margin-bottom:20px;">
+                <input type="text" placeholder="Username">
+                <input type="email" placeholder="Email">
+            </div>
+
+            <div class="form-divider">Security</div>
+            <div style="display:flex; flex-direction:column; gap:10px; max-width:450px; margin-bottom:20px;">
+                <input type="password" placeholder="Password">
+                <input type="password" placeholder="Confirm password">
+            </div>
+
+            <div class="form-divider">Preferences</div>
+            <div style="display:flex; flex-direction:column; gap:10px; max-width:450px;">
+                <label class="demo-checkbox-label">
+                    <input type="checkbox" checked>
+                    <span>Receive email notifications</span>
+                </label>
+                <label class="demo-checkbox-label">
+                    <input type="checkbox">
+                    <span>Enable two-factor authentication</span>
+                </label>
+            </div>
+
+            <div style="margin-top:16px;">
+                <span class="code">.form-divider</span>
+            </div>
+        </div>
+
+        <!-- ==================== FORM STANDARD STYLE ==================== -->
+        <div class="section">
+            <h2 class="section-title">Form Standard Style</h2>
+            <p class="section-desc">Standard form layout with consistent spacing between labels, fieldsets, and panels — <span class="code">.form-standart-style</span></p>
+
+            <form class="form-standart-style" style="max-width: 450px;" onsubmit="return false;">
+                <label class="label-text-input-type-two">
+                    <span>First Name</span>
+                    <input type="text" placeholder="John">
+                </label>
+
+                <label class="label-text-input-type-two">
+                    <span>Last Name</span>
+                    <input type="text" placeholder="Doe">
+                </label>
+
+                <label class="label-text-input-type-two">
+                    <span>Email</span>
+                    <input type="email" placeholder="john@example.com">
+                </label>
+
+                <fieldset>
+                    <legend class="styled">Notification Settings</legend>
+                    <label class="label-checkbox-input-type-two">
+                        <div>
+                            <input type="checkbox" checked>
+                            <span>Email notifications</span>
+                        </div>
+                    </label>
+                    <label class="label-checkbox-input-type-two">
+                        <div>
+                            <input type="checkbox">
+                            <span>SMS notifications</span>
+                        </div>
+                    </label>
+                </fieldset>
+            </form>
+
+            <span class="code">.form-standart-style</span>
+        </div>
+
+        <!-- ==================== HTML BUTTON ELEMENT ==================== -->
+        <div class="section">
+            <h2 class="section-title">HTML Button Element (Base Style)</h2>
+            <p class="section-desc">Base <span class="code">button</span> element reset — inline-flex, centered, rounded, with disabled state</p>
+
+            <div class="row">
+                <span class="label">Default Button</span>
+                <button type="button">Default Button</button>
+                <span class="code">button</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Disabled Button</span>
+                <button type="button" disabled>Disabled Button</button>
+                <span class="code">button[disabled]</span>
+            </div>
+        </div>
+
+        <!-- ==================== COMPLETE FORM EXAMPLE ==================== -->
+        <div class="section">
+            <h2 class="section-title">Complete Form Example</h2>
+            <p class="section-desc">All elements combined into a realistic registration form</p>
+
+            <form class="form-standart-style" style="max-width: 500px;" onsubmit="return false;">
+                <div class="form-divider">Personal Info</div>
+
+                <label class="form-field--top-label">
+                    <span>Full Name</span>
+                    <input type="text" placeholder="Jane Smith">
+                </label>
+
+                <label class="form-field--top-label">
+                    <span>Email</span>
+                    <input type="email" placeholder="jane@example.com">
+                </label>
+
+                <div class="form-divider">Security</div>
+
+                <label class="label-text-input-type-two">
+                    <span>Password</span>
+                    <div class="form-toggle-password-visibility">
+                        <input type="password" placeholder="Create a password" id="demo-pw-full">
+                        <button type="button" onclick="togglePwFull()">
+                            <i class="ph-bold ph-eye" id="demo-pw-full-icon"></i>
+                        </button>
+                    </div>
+                </label>
+                <span class="input-helper-text input-helper-text--with-qmark" style="margin-top:-10px; margin-bottom:16px;">Must be at least 8 characters with one uppercase letter and one number.</span>
+
+                <div class="form-divider">Preferences</div>
+
+                <label class="label-text-input-type-two">
+                    <span>Country</span>
+                    <select>
+                        <option value="" disabled selected>Select your country</option>
+                        <option value="us">United States</option>
+                        <option value="uk">United Kingdom</option>
+                        <option value="de">Germany</option>
+                        <option value="fr">France</option>
+                        <option value="tr">Turkey</option>
+                    </select>
+                </label>
+
+                <label class="label-text-input-type-two">
+                    <span>Bio</span>
+                    <textarea rows="3" placeholder="Tell us about yourself..."></textarea>
+                </label>
+                <span class="input-helper-text" style="margin-top:-10px; margin-bottom:16px;">Maximum 280 characters.</span>
+
+                <fieldset>
+                    <legend class="styled">Communication</legend>
+
+                    <label class="label-checkbox-input-type-two">
+                        <div>
+                            <input type="checkbox" checked>
+                            <span>Email updates about new features</span>
+                        </div>
+                    </label>
+
+                    <label class="label-checkbox-input-type-two">
+                        <div>
+                            <input type="checkbox">
+                            <span>Weekly digest newsletter</span>
+                        </div>
+                    </label>
+                </fieldset>
+
+                <div style="display:flex; align-items:center; gap:16px; margin-top:8px;">
+                    <span style="font-size:0.9rem;">Theme:</span>
+                    <label class="demo-radio-label">
+                        <input type="radio" name="theme" value="light" checked>
+                        <span>Light</span>
+                    </label>
+                    <label class="demo-radio-label">
+                        <input type="radio" name="theme" value="dark">
+                        <span>Dark</span>
+                    </label>
+                    <label class="demo-radio-label">
+                        <input type="radio" name="theme" value="system">
+                        <span>System</span>
+                    </label>
+                </div>
+
+                <div style="display:flex; align-items:center; gap:10px; margin-top:16px;">
+                    <label class="switch">
+                        <input type="checkbox" checked>
+                        <span class="slider round"></span>
+                    </label>
+                    <span style="font-size:0.9rem;">I agree to the Terms of Service</span>
+                </div>
+
+                <div style="margin-top: 20px;">
+                    <button class="bttn bttn--md-rectangle bttn--pri" type="submit">
+                        <i class="ph-bold ph-user-plus"></i>&nbsp; Create Account
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- ==================== DARK BACKGROUND ==================== -->
+        <div class="section dark-section">
+            <h2 class="section-title">Dark Background Preview</h2>
+            <p class="section-desc">Form elements on a dark surface</p>
+
+            <div class="row">
+                <span class="label">Text Input</span>
+                <div class="demo-input-wrap">
+                    <input type="text" placeholder="Dark mode input">
+                </div>
+            </div>
+
+            <div class="row">
+                <span class="label">Select</span>
+                <div class="demo-input-wrap">
+                    <select>
+                        <option value="" disabled selected>Choose option</option>
+                        <option value="1">Option One</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <span class="label">Checkbox</span>
+                <label class="demo-checkbox-label">
+                    <input type="checkbox" checked>
+                    <span>Checked on dark</span>
+                </label>
+                <label class="demo-checkbox-label">
+                    <input type="checkbox">
+                    <span>Unchecked on dark</span>
+                </label>
+            </div>
+
+            <div class="row">
+                <span class="label">Radio</span>
+                <label class="demo-radio-label">
+                    <input type="radio" name="dark-radio" value="1" checked>
+                    <span>Selected</span>
+                </label>
+                <label class="demo-radio-label">
+                    <input type="radio" name="dark-radio" value="2">
+                    <span>Unselected</span>
+                </label>
+            </div>
+
+            <div class="row">
+                <span class="label">Switch</span>
+                <label class="switch">
+                    <input type="checkbox" checked>
+                    <span class="slider round"></span>
+                </label>
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function togglePw() {
+            const input = document.getElementById('demo-pw');
+            const icon = document.getElementById('demo-pw-icon');
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.className = 'ph-bold ph-eye-slash';
+            } else {
+                input.type = 'password';
+                icon.className = 'ph-bold ph-eye';
+            }
+        }
+
+        function togglePwFull() {
+            const input = document.getElementById('demo-pw-full');
+            const icon = document.getElementById('demo-pw-full-icon');
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.className = 'ph-bold ph-eye-slash';
+            } else {
+                input.type = 'password';
+                icon.className = 'ph-bold ph-eye';
+            }
+        }
+    </script>
+</body>
+
+</html>

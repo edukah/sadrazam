@@ -1,0 +1,77 @@
+{
+  "name": "sadrazam",
+  "version": "1.0.0",
+  "description": "Zero-dependency vanilla JavaScript UI component library — modals, tooltips, tabs, forms, and more.",
+  "type": "module",
+  "main": "dist/sadrazam.min.js",
+  "module": "dist/sadrazam.esm.js",
+  "types": "dist/sadrazam.d.ts",
+  "files": [
+    "dist/",
+    "src/js/",
+    "src/scss/",
+    "CHANGELOG.md"
+  ],
+  "exports": {
+    ".": {
+      "sass": "./src/scss/main.scss",
+      "style": "./dist/sadrazam.min.css",
+      "default": "./dist/sadrazam.esm.js"
+    },
+    "./js/*": "./src/js/*",
+    "./scss/*": "./src/scss/*"
+  },
+  "style": "dist/sadrazam.min.css",
+  "sass": "src/scss/main.scss",
+  "scripts": {
+    "dev": "webpack serve --config webpack.dev.js",
+    "build": "webpack --config webpack.prod.js",
+    "release": "npm run build && mkdir -p docs/assets && cp --remove-destination -r dist/. docs/assets",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "keywords": [
+    "ui",
+    "components",
+    "vanilla-js",
+    "zero-dependency",
+    "modal",
+    "tooltip",
+    "tabs",
+    "form-validation"
+  ],
+  "author": "edukah",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/edukah/sadrazam.git"
+  },
+  "bugs": {
+    "url": "https://github.com/edukah/sadrazam/issues"
+  },
+  "homepage": "https://edukah.github.io/sadrazam/",
+  "devDependencies": {
+    "@babel/cli": "^7.28.6",
+    "@babel/core": "^7.29.0",
+    "@babel/preset-env": "^7.29.0",
+    "@eslint/js": "^10.0.1",
+    "babel-loader": "^10.1.1",
+    "clean-webpack-plugin": "^4.0.0",
+    "css-loader": "^7.1.4",
+    "eslint": "^10.0.3",
+    "eslint-plugin-import-x": "^4.16.2",
+    "eslint-plugin-n": "^17.24.0",
+    "eslint-webpack-plugin": "^5.0.3",
+    "globals": "^17.4.0",
+    "jsdom": "^28.1.0",
+    "mini-css-extract-plugin": "^2.10.1",
+    "sass": "^1.98.0",
+    "sass-loader": "^16.0.7",
+    "style-loader": "^4.0.0",
+    "vitest": "^4.1.0",
+    "webpack": "^5.105.4",
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.3",
+    "webpack-merge": "^6.0.1"
+  }
+}

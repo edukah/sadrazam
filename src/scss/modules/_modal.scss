@@ -1,0 +1,231 @@
+@use '../base/variables' as *;
+
+/* Modal Scroll Lock */
+.is-scroll-locked {
+  position: relative;
+}
+
+/* Modal Container */
+.modal {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  margin: 0;
+  padding: 0;
+
+  width: 100%;
+  max-height: 100%;
+  z-index: var(--z-overlay-content);
+
+  text-align: center;
+  outline: 0;
+
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  grid-template-columns: 1fr 1fr;
+
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(var(--backdrop-blur));
+  overflow: auto;
+
+  animation: fadeIn 0.2s ease-out;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  .modal__inner {
+    width: 100%;
+    height: 100%;
+
+    padding: var(--space-0);
+
+    grid-column: 1 / -1;
+
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    place-items: center;
+    grid-template-columns: 1fr 1fr;
+
+    &--top {
+      align-items: start;
+
+      @media (min-width: $breakpoint-md) {
+        padding-top: clamp(1rem, 6vh, 5rem);
+      }
+    }
+
+    &--bottom {
+      align-items: end;
+
+      @media (min-width: $breakpoint-md) {
+        padding-bottom: clamp(1rem, 6vh, 5rem);
+      }
+    }
+  }
+
+  /* Modal Close Button */
+  .modal__close-button {
+    font-size: var(--fsi-27);
+    font-weight: var(--fwe-regular);
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    color: var(--color-text-dark-3);
+    text-decoration: none;
+    z-index: 1;
+    align-self: flex-start;
+    order: 999;
+
+    margin: 0 0 0 var(--space-11);
+    padding: 0;
+
+    appearance: none;
+
+    &--absolute {
+      position: absolute;
+      top: 15px;
+      right: 1.4rem;
+    }
+
+    &:active,
+    &:focus {
+      outline: none;
+      color: var(--color-text-dark-2);
+    }
+
+    &:hover {
+      @media (hover: hover) and (pointer: fine) {
+        outline: none;
+        color: var(--color-text-dark-2);
+      }
+    }
+  }
+
+  /* Modal Dialog */
+  .modal__dialog {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    padding: var(--space-4);
+
+    grid-column: 1 / -1;
+
+    @media (min-width: $breakpoint-md) {
+      &.modal__dialog--sm {
+        max-width: 470px;
+      }
+
+      &.modal__dialog--md {
+        max-width: 650px;
+      }
+
+      &.modal__dialog--lg {
+        max-width: 950px;
+      }
+    }
+
+    &.modal__dialog--fullscreen {
+      display: block;
+      width: 100%;
+
+      box-sizing: border-box;
+      height: 100%;
+
+      .modal__content {
+        max-height: calc(100vh - (var(--space-4) * 2));
+      }
+
+      .modal__body {
+        overflow: auto;
+      }
+    }
+
+    .modal__content {
+      position: relative;
+      background-color: var(--color-grey-zero);
+      border-radius: var(--radius-md);
+      background-clip: padding-box;
+      outline: 0;
+      text-align: left;
+
+      padding: var(--space-11);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-8);
+
+      > form {
+        display: contents;
+      }
+
+      .modal__header {
+        position: sticky;
+        top: 0;
+        background-color: var(--color-grey-zero);
+        z-index: 10;
+        padding-top: var(--space-5);
+        padding-bottom: var(--space-5);
+        margin-top: calc(var(--space-5) * -1);
+        margin-bottom: calc(var(--space-5) * -1);
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 1.4rem;
+
+        .modal__title,
+        h1 {
+          font-size: var(--fsi-25);
+          font-weight: var(--fwe-semibold);
+          margin: 0;
+          line-height: 1.42857;
+        }
+      }
+
+      .modal__body {
+        position: relative;
+      }
+
+      .modal__footer {
+        text-align: right;
+
+        &:before,
+        &:after {
+          content: "";
+          display: table;
+        }
+
+        &:after {
+          clear: both;
+        }
+
+        .bttn+.bttn {
+          margin-left: 5px;
+          margin-bottom: 0;
+        }
+
+        .bttn-group .bttn+.bttn {
+          margin-left: -1px;
+        }
+
+        .bttn--block+.bttn--block {
+          margin-left: 0;
+        }
+      }
+    }
+  }
+}
+
+
+/* End of Modal */

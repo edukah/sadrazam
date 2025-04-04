@@ -1,0 +1,257 @@
+/* =========================================================================
+   Button (.bttn) Sistemi
+   Boyut, renk, kademe ve durum varyantları ile özel buton bileşeni.
+   HTML <button> element stili _form.scss'te kalır, bu dosya sadece
+   .bttn class sistemi içindir.
+
+   Boyutlar:    --lg, --md, --sm, --xs (+ rectangle varyantları)
+   Kademeler:   filled (default), --soft, --outline
+   Bağımsız:    --ghost
+   Renkler:     --pri, --sec, --ter, --neutral,
+                --safe, --notice, --caution, --warning, --danger
+   Durumlar:    --disabled, --loading
+   Yerleşim:    --block (tam genişlik)
+   ========================================================================= */
+
+.bttn {
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  width: auto;
+  margin: 0;
+  border: var(--border-width-sm) solid transparent;
+  border-radius: var(--radius-md);
+  appearance: none;
+  white-space: nowrap;
+  line-height: 1;
+  text-shadow: 0 0 0 var(--color-grey-250);
+  box-shadow: 0 0 0 var(--color-grey-250);
+  transition: filter 0.2s, background-color 0.2s;
+  outline: none;
+  background-color: var(--button-color, transparent);
+  color: var(--color-text-white--f);
+  border-color: var(--button-color, transparent);
+
+  &>* {
+    line-height: 1;
+  }
+
+  &:hover {
+    filter: brightness(0.9);
+  }
+
+  &:hover,
+  &:active,
+  &:focus {
+    outline: none;
+  }
+
+  // ---- Boyutlar (kare padding) ----
+  &--lg {
+    padding: var(--space-7);
+  }
+
+  &--md {
+    padding: var(--space-5);
+  }
+
+  &--sm {
+    padding: var(--space-4);
+  }
+
+  &--xs {
+    padding: var(--space-3);
+  }
+
+  // ---- Rectangle varyantları (yatay padding artırılır) ----
+  &--lg-rectangle {
+    padding: var(--space-7) var(--space-11);
+  }
+
+  &--md-rectangle {
+    padding: var(--space-5) var(--space-8);
+  }
+
+  &--sm-rectangle {
+    padding: var(--space-4) var(--space-6);
+  }
+
+  &--xs-rectangle {
+    padding: var(--space-3) var(--space-5);
+  }
+
+  // ---- Block buton (tam genişlik) ----
+  &--block {
+    display: block;
+    width: 100%;
+
+    &+& {
+      margin-top: var(--space-3);
+    }
+  }
+
+  // ---- Renk varyantları (sadece --button-color set eder) ----
+  &--pri {
+    --button-color: var(--color-pri-500);
+  }
+
+  &--sec {
+    --button-color: var(--color-sec-500);
+  }
+
+  &--ter {
+    --button-color: var(--color-ter-500);
+  }
+
+  &--safe {
+    --button-color: var(--color-safe-500);
+  }
+
+  &--notice {
+    --button-color: var(--color-notice-500);
+  }
+
+  &--caution {
+    --button-color: var(--color-caution-500);
+  }
+
+  &--warning {
+    --button-color: var(--color-warning-500);
+  }
+
+  &--danger {
+    --button-color: var(--color-danger-500);
+  }
+
+  // ---- Kademe: Soft ----
+  &--soft {
+    background-color: color-mix(in srgb, var(--button-color) 12%, transparent);
+    color: var(--button-color);
+    border-color: transparent;
+
+    &:hover {
+      @media (hover: hover) and (pointer: fine) {
+        background-color: color-mix(in srgb, var(--button-color) 20%, transparent);
+      }
+    }
+  }
+
+  // ---- Kademe: Outline ----
+  &--outline {
+    background-color: transparent;
+    color: var(--button-color);
+    border-color: var(--button-color);
+
+    &:hover {
+      @media (hover: hover) and (pointer: fine) {
+        background-color: color-mix(in srgb, var(--button-color) 8%, transparent);
+      }
+    }
+
+    &:focus {
+      box-shadow: 0 0 0 2px color-mix(in srgb, var(--button-color) 15%, transparent);
+    }
+  }
+
+  // ---- Neutral (kendi renk sistemi) ----
+  &--neutral {
+    --button-color: var(--color-grey-250);
+    background-color: transparent;
+    color: var(--color-text-dark-2);
+    border-color: var(--color-text-dark-2);
+
+    &:hover {
+      filter: brightness(0.75);
+    }
+  }
+
+  // ---- Neutral + Soft kombinasyonu ----
+  &--neutral#{&}--soft {
+    background-color: transparent;
+    color: var(--color-grey-400);
+    border-color: var(--color-grey-400);
+
+    &:hover {
+      background-color: transparent;
+    }
+  }
+
+  // ---- Neutral + Outline kombinasyonu ----
+  &--neutral#{&}--outline {
+    background-color: transparent;
+    color: var(--color-grey-600);
+    border-color: var(--color-grey-600);
+
+    &:hover {
+      background-color: transparent;
+    }
+
+    &:focus {
+      border-color: var(--color-pri-300);
+      box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-pri-500) 15%, transparent);
+    }
+  }
+
+  // ---- Bağımsız: Ghost ----
+  &--ghost {
+    --button-color: none;
+    background-color: transparent;
+    color: var(--color-text-dark-3);
+    border-color: transparent;
+    box-shadow: none;
+    text-shadow: none;
+  }
+
+  // ---- Disabled durumu ----
+  &--disabled,
+  &[disabled] {
+    background-color: var(--color-grey-100) !important;
+    border-color: var(--color-grey-150) !important;
+    color: var(--color-grey-400) !important;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  // ---- Loading durumu (disabled'i ezer) ----
+  &--loading,
+  &--loading[disabled] {
+    cursor: wait;
+    pointer-events: none;
+    background-color: var(--color-grey-400) !important;
+    border-color: var(--color-grey-400) !important;
+    color: var(--color-grey-zero) !important;
+    filter: opacity(0.7);
+
+    &:hover {
+      filter: none;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: calc(var(--border-width-sm) * -1);
+      border-radius: inherit;
+      background: linear-gradient(105deg,
+          transparent 35%,
+          rgba(255, 255, 255, 0.5) 45%,
+          rgba(255, 255, 255, 0.8) 50%,
+          rgba(255, 255, 255, 0.5) 55%,
+          transparent 65%);
+      background-size: 250% 100%;
+      animation: bttn-shimmer 1.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes bttn-shimmer {
+      from {
+        background-position: 200% 0;
+      }
+
+      to {
+        background-position: -200% 0;
+      }
+    }
+  }
+}

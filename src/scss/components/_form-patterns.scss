@@ -1,0 +1,212 @@
+/* =========================================================================
+   Form Patterns — Tekrarlanan form kalıpları ve yardımcı bileşenler
+
+   İçerik:
+     .input--error                  → Hata durumunda input border
+     .form-field__password-toggle     → Şifre göster/gizle butonu
+     .form-field--top-label / --checkbox → Label + input kombo stilleri
+     .danger-text             → Hata / doğrulama mesajı metni
+     .helper-text             → Form alanı altı açıklama metni
+     .form__divider                  → Form bölümleri arası çizgi + başlık
+     .form-standard-style           → Standart form yerleşim kuralları
+   ========================================================================= */
+
+/* ---- Hata durumu ---- */
+.input--error {
+  border-color: var(--color-danger-500) !important;
+}
+
+/* ---- Şifre göster/gizle ---- */
+.form-field__password-toggle {
+  position: relative;
+
+  input {
+    width: 100%;
+    padding-right: 2.5rem;
+  }
+
+  button {
+    padding: 0;
+    margin: 0;
+    border: none;
+    background: none;
+
+    font-size: var(--fsi-19);
+    color: var(--color-text-dark-2);
+
+    position: absolute;
+    top: 50%;
+    height: 100%;
+    right: 0;
+    padding: var(--space-0) var(--space-6);
+    transform: translateY(-50%);
+
+    cursor: pointer;
+  }
+}
+
+/* ---- Label-Combi Type One ---- */
+/* Label üstte, input altta, ortak arka plan */
+.form-field--top-label {
+  background-color: var(--color-grey-100);
+  padding-bottom: 0;
+  margin-bottom: var(--space-5);
+
+  span:first-child {
+    display: inline-block;
+    color: var(--color-text-dark-2);
+    font-size: var(--fsi-14);
+    font-weight: var(--fwe-regular);
+    padding-top: var(--space-3);
+    padding-left: var(--space-5);
+  }
+
+  input {
+    font-size: var(--fsi-15);
+    font-weight: var(--fwe-regular);
+    background-color: var(--color-grey-100);
+    border: none;
+    border-bottom: 2px solid var(--color-grey-250);
+    border-radius: 0;
+    padding: 2px 10px 6px 10px;
+
+    &:focus {
+      border-bottom: 2px solid var(--color-pri-500);
+    }
+  }
+}
+
+.form-field--checkbox {
+  margin-bottom: var(--space-5);
+  cursor: pointer;
+  user-select: none;
+
+  &>div {
+    display: flex;
+    gap: var(--space-4);
+    align-items: flex-start;
+  }
+}
+
+.form-field--top-label,
+.form-field--checkbox {
+  *[data-type="warningMessage"] {
+    padding: var(--space-1) var(--space-3);
+  }
+}
+
+/* ---- Label-Combi Type Two ---- */
+/* Label üstte ayrık, input altta standart border */
+.form-field--text {
+  padding-bottom: 0;
+  margin-bottom: var(--space-5);
+
+  &>span:first-child {
+    display: inline-block;
+    color: var(--color-text-dark-2);
+    font-size: var(--fsi-14);
+    font-weight: var(--fwe-regular);
+    padding-bottom: var(--space-2);
+  }
+
+  input {
+    font-size: var(--fsi-15);
+    font-weight: var(--fwe-regular);
+
+    &:focus {
+      border-color: var(--color-pri-500);
+    }
+  }
+}
+
+/* label-checkbox-input-type-two → form-field--checkbox ile birleştirildi (birebir aynı) */
+
+.form-field--text {
+  *[data-type="warningMessage"] {
+    padding-top: var(--space-1);
+  }
+}
+
+/* ---- Helper Text ---- */
+/* Form alanı altındaki açıklama metni, opsiyonel ? işareti ile */
+.helper-text {
+  display: block;
+  margin-top: var(--space-3);
+  font-size: 0.8em;
+  color: var(--color-text-dark-3);
+
+  // Soru işaretli varyasyon
+  &--with-mark {
+    display: flex;
+    align-items: flex-start;
+  }
+
+  &--with-mark::before {
+    content: '?';
+    flex-shrink: 0;
+    margin-right: var(--space-2);
+    font-weight: var(--fwe-bold);
+    opacity: 0.35;
+  }
+}
+
+/* ---- Danger Text ---- */
+/* Hata / doğrulama mesajı metni */
+.danger-text {
+  display: block;
+  margin-top: var(--space-3);
+  font-size: 0.8em;
+  color: var(--color-danger-500);
+}
+
+.danger-text + .helper-text {
+  display: none;
+}
+
+/* ---- Form Divider ---- */
+/* Bölüm başlığı + sağa uzanan çizgi */
+.form__divider {
+  display: flex;
+  align-items: center;
+  color: var(--color-text-dark-1);
+  font-size: var(--fsi-17);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: var(--space-15) 0 var(--space-7) 0;
+
+  h1+&,
+  h2+&,
+  h3+&,
+  &:first-child {
+    margin-top: 0;
+  }
+
+  &::after {
+    content: '';
+    flex-grow: 1;
+    height: 1px;
+    background-color: var(--color-grey-150);
+    margin-left: 1em;
+  }
+}
+
+/* ---- Form Standart Style ---- */
+/* Genel form yerleşim kuralları — label/fieldset arası boşluklar */
+.form-standard-style {
+
+  label,
+  fieldset,
+  div[class*="panel-label"] {
+    margin-bottom: var(--space-7);
+  }
+
+  div[class*="panel-label"] label {
+    margin-bottom: 0;
+  }
+
+  label > span:first-child {
+    margin-bottom: var(--space-2);
+    display: inline-block;
+  }
+}

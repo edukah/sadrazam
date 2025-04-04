@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sadrazam – Modal Showcase</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/bold/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/light/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <script type="text/javascript" src="assets/js/script.js"></script>
+    <link rel="stylesheet" href="assets/sadrazam.min.css">
+    <script type="text/javascript" src="assets/sadrazam.min.js"></script>
+</head>
+
+<body>
+<script>if(localStorage.getItem("dark-mode"))document.body.classList.add("dark-mode")</script>
+    <header>
+        <nav class="top-navbar">
+            <div class="nav-container">
+                <a href="index.html" class="nav-logo">Sadrazam</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li>
+                        <a href="javascript:void(0)" onclick="openPopup(); return false;">Examples</a>
+                        <div class="navi-popup-overlay" id="examplesPopupOverlay"></div>
+                        <div class="navi-popup" id="examplesPopup">
+                            <h3>Examples</h3>
+                            <ul>
+                                <li><a href="buttons.html">Button</a></li>
+                                <li><a href="forms.html">Form</a></li>
+                                <li><a href="form-patterns.html">Form Patterns</a></li>
+                                <li><a href="links.html">Link</a></li>
+                                <li><a href="switches.html">Switch</a></li>
+                                <li><a href="autocomplete.html">Autocomplete</a></li>
+                                <li><a href="backdrop.html">Backdrop</a></li>
+                                <li><a href="hovermenu.html">Hovermenu</a></li>
+                                <li><a href="infinite-scroll.html">Infinite Scroll</a></li>
+                                <li><a href="snackbar.html">Snackbar</a></li>
+                                <li><a href="modals.html">Modal</a></li>
+                                <li><a href="popovers.html">Popover</a></li>
+                                <li><a href="slide-menu.html">Slide Menu</a></li>
+                                <li><a href="spinners.html">Spinner</a></li>
+                                <li><a href="tabs.html">Tabs</a></li>
+                                <li><a href="tooltips.html">Tooltip</a></li>
+                                <li><a href="form-validation.html">Form Validation</a></li>
+                                <li><a href="autosize-textarea.html">Autosize Textarea</a></li>
+                                <li><a href="autosize-select.html">Autosize Select</a></li>
+                                <li><a href="ajax.html">Ajax</a></li>
+                                <li><a href="grid.html">Grid</a></li>
+                                <li><a href="spacing.html">Spacing</a></li>
+                                <li><a href="colors.html">Colors</a></li>
+                                <li><a href="typography.html">Typography</a></li>
+                            </ul>
+                            <button class="close-popup" onclick="closePopup()">&#10005;</button>
+                        </div>
+                    </li>
+                    <li><a href="https://github.com/edukah/sadrazam" target="_blank">GitHub</a></li>
+                </ul>
+                <div class="dark-mode-button-container">
+                    <div class="mode-toggle-switch" onclick="toggleMode()"></div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1>Sadrazam – Modal Showcase</h1>
+        <p class="subtitle">Modal dialog sizes, Toast types, configuration options and API methods</p>
+
+        <!-- ==================== BASIC MODAL (SIZES) ==================== -->
+        <div class="section">
+            <h2 class="section-title">Modal Sizes</h2>
+            <p class="section-desc">Set the <span class="code">size</span> config to control modal width: <span class="code">'sm'</span> / <span class="code">'md'</span> / <span class="code">'lg'</span> / <span class="code">'fullscreen'</span></p>
+
+            <div class="row">
+                <span class="label">Small</span>
+                <button class="bttn bttn--md-rectangle bttn--pri" onclick="openSizedModal('sm', 'Small Modal')">
+                    <i class="ph-bold ph-browsers"></i>&nbsp; Small
+                </button>
+                <span class="code">modal__dialog--sm (470px)</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Medium</span>
+                <button class="bttn bttn--md-rectangle bttn--sec" onclick="openSizedModal('md', 'Medium Modal')">
+                    <i class="ph-bold ph-browsers"></i>&nbsp; Medium
+                </button>
+                <span class="code">modal__dialog--md (650px)</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Large</span>
+                <button class="bttn bttn--md-rectangle bttn--ter" onclick="openSizedModal('lg', 'Large Modal')">
+                    <i class="ph-bold ph-browsers"></i>&nbsp; Large
+                </button>
+                <span class="code">modal__dialog--lg (950px)</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Fullscreen</span>
+                <button class="bttn bttn--md-rectangle bttn--neutral" onclick="openSizedModal('fullscreen', 'Fullscreen Modal')">
+                    <i class="ph-bold ph-arrows-out"></i>&nbsp; Fullscreen
+                </button>
+                <span class="code">modal__dialog--fullscreen</span>
+            </div>
+
+            <div class="code-block">Sadrazam.Modal.<span class="fn">insert</span>({
+  <span class="fn">content</span>: <span class="str">`
+    &lt;div class="modal__header"&gt;...&lt;/div&gt;
+    &lt;div class="modal__body"&gt;...&lt;/div&gt;
+  `</span>,
+  <span class="fn">size</span>: <span class="str">'md'</span>  <span class="cmt">// 'sm' | 'md' | 'lg' | 'fullscreen'</span>
+});</div>
+        </div>
+
+        <!-- ==================== HEADER + FOOTER ==================== -->
+        <div class="section">
+            <h2 class="section-title">Header, Body &amp; Footer</h2>
+            <p class="section-desc">Modals with <span class="code">.modal__header</span>, <span class="code">.modal__body</span> and optional <span class="code">.modal__footer</span></p>
+
+            <div class="row">
+                <span class="label">Header + Body</span>
+                <button class="bttn bttn--md-rectangle bttn--pri" onclick="openHeaderBodyModal()">
+                    <i class="ph-bold ph-article"></i>&nbsp; Open
+                </button>
+                <span class="code">modal__header + modal__body</span>
+            </div>
+
+            <div class="row">
+                <span class="label">With Footer</span>
+                <button class="bttn bttn--md-rectangle bttn--sec" onclick="openFooterModal()">
+                    <i class="ph-bold ph-layout"></i>&nbsp; Open
+                </button>
+                <span class="code">modal__header + modal__body + modal__footer</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Body Only</span>
+                <button class="bttn bttn--md-rectangle bttn--neutral" onclick="openBodyOnlyModal()">
+                    <i class="ph-bold ph-text-align-left"></i>&nbsp; Open
+                </button>
+                <span class="code">modal__body only (minimal)</span>
+            </div>
+
+            <div class="code-block"><span class="cmt">// Footer with action buttons</span>
+Sadrazam.Modal.<span class="fn">insert</span>({
+  <span class="fn">size</span>: <span class="str">'md'</span>,
+  <span class="fn">content</span>: <span class="str">`
+    &lt;div class="modal__header"&gt;
+      &lt;h1 class="modal__title"&gt;Title&lt;/h1&gt;
+      &lt;button class="modal__close-button" data-modal-close&gt;&amp;times;&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div class="modal__body"&gt;Content here&lt;/div&gt;
+    &lt;div class="modal__footer"&gt;
+      &lt;button class="bttn bttn--sm-rectangle bttn--ghost" data-modal-close&gt;Cancel&lt;/button&gt;
+      &lt;button class="bttn bttn--sm-rectangle bttn--pri"&gt;Save&lt;/button&gt;
+    &lt;/div&gt;
+  `</span>
+});</div>
+        </div>
+
+        <!-- ==================== CLOSE BEHAVIOURS ==================== -->
+        <div class="section">
+            <h2 class="section-title">Close Behaviours</h2>
+            <p class="section-desc">Control how the modal closes: close button, outer click, any click or auto-timer</p>
+
+            <div class="row">
+                <span class="label">Close Button</span>
+                <button class="bttn bttn--md-rectangle bttn--pri" onclick="openCloseButtonModal()">
+                    <i class="ph-bold ph-x-circle"></i>&nbsp; Open
+                </button>
+                <span class="code">data-modal-close</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Outer Click</span>
+                <button class="bttn bttn--md-rectangle bttn--sec" onclick="openOuterClickModal()">
+                    <i class="ph-bold ph-cursor-click"></i>&nbsp; Open
+                </button>
+                <span class="code">closeOnOuterClick: true</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Any Click</span>
+                <button class="bttn bttn--md-rectangle bttn--ter" onclick="openAnyClickModal()">
+                    <i class="ph-bold ph-hand-tap"></i>&nbsp; Open
+                </button>
+                <span class="code">closeOnClick: true</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Auto Close (3s)</span>
+                <button class="bttn bttn--md-rectangle bttn--neutral" onclick="openTimedModal()">
+                    <i class="ph-bold ph-timer"></i>&nbsp; Open
+                </button>
+                <span class="code">time: 3000</span>
+            </div>
+
+            <div class="code-block">Sadrazam.Modal.<span class="fn">insert</span>({
+  <span class="fn">content</span>: dialog,
+  <span class="fn">closeOnOuterClick</span>: <span class="kw">true</span>,  <span class="cmt">// close when clicking backdrop</span>
+  <span class="fn">closeOnClick</span>: <span class="kw">false</span>,       <span class="cmt">// close on any click (overrides outer)</span>
+  <span class="fn">time</span>: <span class="kw">3000</span>,                <span class="cmt">// auto-close after 3 seconds</span>
+});</div>
+        </div>
+
+        <!-- ==================== CLOSE CALLBACK ==================== -->
+        <div class="section">
+            <h2 class="section-title">Close Callback</h2>
+            <p class="section-desc">Execute a function after the modal is closed using <span class="code">closeAfterFunction</span></p>
+
+            <div class="row">
+                <span class="label">Callback</span>
+                <button class="bttn bttn--md-rectangle bttn--pri" onclick="openCallbackModal()">
+                    <i class="ph-bold ph-bell-ringing"></i>&nbsp; Open (alert on close)
+                </button>
+                <span class="code">closeAfterFunction: () => { ... }</span>
+            </div>
+
+            <div class="code-block">Sadrazam.Modal.<span class="fn">insert</span>({
+  <span class="fn">content</span>: dialog,
+  <span class="fn">closeOnOuterClick</span>: <span class="kw">true</span>,
+  <span class="fn">closeAfterFunction</span>: () => {
+    alert(<span class="str">'Modal was closed!'</span>);
+  }
+});</div>
+        </div>
+
+        <!-- ==================== PROGRAMMATIC CLOSE ==================== -->
+        <div class="section">
+            <h2 class="section-title">Programmatic API</h2>
+            <p class="section-desc">Store the instance and call <span class="code">.close()</span> or use <span class="code">Modal.getInstance(element)?.close()</span></p>
+
+            <div class="row">
+                <span class="label">Instance .close()</span>
+                <button class="bttn bttn--md-rectangle bttn--pri" onclick="openProgrammaticModal()">
+                    <i class="ph-bold ph-code"></i>&nbsp; Open
+                </button>
+                <span class="code">const m = Modal.insert({...}); m.close();</span>
+            </div>
+
+            <div class="row">
+                <span class="label">getInstance</span>
+                <button class="bttn bttn--md-rectangle bttn--sec" onclick="openGetInstanceModal()">
+                    <i class="ph-bold ph-crosshair"></i>&nbsp; Open
+                </button>
+                <span class="code">Modal.getInstance(element)?.close()</span>
+            </div>
+
+            <div class="row">
+                <span class="label">querySelector</span>
+                <button class="bttn bttn--md-rectangle bttn--neutral" onclick="openQuerySelectorModal()">
+                    <i class="ph-bold ph-magnifying-glass"></i>&nbsp; Open
+                </button>
+                <span class="code">instance.querySelector('.my-input')</span>
+            </div>
+
+            <div class="code-block"><span class="cmt">// Store the modal instance</span>
+<span class="kw">const</span> myModal = Sadrazam.Modal.<span class="fn">insert</span>({ <span class="fn">content</span>: dialog });
+
+<span class="cmt">// Close programmatically after 2 seconds</span>
+setTimeout(() => myModal.<span class="fn">close</span>(), <span class="kw">2000</span>);
+
+<span class="cmt">// Query elements inside the modal</span>
+<span class="kw">const</span> input = myModal.<span class="fn">querySelector</span>(<span class="str">'.my-input'</span>);
+
+<span class="cmt">// Close from inside a modal (e.g. in onclick handler)</span>
+Sadrazam.Modal.<span class="fn">getInstance</span>(event.target)?.<span class="fn">close</span>();</div>
+        </div>
+
+        <!-- ==================== CLOSE OTHER MODALS ==================== -->
+        <div class="section">
+            <h2 class="section-title">Close Other Modals</h2>
+            <p class="section-desc">Use <span class="code">closeOtherModals: true</span> to close all existing modals before opening a new one</p>
+
+            <div class="row">
+                <span class="label">Stack Modals</span>
+                <button class="bttn bttn--md-rectangle bttn--pri" onclick="openStackedModals()">
+                    <i class="ph-bold ph-stack"></i>&nbsp; Open Two Modals
+                </button>
+                <span class="code">Opens two modals stacked</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Replace Modal</span>
+                <button class="bttn bttn--md-rectangle bttn--danger" onclick="openReplacingModal()">
+                    <i class="ph-bold ph-swap"></i>&nbsp; Replace Existing
+                </button>
+                <span class="code">closeOtherModals: true</span>
+            </div>
+
+            <div class="code-block">Sadrazam.Modal.<span class="fn">insert</span>({
+  <span class="fn">content</span>: dialog,
+  <span class="fn">closeOtherModals</span>: <span class="kw">true</span>  <span class="cmt">// closes all open modals first</span>
+});</div>
+        </div>
+
+        <!-- ==================== CONFIRM DIALOG ==================== -->
+        <div class="section">
+            <h2 class="section-title">Confirm Dialog Pattern</h2>
+            <p class="section-desc">Build a confirmation dialog with footer actions and close callback</p>
+
+            <div class="row">
+                <span class="label">Confirm</span>
+                <button class="bttn bttn--md-rectangle bttn--danger" onclick="openConfirmDialog()">
+                    <i class="ph-bold ph-trash"></i>&nbsp; Delete Item
+                </button>
+                <span class="code">Confirm with Cancel / Delete buttons</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Save Changes</span>
+                <button class="bttn bttn--md-rectangle bttn--pri" onclick="openSaveDialog()">
+                    <i class="ph-bold ph-floppy-disk"></i>&nbsp; Save Changes
+                </button>
+                <span class="code">Confirm with Cancel / Save buttons</span>
+            </div>
+
+            <div class="code-block"><span class="cmt">// Confirm dialog with footer actions</span>
+Sadrazam.Modal.<span class="fn">insert</span>({
+  <span class="fn">size</span>: <span class="str">'sm'</span>,
+  <span class="fn">closeOnOuterClick</span>: <span class="kw">true</span>,
+  <span class="fn">content</span>: <span class="str">`
+    &lt;div class="modal__header"&gt;
+      &lt;h1&gt;Are you sure?&lt;/h1&gt;
+    &lt;/div&gt;
+    &lt;div class="modal__body"&gt;This cannot be undone.&lt;/div&gt;
+    &lt;div class="modal__footer"&gt;
+      &lt;button class="bttn bttn--sm-rectangle bttn--ghost" data-modal-close&gt;Cancel&lt;/button&gt;
+      &lt;button class="bttn bttn--sm-rectangle bttn--danger" onclick="onConfirm(this)"&gt;Delete&lt;/button&gt;
+    &lt;/div&gt;
+  `</span>
+});</div>
+        </div>
+
+        <!-- ==================== TOAST ==================== -->
+        <div class="section">
+            <h2 class="section-title">Toast</h2>
+            <p class="section-desc">Quick notification modals via <span class="code">Sadrazam.Toast.insert()</span> with type-based icons: success, error, warning, notice</p>
+
+            <div class="row">
+                <span class="label">Success</span>
+                <button class="bttn bttn--md-rectangle bttn--safe" onclick="showToast('success')">
+                    <i class="ph-bold ph-check-circle"></i>&nbsp; Success
+                </button>
+                <span class="code">{ success: "..." }</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Error</span>
+                <button class="bttn bttn--md-rectangle bttn--danger" onclick="showToast('error')">
+                    <i class="ph-bold ph-x-circle"></i>&nbsp; Error
+                </button>
+                <span class="code">{ error: "..." }</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Warning</span>
+                <button class="bttn bttn--md-rectangle bttn--neutral" onclick="showToast('warning')">
+                    <i class="ph-bold ph-warning"></i>&nbsp; Warning
+                </button>
+                <span class="code">{ warning: "..." }</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Notice</span>
+                <button class="bttn bttn--md-rectangle bttn--ter" onclick="showToast('notice')">
+                    <i class="ph-bold ph-info"></i>&nbsp; Notice
+                </button>
+                <span class="code">{ notice: "..." }</span>
+            </div>
+
+            <hr class="divider">
+
+            <div class="row">
+                <span class="label">Multiple</span>
+                <button class="bttn bttn--md-rectangle bttn--pri" onclick="showMultiToast()">
+                    <i class="ph-bold ph-list-bullets"></i>&nbsp; Multiple Messages
+                </button>
+                <span class="code">{ error: ["msg1", "msg2"] }</span>
+            </div>
+
+            <div class="code-block">Sadrazam.Toast.<span class="fn">insert</span>({
+  <span class="fn">message</span>: { <span class="str">success</span>: <span class="str">'Operation completed successfully!'</span> },
+  <span class="fn">time</span>: <span class="kw">2700</span>,          <span class="cmt">// auto-close ms (default: 27000)</span>
+  <span class="fn">size</span>: <span class="str">'medium'</span>,       <span class="cmt">// 'small' | 'medium' | 'large'</span>
+  <span class="fn">closeOnClick</span>: <span class="kw">true</span>,  <span class="cmt">// click anywhere to dismiss</span>
+});
+
+<span class="cmt">// Multiple messages of same type</span>
+Sadrazam.Toast.<span class="fn">insert</span>({
+  <span class="fn">message</span>: { <span class="str">error</span>: [<span class="str">'Email is required'</span>, <span class="str">'Password too short'</span>] }
+});</div>
+        </div>
+
+        <!-- ==================== TOAST SIZES ==================== -->
+        <div class="section">
+            <h2 class="section-title">Toast Sizes</h2>
+            <p class="section-desc">Control the Toast dialog width with the <span class="code">size</span> option</p>
+
+            <div class="row">
+                <span class="label">Small</span>
+                <button class="bttn bttn--md-rectangle bttn--pri" onclick="showSizedToast('small')">
+                    <i class="ph-bold ph-browsers"></i>&nbsp; Small
+                </button>
+                <span class="code">size: 'small' (470px)</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Medium</span>
+                <button class="bttn bttn--md-rectangle bttn--sec" onclick="showSizedToast('medium')">
+                    <i class="ph-bold ph-browsers"></i>&nbsp; Medium
+                </button>
+                <span class="code">size: 'medium' (650px, default)</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Large</span>
+                <button class="bttn bttn--md-rectangle bttn--ter" onclick="showSizedToast('large')">
+                    <i class="ph-bold ph-browsers"></i>&nbsp; Large
+                </button>
+                <span class="code">size: 'large' (950px)</span>
+            </div>
+        </div>
+
+        <!-- ==================== STATIC METHODS ==================== -->
+        <div class="section">
+            <h2 class="section-title">Static Methods Reference</h2>
+            <p class="section-desc">All available static methods on <span class="code">Sadrazam.Modal</span> and <span class="code">Sadrazam.Toast</span></p>
+
+            <div class="row">
+                <span class="label">Modal.insert()</span>
+                <span class="code">Modal.insert({ content, size, position, className, time, closeOnOuterClick, closeOnClick, closeAfterFunction, closeOtherModals })</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Modal.getInstance()</span>
+                <span class="code">Modal.getInstance(element) -- returns the Modal instance that contains the given element</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Modal.help()</span>
+                <button class="bttn bttn--sm-rectangle bttn--neutral" onclick="Sadrazam.Modal.help()">
+                    <i class="ph-bold ph-terminal"></i>&nbsp; Run
+                </button>
+                <span class="code">Logs config docs to console</span>
+            </div>
+
+            <hr class="divider">
+
+            <div class="row">
+                <span class="label">Toast.insert()</span>
+                <span class="code">Toast.insert({ message, time, size, position, closeOnClick })</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Toast.help()</span>
+                <button class="bttn bttn--sm-rectangle bttn--neutral" onclick="Sadrazam.Toast.help()">
+                    <i class="ph-bold ph-terminal"></i>&nbsp; Run
+                </button>
+                <span class="code">Logs config docs to console</span>
+            </div>
+
+            <div class="code-block"><span class="cmt">// Instance methods (returned by Modal.insert)</span>
+<span class="kw">const</span> m = Sadrazam.Modal.<span class="fn">insert</span>({ <span class="fn">content</span>: dialog });
+
+m.<span class="fn">close</span>();                        <span class="cmt">// close and clean up the modal</span>
+m.<span class="fn">destroy</span>();                      <span class="cmt">// alias for close() (industry convention)</span>
+m.<span class="fn">querySelector</span>(<span class="str">'.my-el'</span>);         <span class="cmt">// find element inside modal</span>
+m.<span class="fn">querySelectorAll</span>(<span class="str">'.items'</span>);     <span class="cmt">// find all matching elements</span></div>
+        </div>
+
+        <!-- ==================== CONFIG REFERENCE ==================== -->
+        <div class="section">
+            <h2 class="section-title">Configuration Reference</h2>
+            <p class="section-desc">All options accepted by <span class="code">Modal.insert(options)</span></p>
+
+            <div class="row">
+                <span class="label">content</span>
+                <span style="font-size: 0.82rem;">HTML string or DOM Element. Auto-wrapped with <span class="code">.modal__dialog</span> + <span class="code">.modal__content</span>. Required.</span>
+            </div>
+
+            <div class="row">
+                <span class="label">size</span>
+                <span style="font-size: 0.82rem;">Dialog width: <span class="code">'sm'</span> (470px), <span class="code">'md'</span> (650px), <span class="code">'lg'</span> (950px), <span class="code">'fullscreen'</span>. Default: <span class="code">'md'</span></span>
+            </div>
+
+            <div class="row">
+                <span class="label">position</span>
+                <span style="font-size: 0.82rem;">Vertical alignment: <span class="code">'top'</span>, <span class="code">'center'</span>, <span class="code">'bottom'</span>. Default: <span class="code">'center'</span></span>
+            </div>
+
+            <div class="row">
+                <span class="label">className</span>
+                <span style="font-size: 0.82rem;">Extra CSS class added to <span class="code">.modal__dialog</span>. Default: <span class="code">''</span></span>
+            </div>
+
+            <div class="row">
+                <span class="label">time</span>
+                <span style="font-size: 0.82rem;">Auto-close delay in ms. <span class="code">false</span> to disable. Default: <span class="code">false</span></span>
+            </div>
+
+            <div class="row">
+                <span class="label">closeOnOuterClick</span>
+                <span style="font-size: 0.82rem;">Close when clicking backdrop / outside modal content. Default: <span class="code">false</span></span>
+            </div>
+
+            <div class="row">
+                <span class="label">closeOnClick</span>
+                <span style="font-size: 0.82rem;">Close on any click (inside or outside). Default: <span class="code">false</span></span>
+            </div>
+
+            <div class="row">
+                <span class="label">closeAfterFunction</span>
+                <span style="font-size: 0.82rem;">Callback invoked after the modal closes. Default: <span class="code">null</span></span>
+            </div>
+
+            <div class="row">
+                <span class="label">closeOtherModals</span>
+                <span style="font-size: 0.82rem;">Close all other open modals before opening this one. Default: <span class="code">false</span></span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /* ============================================================
+         *  Helper: build modal content HTML (header + body + footer)
+         * ============================================================ */
+        function buildContent ({ title, body, footer } = {}) {
+            let html = '';
+
+            if (title) {
+                html += '<div class="modal__header">'
+                      + '<h1 class="modal__title">' + title + '</h1>'
+                      + '<button class="modal__close-button" data-modal-close>&times;</button>'
+                      + '</div>';
+            }
+
+            html += '<div class="modal__body">' + (body || '') + '</div>';
+
+            if (footer) {
+                html += '<div class="modal__footer">' + footer + '</div>';
+            }
+
+            return html;
+        }
+
+        /* ============================================================
+         *  Section: Modal Sizes
+         * ============================================================ */
+        function openSizedModal (size, label) {
+            Sadrazam.Modal.insert({
+                size: size,
+                closeOnOuterClick: true,
+                content: buildContent({
+                    title: label,
+                    body: '<p>This is a <strong>' + label.toLowerCase() + '</strong> using <code>size: \'' + size + '\'</code>.</p>'
+                        + '<p style="margin-top:0.8rem;color:var(--text-muted);">Click the &times; button or press the close button below to dismiss.</p>',
+                    footer: '<button class="bttn bttn--sm-rectangle bttn--ghost" data-modal-close>Close</button>'
+                })
+            });
+        }
+
+        /* ============================================================
+         *  Section: Header, Body & Footer
+         * ============================================================ */
+        function openHeaderBodyModal () {
+            Sadrazam.Modal.insert({
+                size: 'md',
+                closeOnOuterClick: true,
+                content: buildContent({
+                    title: 'Header &amp; Body',
+                    body: '<p>This modal has a sticky header and a body section.</p>'
+                        + '<p style="margin-top:0.5rem;">The header stays pinned at the top when the body scrolls.</p>'
+                })
+            });
+        }
+
+        function openFooterModal () {
+            Sadrazam.Modal.insert({
+                size: 'md',
+                closeOnOuterClick: true,
+                content: buildContent({
+                    title: 'With Footer',
+                    body: '<p>This modal includes a footer with action buttons. The footer is typically used for form submit / cancel actions.</p>',
+                    footer: '<button class="bttn bttn--sm-rectangle bttn--ghost" data-modal-close>Cancel</button>'
+                          + ' <button class="bttn bttn--sm-rectangle bttn--pri" data-modal-close>OK</button>'
+                })
+            });
+        }
+
+        function openBodyOnlyModal () {
+            Sadrazam.Modal.insert({
+                size: 'sm',
+                closeOnOuterClick: true,
+                content: buildContent({
+                    body: '<p style="text-align:center;padding:1rem 0;">A minimal modal with body content only. Click outside to close.</p>'
+                })
+            });
+        }
+
+        /* ============================================================
+         *  Section: Close Behaviours
+         * ============================================================ */
+        function openCloseButtonModal () {
+            Sadrazam.Modal.insert({
+                size: 'sm',
+                content: buildContent({
+                    title: 'Close Button Only',
+                    body: '<p>This modal can only be closed via the &times; button or the close button in the footer. Clicking outside does nothing.</p>',
+                    footer: '<button class="bttn bttn--sm-rectangle bttn--pri" data-modal-close>Got It</button>'
+                })
+            });
+        }
+
+        function openOuterClickModal () {
+            Sadrazam.Modal.insert({
+                size: 'sm',
+                closeOnOuterClick: true,
+                content: buildContent({
+                    title: 'Close on Outer Click',
+                    body: '<p>Click outside this dialog (on the backdrop) to close it.</p><p style="margin-top:0.5rem;color:var(--text-muted);">Clicking inside the content area will NOT close it.</p>'
+                })
+            });
+        }
+
+        function openAnyClickModal () {
+            Sadrazam.Modal.insert({
+                size: 'sm',
+                closeOnClick: true,
+                content: buildContent({
+                    title: 'Close on Any Click',
+                    body: '<p>Click <strong>anywhere</strong> — inside or outside — to close this modal.</p>'
+                })
+            });
+        }
+
+        function openTimedModal () {
+            Sadrazam.Modal.insert({
+                size: 'sm',
+                time: 3000,
+                closeOnOuterClick: true,
+                content: buildContent({
+                    title: 'Auto Close',
+                    body: '<p>This modal will automatically close in <strong>3 seconds</strong>.</p><p style="margin-top:0.5rem;color:var(--text-muted);">You can also click outside to close it early.</p>'
+                })
+            });
+        }
+
+        /* ============================================================
+         *  Section: Close Callback
+         * ============================================================ */
+        function openCallbackModal () {
+            Sadrazam.Modal.insert({
+                size: 'sm',
+                closeOnOuterClick: true,
+                closeAfterFunction: function () {
+                    alert('closeAfterFunction was called!');
+                },
+                content: buildContent({
+                    title: 'Close Callback Demo',
+                    body: '<p>Close this modal (any way you like) and an alert will fire.</p>',
+                    footer: '<button class="bttn bttn--sm-rectangle bttn--pri" data-modal-close>Close Me</button>'
+                })
+            });
+        }
+
+        /* ============================================================
+         *  Section: Programmatic API
+         * ============================================================ */
+        function openProgrammaticModal () {
+            const m = Sadrazam.Modal.insert({
+                size: 'sm',
+                content: buildContent({
+                    title: 'Programmatic Close',
+                    body: '<p>This modal will close itself in <strong>2 seconds</strong> via <code>instance.close()</code>.</p>'
+                })
+            });
+            setTimeout(function () { m.close(); }, 2000);
+        }
+
+        function openGetInstanceModal () {
+            Sadrazam.Modal.insert({
+                size: 'sm',
+                content: buildContent({
+                    title: 'getInstance Demo',
+                    body: '<p>Click the button below. It uses <code>Modal.getInstance(this)?.close()</code> from inside the modal.</p>',
+                    footer: '<button class="bttn bttn--sm-rectangle bttn--danger" onclick="Sadrazam.Modal.getInstance(this)?.close()">Close via getInstance</button>'
+                })
+            });
+        }
+
+        function openQuerySelectorModal () {
+            const m = Sadrazam.Modal.insert({
+                size: 'md',
+                closeOnOuterClick: true,
+                content: buildContent({
+                    title: 'querySelector Demo',
+                    body: '<p>Type something in the input below. The value will be read via <code>instance.querySelector()</code> when you click "Read Value".</p>'
+                        + '<input type="text" class="demo-input" placeholder="Type here..." style="margin-top:0.8rem;padding:8px 12px;border:1px solid var(--border-color);border-radius:6px;width:100%;font-size:0.9rem;">',
+                    footer: '<button class="bttn bttn--sm-rectangle bttn--ghost" data-modal-close>Close</button>'
+                          + ' <button class="bttn bttn--sm-rectangle bttn--pri" id="qs-read-btn">Read Value</button>'
+                })
+            });
+
+            // Use querySelector on the modal instance
+            setTimeout(function () {
+                var readBtn = m.querySelector('#qs-read-btn');
+                if (readBtn) {
+                    readBtn.addEventListener('click', function () {
+                        var input = m.querySelector('.demo-input');
+                        alert('Value: ' + (input ? input.value : '(not found)'));
+                    });
+                }
+            }, 0);
+        }
+
+        /* ============================================================
+         *  Section: Close Other Modals
+         * ============================================================ */
+        function openStackedModals () {
+            Sadrazam.Modal.insert({
+                size: 'md',
+                closeOnOuterClick: true,
+                content: buildContent({
+                    title: 'First Modal',
+                    body: '<p>This is the first modal. A second one will open on top in 500ms.</p>',
+                    footer: '<button class="bttn bttn--sm-rectangle bttn--ghost" data-modal-close>Close</button>'
+                })
+            });
+
+            setTimeout(function () {
+                Sadrazam.Modal.insert({
+                    size: 'sm',
+                    closeOnOuterClick: true,
+                    content: buildContent({
+                        title: 'Second Modal (stacked)',
+                        body: '<p>This is the second modal, stacked on top of the first.</p>',
+                        footer: '<button class="bttn bttn--sm-rectangle bttn--pri" data-modal-close>Close</button>'
+                    })
+                });
+            }, 500);
+        }
+
+        function openReplacingModal () {
+            Sadrazam.Modal.insert({
+                size: 'md',
+                content: buildContent({
+                    title: 'This will be replaced',
+                    body: '<p>Another modal with <code>closeOtherModals: true</code> will replace this in 1 second.</p>'
+                })
+            });
+
+            setTimeout(function () {
+                Sadrazam.Modal.insert({
+                    size: 'sm',
+                    closeOtherModals: true,
+                    closeOnOuterClick: true,
+                    content: buildContent({
+                        title: 'Replacement Modal',
+                        body: '<p>The previous modal was closed automatically via <code>closeOtherModals: true</code>.</p>',
+                        footer: '<button class="bttn bttn--sm-rectangle bttn--pri" data-modal-close>OK</button>'
+                    })
+                });
+            }, 1000);
+        }
+
+        /* ============================================================
+         *  Section: Confirm Dialog
+         * ============================================================ */
+        function openConfirmDialog () {
+            Sadrazam.Modal.insert({
+                size: 'sm',
+                closeOnOuterClick: true,
+                content: buildContent({
+                    title: 'Delete Item?',
+                    body: '<p>Are you sure you want to delete this item? This action cannot be undone.</p>',
+                    footer: '<button class="bttn bttn--sm-rectangle bttn--ghost" data-modal-close>Cancel</button>'
+                          + ' <button class="bttn bttn--sm-rectangle bttn--danger" onclick="handleConfirmDelete(this)"><i class="ph-bold ph-trash"></i>&nbsp; Delete</button>'
+                })
+            });
+        }
+
+        function handleConfirmDelete (btn) {
+            Sadrazam.Modal.getInstance(btn)?.close();
+            Sadrazam.Toast.insert({
+                message: { success: 'Item deleted successfully.' },
+                time: 2500,
+                size: 'small',
+                closeOnClick: true
+            });
+        }
+
+        function openSaveDialog () {
+            Sadrazam.Modal.insert({
+                size: 'sm',
+                closeOnOuterClick: true,
+                content: buildContent({
+                    title: 'Save Changes?',
+                    body: '<p>You have unsaved changes. Do you want to save them before leaving?</p>',
+                    footer: '<button class="bttn bttn--sm-rectangle bttn--ghost" data-modal-close>Discard</button>'
+                          + ' <button class="bttn bttn--sm-rectangle bttn--pri" onclick="handleConfirmSave(this)"><i class="ph-bold ph-floppy-disk"></i>&nbsp; Save</button>'
+                })
+            });
+        }
+
+        function handleConfirmSave (btn) {
+            Sadrazam.Modal.getInstance(btn)?.close();
+            Sadrazam.Toast.insert({
+                message: { success: 'Changes saved.' },
+                time: 2500,
+                size: 'small',
+                closeOnClick: true
+            });
+        }
+
+        /* ============================================================
+         *  Section: Toast
+         * ============================================================ */
+        function showToast (type) {
+            var messages = {
+                success: 'Operation completed successfully!',
+                error: 'Something went wrong. Please try again.',
+                warning: 'Please review your input before submitting.',
+                notice: 'Your session will expire in 5 minutes.'
+            };
+            var msg = {};
+            msg[type] = messages[type];
+
+            Sadrazam.Toast.insert({
+                message: msg,
+                time: 3000,
+                size: 'medium',
+                closeOnClick: true
+            });
+        }
+
+        function showMultiToast () {
+            Sadrazam.Toast.insert({
+                message: {
+                    error: ['Email address is required.', 'Password must be at least 8 characters.', 'Please accept the terms of service.']
+                },
+                time: 5000,
+                size: 'medium',
+                closeOnClick: true
+            });
+        }
+
+        function showSizedToast (size) {
+            Sadrazam.Toast.insert({
+                message: { notice: 'This is a ' + size + ' Toast dialog.' },
+                time: 3000,
+                size: size,
+                closeOnClick: true
+            });
+        }
+    </script>
+</body>
+
+</html>

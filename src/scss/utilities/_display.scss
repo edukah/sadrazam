@@ -1,0 +1,88 @@
+// === Display Utilities ===
+.d-block {
+  display: block !important;
+}
+
+.d-inline {
+  display: inline !important;
+}
+
+.d-ib {
+  display: inline-block !important;
+}
+
+.d-flex {
+  display: flex !important;
+}
+
+.d-grid {
+  display: grid !important;
+}
+
+.d-none {
+  display: none !important;
+}
+
+// === Flexbox ===
+// Alignment
+.flex-vcenter { align-items: center; }
+.flex-hcenter { justify-content: center; }
+.flex-center { align-items: center; justify-content: center; }
+
+// Direction
+.flex-row { flex-direction: row; }
+.flex-col { flex-direction: column; }
+
+// Wrap
+.flex-wrap { flex-wrap: wrap; }
+.flex-nowrap { flex-wrap: nowrap; }
+
+// Justify
+.flex-between { justify-content: space-between; }
+.flex-start { justify-content: flex-start; }
+.flex-end { justify-content: flex-end; }
+
+// Align
+.flex-stretch { align-items: stretch; }
+.flex-astart { align-items: flex-start; }
+
+// Gap
+.flex-gap-xs { gap: var(--space-1); }
+.flex-gap-sm { gap: var(--space-2); }
+.flex-gap-md { gap: var(--space-4); }
+.flex-gap-lg { gap: var(--space-6); }
+.flex-gap-xl { gap: var(--space-8); }
+
+// === Flex Item ===
+.flex-1 {
+  flex: 1 1 0%;
+}
+
+.flex-grow {
+  flex-grow: 1;
+}
+
+.flex-shrink-0 {
+  flex-shrink: 0;
+}
+
+// === Grid ===
+.grid-cols-2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.grid-cols-3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.grid-cols-4 {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.grid-auto-fit {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}

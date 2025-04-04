@@ -1,0 +1,289 @@
+@use '../base/variables';
+
+/* =========================================================================
+   Tabs — Sekme bileşeni
+   JS modülü: modules/tabs.js
+   Tüm varyantlar aynı JS modülünü kullanır, farklı görsel stiller sunar.
+
+   Varyantlar:
+     .tab-classic__*   → Klasik — üst border, aktif sekmenin alt border'ı kaldırılır
+     .tab-card__*      → Border + alt vurgu çizgisi, responsive wrap
+     .tab-scroll__*    → tab-card'a benzer, yatay scroll, margin ile ayrık body
+     .tab-capsule__*   → Yuvarlak köşeli, aktif sekme dolgulu arka plan
+   ========================================================================= */
+
+/* ---- tab-classic: Klasik Tab ---- */
+.tab-classic__container {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+
+  .tab-classic__heading {
+    display: flex;
+    gap: 7px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    margin: 0;
+    padding: 0;
+
+    &.row>*[class*="col-"] {
+      padding: 0;
+    }
+
+    .tab-classic__head {
+      position: relative;
+      display: block;
+      margin: 0;
+      padding: 7px 15px;
+      border: var(--border-width-sm) solid transparent;
+      cursor: pointer;
+
+      white-space: nowrap;
+      flex-grow: 1;
+
+      &.is-active {
+        border: var(--border-width-sm) solid var(--color-grey-150);
+        background-color: var(--color-grey-zero);
+        z-index: 2;
+        border-bottom: 0px transparent none;
+      }
+    }
+  }
+}
+
+.tab-classic__body {
+  .tab-classic__panel {
+    position: relative;
+    display: none;
+    margin-top: 0px;
+    padding: var(--space-8);
+    border: var(--border-width-sm) solid var(--color-grey-150);
+    background-color: var(--color-grey-zero);
+    top: -1px;
+
+    &.is-active {
+      display: block;
+    }
+  }
+}
+
+/* ---- tab-card: Border + Alt Vurgu ---- */
+.tab-card__container {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 20px;
+
+  .tab-card__heading {
+    display: flex;
+    gap: var(--space-6);
+    flex-wrap: wrap;
+
+    @media only screen and (min-width: variables.$breakpoint-xl) {
+      flex-wrap: nowrap;
+    }
+
+    .tab-card__head {
+      position: relative;
+      padding: var(--space-5) var(--space-7);
+      cursor: pointer;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+
+      border: var(--border-width-sm) solid var(--color-grey-250);
+      border-radius: var(--radius-sm) var(--radius-sm) var(--radius-xs) var(--radius-xs);
+      background-color: var(--color-grey-100);
+
+      &.is-active {
+        padding-bottom: var(--space-4);
+        background-color: var(--color-grey-zero);
+        border-bottom: 3px solid var(--color-pri-500);
+        z-index: 2;
+
+        @media only screen and (min-width: variables.$breakpoint-xl) {
+          border-bottom: var(--border-width-sm) solid transparent;
+        }
+      }
+    }
+  }
+}
+
+.tab-card__body {
+  margin-top: 7px;
+
+  @media only screen and (min-width: variables.$breakpoint-xl) {
+    margin-top: 0px;
+  }
+
+  .tab-card__panel {
+    position: relative;
+    display: none;
+    background-color: var(--color-grey-zero);
+    border: var(--border-width-sm) solid var(--color-grey-250);
+    padding: var(--space-8);
+
+    @media only screen and (min-width: variables.$breakpoint-xl) {
+      top: -1px;
+    }
+
+    &.is-active {
+      display: block;
+    }
+  }
+}
+
+/* ---- tab-scroll: Yatay Scroll + Ayrık Body ---- */
+.tab-scroll__container {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+
+  .tab-scroll__heading {
+    display: flex;
+    gap: var(--space-6);
+    flex-wrap: nowrap;
+    overflow: auto;
+
+    margin-bottom: var(--space-10);
+
+    @media only screen and (min-width: variables.$breakpoint-lg) {
+      flex-wrap: wrap;
+      overflow: initial;
+    }
+
+    .tab-scroll__head {
+      position: relative;
+      padding: var(--space-5) var(--space-7);
+      cursor: pointer;
+      white-space: nowrap;
+
+      border: var(--border-width-sm) solid var(--color-grey-250);
+      border-radius: var(--radius-sm) var(--radius-sm) var(--radius-xs) var(--radius-xs);
+      background-color: var(--color-grey-100);
+
+      &.is-active {
+        padding-bottom: calc(var(--space-5) - 2px);
+        background-color: var(--color-grey-zero);
+        border-bottom: 3px solid var(--color-pri-500);
+        border-radius: var(--radius-sm) var(--radius-sm) var(--radius-xs) var(--radius-xs);
+        z-index: 2;
+      }
+    }
+  }
+}
+
+.tab-scroll__body {
+  margin-top: var(--space-2);
+
+  .tab-scroll__panel {
+    position: relative;
+    display: none;
+    border: var(--border-width-sm) solid var(--color-grey-250);
+    background-color: var(--color-grey-zero);
+    padding: var(--space-8);
+
+    &.is-active {
+      display: block;
+    }
+  }
+}
+
+/* ---- tab-capsule: Kapsül / Segment ---- */
+.tab-capsule__container {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+
+  .tab-capsule__heading {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: stretch;
+
+    overflow: auto;
+
+    padding: var(--space-2);
+    border-radius: var(--radius-md);
+    background-color: var(--color-grey-100);
+
+    @media only screen and (min-width: variables.$breakpoint-lg) {
+      flex-wrap: wrap;
+      overflow: initial;
+    }
+
+    .tab-capsule__head {
+      flex-grow: 1;
+
+      position: relative;
+      padding: var(--space-5) var(--space-11);
+      cursor: pointer;
+      white-space: nowrap;
+      text-align: center;
+
+      border-radius: var(--radius-md);
+      background-color: var(--color-grey-100);
+
+      user-select: none;
+
+      transition: background-color var(--ease-fast), color var(--ease-fast);
+
+      &:hover {
+        @media (hover: hover) and (pointer: fine) {
+          color: var(--color-pri-500);
+        }
+      }
+
+      &.is-active {
+        padding-bottom: var(--space-4);
+
+        color: var(--color-white--f);
+        background-color: var(--color-pri-500);
+        box-shadow: var(--shadow);
+
+        z-index: 2;
+      }
+    }
+  }
+}
+
+.tab-capsule__body {
+  margin-top: var(--space-8);
+
+  .tab-capsule__panel--neutral {
+    position: relative;
+    display: none;
+
+    &.is-active {
+      display: block;
+    }
+  }
+
+  .tab-capsule__panel {
+    position: relative;
+    display: none;
+
+    border: var(--border-width-sm) solid var(--color-grey-100);
+    border-radius: var(--radius-md);
+    background-color: var(--color-grey-50);
+
+    padding: var(--space-12);
+
+    &.is-active {
+      display: block;
+    }
+  }
+
+  .tab-capsule__panel--inner {
+    position: relative;
+
+    border: var(--border-width-sm) solid var(--color-grey-100);
+    border-radius: var(--radius-md);
+    background-color: var(--color-grey-50);
+
+    padding: var(--space-12);
+  }
+
+  .tab-capsule__panel--inner+.tab-capsule__panel--inner {
+    margin-top: var(--space-12);
+  }
+}

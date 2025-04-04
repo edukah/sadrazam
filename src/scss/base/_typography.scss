@@ -1,0 +1,126 @@
+@use './variables';
+
+/* ========================================================================
+   Typography SCSS – Headings, paragraphs, inline text elements
+   ======================================================================== */
+
+* {
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  word-spacing: 0.1em;
+  /* transition: all .2s ease; */
+}
+
+html {
+  font-size: var(--base-font-size); // 1rem = 16px
+  font-family: var(--ffa-sans); // Sans-serif temel font ailesi
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0.4em 0;
+}
+
+// Headings scale
+h1 {
+  font-size: var(--fsi-35);
+  font-weight: 700;
+  line-height: 1.2;
+
+  margin-bottom: 0.9em;
+
+  *+& {
+    margin-top: 1.6em;
+  }
+}
+
+h2 {
+  font-size: var(--fsi-28);
+  font-weight: 600;
+  line-height: 1.2;
+
+  margin-bottom: .7em;
+
+  *+& {
+    margin-top: 1.3em;
+  }
+}
+
+h3 {
+  font-size: var(--fsi-24);
+  font-weight: 600;
+  line-height: 1.2;
+
+  margin-bottom: .5em;
+
+  *+& {
+    margin-top: 1.15em;
+  }
+}
+
+h4 {
+  font-size: var(--fsi-21);
+  font-weight: 600;
+
+  margin-bottom: .4em;
+
+  *+& {
+    margin-top: 1em;
+  }
+}
+
+h5 {
+  font-size: var(--fsi-19);
+  font-weight: 600;
+}
+
+h6 {
+  font-size: var(--fsi-17);
+  font-weight: 600;
+}
+
+// Paragraphs
+p {
+  margin-top: var(--space-1);
+  margin-bottom: var(--space-2);
+  margin-block: var(--space-2);
+}
+
+// Inline elements
+code {
+  font-family: monospace;
+  /* Sabit boyut gerekirse: font-size: 1.4rem; (22.4px) */
+  font-size: var(--fsi-22);
+  background: var(--color-grey-50);
+  padding: 0.2em 0.4em;
+  border-radius: var(--radius-sm);
+}
+
+pre {
+  font-family: monospace;
+  /* Sabit boyut gerekirse: font-size: 1.4rem; (22.4px) */
+  font-size: var(--fsi-22);
+  padding: var(--space-4);
+  background: var(--color-grey-50);
+  border-radius: var(--radius-md);
+  overflow: auto;
+  max-width: 100%;
+}
+
+blockquote {
+  border-left: var(--space-2) solid var(--color-grey-250);
+  margin: var(--space-4) 0;
+  padding: var(--space-2) var(--space-4);
+  font-style: italic;
+  background-color: var(--color-grey-50);
+  border-radius: var(--radius-sm);
+}

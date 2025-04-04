@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sadrazam – Slide Menu Showcase</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/bold/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/light/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <script type="text/javascript" src="assets/js/script.js"></script>
+    <link rel="stylesheet" href="assets/sadrazam.min.css">
+    <script type="text/javascript" src="assets/sadrazam.min.js"></script>
+    <style>
+        /* Hidden source containers for SlideMenu content */
+        .menu-source {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+<script>if(localStorage.getItem("dark-mode"))document.body.classList.add("dark-mode")</script>
+    <header>
+        <nav class="top-navbar">
+            <div class="nav-container">
+                <a href="index.html" class="nav-logo">Sadrazam</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li>
+                        <a href="javascript:void(0)" onclick="openPopup(); return false;">Examples</a>
+                        <div class="navi-popup-overlay" id="examplesPopupOverlay"></div>
+                        <div class="navi-popup" id="examplesPopup">
+                            <h3>Examples</h3>
+                            <ul>
+                                <li><a href="buttons.html">Button</a></li>
+                                <li><a href="forms.html">Form</a></li>
+                                <li><a href="form-patterns.html">Form Patterns</a></li>
+                                <li><a href="links.html">Link</a></li>
+                                <li><a href="switches.html">Switch</a></li>
+                                <li><a href="autocomplete.html">Autocomplete</a></li>
+                                <li><a href="backdrop.html">Backdrop</a></li>
+                                <li><a href="hovermenu.html">Hovermenu</a></li>
+                                <li><a href="infinite-scroll.html">Infinite Scroll</a></li>
+                                <li><a href="snackbar.html">Snackbar</a></li>
+                                <li><a href="modals.html">Modal</a></li>
+                                <li><a href="popovers.html">Popover</a></li>
+                                <li><a href="slide-menu.html">Slide Menu</a></li>
+                                <li><a href="spinners.html">Spinner</a></li>
+                                <li><a href="tabs.html">Tabs</a></li>
+                                <li><a href="tooltips.html">Tooltip</a></li>
+                                <li><a href="form-validation.html">Form Validation</a></li>
+                                <li><a href="autosize-textarea.html">Autosize Textarea</a></li>
+                                <li><a href="autosize-select.html">Autosize Select</a></li>
+                                <li><a href="ajax.html">Ajax</a></li>
+                                <li><a href="grid.html">Grid</a></li>
+                                <li><a href="spacing.html">Spacing</a></li>
+                                <li><a href="colors.html">Colors</a></li>
+                                <li><a href="typography.html">Typography</a></li>
+                            </ul>
+                            <button class="close-popup" onclick="closePopup()">&#10005;</button>
+                        </div>
+                    </li>
+                    <li><a href="https://github.com/edukah/sadrazam" target="_blank">GitHub</a></li>
+                </ul>
+                <div class="dark-mode-button-container">
+                    <div class="mode-toggle-switch" onclick="toggleMode()"></div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+
+        <h1>Sadrazam – Slide Menu Showcase</h1>
+        <p class="subtitle">Modal-style slide menu with animation, backdrop, and dynamic content</p>
+
+        <!-- ==================== BASIC USAGE ==================== -->
+        <div class="section">
+            <h2 class="section-title">Basic Slide Menu</h2>
+            <p class="section-desc">
+                A simple slide menu triggered by a button click. On mobile it slides up from the bottom;
+                on desktop it fades in centered. Uses <span class="code">new Sadrazam.SlideMenu({ ... })</span>
+            </p>
+
+            <div class="row">
+                <span class="label">String content</span>
+                <button id="trigger-basic" class="bttn bttn--md-rectangle bttn--pri">
+                    <i class="ph-bold ph-list"></i>&nbsp; Open Menu
+                </button>
+                <span class="code">content: () => '...'</span>
+            </div>
+
+            <div class="code-block"><span class="kw">new</span> sadrazam.<span class="fn">SlideMenu</span>({
+  <span class="str">selector</span>: <span class="str">'#trigger-basic'</span>,
+  <span class="str">content</span>: () => <span class="str">`
+    &lt;div class="slide-menu-header"&gt;
+      &lt;header&gt;Menu&lt;/header&gt;
+      &lt;button class="slide-menu-close-button"&gt;&times;&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div class="slide-menu-option-container"&gt;
+      &lt;div class="slide-menu-option-item"&gt;Option A&lt;/div&gt;
+      &lt;div class="slide-menu-option-item"&gt;Option B&lt;/div&gt;
+    &lt;/div&gt;`</span>
+});</div>
+        </div>
+
+        <!-- ==================== WITH BACKDROP ==================== -->
+        <div class="section">
+            <h2 class="section-title">Slide Menu with Backdrop</h2>
+            <p class="section-desc">
+                Setting <span class="code">backdrop: true</span> shows a dark overlay behind the menu.
+                Clicking the backdrop automatically closes the menu via the Backdrop module.
+            </p>
+
+            <div class="row">
+                <span class="label">Backdrop</span>
+                <button id="trigger-backdrop" class="bttn bttn--md-rectangle bttn--sec">
+                    <i class="ph-bold ph-sidebar"></i>&nbsp; Open with Backdrop
+                </button>
+                <span class="code">backdrop: true</span>
+            </div>
+
+            <div class="code-block"><span class="kw">new</span> sadrazam.<span class="fn">SlideMenu</span>({
+  <span class="str">selector</span>: <span class="str">'#trigger-backdrop'</span>,
+  <span class="str">backdrop</span>: <span class="kw">true</span>,
+  <span class="str">content</span>: () => <span class="str">'...'</span>
+});</div>
+        </div>
+
+        <!-- ==================== CALLBACKS ==================== -->
+        <div class="section">
+            <h2 class="section-title">Open &amp; Close Callbacks</h2>
+            <p class="section-desc">
+                Use <span class="code">openFunc</span> and <span class="code">closeFunc</span> to run
+                custom logic when the menu opens or closes. Check the browser console for log output.
+            </p>
+
+            <div class="row">
+                <span class="label">Callbacks</span>
+                <button id="trigger-callbacks" class="bttn bttn--md-rectangle bttn--ter">
+                    <i class="ph-bold ph-terminal"></i>&nbsp; Open (watch console)
+                </button>
+                <span class="code">openFunc / closeFunc</span>
+            </div>
+
+            <div class="code-block"><span class="kw">new</span> sadrazam.<span class="fn">SlideMenu</span>({
+  <span class="str">selector</span>: <span class="str">'#trigger-callbacks'</span>,
+  <span class="str">backdrop</span>: <span class="kw">true</span>,
+  <span class="str">openFunc</span>: () => console.<span class="fn">log</span>(<span class="str">'Menu opened!'</span>),
+  <span class="str">closeFunc</span>: () => console.<span class="fn">log</span>(<span class="str">'Menu closed!'</span>),
+  <span class="str">content</span>: () => <span class="str">'...'</span>
+});</div>
+        </div>
+
+        <!-- ==================== DOM ELEMENT CONTENT ==================== -->
+        <div class="section">
+            <h2 class="section-title">DOM Element as Content</h2>
+            <p class="section-desc">
+                Instead of returning an HTML string, the <span class="code">content</span> function can
+                return a real DOM element. Child nodes are moved into the menu and restored on close.
+            </p>
+
+            <div class="row">
+                <span class="label">Element source</span>
+                <button id="trigger-dom" class="bttn bttn--md-rectangle bttn--neutral">
+                    <i class="ph-bold ph-code"></i>&nbsp; Open DOM Menu
+                </button>
+                <span class="code">content: () => document.querySelector(...)</span>
+            </div>
+
+            <!-- Hidden source element whose children will be moved into the slide menu -->
+            <div id="dom-source" class="menu-source">
+                <div class="slide-menu-header">
+                    <header>DOM-sourced Menu</header>
+                    <button class="slide-menu-close-button">&times;</button>
+                </div>
+                <div class="slide-menu-option-container">
+                    <div class="slide-menu-option-item">
+                        <a href="javascript:void(0)"><i class="ph-bold ph-user"></i> Profile</a>
+                    </div>
+                    <div class="slide-menu-option-item">
+                        <a href="javascript:void(0)"><i class="ph-bold ph-bell"></i> Notifications</a>
+                    </div>
+                    <div class="slide-menu-option-item">
+                        <a href="javascript:void(0)"><i class="ph-bold ph-sign-out"></i> Logout</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="code-block"><span class="kw">new</span> sadrazam.<span class="fn">SlideMenu</span>({
+  <span class="str">selector</span>: <span class="str">'#trigger-dom'</span>,
+  <span class="str">backdrop</span>: <span class="kw">true</span>,
+  <span class="str">content</span>: () => document.<span class="fn">querySelector</span>(<span class="str">'#dom-source'</span>)
+  <span class="cm">// Child nodes are moved into the menu on open,</span>
+  <span class="cm">// and moved back to the source on close.</span>
+});</div>
+        </div>
+
+        <!-- ==================== STATIC REMOVE ==================== -->
+        <div class="section">
+            <h2 class="section-title">Programmatic Close &amp; Destroy</h2>
+            <p class="section-desc">
+                You can close a slide menu programmatically from any element inside it
+                by calling <span class="code">Sadrazam.SlideMenu.remove(element)</span>.
+                For full teardown use <span class="code">Sadrazam.SlideMenu.destroy(element)</span> or
+                <span class="code">instance.destroy()</span> — this closes the menu, removes the trigger listener,
+                and clears the instance reference.
+                It walks up the DOM to find the nearest <span class="code">[data-slide-menu-id]</span> container.
+                Use <span class="code">SlideMenu.getInstance(element)</span> to retrieve the instance from any child element.
+            </p>
+
+            <div class="row">
+                <span class="label">Static remove</span>
+                <button id="trigger-remove" class="bttn bttn--md-rectangle bttn--danger">
+                    <i class="ph-bold ph-x-circle"></i>&nbsp; Open (close from inside)
+                </button>
+                <span class="code">SlideMenu.remove(el)</span>
+            </div>
+
+            <div class="code-block"><span class="cm">// Inside the content, a button calls SlideMenu.remove(this):</span>
+<span class="str">content</span>: () => <span class="str">`
+  ...
+  &lt;button onclick="Sadrazam.SlideMenu.remove(this)"&gt;
+    Close from inside
+  &lt;/button&gt;
+`</span></div>
+        </div>
+
+        <!-- ==================== RICH CONTENT ==================== -->
+        <div class="section">
+            <h2 class="section-title">Rich Content Menu</h2>
+            <p class="section-desc">
+                The slide menu can hold any HTML. This example shows a settings panel
+                with icons and grouped options using the built-in
+                <span class="code">.slide-menu-option-container</span> and
+                <span class="code">.slide-menu-option-item</span> classes.
+            </p>
+
+            <div class="row">
+                <span class="label">Settings panel</span>
+                <button id="trigger-rich" class="bttn bttn--md-rectangle bttn--pri">
+                    <i class="ph-bold ph-gear"></i>&nbsp; Settings Menu
+                </button>
+            </div>
+
+            <div class="row">
+                <span class="label">Share panel</span>
+                <button id="trigger-share" class="bttn bttn--md-rectangle bttn--sec">
+                    <i class="ph-bold ph-share-network"></i>&nbsp; Share Menu
+                </button>
+            </div>
+        </div>
+
+        <!-- ==================== SELECTOR TYPES ==================== -->
+        <div class="section">
+            <h2 class="section-title">Selector Types</h2>
+            <p class="section-desc">
+                The <span class="code">selector</span> config accepts either a CSS selector string
+                or a direct DOM Element reference.
+            </p>
+
+            <div class="row">
+                <span class="label">CSS string</span>
+                <button id="trigger-css-sel" class="bttn bttn--md-rectangle bttn--neutral">
+                    <i class="ph-bold ph-hash"></i>&nbsp; CSS Selector
+                </button>
+                <span class="code">selector: '#trigger-css-sel'</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Element ref</span>
+                <button id="trigger-elem-ref" class="bttn bttn--md-rectangle bttn--neutral">
+                    <i class="ph-bold ph-brackets-curly"></i>&nbsp; Element Reference
+                </button>
+                <span class="code">selector: document.getElementById(...)</span>
+            </div>
+
+            <div class="code-block"><span class="cm">// CSS selector string</span>
+<span class="kw">new</span> sadrazam.<span class="fn">SlideMenu</span>({ <span class="str">selector</span>: <span class="str">'#my-button'</span>, ... });
+
+<span class="cm">// Direct Element reference</span>
+<span class="kw">const</span> el = document.<span class="fn">getElementById</span>(<span class="str">'my-button'</span>);
+<span class="kw">new</span> sadrazam.<span class="fn">SlideMenu</span>({ <span class="str">selector</span>: el, ... });</div>
+        </div>
+
+        <!-- ==================== CONFIG REFERENCE ==================== -->
+        <div class="section">
+            <h2 class="section-title">Configuration Reference</h2>
+            <p class="section-desc">
+                All available options for <span class="code">new Sadrazam.SlideMenu(config)</span>.
+                Call <span class="code">Sadrazam.SlideMenu.help()</span> in the console for a quick summary.
+            </p>
+
+            <div class="row">
+                <span class="label">selector</span>
+                <span>CSS selector string or DOM Element. <b>Required.</b></span>
+            </div>
+            <hr class="divider">
+            <div class="row">
+                <span class="label">trigger</span>
+                <span>Event name to listen for. Default: <span class="code">'click'</span></span>
+            </div>
+            <hr class="divider">
+            <div class="row">
+                <span class="label">backdrop</span>
+                <span>Show backdrop overlay. Default: <span class="code">false</span></span>
+            </div>
+            <hr class="divider">
+            <div class="row">
+                <span class="label">content</span>
+                <span>Function returning HTML string or DOM Element. <b>Required.</b> Receives <span class="code">(triggerEl, instance)</span></span>
+            </div>
+            <hr class="divider">
+            <div class="row">
+                <span class="label">openFunc</span>
+                <span>Callback fired before the menu opens. Default: <span class="code">() => {}</span></span>
+            </div>
+            <hr class="divider">
+            <div class="row">
+                <span class="label">closeFunc</span>
+                <span>Callback fired after close animation ends. Default: <span class="code">() => {}</span></span>
+            </div>
+
+            <div class="code-block"><span class="cm">// Static methods</span>
+Sadrazam.SlideMenu.<span class="fn">help</span>();           <span class="cm">// Print config reference to console</span>
+Sadrazam.SlideMenu.<span class="fn">remove</span>(element);  <span class="cm">// Close menu containing the element</span>
+Sadrazam.SlideMenu.<span class="fn">destroy</span>(element); <span class="cm">// Full teardown: close + remove trigger listener</span></div>
+        </div>
+
+        <!-- ==================== CSS CLASSES ==================== -->
+        <div class="section">
+            <h2 class="section-title">CSS Structure</h2>
+            <p class="section-desc">
+                The DOM structure and CSS classes generated by SlideMenu.
+                Animation classes <span class="code">.in</span> / <span class="code">.out</span> are
+                added automatically during open and close transitions.
+            </p>
+
+            <div class="row">
+                <span class="label">Container</span>
+                <span class="code">.slide-menu</span>
+                <span>Fixed-position wrapper (full-width on mobile, centered on desktop)</span>
+            </div>
+            <hr class="divider">
+            <div class="row">
+                <span class="label">Inner</span>
+                <span class="code">.slide-menu-inner</span>
+                <span>Padded content wrapper (max-width 450px)</span>
+            </div>
+            <hr class="divider">
+            <div class="row">
+                <span class="label">Content</span>
+                <span class="code">.slide-menu-content</span>
+                <span>Your content is injected here</span>
+            </div>
+            <hr class="divider">
+            <div class="row">
+                <span class="label">Header</span>
+                <span class="code">.slide-menu-header</span>
+                <span>Optional header bar with centered title</span>
+            </div>
+            <hr class="divider">
+            <div class="row">
+                <span class="label">Close button</span>
+                <span class="code">.slide-menu-close-button</span>
+                <span>Absolute-positioned close button (auto-bound to close the menu)</span>
+            </div>
+            <hr class="divider">
+            <div class="row">
+                <span class="label">Options</span>
+                <span class="code">.slide-menu-option-container</span>
+                <span>Flex column list of <span class="code">.slide-menu-option-item</span> elements</span>
+            </div>
+            <hr class="divider">
+            <div class="row">
+                <span class="label">Animation in</span>
+                <span class="code">.slide-menu.in</span>
+                <span>Slide-up on mobile, scale-in on desktop (0.3s cubic-bezier)</span>
+            </div>
+            <hr class="divider">
+            <div class="row">
+                <span class="label">Animation out</span>
+                <span class="code">.slide-menu.out</span>
+                <span>Slide-down on mobile, fade-up on desktop (0.2s ease)</span>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // =====================================================
+        // 1. Basic Slide Menu (string content, no backdrop)
+        // =====================================================
+        new Sadrazam.SlideMenu({
+            selector: '#trigger-basic',
+            content: () => `
+                <div class="slide-menu-header">
+                    <header>Basic Menu</header>
+                    <button class="slide-menu-close-button">&times;</button>
+                </div>
+                <div class="slide-menu-option-container">
+                    <div class="slide-menu-option-item">
+                        <a href="javascript:void(0)"><i class="ph-bold ph-house"></i> Home</a>
+                    </div>
+                    <div class="slide-menu-option-item">
+                        <a href="javascript:void(0)"><i class="ph-bold ph-compass"></i> Explore</a>
+                    </div>
+                    <div class="slide-menu-option-item">
+                        <a href="javascript:void(0)"><i class="ph-bold ph-bookmark-simple"></i> Bookmarks</a>
+                    </div>
+                </div>
+            `
+        });
+
+        // =====================================================
+        // 2. Slide Menu with Backdrop
+        // =====================================================
+        new Sadrazam.SlideMenu({
+            selector: '#trigger-backdrop',
+            backdrop: true,
+            content: () => `
+                <div class="slide-menu-header">
+                    <header>Menu with Backdrop</header>
+                    <button class="slide-menu-close-button">&times;</button>
+                </div>
+                <div class="slide-menu-option-container">
+                    <div class="slide-menu-option-item">
+                        <a href="javascript:void(0)"><i class="ph-bold ph-folder-open"></i> My Files</a>
+                    </div>
+                    <div class="slide-menu-option-item">
+                        <a href="javascript:void(0)"><i class="ph-bold ph-clock-counter-clockwise"></i> Recent</a>
+                    </div>
+                    <div class="slide-menu-option-item">
+                        <a href="javascript:void(0)"><i class="ph-bold ph-trash"></i> Trash</a>
+                    </div>
+                    <div class="slide-menu-option-item">
+                        <a href="javascript:void(0)"><i class="ph-bold ph-cloud"></i> Cloud Storage</a>
+                    </div>
+                </div>
+            `
+        });
+
+        // =====================================================
+        // 3. Open & Close Callbacks
+        // =====================================================
+        new Sadrazam.SlideMenu({
+            selector: '#trigger-callbacks',
+            backdrop: true,
+            openFunc: () => console.log('%c[SlideMenu] Menu opened!', 'color: #00b894; font-weight: bold'),
+            closeFunc: () => console.log('%c[SlideMenu] Menu closed!', 'color: #e17055; font-weight: bold'),
+            content: () => `
+                <div class="slide-menu-header">
+                    <header>Callback Demo</header>
+                    <button class="slide-menu-close-button">&times;</button>
+                </div>
+                <div class="slide-menu-option-container">
+                    <div class="slide-menu-option-item">
+                        <span><i class="ph-bold ph-info"></i> openFunc fires before the menu animates in</span>
+                    </div>
+                    <div class="slide-menu-option-item">
+                        <span><i class="ph-bold ph-info"></i> closeFunc fires after the close animation ends</span>
+                    </div>
+                    <div class="slide-menu-option-item">
+                        <span><i class="ph-bold ph-terminal"></i> Check your browser console</span>
+                    </div>
+                </div>
+            `
+        });
+
+        // =====================================================
+        // 4. DOM Element as Content
+        // =====================================================
+        new Sadrazam.SlideMenu({
+            selector: '#trigger-dom',
+            backdrop: true,
+            content: () => document.querySelector('#dom-source')
+        });
+
+        // =====================================================
+        // 5. Programmatic Close via SlideMenu.remove()
+        // =====================================================
+        new Sadrazam.SlideMenu({
+            selector: '#trigger-remove',
+            backdrop: true,
+            content: () => `
+                <div class="slide-menu-header">
+                    <header>Programmatic Close</header>
+                    <button class="slide-menu-close-button">&times;</button>
+                </div>
+                <div class="slide-menu-option-container">
+                    <div class="slide-menu-option-item">
+                        <span>Click the button below to close from inside</span>
+                    </div>
+                    <div class="slide-menu-option-item">
+                        <button class="bttn bttn--sm-rectangle bttn--danger"
+                                onclick="Sadrazam.SlideMenu.remove(this)">
+                            <i class="ph-bold ph-x-circle"></i>&nbsp; Close via SlideMenu.remove(this)
+                        </button>
+                    </div>
+                </div>
+            `
+        });
+
+        // =====================================================
+        // 6. Rich Content - Settings Panel
+        // =====================================================
+        new Sadrazam.SlideMenu({
+            selector: '#trigger-rich',
+            backdrop: true,
+            content: () => `
+                <div class="slide-menu-header">
+                    <header><i class="ph-bold ph-gear"></i> Settings</header>
+                    <button class="slide-menu-close-button">&times;</button>
+                </div>
+                <div class="slide-menu-option-container">
+                    <div class="slide-menu-option-item">
+                        <a href="javascript:void(0)"><i class="ph-bold ph-user-circle"></i> Account</a>
+                    </div>
+                    <div class="slide-menu-option-item">
+                        <a href="javascript:void(0)"><i class="ph-bold ph-lock"></i> Privacy</a>
+                    </div>
+                    <div class="slide-menu-option-item">
+                        <a href="javascript:void(0)"><i class="ph-bold ph-bell-ringing"></i> Notifications</a>
+                    </div>
+                    <div class="slide-menu-option-item">
+                        <a href="javascript:void(0)"><i class="ph-bold ph-paint-brush"></i> Appearance</a>
+                    </div>
+                    <div class="slide-menu-option-item">
+                        <a href="javascript:void(0)"><i class="ph-bold ph-translate"></i> Language</a>
+                    </div>
+                    <div class="slide-menu-option-item">
+                        <a href="javascript:void(0)"><i class="ph-bold ph-shield-check"></i> Security</a>
+                    </div>
+                </div>
+            `
+        });
+
+        // =====================================================
+        // 7. Rich Content - Share Panel
+        // =====================================================
+        new Sadrazam.SlideMenu({
+            selector: '#trigger-share',
+            backdrop: true,
+            content: () => `
+                <div class="slide-menu-header">
+                    <header><i class="ph-bold ph-share-network"></i> Share</header>
+                    <button class="slide-menu-close-button">&times;</button>
+                </div>
+                <div class="slide-menu-option-container">
+                    <div class="slide-menu-option-item">
+                        <a href="javascript:void(0)"><i class="ph-bold ph-link-simple"></i> Copy Link</a>
+                    </div>
+                    <div class="slide-menu-option-item">
+                        <a href="javascript:void(0)"><i class="ph-bold ph-envelope-simple"></i> Email</a>
+                    </div>
+                    <div class="slide-menu-option-item">
+                        <a href="javascript:void(0)"><i class="ph-bold ph-chat-circle-text"></i> Message</a>
+                    </div>
+                    <div class="slide-menu-option-item">
+                        <a href="javascript:void(0)"><i class="ph-bold ph-twitter-logo"></i> Twitter</a>
+                    </div>
+                    <div class="slide-menu-option-item">
+                        <a href="javascript:void(0)"><i class="ph-bold ph-whatsapp-logo"></i> WhatsApp</a>
+                    </div>
+                </div>
+            `
+        });
+
+        // =====================================================
+        // 8. Selector as CSS string
+        // =====================================================
+        new Sadrazam.SlideMenu({
+            selector: '#trigger-css-sel',
+            backdrop: true,
+            content: () => `
+                <div class="slide-menu-header">
+                    <header>CSS Selector</header>
+                    <button class="slide-menu-close-button">&times;</button>
+                </div>
+                <div class="slide-menu-option-container">
+                    <div class="slide-menu-option-item">
+                        <span>Opened via <code>selector: '#trigger-css-sel'</code></span>
+                    </div>
+                </div>
+            `
+        });
+
+        // =====================================================
+        // 9. Selector as Element reference
+        // =====================================================
+        new Sadrazam.SlideMenu({
+            selector: document.getElementById('trigger-elem-ref'),
+            backdrop: true,
+            content: () => `
+                <div class="slide-menu-header">
+                    <header>Element Reference</header>
+                    <button class="slide-menu-close-button">&times;</button>
+                </div>
+                <div class="slide-menu-option-container">
+                    <div class="slide-menu-option-item">
+                        <span>Opened via <code>selector: document.getElementById('trigger-elem-ref')</code></span>
+                    </div>
+                </div>
+            `
+        });
+    </script>
+</body>
+
+</html>

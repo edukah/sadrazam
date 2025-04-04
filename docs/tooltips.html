@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sadrazam – Tooltip Showcase</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/bold/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/light/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <script type="text/javascript" src="assets/js/script.js"></script>
+    <link rel="stylesheet" href="assets/sadrazam.min.css">
+    <script type="text/javascript" src="assets/sadrazam.min.js"></script>
+    <style>
+        .demo-target {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 10px 20px;
+            border: 1px dashed var(--border-color);
+            border-radius: 8px;
+            background: var(--bg-subtle);
+            color: var(--text-color);
+            font-size: 0.85rem;
+            cursor: default;
+            user-select: none;
+            transition: border-color 0.2s;
+        }
+
+        .demo-target:hover {
+            border-color: var(--theme-color-primary);
+        }
+
+        .dark-section .demo-target {
+            background: #3d3d3d;
+            border-color: #636e72;
+            color: #dfe6e9;
+        }
+
+        .dark-section .demo-target:hover {
+            border-color: #74b9ff;
+        }
+    </style>
+</head>
+
+<body>
+<script>if(localStorage.getItem("dark-mode"))document.body.classList.add("dark-mode")</script>
+    <header>
+        <nav class="top-navbar">
+            <div class="nav-container">
+                <a href="index.html" class="nav-logo">Sadrazam</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li>
+                        <a href="javascript:void(0)" onclick="openPopup(); return false;">Examples</a>
+                        <div class="navi-popup-overlay" id="examplesPopupOverlay"></div>
+                        <div class="navi-popup" id="examplesPopup">
+                            <h3>Examples</h3>
+                            <ul>
+                                <li><a href="buttons.html">Button</a></li>
+                                <li><a href="forms.html">Form</a></li>
+                                <li><a href="form-patterns.html">Form Patterns</a></li>
+                                <li><a href="links.html">Link</a></li>
+                                <li><a href="switches.html">Switch</a></li>
+                                <li><a href="autocomplete.html">Autocomplete</a></li>
+                                <li><a href="backdrop.html">Backdrop</a></li>
+                                <li><a href="hovermenu.html">Hovermenu</a></li>
+                                <li><a href="infinite-scroll.html">Infinite Scroll</a></li>
+                                <li><a href="snackbar.html">Snackbar</a></li>
+                                <li><a href="modals.html">Modal</a></li>
+                                <li><a href="popovers.html">Popover</a></li>
+                                <li><a href="slide-menu.html">Slide Menu</a></li>
+                                <li><a href="spinners.html">Spinner</a></li>
+                                <li><a href="tabs.html">Tabs</a></li>
+                                <li><a href="tooltips.html">Tooltip</a></li>
+                                <li><a href="form-validation.html">Form Validation</a></li>
+                                <li><a href="autosize-textarea.html">Autosize Textarea</a></li>
+                                <li><a href="autosize-select.html">Autosize Select</a></li>
+                                <li><a href="ajax.html">Ajax</a></li>
+                                <li><a href="grid.html">Grid</a></li>
+                                <li><a href="spacing.html">Spacing</a></li>
+                                <li><a href="colors.html">Colors</a></li>
+                                <li><a href="typography.html">Typography</a></li>
+                            </ul>
+                            <button class="close-popup" onclick="closePopup()">&#10005;</button>
+                        </div>
+                    </li>
+                    <li><a href="https://github.com/edukah/sadrazam" target="_blank">GitHub</a></li>
+                </ul>
+                <div class="dark-mode-button-container">
+                    <div class="mode-toggle-switch" onclick="toggleMode()"></div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+
+        <h1>Sadrazam – Tooltip Showcase</h1>
+        <p class="subtitle">Positions, data-attribute configuration, touch support, and JavaScript API</p>
+
+        <!-- ==================== PLACEMENT POSITIONS ==================== -->
+        <div class="section">
+            <h2 class="section-title">Placement Positions</h2>
+            <p class="section-desc">
+                Set the tooltip direction with <span class="code">data-placement</span>.
+                Default is <span class="code">top</span> when the attribute is omitted.
+                The tooltip automatically flips if it would overflow the viewport.
+            </p>
+
+            <div class="row">
+                <span class="label">Top (default)</span>
+                <span class="demo-target"
+                      data-toggle="tooltip"
+                      title="Tooltip on top"
+                      data-placement="top">
+                    <i class="ph-bold ph-arrow-up"></i> Hover me
+                </span>
+                <span class="code">data-placement="top"</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Bottom</span>
+                <span class="demo-target"
+                      data-toggle="tooltip"
+                      title="Tooltip on bottom"
+                      data-placement="bottom">
+                    <i class="ph-bold ph-arrow-down"></i> Hover me
+                </span>
+                <span class="code">data-placement="bottom"</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Left</span>
+                <span class="demo-target"
+                      data-toggle="tooltip"
+                      title="Tooltip on left"
+                      data-placement="left">
+                    <i class="ph-bold ph-arrow-left"></i> Hover me
+                </span>
+                <span class="code">data-placement="left"</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Right</span>
+                <span class="demo-target"
+                      data-toggle="tooltip"
+                      title="Tooltip on right"
+                      data-placement="right">
+                    <i class="ph-bold ph-arrow-right"></i> Hover me
+                </span>
+                <span class="code">data-placement="right"</span>
+            </div>
+
+            <div class="code-block">
+                <span class="comment">&lt;!-- Minimal usage: just add data-toggle and title --&gt;</span><br>
+                &lt;<span class="tag">span</span> <span class="attr">data-toggle</span>=<span class="val">"tooltip"</span> <span class="attr">title</span>=<span class="val">"Hello!"</span>&gt;Hover me&lt;/<span class="tag">span</span>&gt;<br><br>
+                <span class="comment">&lt;!-- With explicit placement --&gt;</span><br>
+                &lt;<span class="tag">button</span> <span class="attr">data-toggle</span>=<span class="val">"tooltip"</span> <span class="attr">title</span>=<span class="val">"Save changes"</span> <span class="attr">data-placement</span>=<span class="val">"right"</span>&gt;Save&lt;/<span class="tag">button</span>&gt;
+            </div>
+        </div>
+
+        <!-- ==================== DEFAULT PLACEMENT ==================== -->
+        <div class="section">
+            <h2 class="section-title">Default Placement (No data-placement)</h2>
+            <p class="section-desc">
+                When <span class="code">data-placement</span> is omitted, the tooltip defaults to
+                <span class="code">top</span>. This is the most common usage pattern.
+            </p>
+
+            <div class="row">
+                <span class="label">No attribute</span>
+                <span class="demo-target"
+                      data-toggle="tooltip"
+                      title="I default to top!">
+                    <i class="ph-bold ph-info"></i> No data-placement
+                </span>
+                <span class="code">defaults to top</span>
+            </div>
+        </div>
+
+        <!-- ==================== ON BUTTONS ==================== -->
+        <div class="section">
+            <h2 class="section-title">Tooltips on Buttons</h2>
+            <p class="section-desc">
+                Tooltips work on any element. Here they are attached to
+                <span class="code">.bttn</span> components in different sizes and styles.
+            </p>
+
+            <div class="row">
+                <span class="label">Primary</span>
+                <button class="bttn bttn--md-rectangle bttn--pri"
+                        data-toggle="tooltip"
+                        title="Send the message"
+                        data-placement="top">
+                    <i class="ph-bold ph-paper-plane-tilt"></i>&nbsp; Send
+                </button>
+                <span class="code">bttn--pri + tooltip top</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Danger</span>
+                <button class="bttn bttn--md-rectangle bttn--danger"
+                        data-toggle="tooltip"
+                        title="Permanently delete this item"
+                        data-placement="right">
+                    <i class="ph-bold ph-trash"></i>&nbsp; Delete
+                </button>
+                <span class="code">bttn--danger + tooltip right</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Icon Only</span>
+                <button class="bttn bttn--md bttn--sec"
+                        data-toggle="tooltip"
+                        title="Add to favorites"
+                        data-placement="bottom">
+                    <i class="ph-bold ph-heart"></i>
+                </button>
+                <button class="bttn bttn--md bttn--neutral"
+                        data-toggle="tooltip"
+                        title="Settings"
+                        data-placement="bottom">
+                    <i class="ph-bold ph-gear"></i>
+                </button>
+                <button class="bttn bttn--md bttn--pri"
+                        data-toggle="tooltip"
+                        title="Copy to clipboard"
+                        data-placement="bottom">
+                    <i class="ph-bold ph-copy"></i>
+                </button>
+                <span class="code">Icon buttons + tooltip bottom</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Ghost</span>
+                <button class="bttn bttn--sm-rectangle bttn--ghost"
+                        data-toggle="tooltip"
+                        title="Cancel and go back"
+                        data-placement="left">
+                    <i class="ph-bold ph-x"></i>&nbsp; Cancel
+                </button>
+                <span class="code">bttn--ghost + tooltip left</span>
+            </div>
+        </div>
+
+        <!-- ==================== LONG TEXT ==================== -->
+        <div class="section">
+            <h2 class="section-title">Long Text Content</h2>
+            <p class="section-desc">
+                Tooltips support longer text content. The maximum width is constrained to
+                <span class="code">320px</span> and text wraps via
+                <span class="code">white-space: break-spaces</span>.
+            </p>
+
+            <div class="row">
+                <span class="label">Long text</span>
+                <span class="demo-target"
+                      data-toggle="tooltip"
+                      title="This is a much longer tooltip message that demonstrates how the component handles multi-line content gracefully with automatic text wrapping."
+                      data-placement="top">
+                    <i class="ph-light ph-article"></i> Hover for a long tooltip
+                </span>
+            </div>
+
+            <div class="row">
+                <span class="label">Short text</span>
+                <span class="demo-target"
+                      data-toggle="tooltip"
+                      title="OK"
+                      data-placement="top">
+                    <i class="ph-light ph-check"></i> Hover for a short tooltip
+                </span>
+            </div>
+        </div>
+
+        <!-- ==================== DATA ATTRIBUTES REFERENCE ==================== -->
+        <div class="section">
+            <h2 class="section-title">Data Attributes Reference</h2>
+            <p class="section-desc">
+                All configuration is done via HTML attributes. No JavaScript is required
+                beyond calling <span class="code">Tooltip.listen()</span> once on page load.
+            </p>
+
+            <div class="row">
+                <span class="label">data-toggle</span>
+                <span class="code">data-toggle="tooltip"</span>
+                <span style="font-size: 0.8rem; color: var(--text-muted);">Required. Marks the element as a tooltip trigger.</span>
+            </div>
+
+            <div class="row">
+                <span class="label">title</span>
+                <span class="code">title="Your text"</span>
+                <span style="font-size: 0.8rem; color: var(--text-muted);">Required. The text displayed inside the tooltip.</span>
+            </div>
+
+            <div class="row">
+                <span class="label">data-placement</span>
+                <span class="code">data-placement="top | right | bottom | left"</span>
+                <span style="font-size: 0.8rem; color: var(--text-muted);">Optional. Defaults to <b>top</b>.</span>
+            </div>
+
+            <hr class="divider">
+
+            <p class="section-desc" style="margin-top: 0.5rem;">
+                The <span class="code">title</span> attribute is copied to
+                <span class="code">data-original-title</span> at initialization
+                and the native <span class="code">title</span> is cleared to prevent
+                the browser's default tooltip from showing.
+            </p>
+
+            <div class="code-block">
+                <span class="comment">&lt;!-- Before Tooltip.listen() --&gt;</span><br>
+                &lt;<span class="tag">span</span> <span class="attr">data-toggle</span>=<span class="val">"tooltip"</span> <span class="attr">title</span>=<span class="val">"Hello"</span>&gt;...&lt;/<span class="tag">span</span>&gt;<br><br>
+                <span class="comment">&lt;!-- After Tooltip.listen() processes it --&gt;</span><br>
+                &lt;<span class="tag">span</span> <span class="attr">data-toggle</span>=<span class="val">"tooltip"</span> <span class="attr">title</span>=<span class="val">""</span> <span class="attr">data-original-title</span>=<span class="val">"Hello"</span>&gt;...&lt;/<span class="tag">span</span>&gt;
+            </div>
+        </div>
+
+        <!-- ==================== JS API ==================== -->
+        <div class="section">
+            <h2 class="section-title">JavaScript API</h2>
+            <p class="section-desc">
+                The library is exposed as the UMD global <span class="code">Sadrazam</span>.
+                The Tooltip class is available at <span class="code">Sadrazam.Tooltip</span>.
+            </p>
+
+            <div class="row">
+                <span class="label">Static: listen()</span>
+                <span style="font-size: 0.8rem; color: var(--text-muted);">
+                    Scans the DOM for all <span class="code">[data-toggle="tooltip"]</span> elements
+                    and registers lazy initialization on first hover or touch.
+                </span>
+            </div>
+
+            <div class="row">
+                <span class="label">Static: getInstance()</span>
+                <span style="font-size: 0.8rem; color: var(--text-muted);">
+                    <span class="code">Tooltip.getInstance(element)</span> &mdash;
+                    Returns the Tooltip instance attached to the given element, or <span class="code">undefined</span>.
+                </span>
+            </div>
+
+            <div class="row">
+                <span class="label">Static: help()</span>
+                <span style="font-size: 0.8rem; color: var(--text-muted);">
+                    Logs available configuration options to the browser console.
+                </span>
+            </div>
+
+            <div class="row">
+                <span class="label">Constructor</span>
+                <span style="font-size: 0.8rem; color: var(--text-muted);">
+                    <span class="code">new Tooltip(element)</span> &mdash;
+                    Manually creates and attaches a tooltip to a specific DOM element.
+                </span>
+            </div>
+
+            <div class="row">
+                <span class="label">.toggle()</span>
+                <span style="font-size: 0.8rem; color: var(--text-muted);">
+                    Programmatically show or hide the tooltip.
+                </span>
+            </div>
+
+            <div class="row">
+                <span class="label">.destroy()</span>
+                <span style="font-size: 0.8rem; color: var(--text-muted);">
+                    Fully removes the tooltip: disconnects observer, removes DOM element,
+                    unbinds all event listeners, and clears the instance reference.
+                </span>
+            </div>
+
+            <hr class="divider">
+
+            <div class="code-block">
+                <span class="comment">// 1. Declarative: Initialize all tooltips on the page</span><br>
+                Sadrazam.Tooltip.listen();<br><br>
+                <span class="comment">// 2. Imperative: Attach tooltip to a specific element</span><br>
+                const el = document.querySelector('#my-button');<br>
+                new Sadrazam.Tooltip(el);<br><br>
+                <span class="comment">// 3. Get an existing instance</span><br>
+                const instance = Sadrazam.Tooltip.getInstance(el);<br>
+                instance.toggle();<br><br>
+                <span class="comment">// 4. Full cleanup</span><br>
+                instance.destroy();<br><br>
+                <span class="comment">// 5. Print help to the console</span><br>
+                Sadrazam.Tooltip.help();
+            </div>
+        </div>
+
+        <!-- ==================== IMPERATIVE JS API DEMO ==================== -->
+        <div class="section">
+            <h2 class="section-title">Imperative API Demo</h2>
+            <p class="section-desc">
+                The button below is not declared with <span class="code">data-toggle="tooltip"</span>.
+                Instead, its tooltip is attached programmatically via <span class="code">new Sadrazam.Tooltip(el)</span>
+                when you click "Attach Tooltip".
+            </p>
+
+            <div class="row">
+                <span class="label">Target</span>
+                <button id="js-api-target"
+                        class="bttn bttn--md-rectangle bttn--neutral"
+                        title="Attached via JS API!"
+                        data-placement="right"
+                        data-original-title="Attached via JS API!">
+                    <i class="ph-bold ph-code"></i>&nbsp; JS Target
+                </button>
+                <button class="bttn bttn--sm-rectangle bttn--pri" onclick="attachTooltipDemo()">
+                    Attach Tooltip
+                </button>
+                <span id="js-api-status" style="font-size: 0.8rem; color: #b2bec3;">Not attached yet</span>
+            </div>
+
+            <div class="code-block">
+                <span class="comment">// Element must have title and data-original-title set</span><br>
+                const target = document.querySelector('#js-api-target');<br>
+                new Sadrazam.Tooltip(target);<br>
+                <span class="comment">// Now hover the element to see the tooltip</span>
+            </div>
+        </div>
+
+        <!-- ==================== AUTO-FLIP BEHAVIOR ==================== -->
+        <div class="section">
+            <h2 class="section-title">Smart Auto-Flip</h2>
+            <p class="section-desc">
+                When a tooltip would overflow the viewport, the positioning engine automatically
+                flips to the opposite side &mdash; both horizontally and vertically.
+                Try hovering the elements near the edges of the page.
+                For example, a <span class="code">right</span> tooltip near the right edge flips to
+                <span class="code">left</span>, and a <span class="code">top</span> tooltip near
+                the top edge flips to <span class="code">bottom</span>.
+            </p>
+
+            <div class="row" style="justify-content: flex-end;">
+                <span class="demo-target"
+                      data-toggle="tooltip"
+                      title="I might flip to the left!"
+                      data-placement="right">
+                    <i class="ph-bold ph-arrows-horizontal"></i> Near right edge
+                </span>
+                <span class="code">data-placement="right" (may flip)</span>
+            </div>
+
+            <div class="row" style="justify-content: flex-start;">
+                <span class="demo-target"
+                      data-toggle="tooltip"
+                      title="I might flip to the right!"
+                      data-placement="left">
+                    <i class="ph-bold ph-arrows-horizontal"></i> Near left edge
+                </span>
+                <span class="code">data-placement="left" (may flip)</span>
+            </div>
+        </div>
+
+        <!-- ==================== MOBILE / TOUCH SUPPORT ==================== -->
+        <div class="section">
+            <h2 class="section-title">Mobile &amp; Touch Support</h2>
+            <p class="section-desc">
+                Tooltips work on both mouse and touch devices. On touch screens, tapping the trigger
+                element toggles the tooltip. Tapping anywhere outside dismisses it.
+                Emulated mouse events after touch are automatically suppressed to prevent double-firing.
+            </p>
+
+            <div class="row">
+                <span class="label">Touch</span>
+                <span class="demo-target"
+                      data-toggle="tooltip"
+                      title="Tap to show, tap outside to dismiss"
+                      data-placement="top">
+                    <i class="ph-bold ph-hand-tap"></i> Tap me (touch devices)
+                </span>
+                <span class="code">touchstart toggles tooltip</span>
+            </div>
+
+            <div class="code-block">
+                <span class="comment">// Tooltip.listen() registers both mouseover and touchstart handlers.</span><br>
+                <span class="comment">// No additional configuration is needed for touch support.</span><br>
+                Sadrazam.Tooltip.listen();
+            </div>
+        </div>
+
+        <!-- ==================== MUTATION OBSERVER ==================== -->
+        <div class="section">
+            <h2 class="section-title">Lifecycle &amp; Self-Cleanup</h2>
+            <p class="section-desc">
+                Each tooltip instance uses a <span class="code">MutationObserver</span> to monitor
+                the DOM. If the trigger element is removed from the document, the tooltip
+                automatically cleans up its DOM node, event listeners, and observer &mdash; preventing
+                memory leaks with no manual teardown required.
+            </p>
+
+            <div class="row">
+                <span class="label">Dynamic Element</span>
+                <span id="removable-target"
+                      class="demo-target"
+                      data-toggle="tooltip"
+                      title="I will be removed!"
+                      data-placement="top">
+                    <i class="ph-bold ph-trash-simple"></i> Removable Element
+                </span>
+                <button class="bttn bttn--sm-rectangle bttn--danger" onclick="removeAndRestore()">
+                    Remove &amp; Restore
+                </button>
+            </div>
+
+            <div class="code-block">
+                <span class="comment">// When the reference element is removed from the DOM,</span><br>
+                <span class="comment">// the tooltip instance self-destructs automatically.</span><br>
+                element.remove(); <span class="comment">// tooltip cleans up via MutationObserver</span>
+            </div>
+        </div>
+
+        <!-- ==================== DARK BACKGROUND ==================== -->
+        <div class="section dark-section">
+            <h2 class="section-title">Dark Background</h2>
+            <p class="section-desc">
+                Tooltips render with the same dark background (<span class="code">--color-grey-850--f</span>)
+                regardless of the surrounding context, ensuring consistent readability.
+            </p>
+
+            <div class="row">
+                <span class="label">Top</span>
+                <span class="demo-target"
+                      data-toggle="tooltip"
+                      title="Still visible on dark"
+                      data-placement="top">
+                    <i class="ph-light ph-sun"></i> Hover me
+                </span>
+            </div>
+
+            <div class="row">
+                <span class="label">Buttons</span>
+                <button class="bttn bttn--md bttn--pri"
+                        data-toggle="tooltip"
+                        title="Primary action"
+                        data-placement="top">
+                    <i class="ph-bold ph-paper-plane-tilt"></i>
+                </button>
+                <button class="bttn bttn--md bttn--sec"
+                        data-toggle="tooltip"
+                        title="Secondary action"
+                        data-placement="top">
+                    <i class="ph-bold ph-star"></i>
+                </button>
+                <button class="bttn bttn--md-rectangle bttn--ghost" style="color: #dfe6e9;"
+                        data-toggle="tooltip"
+                        title="Close this panel"
+                        data-placement="bottom">
+                    <i class="ph-bold ph-x"></i>&nbsp; Close
+                </button>
+            </div>
+        </div>
+
+        <!-- ==================== ALL FOUR DIRECTIONS SIDE BY SIDE ==================== -->
+        <div class="section">
+            <h2 class="section-title">All Four Positions</h2>
+            <p class="section-desc">
+                A quick visual comparison of all four placement values side by side.
+                Hover each to see the tooltip appear in the indicated direction.
+            </p>
+
+            <div class="row" style="justify-content: center; gap: 20px; padding: 30px 0;">
+                <span class="demo-target"
+                      data-toggle="tooltip"
+                      title="Top placement"
+                      data-placement="top">
+                    <i class="ph-fill ph-caret-up"></i> Top
+                </span>
+                <span class="demo-target"
+                      data-toggle="tooltip"
+                      title="Right placement"
+                      data-placement="right">
+                    Right <i class="ph-fill ph-caret-right"></i>
+                </span>
+                <span class="demo-target"
+                      data-toggle="tooltip"
+                      title="Bottom placement"
+                      data-placement="bottom">
+                    <i class="ph-fill ph-caret-down"></i> Bottom
+                </span>
+                <span class="demo-target"
+                      data-toggle="tooltip"
+                      title="Left placement"
+                      data-placement="left">
+                    <i class="ph-fill ph-caret-left"></i> Left
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize all declarative tooltips on the page
+        Sadrazam.Tooltip.listen();
+
+        // Imperative API demo: attach tooltip to an element without data-toggle
+        function attachTooltipDemo() {
+            const target = document.querySelector('#js-api-target');
+            if (target.__tooltip) {
+                document.querySelector('#js-api-status').textContent = 'Already attached!';
+                return;
+            }
+            new Sadrazam.Tooltip(target);
+            document.querySelector('#js-api-status').textContent = 'Attached! Now hover the target.';
+            document.querySelector('#js-api-status').style.color = '#00b894';
+        }
+
+        // Remove & Restore demo for lifecycle / self-cleanup section
+        function removeAndRestore() {
+            const container = document.querySelector('#removable-target');
+            if (!container) return;
+
+            const parent = container.parentElement;
+            const nextSibling = container.nextElementSibling;
+
+            // Remove the element (tooltip self-destructs via MutationObserver)
+            container.remove();
+
+            // Restore after 1.5s so the demo can be repeated
+            setTimeout(() => {
+                parent.insertBefore(container, nextSibling);
+                // Re-register so a new tooltip can be created on next hover
+                Sadrazam.Tooltip.listen();
+            }, 1500);
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sadrazam – Backdrop Showcase</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/bold/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/light/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <script type="text/javascript" src="assets/js/script.js"></script>
+    <link rel="stylesheet" href="assets/sadrazam.min.css">
+    <script type="text/javascript" src="assets/sadrazam.min.js"></script>
+    <style>
+        .demo-btn--primary {
+            background: #0984e3;
+            color: #fff;
+            border-color: #0984e3;
+        }
+
+        .demo-btn--primary:hover {
+            background: #0873c4;
+        }
+
+        .demo-btn--danger {
+            background: #d63031;
+            color: #fff;
+            border-color: #d63031;
+        }
+
+        .demo-btn--danger:hover {
+            background: #c0292a;
+        }
+
+        .demo-btn--success {
+            background: #00b894;
+            color: #fff;
+            border-color: #00b894;
+        }
+
+        .demo-btn--success:hover {
+            background: #00a381;
+        }
+
+        .status-bar {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            background: var(--bg-subtle);
+            color: var(--text-muted);
+            margin-left: 8px;
+            transition: all 0.3s;
+        }
+
+        .status-bar.active {
+            background: #00b894;
+            color: #fff;
+        }
+
+        .stack-indicator {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+            margin-top: 8px;
+        }
+
+        .stack-chip {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            background: var(--bg-subtle);
+            color: var(--text-muted);
+            transition: all 0.3s;
+        }
+
+        .stack-chip.active {
+            background: var(--theme-color-primary);
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+<script>if(localStorage.getItem("dark-mode"))document.body.classList.add("dark-mode")</script>
+    <header>
+        <nav class="top-navbar">
+            <div class="nav-container">
+                <a href="index.html" class="nav-logo">Sadrazam</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li>
+                        <a href="javascript:void(0)" onclick="openPopup(); return false;">Examples</a>
+                        <div class="navi-popup-overlay" id="examplesPopupOverlay"></div>
+                        <div class="navi-popup" id="examplesPopup">
+                            <h3>Examples</h3>
+                            <ul>
+                                <li><a href="buttons.html">Button</a></li>
+                                <li><a href="forms.html">Form</a></li>
+                                <li><a href="form-patterns.html">Form Patterns</a></li>
+                                <li><a href="links.html">Link</a></li>
+                                <li><a href="switches.html">Switch</a></li>
+                                <li><a href="autocomplete.html">Autocomplete</a></li>
+                                <li><a href="backdrop.html">Backdrop</a></li>
+                                <li><a href="hovermenu.html">Hovermenu</a></li>
+                                <li><a href="infinite-scroll.html">Infinite Scroll</a></li>
+                                <li><a href="snackbar.html">Snackbar</a></li>
+                                <li><a href="modals.html">Modal</a></li>
+                                <li><a href="popovers.html">Popover</a></li>
+                                <li><a href="slide-menu.html">Slide Menu</a></li>
+                                <li><a href="spinners.html">Spinner</a></li>
+                                <li><a href="tabs.html">Tabs</a></li>
+                                <li><a href="tooltips.html">Tooltip</a></li>
+                                <li><a href="form-validation.html">Form Validation</a></li>
+                                <li><a href="autosize-textarea.html">Autosize Textarea</a></li>
+                                <li><a href="autosize-select.html">Autosize Select</a></li>
+                                <li><a href="ajax.html">Ajax</a></li>
+                                <li><a href="grid.html">Grid</a></li>
+                                <li><a href="spacing.html">Spacing</a></li>
+                                <li><a href="colors.html">Colors</a></li>
+                                <li><a href="typography.html">Typography</a></li>
+                            </ul>
+                            <button class="close-popup" onclick="closePopup()">&#10005;</button>
+                        </div>
+                    </li>
+                    <li><a href="https://github.com/edukah/sadrazam" target="_blank">GitHub</a></li>
+                </ul>
+                <div class="dark-mode-button-container">
+                    <div class="mode-toggle-switch" onclick="toggleMode()"></div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+
+        <h1>Sadrazam – Backdrop Showcase</h1>
+        <p class="subtitle">Backdrop overlay: show, hide, click-to-close, and z-index stacking demos</p>
+
+        <!-- ==================== BASIC SHOW / HIDE ==================== -->
+        <div class="section">
+            <h2 class="section-title">Basic Show / Hide</h2>
+            <p class="section-desc">
+                Use <span class="code">Backdrop.insert()</span> to show the backdrop and
+                <span class="code">Backdrop.remove(ownerId)</span> to hide it.
+                The method returns an <span class="code">ownerId</span> string used to remove that specific request.
+            </p>
+
+            <div class="row">
+                <span class="label">Toggle</span>
+                <button class="demo-btn demo-btn--primary" id="btnBasicShow">
+                    <i class="ph-bold ph-eye"></i>&nbsp; Show Backdrop
+                </button>
+                <button class="demo-btn demo-btn--danger" id="btnBasicHide" disabled>
+                    <i class="ph-bold ph-eye-slash"></i>&nbsp; Hide Backdrop
+                </button>
+                <span class="status-bar" id="statusBasic">Hidden</span>
+            </div>
+
+            <div class="code-block">
+                <span class="cmt">// Show the backdrop</span><br>
+                <span class="kw">const</span> ownerId = sadrazam.<span class="fn">Backdrop.insert</span>();<br><br>
+                <span class="cmt">// Hide it by ownerId</span><br>
+                sadrazam.<span class="fn">Backdrop.remove</span>(ownerId);
+            </div>
+        </div>
+
+        <!-- ==================== CLICK TO CLOSE ==================== -->
+        <div class="section">
+            <h2 class="section-title">Click to Close</h2>
+            <p class="section-desc">
+                Pass an <span class="code">onClick</span> callback in the options object.
+                When the user clicks the backdrop, the callback fires &mdash; typically used to close the overlay.
+            </p>
+
+            <div class="row">
+                <span class="label">Open</span>
+                <button class="demo-btn demo-btn--primary" id="btnClickClose">
+                    <i class="ph-bold ph-cursor-click"></i>&nbsp; Show (click backdrop to close)
+                </button>
+                <span class="status-bar" id="statusClick">Hidden</span>
+            </div>
+
+            <div class="code-block">
+                <span class="kw">let</span> id;<br>
+                id = sadrazam.<span class="fn">Backdrop.insert</span>({<br>
+                &nbsp;&nbsp;<span class="str">onClick</span>: () => {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;sadrazam.<span class="fn">Backdrop.remove</span>(id);<br>
+                &nbsp;&nbsp;}<br>
+                });
+            </div>
+        </div>
+
+        <!-- ==================== CUSTOM Z-INDEX ==================== -->
+        <div class="section">
+            <h2 class="section-title">Custom z-index Variable</h2>
+            <p class="section-desc">
+                Override the CSS custom property used for <span class="code">z-index</span> via the
+                <span class="code">zIndexVar</span> option. Default is
+                <span class="code">--z-dropdown-backdrop</span>.
+                You can also pass <span class="code">stackLevel</span> to set <span class="code">--z-modal-stack-level</span>.
+            </p>
+
+            <div class="row">
+                <span class="label">Dropdown z</span>
+                <button class="demo-btn demo-btn--primary" id="btnZDefault">
+                    <i class="ph-bold ph-stack"></i>&nbsp; Default z-index
+                </button>
+                <span class="code">--z-dropdown-backdrop</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Overlay z</span>
+                <button class="demo-btn demo-btn--success" id="btnZOverlay">
+                    <i class="ph-bold ph-stack"></i>&nbsp; Overlay z-index
+                </button>
+                <span class="code">--z-overlay-backdrop</span>
+            </div>
+
+            <div class="row">
+                <button class="demo-btn demo-btn--danger" id="btnZClose" disabled>
+                    <i class="ph-bold ph-x"></i>&nbsp; Remove All
+                </button>
+                <span class="status-bar" id="statusZ">No active backdrops</span>
+            </div>
+
+            <div class="code-block">
+                sadrazam.<span class="fn">Backdrop.insert</span>({<br>
+                &nbsp;&nbsp;<span class="str">zIndexVar</span>: <span class="str">'--z-overlay-backdrop'</span>,<br>
+                &nbsp;&nbsp;<span class="str">stackLevel</span>: 2<br>
+                });
+            </div>
+        </div>
+
+        <!-- ==================== STACK DEMO ==================== -->
+        <div class="section">
+            <h2 class="section-title">Stack Behavior</h2>
+            <p class="section-desc">
+                Backdrop maintains an internal stack. Each <span class="code">insert()</span> pushes an owner;
+                each <span class="code">remove()</span> pops or filters it out. The backdrop stays visible until the
+                stack is empty. The topmost owner's <span class="code">onClick</span> is the one that fires on click.
+            </p>
+
+            <div class="row">
+                <span class="label">Push</span>
+                <button class="demo-btn demo-btn--primary" id="btnStackPush">
+                    <i class="ph-bold ph-plus"></i>&nbsp; Push Owner
+                </button>
+                <button class="demo-btn demo-btn--danger" id="btnStackPop" disabled>
+                    <i class="ph-bold ph-minus"></i>&nbsp; Pop Top Owner
+                </button>
+                <button class="demo-btn" id="btnStackClear" disabled>
+                    <i class="ph-bold ph-trash"></i>&nbsp; Clear All
+                </button>
+            </div>
+
+            <div class="stack-indicator" id="stackIndicator">
+                <span class="label">Stack:</span>
+                <span style="font-size: 0.8rem; color: var(--text-muted);">(empty)</span>
+            </div>
+
+            <hr class="divider">
+
+            <p class="section-desc">
+                Clicking the backdrop itself removes the topmost owner (via its <span class="code">onClick</span>).
+                Push multiple owners, then try clicking the backdrop repeatedly to watch the stack drain.
+            </p>
+
+            <div class="code-block">
+                <span class="cmt">// Push multiple owners onto the stack</span><br>
+                <span class="kw">const</span> id1 = sadrazam.<span class="fn">Backdrop.insert</span>({ <span class="str">onClick</span>: () => Sadrazam.Backdrop.remove(id1) });<br>
+                <span class="kw">const</span> id2 = sadrazam.<span class="fn">Backdrop.insert</span>({ <span class="str">onClick</span>: () => Sadrazam.Backdrop.remove(id2) });<br><br>
+                <span class="cmt">// Remove without ownerId pops the topmost entry</span><br>
+                sadrazam.<span class="fn">Backdrop.remove</span>();
+            </div>
+        </div>
+
+        <!-- ==================== OWNER ID ==================== -->
+        <div class="section">
+            <h2 class="section-title">Custom Owner ID</h2>
+            <p class="section-desc">
+                You can supply your own <span class="code">ownerId</span> to prevent duplicate entries.
+                Calling <span class="code">insert()</span> with the same <span class="code">ownerId</span> will not
+                create a second stack entry.
+            </p>
+
+            <div class="row">
+                <span class="label">Fixed ID</span>
+                <button class="demo-btn demo-btn--primary" id="btnFixedInsert">
+                    <i class="ph-bold ph-identification-card"></i>&nbsp; Insert "my-sidebar"
+                </button>
+                <button class="demo-btn demo-btn--danger" id="btnFixedRemove" disabled>
+                    <i class="ph-bold ph-x"></i>&nbsp; Remove "my-sidebar"
+                </button>
+            </div>
+
+            <div class="code-block">
+                <span class="cmt">// Will not duplicate if called twice</span><br>
+                sadrazam.<span class="fn">Backdrop.insert</span>({<br>
+                &nbsp;&nbsp;<span class="str">ownerId</span>: <span class="str">'my-sidebar'</span>,<br>
+                &nbsp;&nbsp;<span class="str">onClick</span>: () => Sadrazam.Backdrop.remove(<span class="str">'my-sidebar'</span>)<br>
+                });<br><br>
+                <span class="cmt">// Remove by the exact ownerId</span><br>
+                sadrazam.<span class="fn">Backdrop.remove</span>(<span class="str">'my-sidebar'</span>);
+            </div>
+        </div>
+
+        <!-- ==================== API REFERENCE ==================== -->
+        <div class="section">
+            <h2 class="section-title">API Reference</h2>
+            <p class="section-desc">
+                The Backdrop module is a singleton (static class). All methods are called on
+                <span class="code">Sadrazam.Backdrop</span> directly.
+            </p>
+
+            <div class="row">
+                <span class="label">insert()</span>
+                <span style="font-size: 0.82rem;">
+                    Shows or updates the backdrop. Returns an <span class="code">ownerId</span> string.
+                </span>
+            </div>
+
+            <div class="row">
+                <span class="label">Options</span>
+                <span style="font-size: 0.82rem;">
+                    <span class="code">ownerId</span> &middot;
+                    <span class="code">zIndexVar</span> &middot;
+                    <span class="code">stackLevel</span> &middot;
+                    <span class="code">onClick</span>
+                </span>
+            </div>
+
+            <hr class="divider">
+
+            <div class="row">
+                <span class="label">remove()</span>
+                <span style="font-size: 0.82rem;">
+                    Removes an owner from the stack. Pass <span class="code">ownerId</span> to target a specific entry,
+                    or omit it to pop the topmost one.
+                </span>
+            </div>
+
+            <hr class="divider">
+
+            <div class="row">
+                <span class="label">help()</span>
+                <span style="font-size: 0.82rem;">
+                    Prints available methods and descriptions to the browser console.
+                </span>
+            </div>
+
+            <div class="row">
+                <button class="demo-btn" id="btnHelp">
+                    <i class="ph-bold ph-terminal"></i>&nbsp; Run Backdrop.help() (check console)
+                </button>
+            </div>
+
+            <hr class="divider">
+
+            <div class="row">
+                <span class="label">CSS Class</span>
+                <span style="font-size: 0.82rem;">
+                    The backdrop element uses <span class="code">.backdrop</span> and toggles
+                    <span class="code">.is-visible</span> for fade-in/out transitions (opacity 0.3s).
+                </span>
+            </div>
+
+            <div class="row">
+                <span class="label">CSS Vars</span>
+                <span style="font-size: 0.82rem;">
+                    <span class="code">--backdrop-background</span> &middot;
+                    <span class="code">--backdrop-blur</span> &middot;
+                    <span class="code">--z-dropdown-backdrop</span> &middot;
+                    <span class="code">--z-overlay-backdrop</span>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const Backdrop = Sadrazam.Backdrop;
+
+        /* ============================================================
+           1) Basic Show / Hide
+           ============================================================ */
+        let basicOwnerId = null;
+
+        document.getElementById('btnBasicShow').addEventListener('click', function () {
+            if (basicOwnerId) return;
+            basicOwnerId = Backdrop.insert();
+            document.getElementById('btnBasicShow').disabled = true;
+            document.getElementById('btnBasicHide').disabled = false;
+            const status = document.getElementById('statusBasic');
+            status.textContent = 'Visible';
+            status.classList.add('active');
+        });
+
+        document.getElementById('btnBasicHide').addEventListener('click', function () {
+            if (!basicOwnerId) return;
+            Backdrop.remove(basicOwnerId);
+            basicOwnerId = null;
+            document.getElementById('btnBasicShow').disabled = false;
+            document.getElementById('btnBasicHide').disabled = true;
+            const status = document.getElementById('statusBasic');
+            status.textContent = 'Hidden';
+            status.classList.remove('active');
+        });
+
+        /* ============================================================
+           2) Click to Close
+           ============================================================ */
+        document.getElementById('btnClickClose').addEventListener('click', function () {
+            const statusEl = document.getElementById('statusClick');
+            let clickId;
+            clickId = Backdrop.insert({
+                onClick: function () {
+                    Backdrop.remove(clickId);
+                    statusEl.textContent = 'Hidden';
+                    statusEl.classList.remove('active');
+                }
+            });
+            statusEl.textContent = 'Visible (click backdrop)';
+            statusEl.classList.add('active');
+        });
+
+        /* ============================================================
+           3) Custom z-index Variable
+           ============================================================ */
+        const zOwnerIds = [];
+
+        function updateZStatus () {
+            const statusEl = document.getElementById('statusZ');
+            const closeBtn = document.getElementById('btnZClose');
+            if (zOwnerIds.length === 0) {
+                statusEl.textContent = 'No active backdrops';
+                statusEl.classList.remove('active');
+                closeBtn.disabled = true;
+            } else {
+                statusEl.textContent = zOwnerIds.length + ' backdrop(s) in stack';
+                statusEl.classList.add('active');
+                closeBtn.disabled = false;
+            }
+        }
+
+        document.getElementById('btnZDefault').addEventListener('click', function () {
+            const id = Backdrop.insert({
+                zIndexVar: '--z-dropdown-backdrop',
+                onClick: function () {
+                    Backdrop.remove(id);
+                    const idx = zOwnerIds.indexOf(id);
+                    if (idx > -1) zOwnerIds.splice(idx, 1);
+                    updateZStatus();
+                }
+            });
+            zOwnerIds.push(id);
+            updateZStatus();
+        });
+
+        document.getElementById('btnZOverlay').addEventListener('click', function () {
+            const id = Backdrop.insert({
+                zIndexVar: '--z-overlay-backdrop',
+                stackLevel: 2,
+                onClick: function () {
+                    Backdrop.remove(id);
+                    const idx = zOwnerIds.indexOf(id);
+                    if (idx > -1) zOwnerIds.splice(idx, 1);
+                    updateZStatus();
+                }
+            });
+            zOwnerIds.push(id);
+            updateZStatus();
+        });
+
+        document.getElementById('btnZClose').addEventListener('click', function () {
+            while (zOwnerIds.length > 0) {
+                Backdrop.remove(zOwnerIds.pop());
+            }
+            updateZStatus();
+        });
+
+        /* ============================================================
+           4) Stack Behavior
+           ============================================================ */
+        const stackOwnerIds = [];
+
+        function renderStackIndicator () {
+            const container = document.getElementById('stackIndicator');
+            const popBtn = document.getElementById('btnStackPop');
+            const clearBtn = document.getElementById('btnStackClear');
+
+            let html = '<span class="label">Stack:</span>';
+            if (stackOwnerIds.length === 0) {
+                html += '<span style="font-size: 0.8rem; color: var(--text-muted);">(empty)</span>';
+                popBtn.disabled = true;
+                clearBtn.disabled = true;
+            } else {
+                stackOwnerIds.forEach(function (id, i) {
+                    const isTop = (i === stackOwnerIds.length - 1);
+                    html += '<span class="stack-chip' + (isTop ? ' active' : '') + '">';
+                    html += 'Owner ' + (i + 1);
+                    if (isTop) html += ' (top)';
+                    html += '</span>';
+                });
+                popBtn.disabled = false;
+                clearBtn.disabled = false;
+            }
+            container.innerHTML = html;
+        }
+
+        function removeStackOwner (ownerId) {
+            Backdrop.remove(ownerId);
+            const idx = stackOwnerIds.indexOf(ownerId);
+            if (idx > -1) stackOwnerIds.splice(idx, 1);
+            renderStackIndicator();
+        }
+
+        document.getElementById('btnStackPush').addEventListener('click', function () {
+            let id;
+            id = Backdrop.insert({
+                onClick: function () {
+                    removeStackOwner(id);
+                }
+            });
+            stackOwnerIds.push(id);
+            renderStackIndicator();
+        });
+
+        document.getElementById('btnStackPop').addEventListener('click', function () {
+            if (stackOwnerIds.length === 0) return;
+            const topId = stackOwnerIds[stackOwnerIds.length - 1];
+            removeStackOwner(topId);
+        });
+
+        document.getElementById('btnStackClear').addEventListener('click', function () {
+            while (stackOwnerIds.length > 0) {
+                Backdrop.remove(stackOwnerIds.pop());
+            }
+            renderStackIndicator();
+        });
+
+        renderStackIndicator();
+
+        /* ============================================================
+           5) Custom Owner ID
+           ============================================================ */
+        document.getElementById('btnFixedInsert').addEventListener('click', function () {
+            Backdrop.insert({
+                ownerId: 'my-sidebar',
+                onClick: function () {
+                    Backdrop.remove('my-sidebar');
+                    document.getElementById('btnFixedInsert').disabled = false;
+                    document.getElementById('btnFixedRemove').disabled = true;
+                }
+            });
+            document.getElementById('btnFixedInsert').disabled = true;
+            document.getElementById('btnFixedRemove').disabled = false;
+        });
+
+        document.getElementById('btnFixedRemove').addEventListener('click', function () {
+            Backdrop.remove('my-sidebar');
+            document.getElementById('btnFixedInsert').disabled = false;
+            document.getElementById('btnFixedRemove').disabled = true;
+        });
+
+        /* ============================================================
+           6) Help
+           ============================================================ */
+        document.getElementById('btnHelp').addEventListener('click', function () {
+            Backdrop.help();
+        });
+    </script>
+</body>
+
+</html>

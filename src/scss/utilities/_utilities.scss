@@ -1,0 +1,37 @@
+/* =========================================================================
+   Yardımcı Sınıflar (Utilities)
+   Projedeki tüm utility SCSS dosyalarını bir araya getirir.
+
+   NOT: Spinner ve Message modüller klasörüne (modules/) taşındı.
+        Backdrop da modules/backdrop.scss'e taşındı.
+   ========================================================================= */
+
+// 1. Temel Yardımcılar
+@use 'spacing';
+@use 'typography';
+
+// 2. Yerleşim ve Gösterim
+@use 'display';
+@use 'positioning';
+@use 'sizing';
+@use 'visibility';
+
+// 3. Etkileşim ve Görsel
+@use 'interactivity';
+@use 'image';
+@use 'fade';
+
+// NOT: breadcrumb ve dialog-box components/ klasörüne taşındı.
+
+/**
+ * YÜKLEME DURUMU YARDIMCI CLASS'I (UTILITY CLASS)
+ * Bu class, eklendiği herhangi bir konteyneri (ve içindekileri)
+ * geçici olarak devre dışı bırakır ve solgunlaştırır.
+ * Bu, çok genel bir yardımcı olduğu için ana dosyada kalabilir.
+ */
+.is-loading {
+  pointer-events: none;
+  opacity: 0.5;
+  filter: grayscale(0.3);
+  transition: opacity 0.3s ease, filter 0.3s ease;
+}

@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sadrazam – Popover Showcase</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/bold/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/light/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <script type="text/javascript" src="assets/js/script.js"></script>
+    <link rel="stylesheet" href="assets/sadrazam.min.css">
+    <script type="text/javascript" src="assets/sadrazam.min.js"></script>
+    <style>
+        .demo-btn.primary {
+            background: #0984e3;
+            color: #fff;
+            border-color: #0984e3;
+        }
+
+        .demo-btn.primary:hover {
+            background: #0770c2;
+        }
+
+        .demo-btn.danger {
+            background: #d63031;
+            color: #fff;
+            border-color: #d63031;
+        }
+
+        .demo-btn.danger:hover {
+            background: #b71c1c;
+        }
+
+        .placement-grid {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            padding: 2rem 0;
+        }
+
+        .placement-grid .placement-row {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        .note {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-top: 8px;
+            line-height: 1.5;
+        }
+
+        pre.code-block {
+            background: #2d3436;
+            color: #dfe6e9;
+            border-radius: 8px;
+            padding: 1rem 1.2rem;
+            font-family: 'SF Mono', Monaco, Consolas, monospace;
+            font-size: 0.78rem;
+            line-height: 1.6;
+            overflow-x: auto;
+            margin: 1rem 0 0 0;
+        }
+
+        pre.code-block .kw { color: #74b9ff; }
+        pre.code-block .str { color: #55efc4; }
+        pre.code-block .cm { color: #636e72; }
+        pre.code-block .fn { color: #ffeaa7; }
+    </style>
+</head>
+
+<body>
+<script>if(localStorage.getItem("dark-mode"))document.body.classList.add("dark-mode")</script>
+    <header>
+        <nav class="top-navbar">
+            <div class="nav-container">
+                <a href="index.html" class="nav-logo">Sadrazam</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li>
+                        <a href="javascript:void(0)" onclick="openPopup(); return false;">Examples</a>
+                        <div class="navi-popup-overlay" id="examplesPopupOverlay"></div>
+                        <div class="navi-popup" id="examplesPopup">
+                            <h3>Examples</h3>
+                            <ul>
+                                <li><a href="buttons.html">Button</a></li>
+                                <li><a href="forms.html">Form</a></li>
+                                <li><a href="form-patterns.html">Form Patterns</a></li>
+                                <li><a href="links.html">Link</a></li>
+                                <li><a href="switches.html">Switch</a></li>
+                                <li><a href="autocomplete.html">Autocomplete</a></li>
+                                <li><a href="backdrop.html">Backdrop</a></li>
+                                <li><a href="hovermenu.html">Hovermenu</a></li>
+                                <li><a href="infinite-scroll.html">Infinite Scroll</a></li>
+                                <li><a href="snackbar.html">Snackbar</a></li>
+                                <li><a href="modals.html">Modal</a></li>
+                                <li><a href="popovers.html">Popover</a></li>
+                                <li><a href="slide-menu.html">Slide Menu</a></li>
+                                <li><a href="spinners.html">Spinner</a></li>
+                                <li><a href="tabs.html">Tabs</a></li>
+                                <li><a href="tooltips.html">Tooltip</a></li>
+                                <li><a href="form-validation.html">Form Validation</a></li>
+                                <li><a href="autosize-textarea.html">Autosize Textarea</a></li>
+                                <li><a href="autosize-select.html">Autosize Select</a></li>
+                                <li><a href="ajax.html">Ajax</a></li>
+                                <li><a href="grid.html">Grid</a></li>
+                                <li><a href="spacing.html">Spacing</a></li>
+                                <li><a href="colors.html">Colors</a></li>
+                                <li><a href="typography.html">Typography</a></li>
+                            </ul>
+                            <button class="close-popup" onclick="closePopup()">&#10005;</button>
+                        </div>
+                    </li>
+                    <li><a href="https://github.com/edukah/sadrazam" target="_blank">GitHub</a></li>
+                </ul>
+                <div class="dark-mode-button-container">
+                    <div class="mode-toggle-switch" onclick="toggleMode()"></div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+
+        <h1>Sadrazam – Popover Showcase</h1>
+        <p class="subtitle">Placement, triggers, custom content, and programmatic control</p>
+
+        <!-- ==================== PLACEMENT POSITIONS ==================== -->
+        <div class="section">
+            <h2 class="section-title">Placement Positions</h2>
+            <p class="section-desc">
+                The <span class="code">placement</span> option accepts
+                <span class="code">top</span>, <span class="code">right</span>,
+                <span class="code">bottom</span> (default), or <span class="code">left</span>.
+                The popover auto-flips when it overflows the viewport.
+            </p>
+
+            <div class="placement-grid">
+                <div class="placement-row">
+                    <button id="pop-top" class="demo-btn primary">Top</button>
+                </div>
+                <div class="placement-row">
+                    <button id="pop-left" class="demo-btn primary">Left</button>
+                    <button id="pop-right" class="demo-btn primary">Right</button>
+                </div>
+                <div class="placement-row">
+                    <button id="pop-bottom" class="demo-btn primary">Bottom</button>
+                </div>
+            </div>
+
+            <pre class="code-block"><span class="kw">new</span> Sadrazam.Popover({
+  <span class="fn">referenceElement</span>: document.<span class="fn">querySelector</span>(<span class="str">'#pop-top'</span>),
+  <span class="fn">placement</span>: <span class="str">'top'</span>,
+  <span class="fn">title</span>: <span class="str">'Top Popover'</span>,
+  <span class="fn">content</span>: () => <span class="str">'This popover appears above the button.'</span>
+});</pre>
+        </div>
+
+        <!-- ==================== TRIGGER TYPES ==================== -->
+        <div class="section">
+            <h2 class="section-title">Trigger Types</h2>
+            <p class="section-desc">
+                The <span class="code">trigger</span> option controls which DOM event opens the popover.
+                Mutual events are handled automatically:
+                <span class="code">mouseover</span> pairs with <span class="code">mouseout</span>,
+                and <span class="code">focus</span> pairs with <span class="code">blur</span>.
+            </p>
+
+            <div class="row">
+                <span class="label">Click</span>
+                <button id="trig-click" class="demo-btn">
+                    <i class="ph-bold ph-cursor-click"></i>&nbsp; Click Me
+                </button>
+                <span class="code">trigger: 'click'</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Hover</span>
+                <button id="trig-hover" class="demo-btn">
+                    <i class="ph-bold ph-hand-pointing"></i>&nbsp; Hover Me
+                </button>
+                <span class="code">trigger: 'mouseover'</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Focus</span>
+                <input id="trig-focus" type="text" placeholder="Focus this input..." style="padding: 8px 12px; border: 1px solid var(--border-color); border-radius: 6px; font-size: 0.85rem; width: 200px;">
+                <span class="code">trigger: 'focus'</span>
+            </div>
+
+            <pre class="code-block"><span class="cm">// Hover trigger — auto-hides on mouseout</span>
+<span class="kw">new</span> Sadrazam.Popover({
+  <span class="fn">referenceElement</span>: document.<span class="fn">querySelector</span>(<span class="str">'#trig-hover'</span>),
+  <span class="fn">trigger</span>: <span class="str">'mouseover'</span>,
+  <span class="fn">content</span>: () => <span class="str">'Appears on hover, hides on mouseout.'</span>
+});</pre>
+        </div>
+
+        <!-- ==================== WITH TITLE ==================== -->
+        <div class="section">
+            <h2 class="section-title">Title and Content</h2>
+            <p class="section-desc">
+                Set the optional <span class="code">title</span> property to render a styled header bar.
+                The <span class="code">content</span> function can return an HTML string or an <span class="code">HTMLElement</span>.
+            </p>
+
+            <div class="row">
+                <span class="label">With Title</span>
+                <button id="pop-titled" class="demo-btn">
+                    <i class="ph-bold ph-info"></i>&nbsp; Info Popover
+                </button>
+                <span class="code">title: 'Notification'</span>
+            </div>
+
+            <div class="row">
+                <span class="label">No Title</span>
+                <button id="pop-no-title" class="demo-btn">
+                    <i class="ph-bold ph-chat-text"></i>&nbsp; Simple Popover
+                </button>
+                <span class="code">title: null</span>
+            </div>
+
+            <div class="row">
+                <span class="label">HTML Content</span>
+                <button id="pop-html" class="demo-btn">
+                    <i class="ph-bold ph-code"></i>&nbsp; Rich Content
+                </button>
+                <span class="code">content: () => '&lt;em&gt;...&lt;/em&gt;'</span>
+            </div>
+
+            <pre class="code-block"><span class="kw">new</span> Sadrazam.Popover({
+  <span class="fn">referenceElement</span>: document.<span class="fn">querySelector</span>(<span class="str">'#pop-titled'</span>),
+  <span class="fn">placement</span>: <span class="str">'right'</span>,
+  <span class="fn">title</span>: <span class="str">'Notification'</span>,
+  <span class="fn">content</span>: () => <span class="str">'You have 3 unread messages.'</span>
+});</pre>
+        </div>
+
+        <!-- ==================== STATIC LISTEN METHOD ==================== -->
+        <div class="section">
+            <h2 class="section-title">Static Listen Method</h2>
+            <p class="section-desc">
+                <span class="code">Popover.listen()</span> attaches a one-time event listener.
+                The popover is created lazily on the first trigger event, via
+                <span class="code">{ once: true }</span>. Subsequent toggles use the live instance.
+            </p>
+
+            <div class="row">
+                <span class="label">Lazy Init</span>
+                <button id="pop-listen" class="demo-btn primary">
+                    <i class="ph-bold ph-lightning"></i>&nbsp; Click to Init
+                </button>
+                <span class="code">Popover.listen({ selector, ... })</span>
+            </div>
+
+            <p class="note">
+                The first click creates the popover instance. After that, it toggles normally on each click.
+            </p>
+
+            <pre class="code-block">Sadrazam.Popover.<span class="fn">listen</span>({
+  <span class="fn">selector</span>: <span class="str">'#pop-listen'</span>,
+  <span class="fn">trigger</span>: <span class="str">'click'</span>,
+  <span class="fn">placement</span>: <span class="str">'bottom'</span>,
+  <span class="fn">title</span>: <span class="str">'Lazy Popover'</span>,
+  <span class="fn">content</span>: () => <span class="str">'Created on first click via Popover.listen().'</span>
+});</pre>
+        </div>
+
+        <!-- ==================== PROGRAMMATIC CONTROL ==================== -->
+        <div class="section">
+            <h2 class="section-title">Programmatic Control</h2>
+            <p class="section-desc">
+                The Popover instance exposes <span class="code">.show()</span>,
+                <span class="code">.hide()</span>, <span class="code">.toggle()</span>, and
+                <span class="code">.destroy()</span> methods for full programmatic control.
+                The instance is also stored on the element as <span class="code">el.__popover</span>.
+            </p>
+
+            <div class="row">
+                <span class="label">Target</span>
+                <span id="pop-program-target" class="demo-btn" style="cursor: default;">
+                    <i class="ph-bold ph-target"></i>&nbsp; Popover Target
+                </span>
+            </div>
+
+            <div class="row" style="margin-top: 4px;">
+                <span class="label">Controls</span>
+                <button class="demo-btn primary" onclick="programShow()">
+                    <i class="ph-bold ph-eye"></i>&nbsp; show()
+                </button>
+                <button class="demo-btn" onclick="programHide()">
+                    <i class="ph-bold ph-eye-slash"></i>&nbsp; hide()
+                </button>
+                <button class="demo-btn" onclick="programToggle()">
+                    <i class="ph-bold ph-swap"></i>&nbsp; toggle()
+                </button>
+                <button class="demo-btn danger" onclick="programRemove()">
+                    <i class="ph-bold ph-trash"></i>&nbsp; remove()
+                </button>
+            </div>
+
+            <pre class="code-block"><span class="kw">const</span> pop = <span class="kw">new</span> Sadrazam.Popover({
+  <span class="fn">referenceElement</span>: el,
+  <span class="fn">placement</span>: <span class="str">'right'</span>,
+  <span class="fn">title</span>: <span class="str">'Controlled'</span>,
+  <span class="fn">content</span>: () => <span class="str">'Use the buttons below to control me.'</span>
+});
+
+pop.<span class="fn">show</span>();   <span class="cm">// fade in</span>
+pop.<span class="fn">hide</span>();   <span class="cm">// fade out</span>
+pop.<span class="fn">toggle</span>(); <span class="cm">// show or hide</span>
+pop.<span class="fn">destroy</span>(); <span class="cm">// destroy and detach observer</span></pre>
+        </div>
+
+        <!-- ==================== CUSTOM HTML CONTENT ==================== -->
+        <div class="section">
+            <h2 class="section-title">Custom HTML Content</h2>
+            <p class="section-desc">
+                The <span class="code">content</span> callback receives the generated
+                <span class="code">popoverId</span> as its argument and can return either an HTML string
+                or an <span class="code">HTMLElement</span> instance.
+            </p>
+
+            <div class="row">
+                <span class="label">User Card</span>
+                <button id="pop-usercard" class="demo-btn">
+                    <i class="ph-bold ph-user-circle"></i>&nbsp; Show User Card
+                </button>
+            </div>
+
+            <div class="row">
+                <span class="label">Action List</span>
+                <button id="pop-actions" class="demo-btn">
+                    <i class="ph-bold ph-list"></i>&nbsp; Show Actions
+                </button>
+            </div>
+
+            <div class="row">
+                <span class="label">HTMLElement</span>
+                <button id="pop-element" class="demo-btn">
+                    <i class="ph-bold ph-brackets-curly"></i>&nbsp; DOM Element
+                </button>
+                <span class="code">content returns HTMLElement</span>
+            </div>
+
+            <pre class="code-block"><span class="kw">new</span> Sadrazam.Popover({
+  <span class="fn">referenceElement</span>: el,
+  <span class="fn">title</span>: <span class="str">'User Profile'</span>,
+  <span class="fn">content</span>: (<span class="fn">popoverId</span>) => <span class="str">`
+    &lt;div style="line-height:1.6"&gt;
+      &lt;strong&gt;John Doe&lt;/strong&gt;&lt;br&gt;
+      &lt;small&gt;john@example.com&lt;/small&gt;
+    &lt;/div&gt;`</span>
+});</pre>
+        </div>
+
+        <!-- ==================== AUTO-FLIP BEHAVIOR ==================== -->
+        <div class="section">
+            <h2 class="section-title">Auto-Flip Behavior</h2>
+            <p class="section-desc">
+                When a popover would overflow the viewport, the placement automatically flips
+                to the opposite side. Try the buttons near the page edges.
+            </p>
+
+            <div class="row">
+                <span class="label">Left Edge</span>
+                <button id="pop-flip-left" class="demo-btn" style="margin-left: 0;">
+                    <i class="ph-bold ph-arrow-left"></i>&nbsp; Left Placement
+                </button>
+                <span class="code">placement: 'left' (may flip to right)</span>
+            </div>
+
+            <div class="row" style="justify-content: flex-end;">
+                <span class="code">placement: 'right' (may flip to left)</span>
+                <button id="pop-flip-right" class="demo-btn">
+                    Right Placement &nbsp;<i class="ph-bold ph-arrow-right"></i>
+                </button>
+            </div>
+
+            <p class="note">
+                The component checks <span class="code">document.documentElement.clientWidth</span>
+                and <span class="code">clientHeight</span> to determine if a flip is needed.
+                The arrow position is also recalculated to stay aligned with the reference element.
+            </p>
+        </div>
+
+        <!-- ==================== MUTATION OBSERVER ==================== -->
+        <div class="section">
+            <h2 class="section-title">Mutation Observer Integration</h2>
+            <p class="section-desc">
+                Each popover instance creates a <span class="code">MutationObserver</span> that watches
+                for DOM changes. If the reference element is removed from the DOM, the popover
+                automatically cleans itself up. If a parent is hidden, the popover hides too.
+            </p>
+
+            <div class="row">
+                <span class="label">Auto-Cleanup</span>
+                <span id="pop-observer-wrapper">
+                    <button id="pop-observer" class="demo-btn">
+                        <i class="ph-bold ph-eye"></i>&nbsp; Open Popover
+                    </button>
+                </span>
+                <button class="demo-btn danger" onclick="removeObserverTarget()">
+                    <i class="ph-bold ph-trash"></i>&nbsp; Remove Button from DOM
+                </button>
+            </div>
+
+            <div class="row">
+                <span class="label">Restore</span>
+                <button class="demo-btn" onclick="restoreObserverTarget()">
+                    <i class="ph-bold ph-arrow-counter-clockwise"></i>&nbsp; Restore Button
+                </button>
+            </div>
+
+            <p class="note">
+                Click "Open Popover", then click "Remove Button from DOM" to see the popover
+                auto-destruct when its reference element is removed.
+            </p>
+
+            <pre class="code-block"><span class="cm">// Internally, the observer watches document.body:</span>
+<span class="cm">// - childList: true (detect element removal)</span>
+<span class="cm">// - subtree, attributes: true (detect style/class hide)</span>
+<span class="cm">// When the reference element disappears, popover.destroy() is called.</span></pre>
+        </div>
+
+        <!-- ==================== API REFERENCE ==================== -->
+        <div class="section">
+            <h2 class="section-title">API Reference</h2>
+            <p class="section-desc">Quick reference for all configuration options and methods</p>
+
+            <div class="row">
+                <span class="label">Config</span>
+                <span class="code">referenceElement</span>
+                <span style="font-size:0.8rem; color:var(--text-muted);">HTMLElement or via selector (in listen). Required.</span>
+            </div>
+            <div class="row">
+                <span class="label"></span>
+                <span class="code">selector</span>
+                <span style="font-size:0.8rem; color:var(--text-muted);">CSS selector string or HTMLElement. Used with Popover.listen().</span>
+            </div>
+            <div class="row">
+                <span class="label"></span>
+                <span class="code">trigger</span>
+                <span style="font-size:0.8rem; color:var(--text-muted);">Event name: 'click' (default), 'mouseover', 'focus', etc.</span>
+            </div>
+            <div class="row">
+                <span class="label"></span>
+                <span class="code">placement</span>
+                <span style="font-size:0.8rem; color:var(--text-muted);">'top' | 'right' | 'bottom' (default) | 'left'</span>
+            </div>
+            <div class="row">
+                <span class="label"></span>
+                <span class="code">title</span>
+                <span style="font-size:0.8rem; color:var(--text-muted);">String for the header bar, or null (default) to omit.</span>
+            </div>
+            <div class="row">
+                <span class="label"></span>
+                <span class="code">content</span>
+                <span style="font-size:0.8rem; color:var(--text-muted);">Function receiving (popoverId) returning HTML string or HTMLElement.</span>
+            </div>
+
+            <hr class="divider">
+
+            <div class="row">
+                <span class="label">Methods</span>
+                <span class="code">.show()</span>
+                <span style="font-size:0.8rem; color:var(--text-muted);">Fade in the popover and activate the observer.</span>
+            </div>
+            <div class="row">
+                <span class="label"></span>
+                <span class="code">.hide()</span>
+                <span style="font-size:0.8rem; color:var(--text-muted);">Fade out the popover (opacity transition).</span>
+            </div>
+            <div class="row">
+                <span class="label"></span>
+                <span class="code">.toggle()</span>
+                <span style="font-size:0.8rem; color:var(--text-muted);">Show if hidden, hide if visible.</span>
+            </div>
+            <div class="row">
+                <span class="label"></span>
+                <span class="code">.destroy()</span>
+                <span style="font-size:0.8rem; color:var(--text-muted);">Disconnect observer, remove DOM element, clean up reference.</span>
+            </div>
+
+            <hr class="divider">
+
+            <div class="row">
+                <span class="label">Static</span>
+                <span class="code">Popover.listen(config)</span>
+                <span style="font-size:0.8rem; color:var(--text-muted);">Lazy init: attaches a { once: true } listener for deferred creation.</span>
+            </div>
+            <div class="row">
+                <span class="label"></span>
+                <span class="code">Popover.getInstance(element)</span>
+                <span style="font-size:0.8rem; color:var(--text-muted);">Returns the Popover instance attached to the given element, or undefined.</span>
+            </div>
+            <div class="row">
+                <span class="label"></span>
+                <span class="code">Popover.help()</span>
+                <span style="font-size:0.8rem; color:var(--text-muted);">Prints available config options to the console.</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ======================================================
+        // PLACEMENT DEMOS
+        // ======================================================
+        const placements = ['top', 'right', 'bottom', 'left'];
+        placements.forEach(pos => {
+            const el = document.querySelector('#pop-' + pos);
+            new Sadrazam.Popover({
+                referenceElement: el,
+                placement: pos,
+                title: pos.charAt(0).toUpperCase() + pos.slice(1) + ' Popover',
+                content: () => 'This popover is placed on the <strong>' + pos + '</strong> side.'
+            });
+        });
+
+        // ======================================================
+        // TRIGGER DEMOS
+        // ======================================================
+        new Sadrazam.Popover({
+            referenceElement: document.querySelector('#trig-click'),
+            trigger: 'click',
+            placement: 'bottom',
+            title: 'Click Trigger',
+            content: () => 'Opened by clicking. Click again to toggle.'
+        });
+
+        new Sadrazam.Popover({
+            referenceElement: document.querySelector('#trig-hover'),
+            trigger: 'mouseover',
+            placement: 'bottom',
+            content: () => 'Appears on hover, hides on mouseout.'
+        });
+
+        new Sadrazam.Popover({
+            referenceElement: document.querySelector('#trig-focus'),
+            trigger: 'focus',
+            placement: 'right',
+            content: () => 'Shown on focus, hidden on blur.'
+        });
+
+        // ======================================================
+        // TITLE & CONTENT DEMOS
+        // ======================================================
+        new Sadrazam.Popover({
+            referenceElement: document.querySelector('#pop-titled'),
+            placement: 'right',
+            title: 'Notification',
+            content: () => 'You have 3 unread messages waiting in your inbox.'
+        });
+
+        new Sadrazam.Popover({
+            referenceElement: document.querySelector('#pop-no-title'),
+            placement: 'bottom',
+            title: null,
+            content: () => 'A simple popover without a title bar.'
+        });
+
+        new Sadrazam.Popover({
+            referenceElement: document.querySelector('#pop-html'),
+            placement: 'bottom',
+            title: 'Rich Content',
+            content: () => '<div style="line-height:1.5"><em>Italic text</em>, <strong>bold text</strong>, and <span style="color:var(--theme-color-primary);">colored text</span>.</div>'
+        });
+
+        // ======================================================
+        // STATIC LISTEN METHOD
+        // ======================================================
+        Sadrazam.Popover.listen({
+            selector: '#pop-listen',
+            trigger: 'click',
+            placement: 'bottom',
+            title: 'Lazy Popover',
+            content: () => 'Created on first click via <strong>Popover.listen()</strong>. Now it toggles normally.'
+        });
+
+        // ======================================================
+        // PROGRAMMATIC CONTROL
+        // ======================================================
+        let programPop = null;
+
+        function programInit() {
+            const el = document.querySelector('#pop-program-target');
+            programPop = new Sadrazam.Popover({
+                referenceElement: el,
+                placement: 'right',
+                title: 'Controlled Popover',
+                content: () => 'Use the buttons below to show, hide, toggle, or remove me.'
+            });
+        }
+
+        function programShow() {
+            if (!programPop) programInit();
+            programPop.show();
+        }
+
+        function programHide() {
+            if (programPop) programPop.hide();
+        }
+
+        function programToggle() {
+            if (!programPop) programInit();
+            programPop.toggle();
+        }
+
+        function programRemove() {
+            if (programPop) {
+                programPop.destroy();
+                programPop = null;
+            }
+        }
+
+        // ======================================================
+        // CUSTOM HTML CONTENT DEMOS
+        // ======================================================
+        new Sadrazam.Popover({
+            referenceElement: document.querySelector('#pop-usercard'),
+            placement: 'right',
+            title: 'User Profile',
+            content: () => `
+                <div style="line-height:1.6; font-size:13px;">
+                    <strong>John Doe</strong><br>
+                    <small style="color:var(--text-muted);">john@example.com</small><br>
+                    <small style="color:var(--text-muted);">Member since 2024</small>
+                </div>`
+        });
+
+        new Sadrazam.Popover({
+            referenceElement: document.querySelector('#pop-actions'),
+            placement: 'bottom',
+            title: 'Actions',
+            content: () => `
+                <div style="font-size:13px; line-height:2;">
+                    <div><i class="ph-bold ph-pencil-simple"></i>&nbsp; Edit item</div>
+                    <div><i class="ph-bold ph-copy"></i>&nbsp; Duplicate</div>
+                    <div><i class="ph-bold ph-archive"></i>&nbsp; Archive</div>
+                    <div style="color:#d63031;"><i class="ph-bold ph-trash"></i>&nbsp; Delete</div>
+                </div>`
+        });
+
+        new Sadrazam.Popover({
+            referenceElement: document.querySelector('#pop-element'),
+            placement: 'bottom',
+            title: 'DOM Element',
+            content: () => {
+                const div = document.createElement('div');
+                div.style.fontSize = '13px';
+                div.style.lineHeight = '1.6';
+                div.innerHTML = 'This content was built as a real <strong>HTMLElement</strong> and passed to the content function.';
+                return div;
+            }
+        });
+
+        // ======================================================
+        // AUTO-FLIP DEMOS
+        // ======================================================
+        new Sadrazam.Popover({
+            referenceElement: document.querySelector('#pop-flip-left'),
+            placement: 'left',
+            title: 'Left Placement',
+            content: () => 'Requested <strong>left</strong>, but may flip to <strong>right</strong> if there is not enough space.'
+        });
+
+        new Sadrazam.Popover({
+            referenceElement: document.querySelector('#pop-flip-right'),
+            placement: 'right',
+            title: 'Right Placement',
+            content: () => 'Requested <strong>right</strong>, but may flip to <strong>left</strong> if there is not enough space.'
+        });
+
+        // ======================================================
+        // MUTATION OBSERVER DEMO
+        // ======================================================
+        const observerBtnHTML = document.querySelector('#pop-observer-wrapper').innerHTML;
+
+        function initObserverPopover() {
+            const el = document.querySelector('#pop-observer');
+            if (el) {
+                new Sadrazam.Popover({
+                    referenceElement: el,
+                    placement: 'top',
+                    title: 'Observer Demo',
+                    content: () => 'Remove my button from the DOM and I will auto-destruct.'
+                });
+            }
+        }
+
+        initObserverPopover();
+
+        function removeObserverTarget() {
+            const el = document.querySelector('#pop-observer');
+            if (el) el.remove();
+        }
+
+        function restoreObserverTarget() {
+            const wrapper = document.querySelector('#pop-observer-wrapper');
+            if (!document.querySelector('#pop-observer')) {
+                wrapper.innerHTML = observerBtnHTML;
+                initObserverPopover();
+            }
+        }
+    </script>
+</body>
+
+</html>

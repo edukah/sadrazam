@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sadrazam – Button Showcase</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/bold/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/light/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <script type="text/javascript" src="assets/js/script.js"></script>
+    <link rel="stylesheet" href="assets/sadrazam.min.css">
+    <script type="text/javascript" src="assets/sadrazam.min.js"></script>
+    <style>
+        .toggle-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 2rem;
+        }
+
+        .toggle-btn {
+            padding: 8px 20px;
+            border: 1px solid var(--border-color);
+            background: var(--card-bg);
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+
+        .toggle-btn:hover {
+            background: var(--bg-subtle);
+        }
+
+        .toggle-btn.active {
+            background: var(--theme-color-primary);
+            color: #fff;
+            border-color: var(--theme-color-primary);
+        }
+
+        .block-demo {
+            max-width: 350px;
+        }
+    </style>
+</head>
+
+<body>
+<script>if(localStorage.getItem("dark-mode"))document.body.classList.add("dark-mode")</script>
+    <header>
+        <nav class="top-navbar">
+            <div class="nav-container">
+                <a href="index.html" class="nav-logo">Sadrazam</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li>
+                        <a href="javascript:void(0)" onclick="openPopup(); return false;">Examples</a>
+                        <div class="navi-popup-overlay" id="examplesPopupOverlay"></div>
+                        <div class="navi-popup" id="examplesPopup">
+                            <h3>Examples</h3>
+                            <ul>
+                                <li><a href="buttons.html">Button</a></li>
+                                <li><a href="forms.html">Form</a></li>
+                                <li><a href="form-patterns.html">Form Patterns</a></li>
+                                <li><a href="links.html">Link</a></li>
+                                <li><a href="switches.html">Switch</a></li>
+                                <li><a href="autocomplete.html">Autocomplete</a></li>
+                                <li><a href="backdrop.html">Backdrop</a></li>
+                                <li><a href="hovermenu.html">Hovermenu</a></li>
+                                <li><a href="infinite-scroll.html">Infinite Scroll</a></li>
+                                <li><a href="snackbar.html">Snackbar</a></li>
+                                <li><a href="modals.html">Modal</a></li>
+                                <li><a href="popovers.html">Popover</a></li>
+                                <li><a href="slide-menu.html">Slide Menu</a></li>
+                                <li><a href="spinners.html">Spinner</a></li>
+                                <li><a href="tabs.html">Tabs</a></li>
+                                <li><a href="tooltips.html">Tooltip</a></li>
+                                <li><a href="form-validation.html">Form Validation</a></li>
+                                <li><a href="autosize-textarea.html">Autosize Textarea</a></li>
+                                <li><a href="autosize-select.html">Autosize Select</a></li>
+                                <li><a href="ajax.html">Ajax</a></li>
+                                <li><a href="grid.html">Grid</a></li>
+                                <li><a href="spacing.html">Spacing</a></li>
+                                <li><a href="colors.html">Colors</a></li>
+                                <li><a href="typography.html">Typography</a></li>
+                            </ul>
+                            <button class="close-popup" onclick="closePopup()">&#10005;</button>
+                        </div>
+                    </li>
+                    <li><a href="https://github.com/edukah/sadrazam" target="_blank">GitHub</a></li>
+                </ul>
+                <div class="dark-mode-button-container">
+                    <div class="mode-toggle-switch" onclick="toggleMode()"></div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1>Sadrazam – Button (.bttn) Showcase</h1>
+        <p class="subtitle">Boyut, renk, kademe, durum ve yerlesim varyantlari</p>
+
+        <div class="toggle-row">
+            <button class="toggle-btn active" onclick="toggleLoading(false)">Normal</button>
+            <button class="toggle-btn" onclick="toggleLoading(true)">Loading</button>
+        </div>
+
+        <!-- ==================== RENK VARYANTLARI ==================== -->
+        <div class="section">
+            <h2 class="section-title">Renk Varyantlari</h2>
+            <p class="section-desc">Her renk md-rectangle boyutunda gosterilmistir</p>
+
+            <div class="row">
+                <span class="label">Primary</span>
+                <button class="bttn bttn--md-rectangle bttn--pri" data-bttn>
+                    <i class="ph-bold ph-paper-plane-tilt"></i>&nbsp; Gonder
+                </button>
+                <span class="code">.bttn--pri</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Secondary</span>
+                <button class="bttn bttn--md-rectangle bttn--sec" data-bttn>
+                    <i class="ph-bold ph-star"></i>&nbsp; Favori
+                </button>
+                <span class="code">.bttn--sec</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Tertiary</span>
+                <button class="bttn bttn--md-rectangle bttn--ter" data-bttn>
+                    <i class="ph-bold ph-magic-wand"></i>&nbsp; Sihir
+                </button>
+                <span class="code">.bttn--ter</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Neutral</span>
+                <button class="bttn bttn--md-rectangle bttn--neutral" data-bttn>
+                    <i class="ph-bold ph-gear"></i>&nbsp; Ayarlar
+                </button>
+                <span class="code">.bttn--neutral</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Ghost</span>
+                <button class="bttn bttn--md-rectangle bttn--ghost" data-bttn>
+                    <i class="ph-bold ph-x"></i>&nbsp; Iptal
+                </button>
+                <span class="code">.bttn--ghost</span>
+            </div>
+
+            <hr class="divider">
+
+            <div class="row">
+                <span class="label">Danger</span>
+                <button class="bttn bttn--md-rectangle bttn--danger" data-bttn>
+                    <i class="ph-bold ph-warning"></i>&nbsp; Tehlike
+                </button>
+                <span class="code">.bttn--danger</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Safe</span>
+                <button class="bttn bttn--md-rectangle bttn--safe" data-bttn>
+                    <i class="ph-bold ph-check"></i>&nbsp; Tamam
+                </button>
+                <span class="code">.bttn--safe</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Notice</span>
+                <button class="bttn bttn--md-rectangle bttn--notice" data-bttn>
+                    <i class="ph-bold ph-info"></i>&nbsp; Bilgi
+                </button>
+                <span class="code">.bttn--notice</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Caution</span>
+                <button class="bttn bttn--md-rectangle bttn--caution" data-bttn>
+                    <i class="ph-bold ph-flag"></i>&nbsp; Dikkat
+                </button>
+                <span class="code">.bttn--caution</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Warning</span>
+                <button class="bttn bttn--md-rectangle bttn--warning" data-bttn>
+                    <i class="ph-bold ph-warning-circle"></i>&nbsp; Uyarı
+                </button>
+                <span class="code">.bttn--warning</span>
+            </div>
+        </div>
+
+        <!-- ==================== BOYUTLAR (KARE) ==================== -->
+        <div class="section">
+            <h2 class="section-title">Boyutlar – Kare</h2>
+            <p class="section-desc">Ikon butonlar icin esit padding</p>
+
+            <div class="row">
+                <span class="label">LG (14px)</span>
+                <button class="bttn bttn--lg bttn--pri" data-bttn><i class="ph-bold ph-plus"></i></button>
+                <button class="bttn bttn--lg bttn--sec" data-bttn><i class="ph-bold ph-heart"></i></button>
+                <button class="bttn bttn--lg bttn--neutral" data-bttn><i class="ph-bold ph-dots-three"></i></button>
+                <span class="code">.bttn--lg</span>
+            </div>
+
+            <div class="row">
+                <span class="label">MD (10px)</span>
+                <button class="bttn bttn--md bttn--pri" data-bttn><i class="ph-bold ph-plus"></i></button>
+                <button class="bttn bttn--md bttn--sec" data-bttn><i class="ph-bold ph-heart"></i></button>
+                <button class="bttn bttn--md bttn--neutral" data-bttn><i class="ph-bold ph-dots-three"></i></button>
+                <span class="code">.bttn--md</span>
+            </div>
+
+            <div class="row">
+                <span class="label">SM (7px)</span>
+                <button class="bttn bttn--sm bttn--pri" data-bttn><i class="ph-bold ph-plus"></i></button>
+                <button class="bttn bttn--sm bttn--sec" data-bttn><i class="ph-bold ph-heart"></i></button>
+                <button class="bttn bttn--sm bttn--neutral" data-bttn><i class="ph-bold ph-dots-three"></i></button>
+                <span class="code">.bttn--sm</span>
+            </div>
+
+            <div class="row">
+                <span class="label">XS (5px)</span>
+                <button class="bttn bttn--xs bttn--pri" data-bttn><i class="ph-bold ph-plus"></i></button>
+                <button class="bttn bttn--xs bttn--sec" data-bttn><i class="ph-bold ph-heart"></i></button>
+                <button class="bttn bttn--xs bttn--neutral" data-bttn><i class="ph-bold ph-dots-three"></i></button>
+                <span class="code">.bttn--xs</span>
+            </div>
+        </div>
+
+        <!-- ==================== BOYUTLAR (RECTANGLE) ==================== -->
+        <div class="section">
+            <h2 class="section-title">Boyutlar – Rectangle</h2>
+            <p class="section-desc">Metin butonlar icin yatay padding arttirilmis</p>
+
+            <div class="row">
+                <span class="label">LG Rectangle</span>
+                <button class="bttn bttn--lg-rectangle bttn--pri" data-bttn>Buyuk Buton</button>
+                <span class="code">.bttn--lg-rectangle</span>
+            </div>
+
+            <div class="row">
+                <span class="label">MD Rectangle</span>
+                <button class="bttn bttn--md-rectangle bttn--pri" data-bttn>Orta Buton</button>
+                <span class="code">.bttn--md-rectangle</span>
+            </div>
+
+            <div class="row">
+                <span class="label">SM Rectangle</span>
+                <button class="bttn bttn--sm-rectangle bttn--pri" data-bttn>Kucuk Buton</button>
+                <span class="code">.bttn--sm-rectangle</span>
+            </div>
+
+            <div class="row">
+                <span class="label">XS Rectangle</span>
+                <button class="bttn bttn--xs-rectangle bttn--pri" data-bttn>Mini Buton</button>
+                <span class="code">.bttn--xs-rectangle</span>
+            </div>
+        </div>
+
+        <!-- ==================== KADEME SISTEMI ==================== -->
+        <div class="section">
+            <h2 class="section-title">Kademe Sistemi</h2>
+            <p class="section-desc">Filled (default) / Soft / Outline — her renk icin 3 kademe</p>
+
+            <div class="row">
+                <span class="label">Primary</span>
+                <button class="bttn bttn--md-rectangle bttn--pri" data-bttn>Filled</button>
+                <button class="bttn bttn--md-rectangle bttn--pri bttn--soft" data-bttn>Soft</button>
+                <button class="bttn bttn--md-rectangle bttn--pri bttn--outline" data-bttn>Outline</button>
+            </div>
+
+            <div class="row">
+                <span class="label">Secondary</span>
+                <button class="bttn bttn--md-rectangle bttn--sec" data-bttn>Filled</button>
+                <button class="bttn bttn--md-rectangle bttn--sec bttn--soft" data-bttn>Soft</button>
+                <button class="bttn bttn--md-rectangle bttn--sec bttn--outline" data-bttn>Outline</button>
+            </div>
+
+            <div class="row">
+                <span class="label">Tertiary</span>
+                <button class="bttn bttn--md-rectangle bttn--ter" data-bttn>Filled</button>
+                <button class="bttn bttn--md-rectangle bttn--ter bttn--soft" data-bttn>Soft</button>
+                <button class="bttn bttn--md-rectangle bttn--ter bttn--outline" data-bttn>Outline</button>
+            </div>
+
+            <div class="row">
+                <span class="label">Neutral</span>
+                <button class="bttn bttn--md-rectangle bttn--neutral" data-bttn>Filled</button>
+                <button class="bttn bttn--md-rectangle bttn--neutral bttn--soft" data-bttn>Soft</button>
+                <button class="bttn bttn--md-rectangle bttn--neutral bttn--outline" data-bttn>Outline</button>
+            </div>
+
+            <hr class="divider">
+
+            <div class="row">
+                <span class="label">Danger</span>
+                <button class="bttn bttn--md-rectangle bttn--danger" data-bttn>Filled</button>
+                <button class="bttn bttn--md-rectangle bttn--danger bttn--soft" data-bttn>Soft</button>
+                <button class="bttn bttn--md-rectangle bttn--danger bttn--outline" data-bttn>Outline</button>
+            </div>
+
+            <div class="row">
+                <span class="label">Safe</span>
+                <button class="bttn bttn--md-rectangle bttn--safe" data-bttn>Filled</button>
+                <button class="bttn bttn--md-rectangle bttn--safe bttn--soft" data-bttn>Soft</button>
+                <button class="bttn bttn--md-rectangle bttn--safe bttn--outline" data-bttn>Outline</button>
+            </div>
+
+            <div class="row">
+                <span class="label">Warning</span>
+                <button class="bttn bttn--md-rectangle bttn--warning" data-bttn>Filled</button>
+                <button class="bttn bttn--md-rectangle bttn--warning bttn--soft" data-bttn>Soft</button>
+                <button class="bttn bttn--md-rectangle bttn--warning bttn--outline" data-bttn>Outline</button>
+            </div>
+
+            <div class="row">
+                <span class="label">Notice</span>
+                <button class="bttn bttn--md-rectangle bttn--notice" data-bttn>Filled</button>
+                <button class="bttn bttn--md-rectangle bttn--notice bttn--soft" data-bttn>Soft</button>
+                <button class="bttn bttn--md-rectangle bttn--notice bttn--outline" data-bttn>Outline</button>
+            </div>
+
+            <div class="row">
+                <span class="label">Caution</span>
+                <button class="bttn bttn--md-rectangle bttn--caution" data-bttn>Filled</button>
+                <button class="bttn bttn--md-rectangle bttn--caution bttn--soft" data-bttn>Soft</button>
+                <button class="bttn bttn--md-rectangle bttn--caution bttn--outline" data-bttn>Outline</button>
+            </div>
+
+            <hr class="divider">
+
+            <p class="section-desc">Custom renk — <span class="code">style="--button-color: ..."</span></p>
+            <div class="row">
+                <span class="label">Custom</span>
+                <button class="bttn bttn--md-rectangle" style="--button-color: #e91e63;" data-bttn>Filled</button>
+                <button class="bttn bttn--md-rectangle bttn--soft" style="--button-color: #e91e63;" data-bttn>Soft</button>
+                <button class="bttn bttn--md-rectangle bttn--outline" style="--button-color: #e91e63;" data-bttn>Outline</button>
+            </div>
+        </div>
+
+        <!-- ==================== AKSIYON HIYERARSISI ==================== -->
+        <div class="section">
+            <h2 class="section-title">Aksiyon Hiyerarsisi</h2>
+            <p class="section-desc">Filled > Soft > Outline > Ghost sirasiyla onem azalir</p>
+
+            <div class="row">
+                <span class="label">Modal footer</span>
+                <button class="bttn bttn--md-rectangle bttn--pri" data-bttn>Kaydet</button>
+                <button class="bttn bttn--md-rectangle bttn--neutral bttn--outline" data-bttn>Iptal</button>
+            </div>
+
+            <div class="row">
+                <span class="label">Silme onayi</span>
+                <button class="bttn bttn--md-rectangle bttn--danger" data-bttn>Sil</button>
+                <button class="bttn bttn--md-rectangle bttn--danger bttn--soft" data-bttn>Tut</button>
+                <button class="bttn bttn--md-rectangle bttn--ghost" data-bttn>Iptal</button>
+            </div>
+
+            <div class="row">
+                <span class="label">Form</span>
+                <button class="bttn bttn--md-rectangle bttn--pri" data-bttn>Gonder</button>
+                <button class="bttn bttn--md-rectangle bttn--pri bttn--soft" data-bttn>Taslak</button>
+                <button class="bttn bttn--md-rectangle bttn--ghost" data-bttn>Vazgec</button>
+            </div>
+        </div>
+
+        <!-- ==================== LOADING DURUMU ==================== -->
+        <div class="section">
+            <h2 class="section-title">Loading Durumu</h2>
+            <p class="section-desc">Shimmer efekti + gri perde overlay — tum renklerde</p>
+
+            <div class="row">
+                <span class="label">Primary</span>
+                <button class="bttn bttn--md-rectangle bttn--pri bttn--loading">
+                    <i class="ph-bold ph-paper-plane-tilt"></i>&nbsp; Gonder
+                </button>
+                <button class="bttn bttn--md-rectangle bttn--pri">
+                    <i class="ph-bold ph-paper-plane-tilt"></i>&nbsp; Gonder
+                </button>
+            </div>
+
+            <div class="row">
+                <span class="label">Secondary</span>
+                <button class="bttn bttn--md-rectangle bttn--sec bttn--loading">
+                    <i class="ph-bold ph-star"></i>&nbsp; Favori
+                </button>
+                <button class="bttn bttn--md-rectangle bttn--sec">
+                    <i class="ph-bold ph-star"></i>&nbsp; Favori
+                </button>
+            </div>
+
+            <div class="row">
+                <span class="label">Tertiary</span>
+                <button class="bttn bttn--md-rectangle bttn--ter bttn--loading">
+                    <i class="ph-bold ph-magic-wand"></i>&nbsp; Sihir
+                </button>
+                <button class="bttn bttn--md-rectangle bttn--ter">
+                    <i class="ph-bold ph-magic-wand"></i>&nbsp; Sihir
+                </button>
+            </div>
+
+            <div class="row">
+                <span class="label">Neutral</span>
+                <button class="bttn bttn--md-rectangle bttn--neutral bttn--loading">
+                    <i class="ph-bold ph-gear"></i>&nbsp; Ayarlar
+                </button>
+                <button class="bttn bttn--md-rectangle bttn--neutral">
+                    <i class="ph-bold ph-gear"></i>&nbsp; Ayarlar
+                </button>
+            </div>
+
+            <div class="row">
+                <span class="label">Danger</span>
+                <button class="bttn bttn--md-rectangle bttn--danger bttn--loading">
+                    <i class="ph-bold ph-trash"></i>&nbsp; Sil
+                </button>
+                <button class="bttn bttn--md-rectangle bttn--danger">
+                    <i class="ph-bold ph-trash"></i>&nbsp; Sil
+                </button>
+            </div>
+
+            <div class="row">
+                <span class="label">Safe</span>
+                <button class="bttn bttn--md-rectangle bttn--safe bttn--loading">
+                    <i class="ph-bold ph-check"></i>&nbsp; Onayla
+                </button>
+                <button class="bttn bttn--md-rectangle bttn--safe">
+                    <i class="ph-bold ph-check"></i>&nbsp; Onayla
+                </button>
+            </div>
+
+            <div class="row">
+                <span class="label">Ghost</span>
+                <button class="bttn bttn--md-rectangle bttn--ghost bttn--loading">
+                    <i class="ph-bold ph-x"></i>&nbsp; Iptal
+                </button>
+                <button class="bttn bttn--md-rectangle bttn--ghost">
+                    <i class="ph-bold ph-x"></i>&nbsp; Iptal
+                </button>
+            </div>
+
+            <hr class="divider">
+
+            <div class="row">
+                <span class="label">Kare Loading</span>
+                <button class="bttn bttn--lg bttn--pri bttn--loading"><i class="ph-bold ph-plus"></i></button>
+                <button class="bttn bttn--md bttn--sec bttn--loading"><i class="ph-bold ph-heart"></i></button>
+                <button class="bttn bttn--sm bttn--danger bttn--loading"><i class="ph-bold ph-trash"></i></button>
+                <button class="bttn bttn--xs bttn--neutral bttn--loading"><i class="ph-bold ph-dots-three"></i></button>
+            </div>
+        </div>
+
+        <!-- ==================== BLOCK BUTON ==================== -->
+        <div class="section">
+            <h2 class="section-title">Block Buton</h2>
+            <p class="section-desc">Tam genislik — <span class="code">.bttn--block</span></p>
+
+            <div class="block-demo">
+                <button class="bttn bttn--md-rectangle bttn--pri bttn--block" data-bttn>
+                    <i class="ph-bold ph-sign-in"></i>&nbsp; Giris Yap
+                </button>
+                <button class="bttn bttn--md-rectangle bttn--sec bttn--block" data-bttn>
+                    <i class="ph-bold ph-user-plus"></i>&nbsp; Kayit Ol
+                </button>
+                <button class="bttn bttn--md-rectangle bttn--neutral bttn--outline bttn--block" data-bttn>
+                    <i class="ph-bold ph-google-logo"></i>&nbsp; Google ile Giris
+                </button>
+            </div>
+
+            <hr class="divider">
+
+            <p class="section-desc">Block + Loading</p>
+            <div class="block-demo">
+                <button class="bttn bttn--md-rectangle bttn--pri bttn--block bttn--loading">
+                    <i class="ph-bold ph-sign-in"></i>&nbsp; Giris Yap
+                </button>
+                <button class="bttn bttn--md-rectangle bttn--danger bttn--block bttn--loading">
+                    <i class="ph-bold ph-trash"></i>&nbsp; Hesabi Sil
+                </button>
+            </div>
+        </div>
+
+        <!-- ==================== BOYUT KARSILASTIRMA ==================== -->
+        <div class="section">
+            <h2 class="section-title">Boyut Karsilastirma</h2>
+            <p class="section-desc">Tum boyutlar yan yana — Primary renkte</p>
+
+            <div class="row">
+                <span class="label">Kare</span>
+                <button class="bttn bttn--lg bttn--pri" data-bttn><i class="ph-bold ph-plus"></i></button>
+                <button class="bttn bttn--md bttn--pri" data-bttn><i class="ph-bold ph-plus"></i></button>
+                <button class="bttn bttn--sm bttn--pri" data-bttn><i class="ph-bold ph-plus"></i></button>
+                <button class="bttn bttn--xs bttn--pri" data-bttn><i class="ph-bold ph-plus"></i></button>
+            </div>
+
+            <div class="row">
+                <span class="label">Rectangle</span>
+                <button class="bttn bttn--lg-rectangle bttn--pri" data-bttn>LG</button>
+                <button class="bttn bttn--md-rectangle bttn--pri" data-bttn>MD</button>
+                <button class="bttn bttn--sm-rectangle bttn--pri" data-bttn>SM</button>
+                <button class="bttn bttn--xs-rectangle bttn--pri" data-bttn>XS</button>
+            </div>
+        </div>
+
+        <!-- ==================== KOYU ARKA PLAN ==================== -->
+        <div class="section dark-section">
+            <h2 class="section-title">Koyu Arka Plan Uzerinde</h2>
+            <p class="section-desc">Ghost ve outline butonlarin koyu arka plandaki gorunumu</p>
+
+            <div class="row">
+                <span class="label">Ghost</span>
+                <button class="bttn bttn--md-rectangle bttn--ghost" style="color: #dfe6e9;" data-bttn>
+                    <i class="ph-bold ph-x"></i>&nbsp; Kapat
+                </button>
+            </div>
+
+            <div class="row">
+                <span class="label">Primary</span>
+                <button class="bttn bttn--md-rectangle bttn--pri" data-bttn>
+                    <i class="ph-bold ph-paper-plane-tilt"></i>&nbsp; Gonder
+                </button>
+            </div>
+
+            <div class="row">
+                <span class="label">Loading</span>
+                <button class="bttn bttn--md-rectangle bttn--pri bttn--loading">Gonder</button>
+                <button class="bttn bttn--md-rectangle bttn--danger bttn--loading">Sil</button>
+                <button class="bttn bttn--md-rectangle bttn--sec bttn--loading">Favori</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleLoading(enable) {
+            document.querySelectorAll('.toggle-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            document.querySelectorAll('[data-bttn]').forEach(btn => {
+                if (enable) {
+                    btn.classList.add('bttn--loading');
+                } else {
+                    btn.classList.remove('bttn--loading');
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,41 @@
+/* =========================================================================
+   Data Table — Tablo görünümlü veri listeleme bileşeni
+   CSS display: table tabanlı, div elementleriyle kullanılır.
+   Eski yeri: utilities/_layout.scss → components/_data-table.scss olarak taşındı.
+   ========================================================================= */
+
+.data-table {
+  display: table;
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 100%;
+}
+
+.data-table__row {
+  display: table-row;
+}
+
+.data-table__cell {
+  display: table-cell;
+  vertical-align: middle;
+  font-size: inherit;
+  padding: var(--space-4);
+}
+
+.data-table__thead {
+  display: table-header-group;
+  vertical-align: middle;
+  border-color: inherit;
+}
+
+.data-table__tbody {
+  display: table-row-group;
+  vertical-align: middle;
+  border-color: inherit;
+}
+
+.data-table__tfoot {
+  display: table-footer-group;
+  vertical-align: middle;
+  border-color: inherit;
+}

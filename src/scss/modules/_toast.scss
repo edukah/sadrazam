@@ -1,0 +1,67 @@
+*[data-toggle="toast"] {
+  cursor: pointer;
+}
+
+/* Toast — Modal-based notification boxes */
+ul.toast__list {
+  position: relative;
+  display: block;
+  text-align: center;
+  list-style-type: none;
+  font-size: inherit;
+
+  &::before {
+    display: block;
+    text-align: center;
+    line-height: 1.2em;
+    margin-bottom: var(--space-4);
+
+    font-family: "Phosphor-Fill";
+    font-size: 2.5em;
+  }
+
+  &--error::before {
+    content: '\EE44';
+    color: var(--color-danger-500);
+  }
+
+  &--warning::before {
+    content: '\E2CE';
+    color: var(--color-warning-500);
+  }
+
+  &--notice::before {
+    content: '\E2CE';
+    color: var(--color-notice-500);
+  }
+
+  &--success::before {
+    content: '\E184';
+    color: var(--color-safe-500);
+  }
+
+  &--hint::before {
+    content: '\E3E8';
+    color: var(--color-pri-500);
+  }
+
+}
+
+.modal__body--sm {
+  font-size: var(--fsi-15);
+}
+
+.modal__body--md {
+  font-size: var(--fsi-21);
+}
+
+.modal__body--lg {
+  font-size: var(--fsi-23);
+}
+
+.toast__dismiss {
+  text-align: center;
+  margin-top: var(--space-12);
+}
+
+/* End of Toast */

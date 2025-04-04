@@ -1,0 +1,270 @@
+@use 'colors-main' as *;
+
+/** Interaction Colors **/
+// Safe
+$color-safe-100: rgba(238, 249, 216, 1);
+$color-safe-300: rgba(180, 200, 139, 1);
+$color-safe-500: rgba(122, 150, 61, 1);
+$color-safe-700: rgba(95, 119, 46, 1);
+$color-safe-900: rgba(68, 88, 30, 1);
+
+// Notice
+$color-notice-100: rgba(238, 243, 251, 1);
+$color-notice-300: rgba(129, 163, 218, 1);
+$color-notice-500: rgba(42, 101, 198, 1);
+$color-notice-700: rgba(33, 80, 156, 1);
+$color-notice-900: rgba(24, 58, 114, 1);
+
+// Caution
+$color-caution-100: rgba(251, 230, 244, 1); // #fbe6f4
+$color-caution-300: rgba(241, 115, 202, 1);
+$color-caution-500: rgba(230, 0, 160, 1); // #e600a0
+$color-caution-700: rgba(188, 20, 138, 1);
+$color-caution-900: rgba(146, 39, 116, 1); // #922774
+
+// Warning
+$color-warning-100: rgba(255, 248, 225, 1); // #FFF8E1
+$color-warning-300: rgba(255, 214, 113, 1);
+$color-warning-500: rgba(255, 179, 0, 1); // #FFB300
+$color-warning-700: rgba(208, 148, 11, 1);
+$color-warning-900: rgba(161, 116, 22, 1); // #A17416
+
+// Danger
+$color-danger-100: rgba(255, 235, 238, 1); // #FFEBEE
+$color-danger-300: rgba(233, 141, 143, 1);
+$color-danger-500: rgba(211, 47, 47, 1); // #D32F2F
+$color-danger-700: rgba(183, 42, 42, 1);
+$color-danger-900: rgba(154, 36, 36, 1); // #9A2424
+/** End of Interaction Colors **/
+
+:root {
+  /** Interaction Colors **/
+  // Safe
+  --color-safe-100: #{$color-safe-100};
+  --color-safe-300: #{$color-safe-300};
+  --color-safe-500: #{$color-safe-500};
+  --color-safe-700: #{$color-safe-700};
+  --color-safe-900: #{$color-safe-900};
+
+  // Notice
+  --color-notice-100: #{$color-notice-100};
+  --color-notice-300: #{$color-notice-300};
+  --color-notice-500: #{$color-notice-500};
+  --color-notice-700: #{$color-notice-700};
+  --color-notice-900: #{$color-notice-900};
+
+  // Caution
+  --color-caution-100: #{$color-caution-100};
+  --color-caution-300: #{$color-caution-300};
+  --color-caution-500: #{$color-caution-500};
+  --color-caution-700: #{$color-caution-700};
+  --color-caution-900: #{$color-caution-900};
+
+  // Warning
+  --color-warning-100: #{$color-warning-100};
+  --color-warning-300: #{$color-warning-300};
+  --color-warning-500: #{$color-warning-500};
+  --color-warning-700: #{$color-warning-700};
+  --color-warning-900: #{$color-warning-900};
+
+  // Danger
+  --color-danger-100: #{$color-danger-100};
+  --color-danger-300: #{$color-danger-300};
+  --color-danger-500: #{$color-danger-500};
+  --color-danger-700: #{$color-danger-700};
+  --color-danger-900: #{$color-danger-900};
+
+  // Sabit (--f) — dark mode'da değişmez
+  --color-safe-100--f: #{$color-safe-100};
+  --color-safe-300--f: #{$color-safe-300};
+  --color-safe-500--f: #{$color-safe-500};
+  --color-safe-700--f: #{$color-safe-700};
+  --color-safe-900--f: #{$color-safe-900};
+
+  --color-notice-100--f: #{$color-notice-100};
+  --color-notice-300--f: #{$color-notice-300};
+  --color-notice-500--f: #{$color-notice-500};
+  --color-notice-700--f: #{$color-notice-700};
+  --color-notice-900--f: #{$color-notice-900};
+
+  --color-caution-100--f: #{$color-caution-100};
+  --color-caution-300--f: #{$color-caution-300};
+  --color-caution-500--f: #{$color-caution-500};
+  --color-caution-700--f: #{$color-caution-700};
+  --color-caution-900--f: #{$color-caution-900};
+
+  --color-warning-100--f: #{$color-warning-100};
+  --color-warning-300--f: #{$color-warning-300};
+  --color-warning-500--f: #{$color-warning-500};
+  --color-warning-700--f: #{$color-warning-700};
+  --color-warning-900--f: #{$color-warning-900};
+
+  --color-danger-100--f: #{$color-danger-100};
+  --color-danger-300--f: #{$color-danger-300};
+  --color-danger-500--f: #{$color-danger-500};
+  --color-danger-700--f: #{$color-danger-700};
+  --color-danger-900--f: #{$color-danger-900};
+
+  body.dark-mode {
+    --color-safe-100: #{$color-safe-900};
+    --color-safe-300: #{$color-safe-700};
+    --color-safe-500: #{$color-safe-500};
+    --color-safe-700: #{$color-safe-300};
+    --color-safe-900: #{$color-safe-100};
+
+    --color-notice-100: #{$color-notice-900};
+    --color-notice-300: #{$color-notice-700};
+    --color-notice-500: #{$color-notice-500};
+    --color-notice-700: #{$color-notice-300};
+    --color-notice-900: #{$color-notice-100};
+
+    --color-caution-100: #{$color-caution-900};
+    --color-caution-300: #{$color-caution-700};
+    --color-caution-500: #{$color-caution-500};
+    --color-caution-700: #{$color-caution-300};
+    --color-caution-900: #{$color-caution-100};
+
+    --color-warning-100: #{$color-warning-900};
+    --color-warning-300: #{$color-warning-700};
+    --color-warning-500: #{$color-warning-500};
+    --color-warning-700: #{$color-warning-300};
+    --color-warning-900: #{$color-warning-100};
+
+    --color-danger-100: #{$color-danger-900};
+    --color-danger-300: #{$color-danger-700};
+    --color-danger-500: #{$color-danger-500};
+    --color-danger-700: #{$color-danger-300};
+    --color-danger-900: #{$color-danger-100};
+  }
+
+  // Interaction Border Colors
+  --color-border-danger: #{tweak-alpha($color-danger-500, 0.3)};
+  --color-border-warning: #{tweak-alpha($color-warning-500, 0.6)};
+  --color-border-caution: #{tweak-alpha($color-caution-500, 0.2)};
+  --color-border-notice: #{tweak-alpha($color-notice-500, 0.2)};
+  --color-border-safe: #{tweak-alpha($color-safe-500, 0.2)};
+  /** End Interaction Colors **/
+}
+
+/* ---- Etkileşim Metin Renkleri ---- */
+.tc-safe-100 { color: var(--color-safe-100); }
+.tc-safe-300 { color: var(--color-safe-300); }
+.tc-safe-500 { color: var(--color-safe-500); }
+.tc-safe-700 { color: var(--color-safe-700); }
+.tc-safe-900 { color: var(--color-safe-900); }
+
+.tc-notice-100 { color: var(--color-notice-100); }
+.tc-notice-300 { color: var(--color-notice-300); }
+.tc-notice-500 { color: var(--color-notice-500); }
+.tc-notice-700 { color: var(--color-notice-700); }
+.tc-notice-900 { color: var(--color-notice-900); }
+
+.tc-caution-100 { color: var(--color-caution-100); }
+.tc-caution-300 { color: var(--color-caution-300); }
+.tc-caution-500 { color: var(--color-caution-500); }
+.tc-caution-700 { color: var(--color-caution-700); }
+.tc-caution-900 { color: var(--color-caution-900); }
+
+.tc-warning-100 { color: var(--color-warning-100); }
+.tc-warning-300 { color: var(--color-warning-300); }
+.tc-warning-500 { color: var(--color-warning-500); }
+.tc-warning-700 { color: var(--color-warning-700); }
+.tc-warning-900 { color: var(--color-warning-900); }
+
+.tc-danger-100 { color: var(--color-danger-100); }
+.tc-danger-300 { color: var(--color-danger-300); }
+.tc-danger-500 { color: var(--color-danger-500); }
+.tc-danger-700 { color: var(--color-danger-700); }
+.tc-danger-900 { color: var(--color-danger-900); }
+
+/* ---- Etkileşim Arka Plan Renkleri ---- */
+.tbc-safe-100 { background-color: var(--color-safe-100); }
+.tbc-safe-300 { background-color: var(--color-safe-300); }
+.tbc-safe-500 { background-color: var(--color-safe-500); }
+.tbc-safe-700 { background-color: var(--color-safe-700); }
+.tbc-safe-900 { background-color: var(--color-safe-900); }
+
+.tbc-notice-100 { background-color: var(--color-notice-100); }
+.tbc-notice-300 { background-color: var(--color-notice-300); }
+.tbc-notice-500 { background-color: var(--color-notice-500); }
+.tbc-notice-700 { background-color: var(--color-notice-700); }
+.tbc-notice-900 { background-color: var(--color-notice-900); }
+
+.tbc-caution-100 { background-color: var(--color-caution-100); }
+.tbc-caution-300 { background-color: var(--color-caution-300); }
+.tbc-caution-500 { background-color: var(--color-caution-500); }
+.tbc-caution-700 { background-color: var(--color-caution-700); }
+.tbc-caution-900 { background-color: var(--color-caution-900); }
+
+.tbc-warning-100 { background-color: var(--color-warning-100); }
+.tbc-warning-300 { background-color: var(--color-warning-300); }
+.tbc-warning-500 { background-color: var(--color-warning-500); }
+.tbc-warning-700 { background-color: var(--color-warning-700); }
+.tbc-warning-900 { background-color: var(--color-warning-900); }
+
+.tbc-danger-100 { background-color: var(--color-danger-100); }
+.tbc-danger-300 { background-color: var(--color-danger-300); }
+.tbc-danger-500 { background-color: var(--color-danger-500); }
+.tbc-danger-700 { background-color: var(--color-danger-700); }
+.tbc-danger-900 { background-color: var(--color-danger-900); }
+
+/* ---- Sabit (--f) Etkileşim Renkleri ---- */
+.tc-safe-100--f { color: var(--color-safe-100--f); }
+.tc-safe-300--f { color: var(--color-safe-300--f); }
+.tc-safe-500--f { color: var(--color-safe-500--f); }
+.tc-safe-700--f { color: var(--color-safe-700--f); }
+.tc-safe-900--f { color: var(--color-safe-900--f); }
+
+.tbc-safe-100--f { background-color: var(--color-safe-100--f); }
+.tbc-safe-300--f { background-color: var(--color-safe-300--f); }
+.tbc-safe-500--f { background-color: var(--color-safe-500--f); }
+.tbc-safe-700--f { background-color: var(--color-safe-700--f); }
+.tbc-safe-900--f { background-color: var(--color-safe-900--f); }
+
+.tc-notice-100--f { color: var(--color-notice-100--f); }
+.tc-notice-300--f { color: var(--color-notice-300--f); }
+.tc-notice-500--f { color: var(--color-notice-500--f); }
+.tc-notice-700--f { color: var(--color-notice-700--f); }
+.tc-notice-900--f { color: var(--color-notice-900--f); }
+
+.tbc-notice-100--f { background-color: var(--color-notice-100--f); }
+.tbc-notice-300--f { background-color: var(--color-notice-300--f); }
+.tbc-notice-500--f { background-color: var(--color-notice-500--f); }
+.tbc-notice-700--f { background-color: var(--color-notice-700--f); }
+.tbc-notice-900--f { background-color: var(--color-notice-900--f); }
+
+.tc-caution-100--f { color: var(--color-caution-100--f); }
+.tc-caution-300--f { color: var(--color-caution-300--f); }
+.tc-caution-500--f { color: var(--color-caution-500--f); }
+.tc-caution-700--f { color: var(--color-caution-700--f); }
+.tc-caution-900--f { color: var(--color-caution-900--f); }
+
+.tbc-caution-100--f { background-color: var(--color-caution-100--f); }
+.tbc-caution-300--f { background-color: var(--color-caution-300--f); }
+.tbc-caution-500--f { background-color: var(--color-caution-500--f); }
+.tbc-caution-700--f { background-color: var(--color-caution-700--f); }
+.tbc-caution-900--f { background-color: var(--color-caution-900--f); }
+
+.tc-warning-100--f { color: var(--color-warning-100--f); }
+.tc-warning-300--f { color: var(--color-warning-300--f); }
+.tc-warning-500--f { color: var(--color-warning-500--f); }
+.tc-warning-700--f { color: var(--color-warning-700--f); }
+.tc-warning-900--f { color: var(--color-warning-900--f); }
+
+.tbc-warning-100--f { background-color: var(--color-warning-100--f); }
+.tbc-warning-300--f { background-color: var(--color-warning-300--f); }
+.tbc-warning-500--f { background-color: var(--color-warning-500--f); }
+.tbc-warning-700--f { background-color: var(--color-warning-700--f); }
+.tbc-warning-900--f { background-color: var(--color-warning-900--f); }
+
+.tc-danger-100--f { color: var(--color-danger-100--f); }
+.tc-danger-300--f { color: var(--color-danger-300--f); }
+.tc-danger-500--f { color: var(--color-danger-500--f); }
+.tc-danger-700--f { color: var(--color-danger-700--f); }
+.tc-danger-900--f { color: var(--color-danger-900--f); }
+
+.tbc-danger-100--f { background-color: var(--color-danger-100--f); }
+.tbc-danger-300--f { background-color: var(--color-danger-300--f); }
+.tbc-danger-500--f { background-color: var(--color-danger-500--f); }
+.tbc-danger-700--f { background-color: var(--color-danger-700--f); }
+.tbc-danger-900--f { background-color: var(--color-danger-900--f); }

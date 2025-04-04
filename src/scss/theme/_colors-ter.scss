@@ -1,0 +1,64 @@
+/** Tertiary Colors (semantic — dark mode'da simetrik swap: 100↔900, 300↔700, 500 sabit) **/
+$color-ter-100: rgba(243, 235, 255, 1);
+$color-ter-300: rgba(235, 218, 255, 1);
+$color-ter-500: rgba(160, 98, 227, 1);
+$color-ter-700: rgba(124, 51, 204, 1);
+$color-ter-900: rgba(94, 45, 145, 1);
+/** End of Tertiary Colors **/
+
+:root {
+  --color-ter-100: #{$color-ter-100};
+  --color-ter-300: #{$color-ter-300};
+  --color-ter-500: #{$color-ter-500};
+  --color-ter-700: #{$color-ter-700};
+  --color-ter-900: #{$color-ter-900};
+
+  // Sabit (--f) — dark mode'da değişmez
+  --color-ter-100--f: #{$color-ter-100};
+  --color-ter-300--f: #{$color-ter-300};
+  --color-ter-500--f: #{$color-ter-500};
+  --color-ter-700--f: #{$color-ter-700};
+  --color-ter-900--f: #{$color-ter-900};
+
+  body.dark-mode {
+    --color-ter-100: #{$color-ter-900};
+    --color-ter-300: #{$color-ter-700};
+    --color-ter-500: #{$color-ter-500};
+    --color-ter-700: #{$color-ter-300};
+    --color-ter-900: #{$color-ter-100};
+  }
+}
+
+/* =========================================================================
+   Theme Renk Yardımcı Sınıfları — Tertiary
+   ========================================================================= */
+
+/** tertiary colors **/
+.tc-ter-100 { color: var(--color-ter-100); }
+.tc-ter-300 { color: var(--color-ter-300); }
+.tc-ter-500 { color: var(--color-ter-500); }
+.tc-ter-700 { color: var(--color-ter-700); }
+.tc-ter-900 { color: var(--color-ter-900); }
+
+.tbc-ter-100 { background-color: var(--color-ter-100); }
+.tbc-ter-300 { background-color: var(--color-ter-300); }
+.tbc-ter-500 { background-color: var(--color-ter-500); }
+.tbc-ter-700 { background-color: var(--color-ter-700); }
+.tbc-ter-900 { background-color: var(--color-ter-900); }
+
+/* =========================================================================
+   Sabit (--f) Renk Yardımcı Sınıfları (dark mode'da değişmez) — Tertiary
+   ========================================================================= */
+
+/** tertiary (--f) **/
+.tc-ter-100--f { color: var(--color-ter-100--f); }
+.tc-ter-300--f { color: var(--color-ter-300--f); }
+.tc-ter-500--f { color: var(--color-ter-500--f); }
+.tc-ter-700--f { color: var(--color-ter-700--f); }
+.tc-ter-900--f { color: var(--color-ter-900--f); }
+
+.tbc-ter-100--f { background-color: var(--color-ter-100--f); }
+.tbc-ter-300--f { background-color: var(--color-ter-300--f); }
+.tbc-ter-500--f { background-color: var(--color-ter-500--f); }
+.tbc-ter-700--f { background-color: var(--color-ter-700--f); }
+.tbc-ter-900--f { background-color: var(--color-ter-900--f); }

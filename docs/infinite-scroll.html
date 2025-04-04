@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sadrazam – Infinite Scroll Showcase</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/bold/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/light/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <script type="text/javascript" src="assets/js/script.js"></script>
+    <link rel="stylesheet" href="assets/sadrazam.min.css">
+    <script type="text/javascript" src="assets/sadrazam.min.js"></script>
+    <style>
+        /* Scrollable demo container */
+        .scroll-container {
+            height: 400px;
+            overflow-y: auto;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            background: var(--bg-subtle);
+            position: relative;
+        }
+
+        .scroll-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .scroll-list li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.9rem;
+            transition: background 0.15s;
+        }
+
+        .scroll-list li:hover {
+            background: var(--bg-inset);
+        }
+
+        .scroll-list li .item-id {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--theme-color-primary);
+            color: #fff;
+            font-size: 0.75rem;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .scroll-list li .item-text {
+            flex: 1;
+            color: var(--text-color);
+        }
+
+        .scroll-list li .item-meta {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        /* Controls bar */
+        .controls-bar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+
+        .controls-bar button {
+            padding: 6px 14px;
+            border: 1px solid var(--border-color);
+            background: var(--card-bg);
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.2s;
+        }
+
+        .controls-bar button:hover {
+            background: var(--bg-subtle);
+        }
+
+        .controls-bar button.active {
+            background: #0984e3;
+            color: #fff;
+            border-color: #0984e3;
+        }
+
+        .controls-bar .status {
+            margin-left: auto;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* Code block */
+        pre.code-block {
+            background: #2d3436;
+            color: #dfe6e9;
+            padding: 16px 20px;
+            border-radius: 8px;
+            font-family: 'SF Mono', Monaco, Consolas, monospace;
+            font-size: 0.78rem;
+            line-height: 1.6;
+            overflow-x: auto;
+            margin: 0;
+            white-space: pre;
+        }
+
+        pre.code-block .hl-key { color: #74b9ff; }
+        pre.code-block .hl-str { color: #55efc4; }
+        pre.code-block .hl-cmt { color: var(--text-muted); }
+        pre.code-block .hl-fn  { color: #ffeaa7; }
+        pre.code-block .hl-kw  { color: #fd79a8; }
+        pre.code-block .hl-num { color: #fab1a0; }
+
+        /* Config table */
+        .config-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.82rem;
+            margin-top: 8px;
+        }
+
+        .config-table th {
+            text-align: left;
+            padding: 8px 12px;
+            background: var(--bg-inset);
+            font-weight: 600;
+            color: var(--text-color);
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .config-table td {
+            padding: 8px 12px;
+            border-bottom: 1px solid var(--border-color);
+            vertical-align: top;
+        }
+
+        .config-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Spinner block (matches library style) */
+        .spinner-block {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .spinner-block::before {
+            content: '';
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--border-color);
+            border-top-color: var(--theme-color-primary);
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+            margin-right: 8px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+
+<body>
+<script>if(localStorage.getItem("dark-mode"))document.body.classList.add("dark-mode")</script>
+    <header>
+        <nav class="top-navbar">
+            <div class="nav-container">
+                <a href="index.html" class="nav-logo">Sadrazam</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li>
+                        <a href="javascript:void(0)" onclick="openPopup(); return false;">Examples</a>
+                        <div class="navi-popup-overlay" id="examplesPopupOverlay"></div>
+                        <div class="navi-popup" id="examplesPopup">
+                            <h3>Examples</h3>
+                            <ul>
+                                <li><a href="buttons.html">Button</a></li>
+                                <li><a href="forms.html">Form</a></li>
+                                <li><a href="form-patterns.html">Form Patterns</a></li>
+                                <li><a href="links.html">Link</a></li>
+                                <li><a href="switches.html">Switch</a></li>
+                                <li><a href="autocomplete.html">Autocomplete</a></li>
+                                <li><a href="backdrop.html">Backdrop</a></li>
+                                <li><a href="hovermenu.html">Hovermenu</a></li>
+                                <li><a href="infinite-scroll.html">Infinite Scroll</a></li>
+                                <li><a href="snackbar.html">Snackbar</a></li>
+                                <li><a href="modals.html">Modal</a></li>
+                                <li><a href="popovers.html">Popover</a></li>
+                                <li><a href="slide-menu.html">Slide Menu</a></li>
+                                <li><a href="spinners.html">Spinner</a></li>
+                                <li><a href="tabs.html">Tabs</a></li>
+                                <li><a href="tooltips.html">Tooltip</a></li>
+                                <li><a href="form-validation.html">Form Validation</a></li>
+                                <li><a href="autosize-textarea.html">Autosize Textarea</a></li>
+                                <li><a href="autosize-select.html">Autosize Select</a></li>
+                                <li><a href="ajax.html">Ajax</a></li>
+                                <li><a href="grid.html">Grid</a></li>
+                                <li><a href="spacing.html">Spacing</a></li>
+                                <li><a href="colors.html">Colors</a></li>
+                                <li><a href="typography.html">Typography</a></li>
+                            </ul>
+                            <button class="close-popup" onclick="closePopup()">&#10005;</button>
+                        </div>
+                    </li>
+                    <li><a href="https://github.com/edukah/sadrazam" target="_blank">GitHub</a></li>
+                </ul>
+                <div class="dark-mode-button-container">
+                    <div class="mode-toggle-switch" onclick="toggleMode()"></div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+
+        <h1>Sadrazam – Infinite Scroll</h1>
+        <p class="subtitle">Scroll-driven content loading with AJAX pagination</p>
+
+        <!-- ==================== LIVE DEMO ==================== -->
+        <div class="section">
+            <h2 class="section-title">Live Demo</h2>
+            <p class="section-desc">Scroll down inside the container to trigger loading of new items. This demo uses a mock data source instead of a real AJAX endpoint.</p>
+
+            <div class="scroll-container" id="scrollContainer">
+                <ul class="scroll-list" id="scrollList"></ul>
+            </div>
+
+            <div class="controls-bar">
+                <button id="btnPause" onclick="demoPause()"><i class="ph-bold ph-pause"></i> Pause</button>
+                <button id="btnResume" onclick="demoResume()"><i class="ph-bold ph-play"></i> Resume</button>
+                <button id="btnDestroy" onclick="demoDestroy()"><i class="ph-bold ph-trash"></i> Destroy</button>
+                <button id="btnReinit" onclick="demoReinit()"><i class="ph-bold ph-arrow-clockwise"></i> Re-init</button>
+                <span class="status" id="statusText">Status: Active &mdash; Page 1</span>
+            </div>
+        </div>
+
+        <!-- ==================== CONSTRUCTOR OPTIONS ==================== -->
+        <div class="section">
+            <h2 class="section-title">Constructor Options</h2>
+            <p class="section-desc">Configuration object passed to <span class="code">new Sadrazam.InfiniteScroll({ ... })</span></p>
+
+            <table class="config-table">
+                <thead>
+                    <tr>
+                        <th>Option</th>
+                        <th>Type</th>
+                        <th>Required</th>
+                        <th>Default</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="code">scrollElement</span></td>
+                        <td>Element | Window</td>
+                        <td>Yes</td>
+                        <td><span class="code">null</span></td>
+                        <td>The element whose scroll event is listened to. Can be <span class="code">window</span> or any scrollable DOM element (e.g. a <span class="code">&lt;div&gt;</span> with overflow).</td>
+                    </tr>
+                    <tr>
+                        <td><span class="code">listElement</span></td>
+                        <td>Element</td>
+                        <td>Yes</td>
+                        <td><span class="code">null</span></td>
+                        <td>The container element where new items are appended (e.g. a <span class="code">&lt;ul&gt;</span> or <span class="code">&lt;div&gt;</span>).</td>
+                    </tr>
+                    <tr>
+                        <td><span class="code">source</span></td>
+                        <td>String</td>
+                        <td>Yes</td>
+                        <td><span class="code">null</span></td>
+                        <td>The AJAX endpoint URL that returns paginated JSON data.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="code">startPage</span></td>
+                        <td>Number</td>
+                        <td>No</td>
+                        <td><span class="code">1</span></td>
+                        <td>The initial page number to start fetching from.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="code">setInnerItem</span></td>
+                        <td>Function</td>
+                        <td>Yes</td>
+                        <td><span class="code">() => {}</span></td>
+                        <td>A callback receiving each data item; must return a DOM element (e.g. <span class="code">&lt;li&gt;</span>) to be appended to the list.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- ==================== EXPECTED RESPONSE FORMAT ==================== -->
+        <div class="section">
+            <h2 class="section-title">Expected Response Format</h2>
+            <p class="section-desc">The AJAX endpoint must return JSON in this shape. The component sends <span class="code">{ page: N }</span> as request data.</p>
+
+            <pre class="code-block"><span class="hl-cmt">// GET /api/items?page=2</span>
+{
+  <span class="hl-key">"items"</span>: [              <span class="hl-cmt">// Array of data objects</span>
+    { <span class="hl-key">"id"</span>: <span class="hl-num">21</span>, <span class="hl-key">"title"</span>: <span class="hl-str">"Item 21"</span> },
+    { <span class="hl-key">"id"</span>: <span class="hl-num">22</span>, <span class="hl-key">"title"</span>: <span class="hl-str">"Item 22"</span> },
+    ...
+  ],
+  <span class="hl-key">"last"</span>: <span class="hl-num">40</span>,              <span class="hl-cmt">// Index/count of the last item returned</span>
+  <span class="hl-key">"limit"</span>: <span class="hl-num">100</span>             <span class="hl-cmt">// Total number of items (0 = unlimited)</span>
+}</pre>
+
+            <hr class="divider">
+
+            <div class="row">
+                <span class="label">Stop When</span>
+                <span>Items array is empty <strong>or</strong> <span class="code">last &gt;= limit</span> (when limit &gt; 0)</span>
+            </div>
+            <div class="row">
+                <span class="label">On Error</span>
+                <span>Scroll listener is paused and no further requests are made</span>
+            </div>
+        </div>
+
+        <!-- ==================== BASIC USAGE ==================== -->
+        <div class="section">
+            <h2 class="section-title">Basic Usage</h2>
+            <p class="section-desc">Minimal setup to get infinite scroll working with a scrollable container</p>
+
+            <pre class="code-block"><span class="hl-kw">const</span> scroller = <span class="hl-kw">new</span> <span class="hl-fn">Sadrazam.InfiniteScroll</span>({
+  <span class="hl-key">scrollElement</span>: document.<span class="hl-fn">getElementById</span>(<span class="hl-str">'myScrollContainer'</span>),
+  <span class="hl-key">listElement</span>:   document.<span class="hl-fn">getElementById</span>(<span class="hl-str">'myList'</span>),
+  <span class="hl-key">source</span>:        <span class="hl-str">'/api/products'</span>,
+  <span class="hl-key">startPage</span>:     <span class="hl-num">1</span>,
+  <span class="hl-key">setInnerItem</span>:  (item) => {
+    <span class="hl-kw">const</span> li = document.<span class="hl-fn">createElement</span>(<span class="hl-str">'li'</span>);
+    li.textContent = item.title;
+    <span class="hl-kw">return</span> li;
+  }
+});</pre>
+        </div>
+
+        <!-- ==================== WINDOW AS SCROLL ELEMENT ==================== -->
+        <div class="section">
+            <h2 class="section-title">Window-Level Scroll</h2>
+            <p class="section-desc">Use <span class="code">window</span> as the scroll element for full-page infinite scrolling</p>
+
+            <pre class="code-block"><span class="hl-kw">const</span> pageScroller = <span class="hl-kw">new</span> <span class="hl-fn">Sadrazam.InfiniteScroll</span>({
+  <span class="hl-key">scrollElement</span>: <span class="hl-fn">window</span>,               <span class="hl-cmt">// Listen on the window object</span>
+  <span class="hl-key">listElement</span>:   document.<span class="hl-fn">querySelector</span>(<span class="hl-str">'.feed'</span>),
+  <span class="hl-key">source</span>:        <span class="hl-str">'/api/feed'</span>,
+  <span class="hl-key">setInnerItem</span>:  (post) => {
+    <span class="hl-kw">const</span> article = document.<span class="hl-fn">createElement</span>(<span class="hl-str">'article'</span>);
+    article.innerHTML = <span class="hl-str">`&lt;h3&gt;${post.title}&lt;/h3&gt;&lt;p&gt;${post.body}&lt;/p&gt;`</span>;
+    <span class="hl-kw">return</span> article;
+  }
+});</pre>
+        </div>
+
+        <!-- ==================== PUBLIC API ==================== -->
+        <div class="section">
+            <h2 class="section-title">Public API Methods</h2>
+            <p class="section-desc">Instance methods available after construction</p>
+
+            <div class="row">
+                <span class="label">pause()</span>
+                <span>Removes scroll and touchmove event listeners, stopping further fetch attempts.</span>
+            </div>
+            <div class="row">
+                <span class="label"></span>
+                <span class="code">scroller.pause()</span>
+            </div>
+
+            <hr class="divider">
+
+            <div class="row">
+                <span class="label">resume()</span>
+                <span>Re-attaches scroll and touchmove listeners. Prevents duplicate listeners internally.</span>
+            </div>
+            <div class="row">
+                <span class="label"></span>
+                <span class="code">scroller.resume()</span>
+            </div>
+
+            <hr class="divider">
+
+            <div class="row">
+                <span class="label">reCalculate()</span>
+                <span>Manually triggers a scroll check. Useful after external DOM changes that may have altered the scroll position.</span>
+            </div>
+            <div class="row">
+                <span class="label"></span>
+                <span class="code">scroller.reCalculate()</span>
+            </div>
+
+            <hr class="divider">
+
+            <div class="row">
+                <span class="label">destroy()</span>
+                <span>Fully cleans up: removes listeners, clears throttle timer, removes spinner, and nullifies the <span class="code">listElement.__infiniteScroll</span> reference.</span>
+            </div>
+            <div class="row">
+                <span class="label"></span>
+                <span class="code">scroller.destroy()</span>
+            </div>
+        </div>
+
+        <!-- ==================== STATIC PROPERTIES ==================== -->
+        <div class="section">
+            <h2 class="section-title">Static Properties</h2>
+            <p class="section-desc">Class-level settings that affect all instances</p>
+
+            <div class="row">
+                <span class="label">throttleTime</span>
+                <span>Minimum interval (ms) between scroll checks. Default: <span class="code">200</span></span>
+            </div>
+            <div class="row">
+                <span class="label"></span>
+                <span class="code">Sadrazam.InfiniteScroll.throttleTime = 300</span>
+            </div>
+
+            <hr class="divider">
+
+            <div class="row">
+                <span class="label">launchDistance</span>
+                <span>Pixel threshold from the bottom of the list to trigger loading. Default: <span class="code">20</span></span>
+            </div>
+            <div class="row">
+                <span class="label"></span>
+                <span class="code">Sadrazam.InfiniteScroll.launchDistance = 50</span>
+            </div>
+
+            <hr class="divider">
+
+            <div class="row">
+                <span class="label">help()</span>
+                <span>Prints all available configuration options with descriptions to the console.</span>
+            </div>
+            <div class="row">
+                <span class="label"></span>
+                <span class="code">Sadrazam.InfiniteScroll.help()</span>
+            </div>
+        </div>
+
+        <!-- ==================== INTERNAL BEHAVIOR ==================== -->
+        <div class="section">
+            <h2 class="section-title">Internal Behavior</h2>
+            <p class="section-desc">How the component works under the hood</p>
+
+            <div class="row">
+                <span class="label">Spinner</span>
+                <span>A <span class="code">.spinner-block</span> element is automatically created and appended after the list element's parent. It toggles visibility during loading.</span>
+            </div>
+
+            <hr class="divider">
+
+            <div class="row">
+                <span class="label">Throttling</span>
+                <span>Scroll events are throttled using <span class="code">setTimeout</span> at <span class="code">InfiniteScroll.throttleTime</span> ms intervals to avoid excessive AJAX calls.</span>
+            </div>
+
+            <hr class="divider">
+
+            <div class="row">
+                <span class="label">Auto-fill</span>
+                <span>After each fetch completes, the component uses <span class="code">requestAnimationFrame</span> to re-check scroll position. If content does not fill the container, it fetches again.</span>
+            </div>
+
+            <hr class="divider">
+
+            <div class="row">
+                <span class="label">Reference</span>
+                <span>The instance is stored on the list element as <span class="code">listElement.__infiniteScroll</span> for external access.</span>
+            </div>
+
+            <hr class="divider">
+
+            <div class="row">
+                <span class="label">Pagination</span>
+                <span>The internal page counter starts at <span class="code">startPage</span> and increments by 1 after each successful append.</span>
+            </div>
+        </div>
+
+        <!-- ==================== FULL EXAMPLE ==================== -->
+        <div class="section">
+            <h2 class="section-title">Full Example with Cleanup</h2>
+            <p class="section-desc">A complete pattern showing initialization, pause/resume controls, and teardown</p>
+
+            <pre class="code-block"><span class="hl-kw">const</span> container = document.<span class="hl-fn">getElementById</span>(<span class="hl-str">'feed-wrapper'</span>);
+<span class="hl-kw">const</span> list      = document.<span class="hl-fn">getElementById</span>(<span class="hl-str">'feed-list'</span>);
+
+<span class="hl-cmt">// Initialize</span>
+<span class="hl-kw">const</span> feed = <span class="hl-kw">new</span> <span class="hl-fn">Sadrazam.InfiniteScroll</span>({
+  <span class="hl-key">scrollElement</span>: container,
+  <span class="hl-key">listElement</span>:   list,
+  <span class="hl-key">source</span>:        <span class="hl-str">'/api/posts'</span>,
+  <span class="hl-key">startPage</span>:     <span class="hl-num">1</span>,
+  <span class="hl-key">setInnerItem</span>:  (post) => {
+    <span class="hl-kw">const</span> li = document.<span class="hl-fn">createElement</span>(<span class="hl-str">'li'</span>);
+    li.className = <span class="hl-str">'post-item'</span>;
+    li.innerHTML = <span class="hl-str">`
+      &lt;strong&gt;${post.title}&lt;/strong&gt;
+      &lt;p&gt;${post.excerpt}&lt;/p&gt;
+    `</span>;
+    <span class="hl-kw">return</span> li;
+  }
+});
+
+<span class="hl-cmt">// Pause when user opens a modal</span>
+modal.<span class="hl-fn">on</span>(<span class="hl-str">'open'</span>, () => feed.<span class="hl-fn">pause</span>());
+modal.<span class="hl-fn">on</span>(<span class="hl-str">'close'</span>, () => feed.<span class="hl-fn">resume</span>());
+
+<span class="hl-cmt">// Full teardown on page navigation</span>
+<span class="hl-kw">function</span> <span class="hl-fn">cleanup</span>() {
+  feed.<span class="hl-fn">destroy</span>();
+  <span class="hl-cmt">// list.__infiniteScroll is now null</span>
+}
+
+<span class="hl-cmt">// Access instance from the DOM element</span>
+<span class="hl-kw">const</span> ref = list.__infiniteScroll;  <span class="hl-cmt">// same as `feed`</span>
+ref.<span class="hl-fn">reCalculate</span>();</pre>
+        </div>
+    </div>
+
+    <script>
+        // ============================================================
+        // Mock InfiniteScroll Demo
+        // Since there is no real AJAX backend, we simulate the
+        // InfiniteScroll behavior with a mock data source.
+        // ============================================================
+
+        let currentPage = 1;
+        const ITEMS_PER_PAGE = 15;
+        const TOTAL_ITEMS = 120;
+        let isActive = true;
+        let isDestroyed = false;
+        let mockScroller = null;
+
+        const scrollContainer = document.getElementById('scrollContainer');
+        const scrollList = document.getElementById('scrollList');
+        const statusText = document.getElementById('statusText');
+
+        // Generate a mock item
+        function generateItem(index) {
+            const titles = [
+                'Understanding Infinite Scroll Patterns',
+                'Building Performant Web Applications',
+                'Modern JavaScript Architecture Guide',
+                'Responsive Design Best Practices',
+                'API Pagination Strategies',
+                'DOM Manipulation Techniques',
+                'Event Throttling and Debouncing',
+                'Scroll Performance Optimization',
+                'Lazy Loading Implementation',
+                'Frontend State Management',
+                'Web Component Fundamentals',
+                'CSS Grid Layout Mastery',
+                'Progressive Web App Patterns',
+                'Accessibility in Dynamic Content',
+                'Memory Management in SPAs'
+            ];
+            return {
+                id: index,
+                title: titles[(index - 1) % titles.length],
+                meta: 'Page ' + Math.ceil(index / ITEMS_PER_PAGE) + ' / Item #' + index
+            };
+        }
+
+        // Create a list item DOM element (mirrors the setInnerItem callback)
+        function createListItem(item) {
+            const li = document.createElement('li');
+            li.innerHTML =
+                '<span class="item-id">' + item.id + '</span>' +
+                '<span class="item-text">' + item.title + '</span>' +
+                '<span class="item-meta">' + item.meta + '</span>';
+            return li;
+        }
+
+        // Simulate a fetch with delay
+        function mockFetch(page) {
+            return new Promise(function(resolve) {
+                const start = (page - 1) * ITEMS_PER_PAGE + 1;
+                const end = Math.min(page * ITEMS_PER_PAGE, TOTAL_ITEMS);
+                const items = [];
+
+                for (let i = start; i <= end; i++) {
+                    items.push(generateItem(i));
+                }
+
+                // Simulate network latency
+                setTimeout(function() {
+                    resolve({
+                        items: start > TOTAL_ITEMS ? [] : items,
+                        last: end,
+                        limit: TOTAL_ITEMS
+                    });
+                }, 600);
+            });
+        }
+
+        // Mock infinite scroll controller
+        let isLoading = false;
+        let isFinished = false;
+        let spinnerEl = null;
+
+        function createSpinner() {
+            spinnerEl = document.createElement('div');
+            spinnerEl.className = 'spinner-block';
+            spinnerEl.textContent = 'Loading more items...';
+            spinnerEl.style.visibility = 'hidden';
+            scrollContainer.appendChild(spinnerEl);
+        }
+
+        function showSpinner() {
+            if (spinnerEl) spinnerEl.style.visibility = 'visible';
+        }
+
+        function hideSpinner() {
+            if (spinnerEl) spinnerEl.style.visibility = 'hidden';
+        }
+
+        function destroySpinner() {
+            if (spinnerEl) { spinnerEl.remove(); spinnerEl = null; }
+        }
+
+        function isNearBottom() {
+            var containerBottom = scrollContainer.getBoundingClientRect().bottom;
+            var listBottom = scrollList.getBoundingClientRect().bottom;
+            return listBottom - containerBottom < 20;
+        }
+
+        async function fetchNextPage() {
+            if (isLoading || isFinished || !isActive) return;
+            isLoading = true;
+            showSpinner();
+
+            try {
+                var data = await mockFetch(currentPage);
+                if (data.items.length === 0 || (data.limit > 0 && data.last >= data.limit)) {
+                    isFinished = true;
+                    destroySpinner();
+                    updateStatus('Finished -- all ' + TOTAL_ITEMS + ' items loaded');
+                }
+                var fragment = document.createDocumentFragment();
+                data.items.forEach(function(item) {
+                    fragment.appendChild(createListItem(item));
+                });
+                scrollList.appendChild(fragment);
+                currentPage++;
+                if (!isFinished) {
+                    updateStatus('Active -- Page ' + currentPage);
+                }
+            } catch (e) {
+                isFinished = true;
+                updateStatus('Error');
+            } finally {
+                isLoading = false;
+                hideSpinner();
+                // Auto-fill: if content doesn't fill container, fetch again
+                requestAnimationFrame(function() {
+                    if (!isFinished && isActive && isNearBottom()) {
+                        fetchNextPage();
+                    }
+                });
+            }
+        }
+
+        var throttleTimer = null;
+        function handleScroll() {
+            if (throttleTimer) return;
+            throttleTimer = setTimeout(function() {
+                if (!isLoading && !isFinished && isActive && isNearBottom()) {
+                    fetchNextPage();
+                }
+                throttleTimer = null;
+            }, 200);
+        }
+
+        function updateStatus(msg) {
+            statusText.textContent = 'Status: ' + msg;
+        }
+
+        // --- Public control functions ---
+
+        function demoPause() {
+            isActive = false;
+            scrollContainer.removeEventListener('scroll', handleScroll);
+            updateStatus('Paused');
+        }
+
+        function demoResume() {
+            if (isDestroyed) return;
+            isActive = true;
+            scrollContainer.removeEventListener('scroll', handleScroll);
+            scrollContainer.addEventListener('scroll', handleScroll);
+            updateStatus('Resumed -- Page ' + currentPage);
+            handleScroll();
+        }
+
+        function demoDestroy() {
+            isActive = false;
+            isDestroyed = true;
+            scrollContainer.removeEventListener('scroll', handleScroll);
+            clearTimeout(throttleTimer);
+            destroySpinner();
+            updateStatus('Destroyed');
+        }
+
+        function demoReinit() {
+            // Reset state
+            scrollList.innerHTML = '';
+            currentPage = 1;
+            isLoading = false;
+            isFinished = false;
+            isActive = true;
+            isDestroyed = false;
+
+            createSpinner();
+            scrollContainer.removeEventListener('scroll', handleScroll);
+            scrollContainer.addEventListener('scroll', handleScroll);
+            updateStatus('Re-initialized -- Page 1');
+            fetchNextPage();
+        }
+
+        // --- Initialize on load ---
+        createSpinner();
+        scrollContainer.addEventListener('scroll', handleScroll);
+        fetchNextPage();
+    </script>
+</body>
+
+</html>

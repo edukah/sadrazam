@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hardcoded Renk Örnekleri</title>
+    <link rel="stylesheet" href="_hot/build.dev.css">
+    <style>
+        body {
+            font-family: "Open Sans", sans-serif;
+            padding: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        h1 { font-size: 1.5rem; font-weight: 700; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.1rem; font-weight: 600; margin: 2rem 0 0.75rem; }
+        p { margin-bottom: 0.5rem; font-size: 0.85rem; opacity: 0.7; }
+
+        .section {
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+        /* ── Renk kutuları ── */
+        .color-row {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 0.75rem;
+        }
+
+        .color-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .swatch {
+            width: 80px;
+            height: 60px;
+            border-radius: 6px;
+            border: 1px solid rgba(128,128,128,0.3);
+        }
+
+        .color-box span {
+            font-size: 0.7rem;
+            font-family: monospace;
+            opacity: 0.8;
+        }
+
+        .color-box small {
+            font-size: 0.65rem;
+            opacity: 0.5;
+        }
+
+        /* ── Scrollbar demo ── */
+        .scrollbar-demo {
+            width: 100%;
+            height: 120px;
+            overflow-y: scroll;
+            background-color: #27272a;
+            color: #aaa;
+            padding: 1rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            line-height: 1.8;
+            margin-top: 0.75rem;
+        }
+
+        .scrollbar-demo::-webkit-scrollbar {
+            width: 12px;
+            background-color: #27272a;
+        }
+        .scrollbar-demo::-webkit-scrollbar-thumb {
+            background-color: #30343a;
+            border-radius: 6px;
+        }
+        .scrollbar-demo::-webkit-scrollbar-thumb:hover {
+            background-color: #353b43;
+        }
+        .scrollbar-demo::-webkit-scrollbar-thumb:active {
+            background-color: #3b4552;
+        }
+        .scrollbar-demo::-webkit-scrollbar-corner {
+            background-color: #232325;
+        }
+
+        /* ── Selection demo ── */
+        .selection-demo {
+            background-color: #1e1e1e;
+            color: #ccc;
+            padding: 1rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            line-height: 1.8;
+            margin-top: 0.75rem;
+            user-select: text;
+        }
+
+        .selection-demo::selection {
+            background-color: #1760b9;
+            color: #fff;
+        }
+
+        .selection-demo::-moz-selection {
+            background-color: #1760b9;
+            color: #fff;
+        }
+
+        /* ── Autofill demo ── */
+        .autofill-demo {
+            display: flex;
+            gap: 1rem;
+            margin-top: 0.75rem;
+        }
+
+        .autofill-preview {
+            padding: 8px 12px;
+            border-radius: 4px;
+            border: 1px solid #555;
+            font-size: 0.85rem;
+        }
+
+        .autofill-light {
+            background-color: #e8f0fe;
+            color: #333;
+        }
+
+        .autofill-dark {
+            background-color: #5b5f13;
+            color: #e5e1d8;
+        }
+
+        /* ── Select focus demo ── */
+        .focus-demo {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+            margin-top: 0.75rem;
+        }
+
+        .focus-preview {
+            padding: 8px 14px;
+            border: 1px solid #aaa;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            background: #fff;
+        }
+
+        .focus-preview--old {
+            box-shadow: 0 0 0 2px rgba(115, 159, 16, 0.2);
+        }
+
+        .focus-preview--new {
+            box-shadow: 0 0 0 2px color-mix(in srgb, rgba(10, 150, 183, 1) 20%, transparent);
+        }
+
+        .label-tag {
+            display: inline-block;
+            font-size: 0.65rem;
+            font-weight: 600;
+            padding: 2px 6px;
+            border-radius: 3px;
+            text-transform: uppercase;
+            margin-left: 6px;
+        }
+        .label-tag--old { background: #fee; color: #c33; }
+        .label-tag--new { background: #efe; color: #393; }
+        .label-tag--keep { background: #eee; color: #666; }
+    </style>
+</head>
+
+<body>
+    <h1>Hardcoded Renk Değerleri — Görsel Karşılaştırma</h1>
+
+    <!-- ─── SCROLLBAR ─── -->
+    <div class="section">
+        <h2>1. Scrollbar Renkleri <span class="label-tag label-tag--keep">dark mode · hardcoded kalacak</span></h2>
+        <p>Webkit scrollbar pseudo-element'leri. R≠G≠B (mavi ton), grey skalasında karşılığı yok.</p>
+
+        <div class="color-row">
+            <div class="color-box">
+                <div class="swatch" style="background-color: #232325;"></div>
+                <span>#232325</span>
+                <small>corner</small>
+            </div>
+            <div class="color-box">
+                <div class="swatch" style="background-color: #27272a;"></div>
+                <span>#27272a</span>
+                <small>track</small>
+            </div>
+            <div class="color-box">
+                <div class="swatch" style="background-color: #30343a;"></div>
+                <span>#30343a</span>
+                <small>thumb</small>
+            </div>
+            <div class="color-box">
+                <div class="swatch" style="background-color: #353b43;"></div>
+                <span>#353b43</span>
+                <small>thumb:hover</small>
+            </div>
+            <div class="color-box">
+                <div class="swatch" style="background-color: #3b4552;"></div>
+                <span>#3b4552</span>
+                <small>thumb:active</small>
+            </div>
+        </div>
+
+        <p style="margin-top: 1rem;">Canlı demo — kaydır:</p>
+        <div class="scrollbar-demo">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br>
+            Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<br>
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.<br>
+            Duis aute irure dolor in reprehenderit in voluptate velit esse.<br>
+            Cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat.<br>
+            Cupidatat non proident, sunt in culpa qui officia deserunt mollit.<br>
+            Sed ut perspiciatis unde omnis iste natus error sit voluptatem.<br>
+            Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit.<br>
+            At vero eos et accusamus et iusto odio dignissimos ducimus.<br>
+            Nam libero tempore, cum soluta nobis est eligendi optio cumque.<br>
+        </div>
+    </div>
+
+    <!-- ─── SELECTION ─── -->
+    <div class="section">
+        <h2>2. Selection Rengi <span class="label-tag label-tag--keep">dark mode · hardcoded kalacak</span></h2>
+        <p>#1760b9 — koyu mavi. Pri-500 (turkuaz) ile ilgisi yok, ayrı bir seçim rengi.</p>
+
+        <div class="color-row">
+            <div class="color-box">
+                <div class="swatch" style="background-color: #1760b9;"></div>
+                <span>#1760b9</span>
+                <small>selection bg</small>
+            </div>
+            <div class="color-box">
+                <div class="swatch" style="background-color: rgba(10,150,183,1);"></div>
+                <span>pri-500</span>
+                <small>karşılaştırma</small>
+            </div>
+        </div>
+
+        <p style="margin-top: 1rem;">Canlı demo — metni seç:</p>
+        <div class="selection-demo">
+            Bu metni fare ile seçerek dark mode selection rengini görebilirsin.
+            #1760b9 mavi tonu, dark arka plan üzerinde okunabilirlik için seçilmiş.
+            Pri-500 turkuaz tonuyla karıştırılmamalı — bunlar farklı amaçlı renkler.
+        </div>
+    </div>
+
+    <!-- ─── AUTOFILL ─── -->
+    <div class="section">
+        <h2>3. Autofill Renkleri <span class="label-tag label-tag--keep">browser-forced · hardcoded kalacak</span></h2>
+        <p>Browser autofill stilini dark mode'da ezmek için kullanılıyor. !important zorunlu, CSS variable çalışmaz.</p>
+
+        <div class="color-row">
+            <div class="color-box">
+                <div class="swatch" style="background-color: #5b5f13;"></div>
+                <span>#5b5f13</span>
+                <small>dark autofill bg</small>
+            </div>
+            <div class="color-box">
+                <div class="swatch" style="background-color: #e5e1d8;"></div>
+                <span>#e5e1d8</span>
+                <small>dark autofill text</small>
+            </div>
+            <div class="color-box">
+                <div class="swatch" style="background-color: #e8f0fe;"></div>
+                <span>#e8f0fe</span>
+                <small>chrome default bg</small>
+            </div>
+        </div>
+
+        <p style="margin-top: 1rem;">Görünüm karşılaştırması:</p>
+        <div class="autofill-demo">
+            <div>
+                <small style="display:block; margin-bottom:4px;">Chrome default (light)</small>
+                <div class="autofill-preview autofill-light">kullanici@email.com</div>
+            </div>
+            <div>
+                <small style="display:block; margin-bottom:4px;">Bizim override (dark)</small>
+                <div class="autofill-preview autofill-dark">kullanici@email.com</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ─── SELECT FOCUS ─── -->
+    <div class="section">
+        <h2>4. Select Focus Glow <span class="label-tag label-tag--old">eski renk · düzeltilecek</span></h2>
+        <p>rgba(115, 159, 16, 0.2) — eski bir yeşil. Şu anki pri-500 turkuaz (10, 150, 183) ile uyuşmuyor.</p>
+
+        <div class="color-row">
+            <div class="color-box">
+                <div class="swatch" style="background-color: rgba(115, 159, 16, 1);"></div>
+                <span>rgb(115,159,16)</span>
+                <small>eski renk (opak)</small>
+            </div>
+            <div class="color-box">
+                <div class="swatch" style="background-color: rgba(115, 159, 16, 0.2);"></div>
+                <span>rgba(..., 0.2)</span>
+                <small>eski glow</small>
+            </div>
+            <div class="color-box">
+                <div class="swatch" style="background-color: rgba(10, 150, 183, 1);"></div>
+                <span>pri-500</span>
+                <small>şu anki pri</small>
+            </div>
+            <div class="color-box">
+                <div class="swatch" style="background-color: rgba(10, 150, 183, 0.2);"></div>
+                <span>pri-500 @ 20%</span>
+                <small>önerilen glow</small>
+            </div>
+        </div>
+
+        <p style="margin-top: 1rem;">Canlı karşılaştırma:</p>
+        <div class="focus-demo">
+            <div>
+                <small style="display:block; margin-bottom:4px;">Eski (yeşil glow)</small>
+                <div class="focus-preview focus-preview--old">Select elementi</div>
+            </div>
+            <div>
+                <small style="display:block; margin-bottom:4px;">Yeni (pri-500 glow)</small>
+                <div class="focus-preview focus-preview--new">Select elementi</div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

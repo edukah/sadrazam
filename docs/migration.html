@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>rsBEM Migration Guide</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+        :root {
+            --bg: #f8f9fa;
+            --text: #212529;
+            --accent: #0d6efd;
+            --code-bg: #e9ecef;
+            --border: #dee2e6;
+            --card-bg: #fff;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--bg);
+            margin: 0;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+
+        h1, h2, h3 { color: #343a40; margin-top: 2em; }
+        h1 { margin-top: 0; border-bottom: 2px solid var(--border); padding-bottom: 12px; }
+
+        code {
+            background: var(--code-bg);
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #d63384;
+            font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        nav { margin-bottom: 24px; }
+        nav a {
+            margin-right: 16px;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        nav a:hover { text-decoration: underline; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 0.9em;
+        }
+        th, td {
+            padding: 8px 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        th { background: #f8f9fa; font-weight: 600; }
+
+        .severity-high { color: #dc3545; font-weight: 600; }
+        .severity-medium { color: #fd7e14; font-weight: 600; }
+        .severity-low { color: #6c757d; }
+
+        .fix-arrow { color: #198754; font-weight: bold; }
+
+        .section-label {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            font-weight: bold;
+            color: white;
+            vertical-align: middle;
+        }
+        .label-sadrazam { background: #198754; }
+        .label-dukkan { background: #0d6efd; }
+
+        .issue-section {
+            margin-top: 1.5rem;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .note {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 40px;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="index.html">Examples</a>
+        <a href="migration.html">Migration</a>
+    </nav>
+
+    <h1>Migration Guide</h1>
+    <p>Inconsistencies found across <span class="section-label label-sadrazam">Sadrazam</span> and <span class="section-label label-dukkan">Dükkan</span> projects, mapped to the rsBEM layered system.</p>
+
+    <!-- Layer 2: Component Issues -->
+    <h2>Layer 2: Component — Structural Issues</h2>
+    <p>Sub-elements using single hyphen instead of <code>__</code>.</p>
+
+    <div class="issue-section">
+        <h3><span class="section-label label-sadrazam">Sadrazam</span> Hyphen → BEM Element (<code>__</code>)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Component</th>
+                    <th>Current</th>
+                    <th></th>
+                    <th>Correct</th>
+                    <th>Severity</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Tooltip</td>
+                    <td><code>.tooltip-arrow</code></td>
+                    <td class="fix-arrow">→</td>
+                    <td><code>.tooltip__arrow</code></td>
+                    <td class="severity-high">High</td>
+                </tr>
+                <tr>
+                    <td>Popover</td>
+                    <td><code>.popover-arrow</code></td>
+                    <td class="fix-arrow">→</td>
+                    <td><code>.popover__arrow</code></td>
+                    <td class="severity-high">High</td>
+                </tr>
+                <tr>
+                    <td>Popover</td>
+                    <td><code>.popover-title</code></td>
+                    <td class="fix-arrow">→</td>
+                    <td><code>.popover__title</code></td>
+                    <td class="severity-high">High</td>
+                </tr>
+                <tr>
+                    <td>Popover</td>
+                    <td><code>.popover-content</code></td>
+                    <td class="fix-arrow">→</td>
+                    <td><code>.popover__content</code></td>
+                    <td class="severity-high">High</td>
+                </tr>
+                <tr>
+                    <td>HoverMenu</td>
+                    <td><code>.hovermenu-arrow-up</code></td>
+                    <td class="fix-arrow">→</td>
+                    <td><code>.hovermenu__arrow-up</code></td>
+                    <td class="severity-high">High</td>
+                </tr>
+                <tr>
+                    <td>HoverMenu</td>
+                    <td><code>.hovermenu-title</code></td>
+                    <td class="fix-arrow">→</td>
+                    <td><code>.hovermenu__title</code></td>
+                    <td class="severity-high">High</td>
+                </tr>
+                <tr>
+                    <td>HoverMenu</td>
+                    <td><code>.hovermenu-content</code></td>
+                    <td class="fix-arrow">→</td>
+                    <td><code>.hovermenu__content</code></td>
+                    <td class="severity-high">High</td>
+                </tr>
+                <tr>
+                    <td>Slide Menu</td>
+                    <td><code>.slide-menu-inner</code></td>
+                    <td class="fix-arrow">→</td>
+                    <td><code>.slide-menu__inner</code></td>
+                    <td class="severity-high">High</td>
+                </tr>
+                <tr>
+                    <td>Slide Menu</td>
+                    <td><code>.slide-menu-header</code></td>
+                    <td class="fix-arrow">→</td>
+                    <td><code>.slide-menu__header</code></td>
+                    <td class="severity-high">High</td>
+                </tr>
+                <tr>
+                    <td>Slide Menu</td>
+                    <td><code>.slide-menu-content</code></td>
+                    <td class="fix-arrow">→</td>
+                    <td><code>.slide-menu__content</code></td>
+                    <td class="severity-high">High</td>
+                </tr>
+                <tr>
+                    <td>Slide Menu</td>
+                    <td><code>.slide-menu-close-button</code></td>
+                    <td class="fix-arrow">→</td>
+                    <td><code>.slide-menu__close-button</code></td>
+                    <td class="severity-high">High</td>
+                </tr>
+                <tr>
+                    <td>Slide Menu</td>
+                    <td><code>.slide-menu-option-container</code></td>
+                    <td class="fix-arrow">→</td>
+                    <td><code>.slide-menu__option-container</code></td>
+                    <td class="severity-high">High</td>
+                </tr>
+                <tr>
+                    <td>Slide Menu</td>
+                    <td><code>.slide-menu-option-item</code></td>
+                    <td class="fix-arrow">→</td>
+                    <td><code>.slide-menu__option-item</code></td>
+                    <td class="severity-high">High</td>
+                </tr>
+                <tr>
+                    <td>Autocomplete</td>
+                    <td><code>.autocomplete-suggestions-container</code></td>
+                    <td class="fix-arrow">→</td>
+                    <td><code>.autocomplete__suggestions-container</code></td>
+                    <td class="severity-high">High</td>
+                </tr>
+                <tr>
+                    <td>Tabs (v1–v4)</td>
+                    <td><code>.tab-container</code>, <code>.tabv2-heading</code>, etc.</td>
+                    <td class="fix-arrow">→</td>
+                    <td><code>.tab__container</code>, <code>.tab__heading</code></td>
+                    <td class="severity-high">High</td>
+                </tr>
+                <tr>
+                    <td>Panel</td>
+                    <td><code>.panel-heading</code></td>
+                    <td class="fix-arrow">→</td>
+                    <td><code>.panel__heading</code></td>
+                    <td class="severity-medium">Medium ✅</td>
+                </tr>
+                <tr>
+                    <td>Panel</td>
+                    <td><code>.panel-body</code></td>
+                    <td class="fix-arrow">→</td>
+                    <td><code>.panel__body</code></td>
+                    <td class="severity-medium">Medium ✅</td>
+                </tr>
+                <tr>
+                    <td>Panel</td>
+                    <td><code>.panel-toolbar</code></td>
+                    <td class="fix-arrow">→</td>
+                    <td><code>.panel__toolbar</code></td>
+                    <td class="severity-medium">Medium ✅</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h2>Layer 2: Component — Modifier Issues</h2>
+    <p>Modifiers using class stacking instead of <code>--</code>.</p>
+
+    <div class="issue-section">
+        <h3><span class="section-label label-sadrazam">Sadrazam</span> Class Stacking → BEM Modifier (<code>--</code>)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Component</th>
+                    <th>Current</th>
+                    <th></th>
+                    <th>Correct</th>
+                    <th>Severity</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Tooltip</td>
+                    <td><code>.tooltip.top</code></td>
+                    <td class="fix-arrow">→</td>
+                    <td><code>.tooltip--top</code></td>
+                    <td class="severity-high">High ✅</td>
+                </tr>
+                <tr>
+                    <td>Popover</td>
+                    <td><code>.popover.top</code></td>
+                    <td class="fix-arrow">→</td>
+                    <td><code>.popover--top</code></td>
+                    <td class="severity-high">High ✅</td>
+                </tr>
+                <tr>
+                    <td>Slide Menu</td>
+                    <td><code>.slide-menu.in</code></td>
+                    <td class="fix-arrow">→</td>
+                    <td><code>.slide-menu.is-entering</code> (state convention)</td>
+                    <td class="severity-high">High ✅</td>
+                </tr>
+                <tr>
+                    <td>Slide Menu</td>
+                    <td><code>.slide-menu.out</code></td>
+                    <td class="fix-arrow">→</td>
+                    <td><code>.slide-menu.is-leaving</code> (state convention)</td>
+                    <td class="severity-high">High ✅</td>
+                </tr>
+                <tr>
+                    <td>Fade</td>
+                    <td><code>.fade.in</code></td>
+                    <td class="fix-arrow">→</td>
+                    <td><code>.anim-fade.is-visible</code> (renamed + state convention)</td>
+                    <td class="severity-medium">Medium ✅</td>
+                </tr>
+                <tr>
+                    <td>Backdrop</td>
+                    <td><code>.c-backdrop.is-visible</code></td>
+                    <td class="fix-arrow">→</td>
+                    <td><code>.backdrop.is-visible</code> (renamed + state convention)</td>
+                    <td class="severity-medium">OK ✅</td>
+                </tr>
+                <tr>
+                    <td>Modal</td>
+                    <td><code>.modal__notification-list.error</code></td>
+                    <td class="fix-arrow">→</td>
+                    <td><code>.modal__notification-list--error</code></td>
+                    <td class="severity-high">High ✅</td>
+                </tr>
+                <tr>
+                    <td>Modal</td>
+                    <td><code>.modal__notification-list.warning</code></td>
+                    <td class="fix-arrow">→</td>
+                    <td><code>.modal__notification-list--warning</code></td>
+                    <td class="severity-high">High ✅</td>
+                </tr>
+                <tr>
+                    <td>Modal</td>
+                    <td><code>.modal__notification-list.success</code></td>
+                    <td class="fix-arrow">→</td>
+                    <td><code>.modal__notification-list--success</code></td>
+                    <td class="severity-high">High ✅</td>
+                </tr>
+                <tr>
+                    <td>Well</td>
+                    <td><code>.well-lg</code></td>
+                    <td class="fix-arrow">→</td>
+                    <td><code>.well--lg</code></td>
+                    <td class="severity-medium">Medium ✅</td>
+                </tr>
+                <tr>
+                    <td>Well</td>
+                    <td><code>.well-sm</code></td>
+                    <td class="fix-arrow">→</td>
+                    <td><code>.well--sm</code></td>
+                    <td class="severity-medium">Medium ✅</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h2>Layer 2: Component — Naming Issues</h2>
+
+    <div class="issue-section">
+        <h3><span class="section-label label-sadrazam">Sadrazam</span> Naming Inconsistencies</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Issue</th>
+                    <th>Current</th>
+                    <th></th>
+                    <th>Recommended</th>
+                    <th>Severity</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Tab versioning</td>
+                    <td><code>.tab-*</code>, <code>.tabv2-*</code>, <code>.tabv3-*</code>, <code>.tabv4-*</code></td>
+                    <td class="fix-arrow">→</td>
+                    <td>Unify under <code>.tab</code> with <code>--pill</code>, <code>--scroll</code> modifiers</td>
+                    <td class="severity-high">High</td>
+                </tr>
+                <tr>
+                    <td>Spinner variants</td>
+                    <td><code>.spinner-main</code>, <code>.spinner-helper</code>, <code>.spinner-block</code></td>
+                    <td class="fix-arrow">→</td>
+                    <td><code>.spinner--main</code>, <code>.spinner--helper</code>, <code>.spinner--block</code></td>
+                    <td class="severity-medium">Medium</td>
+                </tr>
+                <tr>
+                    <td>Misspelling</td>
+                    <td><code>.form-standart-style</code></td>
+                    <td class="fix-arrow">→</td>
+                    <td><code>.form-standard-style</code></td>
+                    <td class="severity-low">Low ✅</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Layer 3: Utility Issues -->
+    <h2>Layer 3: Utility — Inconsistencies</h2>
+
+    <div class="issue-section">
+        <h3><span class="section-label label-sadrazam">Sadrazam</span> Utility Prefix Issues</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Issue</th>
+                    <th>Current</th>
+                    <th></th>
+                    <th>Recommended (New Prefix System)</th>
+                    <th>Severity</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Duplicate cursor utility</td>
+                    <td><code>.pointer</code> and <code>.c-pointer</code></td>
+                    <td class="fix-arrow">→</td>
+                    <td><code>.cursor-pointer</code> (single canonical name)</td>
+                    <td class="severity-medium">Medium ✅</td>
+                </tr>
+                <tr>
+                    <td>Mixed display prefix</td>
+                    <td><code>.ds-flex</code> and <code>.d-table</code></td>
+                    <td class="fix-arrow">→</td>
+                    <td><code>.d-flex</code> and <code>.d-table</code> (unified <code>d-</code> prefix)</td>
+                    <td class="severity-medium">Medium ✅</td>
+                </tr>
+                <tr>
+                    <td>Duplicate width</td>
+                    <td><code>.full-width</code> and <code>.ds-w-full</code></td>
+                    <td class="fix-arrow">→</td>
+                    <td><code>.w-full</code></td>
+                    <td class="severity-medium">Medium ✅</td>
+                </tr>
+                <tr>
+                    <td>Spacing prefix</td>
+                    <td><code>.padding-sm</code>, <code>.margin-y-md</code></td>
+                    <td class="fix-arrow">→</td>
+                    <td><code>.padding-sm</code>, <code>.margin-y-md</code> (migrated from <code>tb</code>/<code>lr</code> to <code>y</code>/<code>x</code>)</td>
+                    <td class="severity-low">OK</td>
+                </tr>
+                <tr>
+                    <td>Typography prefix</td>
+                    <td><code>.text-center</code>, <code>.text-uppercase</code></td>
+                    <td class="fix-arrow">→</td>
+                    <td><code>.text-center</code>, <code>.text-upper</code> (already correct)</td>
+                    <td class="severity-low">OK</td>
+                </tr>
+                <tr>
+                    <td>Font split prefixes</td>
+                    <td><code>.fsi-14</code>, <code>.fwe-semibold</code>, <code>.ffa-sans</code></td>
+                    <td class="fix-arrow">→</td>
+                    <td><code>.fsi-14</code>, <code>.fwe-semibold</code>, <code>.ffa-sans</code> (already correct)</td>
+                    <td class="severity-low">OK</td>
+                </tr>
+                <tr>
+                    <td>No prefix</td>
+                    <td><code>.flow-space</code></td>
+                    <td class="fix-arrow">→</td>
+                    <td><code>.margin-flow</code> (margin grubuna dahil)</td>
+                    <td class="severity-low">OK ✅</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Dükkan: Project-specific BEM Issues -->
+    <h2>Layer 2: Component — Project-Specific Issues</h2>
+
+    <div class="issue-section">
+        <h3><span class="section-label label-dukkan">Dükkan</span> Project-Specific BEM Issues</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Issue</th>
+                    <th>Current</th>
+                    <th></th>
+                    <th>Recommended</th>
+                    <th>Severity</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Inconsistent separator</td>
+                    <td><code>.admin-listing_list-container</code></td>
+                    <td class="fix-arrow">→</td>
+                    <td><code>.admin-listing__container</code></td>
+                    <td class="severity-medium">Medium</td>
+                </tr>
+                <tr>
+                    <td>Inconsistent separator</td>
+                    <td><code>.admin-listing_search-form__buttons</code></td>
+                    <td class="fix-arrow">→</td>
+                    <td><code>.admin-listing__search-buttons</code></td>
+                    <td class="severity-medium">Medium</td>
+                </tr>
+                <tr>
+                    <td>Underscore mix</td>
+                    <td><code>.form_admin_multilanform-row</code></td>
+                    <td class="fix-arrow">→</td>
+                    <td><code>.admin-multilang-row</code> or project convention</td>
+                    <td class="severity-medium">Medium</td>
+                </tr>
+                <tr>
+                    <td>Status naming mix</td>
+                    <td><code>.status-heading</code>, <code>.status-body</code></td>
+                    <td class="fix-arrow">→</td>
+                    <td><code>.status__heading</code>, <code>.status__body</code></td>
+                    <td class="severity-low">Low</td>
+                </tr>
+                <tr>
+                    <td>Marketplace stacking</td>
+                    <td><code>.marketplace-logo-container.pending</code></td>
+                    <td class="fix-arrow">→</td>
+                    <td><code>.marketplace-logo-container--pending</code></td>
+                    <td class="severity-medium">Medium</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Theme Layer Migration -->
+    <h2>Theme Layer — Color Prefix Migration</h2>
+    <p>Color utility classes migrated from <code>color-</code>/<code>bg-</code> to <code>tc-</code>/<code>tbc-</code>. Brand colors renamed from <code>theme-1/2/3</code> to <code>pri/sec/ter</code>.</p>
+
+    <div class="issue-section">
+        <h3><span class="section-label label-sadrazam">Sadrazam</span> + <span class="section-label label-dukkan">Dükkan</span> Theme Layer ✅</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Old</th>
+                    <th></th>
+                    <th>New</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Text color prefix</td>
+                    <td><code>.color-*</code></td>
+                    <td class="fix-arrow">→</td>
+                    <td><code>.tc-*</code></td>
+                    <td class="severity-low">✅</td>
+                </tr>
+                <tr>
+                    <td>Background prefix</td>
+                    <td><code>.bg-*</code></td>
+                    <td class="fix-arrow">→</td>
+                    <td><code>.tbc-*</code></td>
+                    <td class="severity-low">✅</td>
+                </tr>
+                <tr>
+                    <td>Brand colors</td>
+                    <td><code>theme-1/2/3</code></td>
+                    <td class="fix-arrow">→</td>
+                    <td><code>pri/sec/ter</code> (SCSS, CSS props, classes, BEM modifiers)</td>
+                    <td class="severity-low">✅</td>
+                </tr>
+                <tr>
+                    <td>Component modifier</td>
+                    <td><code>.bttn--theme-1</code></td>
+                    <td class="fix-arrow">→</td>
+                    <td><code>.bttn--pri</code></td>
+                    <td class="severity-low">✅</td>
+                </tr>
+                <tr>
+                    <td>SCSS file location</td>
+                    <td><code>scss/base/_colors-*.scss</code></td>
+                    <td class="fix-arrow">→</td>
+                    <td><code>scss/theme/_colors-*.scss</code></td>
+                    <td class="severity-low">✅</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="note">
+        <p><strong>Note:</strong> This migration guide documents inconsistencies found and resolved. See <a href="wiki/theme-layer-plan.md">Theme Layer Plan</a> and <a href="wiki/rsbem-migration-plans.md">Migration Plans</a> for detailed phase-by-phase history.</p>
+        <p><small>rsBEM v2.0.0 — 2025. A layered CSS naming system for MVC projects.</small></p>
+    </div>
+</div>
+
+</body>
+</html>

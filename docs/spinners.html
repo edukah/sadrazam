@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sadrazam – Spinner Showcase</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/bold/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/light/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <script type="text/javascript" src="assets/js/script.js"></script>
+    <link rel="stylesheet" href="assets/sadrazam.min.css">
+    <script type="text/javascript" src="assets/sadrazam.min.js"></script>
+    <style>
+        .demo-btn--show {
+            background: #0984e3;
+            color: #fff;
+            border-color: #0984e3;
+        }
+
+        .demo-btn--show:hover {
+            background: #0770c2;
+        }
+
+        .demo-btn--hide {
+            background: #d63031;
+            color: #fff;
+            border-color: #d63031;
+        }
+
+        .demo-btn--hide:hover {
+            background: #b71c1c;
+        }
+
+        .ref-counter {
+            display: inline-block;
+            min-width: 28px;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--theme-color-primary);
+            padding: 2px 8px;
+            background: var(--bg-subtle);
+            border-radius: 6px;
+        }
+
+        .target-box {
+            position: relative;
+            border: 2px dashed var(--border-color);
+            border-radius: 8px;
+            padding: 2rem;
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+
+        .inline-demo {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 1rem;
+        }
+
+        .note {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 6px;
+            font-style: italic;
+        }
+    </style>
+</head>
+
+<body>
+<script>if(localStorage.getItem("dark-mode"))document.body.classList.add("dark-mode")</script>
+    <header>
+        <nav class="top-navbar">
+            <div class="nav-container">
+                <a href="index.html" class="nav-logo">Sadrazam</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li>
+                        <a href="javascript:void(0)" onclick="openPopup(); return false;">Examples</a>
+                        <div class="navi-popup-overlay" id="examplesPopupOverlay"></div>
+                        <div class="navi-popup" id="examplesPopup">
+                            <h3>Examples</h3>
+                            <ul>
+                                <li><a href="buttons.html">Button</a></li>
+                                <li><a href="forms.html">Form</a></li>
+                                <li><a href="form-patterns.html">Form Patterns</a></li>
+                                <li><a href="links.html">Link</a></li>
+                                <li><a href="switches.html">Switch</a></li>
+                                <li><a href="autocomplete.html">Autocomplete</a></li>
+                                <li><a href="backdrop.html">Backdrop</a></li>
+                                <li><a href="hovermenu.html">Hovermenu</a></li>
+                                <li><a href="infinite-scroll.html">Infinite Scroll</a></li>
+                                <li><a href="snackbar.html">Snackbar</a></li>
+                                <li><a href="modals.html">Modal</a></li>
+                                <li><a href="popovers.html">Popover</a></li>
+                                <li><a href="slide-menu.html">Slide Menu</a></li>
+                                <li><a href="spinners.html">Spinner</a></li>
+                                <li><a href="tabs.html">Tabs</a></li>
+                                <li><a href="tooltips.html">Tooltip</a></li>
+                                <li><a href="form-validation.html">Form Validation</a></li>
+                                <li><a href="autosize-textarea.html">Autosize Textarea</a></li>
+                                <li><a href="autosize-select.html">Autosize Select</a></li>
+                                <li><a href="ajax.html">Ajax</a></li>
+                                <li><a href="grid.html">Grid</a></li>
+                                <li><a href="spacing.html">Spacing</a></li>
+                                <li><a href="colors.html">Colors</a></li>
+                                <li><a href="typography.html">Typography</a></li>
+                            </ul>
+                            <button class="close-popup" onclick="closePopup()">&#10005;</button>
+                        </div>
+                    </li>
+                    <li><a href="https://github.com/edukah/sadrazam" target="_blank">GitHub</a></li>
+                </ul>
+                <div class="dark-mode-button-container">
+                    <div class="mode-toggle-switch" onclick="toggleMode()"></div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+
+        <h1>Sadrazam – Spinner Showcase</h1>
+        <p class="subtitle">Loading indicator variants, reference counting, and placement options</p>
+
+        <!-- ==================== MAIN SPINNER ==================== -->
+        <div class="section">
+            <h2 class="section-title">Main Spinner (Full-page)</h2>
+            <p class="section-desc">
+                Fixed center overlay spinner. Shown via <span class="code">Sadrazam.Spinner.show()</span> or
+                <span class="code">Sadrazam.Spinner.show({ type: 'main' })</span> and hidden with
+                <span class="code">Sadrazam.Spinner.hide()</span>.
+            </p>
+
+            <div class="row">
+                <span class="label">Show / Hide</span>
+                <button class="demo-btn demo-btn--show" onclick="showMain()">
+                    <i class="ph-bold ph-play"></i>&nbsp; Show Main
+                </button>
+                <button class="demo-btn demo-btn--hide" onclick="hideMain()">
+                    <i class="ph-bold ph-stop"></i>&nbsp; Hide Main
+                </button>
+                <span class="code">.spinner-main</span>
+            </div>
+
+            <p class="note">The main spinner appears at the center of the viewport with a high z-index. It auto-hides after 2 seconds in this demo.</p>
+        </div>
+
+        <!-- ==================== HELPER SPINNER ==================== -->
+        <div class="section">
+            <h2 class="section-title">Helper Spinner (Background tasks)</h2>
+            <p class="section-desc">
+                Fixed bottom-left spinner for background operations. Triggered with
+                <span class="code">Sadrazam.Spinner.show({ type: 'helper' })</span>.
+            </p>
+
+            <div class="row">
+                <span class="label">Show / Hide</span>
+                <button class="demo-btn demo-btn--show" onclick="showHelper()">
+                    <i class="ph-bold ph-play"></i>&nbsp; Show Helper
+                </button>
+                <button class="demo-btn demo-btn--hide" onclick="hideHelper()">
+                    <i class="ph-bold ph-stop"></i>&nbsp; Hide Helper
+                </button>
+                <span class="code">.spinner-helper</span>
+            </div>
+
+            <p class="note">The helper spinner sits at the bottom-left corner, ideal for non-blocking background tasks. Auto-hides after 2 seconds in this demo.</p>
+        </div>
+
+        <!-- ==================== REFERENCE COUNTING ==================== -->
+        <div class="section">
+            <h2 class="section-title">Reference Counting</h2>
+            <p class="section-desc">
+                Multiple async operations can call <span class="code">show()</span> independently.
+                The spinner only disappears when every <span class="code">show()</span> has been matched by a
+                <span class="code">hide()</span>. The internal counter prevents premature removal.
+            </p>
+
+            <div class="row">
+                <span class="label">Ref Count</span>
+                <span class="ref-counter" id="refCount">0</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Controls</span>
+                <button class="demo-btn demo-btn--show" onclick="refShow()">
+                    <i class="ph-bold ph-plus"></i>&nbsp; show() &mdash; ref++
+                </button>
+                <button class="demo-btn demo-btn--hide" onclick="refHide()">
+                    <i class="ph-bold ph-minus"></i>&nbsp; hide() &mdash; ref--
+                </button>
+                <button class="demo-btn" onclick="refReset()">
+                    <i class="ph-bold ph-arrow-counter-clockwise"></i>&nbsp; Reset
+                </button>
+            </div>
+
+            <hr class="divider">
+
+            <div class="row">
+                <span class="label">Simulate</span>
+                <button class="demo-btn demo-btn--show" onclick="simulateMultiple()">
+                    <i class="ph-bold ph-lightning"></i>&nbsp; 3 overlapping requests
+                </button>
+            </div>
+
+            <p class="note">
+                Click "3 overlapping requests" to simulate three async calls that start together but finish at
+                different times (1s, 2s, 3s). The spinner stays visible until the last one completes.
+            </p>
+        </div>
+
+        <!-- ==================== CSS-ONLY: BLOCK SPINNER ==================== -->
+        <div class="section">
+            <h2 class="section-title">Block Spinner (CSS-only)</h2>
+            <p class="section-desc">
+                An in-flow spinner for indicating a specific region is loading. Applied directly via
+                <span class="code">.spinner-block</span> on a <span class="code">&lt;div&gt;</span>. No JS required.
+            </p>
+
+            <div class="row">
+                <span class="label">Default</span>
+                <button class="demo-btn" onclick="toggleBlockSpinner(this)">
+                    <i class="ph-bold ph-eye"></i>&nbsp; Toggle
+                </button>
+                <span class="code">&lt;div class="spinner-block"&gt;&lt;/div&gt;</span>
+            </div>
+
+            <div class="target-box" id="blockTarget">
+                <div class="spinner-block" id="blockSpinner"></div>
+            </div>
+
+            <p class="note">The block spinner is relatively positioned and centered with auto margins. Ideal for card or panel loading states.</p>
+        </div>
+
+        <!-- ==================== CSS-ONLY: INLINE SPINNER ==================== -->
+        <div class="section">
+            <h2 class="section-title">Inline Spinner (CSS-only)</h2>
+            <p class="section-desc">
+                Sits alongside text or inside buttons. Inherits the current font size via <span class="code">1em</span> sizing.
+                Applied via <span class="code">.spinner-inline</span>. No JS required.
+            </p>
+
+            <div class="row">
+                <span class="label">With Text</span>
+                <div class="inline-demo">
+                    Loading data<span class="spinner-inline"></span>
+                </div>
+                <span class="code">.spinner-inline</span>
+            </div>
+
+            <div class="row">
+                <span class="label">In Button</span>
+                <button class="bttn bttn--md-rectangle bttn--pri" disabled>
+                    Saving<span class="spinner-inline" style="color: #fff;"></span>
+                </button>
+                <button class="bttn bttn--md-rectangle bttn--sec" disabled>
+                    Processing<span class="spinner-inline"></span>
+                </button>
+                <button class="bttn bttn--sm-rectangle bttn--neutral" disabled>
+                    Wait<span class="spinner-inline"></span>
+                </button>
+            </div>
+
+            <hr class="divider">
+
+            <div class="row">
+                <span class="label">Font Size</span>
+                <span style="font-size: 0.75rem;" class="inline-demo">Small<span class="spinner-inline"></span></span>
+                <span style="font-size: 1rem;" class="inline-demo">Normal<span class="spinner-inline"></span></span>
+                <span style="font-size: 1.5rem;" class="inline-demo">Large<span class="spinner-inline"></span></span>
+            </div>
+
+            <p class="note">The inline spinner scales with font-size since it uses <span class="code">1em</span> for width and height.</p>
+        </div>
+
+        <!-- ==================== ALL VARIANTS SIDE BY SIDE ==================== -->
+        <div class="section">
+            <h2 class="section-title">All CSS Variants at a Glance</h2>
+            <p class="section-desc">
+                Four spinner variants: <span class="code">.spinner-main</span>,
+                <span class="code">.spinner-helper</span>,
+                <span class="code">.spinner-block</span>, and
+                <span class="code">.spinner-inline</span>.
+            </p>
+
+            <div class="row">
+                <span class="label">Main</span>
+                <span>Fixed center, full-page overlay</span>
+                <span class="code">Sadrazam.Spinner.show({ type: 'main' })</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Helper</span>
+                <span>Fixed bottom-left, background tasks</span>
+                <span class="code">Sadrazam.Spinner.show({ type: 'helper' })</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Block</span>
+                <span>In-flow, centered in a container</span>
+                <span class="code">&lt;div class="spinner-block"&gt;&lt;/div&gt;</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Inline</span>
+                <span>Beside text or inside buttons</span>
+                <span class="code">&lt;span class="spinner-inline"&gt;&lt;/span&gt;</span>
+            </div>
+        </div>
+
+        <!-- ==================== TIMED AUTO-HIDE ==================== -->
+        <div class="section">
+            <h2 class="section-title">Timed Auto-hide Demo</h2>
+            <p class="section-desc">
+                Click a button to show a spinner that automatically hides after the specified duration.
+            </p>
+
+            <div class="row">
+                <span class="label">Main 1s</span>
+                <button class="demo-btn demo-btn--show" onclick="timedSpinner('main', 1000)">
+                    <i class="ph-bold ph-timer"></i>&nbsp; Show 1s
+                </button>
+            </div>
+
+            <div class="row">
+                <span class="label">Main 3s</span>
+                <button class="demo-btn demo-btn--show" onclick="timedSpinner('main', 3000)">
+                    <i class="ph-bold ph-timer"></i>&nbsp; Show 3s
+                </button>
+            </div>
+
+            <div class="row">
+                <span class="label">Helper 2s</span>
+                <button class="demo-btn demo-btn--show" onclick="timedSpinner('helper', 2000)">
+                    <i class="ph-bold ph-timer"></i>&nbsp; Show 2s
+                </button>
+            </div>
+
+            <p class="note">
+                Pattern: <span class="code">Sadrazam.Spinner.show({ type })</span> followed by
+                <span class="code">setTimeout(() => Sadrazam.Spinner.hide(), ms)</span>
+            </p>
+        </div>
+
+        <!-- ==================== API REFERENCE ==================== -->
+        <div class="section">
+            <h2 class="section-title">API Reference</h2>
+            <p class="section-desc">Complete static API for <span class="code">Sadrazam.Spinner</span></p>
+
+            <div class="row">
+                <span class="label">show()</span>
+                <span>Displays the spinner. Increments the internal reference counter.</span>
+            </div>
+            <div class="row">
+                <span class="label"></span>
+                <span class="code">Sadrazam.Spinner.show()</span>
+                <span style="font-size: 0.8rem; color: var(--text-muted);">// type defaults to 'main'</span>
+            </div>
+            <div class="row">
+                <span class="label"></span>
+                <span class="code">Sadrazam.Spinner.show({ type: 'helper' })</span>
+            </div>
+
+            <hr class="divider">
+
+            <div class="row">
+                <span class="label">hide()</span>
+                <span>Decrements the reference counter. Removes spinner from DOM when counter reaches 0.</span>
+            </div>
+            <div class="row">
+                <span class="label"></span>
+                <span class="code">Sadrazam.Spinner.hide()</span>
+            </div>
+
+            <hr class="divider">
+
+            <div class="row">
+                <span class="label">help()</span>
+                <span>Prints available configuration options to the browser console.</span>
+            </div>
+            <div class="row">
+                <span class="label"></span>
+                <span class="code">Sadrazam.Spinner.help()</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var Spinner = Sadrazam.Spinner;
+        var refCount = 0;
+
+        // --- Main spinner ---
+        function showMain() {
+            Spinner.show({ type: 'main' });
+            setTimeout(function () { Spinner.hide(); }, 2000);
+        }
+
+        // --- Helper spinner ---
+        function showHelper() {
+            Spinner.show({ type: 'helper' });
+            setTimeout(function () { Spinner.hide(); }, 2000);
+        }
+
+        function hideMain() {
+            Spinner.hide();
+        }
+
+        function hideHelper() {
+            Spinner.hide();
+        }
+
+        // --- Reference counting ---
+        function updateRefDisplay() {
+            document.getElementById('refCount').textContent = refCount;
+        }
+
+        function refShow() {
+            Spinner.show({ type: 'main' });
+            refCount++;
+            updateRefDisplay();
+        }
+
+        function refHide() {
+            if (refCount > 0) {
+                Spinner.hide();
+                refCount--;
+                updateRefDisplay();
+            }
+        }
+
+        function refReset() {
+            while (refCount > 0) {
+                Spinner.hide();
+                refCount--;
+            }
+            updateRefDisplay();
+        }
+
+        function simulateMultiple() {
+            // Three overlapping async operations
+            Spinner.show({ type: 'main' });
+            refCount++;
+            updateRefDisplay();
+
+            Spinner.show({ type: 'main' });
+            refCount++;
+            updateRefDisplay();
+
+            Spinner.show({ type: 'main' });
+            refCount++;
+            updateRefDisplay();
+
+            setTimeout(function () {
+                Spinner.hide();
+                refCount--;
+                updateRefDisplay();
+            }, 1000);
+
+            setTimeout(function () {
+                Spinner.hide();
+                refCount--;
+                updateRefDisplay();
+            }, 2000);
+
+            setTimeout(function () {
+                Spinner.hide();
+                refCount--;
+                updateRefDisplay();
+            }, 3000);
+        }
+
+        // --- Block spinner toggle ---
+        function toggleBlockSpinner(btn) {
+            var spinner = document.getElementById('blockSpinner');
+            if (spinner) {
+                spinner.remove();
+                btn.innerHTML = '<i class="ph-bold ph-eye"></i>&nbsp; Toggle';
+            } else {
+                var el = document.createElement('div');
+                el.id = 'blockSpinner';
+                el.className = 'spinner-block';
+                document.getElementById('blockTarget').appendChild(el);
+                btn.innerHTML = '<i class="ph-bold ph-eye-slash"></i>&nbsp; Toggle';
+            }
+        }
+
+        // --- Timed auto-hide ---
+        function timedSpinner(type, ms) {
+            Spinner.show({ type: type });
+            setTimeout(function () {
+                Spinner.hide();
+            }, ms);
+        }
+    </script>
+</body>
+
+</html>

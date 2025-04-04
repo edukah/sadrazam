@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sadrazam – Spacing Utilities Showcase</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/bold/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/light/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <script type="text/javascript" src="assets/js/script.js"></script>
+    <link rel="stylesheet" href="assets/sadrazam.min.css">
+    <script type="text/javascript" src="assets/sadrazam.min.js"></script>
+    <style>
+        /* ---- Visual demo helpers ---- */
+        .demo-outer {
+            display: inline-block;
+            background: var(--bg-subtle);
+            border: 1px dashed var(--border-color);
+            border-radius: 4px;
+            line-height: 1;
+        }
+
+        .demo-box {
+            background: #0984e3;
+            color: #fff;
+            font-size: 0.7rem;
+            font-weight: 600;
+            border-radius: 3px;
+            white-space: nowrap;
+            padding: 6px 10px;
+        }
+
+        .demo-padding-outer {
+            display: inline-block;
+            background: #55efc4;
+            border: 1px dashed #00b894;
+            border-radius: 4px;
+            line-height: 1;
+        }
+
+        .demo-padding-inner {
+            background: #0984e3;
+            color: #fff;
+            font-size: 0.7rem;
+            font-weight: 600;
+            border-radius: 3px;
+            white-space: nowrap;
+        }
+
+        .flow-demo-wrapper {
+            max-width: 260px;
+        }
+
+        .flow-demo-child {
+            background: #0984e3;
+            color: #fff;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 8px 14px;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .demo-row-items {
+            display: flex;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .demo-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .demo-caption {
+            font-size: 0.68rem;
+            color: var(--text-muted);
+            text-align: center;
+        }
+
+        .legend {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 1rem;
+            font-size: 0.72rem;
+            color: var(--text-muted);
+        }
+
+        .legend-swatch {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            border-radius: 3px;
+            vertical-align: middle;
+            margin-right: 4px;
+        }
+
+        .legend-swatch--margin {
+            background: var(--bg-subtle);
+            border: 1px dashed var(--border-color);
+        }
+
+        .legend-swatch--padding {
+            background: #55efc4;
+            border: 1px dashed #00b894;
+        }
+
+        .legend-swatch--content {
+            background: #0984e3;
+        }
+
+        .space-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.78rem;
+        }
+
+        .space-table th {
+            text-align: left;
+            font-weight: 600;
+            color: var(--text-muted);
+            padding: 6px 10px;
+            border-bottom: 2px solid var(--border-color);
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .space-table td {
+            padding: 6px 10px;
+            border-bottom: 1px solid var(--border-color);
+            vertical-align: middle;
+        }
+
+        .space-bar {
+            display: inline-block;
+            height: 12px;
+            background: #74b9ff;
+            border-radius: 2px;
+            min-width: 2px;
+        }
+    </style>
+</head>
+
+<body>
+<script>if(localStorage.getItem("dark-mode"))document.body.classList.add("dark-mode")</script>
+    <header>
+        <nav class="top-navbar">
+            <div class="nav-container">
+                <a href="index.html" class="nav-logo">Sadrazam</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li>
+                        <a href="javascript:void(0)" onclick="openPopup(); return false;">Examples</a>
+                        <div class="navi-popup-overlay" id="examplesPopupOverlay"></div>
+                        <div class="navi-popup" id="examplesPopup">
+                            <h3>Examples</h3>
+                            <ul>
+                                <li><a href="buttons.html">Button</a></li>
+                                <li><a href="forms.html">Form</a></li>
+                                <li><a href="form-patterns.html">Form Patterns</a></li>
+                                <li><a href="links.html">Link</a></li>
+                                <li><a href="switches.html">Switch</a></li>
+                                <li><a href="autocomplete.html">Autocomplete</a></li>
+                                <li><a href="backdrop.html">Backdrop</a></li>
+                                <li><a href="hovermenu.html">Hovermenu</a></li>
+                                <li><a href="infinite-scroll.html">Infinite Scroll</a></li>
+                                <li><a href="snackbar.html">Snackbar</a></li>
+                                <li><a href="modals.html">Modal</a></li>
+                                <li><a href="popovers.html">Popover</a></li>
+                                <li><a href="slide-menu.html">Slide Menu</a></li>
+                                <li><a href="spinners.html">Spinner</a></li>
+                                <li><a href="tabs.html">Tabs</a></li>
+                                <li><a href="tooltips.html">Tooltip</a></li>
+                                <li><a href="form-validation.html">Form Validation</a></li>
+                                <li><a href="autosize-textarea.html">Autosize Textarea</a></li>
+                                <li><a href="autosize-select.html">Autosize Select</a></li>
+                                <li><a href="ajax.html">Ajax</a></li>
+                                <li><a href="grid.html">Grid</a></li>
+                                <li><a href="spacing.html">Spacing</a></li>
+                                <li><a href="colors.html">Colors</a></li>
+                                <li><a href="typography.html">Typography</a></li>
+                            </ul>
+                            <button class="close-popup" onclick="closePopup()">&#10005;</button>
+                        </div>
+                    </li>
+                    <li><a href="https://github.com/edukah/sadrazam" target="_blank">GitHub</a></li>
+                </ul>
+                <div class="dark-mode-button-container">
+                    <div class="mode-toggle-switch" onclick="toggleMode()"></div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+
+        <h1>Sadrazam – Spacing Utilities Showcase</h1>
+        <p class="subtitle">Numeric spacing utilities: margin, padding, axis, single-direction, and flow spacing (steps 0–18)</p>
+
+        <!-- ==================== SPACE SCALE REFERENCE ==================== -->
+        <div class="section">
+            <h2 class="section-title">Space Scale Reference</h2>
+            <p class="section-desc">CSS custom property values used by all spacing utilities</p>
+
+            <table class="space-table">
+                <thead>
+                    <tr>
+                        <th>Token</th>
+                        <th>Value</th>
+                        <th>Pixels</th>
+                        <th>Visual</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td><span class="code">--space-0</span></td><td>0</td><td>0px</td><td><span class="space-bar" style="width:0;"></span></td></tr>
+                    <tr><td><span class="code">--space-1</span></td><td>0.125rem</td><td>2px</td><td><span class="space-bar" style="width:2px;"></span></td></tr>
+                    <tr><td><span class="code">--space-2</span></td><td>0.25rem</td><td>4px</td><td><span class="space-bar" style="width:4px;"></span></td></tr>
+                    <tr><td><span class="code">--space-3</span></td><td>0.375rem</td><td>6px</td><td><span class="space-bar" style="width:6px;"></span></td></tr>
+                    <tr><td><span class="code">--space-4</span></td><td>0.5rem</td><td>8px</td><td><span class="space-bar" style="width:8px;"></span></td></tr>
+                    <tr><td><span class="code">--space-5</span></td><td>0.625rem</td><td>10px</td><td><span class="space-bar" style="width:10px;"></span></td></tr>
+                    <tr><td><span class="code">--space-6</span></td><td>0.75rem</td><td>12px</td><td><span class="space-bar" style="width:12px;"></span></td></tr>
+                    <tr><td><span class="code">--space-7</span></td><td>0.875rem</td><td>14px</td><td><span class="space-bar" style="width:14px;"></span></td></tr>
+                    <tr><td><span class="code">--space-8</span></td><td>1rem</td><td>16px</td><td><span class="space-bar" style="width:16px;"></span></td></tr>
+                    <tr><td><span class="code">--space-9</span></td><td>1.25rem</td><td>20px</td><td><span class="space-bar" style="width:20px;"></span></td></tr>
+                    <tr><td><span class="code">--space-10</span></td><td>1.5rem</td><td>24px</td><td><span class="space-bar" style="width:24px;"></span></td></tr>
+                    <tr><td><span class="code">--space-11</span></td><td>1.75rem</td><td>28px</td><td><span class="space-bar" style="width:28px;"></span></td></tr>
+                    <tr><td><span class="code">--space-12</span></td><td>2rem</td><td>32px</td><td><span class="space-bar" style="width:32px;"></span></td></tr>
+                    <tr><td><span class="code">--space-13</span></td><td>2.5rem</td><td>40px</td><td><span class="space-bar" style="width:40px;"></span></td></tr>
+                    <tr><td><span class="code">--space-14</span></td><td>3rem</td><td>48px</td><td><span class="space-bar" style="width:48px;"></span></td></tr>
+                    <tr><td><span class="code">--space-15</span></td><td>4rem</td><td>64px</td><td><span class="space-bar" style="width:64px;"></span></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- ==================== LEGEND ==================== -->
+        <div class="section">
+            <h2 class="section-title">Visual Legend</h2>
+            <p class="section-desc">Colour coding used throughout all demos below</p>
+
+            <div class="legend">
+                <span><span class="legend-swatch legend-swatch--margin"></span> Margin area</span>
+                <span><span class="legend-swatch legend-swatch--padding"></span> Padding area</span>
+                <span><span class="legend-swatch legend-swatch--content"></span> Content</span>
+            </div>
+        </div>
+
+        <!-- ==================== MARGIN FLOW ==================== -->
+        <div class="section">
+            <h2 class="section-title">Margin Flow</h2>
+            <p class="section-desc">Adds vertical spacing between sibling elements using <span class="code">.margin-flow</span>. Applies <span class="code">margin-top: var(--space-3)</span> (6px) to every direct child after the first.</p>
+
+            <div class="row">
+                <span class="label">With class</span>
+                <div class="flow-demo-wrapper margin-flow" style="background:var(--bg-subtle); padding:8px; border-radius:6px;">
+                    <div class="flow-demo-child">Child 1</div>
+                    <div class="flow-demo-child">Child 2</div>
+                    <div class="flow-demo-child">Child 3</div>
+                </div>
+                <span class="code">.margin-flow &gt; * + *</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Without class</span>
+                <div class="flow-demo-wrapper" style="background:var(--bg-subtle); padding:8px; border-radius:6px;">
+                    <div class="flow-demo-child">Child 1</div>
+                    <div class="flow-demo-child">Child 2</div>
+                    <div class="flow-demo-child">Child 3</div>
+                </div>
+                <span style="font-size:0.75rem; color:var(--text-muted);">No gap between children</span>
+            </div>
+        </div>
+
+        <!-- ==================== PADDING – ALL SIDES ==================== -->
+        <div class="section">
+            <h2 class="section-title">Padding – All Sides</h2>
+            <p class="section-desc">Symmetric padding on all four sides: <span class="code">.padding-{step}</span></p>
+
+            <div class="demo-row-items">
+                <div class="demo-item">
+                    <div class="demo-padding-outer">
+                        <div class="demo-padding-inner padding-2">Content</div>
+                    </div>
+                    <span class="code">.padding-2</span>
+                    <span class="demo-caption">4px</span>
+                </div>
+
+                <div class="demo-item">
+                    <div class="demo-padding-outer">
+                        <div class="demo-padding-inner padding-5">Content</div>
+                    </div>
+                    <span class="code">.padding-5</span>
+                    <span class="demo-caption">10px</span>
+                </div>
+
+                <div class="demo-item">
+                    <div class="demo-padding-outer">
+                        <div class="demo-padding-inner padding-8">Content</div>
+                    </div>
+                    <span class="code">.padding-8</span>
+                    <span class="demo-caption">16px</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== PADDING – AXIS ==================== -->
+        <div class="section">
+            <h2 class="section-title">Padding – Axis</h2>
+            <p class="section-desc">Vertical axis <span class="code">.padding-y-{step}</span> (top + bottom) and horizontal axis <span class="code">.padding-x-{step}</span> (left + right)</p>
+
+            <div class="demo-row-items">
+                <div class="demo-item">
+                    <div class="demo-padding-outer">
+                        <div class="demo-padding-inner padding-y-5" style="padding-left:10px; padding-right:10px;">Content</div>
+                    </div>
+                    <span class="code">.padding-y-5</span>
+                    <span class="demo-caption">10px top/bottom</span>
+                </div>
+
+                <div class="demo-item">
+                    <div class="demo-padding-outer">
+                        <div class="demo-padding-inner padding-x-6" style="padding-top:6px; padding-bottom:6px;">Content</div>
+                    </div>
+                    <span class="code">.padding-x-6</span>
+                    <span class="demo-caption">12px left/right</span>
+                </div>
+
+                <div class="demo-item">
+                    <div class="demo-padding-outer">
+                        <div class="demo-padding-inner padding-y-8" style="padding-left:10px; padding-right:10px;">Content</div>
+                    </div>
+                    <span class="code">.padding-y-8</span>
+                    <span class="demo-caption">16px top/bottom</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== PADDING – SINGLE DIRECTION ==================== -->
+        <div class="section">
+            <h2 class="section-title">Padding – Single Direction</h2>
+            <p class="section-desc">Individual side: <span class="code">.padding-t-{step}</span>, <span class="code">.padding-b-{step}</span>, <span class="code">.padding-l-{step}</span>, <span class="code">.padding-r-{step}</span></p>
+
+            <div class="demo-row-items">
+                <div class="demo-item">
+                    <div class="demo-padding-outer">
+                        <div class="demo-padding-inner padding-t-3" style="padding-left:10px; padding-right:10px;">Content</div>
+                    </div>
+                    <span class="code">.padding-t-3</span>
+                    <span class="demo-caption">6px top</span>
+                </div>
+
+                <div class="demo-item">
+                    <div class="demo-padding-outer">
+                        <div class="demo-padding-inner padding-b-7" style="padding-left:10px; padding-right:10px;">Content</div>
+                    </div>
+                    <span class="code">.padding-b-7</span>
+                    <span class="demo-caption">14px bottom</span>
+                </div>
+
+                <div class="demo-item">
+                    <div class="demo-padding-outer">
+                        <div class="demo-padding-inner padding-l-9" style="padding-top:6px; padding-bottom:6px;">Content</div>
+                    </div>
+                    <span class="code">.padding-l-9</span>
+                    <span class="demo-caption">20px left</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== MARGIN – ALL SIDES ==================== -->
+        <div class="section">
+            <h2 class="section-title">Margin – All Sides</h2>
+            <p class="section-desc">Symmetric margin on all four sides: <span class="code">.margin-{step}</span></p>
+
+            <div class="demo-row-items">
+                <div class="demo-item">
+                    <div class="demo-outer">
+                        <div class="demo-box margin-2">Content</div>
+                    </div>
+                    <span class="code">.margin-2</span>
+                    <span class="demo-caption">4px</span>
+                </div>
+
+                <div class="demo-item">
+                    <div class="demo-outer">
+                        <div class="demo-box margin-5">Content</div>
+                    </div>
+                    <span class="code">.margin-5</span>
+                    <span class="demo-caption">10px</span>
+                </div>
+
+                <div class="demo-item">
+                    <div class="demo-outer">
+                        <div class="demo-box margin-8">Content</div>
+                    </div>
+                    <span class="code">.margin-8</span>
+                    <span class="demo-caption">16px</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== MARGIN – AXIS ==================== -->
+        <div class="section">
+            <h2 class="section-title">Margin – Axis</h2>
+            <p class="section-desc">Vertical axis <span class="code">.margin-y-{step}</span> (top + bottom) and horizontal axis <span class="code">.margin-x-{step}</span> (left + right)</p>
+
+            <div class="demo-row-items">
+                <div class="demo-item">
+                    <div class="demo-outer">
+                        <div class="demo-box margin-y-5">Content</div>
+                    </div>
+                    <span class="code">.margin-y-5</span>
+                    <span class="demo-caption">10px top/bottom</span>
+                </div>
+
+                <div class="demo-item">
+                    <div class="demo-outer">
+                        <div class="demo-box margin-x-6">Content</div>
+                    </div>
+                    <span class="code">.margin-x-6</span>
+                    <span class="demo-caption">12px left/right</span>
+                </div>
+
+                <div class="demo-item">
+                    <div class="demo-outer">
+                        <div class="demo-box margin-y-8">Content</div>
+                    </div>
+                    <span class="code">.margin-y-8</span>
+                    <span class="demo-caption">16px top/bottom</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== MARGIN – SINGLE DIRECTION ==================== -->
+        <div class="section">
+            <h2 class="section-title">Margin – Single Direction</h2>
+            <p class="section-desc">Individual side: <span class="code">.margin-t-{step}</span>, <span class="code">.margin-b-{step}</span>, <span class="code">.margin-l-{step}</span>, <span class="code">.margin-r-{step}</span></p>
+
+            <div class="demo-row-items">
+                <div class="demo-item">
+                    <div class="demo-outer">
+                        <div class="demo-box margin-t-2">Content</div>
+                    </div>
+                    <span class="code">.margin-t-2</span>
+                    <span class="demo-caption">4px top</span>
+                </div>
+
+                <div class="demo-item">
+                    <div class="demo-outer">
+                        <div class="demo-box margin-b-7">Content</div>
+                    </div>
+                    <span class="code">.margin-b-7</span>
+                    <span class="demo-caption">14px bottom</span>
+                </div>
+
+                <div class="demo-item">
+                    <div class="demo-outer">
+                        <div class="demo-box margin-l-3">Content</div>
+                    </div>
+                    <span class="code">.margin-l-3</span>
+                    <span class="demo-caption">6px left</span>
+                </div>
+
+                <div class="demo-item">
+                    <div class="demo-outer">
+                        <div class="demo-box margin-r-3">Content</div>
+                    </div>
+                    <span class="code">.margin-r-3</span>
+                    <span class="demo-caption">6px right</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== RESPONSIVE ==================== -->
+        <div class="section">
+            <h2 class="section-title">Responsive</h2>
+            <p class="section-desc">Removes horizontal padding below the large breakpoint</p>
+
+            <div class="row">
+                <span class="label">padding-x-0--sm</span>
+                <div class="demo-padding-outer">
+                    <div class="demo-padding-inner padding-x-0--sm" style="padding:6px 20px;">Resize viewport to see effect</div>
+                </div>
+                <span class="code">.padding-x-0--sm</span>
+            </div>
+            <p style="font-size:0.72rem; color:var(--text-muted); margin-top:8px;">Sets <span class="code">padding-left: 0</span> and <span class="code">padding-right: 0</span> at <span class="code">max-width: $breakpoint-lg</span></p>
+        </div>
+
+        <!-- ==================== QUICK REFERENCE TABLE ==================== -->
+        <div class="section">
+            <h2 class="section-title">Quick Reference</h2>
+            <p class="section-desc">Class patterns for the numeric spacing system (steps 0–18)</p>
+
+            <table class="space-table">
+                <thead>
+                    <tr>
+                        <th>Pattern</th>
+                        <th>CSS Property</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td colspan="3" style="font-weight:600; color:var(--theme-color-primary); padding-top:12px;">Flow</td></tr>
+                    <tr><td><span class="code">.margin-flow &gt; * + *</span></td><td>margin-top</td><td>var(--space-3) = 6px</td></tr>
+
+                    <tr><td colspan="3" style="font-weight:600; color:var(--theme-color-primary); padding-top:12px;">Padding &mdash; All Sides</td></tr>
+                    <tr><td><span class="code">.padding-{step}</span></td><td>padding</td><td><span class="code">.padding-5</span> = 10px</td></tr>
+
+                    <tr><td colspan="3" style="font-weight:600; color:var(--theme-color-primary); padding-top:12px;">Padding &mdash; Axis</td></tr>
+                    <tr><td><span class="code">.padding-y-{step}</span></td><td>padding-top, padding-bottom</td><td><span class="code">.padding-y-4</span> = 8px</td></tr>
+                    <tr><td><span class="code">.padding-x-{step}</span></td><td>padding-left, padding-right</td><td><span class="code">.padding-x-6</span> = 12px</td></tr>
+
+                    <tr><td colspan="3" style="font-weight:600; color:var(--theme-color-primary); padding-top:12px;">Padding &mdash; Single Direction</td></tr>
+                    <tr><td><span class="code">.padding-t-{step}</span></td><td>padding-top</td><td><span class="code">.padding-t-3</span> = 6px</td></tr>
+                    <tr><td><span class="code">.padding-b-{step}</span></td><td>padding-bottom</td><td><span class="code">.padding-b-7</span> = 14px</td></tr>
+                    <tr><td><span class="code">.padding-l-{step}</span></td><td>padding-left</td><td><span class="code">.padding-l-9</span> = 20px</td></tr>
+                    <tr><td><span class="code">.padding-r-{step}</span></td><td>padding-right</td><td><span class="code">.padding-r-4</span> = 8px</td></tr>
+
+                    <tr><td colspan="3" style="font-weight:600; color:var(--theme-color-primary); padding-top:12px;">Margin &mdash; All Sides</td></tr>
+                    <tr><td><span class="code">.margin-{step}</span></td><td>margin</td><td><span class="code">.margin-5</span> = 10px</td></tr>
+
+                    <tr><td colspan="3" style="font-weight:600; color:var(--theme-color-primary); padding-top:12px;">Margin &mdash; Axis</td></tr>
+                    <tr><td><span class="code">.margin-y-{step}</span></td><td>margin-top, margin-bottom</td><td><span class="code">.margin-y-4</span> = 8px</td></tr>
+                    <tr><td><span class="code">.margin-x-{step}</span></td><td>margin-left, margin-right</td><td><span class="code">.margin-x-6</span> = 12px</td></tr>
+
+                    <tr><td colspan="3" style="font-weight:600; color:var(--theme-color-primary); padding-top:12px;">Margin &mdash; Single Direction</td></tr>
+                    <tr><td><span class="code">.margin-t-{step}</span></td><td>margin-top</td><td><span class="code">.margin-t-2</span> = 4px</td></tr>
+                    <tr><td><span class="code">.margin-b-{step}</span></td><td>margin-bottom</td><td><span class="code">.margin-b-7</span> = 14px</td></tr>
+                    <tr><td><span class="code">.margin-l-{step}</span></td><td>margin-left</td><td><span class="code">.margin-l-3</span> = 6px</td></tr>
+                    <tr><td><span class="code">.margin-r-{step}</span></td><td>margin-right</td><td><span class="code">.margin-r-3</span> = 6px</td></tr>
+
+                    <tr><td colspan="3" style="font-weight:600; color:var(--theme-color-primary); padding-top:12px;">Responsive</td></tr>
+                    <tr><td><span class="code">.padding-x-0--sm</span></td><td>padding-left, padding-right</td><td>0 (below $breakpoint-lg)</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>

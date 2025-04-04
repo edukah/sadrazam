@@ -1,0 +1,236 @@
+@use '../base/variables';
+
+/* =========================================================================
+   Snackbar — Toast / bildirim bileşeni
+   JS modülü: modules/snackbar.js
+   Popup (animasyonlu) ve statik (sayfa içi) bildirim varyantları.
+   Eski yeri: components/_snackbar.scss → modules/snackbar.scss olarak taşındı.
+   ========================================================================= */
+
+/* Popup Snackbar */
+.snackbar__popup-wrapper {
+  position: fixed;
+  top: 40px;
+  left: 50%;
+  min-width: 300px;
+  z-index: var(--z-toast-notification);
+  transform: translate(-50%, 0);
+  outline: 0;
+  border-radius: var(--radius-md);
+  box-shadow:
+    0 0 30px 2px rgba(0, 0, 0, 0.5),
+    0 0 40px 2px rgba(0, 0, 0, 0.4);
+  /* İkinci, daha yayvan gölge */
+  background-color: rgba(0, 0, 0, 0.4);
+  overflow: visible;
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+
+  animation-name: animatetop;
+  animation-duration: 0.2s;
+
+  @keyframes animatetop {
+    from {
+      top: -300px;
+      opacity: 0;
+      transform: translate(-50%, 0) scale3d(0.5, 0.5, 0.5);
+    }
+
+    to {
+      top: 40px;
+      opacity: 1;
+      transform: translate(-50%, 0) scale3d(1, 1, 1);
+    }
+  }
+
+  .snackbar__static-container {
+    margin: 0;
+    padding: 0;
+    border: 0;
+
+    align-items: center;
+    padding: var(--space-5) var(--space-7);
+  }
+}
+
+/* End of Popup Snackbar  */
+
+/* snackbar list */
+.snackbar__static-container {
+  position: relative;
+
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-8);
+
+  padding: var(--space-8) var(--space-8);
+  margin-bottom: var(--space-8);
+
+  border: var(--border-width-sm) solid var(--color-grey-250);
+  border-radius: var(--radius-md);
+
+  &::before {
+    font-family: "Phosphor-Bold";
+    font-size: var(--fsi-30);
+    line-height: 1;
+
+    margin-top: var(--space-0);
+  }
+
+  &--error {
+    background-color: var(--color-danger-100);
+    border-color: var(--color-border-danger);
+    color: var(--color-danger-900);
+
+    &::before {
+      content: '\E4E0';
+      color: var(--color-danger-500);
+
+    }
+  }
+
+  &--warning {
+    background-color: var(--color-warning-100);
+    border-color: var(--color-border-warning);
+    color: var(--color-warning-900);
+
+    &::before {
+      content: '\E4E0';
+      color: var(--color-warning-500);
+    }
+  }
+
+  &--notice {
+    background-color: var(--color-notice-100);
+    border-color: var(--color-border-notice);
+    color: var(--color-notice-900);
+
+    &::before {
+      content: '\E2CE';
+      color: var(--color-notice-500);
+    }
+  }
+
+  &--success {
+    background-color: var(--color-safe-100);
+    border-color: var(--color-border-safe);
+    color: var(--color-safe-900);
+
+    &::before {
+      content: '\E184';
+      color: var(--color-safe-500);
+    }
+  }
+
+  &--hint {
+    background-color: var(--color-notice-100);
+    border-color: var(--color-border-notice);
+    color: var(--color-notice-900);
+
+    &::before {
+      content: '\E3E8';
+      color: var(--color-notice-500);
+    }
+  }
+
+  ul,
+  .snackbar__static-list {
+    position: relative;
+
+    display: flex;
+    gap: var(--space-5);
+    flex-direction: column;
+
+    /* gerçek bullet’ı kapat */
+    list-style: none;
+    padding-left: 0;
+
+    margin: 0;
+
+    font-weight: var(--fwe-regular);
+
+    flex-grow: 2;
+    align-self: center;
+
+    li {
+      display: flex;
+      align-items: flex-start;
+
+      &::before {
+        content: '•';
+        font-size: 2em;
+        margin-right: var(--space-2);
+        line-height: .75;
+      }
+    }
+
+    li:only-child::before {
+      content: '';
+      margin: 0;
+    }
+  }
+
+  ul.snackbar__child-list {
+    gap: var(--space-1);
+
+    li {
+      display: flex;
+      align-items: flex-start;
+
+      &::before {
+        content: '•';
+        font-size: 2em;
+        margin-right: var(--space-2);
+        line-height: .75;
+      }
+    }
+  }
+
+  p {
+    margin: 0;
+    margin-bottom: var(--space-2);
+
+    &:not(:first-child) {
+      margin-top: var(--space-2);
+    }
+  }
+
+  strong {
+    font-weight: var(--fwe-semibold); // Kalın metinler için
+  }
+
+  button,
+  .snackbar__static-close {
+    margin: 0;
+    padding: var(--space-2);
+    font-size: var(--fsi-20);
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    color: var(--color-text-dark-1);
+    text-shadow: 0 1px 0 var(--color-grey-650--f);
+    opacity: 0.3;
+
+    appearance: none;
+
+    &:focus {
+      color: var(--color-text-dark-1);
+      text-decoration: none;
+      cursor: pointer;
+      opacity: 0.5;
+    }
+
+    &:hover {
+      @media (hover: hover) and (pointer: fine) {
+        color: var(--color-text-dark-1);
+        text-decoration: none;
+        cursor: pointer;
+        opacity: 0.5;
+      }
+    }
+  }
+}
+
+/* End of snackbar list */

@@ -1,0 +1,26 @@
+@use '../base/variables';
+
+/* =========================================================================
+   Progress Bar — Sayfa üst yükleme çubuğu (top loading bar)
+   JS modülü: modules/progress-bar.js (reference counting)
+
+   YouTube/GitHub tarzı, sayfanın tepesinde soldan sağa ilerleyen ince çubuk.
+   ========================================================================= */
+
+.progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: var(--z-system-loader);
+  width: 0;
+  height: 3px;
+  background-color: var(--color-pri-500);
+  box-shadow: 0 0 8px var(--color-pri-500);
+  opacity: 0;
+  transition: width 0.3s ease, opacity 0.3s ease;
+  pointer-events: none;
+
+  &.is-active {
+    opacity: 1;
+  }
+}

@@ -1,0 +1,46 @@
+// === Text Alignment ===
+.text-center {
+  text-align: center !important;
+}
+
+.text-left {
+  text-align: left !important;
+}
+
+.text-right {
+  text-align: right !important;
+}
+
+.text-justify {
+  text-align: justify;
+}
+
+// === Text Wrapping and Transformation ===
+.text-nowrap {
+  white-space: nowrap;
+}
+
+.text-lowercase {
+  text-transform: lowercase;
+}
+
+.text-uppercase {
+  text-transform: uppercase;
+}
+
+.text-capitalize {
+  text-transform: capitalize;
+}
+
+// === Text Decoration ===
+.text-underline {
+  text-decoration: underline;
+}
+
+.text-underline-hover {
+  &:hover {
+    @media (hover: hover) and (pointer: fine) {
+      text-decoration: underline;
+    }
+  }
+}

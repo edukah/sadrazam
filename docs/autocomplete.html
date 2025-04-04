@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sadrazam – Autocomplete Showcase</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/bold/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/light/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <script type="text/javascript" src="assets/js/script.js"></script>
+    <link rel="stylesheet" href="assets/sadrazam.min.css">
+    <script type="text/javascript" src="assets/sadrazam.min.js"></script>
+    <style>
+        .autocomplete-wrapper {
+            position: relative;
+            display: inline-block;
+            width: 320px;
+        }
+
+        .autocomplete-wrapper input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 0.9rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .autocomplete-wrapper input:focus {
+            border-color: var(--theme-color-primary);
+            box-shadow: 0 0 0 3px rgba(9, 132, 227, 0.1);
+        }
+
+        .config-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.82rem;
+            margin-top: 0.5rem;
+        }
+
+        .config-table th,
+        .config-table td {
+            text-align: left;
+            padding: 8px 12px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .config-table th {
+            font-weight: 600;
+            color: var(--text-muted);
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .config-table td:first-child {
+            font-weight: 600;
+        }
+
+        .event-log {
+            background: #2d3436;
+            color: #dfe6e9;
+            border-radius: 6px;
+            padding: 12px 16px;
+            font-family: 'SF Mono', Monaco, Consolas, monospace;
+            font-size: 0.75rem;
+            max-height: 160px;
+            overflow-y: auto;
+            margin-top: 10px;
+            line-height: 1.6;
+        }
+
+        .event-log .log-entry {
+            border-bottom: 1px solid #3d3d3d;
+            padding: 2px 0;
+        }
+
+        .event-log .log-label {
+            color: #74b9ff;
+        }
+
+        .event-log .log-value {
+            color: #55efc4;
+        }
+
+        .snippet {
+            background: #2d3436;
+            color: #dfe6e9;
+            border-radius: 6px;
+            padding: 14px 18px;
+            font-family: 'SF Mono', Monaco, Consolas, monospace;
+            font-size: 0.75rem;
+            line-height: 1.7;
+            overflow-x: auto;
+            margin-top: 10px;
+        }
+
+        .snippet .kw { color: #a29bfe; }
+        .snippet .str { color: #55efc4; }
+        .snippet .num { color: #ffeaa7; }
+        .snippet .prop { color: #74b9ff; }
+        .snippet .cmt { color: #636e72; }
+        .snippet .fn { color: #fd79a8; }
+    </style>
+</head>
+
+<body>
+<script>if(localStorage.getItem("dark-mode"))document.body.classList.add("dark-mode")</script>
+    <header>
+        <nav class="top-navbar">
+            <div class="nav-container">
+                <a href="index.html" class="nav-logo">Sadrazam</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li>
+                        <a href="javascript:void(0)" onclick="openPopup(); return false;">Examples</a>
+                        <div class="navi-popup-overlay" id="examplesPopupOverlay"></div>
+                        <div class="navi-popup" id="examplesPopup">
+                            <h3>Examples</h3>
+                            <ul>
+                                <li><a href="buttons.html">Button</a></li>
+                                <li><a href="forms.html">Form</a></li>
+                                <li><a href="form-patterns.html">Form Patterns</a></li>
+                                <li><a href="links.html">Link</a></li>
+                                <li><a href="switches.html">Switch</a></li>
+                                <li><a href="autocomplete.html">Autocomplete</a></li>
+                                <li><a href="backdrop.html">Backdrop</a></li>
+                                <li><a href="hovermenu.html">Hovermenu</a></li>
+                                <li><a href="infinite-scroll.html">Infinite Scroll</a></li>
+                                <li><a href="snackbar.html">Snackbar</a></li>
+                                <li><a href="modals.html">Modal</a></li>
+                                <li><a href="popovers.html">Popover</a></li>
+                                <li><a href="slide-menu.html">Slide Menu</a></li>
+                                <li><a href="spinners.html">Spinner</a></li>
+                                <li><a href="tabs.html">Tabs</a></li>
+                                <li><a href="tooltips.html">Tooltip</a></li>
+                                <li><a href="form-validation.html">Form Validation</a></li>
+                                <li><a href="autosize-textarea.html">Autosize Textarea</a></li>
+                                <li><a href="autosize-select.html">Autosize Select</a></li>
+                                <li><a href="ajax.html">Ajax</a></li>
+                                <li><a href="grid.html">Grid</a></li>
+                                <li><a href="spacing.html">Spacing</a></li>
+                                <li><a href="colors.html">Colors</a></li>
+                                <li><a href="typography.html">Typography</a></li>
+                            </ul>
+                            <button class="close-popup" onclick="closePopup()">&#10005;</button>
+                        </div>
+                    </li>
+                    <li><a href="https://github.com/edukah/sadrazam" target="_blank">GitHub</a></li>
+                </ul>
+                <div class="dark-mode-button-container">
+                    <div class="mode-toggle-switch" onclick="toggleMode()"></div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+
+        <h1>Sadrazam – Autocomplete Showcase</h1>
+        <p class="subtitle">Interactive autocomplete component with keyboard navigation, caching, and custom callbacks</p>
+
+        <!-- ==================== API REFERENCE ==================== -->
+        <div class="section">
+            <h2 class="section-title">Configuration Reference</h2>
+            <p class="section-desc">All available options for <span class="code">new Sadrazam.Autocomplete({ ... })</span></p>
+
+            <table class="config-table">
+                <thead>
+                    <tr>
+                        <th>Option</th>
+                        <th>Type</th>
+                        <th>Default</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="code">selector</span></td>
+                        <td>String | Element</td>
+                        <td><span class="code">null</span></td>
+                        <td>Target input element. Accepts a CSS selector string or a DOM Element reference.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="code">source</span></td>
+                        <td>String</td>
+                        <td><span class="code">null</span></td>
+                        <td>Endpoint URL for the search query. The component sends <span class="code">{ search_term: value }</span> via Ajax.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="code">delay</span></td>
+                        <td>Number</td>
+                        <td><span class="code">250</span></td>
+                        <td>Debounce delay in milliseconds after the last keystroke before a search is triggered.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="code">cache</span></td>
+                        <td>Boolean</td>
+                        <td><span class="code">false</span></td>
+                        <td>When enabled, previously fetched results are stored and reused for the same search term.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="code">minChars</span></td>
+                        <td>Number</td>
+                        <td><span class="code">1</span></td>
+                        <td>Minimum number of characters required before a search is triggered.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="code">badge</span></td>
+                        <td>String</td>
+                        <td><span class="code">null</span></td>
+                        <td>Badge template shown inside the input after selection. Use <span class="code">{field_name}</span> as a placeholder — the value is read from a hidden <span class="code">&lt;input name="field_name"&gt;</span> inside the selected suggestion.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="code">menuClass</span></td>
+                        <td>String</td>
+                        <td><span class="code">tbc-grey-zero</span></td>
+                        <td>CSS class appended to the suggestions dropdown container element.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="code">onSelect</span></td>
+                        <td>Function</td>
+                        <td>(see below)</td>
+                        <td>Callback fired when a suggestion is selected. Receives <span class="code">(event, itemValue, item)</span>.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="snippet">
+                <span class="cmt">// Default onSelect navigates via data-href or calls item.onclick()</span><br>
+                <span class="kw">onSelect</span>: <span class="kw">function</span> (<span class="prop">event</span>, <span class="prop">itemValue</span>, <span class="prop">item</span>) {<br>
+                &nbsp;&nbsp;<span class="fn">setTimeout</span>(() => {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">const</span> targetUrl = item.firstElementChild?.<span class="fn">getAttribute</span>(<span class="str">'data-href'</span>);<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">if</span> (targetUrl) window.location.href = targetUrl;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">if</span> (item.onclick) item.<span class="fn">onclick</span>();<br>
+                &nbsp;&nbsp;}, <span class="num">40</span>);<br>
+                }
+            </div>
+        </div>
+
+        <!-- ==================== EXPECTED HTML STRUCTURE ==================== -->
+        <div class="section">
+            <h2 class="section-title">Expected Response HTML Structure</h2>
+            <p class="section-desc">The <span class="code">source</span> endpoint must return an HTML string. Each suggestion item needs the <span class="code">.autocomplete__suggestion</span> class and a <span class="code">data-autocomplete-value</span> attribute.</p>
+
+            <div class="snippet">
+                <span class="cmt">&lt;!-- Server response HTML --&gt;</span><br>
+                &lt;<span class="kw">ul</span>&gt;<br>
+                &nbsp;&nbsp;&lt;<span class="kw">li</span> <span class="prop">class</span>=<span class="str">"autocomplete__suggestion"</span> <span class="prop">data-autocomplete-value</span>=<span class="str">"France"</span>&gt;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="kw">a</span> <span class="prop">data-href</span>=<span class="str">"/country/france"</span>&gt;France&lt;/<span class="kw">a</span>&gt;<br>
+                &nbsp;&nbsp;&lt;/<span class="kw">li</span>&gt;<br>
+                &nbsp;&nbsp;&lt;<span class="kw">li</span> <span class="prop">class</span>=<span class="str">"autocomplete__suggestion"</span> <span class="prop">data-autocomplete-value</span>=<span class="str">"Finland"</span>&gt;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="kw">a</span> <span class="prop">data-href</span>=<span class="str">"/country/finland"</span>&gt;Finland&lt;/<span class="kw">a</span>&gt;<br>
+                &nbsp;&nbsp;&lt;/<span class="kw">li</span>&gt;<br>
+                &nbsp;&nbsp;&lt;<span class="kw">li</span> <span class="prop">class</span>=<span class="str">"autocomplete__suggestion"</span> <span class="prop">data-autocomplete-disabled</span>&gt;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="cmt">&lt;!-- Non-selectable header/separator --&gt;</span><br>
+                &nbsp;&nbsp;&lt;/<span class="kw">li</span>&gt;<br>
+                &lt;/<span class="kw">ul</span>&gt;
+            </div>
+
+            <p class="section-desc" style="margin-top: 1rem;">
+                Items with <span class="code">data-autocomplete-disabled</span> are skipped during keyboard navigation and click selection.
+            </p>
+        </div>
+
+        <!-- ==================== BASIC USAGE (COUNTRIES) ==================== -->
+        <div class="section">
+            <h2 class="section-title">1. Basic Usage -- Country Search</h2>
+            <p class="section-desc">Minimal configuration with default settings. Type to search countries. Uses a local mock source interceptor since there is no live endpoint.</p>
+
+            <div class="row">
+                <span class="label">Input</span>
+                <div class="autocomplete-wrapper">
+                    <input type="text" id="ac-countries" placeholder="Type a country name...">
+                </div>
+            </div>
+
+            <div class="snippet">
+                <span class="kw">new</span> sadrazam.<span class="fn">Autocomplete</span>({<br>
+                &nbsp;&nbsp;<span class="prop">selector</span>: <span class="str">'#ac-countries'</span>,<br>
+                &nbsp;&nbsp;<span class="prop">source</span>: <span class="str">'/api/countries'</span><br>
+                });
+            </div>
+        </div>
+
+        <!-- ==================== MIN CHARS ==================== -->
+        <div class="section">
+            <h2 class="section-title">2. Minimum Characters -- Fruit Search</h2>
+            <p class="section-desc">Requires at least <span class="code">minChars: 2</span> characters before searching. The dropdown will not appear for a single character.</p>
+
+            <div class="row">
+                <span class="label">minChars: 2</span>
+                <div class="autocomplete-wrapper">
+                    <input type="text" id="ac-fruits" placeholder="Type at least 2 characters...">
+                </div>
+            </div>
+
+            <div class="snippet">
+                <span class="kw">new</span> sadrazam.<span class="fn">Autocomplete</span>({<br>
+                &nbsp;&nbsp;<span class="prop">selector</span>: <span class="str">'#ac-fruits'</span>,<br>
+                &nbsp;&nbsp;<span class="prop">source</span>: <span class="str">'/api/fruits'</span>,<br>
+                &nbsp;&nbsp;<span class="prop">minChars</span>: <span class="num">2</span><br>
+                });
+            </div>
+        </div>
+
+        <!-- ==================== CACHE ENABLED ==================== -->
+        <div class="section">
+            <h2 class="section-title">3. Cache Enabled -- City Search</h2>
+            <p class="section-desc">With <span class="code">cache: true</span>, results for the same query are stored in memory and reused without another network request. Try typing, clearing, and retyping the same term.</p>
+
+            <div class="row">
+                <span class="label">cache: true</span>
+                <div class="autocomplete-wrapper">
+                    <input type="text" id="ac-cities" placeholder="Search cities (cached)...">
+                </div>
+            </div>
+
+            <div class="snippet">
+                <span class="kw">new</span> sadrazam.<span class="fn">Autocomplete</span>({<br>
+                &nbsp;&nbsp;<span class="prop">selector</span>: <span class="str">'#ac-cities'</span>,<br>
+                &nbsp;&nbsp;<span class="prop">source</span>: <span class="str">'/api/cities'</span>,<br>
+                &nbsp;&nbsp;<span class="prop">cache</span>: <span class="num">true</span><br>
+                });
+            </div>
+        </div>
+
+        <!-- ==================== CUSTOM DELAY ==================== -->
+        <div class="section">
+            <h2 class="section-title">4. Custom Delay -- Programming Languages</h2>
+            <p class="section-desc">The <span class="code">delay</span> option controls the debounce interval. A higher value (e.g. <span class="code">500</span>ms) reduces requests for fast typists. A lower value (e.g. <span class="code">100</span>ms) feels more responsive.</p>
+
+            <div class="row">
+                <span class="label">delay: 100</span>
+                <div class="autocomplete-wrapper">
+                    <input type="text" id="ac-lang-fast" placeholder="Fast response (100ms)...">
+                </div>
+            </div>
+
+            <div class="row">
+                <span class="label">delay: 600</span>
+                <div class="autocomplete-wrapper">
+                    <input type="text" id="ac-lang-slow" placeholder="Slow response (600ms)...">
+                </div>
+            </div>
+
+            <div class="snippet">
+                <span class="cmt">// Fast -- 100ms debounce</span><br>
+                <span class="kw">new</span> sadrazam.<span class="fn">Autocomplete</span>({<br>
+                &nbsp;&nbsp;<span class="prop">selector</span>: <span class="str">'#ac-lang-fast'</span>,<br>
+                &nbsp;&nbsp;<span class="prop">source</span>: <span class="str">'/api/languages'</span>,<br>
+                &nbsp;&nbsp;<span class="prop">delay</span>: <span class="num">100</span><br>
+                });<br><br>
+                <span class="cmt">// Slow -- 600ms debounce</span><br>
+                <span class="kw">new</span> sadrazam.<span class="fn">Autocomplete</span>({<br>
+                &nbsp;&nbsp;<span class="prop">selector</span>: <span class="str">'#ac-lang-slow'</span>,<br>
+                &nbsp;&nbsp;<span class="prop">source</span>: <span class="str">'/api/languages'</span>,<br>
+                &nbsp;&nbsp;<span class="prop">delay</span>: <span class="num">600</span><br>
+                });
+            </div>
+        </div>
+
+        <!-- ==================== CUSTOM onSelect CALLBACK ==================== -->
+        <div class="section">
+            <h2 class="section-title">5. Custom onSelect Callback</h2>
+            <p class="section-desc">Override the default <span class="code">onSelect</span> to perform custom actions when a suggestion is selected. The callback receives <span class="code">(event, itemValue, itemElement)</span>. Events are logged below the input.</p>
+
+            <div class="row">
+                <span class="label">onSelect</span>
+                <div class="autocomplete-wrapper">
+                    <input type="text" id="ac-callback" placeholder="Select a country to see the log...">
+                </div>
+            </div>
+
+            <div id="callback-log" class="event-log">
+                <div class="log-entry"><span class="log-label">Waiting for selection...</span></div>
+            </div>
+
+            <div class="snippet">
+                <span class="kw">new</span> sadrazam.<span class="fn">Autocomplete</span>({<br>
+                &nbsp;&nbsp;<span class="prop">selector</span>: <span class="str">'#ac-callback'</span>,<br>
+                &nbsp;&nbsp;<span class="prop">source</span>: <span class="str">'/api/countries'</span>,<br>
+                &nbsp;&nbsp;<span class="prop">onSelect</span>: <span class="kw">function</span> (<span class="prop">event</span>, <span class="prop">value</span>, <span class="prop">item</span>) {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;console.<span class="fn">log</span>(<span class="str">'Selected:'</span>, value);<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;console.<span class="fn">log</span>(<span class="str">'Event type:'</span>, event.type);<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;console.<span class="fn">log</span>(<span class="str">'DOM element:'</span>, item);<br>
+                &nbsp;&nbsp;}<br>
+                });
+            </div>
+        </div>
+
+        <!-- ==================== CUSTOM menuClass ==================== -->
+        <div class="section">
+            <h2 class="section-title">6. Custom Menu Class</h2>
+            <p class="section-desc">The <span class="code">menuClass</span> option adds a custom CSS class to the suggestions container. Default is <span class="code">tbc-grey-zero</span>. You can pass any class for custom styling.</p>
+
+            <div class="row">
+                <span class="label">menuClass</span>
+                <div class="autocomplete-wrapper">
+                    <input type="text" id="ac-menuclass" placeholder="Custom styled dropdown...">
+                </div>
+            </div>
+
+            <div class="snippet">
+                <span class="kw">new</span> sadrazam.<span class="fn">Autocomplete</span>({<br>
+                &nbsp;&nbsp;<span class="prop">selector</span>: <span class="str">'#ac-menuclass'</span>,<br>
+                &nbsp;&nbsp;<span class="prop">source</span>: <span class="str">'/api/countries'</span>,<br>
+                &nbsp;&nbsp;<span class="prop">menuClass</span>: <span class="str">'my-custom-dropdown'</span><br>
+                });
+            </div>
+        </div>
+
+        <!-- ==================== SELECTOR AS ELEMENT ==================== -->
+        <div class="section">
+            <h2 class="section-title">7. Selector as DOM Element</h2>
+            <p class="section-desc">Instead of a CSS selector string, you can pass a direct DOM <span class="code">Element</span> reference to the <span class="code">selector</span> option.</p>
+
+            <div class="row">
+                <span class="label">Element ref</span>
+                <div class="autocomplete-wrapper">
+                    <input type="text" id="ac-element-ref" placeholder="Passed as Element reference...">
+                </div>
+            </div>
+
+            <div class="snippet">
+                <span class="kw">const</span> inputEl = document.<span class="fn">getElementById</span>(<span class="str">'ac-element-ref'</span>);<br><br>
+                <span class="kw">new</span> sadrazam.<span class="fn">Autocomplete</span>({<br>
+                &nbsp;&nbsp;<span class="prop">selector</span>: inputEl,<br>
+                &nbsp;&nbsp;<span class="prop">source</span>: <span class="str">'/api/countries'</span>,<br>
+                &nbsp;&nbsp;<span class="prop">minChars</span>: <span class="num">1</span>,<br>
+                &nbsp;&nbsp;<span class="prop">cache</span>: <span class="num">true</span><br>
+                });
+            </div>
+        </div>
+
+        <!-- ==================== BADGE ==================== -->
+        <div class="section">
+            <h2 class="section-title">8. Badge</h2>
+            <p class="section-desc">The <span class="code">badge</span> option displays a label inside the input after a suggestion is selected. The template uses <span class="code">{field_name}</span> as a placeholder — the value is read from a hidden <span class="code">&lt;input name="field_name"&gt;</span> inside the selected <span class="code">&lt;li&gt;</span>. Typing again automatically clears the badge.</p>
+
+            <div class="row">
+                <span class="label">badge</span>
+                <div class="autocomplete-wrapper">
+                    <input type="text" id="ac-badge" placeholder="Search a country...">
+                </div>
+            </div>
+
+            <div class="snippet">
+                <span class="kw">new</span> sadrazam.<span class="fn">Autocomplete</span>({<br>
+                &nbsp;&nbsp;<span class="prop">selector</span>: <span class="str">'#ac-badge'</span>,<br>
+                &nbsp;&nbsp;<span class="prop">source</span>: <span class="str">'/api/countries'</span>,<br>
+                &nbsp;&nbsp;<span class="prop">badge</span>: <span class="str">'#{country_code}'</span>,<br>
+                &nbsp;&nbsp;<span class="prop">onSelect</span>: <span class="kw">function</span> (<span class="prop">event</span>, <span class="prop">value</span>) {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;document.<span class="fn">getElementById</span>(<span class="str">'ac-badge'</span>).value = value;<br>
+                &nbsp;&nbsp;}<br>
+                });
+            </div>
+
+            <p class="section-desc" style="margin-top: 1rem;">The server response must include a hidden input matching the badge field name:</p>
+
+            <div class="snippet">
+                <span class="cmt">&lt;!-- Server response HTML with badge field --&gt;</span><br>
+                &lt;<span class="kw">li</span> <span class="prop">class</span>=<span class="str">"autocomplete__suggestion"</span> <span class="prop">data-autocomplete-value</span>=<span class="str">"France"</span>&gt;<br>
+                &nbsp;&nbsp;France<br>
+                &nbsp;&nbsp;&lt;<span class="kw">input</span> <span class="prop">type</span>=<span class="str">"hidden"</span> <span class="prop">name</span>=<span class="str">"country_code"</span> <span class="prop">value</span>=<span class="str">"FR"</span>&gt;<br>
+                &lt;/<span class="kw">li</span>&gt;
+            </div>
+
+            <p class="section-desc" style="margin-top: 1rem;">You can also control the badge programmatically:</p>
+
+            <div class="row">
+                <button class="bttn bttn--sm-rectangle bttn--pri" id="btn-set-badge">setBadge('TR')</button>
+                <button class="bttn bttn--sm-rectangle bttn--danger" id="btn-clear-badge">clearBadge()</button>
+            </div>
+
+            <div class="snippet">
+                <span class="kw">const</span> ac = Sadrazam.Autocomplete.<span class="fn">getInstance</span>(input);<br><br>
+                <span class="cmt">// Show badge with a value</span><br>
+                ac.<span class="fn">setBadge</span>(<span class="str">'TR'</span>);<br><br>
+                <span class="cmt">// Hide badge and reset input padding</span><br>
+                ac.<span class="fn">clearBadge</span>();
+            </div>
+        </div>
+
+        <!-- ==================== DESTROY INSTANCE ==================== -->
+        <div class="section">
+            <h2 class="section-title">9. Destroy Instance</h2>
+            <p class="section-desc">Call <span class="code">instance.destroy()</span> to remove all event listeners, restore the original <span class="code">autocomplete</span> attribute, and remove the suggestions container from the DOM.</p>
+
+            <div class="row">
+                <span class="label">Destroy</span>
+                <div class="autocomplete-wrapper">
+                    <input type="text" id="ac-destroy" placeholder="Type to search, then destroy...">
+                </div>
+                <button class="bttn bttn--sm-rectangle bttn--danger" id="btn-destroy">Destroy</button>
+                <button class="bttn bttn--sm-rectangle bttn--pri" id="btn-reinit" style="display:none;">Re-initialize</button>
+            </div>
+
+            <div id="destroy-log" class="event-log">
+                <div class="log-entry"><span class="log-label">Instance active. Click "Destroy" to tear down.</span></div>
+            </div>
+
+            <div class="snippet">
+                <span class="kw">const</span> ac = <span class="kw">new</span> sadrazam.<span class="fn">Autocomplete</span>({<br>
+                &nbsp;&nbsp;<span class="prop">selector</span>: <span class="str">'#ac-destroy'</span>,<br>
+                &nbsp;&nbsp;<span class="prop">source</span>: <span class="str">'/api/countries'</span><br>
+                });<br><br>
+                <span class="cmt">// Later, to clean up:</span><br>
+                ac.<span class="fn">destroy</span>();
+            </div>
+        </div>
+
+        <!-- ==================== KEYBOARD NAVIGATION ==================== -->
+        <div class="section">
+            <h2 class="section-title">10. Keyboard Navigation</h2>
+            <p class="section-desc">All autocomplete instances support full keyboard navigation out of the box.</p>
+
+            <table class="config-table">
+                <thead>
+                    <tr>
+                        <th>Key</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="code">Arrow Down</span> / <span class="code">Arrow Up</span></td>
+                        <td>Navigate through suggestion items (skips items with <span class="code">data-autocomplete-disabled</span>)</td>
+                    </tr>
+                    <tr>
+                        <td><span class="code">Enter</span> / <span class="code">Tab</span></td>
+                        <td>Select the currently highlighted suggestion and trigger <span class="code">onSelect</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="code">Escape</span></td>
+                        <td>Close the suggestions dropdown</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="row" style="margin-top: 1rem;">
+                <span class="label">Try it</span>
+                <div class="autocomplete-wrapper">
+                    <input type="text" id="ac-keyboard" placeholder="Use arrow keys after typing...">
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== STATIC getInstance ==================== -->
+        <div class="section">
+            <h2 class="section-title">11. Static getInstance Method</h2>
+            <p class="section-desc">
+                <span class="code">Autocomplete.getInstance(element)</span> returns the Autocomplete instance
+                attached to the given input element, or <span class="code">undefined</span> if none exists.
+            </p>
+
+            <div class="snippet">
+                <span class="kw">const</span> input = document.<span class="fn">querySelector</span>(<span class="str">'#my-input'</span>);<br>
+                <span class="kw">const</span> ac = Sadrazam.Autocomplete.<span class="fn">getInstance</span>(input);<br><br>
+                <span class="cmt">// Use the instance</span><br>
+                ac.<span class="fn">destroy</span>();
+            </div>
+        </div>
+
+        <!-- ==================== STATIC HELP ==================== -->
+        <div class="section">
+            <h2 class="section-title">12. Static Help Method</h2>
+            <p class="section-desc">Call <span class="code">Sadrazam.Autocomplete.help()</span> in the browser console to print all available configuration options with descriptions.</p>
+
+            <div class="row">
+                <span class="label">Console</span>
+                <button class="bttn bttn--sm-rectangle bttn--pri" id="btn-help">
+                    <i class="ph-bold ph-terminal"></i>&nbsp; Run Autocomplete.help()
+                </button>
+                <span class="code">Sadrazam.Autocomplete.help()</span>
+            </div>
+
+            <div class="snippet">
+                <span class="cmt">// Open the browser DevTools console, then:</span><br>
+                Sadrazam.Autocomplete.<span class="fn">help</span>();<br><br>
+                <span class="cmt">// Output:</span><br>
+                <span class="cmt">// Autocomplete</span><br>
+                <span class="cmt">// selector:  Target input element. String (class or id).</span><br>
+                <span class="cmt">// source:    Query endpoint. String.</span><br>
+                <span class="cmt">// delay:     Debounce delay in ms. Default: 250.</span><br>
+                <span class="cmt">// cache:     Cache results? Boolean. Default: false.</span><br>
+                <span class="cmt">// minChars:  Minimum chars before search. Default: 1.</span><br>
+                <span class="cmt">// badge:     Badge template with {field_name} placeholder. Optional.</span><br>
+                <span class="cmt">// menuClass: CSS class for the container. String.</span><br>
+                <span class="cmt">// onSelect:  Callback on item selection.</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ============================================================
+        // Mock data sets for the demo (no real backend needed)
+        // ============================================================
+        const COUNTRIES = [
+            'Afghanistan', 'Albania', 'Algeria', 'Andorra', 'Angola', 'Argentina',
+            'Armenia', 'Australia', 'Austria', 'Azerbaijan', 'Bahamas', 'Bangladesh',
+            'Belgium', 'Bolivia', 'Brazil', 'Bulgaria', 'Cambodia', 'Cameroon',
+            'Canada', 'Chile', 'China', 'Colombia', 'Costa Rica', 'Croatia',
+            'Cuba', 'Cyprus', 'Czech Republic', 'Denmark', 'Dominican Republic',
+            'Ecuador', 'Egypt', 'Estonia', 'Ethiopia', 'Finland', 'France',
+            'Georgia', 'Germany', 'Ghana', 'Greece', 'Guatemala', 'Hungary',
+            'Iceland', 'India', 'Indonesia', 'Iran', 'Iraq', 'Ireland',
+            'Israel', 'Italy', 'Jamaica', 'Japan', 'Jordan', 'Kazakhstan',
+            'Kenya', 'Kuwait', 'Latvia', 'Lebanon', 'Libya', 'Lithuania',
+            'Luxembourg', 'Malaysia', 'Mexico', 'Mongolia', 'Morocco',
+            'Nepal', 'Netherlands', 'New Zealand', 'Nigeria', 'North Macedonia',
+            'Norway', 'Pakistan', 'Panama', 'Paraguay', 'Peru', 'Philippines',
+            'Poland', 'Portugal', 'Qatar', 'Romania', 'Russia', 'Saudi Arabia',
+            'Senegal', 'Serbia', 'Singapore', 'Slovakia', 'Slovenia', 'Somalia',
+            'South Africa', 'South Korea', 'Spain', 'Sri Lanka', 'Sweden',
+            'Switzerland', 'Taiwan', 'Tanzania', 'Thailand', 'Tunisia', 'Turkey',
+            'Ukraine', 'United Arab Emirates', 'United Kingdom', 'United States',
+            'Uruguay', 'Uzbekistan', 'Venezuela', 'Vietnam', 'Yemen', 'Zimbabwe'
+        ];
+
+        const FRUITS = [
+            'Apple', 'Apricot', 'Avocado', 'Banana', 'Blackberry', 'Blueberry',
+            'Cherry', 'Coconut', 'Cranberry', 'Date', 'Dragon Fruit', 'Elderberry',
+            'Fig', 'Grape', 'Grapefruit', 'Guava', 'Honeydew', 'Jackfruit',
+            'Kiwi', 'Kumquat', 'Lemon', 'Lime', 'Lychee', 'Mango',
+            'Mangosteen', 'Mulberry', 'Nectarine', 'Orange', 'Papaya',
+            'Passion Fruit', 'Peach', 'Pear', 'Persimmon', 'Pineapple',
+            'Plum', 'Pomegranate', 'Pomelo', 'Raspberry', 'Starfruit',
+            'Strawberry', 'Tangerine', 'Watermelon'
+        ];
+
+        const CITIES = [
+            'Amsterdam', 'Athens', 'Bangkok', 'Barcelona', 'Beijing', 'Berlin',
+            'Boston', 'Brussels', 'Buenos Aires', 'Cairo', 'Cape Town',
+            'Chicago', 'Copenhagen', 'Delhi', 'Dubai', 'Dublin', 'Edinburgh',
+            'Florence', 'Geneva', 'Helsinki', 'Hong Kong', 'Istanbul',
+            'Jakarta', 'Kuala Lumpur', 'Kyoto', 'Lima', 'Lisbon', 'London',
+            'Los Angeles', 'Madrid', 'Manila', 'Melbourne', 'Mexico City',
+            'Milan', 'Montreal', 'Moscow', 'Mumbai', 'Munich', 'Nairobi',
+            'New York', 'Osaka', 'Oslo', 'Paris', 'Prague', 'Rio de Janeiro',
+            'Rome', 'San Francisco', 'Santiago', 'Sao Paulo', 'Seoul',
+            'Shanghai', 'Singapore', 'Stockholm', 'Sydney', 'Taipei',
+            'Tokyo', 'Toronto', 'Vancouver', 'Vienna', 'Warsaw', 'Zurich'
+        ];
+
+        const LANGUAGES = [
+            'Assembly', 'Bash', 'C', 'C++', 'C#', 'Clojure', 'COBOL',
+            'CoffeeScript', 'Crystal', 'CSS', 'Dart', 'Delphi', 'Elixir',
+            'Elm', 'Erlang', 'F#', 'Fortran', 'Go', 'GraphQL', 'Groovy',
+            'Haskell', 'HTML', 'Java', 'JavaScript', 'Julia', 'Kotlin',
+            'Lisp', 'Lua', 'MATLAB', 'Nim', 'Objective-C', 'OCaml',
+            'Pascal', 'Perl', 'PHP', 'PowerShell', 'Prolog', 'Python',
+            'R', 'Racket', 'Ruby', 'Rust', 'Scala', 'Scheme', 'Shell',
+            'Solidity', 'SQL', 'Swift', 'TypeScript', 'V', 'Vala',
+            'VBA', 'Verilog', 'VHDL', 'Zig'
+        ];
+
+        // ============================================================
+        // Mock Ajax interceptor
+        // Replaces Sadrazam.Ajax.send to return filtered HTML locally
+        // ============================================================
+        const DATA_MAP = {
+            '/api/countries': COUNTRIES,
+            '/api/countries-badge': COUNTRIES,
+            '/api/fruits': FRUITS,
+            '/api/cities': CITIES,
+            '/api/languages': LANGUAGES
+        };
+
+        // Country code lookup for badge demo
+        const COUNTRY_CODES = {
+            'Afghanistan': 'AF', 'Albania': 'AL', 'Algeria': 'DZ', 'Andorra': 'AD', 'Angola': 'AO',
+            'Argentina': 'AR', 'Armenia': 'AM', 'Australia': 'AU', 'Austria': 'AT', 'Azerbaijan': 'AZ',
+            'Bahamas': 'BS', 'Bangladesh': 'BD', 'Belgium': 'BE', 'Bolivia': 'BO', 'Brazil': 'BR',
+            'Bulgaria': 'BG', 'Cambodia': 'KH', 'Cameroon': 'CM', 'Canada': 'CA', 'Chile': 'CL',
+            'China': 'CN', 'Colombia': 'CO', 'Costa Rica': 'CR', 'Croatia': 'HR', 'Cuba': 'CU',
+            'Cyprus': 'CY', 'Czech Republic': 'CZ', 'Denmark': 'DK', 'Dominican Republic': 'DO',
+            'Ecuador': 'EC', 'Egypt': 'EG', 'Estonia': 'EE', 'Ethiopia': 'ET', 'Finland': 'FI',
+            'France': 'FR', 'Georgia': 'GE', 'Germany': 'DE', 'Ghana': 'GH', 'Greece': 'GR',
+            'Guatemala': 'GT', 'Hungary': 'HU', 'Iceland': 'IS', 'India': 'IN', 'Indonesia': 'ID',
+            'Iran': 'IR', 'Iraq': 'IQ', 'Ireland': 'IE', 'Israel': 'IL', 'Italy': 'IT',
+            'Jamaica': 'JM', 'Japan': 'JP', 'Jordan': 'JO', 'Kazakhstan': 'KZ', 'Kenya': 'KE',
+            'Kuwait': 'KW', 'Latvia': 'LV', 'Lebanon': 'LB', 'Libya': 'LY', 'Lithuania': 'LT',
+            'Luxembourg': 'LU', 'Malaysia': 'MY', 'Mexico': 'MX', 'Mongolia': 'MN', 'Morocco': 'MA',
+            'Nepal': 'NP', 'Netherlands': 'NL', 'New Zealand': 'NZ', 'Nigeria': 'NG',
+            'North Macedonia': 'MK', 'Norway': 'NO', 'Pakistan': 'PK', 'Panama': 'PA',
+            'Paraguay': 'PY', 'Peru': 'PE', 'Philippines': 'PH', 'Poland': 'PL', 'Portugal': 'PT',
+            'Qatar': 'QA', 'Romania': 'RO', 'Russia': 'RU', 'Saudi Arabia': 'SA', 'Senegal': 'SN',
+            'Serbia': 'RS', 'Singapore': 'SG', 'Slovakia': 'SK', 'Slovenia': 'SI', 'Somalia': 'SO',
+            'South Africa': 'ZA', 'South Korea': 'KR', 'Spain': 'ES', 'Sri Lanka': 'LK',
+            'Sweden': 'SE', 'Switzerland': 'CH', 'Taiwan': 'TW', 'Tanzania': 'TZ', 'Thailand': 'TH',
+            'Tunisia': 'TN', 'Turkey': 'TR', 'Ukraine': 'UA', 'United Arab Emirates': 'AE',
+            'United Kingdom': 'GB', 'United States': 'US', 'Uruguay': 'UY', 'Uzbekistan': 'UZ',
+            'Venezuela': 'VE', 'Vietnam': 'VN', 'Yemen': 'YE', 'Zimbabwe': 'ZW'
+        };
+
+        const originalNewload = Sadrazam.Ajax.send;
+        Sadrazam.Ajax.send = function (opts) {
+            const dataSet = DATA_MAP[opts.route];
+            if (dataSet) {
+                const term = (opts.data && opts.data.search_term) ? opts.data.search_term.toLowerCase() : '';
+                const matches = dataSet.filter(item => item.toLowerCase().includes(term)).slice(0, 10);
+                const isBadgeRoute = opts.route === '/api/countries-badge';
+
+                let html = '';
+                if (matches.length > 0) {
+                    html = '<ul>' + matches.map(item => {
+                        const highlighted = item.replace(new RegExp('(' + term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi'), '<strong>$1</strong>');
+                        const hiddenInput = isBadgeRoute && COUNTRY_CODES[item]
+                            ? '<input type="hidden" name="country_code" value="' + COUNTRY_CODES[item] + '">'
+                            : '';
+                        return '<li class="autocomplete__suggestion" data-autocomplete-value="' + item + '">' +
+                            '<a data-href="#' + item.toLowerCase().replace(/\s+/g, '-') + '">' + highlighted + '</a>' +
+                            hiddenInput + '</li>';
+                    }).join('') + '</ul>';
+                }
+
+                // Simulate async response
+                setTimeout(function () {
+                    if (opts.success) {
+                        opts.success({ responseText: JSON.stringify({ html: html }) });
+                    }
+                }, 30);
+            } else if (originalNewload) {
+                originalNewload.call(Sadrazam.Ajax, opts);
+            }
+        };
+
+        // ============================================================
+        // 1. Basic Usage -- Country Search
+        // ============================================================
+        new Sadrazam.Autocomplete({
+            selector: '#ac-countries',
+            source: '/api/countries'
+        });
+
+        // ============================================================
+        // 2. Minimum Characters -- Fruit Search
+        // ============================================================
+        new Sadrazam.Autocomplete({
+            selector: '#ac-fruits',
+            source: '/api/fruits',
+            minChars: 2
+        });
+
+        // ============================================================
+        // 3. Cache Enabled -- City Search
+        // ============================================================
+        new Sadrazam.Autocomplete({
+            selector: '#ac-cities',
+            source: '/api/cities',
+            cache: true
+        });
+
+        // ============================================================
+        // 4. Custom Delay -- Programming Languages
+        // ============================================================
+        new Sadrazam.Autocomplete({
+            selector: '#ac-lang-fast',
+            source: '/api/languages',
+            delay: 100
+        });
+
+        new Sadrazam.Autocomplete({
+            selector: '#ac-lang-slow',
+            source: '/api/languages',
+            delay: 600
+        });
+
+        // ============================================================
+        // 5. Custom onSelect Callback
+        // ============================================================
+        new Sadrazam.Autocomplete({
+            selector: '#ac-callback',
+            source: '/api/countries',
+            onSelect: function (event, value, item) {
+                var logEl = document.getElementById('callback-log');
+                var entry = document.createElement('div');
+                entry.className = 'log-entry';
+                entry.innerHTML =
+                    '<span class="log-label">onSelect fired</span> &rarr; ' +
+                    'value: <span class="log-value">"' + value + '"</span>, ' +
+                    'event.type: <span class="log-value">"' + event.type + '"</span>, ' +
+                    'tag: <span class="log-value">&lt;' + item.tagName.toLowerCase() + '&gt;</span>';
+                logEl.prepend(entry);
+
+                // Also set the input value (default behavior navigates away)
+                document.getElementById('ac-callback').value = value;
+            }
+        });
+
+        // ============================================================
+        // 6. Custom Menu Class
+        // ============================================================
+        new Sadrazam.Autocomplete({
+            selector: '#ac-menuclass',
+            source: '/api/countries',
+            menuClass: 'my-custom-dropdown'
+        });
+
+        // ============================================================
+        // 7. Selector as DOM Element
+        // ============================================================
+        var inputEl = document.getElementById('ac-element-ref');
+        new Sadrazam.Autocomplete({
+            selector: inputEl,
+            source: '/api/countries',
+            minChars: 1,
+            cache: true
+        });
+
+        // ============================================================
+        // 8. Badge
+        // ============================================================
+        var badgeInstance = new Sadrazam.Autocomplete({
+            selector: '#ac-badge',
+            source: '/api/countries-badge',
+            badge: '#{country_code}',
+            onSelect: function (event, value) {
+                document.getElementById('ac-badge').value = value;
+            }
+        });
+
+        document.getElementById('btn-set-badge').addEventListener('click', function () {
+            badgeInstance.setBadge('TR');
+        });
+
+        document.getElementById('btn-clear-badge').addEventListener('click', function () {
+            badgeInstance.clearBadge();
+        });
+
+        // ============================================================
+        // 9. Destroy Instance
+        // ============================================================
+        var destroyInstance = null;
+
+        function initDestroyDemo() {
+            destroyInstance = new Sadrazam.Autocomplete({
+                selector: '#ac-destroy',
+                source: '/api/countries',
+                onSelect: function (event, value) {
+                    document.getElementById('ac-destroy').value = value;
+                }
+            });
+        }
+
+        initDestroyDemo();
+
+        document.getElementById('btn-destroy').addEventListener('click', function () {
+            if (destroyInstance) {
+                destroyInstance.destroy();
+                destroyInstance = null;
+
+                var logEl = document.getElementById('destroy-log');
+                logEl.innerHTML = '<div class="log-entry"><span class="log-value">Instance destroyed.</span> Event listeners removed, suggestions container removed from DOM.</div>';
+
+                document.getElementById('btn-destroy').style.display = 'none';
+                document.getElementById('btn-reinit').style.display = '';
+            }
+        });
+
+        document.getElementById('btn-reinit').addEventListener('click', function () {
+            initDestroyDemo();
+
+            var logEl = document.getElementById('destroy-log');
+            logEl.innerHTML = '<div class="log-entry"><span class="log-label">Instance re-initialized.</span> Autocomplete is active again.</div>';
+
+            document.getElementById('btn-destroy').style.display = '';
+            document.getElementById('btn-reinit').style.display = 'none';
+        });
+
+        // ============================================================
+        // 10. Keyboard Navigation
+        // ============================================================
+        new Sadrazam.Autocomplete({
+            selector: '#ac-keyboard',
+            source: '/api/countries',
+            onSelect: function (event, value) {
+                document.getElementById('ac-keyboard').value = value;
+            }
+        });
+
+        // ============================================================
+        // 12. Static Help Method
+        // ============================================================
+        document.getElementById('btn-help').addEventListener('click', function () {
+            Sadrazam.Autocomplete.help();
+            alert('Check the browser DevTools console (F12) to see the help output.');
+        });
+    </script>
+</body>
+
+</html>

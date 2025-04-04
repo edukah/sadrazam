@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sadrazam – Component Library &amp; Module Showcase</title>
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <script type="text/javascript" src="assets/js/script.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/bold/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/light/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css">
+    <!-- --- -->
+    <script type="text/javascript" src="assets/sadrazam.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="assets/sadrazam.min.css">
+</head>
+
+<body>
+<script>if(localStorage.getItem("dark-mode"))document.body.classList.add("dark-mode")</script>
+    <header>
+        <nav class="top-navbar">
+            <div class="nav-container">
+                <a href="index.html" class="nav-logo">Sadrazam</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li>
+                        <a href="javascript:void(0)" onclick="openPopup(); return false;">Examples</a>
+                        <div class="navi-popup-overlay" id="examplesPopupOverlay"></div>
+                        <div class="navi-popup" id="examplesPopup">
+                            <h3>Examples</h3>
+                            <ul>
+                                <li><a href="buttons.html">Button</a></li>
+                                <li><a href="forms.html">Form</a></li>
+                                <li><a href="form-patterns.html">Form Patterns</a></li>
+                                <li><a href="links.html">Link</a></li>
+                                <li><a href="switches.html">Switch</a></li>
+                                <li><a href="autocomplete.html">Autocomplete</a></li>
+                                <li><a href="backdrop.html">Backdrop</a></li>
+                                <li><a href="hovermenu.html">Hovermenu</a></li>
+                                <li><a href="infinite-scroll.html">Infinite Scroll</a></li>
+                                <li><a href="snackbar.html">Snackbar</a></li>
+                                <li><a href="modals.html">Modal</a></li>
+                                <li><a href="popovers.html">Popover</a></li>
+                                <li><a href="slide-menu.html">Slide Menu</a></li>
+                                <li><a href="spinners.html">Spinner</a></li>
+                                <li><a href="tabs.html">Tabs</a></li>
+                                <li><a href="tooltips.html">Tooltip</a></li>
+                                <li><a href="form-validation.html">Form Validation</a></li>
+                                <li><a href="autosize-textarea.html">Autosize Textarea</a></li>
+                                <li><a href="autosize-select.html">Autosize Select</a></li>
+                                <li><a href="ajax.html">Ajax</a></li>
+                                <li><a href="grid.html">Grid</a></li>
+                                <li><a href="spacing.html">Spacing</a></li>
+                                <li><a href="colors.html">Colors</a></li>
+                                <li><a href="typography.html">Typography</a></li>
+                            </ul>
+                            <button class="close-popup" onclick="closePopup()">&#10005;</button>
+                        </div>
+                    </li>
+                    <li><a href="https://github.com/edukah/sadrazam" target="_blank">GitHub</a></li>
+                </ul>
+                <div class="dark-mode-button-container">
+                    <div class="mode-toggle-switch" onclick="toggleMode()"></div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="content-container">
+            <div class="content-header">
+                <h1>Sadrazam – Component Library</h1>
+                <p>A comprehensive JS toolkit &amp; CSS component library. Browse the showcases below to explore all available components, modules, helpers, and utilities.</p>
+            </div>
+
+            <!-- COMPONENTS -->
+            <div class="category">
+                <div class="category-title">Components</div>
+                <div class="grid">
+                    <a href="buttons.html" class="card">
+                        <div class="card-icon card-icon--component">
+                            <i class="ph-bold ph-cursor-click"></i>
+                        </div>
+                        <div class="card-title">Button</div>
+                        <div class="card-desc">Size, color, border &amp; loading variants</div>
+                    </a>
+                    <a href="forms.html" class="card">
+                        <div class="card-icon card-icon--component">
+                            <i class="ph-bold ph-textbox"></i>
+                        </div>
+                        <div class="card-title">Form</div>
+                        <div class="card-desc">Input, textarea, select &amp; fieldset elements</div>
+                    </a>
+                    <a href="form-patterns.html" class="card">
+                        <div class="card-icon card-icon--component">
+                            <i class="ph-bold ph-rows"></i>
+                        </div>
+                        <div class="card-title">Form Patterns</div>
+                        <div class="card-desc">Label combos, helper text &amp; divider patterns</div>
+                    </a>
+                    <a href="links.html" class="card">
+                        <div class="card-icon card-icon--component">
+                            <i class="ph-bold ph-link"></i>
+                        </div>
+                        <div class="card-title">Link</div>
+                        <div class="card-desc">Link styles &amp; variants</div>
+                    </a>
+                    <a href="switches.html" class="card">
+                        <div class="card-icon card-icon--component">
+                            <i class="ph-bold ph-toggle-right"></i>
+                        </div>
+                        <div class="card-title">Switch</div>
+                        <div class="card-desc">Toggle switch component</div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- MODULES -->
+            <div class="category">
+                <div class="category-title">Modules</div>
+                <div class="grid">
+                    <a href="autocomplete.html" class="card">
+                        <div class="card-icon card-icon--module">
+                            <i class="ph-bold ph-magnifying-glass"></i>
+                        </div>
+                        <div class="card-title">Autocomplete</div>
+                        <div class="card-desc">Auto-completion input component</div>
+                    </a>
+                    <a href="backdrop.html" class="card">
+                        <div class="card-icon card-icon--module">
+                            <i class="ph-bold ph-rectangle"></i>
+                        </div>
+                        <div class="card-title">Backdrop</div>
+                        <div class="card-desc">Backdrop overlay layer</div>
+                    </a>
+                    <a href="hovermenu.html" class="card">
+                        <div class="card-icon card-icon--module">
+                            <i class="ph-bold ph-list"></i>
+                        </div>
+                        <div class="card-title">Hovermenu</div>
+                        <div class="card-desc">Dropdown hover menu component</div>
+                    </a>
+                    <a href="snackbar.html" class="card">
+                        <div class="card-icon card-icon--module">
+                            <i class="ph-bold ph-chat-circle"></i>
+                        </div>
+                        <div class="card-title">Snackbar</div>
+                        <div class="card-desc">Toast notification messages</div>
+                    </a>
+                    <a href="modals.html" class="card">
+                        <div class="card-icon card-icon--module">
+                            <i class="ph-bold ph-browsers"></i>
+                        </div>
+                        <div class="card-title">Modal</div>
+                        <div class="card-desc">Modal dialog &amp; Toast</div>
+                    </a>
+                    <a href="popovers.html" class="card">
+                        <div class="card-icon card-icon--module">
+                            <i class="ph-bold ph-chat-circle-dots"></i>
+                        </div>
+                        <div class="card-title">Popover</div>
+                        <div class="card-desc">Popup information box</div>
+                    </a>
+                    <a href="slide-menu.html" class="card">
+                        <div class="card-icon card-icon--module">
+                            <i class="ph-bold ph-sidebar"></i>
+                        </div>
+                        <div class="card-title">Slide Menu</div>
+                        <div class="card-desc">Mobile slide-out menu</div>
+                    </a>
+                    <a href="spinners.html" class="card">
+                        <div class="card-icon card-icon--module">
+                            <i class="ph-bold ph-circle-notch"></i>
+                        </div>
+                        <div class="card-title">Spinner</div>
+                        <div class="card-desc">Loading indicator with ref counting</div>
+                    </a>
+                    <a href="tabs.html" class="card">
+                        <div class="card-icon card-icon--module">
+                            <i class="ph-bold ph-tabs"></i>
+                        </div>
+                        <div class="card-title">Tabs</div>
+                        <div class="card-desc">Tab navigation component</div>
+                    </a>
+                    <a href="tooltips.html" class="card">
+                        <div class="card-icon card-icon--module">
+                            <i class="ph-bold ph-info"></i>
+                        </div>
+                        <div class="card-title">Tooltip</div>
+                        <div class="card-desc">Tooltip hint component</div>
+                    </a>
+                    <a href="infinite-scroll.html" class="card">
+                        <div class="card-icon card-icon--module">
+                            <i class="ph-bold ph-arrow-down"></i>
+                        </div>
+                        <div class="card-title">Infinite Scroll</div>
+                        <div class="card-desc">Infinite scrolling component</div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- HELPERS -->
+            <div class="category">
+                <div class="category-title">Helpers</div>
+                <div class="grid">
+                    <a href="form-validation.html" class="card">
+                        <div class="card-icon card-icon--helper">
+                            <i class="ph-bold ph-check-circle"></i>
+                        </div>
+                        <div class="card-title">Form Validation</div>
+                        <div class="card-desc">Rule-based form validation</div>
+                    </a>
+                    <a href="autosize-textarea.html" class="card">
+                        <div class="card-icon card-icon--helper">
+                            <i class="ph-bold ph-arrows-out-line-vertical"></i>
+                        </div>
+                        <div class="card-title">Autosize Textarea</div>
+                        <div class="card-desc">Auto-height textarea</div>
+                    </a>
+                    <a href="autosize-select.html" class="card">
+                        <div class="card-icon card-icon--helper">
+                            <i class="ph-bold ph-arrows-out-line-horizontal"></i>
+                        </div>
+                        <div class="card-title">Autosize Select</div>
+                        <div class="card-desc">Auto-width select</div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- SERVICES -->
+            <div class="category">
+                <div class="category-title">Services</div>
+                <div class="grid">
+                    <a href="ajax.html" class="card">
+                        <div class="card-icon card-icon--service">
+                            <i class="ph-bold ph-cloud-arrow-up"></i>
+                        </div>
+                        <div class="card-title">Ajax</div>
+                        <div class="card-desc">Promise-based HTTP client</div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- LAYOUT & UTILITIES -->
+            <div class="category">
+                <div class="category-title">Layout &amp; Utilities</div>
+                <div class="grid">
+                    <a href="grid.html" class="card">
+                        <div class="card-icon card-icon--layout">
+                            <i class="ph-bold ph-grid-four"></i>
+                        </div>
+                        <div class="card-title">Grid</div>
+                        <div class="card-desc">Grid system &amp; column structure</div>
+                    </a>
+                    <a href="spacing.html" class="card">
+                        <div class="card-icon card-icon--layout">
+                            <i class="ph-bold ph-arrows-out"></i>
+                        </div>
+                        <div class="card-title">Spacing</div>
+                        <div class="card-desc">Margin &amp; padding utility classes</div>
+                    </a>
+                    <a href="typography.html" class="card">
+                        <div class="card-icon card-icon--layout">
+                            <i class="ph-bold ph-text-aa"></i>
+                        </div>
+                        <div class="card-title">Typography</div>
+                        <div class="card-desc">Font &amp; text styles</div>
+                    </a>
+                    <a href="colors.html" class="card">
+                        <div class="card-icon card-icon--layout">
+                            <i class="ph-bold ph-palette"></i>
+                        </div>
+                        <div class="card-title">Colors</div>
+                        <div class="card-desc">Theme colors &amp; color palette</div>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+    <footer>
+        <p>Sadrazam Component Library &copy; <span id="currentYear"></span> | MIT License</p>
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sadrazam – AutosizeSelect Showcase</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/bold/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/light/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <script type="text/javascript" src="assets/js/script.js"></script>
+    <link rel="stylesheet" href="assets/sadrazam.min.css">
+    <script type="text/javascript" src="assets/sadrazam.min.js"></script>
+    <style>
+        select {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-size: 0.9rem;
+            padding: 8px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            outline: none;
+            background: var(--card-bg);
+            cursor: pointer;
+            transition: border-color 0.2s;
+            color: var(--text-color);
+            appearance: auto;
+        }
+
+        select:focus {
+            border-color: var(--theme-color-primary);
+        }
+
+        .btn-row {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .demo-btn {
+            padding: 6px 14px;
+            font-size: 0.8rem;
+        }
+
+        .demo-btn--primary {
+            background: #0984e3;
+            color: #fff;
+            border-color: #0984e3;
+        }
+
+        .demo-btn--primary:hover {
+            background: #0773c5;
+        }
+
+        .demo-btn--danger {
+            background: #d63031;
+            color: #fff;
+            border-color: #d63031;
+        }
+
+        .demo-btn--danger:hover {
+            background: #c0292a;
+        }
+
+        .width-indicator {
+            font-family: 'SF Mono', Monaco, Consolas, monospace;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            background: var(--bg-subtle);
+            padding: 3px 8px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body>
+<script>if(localStorage.getItem("dark-mode"))document.body.classList.add("dark-mode")</script>
+    <header>
+        <nav class="top-navbar">
+            <div class="nav-container">
+                <a href="index.html" class="nav-logo">Sadrazam</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li>
+                        <a href="javascript:void(0)" onclick="openPopup(); return false;">Examples</a>
+                        <div class="navi-popup-overlay" id="examplesPopupOverlay"></div>
+                        <div class="navi-popup" id="examplesPopup">
+                            <h3>Examples</h3>
+                            <ul>
+                                <li><a href="buttons.html">Button</a></li>
+                                <li><a href="forms.html">Form</a></li>
+                                <li><a href="form-patterns.html">Form Patterns</a></li>
+                                <li><a href="links.html">Link</a></li>
+                                <li><a href="switches.html">Switch</a></li>
+                                <li><a href="autocomplete.html">Autocomplete</a></li>
+                                <li><a href="backdrop.html">Backdrop</a></li>
+                                <li><a href="hovermenu.html">Hovermenu</a></li>
+                                <li><a href="infinite-scroll.html">Infinite Scroll</a></li>
+                                <li><a href="snackbar.html">Snackbar</a></li>
+                                <li><a href="modals.html">Modal</a></li>
+                                <li><a href="popovers.html">Popover</a></li>
+                                <li><a href="slide-menu.html">Slide Menu</a></li>
+                                <li><a href="spinners.html">Spinner</a></li>
+                                <li><a href="tabs.html">Tabs</a></li>
+                                <li><a href="tooltips.html">Tooltip</a></li>
+                                <li><a href="form-validation.html">Form Validation</a></li>
+                                <li><a href="autosize-textarea.html">Autosize Textarea</a></li>
+                                <li><a href="autosize-select.html">Autosize Select</a></li>
+                                <li><a href="ajax.html">Ajax</a></li>
+                                <li><a href="grid.html">Grid</a></li>
+                                <li><a href="spacing.html">Spacing</a></li>
+                                <li><a href="colors.html">Colors</a></li>
+                                <li><a href="typography.html">Typography</a></li>
+                            </ul>
+                            <button class="close-popup" onclick="closePopup()">&#10005;</button>
+                        </div>
+                    </li>
+                    <li><a href="https://github.com/edukah/sadrazam" target="_blank">GitHub</a></li>
+                </ul>
+                <div class="dark-mode-button-container">
+                    <div class="mode-toggle-switch" onclick="toggleMode()"></div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+
+        <h1>Sadrazam – AutosizeSelect Showcase</h1>
+        <p class="subtitle">Select elements that automatically resize their width based on the selected option</p>
+
+        <!-- ==================== BASIC USAGE ==================== -->
+        <div class="section">
+            <h2 class="section-title">Basic Usage</h2>
+            <p class="section-desc">Add <span class="code">data-autosize-select</span> attribute, then call <span class="code">Sadrazam.AutosizeSelect.listen()</span></p>
+
+            <div class="row">
+                <span class="label">Default</span>
+                <select data-autosize-select>
+                    <option>Short</option>
+                    <option>Medium length</option>
+                    <option>A much longer option text</option>
+                    <option>Tiny</option>
+                </select>
+                <span class="code">data-autosize-select</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Code</span>
+                <span class="code">&lt;select data-autosize-select&gt;...&lt;/select&gt;</span>
+            </div>
+        </div>
+
+        <!-- ==================== SHORT OPTIONS ==================== -->
+        <div class="section">
+            <h2 class="section-title">Short Options</h2>
+            <p class="section-desc">Select with brief, uniform-length options</p>
+
+            <div class="row">
+                <span class="label">Status</span>
+                <select data-autosize-select>
+                    <option>Active</option>
+                    <option>Paused</option>
+                    <option>Draft</option>
+                    <option>Closed</option>
+                </select>
+            </div>
+
+            <div class="row">
+                <span class="label">Priority</span>
+                <select data-autosize-select>
+                    <option>Low</option>
+                    <option>Mid</option>
+                    <option>High</option>
+                    <option>Critical</option>
+                </select>
+            </div>
+
+            <div class="row">
+                <span class="label">Boolean</span>
+                <select data-autosize-select>
+                    <option>Yes</option>
+                    <option>No</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- ==================== MIXED OPTION LENGTHS ==================== -->
+        <div class="section">
+            <h2 class="section-title">Mixed Option Lengths</h2>
+            <p class="section-desc">Options with dramatically different text lengths — watch the select shrink and expand</p>
+
+            <div class="row">
+                <span class="label">Countries</span>
+                <select data-autosize-select>
+                    <option>US</option>
+                    <option>United Kingdom</option>
+                    <option>The United States of America</option>
+                    <option>Germany</option>
+                    <option>Democratic Republic of the Congo</option>
+                    <option>Japan</option>
+                </select>
+            </div>
+
+            <div class="row">
+                <span class="label">Roles</span>
+                <select data-autosize-select>
+                    <option>Admin</option>
+                    <option>Editor</option>
+                    <option>Registered User</option>
+                    <option>Super Administrator with Full Access</option>
+                    <option>Guest</option>
+                </select>
+            </div>
+
+            <div class="row">
+                <span class="label">Categories</span>
+                <select data-autosize-select>
+                    <option>All</option>
+                    <option>Electronics & Computers</option>
+                    <option>Home, Garden & Tools</option>
+                    <option>Sports, Outdoors & Recreation Equipment</option>
+                    <option>Books</option>
+                    <option>Automotive Parts & Accessories</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- ==================== LONG OPTIONS ==================== -->
+        <div class="section">
+            <h2 class="section-title">Long Options</h2>
+            <p class="section-desc">All options are lengthy text strings</p>
+
+            <div class="row">
+                <span class="label">Descriptions</span>
+                <select data-autosize-select>
+                    <option>Processing your request, please wait</option>
+                    <option>Your order has been shipped successfully</option>
+                    <option>Payment is pending verification from the bank</option>
+                    <option>Refund has been initiated and will arrive in 3-5 days</option>
+                </select>
+            </div>
+
+            <div class="row">
+                <span class="label">File paths</span>
+                <select data-autosize-select>
+                    <option>/src/js/index.js</option>
+                    <option>/src/scss/components/_button.scss</option>
+                    <option>/src/js/helpers/autosize-textarea.js</option>
+                    <option>/dev/build.dev.js (autosize demo with longer text content)</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- ==================== MULTIPLE SELECTS INLINE ==================== -->
+        <div class="section">
+            <h2 class="section-title">Multiple Selects Inline</h2>
+            <p class="section-desc">Several auto-sized selects side by side — useful for filter bars and form rows</p>
+
+            <div class="row">
+                <span class="label">Filter bar</span>
+                <select data-autosize-select>
+                    <option>All Categories</option>
+                    <option>Electronics</option>
+                    <option>Clothing</option>
+                    <option>Home & Garden</option>
+                </select>
+                <select data-autosize-select>
+                    <option>Newest First</option>
+                    <option>Price: Low to High</option>
+                    <option>Price: High to Low</option>
+                    <option>Best Rating</option>
+                </select>
+                <select data-autosize-select>
+                    <option>10 per page</option>
+                    <option>25 per page</option>
+                    <option>50 per page</option>
+                    <option>100 per page</option>
+                </select>
+            </div>
+
+            <div class="row">
+                <span class="label">Date range</span>
+                <select data-autosize-select>
+                    <option>January</option>
+                    <option>February</option>
+                    <option>March</option>
+                    <option>April</option>
+                    <option>May</option>
+                    <option>June</option>
+                    <option>July</option>
+                    <option>August</option>
+                    <option>September</option>
+                    <option>October</option>
+                    <option>November</option>
+                    <option>December</option>
+                </select>
+                <select data-autosize-select>
+                    <option>2024</option>
+                    <option>2025</option>
+                    <option>2026</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- ==================== CUSTOM SELECTOR ==================== -->
+        <div class="section">
+            <h2 class="section-title">Custom Selector</h2>
+            <p class="section-desc">Use a custom CSS selector instead of the default <span class="code">data-autosize-select</span> attribute</p>
+
+            <div class="row">
+                <span class="label">Custom class</span>
+                <select class="my-autosize-select">
+                    <option>Compact</option>
+                    <option>A wider option with more text</option>
+                    <option>Even wider with a longer description</option>
+                </select>
+                <span class="code">Sadrazam.AutosizeSelect.listen('.my-autosize-select')</span>
+            </div>
+        </div>
+
+        <!-- ==================== PROGRAMMATIC CONTROL ==================== -->
+        <div class="section">
+            <h2 class="section-title">Programmatic Control</h2>
+            <p class="section-desc">Manual update and destroy via <span class="code">.update()</span> and <span class="code">.destroy()</span></p>
+
+            <div class="row">
+                <span class="label">Controlled</span>
+                <select id="controlled-select" data-autosize-select>
+                    <option value="1">Option A</option>
+                    <option value="2">Option B — Longer Text</option>
+                    <option value="3">Option C — A Very Long Option Description</option>
+                </select>
+                <span id="width-display" class="width-indicator"></span>
+            </div>
+
+            <div class="btn-row">
+                <button class="demo-btn demo-btn--primary" onclick="addOption()">
+                    <i class="ph-bold ph-plus"></i>&nbsp; Add Option
+                </button>
+                <button class="demo-btn" onclick="manualUpdate()">
+                    <i class="ph-bold ph-arrows-clockwise"></i>&nbsp; Manual Update
+                </button>
+                <button class="demo-btn demo-btn--danger" onclick="destroyAutosize()">
+                    <i class="ph-bold ph-trash"></i>&nbsp; Destroy
+                </button>
+                <button class="demo-btn" onclick="reinitAutosize()">
+                    <i class="ph-bold ph-arrow-counter-clockwise"></i>&nbsp; Re-initialize
+                </button>
+            </div>
+
+            <div class="row" style="margin-top: 10px;">
+                <span class="label">Methods</span>
+                <span class="code">Sadrazam.AutosizeSelect.update(el)</span>
+                <span class="code">Sadrazam.AutosizeSelect.destroy(el)</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize all data-autosize-select elements
+        Sadrazam.AutosizeSelect.listen();
+
+        // Initialize the custom selector select
+        Sadrazam.AutosizeSelect.listen('.my-autosize-select');
+
+        // --- Width Indicator ---
+        const controlledSelect = document.getElementById('controlled-select');
+        const widthDisplay = document.getElementById('width-display');
+
+        function updateWidthDisplay() {
+            widthDisplay.textContent = 'width: ' + controlledSelect.style.width;
+        }
+
+        controlledSelect.addEventListener('change', function () {
+            setTimeout(updateWidthDisplay, 50);
+        });
+
+        setTimeout(updateWidthDisplay, 100);
+
+        // --- Programmatic Control ---
+        let optionCounter = 0;
+
+        function addOption() {
+            optionCounter++;
+            const option = document.createElement('option');
+            option.value = 'new-' + optionCounter;
+            option.textContent = 'Dynamically Added Option #' + optionCounter + ' — Extra Text Here';
+            controlledSelect.appendChild(option);
+            controlledSelect.value = option.value;
+            Sadrazam.AutosizeSelect.update(controlledSelect);
+            setTimeout(updateWidthDisplay, 50);
+        }
+
+        function manualUpdate() {
+            Sadrazam.AutosizeSelect.update(controlledSelect);
+            setTimeout(updateWidthDisplay, 50);
+        }
+
+        function destroyAutosize() {
+            Sadrazam.AutosizeSelect.destroy(controlledSelect);
+            setTimeout(updateWidthDisplay, 50);
+        }
+
+        function reinitAutosize() {
+            Sadrazam.AutosizeSelect.listen('#controlled-select');
+            setTimeout(updateWidthDisplay, 50);
+        }
+    </script>
+</body>
+
+</html>

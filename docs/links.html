@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sadrazam – Link Showcase</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/bold/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/light/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <script type="text/javascript" src="assets/js/script.js"></script>
+    <link rel="stylesheet" href="assets/sadrazam.min.css">
+    <script type="text/javascript" src="assets/sadrazam.min.js"></script>
+
+</head>
+
+<body>
+<script>if(localStorage.getItem("dark-mode"))document.body.classList.add("dark-mode")</script>
+    <header>
+        <nav class="top-navbar">
+            <div class="nav-container">
+                <a href="index.html" class="nav-logo">Sadrazam</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li>
+                        <a href="javascript:void(0)" onclick="openPopup(); return false;">Examples</a>
+                        <div class="navi-popup-overlay" id="examplesPopupOverlay"></div>
+                        <div class="navi-popup" id="examplesPopup">
+                            <h3>Examples</h3>
+                            <ul>
+                                <li><a href="buttons.html">Button</a></li>
+                                <li><a href="forms.html">Form</a></li>
+                                <li><a href="form-patterns.html">Form Patterns</a></li>
+                                <li><a href="links.html">Link</a></li>
+                                <li><a href="switches.html">Switch</a></li>
+                                <li><a href="autocomplete.html">Autocomplete</a></li>
+                                <li><a href="backdrop.html">Backdrop</a></li>
+                                <li><a href="hovermenu.html">Hovermenu</a></li>
+                                <li><a href="infinite-scroll.html">Infinite Scroll</a></li>
+                                <li><a href="snackbar.html">Snackbar</a></li>
+                                <li><a href="modals.html">Modal</a></li>
+                                <li><a href="popovers.html">Popover</a></li>
+                                <li><a href="slide-menu.html">Slide Menu</a></li>
+                                <li><a href="spinners.html">Spinner</a></li>
+                                <li><a href="tabs.html">Tabs</a></li>
+                                <li><a href="tooltips.html">Tooltip</a></li>
+                                <li><a href="form-validation.html">Form Validation</a></li>
+                                <li><a href="autosize-textarea.html">Autosize Textarea</a></li>
+                                <li><a href="autosize-select.html">Autosize Select</a></li>
+                                <li><a href="ajax.html">Ajax</a></li>
+                                <li><a href="grid.html">Grid</a></li>
+                                <li><a href="spacing.html">Spacing</a></li>
+                                <li><a href="colors.html">Colors</a></li>
+                                <li><a href="typography.html">Typography</a></li>
+                            </ul>
+                            <button class="close-popup" onclick="closePopup()">&#10005;</button>
+                        </div>
+                    </li>
+                    <li><a href="https://github.com/edukah/sadrazam" target="_blank">GitHub</a></li>
+                </ul>
+                <div class="dark-mode-button-container">
+                    <div class="mode-toggle-switch" onclick="toggleMode()"></div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+
+        <h1>Sadrazam – Link Showcase</h1>
+        <p class="subtitle">All link classes and variants from _link.scss</p>
+
+        <!-- ==================== DEFAULT LINK ==================== -->
+        <div class="section">
+            <h2 class="section-title">Default Link</h2>
+            <p class="section-desc">Base <span class="code">&lt;a&gt;</span> element uses <span class="code">--color-link-dark</span></p>
+
+            <div class="row">
+                <span class="label">Default</span>
+                <a href="#">This is a default link</a>
+                <span class="code">a</span>
+            </div>
+        </div>
+
+        <!-- ==================== COLOR VARIANT ==================== -->
+        <div class="section">
+            <h2 class="section-title">Color Variant</h2>
+            <p class="section-desc">Blue link color using <span class="code">.tc-link-blue-dark</span></p>
+
+            <div class="row">
+                <span class="label">Blue</span>
+                <a href="#" class="tc-link-blue-dark">This is a blue link</a>
+                <span class="code">.tc-link-blue-dark</span>
+            </div>
+
+            <hr class="divider">
+
+            <div class="row">
+                <span class="label">Default vs Blue</span>
+                <a href="#">Default link</a>
+                <a href="#" class="tc-link-blue-dark">Blue link</a>
+            </div>
+        </div>
+
+        <!-- ==================== UNDERLINE ON HOVER ==================== -->
+        <div class="section">
+            <h2 class="section-title">Underline on Hover</h2>
+            <p class="section-desc">Adding <span class="code">.underline</span> shows underline on hover</p>
+
+            <div class="row">
+                <span class="label">Default + Underline</span>
+                <a href="#" class="underline">Hover me for underline</a>
+                <span class="code">.underline</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Blue + Underline</span>
+                <a href="#" class="tc-link-blue-dark underline">Hover me for underline</a>
+                <span class="code">.tc-link-blue-dark.underline</span>
+            </div>
+
+            <hr class="divider">
+
+            <div class="row">
+                <span class="label">Without</span>
+                <a href="#">No underline on hover</a>
+                <span class="code">a</span>
+            </div>
+
+            <div class="row">
+                <span class="label">With</span>
+                <a href="#" class="underline">Underline on hover</a>
+                <span class="code">a.underline</span>
+            </div>
+        </div>
+
+        <!-- ==================== LINKS WITH ICONS ==================== -->
+        <div class="section">
+            <h2 class="section-title">Links with Icons</h2>
+            <p class="section-desc">Combining link classes with Phosphor icons</p>
+
+            <div class="row">
+                <span class="label">Default + Icon</span>
+                <a href="#"><i class="ph-bold ph-arrow-square-out"></i>&nbsp; Open external</a>
+                <span class="code">a</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Blue + Icon</span>
+                <a href="#" class="tc-link-blue-dark"><i class="ph-bold ph-envelope"></i>&nbsp; Send email</a>
+                <span class="code">.tc-link-blue-dark</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Underline + Icon</span>
+                <a href="#" class="tc-link-blue-dark underline"><i class="ph-bold ph-link"></i>&nbsp; View details</a>
+                <span class="code">.tc-link-blue-dark.underline</span>
+            </div>
+        </div>
+
+        <!-- ==================== ALL COMBINATIONS ==================== -->
+        <div class="section">
+            <h2 class="section-title">All Combinations</h2>
+            <p class="section-desc">Every possible combination of link classes</p>
+
+            <div class="row">
+                <span class="label">Base</span>
+                <a href="#">Plain link</a>
+                <span class="code">a</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Base + Underline</span>
+                <a href="#" class="underline">With hover underline</a>
+                <span class="code">a.underline</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Blue</span>
+                <a href="#" class="tc-link-blue-dark">Blue color link</a>
+                <span class="code">a.tc-link-blue-dark</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Blue + Underline</span>
+                <a href="#" class="tc-link-blue-dark underline">Blue with hover underline</a>
+                <span class="code">a.tc-link-blue-dark.underline</span>
+            </div>
+        </div>
+
+        <!-- ==================== DARK BACKGROUND ==================== -->
+        <div class="section dark-section">
+            <h2 class="section-title">Dark Background</h2>
+            <p class="section-desc">Links on a dark background to test contrast</p>
+
+            <div class="row">
+                <span class="label">Default</span>
+                <a href="#">Default link on dark</a>
+                <span class="code">a</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Blue</span>
+                <a href="#" class="tc-link-blue-dark">Blue link on dark</a>
+                <span class="code">.tc-link-blue-dark</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Underline</span>
+                <a href="#" class="underline">Hover underline on dark</a>
+                <span class="code">.underline</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Blue + Underline</span>
+                <a href="#" class="tc-link-blue-dark underline">Blue + underline on dark</a>
+                <span class="code">.tc-link-blue-dark.underline</span>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,272 @@
+/**
+ * Mail Base Styles
+ *
+ * KAPSAM DIŞI: Bu dosya email template stillerini içerir. Email istemcileri
+ * CSS Custom Properties, nesting ve BEM desteklemediği için flat naming kullanır.
+ * rsBEM kuralları bu dosyaya uygulanmaz. components/ klasöründe kalması uygundur
+ * çünkü Sadrazam'ın build pipeline'ından geçer.
+ *
+ * DİKKAT: Email istemcileri CSS Custom Properties (var(--...)) desteklemez!
+ * Bu dosyada sadece SCSS değişkenleri kullanılır, derleme zamanında
+ * hardcoded değerlere dönüşür.
+ *
+ * Import zinciri:
+ * variables → colors-main → colors-pri/sec/ter (hepsi forward ediliyor)
+ */
+
+@use '../base/variables' as *;
+
+// =============================================================================
+// BASE STYLES
+// =============================================================================
+body {
+  font-family: Arial, Verdana, Tahoma, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  margin: 20px 0;
+  padding: 0;
+  min-width: 100% !important;
+  background-color: $color-grey-100;
+  color: $color-text-dark-1;
+  letter-spacing: 0.04em;
+  word-spacing: 0.08em;
+  line-height: 1.5em;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+p {
+  margin: 10px 0;
+}
+
+a {
+  color: $color-link-blue-dark;
+  text-decoration: none;
+
+  &.default-link {
+    color: $color-link-blue-dark;
+  }
+}
+
+b {
+  font-weight: 600;
+}
+
+h1 {
+  font-size: 23px;
+  font-weight: bold;
+  color: $color-text-dark-1;
+}
+
+h2 {
+  font-size: 19px;
+  font-weight: bold;
+  margin: 27px 0 11px 0;
+  color: $color-text-dark-1;
+}
+
+// =============================================================================
+// LAYOUT
+// =============================================================================
+.main-container {
+  width: 100%;
+  min-width: 200px;
+  max-width: 600px;
+}
+
+.header {
+  padding: 25px;
+  background-color: $color-white;
+
+  img {
+    max-width: 150px;
+  }
+}
+
+.body {
+  padding: 20px 25px;
+  background-color: $color-white;
+  border-top: 1px solid $color-grey-150;
+  border-bottom: 1px solid $color-grey-150;
+
+  .body-h1,
+  .body-h2,
+  .body-text {
+    font-family: Tahoma, Geneva, sans-serif;
+    margin: 0.5em 0;
+    color: $color-text-dark-1;
+  }
+
+  .body-h1 {
+    font-size: 23px;
+    font-weight: bold;
+  }
+
+  .body-h2 {
+    font-size: 19px;
+    font-weight: bold;
+  }
+
+  .body-text-medium {
+    font-size: 14px;
+  }
+
+  .body-text-small {
+    font-size: 12px;
+  }
+
+  .body-text-theme-base {
+    color: $color-pri-500;
+  }
+
+  .body-text-theme-dark {
+    color: $color-pri-900;
+  }
+
+  .body-text-secondary {
+    color: $color-text-dark-2;
+  }
+
+  .body-text-hint {
+    color: $color-text-dark-3;
+  }
+
+  .body-text-bold {
+    font-weight: 600;
+  }
+
+  .directlink {
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 14px;
+    line-height: 22px;
+    margin-top: 5px;
+    word-break: break-all;
+
+    a {
+      color: $color-grey-550;
+    }
+  }
+
+  .col425 {
+    width: 425px !important;
+  }
+
+  .button {
+    display: inline-block;
+    text-align: center;
+    font-size: 16px;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-weight: bold;
+    padding: 9px 13px;
+    background-color: $color-pri-500;
+    border-radius: 4px;
+  }
+
+  a.button {
+    color: $color-white;
+    text-decoration: none;
+  }
+}
+
+.footer {
+  padding: 15px 25px;
+  background-color: $color-white;
+
+  .footer-hint-text {
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+    color: $color-text-dark-3;
+  }
+}
+
+// =============================================================================
+// UTILITY CLASSES
+// =============================================================================
+.text-center {
+  text-align: center;
+}
+
+.text-muted {
+  color: $color-text-dark-3;
+}
+
+.text-small {
+  font-size: 14px;
+}
+
+.text-primary {
+  color: $color-pri-500;
+}
+
+.mt-16 {
+  margin-top: 16px;
+}
+
+.mt-24 {
+  margin-top: 24px;
+}
+
+.mb-16 {
+  margin-bottom: 16px;
+}
+
+.mb-24 {
+  margin-bottom: 24px;
+}
+
+// =============================================================================
+// WARNING BOX
+// =============================================================================
+.warning-box {
+  padding: 16px;
+  background-color: $color-grey-50;
+  border-radius: 6px;
+  border-left: 3px solid $color-grey-250;
+
+  p {
+    font-size: 14px;
+    color: $color-text-dark-3;
+    margin: 0;
+  }
+}
+
+// =============================================================================
+// INFO BOX
+// =============================================================================
+.info-box {
+  padding: 16px;
+  background-color: $color-grey-50;
+  border-radius: 6px;
+
+  &.info-box-primary {
+    background-color: $color-pri-300;
+    border-left: 3px solid $color-pri-500;
+  }
+
+  &.info-box-success {
+    background-color: $color-safe-100;
+    border-left: 3px solid $color-safe-500;
+  }
+
+  &.info-box-warning {
+    background-color: $color-warning-100;
+    border-left: 3px solid $color-warning-500;
+  }
+
+  &.info-box-danger {
+    background-color: $color-danger-100;
+    border-left: 3px solid $color-danger-500;
+  }
+}
+
+// =============================================================================
+// DIVIDER
+// =============================================================================
+.divider {
+  border: none;
+  border-top: 1px solid $color-grey-100;
+  margin: 20px 0;
+}

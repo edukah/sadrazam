@@ -1,0 +1,70 @@
+/* =========================================================================
+   Switch — Toggle (açma/kapama) bileşeni
+   Kullanım: <label class="switch"><input type="checkbox"><span class="switch__slider"></span></label>
+
+   Yapı:
+     .switch__container → Flex wrapper (switch + label yan yana)
+     .switch            → Asıl toggle kutusu
+     .switch__label     → Etiket
+     .switch__slider    → Kaydırıcı parça
+   ========================================================================= */
+
+.switch__container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: var(--space-4);
+}
+
+.switch__label {
+  margin: 0 !important;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  min-width: 2.5em;
+  width: 2.5em;
+  height: 1.375em;
+}
+
+.switch input,
+.switch input[type="checkbox"] {
+  display: none;
+}
+
+.switch__slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--color-grey-150--f);
+  border-radius: 2.125em;
+  transition: 0.4s;
+}
+
+.switch__slider:before {
+  position: absolute;
+  content: "";
+  height: 0.875em;
+  width: 0.875em;
+  left: 0.25em;
+  bottom: 0.25em;
+  background-color: var(--color-grey-zero);
+  border-radius: var(--radius-pill);
+  transition: 0.4s;
+}
+
+input:checked+.switch__slider {
+  background-color: var(--color-sec-900--f);
+}
+
+input:focus+.switch__slider {
+  box-shadow: 0 0 0.0625em var(--color-sec-900--f);
+}
+
+input:checked+.switch__slider:before {
+  transform: translateX(1.125em);
+}

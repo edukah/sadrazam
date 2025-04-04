@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sadrazam – Grid System Showcase</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/bold/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/light/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <script type="text/javascript" src="assets/js/script.js"></script>
+    <link rel="stylesheet" href="assets/sadrazam.min.css">
+    <script type="text/javascript" src="assets/sadrazam.min.js"></script>
+    <style>
+        /* Grid demo cell styling */
+        .grid-cell {
+            background: var(--bg-subtle);
+            border-radius: 6px;
+            padding: 0.75rem 0.5rem;
+            text-align: center;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--text-color);
+            min-height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .grid-cell--blue {
+            background: #74b9ff;
+            color: #fff;
+        }
+
+        .grid-cell--green {
+            background: #55efc4;
+            color: #2d3436;
+        }
+
+        .grid-cell--orange {
+            background: #fab1a0;
+            color: #2d3436;
+        }
+
+        .grid-cell--purple {
+            background: #a29bfe;
+            color: #fff;
+        }
+
+        .grid-cell--pink {
+            background: #fd79a8;
+            color: #fff;
+        }
+
+        .grid-cell--yellow {
+            background: #ffeaa7;
+            color: #2d3436;
+        }
+
+        .grid-cell--teal {
+            background: #81ecec;
+            color: #2d3436;
+        }
+
+        .grid-cell--dark {
+            background: #636e72;
+            color: #fff;
+        }
+
+        /* Nested grid highlight */
+        .grid-cell--nested-parent {
+            background: rgba(9, 132, 227, 0.1);
+            border: 2px dashed var(--theme-color-primary);
+            padding: 0.75rem;
+        }
+
+        .grid-cell--nested-child {
+            background: #0984e3;
+            color: #fff;
+            border-radius: 4px;
+            padding: 0.5rem 0.25rem;
+            text-align: center;
+            font-size: 0.72rem;
+            font-weight: 600;
+            min-height: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Override margin on demo gr-rows so they don't collapse with .row */
+        .demo-grid.gr-row {
+            margin-bottom: 12px;
+        }
+
+        .class-ref {
+            margin-top: 8px;
+            font-size: 0.78rem;
+            color: var(--text-muted);
+        }
+
+        .breakpoint-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.82rem;
+            margin-bottom: 1rem;
+        }
+
+        .breakpoint-table th,
+        .breakpoint-table td {
+            padding: 8px 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .breakpoint-table th {
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            font-size: 0.72rem;
+            letter-spacing: 0.5px;
+        }
+
+        .breakpoint-table tr:last-child td {
+            border-bottom: none;
+        }
+    </style>
+</head>
+
+<body>
+<script>if(localStorage.getItem("dark-mode"))document.body.classList.add("dark-mode")</script>
+    <header>
+        <nav class="top-navbar">
+            <div class="nav-container">
+                <a href="index.html" class="nav-logo">Sadrazam</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li>
+                        <a href="javascript:void(0)" onclick="openPopup(); return false;">Examples</a>
+                        <div class="navi-popup-overlay" id="examplesPopupOverlay"></div>
+                        <div class="navi-popup" id="examplesPopup">
+                            <h3>Examples</h3>
+                            <ul>
+                                <li><a href="buttons.html">Button</a></li>
+                                <li><a href="forms.html">Form</a></li>
+                                <li><a href="form-patterns.html">Form Patterns</a></li>
+                                <li><a href="links.html">Link</a></li>
+                                <li><a href="switches.html">Switch</a></li>
+                                <li><a href="autocomplete.html">Autocomplete</a></li>
+                                <li><a href="backdrop.html">Backdrop</a></li>
+                                <li><a href="hovermenu.html">Hovermenu</a></li>
+                                <li><a href="infinite-scroll.html">Infinite Scroll</a></li>
+                                <li><a href="snackbar.html">Snackbar</a></li>
+                                <li><a href="modals.html">Modal</a></li>
+                                <li><a href="popovers.html">Popover</a></li>
+                                <li><a href="slide-menu.html">Slide Menu</a></li>
+                                <li><a href="spinners.html">Spinner</a></li>
+                                <li><a href="tabs.html">Tabs</a></li>
+                                <li><a href="tooltips.html">Tooltip</a></li>
+                                <li><a href="form-validation.html">Form Validation</a></li>
+                                <li><a href="autosize-textarea.html">Autosize Textarea</a></li>
+                                <li><a href="autosize-select.html">Autosize Select</a></li>
+                                <li><a href="ajax.html">Ajax</a></li>
+                                <li><a href="grid.html">Grid</a></li>
+                                <li><a href="spacing.html">Spacing</a></li>
+                                <li><a href="colors.html">Colors</a></li>
+                                <li><a href="typography.html">Typography</a></li>
+                            </ul>
+                            <button class="close-popup" onclick="closePopup()">&#10005;</button>
+                        </div>
+                    </li>
+                    <li><a href="https://github.com/edukah/sadrazam" target="_blank">GitHub</a></li>
+                </ul>
+                <div class="dark-mode-button-container">
+                    <div class="mode-toggle-switch" onclick="toggleMode()"></div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+
+        <h1>Sadrazam – Grid System Showcase</h1>
+        <p class="subtitle">12-column responsive grid, auto-fit variants, nesting, offsets, and alignment</p>
+
+        <!-- ==================== BREAKPOINTS REFERENCE ==================== -->
+        <div class="section">
+            <h2 class="section-title">Breakpoint Reference</h2>
+            <p class="section-desc">Responsive breakpoints used by the grid column classes</p>
+
+            <table class="breakpoint-table">
+                <thead>
+                    <tr>
+                        <th>Prefix</th>
+                        <th>Min-width</th>
+                        <th>Target Devices</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="code">.col-xs-*</span></td>
+                        <td>0 (no media query)</td>
+                        <td>All devices (base / small phones)</td>
+                    </tr>
+                    <tr>
+                        <td><span class="code">.col-sm-*</span></td>
+                        <td>576px</td>
+                        <td>Mobile landscape</td>
+                    </tr>
+                    <tr>
+                        <td><span class="code">.col-md-*</span></td>
+                        <td>768px</td>
+                        <td>Tablets (portrait)</td>
+                    </tr>
+                    <tr>
+                        <td><span class="code">.col-lg-*</span></td>
+                        <td>992px</td>
+                        <td>Tablets (landscape) / Small laptops</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p class="class-ref">Grid container: <span class="code">.gr-row</span> &mdash; 12-column CSS Grid with <span class="code">gap: 1.2rem</span></p>
+        </div>
+
+        <!-- ==================== EQUAL COLUMNS ==================== -->
+        <div class="section">
+            <h2 class="section-title">Equal Column Layouts</h2>
+            <p class="section-desc">Common equal-width column distributions using <span class="code">.col-xs-*</span></p>
+
+            <!-- 12 x 1-col -->
+            <div class="row">
+                <span class="label">12 Columns</span>
+                <span class="code">.col-xs-1</span>
+            </div>
+            <div class="gr-row demo-grid">
+                <div class="col-xs-1"><div class="grid-cell grid-cell--blue">1</div></div>
+                <div class="col-xs-1"><div class="grid-cell grid-cell--green">1</div></div>
+                <div class="col-xs-1"><div class="grid-cell grid-cell--blue">1</div></div>
+                <div class="col-xs-1"><div class="grid-cell grid-cell--green">1</div></div>
+                <div class="col-xs-1"><div class="grid-cell grid-cell--blue">1</div></div>
+                <div class="col-xs-1"><div class="grid-cell grid-cell--green">1</div></div>
+                <div class="col-xs-1"><div class="grid-cell grid-cell--blue">1</div></div>
+                <div class="col-xs-1"><div class="grid-cell grid-cell--green">1</div></div>
+                <div class="col-xs-1"><div class="grid-cell grid-cell--blue">1</div></div>
+                <div class="col-xs-1"><div class="grid-cell grid-cell--green">1</div></div>
+                <div class="col-xs-1"><div class="grid-cell grid-cell--blue">1</div></div>
+                <div class="col-xs-1"><div class="grid-cell grid-cell--green">1</div></div>
+            </div>
+
+            <hr class="divider">
+
+            <!-- 6 x 2-col -->
+            <div class="row">
+                <span class="label">6 Columns</span>
+                <span class="code">.col-xs-2</span>
+            </div>
+            <div class="gr-row demo-grid">
+                <div class="col-xs-2"><div class="grid-cell grid-cell--orange">2</div></div>
+                <div class="col-xs-2"><div class="grid-cell grid-cell--purple">2</div></div>
+                <div class="col-xs-2"><div class="grid-cell grid-cell--orange">2</div></div>
+                <div class="col-xs-2"><div class="grid-cell grid-cell--purple">2</div></div>
+                <div class="col-xs-2"><div class="grid-cell grid-cell--orange">2</div></div>
+                <div class="col-xs-2"><div class="grid-cell grid-cell--purple">2</div></div>
+            </div>
+
+            <hr class="divider">
+
+            <!-- 4 x 3-col -->
+            <div class="row">
+                <span class="label">4 Columns</span>
+                <span class="code">.col-xs-3</span>
+            </div>
+            <div class="gr-row demo-grid">
+                <div class="col-xs-3"><div class="grid-cell grid-cell--teal">3</div></div>
+                <div class="col-xs-3"><div class="grid-cell grid-cell--pink">3</div></div>
+                <div class="col-xs-3"><div class="grid-cell grid-cell--teal">3</div></div>
+                <div class="col-xs-3"><div class="grid-cell grid-cell--pink">3</div></div>
+            </div>
+
+            <hr class="divider">
+
+            <!-- 3 x 4-col -->
+            <div class="row">
+                <span class="label">3 Columns</span>
+                <span class="code">.col-xs-4</span>
+            </div>
+            <div class="gr-row demo-grid">
+                <div class="col-xs-4"><div class="grid-cell grid-cell--blue">4</div></div>
+                <div class="col-xs-4"><div class="grid-cell grid-cell--yellow">4</div></div>
+                <div class="col-xs-4"><div class="grid-cell grid-cell--blue">4</div></div>
+            </div>
+
+            <hr class="divider">
+
+            <!-- 2 x 6-col -->
+            <div class="row">
+                <span class="label">2 Columns</span>
+                <span class="code">.col-xs-6</span>
+            </div>
+            <div class="gr-row demo-grid">
+                <div class="col-xs-6"><div class="grid-cell grid-cell--purple">6</div></div>
+                <div class="col-xs-6"><div class="grid-cell grid-cell--green">6</div></div>
+            </div>
+
+            <hr class="divider">
+
+            <!-- 1 x 12-col -->
+            <div class="row">
+                <span class="label">1 Column</span>
+                <span class="code">.col-xs-12</span>
+            </div>
+            <div class="gr-row demo-grid">
+                <div class="col-xs-12"><div class="grid-cell grid-cell--dark">12</div></div>
+            </div>
+        </div>
+
+        <!-- ==================== MIXED WIDTHS ==================== -->
+        <div class="section">
+            <h2 class="section-title">Mixed Column Widths</h2>
+            <p class="section-desc">Asymmetric layouts where column spans add up to 12</p>
+
+            <!-- 8 + 4 -->
+            <div class="row">
+                <span class="label">8 + 4</span>
+                <span class="code">.col-xs-8</span> + <span class="code">.col-xs-4</span>
+            </div>
+            <div class="gr-row demo-grid">
+                <div class="col-xs-8"><div class="grid-cell grid-cell--blue">col-xs-8</div></div>
+                <div class="col-xs-4"><div class="grid-cell grid-cell--orange">col-xs-4</div></div>
+            </div>
+
+            <hr class="divider">
+
+            <!-- 3 + 6 + 3 -->
+            <div class="row">
+                <span class="label">3 + 6 + 3</span>
+                <span class="code">.col-xs-3</span> + <span class="code">.col-xs-6</span> + <span class="code">.col-xs-3</span>
+            </div>
+            <div class="gr-row demo-grid">
+                <div class="col-xs-3"><div class="grid-cell grid-cell--green">col-xs-3</div></div>
+                <div class="col-xs-6"><div class="grid-cell grid-cell--purple">col-xs-6</div></div>
+                <div class="col-xs-3"><div class="grid-cell grid-cell--green">col-xs-3</div></div>
+            </div>
+
+            <hr class="divider">
+
+            <!-- 2 + 3 + 7 -->
+            <div class="row">
+                <span class="label">2 + 3 + 7</span>
+                <span class="code">.col-xs-2</span> + <span class="code">.col-xs-3</span> + <span class="code">.col-xs-7</span>
+            </div>
+            <div class="gr-row demo-grid">
+                <div class="col-xs-2"><div class="grid-cell grid-cell--pink">col-xs-2</div></div>
+                <div class="col-xs-3"><div class="grid-cell grid-cell--yellow">col-xs-3</div></div>
+                <div class="col-xs-7"><div class="grid-cell grid-cell--teal">col-xs-7</div></div>
+            </div>
+
+            <hr class="divider">
+
+            <!-- 1 + 5 + 5 + 1 -->
+            <div class="row">
+                <span class="label">1 + 5 + 5 + 1</span>
+                <span class="code">.col-xs-1</span> + <span class="code">.col-xs-5</span> + <span class="code">.col-xs-5</span> + <span class="code">.col-xs-1</span>
+            </div>
+            <div class="gr-row demo-grid">
+                <div class="col-xs-1"><div class="grid-cell grid-cell--dark">1</div></div>
+                <div class="col-xs-5"><div class="grid-cell grid-cell--blue">col-xs-5</div></div>
+                <div class="col-xs-5"><div class="grid-cell grid-cell--orange">col-xs-5</div></div>
+                <div class="col-xs-1"><div class="grid-cell grid-cell--dark">1</div></div>
+            </div>
+        </div>
+
+        <!-- ==================== RESPONSIVE BREAKPOINTS ==================== -->
+        <div class="section">
+            <h2 class="section-title">Responsive Breakpoints</h2>
+            <p class="section-desc">Columns change span at different viewport widths. Resize the browser to see the effect.</p>
+
+            <!-- Full-width on mobile, 2-col on sm, 3-col on md, 4-col on lg -->
+            <div class="row">
+                <span class="label">Responsive 4-up</span>
+                <span class="code">.col-xs-12 .col-sm-6 .col-md-4 .col-lg-3</span>
+            </div>
+            <div class="gr-row demo-grid">
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3"><div class="grid-cell grid-cell--blue">Item 1</div></div>
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3"><div class="grid-cell grid-cell--green">Item 2</div></div>
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3"><div class="grid-cell grid-cell--orange">Item 3</div></div>
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3"><div class="grid-cell grid-cell--purple">Item 4</div></div>
+            </div>
+
+            <hr class="divider">
+
+            <!-- Sidebar layout: full on xs, 4+8 on md, 3+9 on lg -->
+            <div class="row">
+                <span class="label">Sidebar Layout</span>
+                <span class="code">.col-xs-12 .col-md-4/.col-md-8</span> then <span class="code">.col-lg-3/.col-lg-9</span>
+            </div>
+            <div class="gr-row demo-grid">
+                <div class="col-xs-12 col-md-4 col-lg-3"><div class="grid-cell grid-cell--teal">Sidebar</div></div>
+                <div class="col-xs-12 col-md-8 col-lg-9"><div class="grid-cell grid-cell--yellow">Main Content</div></div>
+            </div>
+
+            <hr class="divider">
+
+            <!-- Three-column layout: stacked on xs, side-by-side on md -->
+            <div class="row">
+                <span class="label">Holy Grail</span>
+                <span class="code">.col-xs-12 .col-md-3/.col-md-6/.col-md-3</span>
+            </div>
+            <div class="gr-row demo-grid">
+                <div class="col-xs-12 col-md-3"><div class="grid-cell grid-cell--pink">Left Nav</div></div>
+                <div class="col-xs-12 col-md-6"><div class="grid-cell grid-cell--blue">Content</div></div>
+                <div class="col-xs-12 col-md-3"><div class="grid-cell grid-cell--pink">Right Sidebar</div></div>
+            </div>
+        </div>
+
+        <!-- ==================== OFFSETS (grid-column-start) ==================== -->
+        <div class="section">
+            <h2 class="section-title">Offsets with grid-column-start</h2>
+            <p class="section-desc">Use inline <span class="code">grid-column-start</span> to push columns. Since the grid is CSS Grid based, offsets are achieved via the start position.</p>
+
+            <!-- Offset by 1 -->
+            <div class="row">
+                <span class="label">Start at col 2</span>
+                <span class="code">grid-column-start: 2</span>
+            </div>
+            <div class="gr-row demo-grid">
+                <div class="col-xs-4" style="grid-column-start: 2;"><div class="grid-cell grid-cell--purple">col-xs-4 (offset 1)</div></div>
+            </div>
+
+            <hr class="divider">
+
+            <!-- Offset by 3 -->
+            <div class="row">
+                <span class="label">Start at col 4</span>
+                <span class="code">grid-column-start: 4</span>
+            </div>
+            <div class="gr-row demo-grid">
+                <div class="col-xs-6" style="grid-column-start: 4;"><div class="grid-cell grid-cell--green">col-xs-6 (offset 3)</div></div>
+            </div>
+
+            <hr class="divider">
+
+            <!-- Centered 6-col -->
+            <div class="row">
+                <span class="label">Centered 6-col</span>
+                <span class="code">grid-column-start: 4</span> + <span class="code">.col-xs-6</span>
+            </div>
+            <div class="gr-row demo-grid">
+                <div class="col-xs-6" style="grid-column-start: 4;"><div class="grid-cell grid-cell--orange">Centered (6 of 12)</div></div>
+            </div>
+
+            <hr class="divider">
+
+            <!-- Right-aligned 4-col -->
+            <div class="row">
+                <span class="label">Right-aligned</span>
+                <span class="code">grid-column-start: 9</span> + <span class="code">.col-xs-4</span>
+            </div>
+            <div class="gr-row demo-grid">
+                <div class="col-xs-4" style="grid-column-start: 9;"><div class="grid-cell grid-cell--pink">Right-aligned (col 9-12)</div></div>
+            </div>
+
+            <hr class="divider">
+
+            <!-- Two columns with gap between -->
+            <div class="row">
+                <span class="label">Gapped pair</span>
+                <span class="code">.col-xs-3</span> at start 1, <span class="code">.col-xs-3</span> at start 10
+            </div>
+            <div class="gr-row demo-grid">
+                <div class="col-xs-3" style="grid-column-start: 1;"><div class="grid-cell grid-cell--blue">Left</div></div>
+                <div class="col-xs-3" style="grid-column-start: 10;"><div class="grid-cell grid-cell--blue">Right</div></div>
+            </div>
+        </div>
+
+        <!-- ==================== NESTING ==================== -->
+        <div class="section">
+            <h2 class="section-title">Nested Grids</h2>
+            <p class="section-desc">Place a <span class="code">.gr-row</span> inside any column to create a nested 12-column sub-grid</p>
+
+            <!-- 8 + 4, with nested 6+6 inside the 8 -->
+            <div class="row">
+                <span class="label">Nested in col-8</span>
+                <span class="code">.col-xs-8 > .gr-row > .col-xs-6 + .col-xs-6</span>
+            </div>
+            <div class="gr-row demo-grid">
+                <div class="col-xs-8">
+                    <div class="grid-cell--nested-parent">
+                        <div style="font-size: 0.72rem; font-weight: 600; color: var(--theme-color-primary); margin-bottom: 6px;">col-xs-8 (parent)</div>
+                        <div class="gr-row">
+                            <div class="col-xs-6"><div class="grid-cell--nested-child">col-xs-6</div></div>
+                            <div class="col-xs-6"><div class="grid-cell--nested-child">col-xs-6</div></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-4"><div class="grid-cell grid-cell--dark" style="min-height: 80px;">col-xs-4</div></div>
+            </div>
+
+            <hr class="divider">
+
+            <!-- 6 + 6, with nested 4+4+4 inside the first 6 -->
+            <div class="row">
+                <span class="label">Nested 3-up</span>
+                <span class="code">.col-xs-6 > .gr-row > .col-xs-4 * 3</span>
+            </div>
+            <div class="gr-row demo-grid">
+                <div class="col-xs-6">
+                    <div class="grid-cell--nested-parent">
+                        <div style="font-size: 0.72rem; font-weight: 600; color: var(--theme-color-primary); margin-bottom: 6px;">col-xs-6 (parent)</div>
+                        <div class="gr-row">
+                            <div class="col-xs-4"><div class="grid-cell--nested-child">4</div></div>
+                            <div class="col-xs-4"><div class="grid-cell--nested-child">4</div></div>
+                            <div class="col-xs-4"><div class="grid-cell--nested-child">4</div></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="grid-cell--nested-parent">
+                        <div style="font-size: 0.72rem; font-weight: 600; color: var(--theme-color-primary); margin-bottom: 6px;">col-xs-6 (parent)</div>
+                        <div class="gr-row">
+                            <div class="col-xs-3"><div class="grid-cell--nested-child">3</div></div>
+                            <div class="col-xs-9"><div class="grid-cell--nested-child">9</div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== ALIGNMENT ==================== -->
+        <div class="section">
+            <h2 class="section-title">Alignment</h2>
+            <p class="section-desc">Use <span class="code">align-items</span> and <span class="code">justify-items</span> on <span class="code">.gr-row</span> for alignment control</p>
+
+            <!-- align-items: start / center / end -->
+            <div class="row">
+                <span class="label">Vertical Align</span>
+                <span class="code">align-items: start | center | end</span>
+            </div>
+
+            <div style="margin-bottom: 12px;">
+                <p class="class-ref" style="margin: 0 0 4px 0;"><span class="code">align-items: start</span></p>
+                <div class="gr-row demo-grid" style="align-items: start; min-height: 100px; background: var(--bg-inset); border-radius: 6px; padding: 8px;">
+                    <div class="col-xs-4"><div class="grid-cell grid-cell--blue" style="height: 40px;">Short</div></div>
+                    <div class="col-xs-4"><div class="grid-cell grid-cell--green" style="height: 80px;">Tall</div></div>
+                    <div class="col-xs-4"><div class="grid-cell grid-cell--orange" style="height: 55px;">Medium</div></div>
+                </div>
+            </div>
+
+            <div style="margin-bottom: 12px;">
+                <p class="class-ref" style="margin: 0 0 4px 0;"><span class="code">align-items: center</span></p>
+                <div class="gr-row demo-grid" style="align-items: center; min-height: 100px; background: var(--bg-inset); border-radius: 6px; padding: 8px;">
+                    <div class="col-xs-4"><div class="grid-cell grid-cell--blue" style="height: 40px;">Short</div></div>
+                    <div class="col-xs-4"><div class="grid-cell grid-cell--green" style="height: 80px;">Tall</div></div>
+                    <div class="col-xs-4"><div class="grid-cell grid-cell--orange" style="height: 55px;">Medium</div></div>
+                </div>
+            </div>
+
+            <div style="margin-bottom: 12px;">
+                <p class="class-ref" style="margin: 0 0 4px 0;"><span class="code">align-items: end</span></p>
+                <div class="gr-row demo-grid" style="align-items: end; min-height: 100px; background: var(--bg-inset); border-radius: 6px; padding: 8px;">
+                    <div class="col-xs-4"><div class="grid-cell grid-cell--blue" style="height: 40px;">Short</div></div>
+                    <div class="col-xs-4"><div class="grid-cell grid-cell--green" style="height: 80px;">Tall</div></div>
+                    <div class="col-xs-4"><div class="grid-cell grid-cell--orange" style="height: 55px;">Medium</div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== AUTO-FIT GRIDS ==================== -->
+        <div class="section">
+            <h2 class="section-title">Auto-fit Grid Variants</h2>
+            <p class="section-desc">Fluid grids that auto-wrap based on minimum column width. No explicit column count needed.</p>
+
+            <!-- grid-auto-sm -->
+            <div class="row">
+                <span class="label">Auto SM</span>
+                <span class="code">.grid-auto-sm</span> &mdash; <span class="code">minmax(150px, 1fr)</span>
+            </div>
+            <div class="grid-auto-sm demo-grid" style="margin-bottom: 16px;">
+                <div class="grid-cell grid-cell--teal">A</div>
+                <div class="grid-cell grid-cell--teal">B</div>
+                <div class="grid-cell grid-cell--teal">C</div>
+                <div class="grid-cell grid-cell--teal">D</div>
+                <div class="grid-cell grid-cell--teal">E</div>
+                <div class="grid-cell grid-cell--teal">F</div>
+            </div>
+
+            <hr class="divider">
+
+            <!-- grid-auto (default) -->
+            <div class="row">
+                <span class="label">Auto Default</span>
+                <span class="code">.grid-auto</span> &mdash; <span class="code">minmax(200px, 1fr)</span>
+            </div>
+            <div class="grid-auto demo-grid" style="margin-bottom: 16px;">
+                <div class="grid-cell grid-cell--blue">A</div>
+                <div class="grid-cell grid-cell--blue">B</div>
+                <div class="grid-cell grid-cell--blue">C</div>
+                <div class="grid-cell grid-cell--blue">D</div>
+                <div class="grid-cell grid-cell--blue">E</div>
+                <div class="grid-cell grid-cell--blue">F</div>
+            </div>
+
+            <hr class="divider">
+
+            <!-- grid-auto-md -->
+            <div class="row">
+                <span class="label">Auto MD</span>
+                <span class="code">.grid-auto-md</span> &mdash; <span class="code">minmax(250px, 1fr)</span>
+            </div>
+            <div class="grid-auto-md demo-grid" style="margin-bottom: 16px;">
+                <div class="grid-cell grid-cell--green">A</div>
+                <div class="grid-cell grid-cell--green">B</div>
+                <div class="grid-cell grid-cell--green">C</div>
+                <div class="grid-cell grid-cell--green">D</div>
+            </div>
+
+            <hr class="divider">
+
+            <!-- grid-auto-lg -->
+            <div class="row">
+                <span class="label">Auto LG</span>
+                <span class="code">.grid-auto-lg</span> &mdash; <span class="code">minmax(300px, 1fr)</span>
+            </div>
+            <div class="grid-auto-lg demo-grid" style="margin-bottom: 16px;">
+                <div class="grid-cell grid-cell--orange">A</div>
+                <div class="grid-cell grid-cell--orange">B</div>
+                <div class="grid-cell grid-cell--orange">C</div>
+                <div class="grid-cell grid-cell--orange">D</div>
+            </div>
+
+            <hr class="divider">
+
+            <!-- grid-auto-xl -->
+            <div class="row">
+                <span class="label">Auto XL</span>
+                <span class="code">.grid-auto-xl</span> &mdash; <span class="code">minmax(400px, 1fr)</span>
+            </div>
+            <div class="grid-auto-xl demo-grid" style="margin-bottom: 16px;">
+                <div class="grid-cell grid-cell--purple">A</div>
+                <div class="grid-cell grid-cell--purple">B</div>
+                <div class="grid-cell grid-cell--purple">C</div>
+            </div>
+        </div>
+
+        <!-- ==================== REAL-WORLD EXAMPLES ==================== -->
+        <div class="section">
+            <h2 class="section-title">Real-World Layout Examples</h2>
+            <p class="section-desc">Common page patterns composed with the grid system</p>
+
+            <!-- Card grid -->
+            <div class="row">
+                <span class="label">Card Grid</span>
+                <span class="code">.col-xs-12 .col-sm-6 .col-lg-3</span>
+            </div>
+            <div class="gr-row demo-grid">
+                <div class="col-xs-12 col-sm-6 col-lg-3">
+                    <div class="grid-cell grid-cell--blue" style="min-height: 80px; flex-direction: column; gap: 4px;">
+                        <i class="ph-bold ph-package" style="font-size: 1.2rem;"></i>
+                        <span>Product 1</span>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-lg-3">
+                    <div class="grid-cell grid-cell--green" style="min-height: 80px; flex-direction: column; gap: 4px;">
+                        <i class="ph-bold ph-package" style="font-size: 1.2rem;"></i>
+                        <span>Product 2</span>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-lg-3">
+                    <div class="grid-cell grid-cell--orange" style="min-height: 80px; flex-direction: column; gap: 4px;">
+                        <i class="ph-bold ph-package" style="font-size: 1.2rem;"></i>
+                        <span>Product 3</span>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-lg-3">
+                    <div class="grid-cell grid-cell--purple" style="min-height: 80px; flex-direction: column; gap: 4px;">
+                        <i class="ph-bold ph-package" style="font-size: 1.2rem;"></i>
+                        <span>Product 4</span>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="divider">
+
+            <!-- Dashboard layout -->
+            <div class="row">
+                <span class="label">Dashboard</span>
+                <span class="code">.col-xs-12 .col-md-*</span>
+            </div>
+            <div class="gr-row demo-grid">
+                <div class="col-xs-12 col-md-8">
+                    <div class="grid-cell grid-cell--yellow" style="min-height: 120px; flex-direction: column; gap: 4px;">
+                        <i class="ph-bold ph-chart-line" style="font-size: 1.4rem;"></i>
+                        <span>Main Chart (col-md-8)</span>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-4">
+                    <div class="grid-cell grid-cell--dark" style="min-height: 120px; flex-direction: column; gap: 4px;">
+                        <i class="ph-bold ph-list-bullets" style="font-size: 1.4rem;"></i>
+                        <span>Stats Panel (col-md-4)</span>
+                    </div>
+                </div>
+            </div>
+            <div class="gr-row demo-grid" style="margin-top: 4px;">
+                <div class="col-xs-12 col-md-4">
+                    <div class="grid-cell grid-cell--teal" style="min-height: 60px; flex-direction: column; gap: 4px;">
+                        <span>Widget A (col-md-4)</span>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-4">
+                    <div class="grid-cell grid-cell--pink" style="min-height: 60px; flex-direction: column; gap: 4px;">
+                        <span>Widget B (col-md-4)</span>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-4">
+                    <div class="grid-cell grid-cell--green" style="min-height: 60px; flex-direction: column; gap: 4px;">
+                        <span>Widget C (col-md-4)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== CLASS SUMMARY ==================== -->
+        <div class="section">
+            <h2 class="section-title">Class Summary</h2>
+            <p class="section-desc">Quick reference for all grid system classes</p>
+
+            <table class="breakpoint-table">
+                <thead>
+                    <tr>
+                        <th>Class</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="code">.gr-row</span></td>
+                        <td>12-column CSS Grid container with <span class="code">gap: 1.2rem</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="code">.col-xs-{1-12}</span></td>
+                        <td>Column span at all screen sizes (no media query)</td>
+                    </tr>
+                    <tr>
+                        <td><span class="code">.col-sm-{1-12}</span></td>
+                        <td>Column span at 576px and above</td>
+                    </tr>
+                    <tr>
+                        <td><span class="code">.col-md-{1-12}</span></td>
+                        <td>Column span at 768px and above</td>
+                    </tr>
+                    <tr>
+                        <td><span class="code">.col-lg-{1-12}</span></td>
+                        <td>Column span at 992px and above</td>
+                    </tr>
+                    <tr>
+                        <td><span class="code">.grid-auto</span></td>
+                        <td>Auto-fit grid with <span class="code">minmax(200px, 1fr)</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="code">.grid-auto-sm</span></td>
+                        <td>Auto-fit grid with <span class="code">minmax(150px, 1fr)</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="code">.grid-auto-md</span></td>
+                        <td>Auto-fit grid with <span class="code">minmax(250px, 1fr)</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="code">.grid-auto-lg</span></td>
+                        <td>Auto-fit grid with <span class="code">minmax(300px, 1fr)</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="code">.grid-auto-xl</span></td>
+                        <td>Auto-fit grid with <span class="code">minmax(400px, 1fr)</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</body>
+
+</html>

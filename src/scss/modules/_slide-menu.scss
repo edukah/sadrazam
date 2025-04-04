@@ -1,0 +1,198 @@
+@use '../base/variables';
+
+/* SlideMenu */
+.slide-menu {
+  display: none;
+  position: fixed;
+  z-index: var(--z-overlay-content);
+  left: 0;
+  width: 100%;
+  bottom: 0;
+  max-height: 100%;
+  overflow: auto;
+  background-color: var(--color-grey-zero);
+  /* Performans optimizasyonu */
+
+  @media only screen and (min-width: variables.$breakpoint-md) {
+    margin: 0 auto;
+    width: initial;
+    top: 0;
+    left: 50%;
+    bottom: initial;
+    transform: translate(-50%, 40px);
+    border-radius: var(--radius-md);
+  }
+
+  /* Giriş animasyonu - mobile */
+  @keyframes menuSlideIn {
+    0% {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  /* Giriş animasyonu - desktop */
+  @media only screen and (min-width: variables.$breakpoint-md) {
+    @keyframes menuSlideIn {
+      0% {
+        transform: translate(-50%, 20px) scale(0.8);
+        opacity: 0;
+      }
+
+      100% {
+        transform: translate(-50%, 40px) scale(1);
+        opacity: 1;
+      }
+    }
+  }
+
+  /* Çıkış animasyonu - mobile */
+  @keyframes menuSlideOut {
+    0% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    100% {
+      transform: translateY(120%);
+      opacity: 0;
+    }
+  }
+
+  /* Çıkış animasyonu - desktop */
+  @media only screen and (min-width: variables.$breakpoint-md) {
+    @keyframes menuSlideOut {
+      0% {
+        transform: translate(-50%, 40px);
+        opacity: 1;
+      }
+
+      100% {
+        transform: translate(-50%, 10px);
+        opacity: 0;
+      }
+    }
+  }
+
+  &.is-open {
+    display: block;
+  }
+
+  &.is-entering {
+    will-change: transform, opacity;
+    animation: menuSlideIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  }
+
+  &.is-leaving {
+    will-change: transform, opacity;
+    animation: menuSlideOut 0.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+}
+
+/* Kalan stil kuralları aynı kalabilir */
+.slide-menu__inner {
+  margin: 0 auto;
+  padding: var(--space-10);
+  width: 100%;
+  max-width: 450px;
+
+  @media only screen and (min-width: variables.$breakpoint-md) {
+    padding: var(--space-11);
+    width: 450px;
+  }
+}
+
+.slide-menu__header {
+  position: relative;
+  margin-bottom: var(--space-9);
+  border-radius: var(--radius-md);
+  text-align: center;
+  padding: var(--space-4);
+  background-color: var(--color-grey-100);
+  border: var(--border-width-sm) solid var(--color-grey-100);
+
+  header {
+  }
+}
+
+.slide-menu__content {
+  width: 100%;
+}
+
+/* Modal Close Button */
+.slide-menu__close-button {
+  position: absolute;
+  right: var(--space-10);
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0;
+  margin: 0;
+
+  font-size: var(--fsi-21);
+  font-weight: bold;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  appearance: none;
+  color: var(--color-text-dark-1);
+  text-shadow: 0 1px 0 var(--color-grey-650--f);
+  opacity: 0.3;
+  z-index: 1;
+
+  // flex
+  order: 999;
+
+  &:active,
+  &:focus {
+    outline: 0;
+    border: none;
+    opacity: 0.5;
+  }
+
+  &:hover {
+    @media (hover: hover) and (pointer: fine) {
+      outline: 0;
+      border: none;
+      opacity: 0.5;
+    }
+  }
+}
+
+.slide-menu__option-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+
+  text-align: center;
+
+  .slide-menu__option-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-4);
+
+    line-height: 2em;
+    border: var(--border-width-sm) solid var(--color-grey-150);
+    border-radius: var(--radius-md);
+    padding: var(--space-3);
+    transition: box-shadow 0.2s ease-out;
+
+    &:hover {
+      @media (hover: hover) and (pointer: fine) {
+        box-shadow: 0 0 6px var(--color-grey-250);
+      }
+    }
+
+    * {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-4);
+    }
+  }
+}

@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sadrazam – Typography Showcase</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/bold/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/light/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <script type="text/javascript" src="assets/js/script.js"></script>
+    <link rel="stylesheet" href="assets/sadrazam.min.css">
+    <script type="text/javascript" src="assets/sadrazam.min.js"></script>
+    <style>
+        h1.page-title {
+            font-size: 1.8rem;
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .demo-box {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .demo-inline {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 4px;
+        }
+
+        .color-swatch {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 12px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            min-width: 200px;
+        }
+
+        .align-demo {
+            background: var(--bg-subtle);
+            padding: 8px 14px;
+            border-radius: 6px;
+            border: 1px dashed var(--border-color);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .dark-section .color-swatch {
+            border-color: var(--border-color);
+        }
+
+        .heading-reset {
+            margin: 0 !important;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+<script>if(localStorage.getItem("dark-mode"))document.body.classList.add("dark-mode")</script>
+    <header>
+        <nav class="top-navbar">
+            <div class="nav-container">
+                <a href="index.html" class="nav-logo">Sadrazam</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li>
+                        <a href="javascript:void(0)" onclick="openPopup(); return false;">Examples</a>
+                        <div class="navi-popup-overlay" id="examplesPopupOverlay"></div>
+                        <div class="navi-popup" id="examplesPopup">
+                            <h3>Examples</h3>
+                            <ul>
+                                <li><a href="buttons.html">Button</a></li>
+                                <li><a href="forms.html">Form</a></li>
+                                <li><a href="form-patterns.html">Form Patterns</a></li>
+                                <li><a href="links.html">Link</a></li>
+                                <li><a href="switches.html">Switch</a></li>
+                                <li><a href="autocomplete.html">Autocomplete</a></li>
+                                <li><a href="backdrop.html">Backdrop</a></li>
+                                <li><a href="hovermenu.html">Hovermenu</a></li>
+                                <li><a href="infinite-scroll.html">Infinite Scroll</a></li>
+                                <li><a href="snackbar.html">Snackbar</a></li>
+                                <li><a href="modals.html">Modal</a></li>
+                                <li><a href="popovers.html">Popover</a></li>
+                                <li><a href="slide-menu.html">Slide Menu</a></li>
+                                <li><a href="spinners.html">Spinner</a></li>
+                                <li><a href="tabs.html">Tabs</a></li>
+                                <li><a href="tooltips.html">Tooltip</a></li>
+                                <li><a href="form-validation.html">Form Validation</a></li>
+                                <li><a href="autosize-textarea.html">Autosize Textarea</a></li>
+                                <li><a href="autosize-select.html">Autosize Select</a></li>
+                                <li><a href="ajax.html">Ajax</a></li>
+                                <li><a href="grid.html">Grid</a></li>
+                                <li><a href="spacing.html">Spacing</a></li>
+                                <li><a href="colors.html">Colors</a></li>
+                                <li><a href="typography.html">Typography</a></li>
+                            </ul>
+                            <button class="close-popup" onclick="closePopup()">&#10005;</button>
+                        </div>
+                    </li>
+                    <li><a href="https://github.com/edukah/sadrazam" target="_blank">GitHub</a></li>
+                </ul>
+                <div class="dark-mode-button-container">
+                    <div class="mode-toggle-switch" onclick="toggleMode()"></div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+
+        <h1 class="page-title">Sadrazam – Typography Showcase</h1>
+        <p class="subtitle">Headings, font sizes, weights, families, alignment, transform, decoration and text colors</p>
+
+        <!-- ==================== HEADINGS ==================== -->
+        <div class="section">
+            <h2 class="section-title">Headings</h2>
+            <p class="section-desc">Native HTML heading elements h1 through h6, styled in base/_typography.scss</p>
+
+            <div class="row">
+                <span class="label">H1</span>
+                <div class="demo-box">
+                    <h1 class="heading-reset">Heading One</h1>
+                </div>
+                <span class="code">h1 &mdash; var(--fsi-35), 700</span>
+            </div>
+
+            <div class="row">
+                <span class="label">H2</span>
+                <div class="demo-box">
+                    <h2 class="heading-reset">Heading Two</h2>
+                </div>
+                <span class="code">h2 &mdash; var(--fsi-28), 600</span>
+            </div>
+
+            <div class="row">
+                <span class="label">H3</span>
+                <div class="demo-box">
+                    <h3 class="heading-reset">Heading Three</h3>
+                </div>
+                <span class="code">h3 &mdash; var(--fsi-24), 600</span>
+            </div>
+
+            <div class="row">
+                <span class="label">H4</span>
+                <div class="demo-box">
+                    <h4 class="heading-reset">Heading Four</h4>
+                </div>
+                <span class="code">h4 &mdash; var(--fsi-21), 600</span>
+            </div>
+
+            <div class="row">
+                <span class="label">H5</span>
+                <div class="demo-box">
+                    <h5 class="heading-reset">Heading Five</h5>
+                </div>
+                <span class="code">h5 &mdash; var(--fsi-19), 600</span>
+            </div>
+
+            <div class="row">
+                <span class="label">H6</span>
+                <div class="demo-box">
+                    <h6 class="heading-reset">Heading Six</h6>
+                </div>
+                <span class="code">h6 &mdash; var(--fsi-17), 600</span>
+            </div>
+        </div>
+
+        <!-- ==================== INLINE ELEMENTS ==================== -->
+        <div class="section">
+            <h2 class="section-title">Paragraph &amp; Inline Elements</h2>
+            <p class="section-desc">Standard paragraph, code, pre and blockquote elements from base/_typography.scss</p>
+
+            <div class="row">
+                <span class="label">Paragraph</span>
+                <div class="demo-box">
+                    <p style="margin:0;">The quick brown fox jumps over the lazy dog. This is a standard paragraph element with default line-height and letter-spacing applied globally.</p>
+                </div>
+                <span class="code">&lt;p&gt;</span>
+            </div>
+
+            <hr class="divider">
+
+            <div class="row">
+                <span class="label">Inline Code</span>
+                <div class="demo-box">
+                    <span>Use the <code>font-size</code> property to set text size.</span>
+                </div>
+                <span class="code">&lt;code&gt;</span>
+            </div>
+
+            <hr class="divider">
+
+            <div class="row">
+                <span class="label">Pre Block</span>
+                <div class="demo-box">
+                    <pre style="margin:0;">const greeting = "Hello, world!";
+console.log(greeting);</pre>
+                </div>
+                <span class="code">&lt;pre&gt;</span>
+            </div>
+
+            <hr class="divider">
+
+            <div class="row">
+                <span class="label">Blockquote</span>
+                <div class="demo-box">
+                    <blockquote style="margin:0;">Design is not just what it looks like and feels like. Design is how it works.</blockquote>
+                </div>
+                <span class="code">&lt;blockquote&gt;</span>
+            </div>
+        </div>
+
+        <!-- ==================== FONT FAMILIES ==================== -->
+        <div class="section">
+            <h2 class="section-title">Font Families</h2>
+            <p class="section-desc">Utility classes for switching font family &mdash; defined in base/_fonts.scss</p>
+
+            <div class="row">
+                <span class="label">Sans-Serif</span>
+                <div class="demo-box">
+                    <span class="ffa-sans">The quick brown fox jumps over the lazy dog.</span>
+                </div>
+                <span class="code">.ffa-sans</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Serif</span>
+                <div class="demo-box">
+                    <span class="ffa-serif">The quick brown fox jumps over the lazy dog.</span>
+                </div>
+                <span class="code">.ffa-serif</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Monospace</span>
+                <div class="demo-box">
+                    <span class="ffa-mono">The quick brown fox jumps over the lazy dog.</span>
+                </div>
+                <span class="code">.ffa-mono</span>
+            </div>
+        </div>
+
+        <!-- ==================== FONT WEIGHTS ==================== -->
+        <div class="section">
+            <h2 class="section-title">Font Weights</h2>
+            <p class="section-desc">Utility classes for font-weight &mdash; from base/_fonts.scss</p>
+
+            <div class="row">
+                <span class="label">Light (300)</span>
+                <div class="demo-box">
+                    <span class="fwe-light fsi-18">The quick brown fox jumps over the lazy dog.</span>
+                </div>
+                <span class="code">.fwe-light</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Regular (400)</span>
+                <div class="demo-box">
+                    <span class="fwe-regular fsi-18">The quick brown fox jumps over the lazy dog.</span>
+                </div>
+                <span class="code">.fwe-regular</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Medium (500)</span>
+                <div class="demo-box">
+                    <span class="fwe-medium fsi-18">The quick brown fox jumps over the lazy dog.</span>
+                </div>
+                <span class="code">.fwe-medium</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Semibold (600)</span>
+                <div class="demo-box">
+                    <span class="fwe-semibold fsi-18">The quick brown fox jumps over the lazy dog.</span>
+                </div>
+                <span class="code">.fwe-semibold</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Bold (700)</span>
+                <div class="demo-box">
+                    <span class="fwe-bold fsi-18">The quick brown fox jumps over the lazy dog.</span>
+                </div>
+                <span class="code">.fwe-bold</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Extrabold (800)</span>
+                <div class="demo-box">
+                    <span class="fwe-extrabold fsi-18">The quick brown fox jumps over the lazy dog.</span>
+                </div>
+                <span class="code">.fwe-extrabold</span>
+            </div>
+        </div>
+
+        <!-- ==================== FONT SIZES ==================== -->
+        <div class="section">
+            <h2 class="section-title">Font Sizes</h2>
+            <p class="section-desc">Responsive clamp-based size scale using .fsi-{n} classes &mdash; from base/_fonts.scss</p>
+
+            <div class="row">
+                <span class="label">fsi-10</span>
+                <span class="fsi-10">The quick brown fox</span>
+                <span class="code">.fsi-10</span>
+            </div>
+
+            <div class="row">
+                <span class="label">fsi-11</span>
+                <span class="fsi-11">The quick brown fox</span>
+                <span class="code">.fsi-11</span>
+            </div>
+
+            <div class="row">
+                <span class="label">fsi-12</span>
+                <span class="fsi-12">The quick brown fox</span>
+                <span class="code">.fsi-12</span>
+            </div>
+
+            <div class="row">
+                <span class="label">fsi-13</span>
+                <span class="fsi-13">The quick brown fox</span>
+                <span class="code">.fsi-13</span>
+            </div>
+
+            <div class="row">
+                <span class="label">fsi-14</span>
+                <span class="fsi-14">The quick brown fox</span>
+                <span class="code">.fsi-14</span>
+            </div>
+
+            <div class="row">
+                <span class="label">fsi-15</span>
+                <span class="fsi-15">The quick brown fox</span>
+                <span class="code">.fsi-15</span>
+            </div>
+
+            <div class="row">
+                <span class="label">fsi-16</span>
+                <span class="fsi-16">The quick brown fox</span>
+                <span class="code">.fsi-16</span>
+            </div>
+
+            <div class="row">
+                <span class="label">fsi-17</span>
+                <span class="fsi-17">The quick brown fox</span>
+                <span class="code">.fsi-17</span>
+            </div>
+
+            <div class="row">
+                <span class="label">fsi-18</span>
+                <span class="fsi-18">The quick brown fox</span>
+                <span class="code">.fsi-18</span>
+            </div>
+
+            <div class="row">
+                <span class="label">fsi-19</span>
+                <span class="fsi-19">The quick brown fox</span>
+                <span class="code">.fsi-19</span>
+            </div>
+
+            <div class="row">
+                <span class="label">fsi-20</span>
+                <span class="fsi-20">The quick brown fox</span>
+                <span class="code">.fsi-20</span>
+            </div>
+
+            <div class="row">
+                <span class="label">fsi-21</span>
+                <span class="fsi-21">The quick brown fox</span>
+                <span class="code">.fsi-21</span>
+            </div>
+
+            <div class="row">
+                <span class="label">fsi-22</span>
+                <span class="fsi-22">The quick brown fox</span>
+                <span class="code">.fsi-22</span>
+            </div>
+
+            <div class="row">
+                <span class="label">fsi-24</span>
+                <span class="fsi-24">The quick brown fox</span>
+                <span class="code">.fsi-24</span>
+            </div>
+
+            <div class="row">
+                <span class="label">fsi-28</span>
+                <span class="fsi-28">The quick brown fox</span>
+                <span class="code">.fsi-28</span>
+            </div>
+
+            <div class="row">
+                <span class="label">fsi-32</span>
+                <span class="fsi-32">The quick brown fox</span>
+                <span class="code">.fsi-32</span>
+            </div>
+
+            <div class="row">
+                <span class="label">fsi-35</span>
+                <span class="fsi-35">The quick brown fox</span>
+                <span class="code">.fsi-35</span>
+            </div>
+
+            <div class="row">
+                <span class="label">fsi-40</span>
+                <span class="fsi-40">The quick brown fox</span>
+                <span class="code">.fsi-40</span>
+            </div>
+
+            <div class="row">
+                <span class="label">fsi-45</span>
+                <span class="fsi-45">The quick brown fox</span>
+                <span class="code">.fsi-45</span>
+            </div>
+        </div>
+
+        <!-- ==================== ICON SIZES ==================== -->
+        <div class="section">
+            <h2 class="section-title">Icon Sizes</h2>
+            <p class="section-desc">Phosphor icon scaling classes &mdash; from base/_fonts.scss</p>
+
+            <div class="row">
+                <span class="label">Default</span>
+                <i class="ph-bold ph-star"></i>
+                <span class="code">(no class)</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Icon LG</span>
+                <i class="ph-bold ph-star ficon-lg"></i>
+                <span class="code">.ficon-lg (1.5em)</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Icon 2x</span>
+                <i class="ph-bold ph-star ficon-2x"></i>
+                <span class="code">.ficon-2x (2em)</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Icon 3x</span>
+                <i class="ph-bold ph-star ficon-3x"></i>
+                <span class="code">.ficon-3x (3em)</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Icon 4x</span>
+                <i class="ph-bold ph-star ficon-4x"></i>
+                <span class="code">.ficon-4x (4em)</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Icon 5x</span>
+                <i class="ph-bold ph-star ficon-5x"></i>
+                <span class="code">.ficon-5x (5em)</span>
+            </div>
+        </div>
+
+        <!-- ==================== TEXT ALIGNMENT ==================== -->
+        <div class="section">
+            <h2 class="section-title">Text Alignment</h2>
+            <p class="section-desc">Alignment utility classes from utilities/_typography.scss</p>
+
+            <div class="row">
+                <span class="label">Left</span>
+                <div class="align-demo text-left">Left-aligned text content.</div>
+                <span class="code">.text-left</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Center</span>
+                <div class="align-demo text-center">Center-aligned text content.</div>
+                <span class="code">.text-center</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Right</span>
+                <div class="align-demo text-right">Right-aligned text content.</div>
+                <span class="code">.text-right</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Justify</span>
+                <div class="align-demo text-justify">Justified text stretches each line so that both the left and right edges are flush with the container boundaries, creating a clean block of text that looks more like a printed column.</div>
+                <span class="code">.text-justify</span>
+            </div>
+        </div>
+
+        <!-- ==================== TEXT TRANSFORM ==================== -->
+        <div class="section">
+            <h2 class="section-title">Text Transform</h2>
+            <p class="section-desc">Transform and wrapping utilities from utilities/_typography.scss</p>
+
+            <div class="row">
+                <span class="label">Uppercase</span>
+                <span class="text-uppercase fsi-16">The quick brown fox jumps over the lazy dog.</span>
+                <span class="code">.text-uppercase</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Lowercase</span>
+                <span class="text-lowercase fsi-16">THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG.</span>
+                <span class="code">.text-lowercase</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Capitalize</span>
+                <span class="text-capitalize fsi-16">the quick brown fox jumps over the lazy dog.</span>
+                <span class="code">.text-capitalize</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Initialism</span>
+                <span class="text-uppercase fsi-16">html css scss</span>
+                <span class="code">.text-uppercase</span>
+            </div>
+
+            <hr class="divider">
+
+            <div class="row">
+                <span class="label">No Wrap</span>
+                <div style="max-width: 300px; overflow: hidden; border: 1px dashed var(--border-color); border-radius: 6px; padding: 6px 10px;">
+                    <span class="text-nowrap fsi-14">This text will never wrap to a new line regardless of container width.</span>
+                </div>
+                <span class="code">.text-nowrap</span>
+            </div>
+        </div>
+
+        <!-- ==================== TEXT DECORATION ==================== -->
+        <div class="section">
+            <h2 class="section-title">Text Decoration</h2>
+            <p class="section-desc">Underline utility classes from utilities/_typography.scss</p>
+
+            <div class="row">
+                <span class="label">Underline</span>
+                <span class="text-underline fsi-16">This text is always underlined.</span>
+                <span class="code">.text-underline</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Underline Hover</span>
+                <span class="text-underline-hover fsi-16" style="cursor: pointer;">Hover over this text to see the underline.</span>
+                <span class="code">.text-underline-hover</span>
+            </div>
+        </div>
+
+        <!-- ==================== TEXT COLORS: LIGHT THEME ==================== -->
+        <div class="section">
+            <h2 class="section-title">Text Colors &mdash; Light Theme</h2>
+            <p class="section-desc">Text color utility classes from base/_colors-main.scss</p>
+
+            <div class="row">
+                <span class="label">Black</span>
+                <div class="color-swatch">
+                    <span class="tc-text-black fsi-15 fwe-semibold">Sample Text</span>
+                </div>
+                <span class="code">.tc-text-black</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Dark Primary</span>
+                <div class="color-swatch">
+                    <span class="tc-text-dark-1 fsi-15 fwe-semibold">Sample Text</span>
+                </div>
+                <span class="code">.tc-text-dark-1</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Dark Secondary</span>
+                <div class="color-swatch">
+                    <span class="tc-text-dark-2 fsi-15 fwe-semibold">Sample Text</span>
+                </div>
+                <span class="code">.tc-text-dark-2</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Dark Hint</span>
+                <div class="color-swatch">
+                    <span class="tc-text-dark-3 fsi-15 fwe-semibold">Sample Text</span>
+                </div>
+                <span class="code">.tc-text-dark-3</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Dark Divider</span>
+                <div class="color-swatch">
+                    <span class="tc-text-dark-4 fsi-15 fwe-semibold">Sample Text</span>
+                </div>
+                <span class="code">.tc-text-dark-4</span>
+            </div>
+
+            <hr class="divider">
+
+            <div class="row">
+                <span class="label">Link Blue</span>
+                <div class="color-swatch">
+                    <span class="tc-link-blue-dark fsi-15 fwe-semibold">Sample Link</span>
+                </div>
+                <span class="code">.tc-link-blue-dark</span>
+            </div>
+        </div>
+
+        <!-- ==================== TEXT COLORS: THEME ==================== -->
+        <div class="section">
+            <h2 class="section-title">Text Colors &mdash; Theme Colors</h2>
+            <p class="section-desc">Brand color text classes from theme/_colors-pri.scss, _colors-sec.scss, _colors-ter.scss</p>
+
+            <div class="row">
+                <span class="label">Primary Light</span>
+                <div class="color-swatch">
+                    <span class="tc-pri-300 fsi-15 fwe-semibold">Sample Text</span>
+                </div>
+                <span class="code">.tc-pri-300</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Primary Base</span>
+                <div class="color-swatch">
+                    <span class="tc-pri-500 fsi-15 fwe-semibold">Sample Text</span>
+                </div>
+                <span class="code">.tc-pri-500</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Primary Dark</span>
+                <div class="color-swatch">
+                    <span class="tc-pri-700 fsi-15 fwe-semibold">Sample Text</span>
+                </div>
+                <span class="code">.tc-pri-700</span>
+            </div>
+
+            <hr class="divider">
+
+            <div class="row">
+                <span class="label">Secondary Light</span>
+                <div class="color-swatch">
+                    <span class="tc-sec-300 fsi-15 fwe-semibold">Sample Text</span>
+                </div>
+                <span class="code">.tc-sec-300</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Secondary Base</span>
+                <div class="color-swatch">
+                    <span class="tc-sec-500 fsi-15 fwe-semibold">Sample Text</span>
+                </div>
+                <span class="code">.tc-sec-500</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Secondary Dark</span>
+                <div class="color-swatch">
+                    <span class="tc-sec-700 fsi-15 fwe-semibold">Sample Text</span>
+                </div>
+                <span class="code">.tc-sec-700</span>
+            </div>
+
+            <hr class="divider">
+
+            <div class="row">
+                <span class="label">Tertiary Light</span>
+                <div class="color-swatch">
+                    <span class="tc-ter-300 fsi-15 fwe-semibold">Sample Text</span>
+                </div>
+                <span class="code">.tc-ter-300</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Tertiary Base</span>
+                <div class="color-swatch">
+                    <span class="tc-ter-500 fsi-15 fwe-semibold">Sample Text</span>
+                </div>
+                <span class="code">.tc-ter-500</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Tertiary Dark</span>
+                <div class="color-swatch">
+                    <span class="tc-ter-700 fsi-15 fwe-semibold">Sample Text</span>
+                </div>
+                <span class="code">.tc-ter-700</span>
+            </div>
+        </div>
+
+        <!-- ==================== TEXT COLORS: INTERACTION ==================== -->
+        <div class="section">
+            <h2 class="section-title">Text Colors &mdash; Interaction / Status</h2>
+            <p class="section-desc">Semantic status text colors from base/_colors-main.scss</p>
+
+            <div class="row">
+                <span class="label">Safe 500</span>
+                <div class="color-swatch">
+                    <span class="tc-safe-500 fsi-15 fwe-semibold">Success</span>
+                </div>
+                <span class="code">.tc-safe-500</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Safe 800</span>
+                <div class="color-swatch">
+                    <span class="tc-safe-800 fsi-15 fwe-semibold">Success Dark</span>
+                </div>
+                <span class="code">.tc-safe-800</span>
+            </div>
+
+            <hr class="divider">
+
+            <div class="row">
+                <span class="label">Notice 500</span>
+                <div class="color-swatch">
+                    <span class="tc-notice-500 fsi-15 fwe-semibold">Informational</span>
+                </div>
+                <span class="code">.tc-notice-500</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Notice 800</span>
+                <div class="color-swatch">
+                    <span class="tc-notice-800 fsi-15 fwe-semibold">Info Dark</span>
+                </div>
+                <span class="code">.tc-notice-800</span>
+            </div>
+
+            <hr class="divider">
+
+            <div class="row">
+                <span class="label">Caution 500</span>
+                <div class="color-swatch">
+                    <span class="tc-caution-500 fsi-15 fwe-semibold">Caution</span>
+                </div>
+                <span class="code">.tc-caution-500</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Caution 800</span>
+                <div class="color-swatch">
+                    <span class="tc-caution-800 fsi-15 fwe-semibold">Caution Dark</span>
+                </div>
+                <span class="code">.tc-caution-800</span>
+            </div>
+
+            <hr class="divider">
+
+            <div class="row">
+                <span class="label">Warning 500</span>
+                <div class="color-swatch">
+                    <span class="tc-warning-500 fsi-15 fwe-semibold">Warning</span>
+                </div>
+                <span class="code">.tc-warning-500</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Warning 800</span>
+                <div class="color-swatch">
+                    <span class="tc-warning-800 fsi-15 fwe-semibold">Warning Dark</span>
+                </div>
+                <span class="code">.tc-warning-800</span>
+            </div>
+
+            <hr class="divider">
+
+            <div class="row">
+                <span class="label">Danger 500</span>
+                <div class="color-swatch">
+                    <span class="tc-danger-500 fsi-15 fwe-semibold">Danger</span>
+                </div>
+                <span class="code">.tc-danger-500</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Danger 800</span>
+                <div class="color-swatch">
+                    <span class="tc-danger-800 fsi-15 fwe-semibold">Danger Dark</span>
+                </div>
+                <span class="code">.tc-danger-800</span>
+            </div>
+        </div>
+
+        <!-- ==================== DARK THEME TEXT COLORS ==================== -->
+        <div class="section dark-section">
+            <h2 class="section-title">Text Colors &mdash; Dark Background</h2>
+            <p class="section-desc">Light-on-dark text color classes, best used on dark backgrounds</p>
+
+            <div class="row">
+                <span class="label">White</span>
+                <div class="color-swatch">
+                    <span class="tc-text-white fsi-15 fwe-semibold">Sample Text</span>
+                </div>
+                <span class="code">.tc-text-white</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Light Primary</span>
+                <div class="color-swatch">
+                    <span class="tc-text-light-1 fsi-15 fwe-semibold">Sample Text</span>
+                </div>
+                <span class="code">.tc-text-light-1</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Light Secondary</span>
+                <div class="color-swatch">
+                    <span class="tc-text-light-2 fsi-15 fwe-semibold">Sample Text</span>
+                </div>
+                <span class="code">.tc-text-light-2</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Light Hint</span>
+                <div class="color-swatch">
+                    <span class="tc-text-light-3 fsi-15 fwe-semibold">Sample Text</span>
+                </div>
+                <span class="code">.tc-text-light-3</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Light Divider</span>
+                <div class="color-swatch">
+                    <span class="tc-text-light-4 fsi-15 fwe-semibold">Sample Text</span>
+                </div>
+                <span class="code">.tc-text-light-4</span>
+            </div>
+
+            <hr class="divider" style="border-color: var(--border-color);">
+
+            <div class="row">
+                <span class="label">Constant White</span>
+                <div class="color-swatch">
+                    <span class="tc-text-white--f fsi-15 fwe-semibold">Always White</span>
+                </div>
+                <span class="code">.tc-text-white--f</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Constant Black</span>
+                <div class="color-swatch" style="background: var(--bg-subtle);">
+                    <span class="tc-text-black--f fsi-15 fwe-semibold">Always Black</span>
+                </div>
+                <span class="code">.tc-text-black--f</span>
+            </div>
+        </div>
+
+        <!-- ==================== COMBINED EXAMPLE ==================== -->
+        <div class="section">
+            <h2 class="section-title">Combined Example</h2>
+            <p class="section-desc">Mixing multiple typography utilities on the same element</p>
+
+            <div class="row">
+                <span class="label">Heading Style</span>
+                <div class="demo-box">
+                    <span class="fsi-28 fwe-bold ffa-serif tc-pri-700">Serif Bold Heading</span>
+                </div>
+                <span class="code">.fsi-28 .fwe-bold .ffa-serif .tc-pri-700</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Caption Style</span>
+                <div class="demo-box">
+                    <span class="fsi-11 fwe-medium text-uppercase tc-text-dark-3">Small uppercase caption text</span>
+                </div>
+                <span class="code">.fsi-11 .fwe-medium .text-uppercase .tc-text-dark-3</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Code Style</span>
+                <div class="demo-box">
+                    <span class="fsi-14 ffa-mono tc-danger-500">const x = 42;</span>
+                </div>
+                <span class="code">.fsi-14 .ffa-mono .tc-danger-500</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Label Style</span>
+                <div class="demo-box">
+                    <span class="fsi-12 fwe-semibold text-uppercase tc-safe-800">verified account</span>
+                </div>
+                <span class="code">.fsi-12 .fwe-semibold .text-uppercase .tc-safe-800</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Underline Link</span>
+                <div class="demo-box">
+                    <span class="fsi-15 fwe-medium text-underline tc-link-blue-dark">Click here for details</span>
+                </div>
+                <span class="code">.fsi-15 .fwe-medium .text-underline .tc-link-blue-dark</span>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>

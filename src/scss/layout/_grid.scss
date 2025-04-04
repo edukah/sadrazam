@@ -1,0 +1,118 @@
+@use '../base/variables';
+
+/* =========================================================================
+   Grid Sistemi
+   12'lik responsive grid yapısı ve auto-fit grid varyantları.
+   Eski adı: layout/_responsive.scss → layout/_grid.scss olarak yeniden adlandırıldı.
+   Visibility class'ları: utilities/_visibility.scss
+   ========================================================================= */
+
+// 1. 12'lik grid row yapısı
+.gr-row {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--space-10);
+}
+
+.gr-row + .gr-row {
+  margin-top: var(--space-10);
+}
+
+// 2. Sütun sınıfı genel stilleri
+[class*="col-"] {
+  width: 100%;
+}
+
+// 3. XS'den LG'ye kadar grid-column span sınıfları
+@for $i from 1 through 12 {
+  .col-xs-#{$i} {
+    grid-column: span #{$i} / span #{$i};
+  }
+}
+
+@media (min-width: variables.$breakpoint-sm) {
+  @for $i from 1 through 12 {
+    .col-sm-#{$i} {
+      grid-column: span #{$i} / span #{$i};
+    }
+  }
+}
+
+@media (min-width: variables.$breakpoint-md) {
+  @for $i from 1 through 12 {
+    .col-md-#{$i} {
+      grid-column: span #{$i} / span #{$i};
+    }
+  }
+}
+
+@media (min-width: variables.$breakpoint-lg) {
+  @for $i from 1 through 12 {
+    .col-lg-#{$i} {
+      grid-column: span #{$i} / span #{$i};
+    }
+  }
+}
+
+@media (min-width: variables.$breakpoint-xl) {
+  @for $i from 1 through 12 {
+    .col-xl-#{$i} {
+      grid-column: span #{$i} / span #{$i};
+    }
+  }
+}
+
+@media (min-width: variables.$breakpoint-xxl) {
+  @for $i from 1 through 12 {
+    .col-xxl-#{$i} {
+      grid-column: span #{$i} / span #{$i};
+    }
+  }
+}
+
+@media (min-width: variables.$breakpoint-xxxl) {
+  @for $i from 1 through 12 {
+    .col-xxxl-#{$i} {
+      grid-column: span #{$i} / span #{$i};
+    }
+  }
+}
+
+@media (min-width: variables.$breakpoint-4k) {
+  @for $i from 1 through 12 {
+    .col-4k-#{$i} {
+      grid-column: span #{$i} / span #{$i};
+    }
+  }
+}
+
+// 4. Auto-fit grid yapıları
+.grid-auto {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-10);
+}
+
+.grid-auto-sm {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: var(--space-10);
+}
+
+.grid-auto-md {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--space-10);
+}
+
+.grid-auto-lg {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-10);
+}
+
+.grid-auto-xl {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: var(--space-10);
+}

@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sadrazam – Switch Showcase</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/bold/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/light/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <script type="text/javascript" src="assets/js/script.js"></script>
+    <link rel="stylesheet" href="assets/sadrazam.min.css">
+    <script type="text/javascript" src="assets/sadrazam.min.js"></script>
+
+</head>
+
+<body>
+<script>if(localStorage.getItem("dark-mode"))document.body.classList.add("dark-mode")</script>
+    <header>
+        <nav class="top-navbar">
+            <div class="nav-container">
+                <a href="index.html" class="nav-logo">Sadrazam</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li>
+                        <a href="javascript:void(0)" onclick="openPopup(); return false;">Examples</a>
+                        <div class="navi-popup-overlay" id="examplesPopupOverlay"></div>
+                        <div class="navi-popup" id="examplesPopup">
+                            <h3>Examples</h3>
+                            <ul>
+                                <li><a href="buttons.html">Button</a></li>
+                                <li><a href="forms.html">Form</a></li>
+                                <li><a href="form-patterns.html">Form Patterns</a></li>
+                                <li><a href="links.html">Link</a></li>
+                                <li><a href="switches.html">Switch</a></li>
+                                <li><a href="autocomplete.html">Autocomplete</a></li>
+                                <li><a href="backdrop.html">Backdrop</a></li>
+                                <li><a href="hovermenu.html">Hovermenu</a></li>
+                                <li><a href="infinite-scroll.html">Infinite Scroll</a></li>
+                                <li><a href="snackbar.html">Snackbar</a></li>
+                                <li><a href="modals.html">Modal</a></li>
+                                <li><a href="popovers.html">Popover</a></li>
+                                <li><a href="slide-menu.html">Slide Menu</a></li>
+                                <li><a href="spinners.html">Spinner</a></li>
+                                <li><a href="tabs.html">Tabs</a></li>
+                                <li><a href="tooltips.html">Tooltip</a></li>
+                                <li><a href="form-validation.html">Form Validation</a></li>
+                                <li><a href="autosize-textarea.html">Autosize Textarea</a></li>
+                                <li><a href="autosize-select.html">Autosize Select</a></li>
+                                <li><a href="ajax.html">Ajax</a></li>
+                                <li><a href="grid.html">Grid</a></li>
+                                <li><a href="spacing.html">Spacing</a></li>
+                                <li><a href="colors.html">Colors</a></li>
+                                <li><a href="typography.html">Typography</a></li>
+                            </ul>
+                            <button class="close-popup" onclick="closePopup()">&#10005;</button>
+                        </div>
+                    </li>
+                    <li><a href="https://github.com/edukah/sadrazam" target="_blank">GitHub</a></li>
+                </ul>
+                <div class="dark-mode-button-container">
+                    <div class="mode-toggle-switch" onclick="toggleMode()"></div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+
+        <h1>Sadrazam – Switch Showcase</h1>
+        <p class="subtitle">Toggle switch component with default, checked, disabled, size, and shape variants</p>
+
+        <!-- ==================== DEFAULT (SQUARE SLIDER) ==================== -->
+        <div class="section">
+            <h2 class="section-title">Default Switch (Square Slider)</h2>
+            <p class="section-desc">Basic toggle using <span class="code">.switch</span> + <span class="code">.slider</span> without the round modifier</p>
+
+            <div class="row">
+                <span class="label">Unchecked</span>
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider"></span>
+                </label>
+                <span class="code">.switch &gt; .slider</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Checked</span>
+                <label class="switch">
+                    <input type="checkbox" checked>
+                    <span class="slider"></span>
+                </label>
+                <span class="code">.slider (input:checked)</span>
+            </div>
+        </div>
+
+        <!-- ==================== ROUNDED SLIDER ==================== -->
+        <div class="section">
+            <h2 class="section-title">Rounded Switch</h2>
+            <p class="section-desc">Add <span class="code">.round</span> to the slider for pill-shaped corners</p>
+
+            <div class="row">
+                <span class="label">Unchecked</span>
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider round"></span>
+                </label>
+                <span class="code">.slider.round</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Checked</span>
+                <label class="switch">
+                    <input type="checkbox" checked>
+                    <span class="slider round"></span>
+                </label>
+                <span class="code">.slider.round (input:checked)</span>
+            </div>
+        </div>
+
+        <!-- ==================== DISABLED STATE ==================== -->
+        <div class="section">
+            <h2 class="section-title">Disabled State</h2>
+            <p class="section-desc">Disabled switches with <span class="code">disabled</span> attribute on the input</p>
+
+            <div class="row">
+                <span class="label">Disabled Off</span>
+                <label class="switch" style="opacity: 0.5; pointer-events: none;">
+                    <input type="checkbox" disabled>
+                    <span class="slider round"></span>
+                </label>
+                <span class="code">input[disabled]</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Disabled On</span>
+                <label class="switch" style="opacity: 0.5; pointer-events: none;">
+                    <input type="checkbox" checked disabled>
+                    <span class="slider round"></span>
+                </label>
+                <span class="code">input[checked][disabled]</span>
+            </div>
+
+            <hr class="divider">
+
+            <div class="row">
+                <span class="label">Disabled Off</span>
+                <label class="switch" style="opacity: 0.5; pointer-events: none;">
+                    <input type="checkbox" disabled>
+                    <span class="slider"></span>
+                </label>
+                <span class="code">input[disabled] (square)</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Disabled On</span>
+                <label class="switch" style="opacity: 0.5; pointer-events: none;">
+                    <input type="checkbox" checked disabled>
+                    <span class="slider"></span>
+                </label>
+                <span class="code">input[checked][disabled] (square)</span>
+            </div>
+        </div>
+
+        <!-- ==================== SIZES ==================== -->
+        <div class="section">
+            <h2 class="section-title">Sizes</h2>
+            <p class="section-desc">The switch uses em-based sizing, so scale it via <span class="code">font-size</span> on the <span class="code">.switch</span> element</p>
+
+            <div class="row">
+                <span class="label">XS (10px)</span>
+                <label class="switch" style="font-size: 10px;">
+                    <input type="checkbox" checked>
+                    <span class="slider round"></span>
+                </label>
+                <span class="code">font-size: 10px</span>
+            </div>
+
+            <div class="row">
+                <span class="label">SM (12px)</span>
+                <label class="switch" style="font-size: 12px;">
+                    <input type="checkbox" checked>
+                    <span class="slider round"></span>
+                </label>
+                <span class="code">font-size: 12px</span>
+            </div>
+
+            <div class="row">
+                <span class="label">MD (16px)</span>
+                <label class="switch" style="font-size: 16px;">
+                    <input type="checkbox" checked>
+                    <span class="slider round"></span>
+                </label>
+                <span class="code">font-size: 16px (default)</span>
+            </div>
+
+            <div class="row">
+                <span class="label">LG (20px)</span>
+                <label class="switch" style="font-size: 20px;">
+                    <input type="checkbox" checked>
+                    <span class="slider round"></span>
+                </label>
+                <span class="code">font-size: 20px</span>
+            </div>
+
+            <div class="row">
+                <span class="label">XL (26px)</span>
+                <label class="switch" style="font-size: 26px;">
+                    <input type="checkbox" checked>
+                    <span class="slider round"></span>
+                </label>
+                <span class="code">font-size: 26px</span>
+            </div>
+
+            <hr class="divider">
+
+            <div class="row">
+                <span class="label">All Sizes</span>
+                <label class="switch" style="font-size: 10px;">
+                    <input type="checkbox" checked>
+                    <span class="slider round"></span>
+                </label>
+                <label class="switch" style="font-size: 12px;">
+                    <input type="checkbox" checked>
+                    <span class="slider round"></span>
+                </label>
+                <label class="switch" style="font-size: 16px;">
+                    <input type="checkbox" checked>
+                    <span class="slider round"></span>
+                </label>
+                <label class="switch" style="font-size: 20px;">
+                    <input type="checkbox" checked>
+                    <span class="slider round"></span>
+                </label>
+                <label class="switch" style="font-size: 26px;">
+                    <input type="checkbox" checked>
+                    <span class="slider round"></span>
+                </label>
+                <span class="code">side-by-side comparison</span>
+            </div>
+        </div>
+
+        <!-- ==================== SWITCH CONTAINER ==================== -->
+        <div class="section">
+            <h2 class="section-title">Switch Container</h2>
+            <p class="section-desc">Use <span class="code">.switch-container</span> as a flex column wrapper and <span class="code">.switch-label</span> for the text label</p>
+
+            <div class="row">
+                <span class="label">With Label</span>
+                <div class="switch-container" style="width: auto; flex-direction: row; align-items: center;">
+                    <label class="switch">
+                        <input type="checkbox" checked>
+                        <span class="slider round"></span>
+                    </label>
+                    <span class="switch-label">Enable notifications</span>
+                </div>
+                <span class="code">.switch-container + .switch-label</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Unchecked</span>
+                <div class="switch-container" style="width: auto; flex-direction: row; align-items: center;">
+                    <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                    <span class="switch-label">Dark mode</span>
+                </div>
+                <span class="code">.switch-container + .switch-label</span>
+            </div>
+
+            <hr class="divider">
+
+            <div class="row">
+                <span class="label">Column Layout</span>
+                <div class="switch-container" style="max-width: 200px;">
+                    <div style="display: flex; align-items: center; gap: var(--space-4, 8px);">
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="slider round"></span>
+                        </label>
+                        <span class="switch-label">WiFi</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: var(--space-4, 8px);">
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider round"></span>
+                        </label>
+                        <span class="switch-label">Bluetooth</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: var(--space-4, 8px);">
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="slider round"></span>
+                        </label>
+                        <span class="switch-label">GPS</span>
+                    </div>
+                </div>
+                <span class="code">.switch-container (column)</span>
+            </div>
+        </div>
+
+        <!-- ==================== CUSTOM COLORS ==================== -->
+        <div class="section">
+            <h2 class="section-title">Custom Colors</h2>
+            <p class="section-desc">Override <span class="code">--color-sec-700</span> via inline style to change the checked track color</p>
+
+            <div class="row">
+                <span class="label">Default</span>
+                <label class="switch">
+                    <input type="checkbox" checked>
+                    <span class="slider round"></span>
+                </label>
+                <span class="code">--color-sec-700</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Green</span>
+                <label class="switch" style="--color-sec-700: #00b894;">
+                    <input type="checkbox" checked>
+                    <span class="slider round"></span>
+                </label>
+                <span class="code">--color-sec-700: #00b894</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Red</span>
+                <label class="switch" style="--color-sec-700: #d63031;">
+                    <input type="checkbox" checked>
+                    <span class="slider round"></span>
+                </label>
+                <span class="code">--color-sec-700: #d63031</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Orange</span>
+                <label class="switch" style="--color-sec-700: #e17055;">
+                    <input type="checkbox" checked>
+                    <span class="slider round"></span>
+                </label>
+                <span class="code">--color-sec-700: #e17055</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Blue</span>
+                <label class="switch" style="--color-sec-700: #0984e3;">
+                    <input type="checkbox" checked>
+                    <span class="slider round"></span>
+                </label>
+                <span class="code">--color-sec-700: #0984e3</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Purple</span>
+                <label class="switch" style="--color-sec-700: #6c5ce7;">
+                    <input type="checkbox" checked>
+                    <span class="slider round"></span>
+                </label>
+                <span class="code">--color-sec-700: #6c5ce7</span>
+            </div>
+        </div>
+
+        <!-- ==================== SQUARE vs ROUND COMPARISON ==================== -->
+        <div class="section">
+            <h2 class="section-title">Shape Comparison</h2>
+            <p class="section-desc">Square slider vs rounded slider side by side</p>
+
+            <div class="row">
+                <span class="label">Square Off</span>
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider"></span>
+                </label>
+                <span class="label" style="min-width: auto;">Round Off</span>
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider round"></span>
+                </label>
+                <span class="code">.slider vs .slider.round</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Square On</span>
+                <label class="switch">
+                    <input type="checkbox" checked>
+                    <span class="slider"></span>
+                </label>
+                <span class="label" style="min-width: auto;">Round On</span>
+                <label class="switch">
+                    <input type="checkbox" checked>
+                    <span class="slider round"></span>
+                </label>
+                <span class="code">.slider vs .slider.round</span>
+            </div>
+        </div>
+
+        <!-- ==================== DARK BACKGROUND ==================== -->
+        <div class="section dark-section">
+            <h2 class="section-title">Dark Background</h2>
+            <p class="section-desc">Switch appearance on a dark surface</p>
+
+            <div class="row">
+                <span class="label">Round Off</span>
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider round"></span>
+                </label>
+                <span class="code">.slider.round</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Round On</span>
+                <label class="switch">
+                    <input type="checkbox" checked>
+                    <span class="slider round"></span>
+                </label>
+                <span class="code">.slider.round (checked)</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Square Off</span>
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider"></span>
+                </label>
+                <span class="code">.slider</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Square On</span>
+                <label class="switch">
+                    <input type="checkbox" checked>
+                    <span class="slider"></span>
+                </label>
+                <span class="code">.slider (checked)</span>
+            </div>
+
+            <hr class="divider" style="border-top-color: var(--border-color);">
+
+            <div class="row">
+                <span class="label">Custom Color</span>
+                <label class="switch" style="--color-sec-700: #00b894;">
+                    <input type="checkbox" checked>
+                    <span class="slider round"></span>
+                </label>
+                <label class="switch" style="--color-sec-700: #d63031;">
+                    <input type="checkbox" checked>
+                    <span class="slider round"></span>
+                </label>
+                <label class="switch" style="--color-sec-700: #0984e3;">
+                    <input type="checkbox" checked>
+                    <span class="slider round"></span>
+                </label>
+                <label class="switch" style="--color-sec-700: #6c5ce7;">
+                    <input type="checkbox" checked>
+                    <span class="slider round"></span>
+                </label>
+                <span class="code">custom --color-sec-700</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Sizes</span>
+                <label class="switch" style="font-size: 10px;">
+                    <input type="checkbox" checked>
+                    <span class="slider round"></span>
+                </label>
+                <label class="switch" style="font-size: 14px;">
+                    <input type="checkbox" checked>
+                    <span class="slider round"></span>
+                </label>
+                <label class="switch" style="font-size: 18px;">
+                    <input type="checkbox" checked>
+                    <span class="slider round"></span>
+                </label>
+                <label class="switch" style="font-size: 24px;">
+                    <input type="checkbox" checked>
+                    <span class="slider round"></span>
+                </label>
+                <span class="code">em-based sizing on dark</span>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

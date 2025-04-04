@@ -1,0 +1,190 @@
+@use 'colors-main' as *;
+
+// Grey skalasi degistiginde asagidaki eslesmeler kontrol edilmeli.
+// Ayni degerler kullanilir ama bagimsiz tanimlanir — grey'den alinmaz.
+
+/** Text Colors **/
+/*** Light Theme Text Colors ***/
+$color-text-dark-1: rgba(23, 23, 23, 1); // = grey-910
+$color-text-dark-2: rgba(81, 81, 81, 1); // = grey-700
+$color-text-dark-3: rgba(133, 133, 133, 1); // = grey-500
+$color-text-dark-4: rgba(185, 185, 185, 1); // = grey-300
+/*** End of Light Theme Text Colors ***/
+
+/*** Dark Theme Text Colors (warm ton, grey'e baglanamaz) ***/
+$color-text-light-1: rgba(235, 231, 222, 1);
+$color-text-light-2: rgba(200, 195, 184, 1);
+$color-text-light-3: rgba(165, 158, 165, 1);
+$color-text-light-4: rgba(123, 123, 123, 1);
+/*** End of Dark Theme Text Colors ***/
+
+/*** Light Theme Link Colors ***/
+$color-link-dark: rgba(23, 23, 23, 1); // = grey-910
+$color-link-dark-hover: rgba(29, 29, 29, 1); // = grey-900
+$color-link-blue-dark: rgba(0, 102, 204, 1);
+/*** End of Light Theme Link Colors ***/
+
+/*** Dark Theme Link Colors ***/
+$color-link-light: rgba(235, 231, 222, 1);
+$color-link-light-hover: rgba(229, 225, 216, 0.87);
+$color-link-blue-light: rgba(130, 130, 255, 1);
+/*** End of Dark Theme Link Colors ***/
+/** End of Text Colors **/
+
+:root {
+  // Sabit (--f) — dark mode'da değişmez
+  --color-text-light-1--f: #{$color-text-light-1};
+  --color-text-light-2--f: #{$color-text-light-2};
+  --color-text-light-3--f: #{$color-text-light-3};
+  --color-text-light-4--f: #{$color-text-light-4};
+
+  --color-text-dark-1--f: #{$color-text-dark-1};
+  --color-text-dark-2--f: #{$color-text-dark-2};
+  --color-text-dark-3--f: #{$color-text-dark-3};
+  --color-text-dark-4--f: #{$color-text-dark-4};
+
+  --color-text-black--f: #{$color-black};
+  --color-text-white--f: #{$color-white};
+
+  // Text Colors
+  --color-text-black: #{$color-black};
+  --color-text-dark-1: #{$color-text-dark-1};
+  --color-text-dark-2: #{$color-text-dark-2};
+  --color-text-dark-3: #{$color-text-dark-3};
+  --color-text-dark-4: #{$color-text-dark-4};
+
+  body.dark-mode {
+    --color-text-black: #{$color-white};
+    --color-text-dark-1: #{$color-text-light-1};
+    --color-text-dark-2: #{$color-text-light-2};
+    --color-text-dark-3: #{$color-text-light-3};
+    --color-text-dark-4: #{$color-text-light-4};
+  }
+
+  --color-text-white: #{$color-white};
+  --color-text-light-1: #{$color-text-light-1};
+  --color-text-light-2: #{$color-text-light-2};
+  --color-text-light-3: #{$color-text-light-3};
+  --color-text-light-4: #{$color-text-light-4};
+
+  body.dark-mode {
+    --color-text-white: #{$color-text-dark-1};
+    --color-text-light-1: #{$color-text-dark-1};
+    --color-text-light-2: #{$color-text-dark-2};
+    --color-text-light-3: #{$color-text-dark-3};
+    --color-text-light-4: #{$color-text-dark-4};
+  }
+
+  // Link Colors
+  --color-link-dark: #{$color-link-dark};
+  --color-link-dark-hover: #{$color-link-dark-hover};
+  --color-link-blue-dark: #{$color-link-blue-dark};
+  --color-link-blue-dark-hover: #{$color-link-blue-dark};
+
+  body.dark-mode {
+    --color-link-dark: #{$color-link-light};
+    --color-link-dark-hover: #{$color-link-light-hover};
+    --color-link-blue-dark: #{$color-link-blue-light};
+    --color-link-blue-dark-hover: #{$color-link-blue-light};
+  }
+
+  --color-link-light: #{$color-link-light};
+  --color-link-light-hover: #{$color-link-light-hover};
+  --color-link-blue-light: #{$color-link-blue-light};
+  --color-link-blue-light-hover: #{$color-link-blue-light};
+
+  body.dark-mode {
+    --color-link-light: #{$color-link-dark};
+    --color-link-light-hover: #{$color-link-dark-hover};
+    --color-link-blue-light: #{$color-link-blue-dark};
+    --color-link-blue-light-hover: #{$color-link-blue-dark};
+  }
+}
+
+/* ---- Sabit Metin Renkleri (Tema Bağımsız) ---- */
+.tc-text-white--f {
+  color: var(--color-text-white--f);
+}
+
+.tc-text-black--f {
+  color: var(--color-text-black--f);
+}
+
+.tc-text-light-1--f {
+  color: var(--color-text-light-1--f);
+}
+
+.tc-text-light-2--f {
+  color: var(--color-text-light-2--f);
+}
+
+.tc-text-light-3--f {
+  color: var(--color-text-light-3--f);
+}
+
+.tc-text-light-4--f {
+  color: var(--color-text-light-4--f);
+}
+
+.tc-text-dark-1--f {
+  color: var(--color-text-dark-1--f);
+}
+
+.tc-text-dark-2--f {
+  color: var(--color-text-dark-2--f);
+}
+
+.tc-text-dark-3--f {
+  color: var(--color-text-dark-3--f);
+}
+
+.tc-text-dark-4--f {
+  color: var(--color-text-dark-4--f);
+}
+
+/* ---- Açık Tema Metin Renkleri ---- */
+.tc-text-black {
+  color: var(--color-text-black);
+}
+
+.tc-text-dark-1 {
+  color: var(--color-text-dark-1);
+}
+
+.tc-text-dark-2 {
+  color: var(--color-text-dark-2);
+}
+
+.tc-text-dark-3 {
+  color: var(--color-text-dark-3);
+}
+
+.tc-text-dark-4 {
+  color: var(--color-text-dark-4);
+}
+
+/* ---- Link Renkleri ---- */
+.tc-link-blue-dark {
+  color: var(--color-link-blue-dark);
+}
+
+/* ---- Koyu Tema Metin Renkleri ---- */
+.tc-text-white {
+  color: var(--color-text-white);
+}
+
+.tc-text-light-1 {
+  color: var(--color-text-light-1);
+}
+
+.tc-text-light-2 {
+  color: var(--color-text-light-2);
+}
+
+.tc-text-light-3 {
+  color: var(--color-text-light-3);
+}
+
+.tc-text-light-4 {
+  color: var(--color-text-light-4);
+}

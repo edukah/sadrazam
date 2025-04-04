@@ -1,0 +1,64 @@
+/** Secondary Colors (semantic — dark mode'da simetrik swap: 100↔900, 300↔700, 500 sabit) **/
+$color-sec-100: rgba(254, 244, 211, 1);
+$color-sec-300: rgba(252, 238, 191, 1);
+$color-sec-500: rgba(254, 163, 96, 1);
+$color-sec-700: rgba(244, 130, 60, 1);
+$color-sec-900: rgba(241, 101, 29, 1);
+/** End of Secondary Colors **/
+
+:root {
+  --color-sec-100: #{$color-sec-100};
+  --color-sec-300: #{$color-sec-300};
+  --color-sec-500: #{$color-sec-500};
+  --color-sec-700: #{$color-sec-700};
+  --color-sec-900: #{$color-sec-900};
+
+  // Sabit (--f) — dark mode'da değişmez
+  --color-sec-100--f: #{$color-sec-100};
+  --color-sec-300--f: #{$color-sec-300};
+  --color-sec-500--f: #{$color-sec-500};
+  --color-sec-700--f: #{$color-sec-700};
+  --color-sec-900--f: #{$color-sec-900};
+
+  body.dark-mode {
+    --color-sec-100: #{$color-sec-900};
+    --color-sec-300: #{$color-sec-700};
+    --color-sec-500: #{$color-sec-500};
+    --color-sec-700: #{$color-sec-300};
+    --color-sec-900: #{$color-sec-100};
+  }
+}
+
+/* =========================================================================
+   Theme Renk Yardımcı Sınıfları — Secondary
+   ========================================================================= */
+
+/** secondary colors **/
+.tc-sec-100 { color: var(--color-sec-100); }
+.tc-sec-300 { color: var(--color-sec-300); }
+.tc-sec-500 { color: var(--color-sec-500); }
+.tc-sec-700 { color: var(--color-sec-700); }
+.tc-sec-900 { color: var(--color-sec-900); }
+
+.tbc-sec-100 { background-color: var(--color-sec-100); }
+.tbc-sec-300 { background-color: var(--color-sec-300); }
+.tbc-sec-500 { background-color: var(--color-sec-500); }
+.tbc-sec-700 { background-color: var(--color-sec-700); }
+.tbc-sec-900 { background-color: var(--color-sec-900); }
+
+/* =========================================================================
+   Sabit (--f) Renk Yardımcı Sınıfları (dark mode'da değişmez) — Secondary
+   ========================================================================= */
+
+/** secondary (--f) **/
+.tc-sec-100--f { color: var(--color-sec-100--f); }
+.tc-sec-300--f { color: var(--color-sec-300--f); }
+.tc-sec-500--f { color: var(--color-sec-500--f); }
+.tc-sec-700--f { color: var(--color-sec-700--f); }
+.tc-sec-900--f { color: var(--color-sec-900--f); }
+
+.tbc-sec-100--f { background-color: var(--color-sec-100--f); }
+.tbc-sec-300--f { background-color: var(--color-sec-300--f); }
+.tbc-sec-500--f { background-color: var(--color-sec-500--f); }
+.tbc-sec-700--f { background-color: var(--color-sec-700--f); }
+.tbc-sec-900--f { background-color: var(--color-sec-900--f); }

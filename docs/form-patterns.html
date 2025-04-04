@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sadrazam – Form Patterns Showcase</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/bold/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/light/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <script type="text/javascript" src="assets/js/script.js"></script>
+    <link rel="stylesheet" href="assets/sadrazam.min.css">
+    <script type="text/javascript" src="assets/sadrazam.min.js"></script>
+    <style>
+        .demo-box {
+            max-width: 400px;
+            flex: 1;
+        }
+
+        .demo-box-wide {
+            max-width: 600px;
+        }
+    </style>
+</head>
+
+<body>
+<script>if(localStorage.getItem("dark-mode"))document.body.classList.add("dark-mode")</script>
+    <header>
+        <nav class="top-navbar">
+            <div class="nav-container">
+                <a href="index.html" class="nav-logo">Sadrazam</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li>
+                        <a href="javascript:void(0)" onclick="openPopup(); return false;">Examples</a>
+                        <div class="navi-popup-overlay" id="examplesPopupOverlay"></div>
+                        <div class="navi-popup" id="examplesPopup">
+                            <h3>Examples</h3>
+                            <ul>
+                                <li><a href="buttons.html">Button</a></li>
+                                <li><a href="forms.html">Form</a></li>
+                                <li><a href="form-patterns.html">Form Patterns</a></li>
+                                <li><a href="links.html">Link</a></li>
+                                <li><a href="switches.html">Switch</a></li>
+                                <li><a href="autocomplete.html">Autocomplete</a></li>
+                                <li><a href="backdrop.html">Backdrop</a></li>
+                                <li><a href="hovermenu.html">Hovermenu</a></li>
+                                <li><a href="infinite-scroll.html">Infinite Scroll</a></li>
+                                <li><a href="snackbar.html">Snackbar</a></li>
+                                <li><a href="modals.html">Modal</a></li>
+                                <li><a href="popovers.html">Popover</a></li>
+                                <li><a href="slide-menu.html">Slide Menu</a></li>
+                                <li><a href="spinners.html">Spinner</a></li>
+                                <li><a href="tabs.html">Tabs</a></li>
+                                <li><a href="tooltips.html">Tooltip</a></li>
+                                <li><a href="form-validation.html">Form Validation</a></li>
+                                <li><a href="autosize-textarea.html">Autosize Textarea</a></li>
+                                <li><a href="autosize-select.html">Autosize Select</a></li>
+                                <li><a href="ajax.html">Ajax</a></li>
+                                <li><a href="grid.html">Grid</a></li>
+                                <li><a href="spacing.html">Spacing</a></li>
+                                <li><a href="colors.html">Colors</a></li>
+                                <li><a href="typography.html">Typography</a></li>
+                            </ul>
+                            <button class="close-popup" onclick="closePopup()">&#10005;</button>
+                        </div>
+                    </li>
+                    <li><a href="https://github.com/edukah/sadrazam" target="_blank">GitHub</a></li>
+                </ul>
+                <div class="dark-mode-button-container">
+                    <div class="mode-toggle-switch" onclick="toggleMode()"></div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1>Sadrazam – Form Patterns Showcase</h1>
+        <p class="subtitle">Label combos, helper text, dividers, input groups, and standard form layout</p>
+
+        <!-- ==================== INPUT ERROR ==================== -->
+        <div class="section">
+            <h2 class="section-title">.input--error</h2>
+            <p class="section-desc">Applies a red border to any input in an error state</p>
+
+            <div class="row">
+                <span class="label">Normal</span>
+                <div class="demo-box">
+                    <input type="text" placeholder="Normal input">
+                </div>
+            </div>
+
+            <div class="row">
+                <span class="label">Error</span>
+                <div class="demo-box">
+                    <input type="text" class="input--error" placeholder="This field has an error" value="Invalid value">
+                </div>
+                <span class="code">.input--error</span>
+            </div>
+        </div>
+
+        <!-- ==================== TOGGLE PASSWORD VISIBILITY ==================== -->
+        <div class="section">
+            <h2 class="section-title">.form-toggle-password-visibility</h2>
+            <p class="section-desc">Password input with a show/hide toggle button positioned inside the field</p>
+
+            <div class="row">
+                <span class="label">Password</span>
+                <div class="demo-box">
+                    <div class="form-toggle-password-visibility">
+                        <input type="password" id="demo-password" placeholder="Enter password" value="secret123">
+                        <button type="button" onclick="togglePassword()">
+                            <i class="ph-bold ph-eye" id="pw-icon"></i>
+                        </button>
+                    </div>
+                </div>
+                <span class="code">.form-toggle-password-visibility</span>
+            </div>
+
+            <div class="row">
+                <span class="label">With Error</span>
+                <div class="demo-box">
+                    <div class="form-toggle-password-visibility">
+                        <input type="password" class="input--error" placeholder="Password required" value="">
+                        <button type="button">
+                            <i class="ph-bold ph-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                <span class="code">.form-toggle-password-visibility + .input--error</span>
+            </div>
+        </div>
+
+        <!-- ==================== LABEL TEXT INPUT TYPE ONE ==================== -->
+        <div class="section">
+            <h2 class="section-title">.form-field--top-label</h2>
+            <p class="section-desc">Label above, input below, shared grey background with bottom border focus effect</p>
+
+            <div class="row">
+                <span class="label">Text Input</span>
+                <div class="demo-box">
+                    <label class="form-field--top-label">
+                        <span>Full Name</span>
+                        <input type="text" placeholder="John Doe">
+                    </label>
+                </div>
+                <span class="code">.form-field--top-label</span>
+            </div>
+
+            <div class="row">
+                <span class="label">With Value</span>
+                <div class="demo-box">
+                    <label class="form-field--top-label">
+                        <span>Email Address</span>
+                        <input type="email" value="john@example.com">
+                    </label>
+                </div>
+            </div>
+
+            <div class="row">
+                <span class="label">With Warning</span>
+                <div class="demo-box">
+                    <label class="form-field--top-label">
+                        <span>Username</span>
+                        <input type="text" value="jo">
+                        <div data-type="warningMessage" style="color: #d63031; font-size: 0.75em;">Username must be at least 3 characters</div>
+                    </label>
+                </div>
+                <span class="code">*[data-type="warningMessage"]</span>
+            </div>
+        </div>
+
+        <!-- ==================== LABEL CHECKBOX INPUT TYPE ONE ==================== -->
+        <div class="section">
+            <h2 class="section-title">.form-field--checkbox</h2>
+            <p class="section-desc">Checkbox with label, flex layout, cursor pointer, user-select none</p>
+
+            <div class="row">
+                <span class="label">Checkbox</span>
+                <div class="demo-box">
+                    <label class="form-field--checkbox">
+                        <div>
+                            <input type="checkbox">
+                            <span>I agree to the terms and conditions</span>
+                        </div>
+                    </label>
+                </div>
+                <span class="code">.form-field--checkbox</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Checked</span>
+                <div class="demo-box">
+                    <label class="form-field--checkbox">
+                        <div>
+                            <input type="checkbox" checked>
+                            <span>Subscribe to newsletter</span>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="row">
+                <span class="label">With Warning</span>
+                <div class="demo-box">
+                    <label class="form-field--checkbox">
+                        <div>
+                            <input type="checkbox">
+                            <span>Accept privacy policy</span>
+                        </div>
+                        <div data-type="warningMessage" style="color: #d63031; font-size: 0.75em;">You must accept the privacy policy to continue</div>
+                    </label>
+                </div>
+                <span class="code">*[data-type="warningMessage"]</span>
+            </div>
+        </div>
+
+        <!-- ==================== LABEL TEXT INPUT TYPE TWO ==================== -->
+        <div class="section">
+            <h2 class="section-title">.label-text-input-type-two</h2>
+            <p class="section-desc">Label above (separate), input below with standard border and focus color</p>
+
+            <div class="row">
+                <span class="label">Text Input</span>
+                <div class="demo-box">
+                    <label class="label-text-input-type-two">
+                        <span>Company Name</span>
+                        <input type="text" placeholder="Acme Inc.">
+                    </label>
+                </div>
+                <span class="code">.label-text-input-type-two</span>
+            </div>
+
+            <div class="row">
+                <span class="label">With Value</span>
+                <div class="demo-box">
+                    <label class="label-text-input-type-two">
+                        <span>Phone Number</span>
+                        <input type="tel" value="+1 (555) 123-4567">
+                    </label>
+                </div>
+            </div>
+
+            <div class="row">
+                <span class="label">With Warning</span>
+                <div class="demo-box">
+                    <label class="label-text-input-type-two">
+                        <span>Website URL</span>
+                        <input type="url" value="not-a-url">
+                        <div data-type="warningMessage" style="color: #d63031; font-size: 0.75em;">Please enter a valid URL</div>
+                    </label>
+                </div>
+                <span class="code">*[data-type="warningMessage"]</span>
+            </div>
+        </div>
+
+        <!-- ==================== LABEL CHECKBOX INPUT TYPE TWO ==================== -->
+        <div class="section">
+            <h2 class="section-title">.label-checkbox-input-type-two</h2>
+            <p class="section-desc">Checkbox variant with flex layout, same pattern as type one but different warning spacing</p>
+
+            <div class="row">
+                <span class="label">Checkbox</span>
+                <div class="demo-box">
+                    <label class="label-checkbox-input-type-two">
+                        <div>
+                            <input type="checkbox">
+                            <span>Enable notifications</span>
+                        </div>
+                    </label>
+                </div>
+                <span class="code">.label-checkbox-input-type-two</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Checked</span>
+                <div class="demo-box">
+                    <label class="label-checkbox-input-type-two">
+                        <div>
+                            <input type="checkbox" checked>
+                            <span>Remember this device</span>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="row">
+                <span class="label">With Warning</span>
+                <div class="demo-box">
+                    <label class="label-checkbox-input-type-two">
+                        <div>
+                            <input type="checkbox">
+                            <span>Confirm deletion</span>
+                        </div>
+                        <div data-type="warningMessage" style="color: #d63031; font-size: 0.75em;">Please confirm before proceeding</div>
+                    </label>
+                </div>
+                <span class="code">*[data-type="warningMessage"]</span>
+            </div>
+        </div>
+
+        <!-- ==================== TYPE ONE vs TYPE TWO COMPARISON ==================== -->
+        <div class="section">
+            <h2 class="section-title">Type One vs Type Two — Side by Side</h2>
+            <p class="section-desc">Visual comparison of the two label-input combo styles</p>
+
+            <div class="row" style="align-items: flex-start;">
+                <span class="label">Type One</span>
+                <div class="demo-box">
+                    <label class="form-field--top-label">
+                        <span>First Name</span>
+                        <input type="text" placeholder="Shared background style">
+                    </label>
+                </div>
+                <span class="code">.form-field--top-label</span>
+            </div>
+
+            <div class="row" style="align-items: flex-start;">
+                <span class="label">Type Two</span>
+                <div class="demo-box">
+                    <label class="label-text-input-type-two">
+                        <span>First Name</span>
+                        <input type="text" placeholder="Separate label style">
+                    </label>
+                </div>
+                <span class="code">.label-text-input-type-two</span>
+            </div>
+        </div>
+
+        <!-- ==================== INPUT HELPER TEXT ==================== -->
+        <div class="section">
+            <h2 class="section-title">.input-helper-text</h2>
+            <p class="section-desc">Small descriptive text below form fields, with an optional question-mark variant</p>
+
+            <div class="row" style="align-items: flex-start;">
+                <span class="label">Basic</span>
+                <div class="demo-box">
+                    <label class="label-text-input-type-two">
+                        <span>Password</span>
+                        <input type="password" placeholder="Enter a strong password">
+                    </label>
+                    <span class="input-helper-text">Must be at least 8 characters with one uppercase letter and one number.</span>
+                </div>
+                <span class="code">.input-helper-text</span>
+            </div>
+
+            <hr class="divider">
+
+            <div class="row" style="align-items: flex-start;">
+                <span class="label">With ? Mark</span>
+                <div class="demo-box">
+                    <label class="label-text-input-type-two">
+                        <span>Tax ID Number</span>
+                        <input type="text" placeholder="XX-XXXXXXX">
+                    </label>
+                    <span class="input-helper-text input-helper-text--with-qmark">Your Tax ID is a unique number assigned by the tax authority. You can find it on your tax return or official correspondence.</span>
+                </div>
+                <span class="code">.input-helper-text--with-qmark</span>
+            </div>
+
+            <hr class="divider">
+
+            <div class="row" style="align-items: flex-start;">
+                <span class="label">Type One + Helper</span>
+                <div class="demo-box">
+                    <label class="form-field--top-label">
+                        <span>Display Name</span>
+                        <input type="text" placeholder="How others will see you">
+                    </label>
+                    <span class="input-helper-text">This will be visible to other users on the platform.</span>
+                </div>
+            </div>
+
+            <div class="row" style="align-items: flex-start;">
+                <span class="label">Type One + ? Mark</span>
+                <div class="demo-box">
+                    <label class="form-field--top-label">
+                        <span>Referral Code</span>
+                        <input type="text" placeholder="Optional">
+                    </label>
+                    <span class="input-helper-text input-helper-text--with-qmark">If you were referred by another user, enter their referral code here to receive a bonus.</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== FORM DIVIDER ==================== -->
+        <div class="section">
+            <h2 class="section-title">.form-divider</h2>
+            <p class="section-desc">Section heading with a horizontal line extending to the right — used to separate form sections</p>
+
+            <div class="row" style="align-items: flex-start;">
+                <span class="label">Default</span>
+                <div class="demo-box demo-box-wide" style="max-width: 100%; flex: 1;">
+                    <div class="form-divider">Personal Information</div>
+
+                    <div style="display: flex; gap: 12px;">
+                        <label class="label-text-input-type-two" style="flex:1;">
+                            <span>First Name</span>
+                            <input type="text" placeholder="John">
+                        </label>
+                        <label class="label-text-input-type-two" style="flex:1;">
+                            <span>Last Name</span>
+                            <input type="text" placeholder="Doe">
+                        </label>
+                    </div>
+
+                    <div class="form-divider">Contact Details</div>
+
+                    <div style="display: flex; gap: 12px;">
+                        <label class="label-text-input-type-two" style="flex:1;">
+                            <span>Email</span>
+                            <input type="email" placeholder="john@example.com">
+                        </label>
+                        <label class="label-text-input-type-two" style="flex:1;">
+                            <span>Phone</span>
+                            <input type="tel" placeholder="+1 (555) 000-0000">
+                        </label>
+                    </div>
+
+                    <div class="form-divider">Preferences</div>
+
+                    <label class="label-checkbox-input-type-two">
+                        <div>
+                            <input type="checkbox" checked>
+                            <span>Receive email updates</span>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="row">
+                <span class="label">Class</span>
+                <span class="code">.form-divider</span>
+            </div>
+        </div>
+
+        <!-- ==================== FORM STANDART STYLE ==================== -->
+        <div class="section">
+            <h2 class="section-title">.form-standart-style</h2>
+            <p class="section-desc">Standard form layout rules — adds consistent spacing between label, fieldset, and panel-label elements</p>
+
+            <div class="row" style="align-items: flex-start;">
+                <span class="label">With Layout</span>
+                <div class="demo-box demo-box-wide" style="max-width: 100%; flex: 1;">
+                    <form class="form-standart-style">
+                        <div class="form-divider">Account Setup</div>
+
+                        <label class="label-text-input-type-two">
+                            <span>Username</span>
+                            <input type="text" placeholder="Choose a username">
+                        </label>
+
+                        <label class="label-text-input-type-two">
+                            <span>Email</span>
+                            <input type="email" placeholder="you@example.com">
+                        </label>
+
+                        <label class="label-text-input-type-two">
+                            <span>Password</span>
+                            <div class="form-toggle-password-visibility">
+                                <input type="password" placeholder="Create a password">
+                                <button type="button">
+                                    <i class="ph-bold ph-eye"></i>
+                                </button>
+                            </div>
+                        </label>
+                        <span class="input-helper-text" style="margin-top: -8px;">Must be at least 8 characters.</span>
+
+                        <div class="form-divider">Profile</div>
+
+                        <label class="form-field--top-label">
+                            <span>Display Name</span>
+                            <input type="text" placeholder="How others will see you">
+                        </label>
+
+                        <label class="form-field--top-label">
+                            <span>Bio</span>
+                            <input type="text" placeholder="A short description about yourself">
+                        </label>
+
+                        <fieldset>
+                            <legend style="font-weight: 600; margin-bottom: 8px; font-size: 0.9rem;">Notifications</legend>
+                            <label class="label-checkbox-input-type-two">
+                                <div>
+                                    <input type="checkbox" checked>
+                                    <span>Email notifications</span>
+                                </div>
+                            </label>
+                            <label class="label-checkbox-input-type-two">
+                                <div>
+                                    <input type="checkbox">
+                                    <span>SMS notifications</span>
+                                </div>
+                            </label>
+                            <label class="label-checkbox-input-type-two">
+                                <div>
+                                    <input type="checkbox" checked>
+                                    <span>Push notifications</span>
+                                </div>
+                            </label>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+
+            <div class="row">
+                <span class="label">Class</span>
+                <span class="code">.form-standart-style</span>
+            </div>
+        </div>
+
+        <!-- ==================== FULL FORM EXAMPLE ==================== -->
+        <div class="section">
+            <h2 class="section-title">Complete Form Example</h2>
+            <p class="section-desc">All form pattern classes used together in a realistic registration form</p>
+
+            <div style="max-width: 500px;">
+                <form class="form-standart-style">
+                    <div class="form-divider">Account</div>
+
+                    <label class="form-field--top-label">
+                        <span>Email Address</span>
+                        <input type="email" placeholder="you@company.com">
+                    </label>
+
+                    <label class="form-field--top-label">
+                        <span>Password</span>
+                        <div class="form-toggle-password-visibility">
+                            <input type="password" placeholder="Create a secure password" id="demo-pw-full">
+                            <button type="button" onclick="togglePasswordById('demo-pw-full', this)">
+                                <i class="ph-bold ph-eye"></i>
+                            </button>
+                        </div>
+                    </label>
+                    <span class="input-helper-text input-helper-text--with-qmark">Use at least 8 characters, mixing letters, numbers, and symbols for better security.</span>
+
+                    <label class="form-field--top-label">
+                        <span>Confirm Password</span>
+                        <div class="form-toggle-password-visibility">
+                            <input type="password" class="input--error" placeholder="Re-enter your password" id="demo-pw-confirm">
+                            <button type="button" onclick="togglePasswordById('demo-pw-confirm', this)">
+                                <i class="ph-bold ph-eye"></i>
+                            </button>
+                        </div>
+                        <div data-type="warningMessage" style="color: #d63031; font-size: 0.75em;">Passwords do not match</div>
+                    </label>
+
+                    <div class="form-divider">Personal Info</div>
+
+                    <label class="label-text-input-type-two">
+                        <span>Full Name</span>
+                        <input type="text" placeholder="John Doe">
+                    </label>
+
+                    <label class="label-text-input-type-two">
+                        <span>Organization</span>
+                        <input type="text" placeholder="Company or team name">
+                    </label>
+                    <span class="input-helper-text">Optional. This helps us personalize your experience.</span>
+
+                    <div class="form-divider">Agreements</div>
+
+                    <label class="form-field--checkbox">
+                        <div>
+                            <input type="checkbox">
+                            <span>I agree to the Terms of Service and Privacy Policy</span>
+                        </div>
+                    </label>
+
+                    <label class="label-checkbox-input-type-two">
+                        <div>
+                            <input type="checkbox" checked>
+                            <span>Send me product updates and tips (you can unsubscribe at any time)</span>
+                        </div>
+                    </label>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function togglePassword() {
+            const input = document.getElementById('demo-password');
+            const icon = document.getElementById('pw-icon');
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.remove('ph-eye');
+                icon.classList.add('ph-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.remove('ph-eye-slash');
+                icon.classList.add('ph-eye');
+            }
+        }
+
+        function togglePasswordById(inputId, btn) {
+            const input = document.getElementById(inputId);
+            const icon = btn.querySelector('i');
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.remove('ph-eye');
+                icon.classList.add('ph-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.remove('ph-eye-slash');
+                icon.classList.add('ph-eye');
+            }
+        }
+    </script>
+</body>
+
+</html>

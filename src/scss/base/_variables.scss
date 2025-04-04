@@ -1,0 +1,149 @@
+@use "../theme/colors-main" as *;
+@forward "../theme/colors-main";
+@forward "../theme/colors-text";
+@forward "../theme/colors-grey";
+@forward "../theme/colors-interaction";
+
+@use "fonts";
+@forward "fonts";
+
+/* MEDIA QUERIES */
+$breakpoint-xs: 360px; // Küçük telefonlar
+$breakpoint-sm: 576px; // Mobil (Bootstrap uyumlu)
+$breakpoint-md: 768px; // Tablet (dikey)
+$breakpoint-lg: 992px; // Tablet (yatay) / Küçük laptop
+$breakpoint-xl: 1200px; // Desktop
+$breakpoint-xxl: 1440px; // Büyük desktop
+$breakpoint-xxxl: 1920px; // Full HD / 2K
+$breakpoint-4k: 2560px; // Gerçek 4K
+/* END OF MEDIA QUERIES */
+
+:where(:root) {
+  --breakpoint-xs: #{$breakpoint-xs};
+  --breakpoint-sm: #{$breakpoint-sm};
+  --breakpoint-md: #{$breakpoint-md};
+  --breakpoint-lg: #{$breakpoint-lg};
+  --breakpoint-xl: #{$breakpoint-xl};
+  --breakpoint-xxl: #{$breakpoint-xxl};
+  --breakpoint-xxxl: #{$breakpoint-xxxl};
+  --breakpoint-4k: #{$breakpoint-4k};
+
+  // Spacing scale (2px steps → 4px steps → 8px steps)
+  --space-0: 0; // 0px
+  --space-1: 0.125rem; // 2px
+  --space-2: 0.25rem; // 4px
+  --space-3: 0.375rem; // 6px
+  --space-4: 0.5rem; // 8px
+  --space-5: 0.625rem; // 10px
+  --space-6: 0.75rem; // 12px
+  --space-7: 0.875rem; // 14px
+  --space-8: 1rem; // 16px
+  --space-9: 1.125rem; // 18px
+  --space-10: 1.25rem; // 20px
+  --space-11: 1.5rem; // 24px
+  --space-12: 1.75rem; // 28px
+  --space-13: 2rem; // 32px
+  --space-14: 2.25rem; // 36px
+  --space-15: 2.5rem; // 40px
+  --space-16: 3rem; // 48px
+  --space-17: 3.5rem; // 56px
+  --space-18: 4rem; // 64px
+
+  // Border radius scale
+  --radius-xs: 0.125rem;
+  --radius-sm: 0.2rem;
+  --radius-md: 0.4rem;
+  --radius-lg: 0.9rem;
+  --radius-xl: 1.5rem;
+  --radius-pill: 9999px;
+
+  // Border width scale
+  --border-width-sm: 1px;
+  --border-width-md: 2px;
+
+  // Backdrop
+  --backdrop-blur: 1px;
+
+  // Transition timing
+  --ease-slow: 0.45s ease-in-out;
+  --ease-default: 0.3s ease-in-out;
+  --ease-fast: 0.15s ease-out;
+
+  // Animation (Dükkan'da artık kullanılmıyor — Bikonuvar/Burtest kontrol edilmeli)
+  --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  // Container max width
+  --container-max: 1280px;
+
+  // Box shadow
+  --shadow: 1px 2px 3px #{tweak-alpha($color-black, 0.1)};
+  --shadow-hover: 0 3px 4px #{tweak-alpha($color-black, 0.15)};
+
+  body.dark-mode {
+    --shadow: 0 2px 3px #{tweak-alpha($color-white, 0.1)};
+    --shadow-hover: 0 3px 4px #{tweak-alpha($color-white, 0.15)};
+  }
+
+  // Z-Index Scale
+  /* --------------------------------------------------------------------------
+   * YARDIMCI DEĞERLER (UTILITIES)
+   * -------------------------------------------------------------------------- */
+  --z-ground: 0;
+  /* YENİ: Yeni bir yığınlama bağlamı (stacking context) oluşturmak için. */
+  --z-behind: -1;
+  /* YENİ: Bir stacking context içinde bir elementi arkaya göndermek için. */
+
+  /* --------------------------------------------------------------------------
+   * KATMAN TANIMLARI (LAYERS)
+   * Projenin tüm katmanlama hiyerarşisinin temelidir.
+   * -------------------------------------------------------------------------- */
+  /* Sayfa akışında kalan ama üste çıkanlar (örn: sticky header) */
+  --z-layer-base: 100;
+  /* Açılır menüler, custom select'ler gibi küçük UI popup'ları */
+  --z-layer-ui: 200;
+  /* Etkileşimi kilitleyen tam ekran perdeler (modal, off-canvas) */
+  --z-layer-overlay: 300;
+  /* UI'ı kilitlemeyen anlık elementler (tooltip, popover) */
+  --z-layer-floating: 400;
+  /* Tüm pencerelerin üzerinde çıkan bildirimler (başarılı/hata) */
+  --z-layer-toast: 500;
+  /* Mutlak tavan. En üstteki sistem bileşeni (örn: loading spinner) */
+  --z-layer-ceiling: 1000;
+
+  /* --------------------------------------------------------------------------
+   * DİNAMİK YIĞINLAMA (STACKING)
+   * İç içe açılan ve aynı katmanı paylaşan bileşenler için.
+   * Şimdilik sadece "overlay" katmanı için tanımlı.
+   * -------------------------------------------------------------------------- */
+  --z-overlay-stack-level: 0;
+  /* JS tarafından yönetilir (0, 1, 2...). */
+
+  /* --------------------------------------------------------------------------
+   * BİLEŞEN DEĞİŞKENLERİ (COMPONENTS)
+   * Her bileşen, ait olduğu katmandan türetilir.
+   * -------------------------------------------------------------------------- */
+
+  /** @group Base Layer (100'ler) */
+  --z-header-sticky: var(--z-layer-base);
+  --z-form-validation-inline: calc(var(--z-layer-base) + 1);
+
+  /** @group UI Layer (200'ler) */
+  --z-dropdown-backdrop: var(--z-layer-ui);
+  --z-dropdown-content: calc(var(--z-layer-ui) + 1);
+
+  /** @group Overlay Layer (300'ler - DİNAMİK) */
+  /* Bu katman, Backdrop sınıfımızla tam uyumludur. */
+  --z-overlay-backdrop: calc(var(--z-layer-overlay) + (var(--z-overlay-stack-level) * 2));
+  --z-overlay-content: calc(var(--z-layer-overlay) + (var(--z-overlay-stack-level) * 2) + 1);
+
+  /** @group Floating Layer (400'ler) */
+  --z-popover: var(--z-layer-floating);
+  --z-tooltip: calc(var(--z-layer-floating) + 1);
+
+  /** @group Toast Layer (500'ler) */
+  --z-toast-notification: var(--z-layer-toast);
+
+  /** @group Ceiling Layer (1000 ve üzeri) */
+  --z-system-backdrop: var(--z-layer-ceiling);
+  --z-system-loader: calc(var(--z-layer-ceiling) + 1);
+}

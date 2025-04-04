@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sadrazam – Snackbar Showcase</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/bold/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/light/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <script type="text/javascript" src="assets/js/script.js"></script>
+    <link rel="stylesheet" href="assets/sadrazam.min.css">
+    <script type="text/javascript" src="assets/sadrazam.min.js"></script>
+    <style>
+        .trigger-btn {
+            padding: 8px 18px;
+            border: 1px solid var(--border-color);
+            background: var(--card-bg);
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .trigger-btn:hover {
+            background: var(--bg-subtle);
+            border-color: var(--border-color);
+        }
+
+        .trigger-btn.success { background: #00b894; color: #fff; border-color: #00b894; }
+        .trigger-btn.success:hover { background: #00a381; }
+
+        .trigger-btn.error { background: #d63031; color: #fff; border-color: #d63031; }
+        .trigger-btn.error:hover { background: #c0292a; }
+
+        .trigger-btn.warning { background: #fdcb6e; color: #2d3436; border-color: #fdcb6e; }
+        .trigger-btn.warning:hover { background: #f0bd52; }
+
+        .trigger-btn.notice { background: #0984e3; color: #fff; border-color: #0984e3; }
+        .trigger-btn.notice:hover { background: #0770c4; }
+
+        .trigger-btn.info { background: #636e72; color: #fff; border-color: #636e72; }
+        .trigger-btn.info:hover { background: #555f63; }
+    </style>
+</head>
+
+<body>
+<script>if(localStorage.getItem("dark-mode"))document.body.classList.add("dark-mode")</script>
+    <header>
+        <nav class="top-navbar">
+            <div class="nav-container">
+                <a href="index.html" class="nav-logo">Sadrazam</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li>
+                        <a href="javascript:void(0)" onclick="openPopup(); return false;">Examples</a>
+                        <div class="navi-popup-overlay" id="examplesPopupOverlay"></div>
+                        <div class="navi-popup" id="examplesPopup">
+                            <h3>Examples</h3>
+                            <ul>
+                                <li><a href="buttons.html">Button</a></li>
+                                <li><a href="forms.html">Form</a></li>
+                                <li><a href="form-patterns.html">Form Patterns</a></li>
+                                <li><a href="links.html">Link</a></li>
+                                <li><a href="switches.html">Switch</a></li>
+                                <li><a href="autocomplete.html">Autocomplete</a></li>
+                                <li><a href="backdrop.html">Backdrop</a></li>
+                                <li><a href="hovermenu.html">Hovermenu</a></li>
+                                <li><a href="infinite-scroll.html">Infinite Scroll</a></li>
+                                <li><a href="snackbar.html">Snackbar</a></li>
+                                <li><a href="modals.html">Modal</a></li>
+                                <li><a href="popovers.html">Popover</a></li>
+                                <li><a href="slide-menu.html">Slide Menu</a></li>
+                                <li><a href="spinners.html">Spinner</a></li>
+                                <li><a href="tabs.html">Tabs</a></li>
+                                <li><a href="tooltips.html">Tooltip</a></li>
+                                <li><a href="form-validation.html">Form Validation</a></li>
+                                <li><a href="autosize-textarea.html">Autosize Textarea</a></li>
+                                <li><a href="autosize-select.html">Autosize Select</a></li>
+                                <li><a href="ajax.html">Ajax</a></li>
+                                <li><a href="grid.html">Grid</a></li>
+                                <li><a href="spacing.html">Spacing</a></li>
+                                <li><a href="colors.html">Colors</a></li>
+                                <li><a href="typography.html">Typography</a></li>
+                            </ul>
+                            <button class="close-popup" onclick="closePopup()">&#10005;</button>
+                        </div>
+                    </li>
+                    <li><a href="https://github.com/edukah/sadrazam" target="_blank">GitHub</a></li>
+                </ul>
+                <div class="dark-mode-button-container">
+                    <div class="mode-toggle-switch" onclick="toggleMode()"></div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+
+        <h1>Sadrazam – Snackbar Showcase</h1>
+        <p class="subtitle">Singleton notification manager: types, durations, and multi-message groups</p>
+
+        <!-- ==================== API OVERVIEW ==================== -->
+        <div class="section">
+            <h2 class="section-title">API Overview</h2>
+            <p class="section-desc">The Snackbar class is a singleton toast notification manager exposed at <span class="code">Sadrazam.Snackbar</span></p>
+
+            <div class="row">
+                <span class="label">Main method</span>
+                <span class="code">Sadrazam.Snackbar.insert(message, time?)</span>
+            </div>
+
+            <div class="row">
+                <span class="label">message</span>
+                <span>String or object with type keys. A plain string is treated as <span class="code">{ info: [message] }</span></span>
+            </div>
+
+            <div class="row">
+                <span class="label">time</span>
+                <span>Auto-dismiss duration in ms. Default: <span class="code">5000</span>. Set to <span class="code">false</span> to disable auto-close.</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Types</span>
+                <span>
+                    <span class="code">success</span>&nbsp;
+                    <span class="code">error</span>&nbsp;
+                    <span class="code">warning</span>&nbsp;
+                    <span class="code">notice</span>&nbsp;
+                    (plain string defaults to unstyled info)
+                </span>
+            </div>
+
+            <div class="row">
+                <span class="label">Help</span>
+                <span class="code">Sadrazam.Snackbar.help()</span> &mdash; prints available configs to the console
+            </div>
+
+            <div class="code-block"><span class="cm">// String shorthand (becomes info type)</span>
+<span class="kw">sadrazam</span>.Snackbar.insert(<span class="str">'Hello world!'</span>);
+
+<span class="cm">// Object with typed messages</span>
+<span class="kw">sadrazam</span>.Snackbar.insert({
+  <span class="str">success</span>: <span class="str">'Record saved successfully.'</span>,
+  <span class="str">error</span>: [<span class="str">'Field is required.'</span>, <span class="str">'Invalid email address.'</span>]
+});
+
+<span class="cm">// Custom duration (10 seconds)</span>
+<span class="kw">sadrazam</span>.Snackbar.insert(<span class="str">'Slow toast'</span>, <span class="num">10000</span>);
+
+<span class="cm">// Persistent (no auto-dismiss)</span>
+<span class="kw">sadrazam</span>.Snackbar.insert(<span class="str">'I stay until closed'</span>, <span class="kw">false</span>);</div>
+        </div>
+
+        <!-- ==================== SNACKBAR TYPES ==================== -->
+        <div class="section">
+            <h2 class="section-title">Snackbar Types</h2>
+            <p class="section-desc">Each type applies a distinct color theme and icon via the CSS class on <span class="code">.snackbar__static-container</span></p>
+
+            <div class="row">
+                <span class="label">Success</span>
+                <button class="trigger-btn success" onclick="showSuccess()">
+                    <i class="ph-bold ph-check-circle"></i> Show Success
+                </button>
+                <span class="code">{ success: 'Record saved.' }</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Error</span>
+                <button class="trigger-btn error" onclick="showError()">
+                    <i class="ph-bold ph-x-circle"></i> Show Error
+                </button>
+                <span class="code">{ error: 'Something went wrong.' }</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Warning</span>
+                <button class="trigger-btn warning" onclick="showWarning()">
+                    <i class="ph-bold ph-warning"></i> Show Warning
+                </button>
+                <span class="code">{ warning: 'Check your input.' }</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Notice</span>
+                <button class="trigger-btn notice" onclick="showNotice()">
+                    <i class="ph-bold ph-info"></i> Show Notice
+                </button>
+                <span class="code">{ notice: 'Scheduled maintenance tonight.' }</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Plain String</span>
+                <button class="trigger-btn info" onclick="showPlain()">
+                    <i class="ph-bold ph-chat-text"></i> Show Plain
+                </button>
+                <span class="code">'A simple text message'</span>
+            </div>
+
+            <div class="code-block"><span class="cm">// Success</span>
+<span class="kw">sadrazam</span>.Snackbar.insert({ <span class="str">success</span>: <span class="str">'Record saved successfully.'</span> });
+
+<span class="cm">// Error</span>
+<span class="kw">sadrazam</span>.Snackbar.insert({ <span class="str">error</span>: <span class="str">'Something went wrong. Please try again.'</span> });
+
+<span class="cm">// Warning</span>
+<span class="kw">sadrazam</span>.Snackbar.insert({ <span class="str">warning</span>: <span class="str">'Check your input before submitting.'</span> });
+
+<span class="cm">// Notice</span>
+<span class="kw">sadrazam</span>.Snackbar.insert({ <span class="str">notice</span>: <span class="str">'Scheduled maintenance tonight at 11 PM.'</span> });
+
+<span class="cm">// Plain string (no special styling)</span>
+<span class="kw">sadrazam</span>.Snackbar.insert(<span class="str">'A simple text message'</span>);</div>
+        </div>
+
+        <!-- ==================== MULTIPLE MESSAGES PER TYPE ==================== -->
+        <div class="section">
+            <h2 class="section-title">Multiple Messages per Type</h2>
+            <p class="section-desc">Pass an array of strings to show a bulleted list inside one type group</p>
+
+            <div class="row">
+                <span class="label">Error List</span>
+                <button class="trigger-btn error" onclick="showErrorList()">
+                    <i class="ph-bold ph-list-bullets"></i> Show Error List
+                </button>
+                <span class="code">{ error: ['msg1', 'msg2', 'msg3'] }</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Success List</span>
+                <button class="trigger-btn success" onclick="showSuccessList()">
+                    <i class="ph-bold ph-list-bullets"></i> Show Success List
+                </button>
+                <span class="code">{ success: ['msg1', 'msg2'] }</span>
+            </div>
+
+            <div class="code-block"><span class="cm">// Multiple error messages displayed as a bulleted list</span>
+<span class="kw">sadrazam</span>.Snackbar.insert({
+  <span class="str">error</span>: [
+    <span class="str">'Name field is required.'</span>,
+    <span class="str">'Email address is invalid.'</span>,
+    <span class="str">'Password must be at least 8 characters.'</span>
+  ]
+});
+
+<span class="cm">// Multiple success messages</span>
+<span class="kw">sadrazam</span>.Snackbar.insert({
+  <span class="str">success</span>: [<span class="str">'Profile updated.'</span>, <span class="str">'Avatar uploaded.'</span>]
+});</div>
+        </div>
+
+        <!-- ==================== MIXED TYPES ==================== -->
+        <div class="section">
+            <h2 class="section-title">Mixed Types in One Call</h2>
+            <p class="section-desc">A single <span class="code">insert()</span> call can display multiple type groups stacked together</p>
+
+            <div class="row">
+                <span class="label">Success + Error</span>
+                <button class="trigger-btn" onclick="showMixedSuccessError()" style="background:#6c5ce7;color:#fff;border-color:#6c5ce7;">
+                    <i class="ph-bold ph-stack"></i> Show Mixed
+                </button>
+                <span class="code">{ success: '...', error: ['...', '...'] }</span>
+            </div>
+
+            <div class="row">
+                <span class="label">All Four Types</span>
+                <button class="trigger-btn" onclick="showAllTypes()" style="background:#6c5ce7;color:#fff;border-color:#6c5ce7;">
+                    <i class="ph-bold ph-squares-four"></i> Show All Types
+                </button>
+                <span class="code">{ success, error, warning, notice }</span>
+            </div>
+
+            <div class="code-block"><span class="cm">// Mixed: success + error in one notification</span>
+<span class="kw">sadrazam</span>.Snackbar.insert({
+  <span class="str">success</span>: <span class="str">'2 items imported successfully.'</span>,
+  <span class="str">error</span>: [<span class="str">'Row 5: missing email.'</span>, <span class="str">'Row 12: duplicate entry.'</span>]
+});
+
+<span class="cm">// All four types at once</span>
+<span class="kw">sadrazam</span>.Snackbar.insert({
+  <span class="str">success</span>: <span class="str">'Settings saved.'</span>,
+  <span class="str">warning</span>: <span class="str">'API rate limit is near 80%.'</span>,
+  <span class="str">error</span>: <span class="str">'Failed to sync with remote server.'</span>,
+  <span class="str">notice</span>: <span class="str">'New version available (v2.4.0).'</span>
+});</div>
+        </div>
+
+        <!-- ==================== DURATION & AUTO-DISMISS ==================== -->
+        <div class="section">
+            <h2 class="section-title">Duration &amp; Auto-Dismiss</h2>
+            <p class="section-desc">The second parameter controls how long the toast stays on screen (in milliseconds)</p>
+
+            <div class="row">
+                <span class="label">Default (5s)</span>
+                <button class="trigger-btn" onclick="showDurationDefault()">
+                    <i class="ph-bold ph-timer"></i> 5 seconds
+                </button>
+                <span class="code">insert('...') // default 5000ms</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Short (2s)</span>
+                <button class="trigger-btn" onclick="showDurationShort()">
+                    <i class="ph-bold ph-lightning"></i> 2 seconds
+                </button>
+                <span class="code">insert('...', 2000)</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Long (10s)</span>
+                <button class="trigger-btn" onclick="showDurationLong()">
+                    <i class="ph-bold ph-hourglass-medium"></i> 10 seconds
+                </button>
+                <span class="code">insert('...', 10000)</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Persistent</span>
+                <button class="trigger-btn" onclick="showPersistent()" style="background:#2d3436;color:#fff;border-color:#2d3436;">
+                    <i class="ph-bold ph-push-pin"></i> Persistent (no auto-close)
+                </button>
+                <span class="code">insert('...', false)</span>
+            </div>
+
+            <div class="code-block"><span class="cm">// Default 5-second auto-dismiss</span>
+<span class="kw">sadrazam</span>.Snackbar.insert(<span class="str">'Disappears in 5 seconds.'</span>);
+
+<span class="cm">// Quick 2-second flash</span>
+<span class="kw">sadrazam</span>.Snackbar.insert(<span class="str">'Quick flash!'</span>, <span class="num">2000</span>);
+
+<span class="cm">// Longer 10-second display</span>
+<span class="kw">sadrazam</span>.Snackbar.insert(<span class="str">'I will stay for 10 seconds.'</span>, <span class="num">10000</span>);
+
+<span class="cm">// Persistent: stays until the user clicks the close button</span>
+<span class="kw">sadrazam</span>.Snackbar.insert({ <span class="str">warning</span>: <span class="str">'This will not auto-close. Click X to dismiss.'</span> }, <span class="kw">false</span>);</div>
+        </div>
+
+        <!-- ==================== SINGLETON BEHAVIOR ==================== -->
+        <div class="section">
+            <h2 class="section-title">Singleton Behavior</h2>
+            <p class="section-desc">Only one notification is visible at a time. Calling <span class="code">insert()</span> again replaces the current toast immediately.</p>
+
+            <div class="row">
+                <span class="label">Replace Demo</span>
+                <button class="trigger-btn notice" onclick="showReplace1()">
+                    <i class="ph-bold ph-number-one"></i> First Toast
+                </button>
+                <button class="trigger-btn success" onclick="showReplace2()">
+                    <i class="ph-bold ph-number-two"></i> Replace with Second
+                </button>
+                <span style="font-size:0.8rem;color:var(--text-muted);">Click "First Toast" then quickly click "Replace with Second"</span>
+            </div>
+
+            <div class="code-block"><span class="cm">// First toast appears</span>
+<span class="kw">sadrazam</span>.Snackbar.insert({ <span class="str">notice</span>: <span class="str">'Loading data...'</span> }, <span class="kw">false</span>);
+
+<span class="cm">// Calling insert() again replaces the previous one</span>
+<span class="kw">sadrazam</span>.Snackbar.insert({ <span class="str">success</span>: <span class="str">'Data loaded! Previous toast was replaced.'</span> });</div>
+        </div>
+
+        <!-- ==================== CLOSE BUTTON BEHAVIOR ==================== -->
+        <div class="section">
+            <h2 class="section-title">Close Button &amp; Group Dismissal</h2>
+            <p class="section-desc">Each type group has its own close button (<span class="code">ph-x</span> icon). Closing all groups removes the wrapper entirely.</p>
+
+            <div class="row">
+                <span class="label">Try It</span>
+                <button class="trigger-btn" onclick="showCloseDemo()" style="background:#6c5ce7;color:#fff;border-color:#6c5ce7;">
+                    <i class="ph-bold ph-x-circle"></i> Show Multi-Group (persistent)
+                </button>
+                <span style="font-size:0.8rem;color:var(--text-muted);">Click the X on each group to close them individually</span>
+            </div>
+
+            <div class="code-block"><span class="cm">// Show three groups - close each one individually with the X button</span>
+<span class="kw">sadrazam</span>.Snackbar.insert({
+  <span class="str">success</span>: <span class="str">'Upload complete.'</span>,
+  <span class="str">warning</span>: <span class="str">'File size is large (48 MB).'</span>,
+  <span class="str">error</span>: <span class="str">'Thumbnail generation failed.'</span>
+}, <span class="kw">false</span>);</div>
+        </div>
+
+        <!-- ==================== REAL-WORLD EXAMPLES ==================== -->
+        <div class="section">
+            <h2 class="section-title">Real-World Examples</h2>
+            <p class="section-desc">Typical usage patterns you might encounter in production</p>
+
+            <div class="row">
+                <span class="label">Form Validation</span>
+                <button class="trigger-btn error" onclick="showFormValidation()">
+                    <i class="ph-bold ph-clipboard-text"></i> Validate Form
+                </button>
+            </div>
+
+            <div class="row">
+                <span class="label">Save Confirm</span>
+                <button class="trigger-btn success" onclick="showSaveConfirm()">
+                    <i class="ph-bold ph-floppy-disk"></i> Save Record
+                </button>
+            </div>
+
+            <div class="row">
+                <span class="label">Delete Confirm</span>
+                <button class="trigger-btn warning" onclick="showDeleteConfirm()">
+                    <i class="ph-bold ph-trash"></i> Delete Item
+                </button>
+            </div>
+
+            <div class="row">
+                <span class="label">Import Report</span>
+                <button class="trigger-btn" onclick="showImportReport()" style="background:#6c5ce7;color:#fff;border-color:#6c5ce7;">
+                    <i class="ph-bold ph-file-csv"></i> Import CSV
+                </button>
+            </div>
+
+            <div class="code-block"><span class="cm">// Form validation errors</span>
+<span class="kw">sadrazam</span>.Snackbar.insert({
+  <span class="str">error</span>: [
+    <span class="str">'Name is required.'</span>,
+    <span class="str">'Email format is invalid.'</span>,
+    <span class="str">'Phone number must be 10 digits.'</span>,
+    <span class="str">'Password and confirmation do not match.'</span>
+  ]
+});
+
+<span class="cm">// Successful save</span>
+<span class="kw">sadrazam</span>.Snackbar.insert({ <span class="str">success</span>: <span class="str">'Record #1042 saved successfully.'</span> }, <span class="num">3000</span>);
+
+<span class="cm">// CSV import results (mixed)</span>
+<span class="kw">sadrazam</span>.Snackbar.insert({
+  <span class="str">success</span>: [<span class="str">'120 rows imported.'</span>, <span class="str">'3 duplicates merged.'</span>],
+  <span class="str">warning</span>: <span class="str">'5 rows skipped due to missing required fields.'</span>,
+  <span class="str">error</span>: [<span class="str">'Row 88: invalid date format.'</span>, <span class="str">'Row 102: unknown category code.'</span>]
+}, <span class="kw">false</span>);</div>
+        </div>
+
+        <!-- ==================== STATIC (INLINE) USAGE ==================== -->
+        <div class="section">
+            <h2 class="section-title">Static (Inline) Notifications</h2>
+            <p class="section-desc">The same CSS classes can be used as inline, static notifications within page content (without JS)</p>
+
+            <div style="max-width:700px;">
+                <div class="snackbar__static-container success">
+                    <ul class="snackbar__static-list">
+                        <li>Your profile has been updated successfully.</li>
+                    </ul>
+                </div>
+
+                <div class="snackbar__static-container error">
+                    <ul class="snackbar__static-list">
+                        <li>Access denied. You do not have permission to view this page.</li>
+                    </ul>
+                </div>
+
+                <div class="snackbar__static-container warning">
+                    <ul class="snackbar__static-list">
+                        <li>Your subscription expires in 3 days.</li>
+                        <li>Please update your payment method.</li>
+                    </ul>
+                </div>
+
+                <div class="snackbar__static-container notice">
+                    <ul class="snackbar__static-list">
+                        <li>A new software update is available. Version 3.2.1 includes bug fixes and performance improvements.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="code-block"><span class="cm">&lt;!-- Static notification embedded in page (no JS needed) --&gt;</span>
+&lt;<span class="kw">div</span> class=<span class="str">"snackbar__static-container success"</span>&gt;
+  &lt;<span class="kw">ul</span> class=<span class="str">"snackbar__static-list"</span>&gt;
+    &lt;<span class="kw">li</span>&gt;Your profile has been updated.&lt;/<span class="kw">li</span>&gt;
+  &lt;/<span class="kw">ul</span>&gt;
+&lt;/<span class="kw">div</span>&gt;
+
+<span class="cm">&lt;!-- Multiple messages become a bulleted list --&gt;</span>
+&lt;<span class="kw">div</span> class=<span class="str">"snackbar__static-container warning"</span>&gt;
+  &lt;<span class="kw">ul</span> class=<span class="str">"snackbar__static-list"</span>&gt;
+    &lt;<span class="kw">li</span>&gt;Subscription expires in 3 days.&lt;/<span class="kw">li</span>&gt;
+    &lt;<span class="kw">li</span>&gt;Please update your payment method.&lt;/<span class="kw">li</span>&gt;
+  &lt;/<span class="kw">ul</span>&gt;
+&lt;/<span class="kw">div</span>&gt;</div>
+        </div>
+
+        <!-- ==================== CONSOLE HELPER ==================== -->
+        <div class="section">
+            <h2 class="section-title">Console Helper</h2>
+            <p class="section-desc">Run <span class="code">Sadrazam.Snackbar.help()</span> in your browser console to see all available configuration options</p>
+
+            <div class="row">
+                <span class="label">Try It</span>
+                <button class="trigger-btn" onclick="Sadrazam.Snackbar.help()">
+                    <i class="ph-bold ph-terminal"></i> Run help() (check console)
+                </button>
+                <span style="font-size:0.8rem;color:var(--text-muted);">Open DevTools console to see the output</span>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // === Snackbar Types ===
+        function showSuccess() {
+            Sadrazam.Snackbar.insert({ success: 'Record saved successfully.' });
+        }
+
+        function showError() {
+            Sadrazam.Snackbar.insert({ error: 'Something went wrong. Please try again.' });
+        }
+
+        function showWarning() {
+            Sadrazam.Snackbar.insert({ warning: 'Check your input before submitting.' });
+        }
+
+        function showNotice() {
+            Sadrazam.Snackbar.insert({ notice: 'Scheduled maintenance tonight at 11 PM.' });
+        }
+
+        function showPlain() {
+            Sadrazam.Snackbar.insert('A simple text message with no special styling.');
+        }
+
+        // === Multiple Messages ===
+        function showErrorList() {
+            Sadrazam.Snackbar.insert({
+                error: [
+                    'Name field is required.',
+                    'Email address is invalid.',
+                    'Password must be at least 8 characters.'
+                ]
+            });
+        }
+
+        function showSuccessList() {
+            Sadrazam.Snackbar.insert({
+                success: ['Profile updated.', 'Avatar uploaded.']
+            });
+        }
+
+        // === Mixed Types ===
+        function showMixedSuccessError() {
+            Sadrazam.Snackbar.insert({
+                success: '2 items imported successfully.',
+                error: ['Row 5: missing email.', 'Row 12: duplicate entry.']
+            });
+        }
+
+        function showAllTypes() {
+            Sadrazam.Snackbar.insert({
+                success: 'Settings saved.',
+                warning: 'API rate limit is near 80%.',
+                error: 'Failed to sync with remote server.',
+                notice: 'New version available (v2.4.0).'
+            }, false);
+        }
+
+        // === Duration ===
+        function showDurationDefault() {
+            Sadrazam.Snackbar.insert({ notice: 'This disappears in 5 seconds (default).' });
+        }
+
+        function showDurationShort() {
+            Sadrazam.Snackbar.insert({ notice: 'Quick flash! Gone in 2 seconds.' }, 2000);
+        }
+
+        function showDurationLong() {
+            Sadrazam.Snackbar.insert({ notice: 'I will stay for 10 seconds.' }, 10000);
+        }
+
+        function showPersistent() {
+            Sadrazam.Snackbar.insert({ warning: 'This will not auto-close. Click X to dismiss.' }, false);
+        }
+
+        // === Singleton ===
+        function showReplace1() {
+            Sadrazam.Snackbar.insert({ notice: 'Loading data... (click "Replace with Second" now)' }, false);
+        }
+
+        function showReplace2() {
+            Sadrazam.Snackbar.insert({ success: 'Data loaded! Previous toast was replaced.' });
+        }
+
+        // === Close Button Demo ===
+        function showCloseDemo() {
+            Sadrazam.Snackbar.insert({
+                success: 'Upload complete.',
+                warning: 'File size is large (48 MB).',
+                error: 'Thumbnail generation failed.'
+            }, false);
+        }
+
+        // === Real-World ===
+        function showFormValidation() {
+            Sadrazam.Snackbar.insert({
+                error: [
+                    'Name is required.',
+                    'Email format is invalid.',
+                    'Phone number must be 10 digits.',
+                    'Password and confirmation do not match.'
+                ]
+            });
+        }
+
+        function showSaveConfirm() {
+            Sadrazam.Snackbar.insert({ success: 'Record #1042 saved successfully.' }, 3000);
+        }
+
+        function showDeleteConfirm() {
+            Sadrazam.Snackbar.insert({ warning: 'Item moved to trash. Undo available for 30 seconds.' }, 8000);
+        }
+
+        function showImportReport() {
+            Sadrazam.Snackbar.insert({
+                success: ['120 rows imported.', '3 duplicates merged.'],
+                warning: '5 rows skipped due to missing required fields.',
+                error: ['Row 88: invalid date format.', 'Row 102: unknown category code.']
+            }, false);
+        }
+    </script>
+</body>
+
+</html>

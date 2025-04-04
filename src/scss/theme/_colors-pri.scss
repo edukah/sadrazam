@@ -1,0 +1,64 @@
+/** Primary Colors (semantic — dark mode'da simetrik swap: 100↔900, 300↔700, 500 sabit) **/
+$color-pri-100: rgba(133, 199, 217, 1);
+$color-pri-300: rgba(84, 180, 203, 1);
+$color-pri-500: rgba(10, 150, 183, 1);
+$color-pri-700: rgba(5, 120, 147, 1);
+$color-pri-900: rgba(2, 91, 112, 1);
+/** End of Primary Colors **/
+
+:root {
+  --color-pri-100: #{$color-pri-100};
+  --color-pri-300: #{$color-pri-300};
+  --color-pri-500: #{$color-pri-500};
+  --color-pri-700: #{$color-pri-700};
+  --color-pri-900: #{$color-pri-900};
+
+  // Sabit (--f) — dark mode'da değişmez
+  --color-pri-100--f: #{$color-pri-100};
+  --color-pri-300--f: #{$color-pri-300};
+  --color-pri-500--f: #{$color-pri-500};
+  --color-pri-700--f: #{$color-pri-700};
+  --color-pri-900--f: #{$color-pri-900};
+
+  body.dark-mode {
+    --color-pri-100: #{$color-pri-900};
+    --color-pri-300: #{$color-pri-700};
+    --color-pri-500: #{$color-pri-500};
+    --color-pri-700: #{$color-pri-300};
+    --color-pri-900: #{$color-pri-100};
+  }
+}
+
+/* =========================================================================
+   Theme Renk Yardımcı Sınıfları — Primary
+   ========================================================================= */
+
+/** primary colors **/
+.tc-pri-100 { color: var(--color-pri-100); }
+.tc-pri-300 { color: var(--color-pri-300); }
+.tc-pri-500 { color: var(--color-pri-500); }
+.tc-pri-700 { color: var(--color-pri-700); }
+.tc-pri-900 { color: var(--color-pri-900); }
+
+.tbc-pri-100 { background-color: var(--color-pri-100); }
+.tbc-pri-300 { background-color: var(--color-pri-300); }
+.tbc-pri-500 { background-color: var(--color-pri-500); }
+.tbc-pri-700 { background-color: var(--color-pri-700); }
+.tbc-pri-900 { background-color: var(--color-pri-900); }
+
+/* =========================================================================
+   Sabit (--f) Renk Yardımcı Sınıfları (dark mode'da değişmez) — Primary
+   ========================================================================= */
+
+/** primary (--f) **/
+.tc-pri-100--f { color: var(--color-pri-100--f); }
+.tc-pri-300--f { color: var(--color-pri-300--f); }
+.tc-pri-500--f { color: var(--color-pri-500--f); }
+.tc-pri-700--f { color: var(--color-pri-700--f); }
+.tc-pri-900--f { color: var(--color-pri-900--f); }
+
+.tbc-pri-100--f { background-color: var(--color-pri-100--f); }
+.tbc-pri-300--f { background-color: var(--color-pri-300--f); }
+.tbc-pri-500--f { background-color: var(--color-pri-500--f); }
+.tbc-pri-700--f { background-color: var(--color-pri-700--f); }
+.tbc-pri-900--f { background-color: var(--color-pri-900--f); }

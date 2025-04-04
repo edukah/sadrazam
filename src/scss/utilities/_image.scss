@@ -1,0 +1,62 @@
+@use '../base/variables';
+
+/* IMAGE */
+.img-responsive {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.img-rounded {
+  border-radius: var(--radius-md);
+}
+
+.img-circle {
+  border-radius: var(--radius-pill);
+}
+
+.img-thumbnail {
+  padding: 4px;
+  line-height: 1.42857;
+  background-color: var(--color-grey-zero);
+  border: var(--border-width-sm) solid var(--color-grey-150);
+  border-radius: var(--radius-sm);
+  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  display: inline-block;
+  max-width: 100%;
+  height: auto;
+}
+
+.img-flag-width-25 {
+  width: 25px;
+}
+
+/* Inline image (satır içi ikon boyutlu resim) */
+.img-inline {
+  display: inline;
+  vertical-align: middle;
+  width: 2em;
+  height: 2em;
+
+  &--2x {
+    width: 2em;
+    height: 2em;
+  }
+}
+
+/* Grayscale filter for images */
+.img-grayscale {
+  filter: grayscale(100%);
+}
+
+/* Grayscale filter that removes on hover */
+.img-grayscale--hover {
+  filter: grayscale(100%);
+  transition: filter 0.3s ease-in-out;
+
+  &:hover {
+    @media (hover: hover) and (pointer: fine) {
+      filter: none;
+    }
+  }
+}

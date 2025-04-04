@@ -1,0 +1,80 @@
+/* =========================================================================
+   Responsive Visibility (Görünürlük) Yardımcıları
+   Ekran boyutuna göre elementleri gizleme/gösterme.
+   Eski adı: utilities/_responsive.scss → utilities/_visibility.scss olarak yeniden adlandırıldı.
+   Grid sistemi: layout/_grid.scss
+   ========================================================================= */
+
+// ========================================================================
+// Yardımcı Sınıflar: Responsive Visibility (d-none--/d-show-- Stili)
+// ========================================================================
+
+@use '../base/variables' as var;
+
+$breakpoints: (
+  'xs': var.$breakpoint-xs,
+  'sm': var.$breakpoint-sm,
+  'md': var.$breakpoint-md,
+  'lg': var.$breakpoint-lg,
+  'xl': var.$breakpoint-xl,
+  'xxl': var.$breakpoint-xxl,
+  'xxxl': var.$breakpoint-xxxl,
+  '4k': var.$breakpoint-4k
+);
+
+@each $name, $width in $breakpoints {
+
+  // === GİZLEME SINIFLARI (Varsayılan olarak görünür) ===
+
+  // Kullanım: .d-none--md-up -> md (768px) ve üzeri ekranlarda gizlenir.
+  .d-none--#{$name}-up {
+    @media (min-width: $width) {
+      display: none !important;
+    }
+  }
+
+  // Kullanım: .d-none--md-down -> md (768px) ve altındaki ekranlarda gizlenir.
+  .d-none--#{$name}-down {
+    @media (max-width: ($width - 1px)) {
+      display: none !important;
+    }
+  }
+
+
+  // === GÖSTERME SINIFLARI (Varsayılan olarak gizli) ===
+
+  // Kullanım: .d-show--md-up -> Sadece md (768px) ve üzeri ekranlarda görünür.
+  .d-show--#{$name}-up {
+    display: none !important;
+
+    @media (min-width: $width) {
+      display: initial !important;
+    }
+  }
+
+  // Kullanım: .d-show--md-down -> Sadece md (768px) ve altındaki ekranlarda görünür.
+  .d-show--#{$name}-down {
+    display: none !important;
+
+    @media (max-width: ($width - 1px)) {
+      display: initial !important;
+    }
+  }
+}
+
+// === Visibility ===
+.vis-hidden {
+  visibility: hidden;
+}
+
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}

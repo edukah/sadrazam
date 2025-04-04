@@ -1,0 +1,9 @@
+@use '../base/variables';
+
+a {
+  color: var(--color-link-dark);
+
+  &.tc-link-blue-dark {
+    color: var(--color-link-blue-dark);
+  }
+}

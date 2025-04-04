@@ -1,0 +1,65 @@
+@use '../base/variables';
+
+/* Tooltip */
+.tooltip--top .tooltip__arrow,
+.tooltip--right .tooltip__arrow,
+.tooltip--bottom .tooltip__arrow,
+.tooltip--left .tooltip__arrow {
+  position: absolute;
+  border-width: 6px;
+  border-style: solid;
+  border-color: transparent;
+}
+
+.tooltip--top .tooltip__arrow {
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-bottom: 0;
+  border-top-color: var(--color-grey-850--f);
+}
+
+.tooltip--right .tooltip__arrow {
+  top: 50%;
+  right: 100%;
+  transform: translateY(-50%);
+  border-left: 0;
+  border-right-color: var(--color-grey-850--f);
+}
+
+.tooltip--bottom .tooltip__arrow {
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-top: 0;
+  border-bottom-color: var(--color-grey-850--f);
+}
+
+.tooltip--left .tooltip__arrow {
+  top: 50%;
+  left: 100%;
+  transform: translateY(-50%);
+  border-right: 0;
+  border-left-color: var(--color-grey-850--f);
+}
+
+.tooltip {
+  position: absolute;
+  padding: var(--space-5) var(--space-6);
+  max-width: 320px;
+  border-radius: var(--radius-sm);
+  line-height: 1.4;
+  z-index: var(--z-tooltip);
+  white-space: normal;
+  background-color: var(--color-grey-850--f);
+  color: var(--color-text-white--f);
+  opacity: 0;
+  transition: opacity 0.15s;
+  pointer-events: none;
+
+  &.is-visible {
+    opacity: 1;
+  }
+}
+
+/* End of Tooltip */

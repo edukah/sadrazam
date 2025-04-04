@@ -1,0 +1,106 @@
+/* CONVENTION: Bu dosyada CSS custom property (var(--*)) kullanılmaz.
+   Saf sıfırlama kuralları — tarayıcı varsayılanlarını temizler.
+   Temel stiller (body, hr vb.) _base.scss dosyasındadır. */
+
+// Universal element resets
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  border: 0;
+
+  font: inherit;
+  font-size: inherit;
+  text-decoration: none;
+  line-height: inherit;
+
+  color: inherit;
+
+  vertical-align: baseline;
+  box-sizing: border-box;
+
+  /* Firefox için tıklanma anında blok çevresinde oluşan çizgileri önlüyor */
+  outline: none;
+}
+
+*::-moz-focus-inner {
+  /* Firefox için tıklanma anında input çevresinde oluşan çizgileri önlüyor */
+  border: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+
+// HTML5 elementleri
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+img,
+menu,
+nav,
+section,
+label {
+  display: block;
+}
+
+// Başlıklar
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+// Diğer elementler
+u {
+  text-decoration: underline;
+}
+
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+
+sup {
+  font-size: xx-small;
+  vertical-align: super;
+}
+
+sub {
+  font-size: xx-small;
+  vertical-align: sub;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+p {
+  text-indent: 0;
+}
+
+img {
+  vertical-align: middle;
+}

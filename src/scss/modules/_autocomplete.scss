@@ -1,0 +1,88 @@
+﻿@use '../base/variables';
+
+/* Suggestion Container */
+.autocomplete__suggestions-container {
+  display: none;
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  margin-top: var(--space-2);
+  z-index: var(--z-dropdown-content);
+  border: 1px solid var(--color-grey-200);
+  border-radius: var(--radius-md);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+
+  body.dark-mode & {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+  }
+
+  &.is-open {
+    display: block;
+  }
+
+  &.is-open ~ * {
+    display: none;
+  }
+}
+
+.autocomplete__suggestions-container ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 40vh;
+  overflow-y: auto;
+  background-color: var(--color-grey-zero);
+}
+
+.autocomplete__suggestions-container li {
+  position: relative;
+  padding: var(--space-3) var(--space-5);
+}
+
+.autocomplete__suggestions-container li:not([data-autocomplete-disabled]) {
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.autocomplete__suggestions-container li + li {
+  border-top: 1px solid var(--color-grey-50);
+}
+
+.autocomplete__suggestions-container li:not([data-autocomplete-disabled]):hover {
+  @media (hover: hover) and (pointer: fine) {
+    background-color: var(--color-grey-100);
+  }
+}
+
+.autocomplete__suggestions-container li:not([data-autocomplete-disabled]).is-selected {
+  background-color: var(--color-grey-150);
+}
+
+.autocomplete__suggestions-container li a {
+  display: block;
+  padding: var(--space-1) var(--space-2);
+  text-decoration: none;
+  color: inherit;
+}
+/* End of Suggestion Container */
+
+/* Badge */
+.autocomplete__badge-container {
+  position: relative;
+}
+
+.autocomplete__badge {
+  position: absolute;
+  right: var(--space-5);
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 11px;
+  padding: 2px var(--space-3);
+  border-radius: var(--radius-sm);
+  background: var(--color-grey-100);
+  color: var(--color-text-dark-3);
+  pointer-events: none;
+  white-space: nowrap;
+}
+/* End of Badge */

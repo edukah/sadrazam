@@ -1,0 +1,83 @@
+@use '../base/variables';
+
+// Adds vertical spacing between sibling elements in a container.
+.margin-flow>*+* {
+  margin-top: var(--space-3);
+}
+
+/* =========================================================================
+   Numeric Spacing Utilities
+   Generated from the 19-step space scale (--space-0 … --space-18).
+   Pattern: .{property}-{direction}-{step}
+   ========================================================================= */
+
+$space-steps: (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18);
+
+/* Margin — single direction */
+@each $step in $space-steps {
+  .margin-t-#{$step} { margin-top: var(--space-#{$step}); }
+  .margin-b-#{$step} { margin-bottom: var(--space-#{$step}); }
+  .margin-l-#{$step} { margin-left: var(--space-#{$step}); }
+  .margin-r-#{$step} { margin-right: var(--space-#{$step}); }
+}
+
+/* Margin — axis */
+@each $step in $space-steps {
+  .margin-x-#{$step} {
+    margin-left: var(--space-#{$step});
+    margin-right: var(--space-#{$step});
+  }
+
+  .margin-y-#{$step} {
+    margin-top: var(--space-#{$step});
+    margin-bottom: var(--space-#{$step});
+  }
+}
+
+/* Margin — all sides */
+@each $step in $space-steps {
+  .margin-#{$step} {
+    margin: var(--space-#{$step});
+  }
+}
+
+/* Padding — single direction */
+@each $step in $space-steps {
+  .padding-t-#{$step} { padding-top: var(--space-#{$step}); }
+  .padding-b-#{$step} { padding-bottom: var(--space-#{$step}); }
+  .padding-l-#{$step} { padding-left: var(--space-#{$step}); }
+  .padding-r-#{$step} { padding-right: var(--space-#{$step}); }
+}
+
+/* Padding — axis */
+@each $step in $space-steps {
+  .padding-x-#{$step} {
+    padding-left: var(--space-#{$step});
+    padding-right: var(--space-#{$step});
+  }
+
+  .padding-y-#{$step} {
+    padding-top: var(--space-#{$step});
+    padding-bottom: var(--space-#{$step});
+  }
+}
+
+/* Padding — all sides */
+@each $step in $space-steps {
+  .padding-#{$step} {
+    padding: var(--space-#{$step});
+  }
+}
+
+/* Responsive overrides */
+.padding-x-0--sm {
+  @media (max-width: variables.$breakpoint-lg) {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+// === Centering ===
+.margin-x-auto {
+  margin-inline: auto;
+}

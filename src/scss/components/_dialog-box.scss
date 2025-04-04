@@ -1,0 +1,56 @@
+/* =========================================================================
+   Dialog Box — Durum rengi ile vurgulanan bilgi kutuları
+   Eski yeri: utilities/_components.scss → components/_dialog-box.scss olarak taşındı.
+   ========================================================================= */
+
+.dialog-box--danger {
+  border: var(--border-width-sm) solid var(--color-border-danger);
+  border-radius: var(--radius-sm);
+  padding: 0.5rem var(--space-5);
+  background-color: var(--color-danger-100);
+  color: var(--color-danger-900);
+}
+
+.dialog-box--warning {
+  border: var(--border-width-sm) solid var(--color-border-warning);
+  border-radius: var(--radius-sm);
+  padding: 0.5rem var(--space-5);
+  background-color: var(--color-warning-100);
+  color: var(--color-warning-900);
+}
+
+.dialog-box--caution {
+  border: var(--border-width-sm) solid var(--color-border-caution);
+  border-radius: var(--radius-sm);
+  padding: 0.5rem var(--space-5);
+  background-color: var(--color-caution-100);
+  color: var(--color-caution-900);
+}
+
+.dialog-box--notice {
+  border: var(--border-width-sm) solid var(--color-border-notice);
+  border-radius: var(--radius-sm);
+  padding: 0.5rem var(--space-5);
+  background-color: var(--color-notice-100);
+  color: var(--color-notice-900);
+}
+
+.dialog-box--safe {
+  border: var(--border-width-sm) solid var(--color-border-safe);
+  border-radius: var(--radius-sm);
+  padding: 0.5rem var(--space-5);
+  background-color: var(--color-safe-100);
+  color: var(--color-safe-900);
+}
+
+.dialog-box--hint {
+  border: var(--border-width-sm) solid var(--color-border-notice);
+  border-radius: var(--radius-sm);
+  padding: 0.5rem var(--space-5);
+  background-color: var(--color-notice-100);
+  color: var(--color-notice-900);
+}
+
+.hint-symbol {
+  opacity: 0.35;
+}
