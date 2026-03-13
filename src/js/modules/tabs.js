@@ -32,6 +32,14 @@ class Tabs {
       ['instance.activateTab(tabHead)', 'Activates the specified tab.'],
       ['instance.destroy()', 'Destroys and cleans up the Tabs instance.']
     ]);
+    const availableBehaviors = new Map([
+      ['Tab priority', 'URL hash (data-tab-hash) → element-in-panel → sessionStorage → .is-default → first tab.'],
+      ['Session persistence', 'Active tab saved to sessionStorage per page. Key: sdrzm-tab:{pathname}:{groupIndex}.'],
+      ['Element-in-panel', 'URL hash matching an element ID inside a panel activates that tab, scrolls and flashes it.'],
+      ['In-page hash links', 'Clicking <a href="#hash"> activates the matching tab (by data-tab-hash or element-in-panel).'],
+      ['Keyboard (WAI-ARIA)', 'Arrow keys cycle tabs. Home/End jump to first/last. Focus follows selection.'],
+      ['Hash clearing', 'Selecting the first tab clears the URL hash. Non-first tabs with data-tab-hash set it.']
+    ]);
     console.info('%cTabs', 'font-size: 20px; font-weight: bold; color: red');
     console.info('%cHTML Attributes:', 'font-size: 14px; font-weight: bold; color: blue');
     availableAttributes.forEach((value, key) => {
@@ -39,6 +47,10 @@ class Tabs {
     });
     console.info('%cAPI:', 'font-size: 14px; font-weight: bold; color: blue');
     availableMethods.forEach((value, key) => {
+      console.info(`%c${key}: %c${value}`, 'font-weight: bold; color: red', 'font-weight: normal; color: unset');
+    });
+    console.info('%cBehaviors:', 'font-size: 14px; font-weight: bold; color: blue');
+    availableBehaviors.forEach((value, key) => {
       console.info(`%c${key}: %c${value}`, 'font-weight: bold; color: red', 'font-weight: normal; color: unset');
     });
   }

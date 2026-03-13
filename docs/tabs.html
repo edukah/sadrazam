@@ -137,6 +137,18 @@
                     </tr>
                 </tbody>
             </table>
+
+            <h3 style="margin-top: 1.2rem; font-size: 0.95rem; font-weight: 600;">Tab Resolution Priority</h3>
+            <p style="font-size: 0.85rem; margin-top: 0.4rem; line-height: 1.6;">
+                On initialization, the active tab is determined by the first match in this order:
+            </p>
+            <ol style="font-size: 0.85rem; margin-top: 0.4rem; padding-left: 1.5rem; line-height: 1.8;">
+                <li><strong>URL hash &rarr; <span class="code">data-tab-hash</span></strong> &mdash; Hash matches a tab's <span class="code">data-tab-hash</span> value.</li>
+                <li><strong>URL hash &rarr; element-in-panel</strong> &mdash; Hash matches an element <span class="code">id</span> inside a tab panel. That tab activates and the element is scrolled into view with a flash effect.</li>
+                <li><strong>sessionStorage</strong> &mdash; Previously selected tab restored from <span class="code">sdrzm-tab:{pathname}:{groupIndex}</span>.</li>
+                <li><strong><span class="code">.is-default</span></strong> &mdash; Tab head with the <span class="code">.is-default</span> class.</li>
+                <li><strong>First tab</strong> &mdash; Falls back to the first tab head.</li>
+            </ol>
         </div>
 
         <!-- ==================== V1: CLASSIC TAB ==================== -->
@@ -464,8 +476,11 @@
             <h2 class="section-title">URL Hash Integration</h2>
             <p class="section-desc">
                 Add <span class="code">data-tab-hash</span> to each tab head. When selected,
-                the browser URL updates to <span class="code">#tab-name</span>. Refreshing the page
-                restores the active tab from the hash.
+                the browser URL updates to <span class="code">#value</span> via
+                <span class="code">history.replaceState()</span> (no history pollution).
+                Refreshing the page restores the active tab from the hash.
+                In-page links like <span class="code">&lt;a href="#security"&gt;</span> also activate the matching tab.
+                Selecting the first tab clears the hash from the URL.
             </p>
 
             <div class="tab-scroll__container">
@@ -503,6 +518,54 @@
                             <strong>Notifications</strong> settings. The hash update uses
                             <span class="code">history.replaceState()</span> so it does not pollute
                             browser history or trigger a page reload.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== ELEMENT-IN-PANEL DEEP LINKING ==================== -->
+        <div class="section">
+            <h2 class="section-title">Element-in-Panel Deep Linking</h2>
+            <p class="section-desc">
+                When the URL hash matches an element <span class="code">id</span> inside a tab panel,
+                that tab is automatically activated and the page scrolls to the element with a flash effect.
+                This also works when clicking in-page <span class="code">&lt;a href="#element-id"&gt;</span> links.
+            </p>
+
+            <div style="margin-bottom: 1.2rem;">
+                <span class="label">Try it</span>
+                <a href="#deep-target-item" class="bttn bttn--sm-rectangle bttn--pri">
+                    Jump to Target Item
+                </a>
+                <span style="font-size: 0.82rem; color: var(--text-muted);">
+                    &mdash; clicks <span class="code">&lt;a href="#deep-target-item"&gt;</span>, activates the correct tab, scrolls and flashes the element.
+                </span>
+            </div>
+
+            <div class="tab-card__container">
+                <div class="tab-card__heading">
+                    <div class="tab-card__head" data-tab-id="tab-deep-list">
+                        Item List
+                    </div>
+                    <div class="tab-card__head" data-tab-id="tab-deep-details">
+                        Details
+                    </div>
+                </div>
+                <div class="tab-card__body">
+                    <div class="tab-card__panel" id="tab-deep-list">
+                        <div class="demo-panel-content">
+                            This is the <strong>Item List</strong> panel. The target element is in the Details tab.
+                        </div>
+                    </div>
+                    <div class="tab-card__panel" id="tab-deep-details">
+                        <div class="demo-panel-content">
+                            <p>Some content before the target...</p>
+                            <div id="deep-target-item" style="margin-top: 1rem; padding: 0.8rem; border: 2px dashed var(--color-pri-500); border-radius: 6px;">
+                                <strong>Target Item</strong> &mdash; This element has <span class="code">id="deep-target-item"</span>.
+                                When you click the link above or visit the page with <span class="code">#deep-target-item</span> in the URL,
+                                this tab opens and the element receives a flash highlight via <span class="code">Elem.flash()</span>.
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -619,6 +682,80 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        <!-- ==================== SESSION PERSISTENCE ==================== -->
+        <div class="section">
+            <h2 class="section-title">Session Persistence</h2>
+            <p class="section-desc">
+                The active tab is automatically saved to <span class="code">sessionStorage</span> on every tab change.
+                When the page reloads, the previously active tab is restored &mdash; unless a URL hash takes higher priority.
+                The storage key format is <span class="code">sdrzm-tab:{pathname}:{groupIndex}</span>,
+                so each tab group on each page has its own independent memory.
+            </p>
+            <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 0.5rem;">
+                This is automatic and requires no configuration. Session data persists until the browser tab is closed.
+            </p>
+        </div>
+
+        <!-- ==================== ACCESSIBILITY ==================== -->
+        <div class="section">
+            <h2 class="section-title">Accessibility</h2>
+            <p class="section-desc">
+                Tabs follow the
+                <a href="https://www.w3.org/WAI/ARIA/apg/patterns/tabs/" target="_blank" style="text-decoration: underline;">WAI-ARIA Tabs pattern</a>
+                for screen readers and keyboard navigation. All ARIA attributes are applied automatically on initialization
+                and removed on <span class="code">destroy()</span>.
+            </p>
+
+            <table class="attr-table">
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>ARIA roles</td>
+                        <td>
+                            <span class="code">role="tablist"</span> on heading container,
+                            <span class="code">role="tab"</span> on each head,
+                            <span class="code">role="tabpanel"</span> on each panel.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>ARIA attributes</td>
+                        <td>
+                            <span class="code">aria-selected</span> and <span class="code">aria-controls</span> on tab heads;
+                            <span class="code">aria-labelledby</span> on panels.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Focus management</td>
+                        <td>
+                            Active tab: <span class="code">tabindex="0"</span>.
+                            Inactive tabs: <span class="code">tabindex="-1"</span>.
+                            Only the active tab is in the natural tab order.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Keyboard</td>
+                        <td>
+                            <span class="code">ArrowRight</span> / <span class="code">ArrowDown</span> &mdash; next tab (cycles).<br>
+                            <span class="code">ArrowLeft</span> / <span class="code">ArrowUp</span> &mdash; previous tab (cycles).<br>
+                            <span class="code">Home</span> &mdash; first tab.<br>
+                            <span class="code">End</span> &mdash; last tab.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Cleanup</td>
+                        <td>
+                            <span class="code">destroy()</span> removes all ARIA attributes, roles, and keyboard listeners.
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
 
         <!-- ==================== CSS CLASS REFERENCE ==================== -->
