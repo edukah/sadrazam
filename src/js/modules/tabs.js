@@ -1,5 +1,7 @@
 import Elem from './elem.js';
 
+const HEADING_SELECTOR = '.tab-capsule__heading, .tab-scroll__heading, .tab-card__heading, .tab-classic__heading';
+
 /**
  * @summary Tabbed content manager with URL hash sync and external triggers.
  */
@@ -9,19 +11,20 @@ class Tabs {
   #tabHeads;
   #activeTabHead = null;
   #clickHandlers = new Map();
+  #hashTargetElement = null;
+  #storageKey;
 
   /**
    * Prints available configuration and API methods to the console.
    */
   static help () {
-    const availableConfigs = new Map([
+    const availableAttributes = new Map([
       ['.tab-classic__heading (or tab-card/tab-scroll/tab-capsule)', 'Main wrapper element containing tab headings.'],
       ['*[data-tab-id]', 'Matching ID for each tab heading and its content panel.'],
       ['id="tab-ID"', 'Content panel ID. Must match the `data-tab-id` above.'],
       ['.is-active', 'Marks which tab is active on initial page load.'],
-      ['*[data-tab-edit-url-hash]', 'Updates the browser URL hash when a tab is selected.'],
-      ['*[data-tab-external-target-id]', 'Activates a tab from outside the tab group.'],
-      ['*[data-tab-scroll-to-target]', 'Scrolls to the target when the external button is clicked.']
+      ['*[data-tab-hash]', 'Updates the browser URL hash when a tab is selected.'],
+      ['*[data-tab-target]', 'Activates a tab from outside the tab group and scrolls to it.']
     ]);
     const availableMethods = new Map([
       ['Tabs.listen()', 'Finds and initializes all tab groups on the page.'],
@@ -31,7 +34,7 @@ class Tabs {
     ]);
     console.info('%cTabs', 'font-size: 20px; font-weight: bold; color: red');
     console.info('%cHTML Attributes:', 'font-size: 14px; font-weight: bold; color: blue');
-    availableConfigs.forEach((value, key) => {
+    availableAttributes.forEach((value, key) => {
       console.info(`%c${key}: %c${value}`, 'font-weight: bold; color: red', 'font-weight: normal; color: unset');
     });
     console.info('%cAPI:', 'font-size: 14px; font-weight: bold; color: blue');
@@ -39,7 +42,7 @@ class Tabs {
       console.info(`%c${key}: %c${value}`, 'font-weight: bold; color: red', 'font-weight: normal; color: unset');
     });
   }
-  
+
   /**
    * Returns the Tabs instance for the given element.
    * @param {Element} element - A tab heading or container element.
@@ -54,27 +57,22 @@ class Tabs {
    * Also listens for external control links and in-page hash links.
    */
   static listen () {
-    const tabContainers = document.querySelectorAll('.tab-capsule__heading, .tab-scroll__heading, .tab-card__heading, .tab-classic__heading');
-    tabContainers.forEach(container => new this(container));
+    document.querySelectorAll(HEADING_SELECTOR).forEach(container => new this(container));
 
-    const externalButtons = document.querySelectorAll('*[data-tab-external-target-id]');
-    externalButtons.forEach(button => {
+    document.querySelectorAll('*[data-tab-target]').forEach(button => {
       button.addEventListener('click', () => {
-        const targetId = button.getAttribute('data-tab-external-target-id');
+        const targetId = button.getAttribute('data-tab-target');
         const targetTabHead = document.querySelector(`*[data-tab-id="${targetId}"]`);
-        
-        // Use the reference directly on the tab heading element.
+
         const tabsInstance = targetTabHead?.__tabs;
         if (tabsInstance) {
           tabsInstance.activateTab(targetTabHead);
-          if (button.hasAttribute('data-tab-scroll-to-target')) {
-            const targetPanel = document.getElementById(targetId);
-            globalThis.setTimeout(() => {
-              if(targetPanel) {
-                Elem.scrollToView(targetPanel);
-              }
-            }, 50);
-          }
+          const targetPanel = document.getElementById(targetId);
+          globalThis.setTimeout(() => {
+            if (targetPanel) {
+              Elem.scrollToView(targetPanel);
+            }
+          }, 50);
         }
       });
     });
@@ -84,19 +82,46 @@ class Tabs {
       const link = event.target.closest('a');
       if (!link || !link.hash) return;
 
-      const targetId = `tab-${link.hash.substring(1)}`;
-      const targetTabHead = document.querySelector(`*[data-tab-id="${targetId}"]`);
-      
-      if (targetTabHead) {
-        // Use the reference directly on the tab heading element.
-        const tabsInstance = targetTabHead?.__tabs;
+      const hashValue = link.hash.substring(1);
+
+      // 1. Hash, bir tab'ın data-tab-hash değeriyle eşleşiyor mu?
+      const matchedHead = document.querySelector(`*[data-tab-hash="${hashValue}"]`);
+      if (matchedHead) {
+        const tabsInstance = matchedHead.__tabs;
         if (tabsInstance) {
           event.preventDefault();
-          tabsInstance.activateTab(targetTabHead);
-          const targetPanel = document.getElementById(targetId);
+          tabsInstance.activateTab(matchedHead);
+          const targetPanel = document.getElementById(matchedHead.getAttribute('data-tab-id'));
           globalThis.setTimeout(() => {
-            targetPanel?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            if (targetPanel) {
+              Elem.scrollToView(targetPanel);
+            }
           }, 50);
+        }
+
+        return;
+      }
+
+      // 2. Hash bir element ID'si mi ve bu element bir tab panelinin içinde mi?
+      const targetElement = document.getElementById(hashValue);
+      if (targetElement) {
+        for (const container of document.querySelectorAll(HEADING_SELECTOR)) {
+          const tabsInstance = container.__tabs;
+          if (!tabsInstance) continue;
+
+          for (const head of container.querySelectorAll('*[data-tab-id]')) {
+            const panel = document.getElementById(head.getAttribute('data-tab-id'));
+            if (panel && panel.contains(targetElement)) {
+              event.preventDefault();
+              tabsInstance.activateTab(head);
+              globalThis.setTimeout(() => {
+                targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                Elem.flash(targetElement);
+              }, 50);
+
+              return;
+            }
+          }
         }
       }
     });
@@ -107,6 +132,10 @@ class Tabs {
 
     this.#tabContainer = tabContainer;
     this.#tabHeads = this.#tabContainer.querySelectorAll('*[data-tab-id]');
+
+    const allContainers = document.querySelectorAll(HEADING_SELECTOR);
+    const groupIndex = [...allContainers].indexOf(this.#tabContainer);
+    this.#storageKey = `sdrzm-tab:${globalThis.location.pathname}:${groupIndex}`;
 
     // Store reference on both the container and each tab heading.
     this.#tabContainer.__tabs = this;
@@ -144,10 +173,12 @@ class Tabs {
     if (newTabPanel) newTabPanel.classList.add('is-active');
 
     this.#activeTabHead = targetTabHead;
+    globalThis.sessionStorage.setItem(this.#storageKey, targetTabHead.getAttribute('data-tab-id'));
 
-    if (targetTabHead.hasAttribute('data-tab-edit-url-hash')) {
-      const hash = targetTabHead.getAttribute('data-tab-id').replace('tab-', '');
-      globalThis.history.pushState(null, null, `#${hash}`);
+    const hash = targetTabHead.getAttribute('data-tab-hash');
+    if (hash) {
+      const url = globalThis.location.pathname + globalThis.location.search + `#${hash}`;
+      globalThis.history.replaceState(null, null, url);
     }
   };
 
@@ -167,7 +198,7 @@ class Tabs {
     this.#clickHandlers.clear();
     this.#tabContainer.removeEventListener('keydown', this.#handleKeydown);
     this.#tabContainer.removeAttribute('role');
-    if (this.#tabContainer) this.#tabContainer.__tabs = null;
+    this.#tabContainer.__tabs = null;
   };
 
   // --- Private Helper Methods ---
@@ -205,6 +236,13 @@ class Tabs {
 
     const initialTab = this.#determineInitialTab();
     this.activateTab(initialTab);
+
+    if (this.#hashTargetElement) {
+      globalThis.setTimeout(() => {
+        this.#hashTargetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        Elem.flash(this.#hashTargetElement);
+      }, 50);
+    }
   };
 
   #bindEvents = () => {
@@ -249,17 +287,39 @@ class Tabs {
 
   #determineInitialTab = () => {
     if (globalThis.location.hash) {
-      const tabIdFromHash = `tab-${globalThis.location.hash.substring(1)}`;
-      const tabFromHash = this.#tabContainer.querySelector(`*[data-tab-id="${tabIdFromHash}"]`);
-      if (tabFromHash) return tabFromHash;
+      const hashValue = globalThis.location.hash.substring(1);
+
+      // 1. Hash, bir tab'ın data-tab-hash değeriyle eşleşiyor mu?
+      for (const head of this.#tabHeads) {
+        if (head.getAttribute('data-tab-hash') === hashValue) return head;
+      }
+
+      // 2. Hash bir element ID'si mi ve bu element bir tab panelinin içinde mi?
+      const targetElement = document.getElementById(hashValue);
+      if (targetElement) {
+        for (const head of this.#tabHeads) {
+          const panel = document.getElementById(head.getAttribute('data-tab-id'));
+          if (panel && panel.contains(targetElement)) {
+            this.#hashTargetElement = targetElement;
+
+            return head;
+          }
+        }
+      }
+    }
+
+    // 3. sessionStorage'da kayıtlı tab var mı?
+    const storedTabId = globalThis.sessionStorage.getItem(this.#storageKey);
+    if (storedTabId) {
+      const storedTab = this.#tabContainer.querySelector(`*[data-tab-id="${storedTabId}"]`);
+      if (storedTab) return storedTab;
     }
 
     const activeTabFromAttr = this.#tabContainer.querySelector('.is-active');
     if (activeTabFromAttr) return activeTabFromAttr;
-    
+
     return this.#tabHeads[0];
   };
 }
 
 export default Tabs;
-
