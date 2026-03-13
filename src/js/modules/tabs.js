@@ -23,7 +23,7 @@ class Tabs {
       ['*[data-tab-id]', 'Matching ID for each tab heading and its content panel.'],
       ['id="tab-ID"', 'Content panel ID. Must match the `data-tab-id` above.'],
       ['.is-default', 'Marks which tab opens by default (fallback when no hash or session).'],
-      ['*[data-tab-hash]', 'Updates the browser URL hash when a tab is selected.'],
+      ['*[data-tab-hash]', 'Custom hash value. Sets URL to #value on select, restores tab on page load.'],
       ['*[data-tab-target]', 'Activates a tab from outside the tab group and scrolls to it.']
     ]);
     const availableMethods = new Map([

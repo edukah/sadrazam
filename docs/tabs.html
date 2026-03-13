@@ -129,7 +129,7 @@
                     </tr>
                     <tr>
                         <td><span class="code">data-tab-hash</span></td>
-                        <td>When present, selecting the tab updates the browser URL hash.</td>
+                        <td>Custom hash value. Selecting the tab sets the URL to <span class="code">#value</span>. On page load, a matching hash restores that tab.</td>
                     </tr>
                     <tr>
                         <td><span class="code">data-tab-target</span></td>
@@ -470,13 +470,13 @@
 
             <div class="tab-scroll__container">
                 <div class="tab-scroll__heading">
-                    <div class="tab-scroll__head" data-tab-id="tab-hash-general" data-tab-hash>
+                    <div class="tab-scroll__head" data-tab-id="tab-hash-general" data-tab-hash="general">
                         <i class="ph-bold ph-house"></i>&nbsp; General
                     </div>
-                    <div class="tab-scroll__head" data-tab-id="tab-hash-security" data-tab-hash>
+                    <div class="tab-scroll__head" data-tab-id="tab-hash-security" data-tab-hash="security">
                         <i class="ph-bold ph-lock"></i>&nbsp; Security
                     </div>
-                    <div class="tab-scroll__head" data-tab-id="tab-hash-notifications" data-tab-hash>
+                    <div class="tab-scroll__head" data-tab-id="tab-hash-notifications" data-tab-hash="notifications">
                         <i class="ph-bold ph-bell"></i>&nbsp; Notifications
                     </div>
                 </div>
@@ -484,10 +484,11 @@
                     <div class="tab-scroll__panel" id="tab-hash-general">
                         <div class="demo-panel-content">
                             <strong>General</strong> settings. Click each tab and watch the URL hash change
-                            in your browser address bar. The format is
-                            <span class="code">#hash-general</span>,
-                            <span class="code">#hash-security</span>, etc.
-                            (the <span class="code">tab-</span> prefix is stripped from the hash).
+                            in your browser address bar. The value comes from the
+                            <span class="code">data-tab-hash</span> attribute:
+                            <span class="code">#general</span>,
+                            <span class="code">#security</span>,
+                            <span class="code">#notifications</span>.
                         </div>
                     </div>
                     <div class="tab-scroll__panel" id="tab-hash-security">
@@ -500,8 +501,8 @@
                     <div class="tab-scroll__panel" id="tab-hash-notifications">
                         <div class="demo-panel-content">
                             <strong>Notifications</strong> settings. The hash update uses
-                            <span class="code">history.pushState()</span> so it does not trigger a
-                            page reload.
+                            <span class="code">history.replaceState()</span> so it does not pollute
+                            browser history or trigger a page reload.
                         </div>
                     </div>
                 </div>
