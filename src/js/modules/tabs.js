@@ -22,7 +22,7 @@ class Tabs {
       ['.tab-classic__heading (or tab-card/tab-scroll/tab-capsule)', 'Main wrapper element containing tab headings.'],
       ['*[data-tab-id]', 'Matching ID for each tab heading and its content panel.'],
       ['id="tab-ID"', 'Content panel ID. Must match the `data-tab-id` above.'],
-      ['.is-active', 'Marks which tab is active on initial page load.'],
+      ['.is-default', 'Marks which tab opens by default (fallback when no hash or session).'],
       ['*[data-tab-hash]', 'Updates the browser URL hash when a tab is selected.'],
       ['*[data-tab-target]', 'Activates a tab from outside the tab group and scrolls to it.']
     ]);
@@ -176,9 +176,11 @@ class Tabs {
     globalThis.sessionStorage.setItem(this.#storageKey, targetTabHead.getAttribute('data-tab-id'));
 
     const hash = targetTabHead.getAttribute('data-tab-hash');
-    if (hash) {
+    if (hash && targetTabHead !== this.#tabHeads[0]) {
       const url = globalThis.location.pathname + globalThis.location.search + `#${hash}`;
       globalThis.history.replaceState(null, null, url);
+    } else if (globalThis.location.hash) {
+      globalThis.history.replaceState(null, null, globalThis.location.pathname + globalThis.location.search);
     }
   };
 
@@ -227,15 +229,12 @@ class Tabs {
   #initialize = () => {
     this.#tabHeads.forEach(head => {
       const panel = document.getElementById(head.getAttribute('data-tab-id'));
-      if (panel) {
-        panel.classList.remove('is-active');
-      } else {
+      if (!panel) {
         console.warn(`Tab content not found: #${head.getAttribute('data-tab-id')}`);
       }
     });
 
-    const initialTab = this.#determineInitialTab();
-    this.activateTab(initialTab);
+    this.activateTab(this.#determineInitialTab());
 
     if (this.#hashTargetElement) {
       globalThis.setTimeout(() => {
@@ -315,8 +314,9 @@ class Tabs {
       if (storedTab) return storedTab;
     }
 
-    const activeTabFromAttr = this.#tabContainer.querySelector('.is-active');
-    if (activeTabFromAttr) return activeTabFromAttr;
+    // 4. is-default işaretli tab var mı?
+    const defaultTab = this.#tabContainer.querySelector('.is-default');
+    if (defaultTab) return defaultTab;
 
     return this.#tabHeads[0];
   };

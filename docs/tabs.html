@@ -124,8 +124,8 @@
                         <td>The content panel ID. Must match the <span class="code">data-tab-id</span> value on the head.</td>
                     </tr>
                     <tr>
-                        <td><span class="code">.is-active</span> (class)</td>
-                        <td>Marks which tab is active on initial page load.</td>
+                        <td><span class="code">.is-default</span> (class)</td>
+                        <td>Marks which tab opens by default. Fallback when no hash or session is found. If omitted, the first tab is used.</td>
                     </tr>
                     <tr>
                         <td><span class="code">data-tab-hash</span></td>
@@ -153,7 +153,7 @@
 
             <div class="tab-classic__container">
                 <div class="tab-classic__heading">
-                    <div class="tab-classic__head is-active" data-tab-id="tab-v1-overview">
+                    <div class="tab-classic__head" data-tab-id="tab-v1-overview">
                         <i class="ph-bold ph-info"></i>&nbsp; Overview
                     </div>
                     <div class="tab-classic__head" data-tab-id="tab-v1-features">
@@ -203,7 +203,7 @@
 
             <div class="tab-card__container">
                 <div class="tab-card__heading">
-                    <div class="tab-card__head is-active" data-tab-id="tab-v2-dashboard">
+                    <div class="tab-card__head" data-tab-id="tab-v2-dashboard">
                         <i class="ph-bold ph-chart-line-up"></i>&nbsp; Dashboard
                     </div>
                     <div class="tab-card__head" data-tab-id="tab-v2-analytics">
@@ -264,7 +264,7 @@
 
             <div class="tab-scroll__container">
                 <div class="tab-scroll__heading">
-                    <div class="tab-scroll__head is-active" data-tab-id="tab-v3-products">
+                    <div class="tab-scroll__head" data-tab-id="tab-v3-products">
                         <i class="ph-bold ph-package"></i>&nbsp; Products
                     </div>
                     <div class="tab-scroll__head" data-tab-id="tab-v3-orders">
@@ -333,7 +333,7 @@
 
             <div class="tab-capsule__container">
                 <div class="tab-capsule__heading">
-                    <div class="tab-capsule__head is-active" data-tab-id="tab-v4-monthly">
+                    <div class="tab-capsule__head" data-tab-id="tab-v4-monthly">
                         <i class="ph-bold ph-calendar"></i>&nbsp; Monthly
                     </div>
                     <div class="tab-capsule__head" data-tab-id="tab-v4-yearly">
@@ -383,7 +383,7 @@
 
             <div class="tab-capsule__container">
                 <div class="tab-capsule__heading">
-                    <div class="tab-capsule__head is-active" data-tab-id="tab-v4n-all">
+                    <div class="tab-capsule__head" data-tab-id="tab-v4n-all">
                         All Items
                     </div>
                     <div class="tab-capsule__head" data-tab-id="tab-v4n-active">
@@ -416,12 +416,14 @@
             </div>
         </div>
 
-        <!-- ==================== IS-ACTIVE: DEFAULT ACTIVE TAB ==================== -->
+
+        <!-- ==================== IS-DEFAULT: DEFAULT TAB ==================== -->
         <div class="section">
-            <h2 class="section-title">Default Active Tab</h2>
+            <h2 class="section-title">Default Tab Override</h2>
             <p class="section-desc">
-                The <span class="code">.is-active</span> class controls which tab is shown on page load.
-                Here the second tab is set as default.
+                By default, the first tab is active. Add <span class="code">.is-default</span> to a tab head
+                to override this. Unlike <span class="code">.is-active</span>, this class has no CSS styling
+                and causes no visual flash on page load.
             </p>
 
             <div class="tab-card__container">
@@ -429,7 +431,7 @@
                     <div class="tab-card__head" data-tab-id="tab-da-first">
                         First Tab
                     </div>
-                    <div class="tab-card__head is-active" data-tab-id="tab-da-second">
+                    <div class="tab-card__head is-default" data-tab-id="tab-da-second">
                         Second Tab (default)
                     </div>
                     <div class="tab-card__head" data-tab-id="tab-da-third">
@@ -439,13 +441,13 @@
                 <div class="tab-card__body">
                     <div class="tab-card__panel" id="tab-da-first">
                         <div class="demo-panel-content">
-                            This is the <strong>first</strong> tab. It was not set as the default.
+                            This is the <strong>first</strong> tab. It is not the default.
                         </div>
                     </div>
                     <div class="tab-card__panel" id="tab-da-second">
                         <div class="demo-panel-content">
                             This is the <strong>second</strong> tab. It opens by default because
-                            <span class="code">.is-active</span> class is placed on its head element.
+                            the <span class="code">.is-default</span> class is on its head element.
                         </div>
                     </div>
                     <div class="tab-card__panel" id="tab-da-third">
@@ -468,7 +470,7 @@
 
             <div class="tab-scroll__container">
                 <div class="tab-scroll__heading">
-                    <div class="tab-scroll__head is-active" data-tab-id="tab-hash-general" data-tab-hash>
+                    <div class="tab-scroll__head" data-tab-id="tab-hash-general" data-tab-hash>
                         <i class="ph-bold ph-house"></i>&nbsp; General
                     </div>
                     <div class="tab-scroll__head" data-tab-id="tab-hash-security" data-tab-hash>
@@ -529,7 +531,7 @@
 
             <div class="tab-capsule__container">
                 <div class="tab-capsule__heading">
-                    <div class="tab-capsule__head is-active" data-tab-id="tab-ext-red">
+                    <div class="tab-capsule__head" data-tab-id="tab-ext-red">
                         Red
                     </div>
                     <div class="tab-capsule__head" data-tab-id="tab-ext-green">
@@ -576,7 +578,7 @@
 
             <div class="tab-capsule__container">
                 <div class="tab-capsule__heading">
-                    <div class="tab-capsule__head is-active" data-tab-id="tab-v4i-profile">
+                    <div class="tab-capsule__head" data-tab-id="tab-v4i-profile">
                         <i class="ph-bold ph-user"></i>&nbsp; Profile
                     </div>
                     <div class="tab-capsule__head" data-tab-id="tab-v4i-billing">
