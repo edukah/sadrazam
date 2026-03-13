@@ -19,7 +19,7 @@ class Tooltip {
    * Prints available configuration and API methods to the console.
    */
   static help () {
-    const availableConfigs = new Map([
+    const availableAttributes = new Map([
       ['*[data-toggle="tooltip"]', 'The element that triggers the tooltip.'],
       ['title', 'Text shown in the tooltip. Read from this attribute.'],
       ['data-placement', 'Tooltip position (`top`, `right`, `bottom`, `left`). Default: `top`.']
@@ -32,7 +32,7 @@ class Tooltip {
     ]);
     console.info('%cTooltip', 'font-size: 20px; font-weight: bold; color: red');
     console.info('%cHTML Attributes:', 'font-size: 14px; font-weight: bold; color: blue');
-    availableConfigs.forEach((value, key) => {
+    availableAttributes.forEach((value, key) => {
       console.info(`%c${key}: %c${value}`, 'font-weight: bold; color: red', 'font-weight: normal; color: unset');
     });
     console.info('%cAPI:', 'font-size: 14px; font-weight: bold; color: blue');

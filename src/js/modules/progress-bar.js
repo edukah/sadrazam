@@ -12,13 +12,13 @@ class ProgressBar {
    * Prints available methods and descriptions to the console.
    */
   static help () {
-    const availableConfigs = new Map([
+    const availableMethods = new Map([
       ['start()', 'Shows the bar and starts trickle progress. Supports multiple calls (reference counting).'],
       ['done()', 'Withdraws a reference. On the last reference, completes to 100% and hides.'],
       ['set(n)', 'Sets progress manually. Takes a 0–1 value (e.g. 0.5 = 50%).']
     ]);
     console.info('%cProgressBar', 'font-size: 20px; font-weight: bold; color: red');
-    availableConfigs.forEach((value, key) => {
+    availableMethods.forEach((value, key) => {
       console.info(`%c${key}: %c${value}`, 'font-weight: bold; color: red', 'font-weight: normal; color: unset');
     });
   }

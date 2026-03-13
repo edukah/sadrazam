@@ -10,12 +10,12 @@ class Backdrop {
    * Prints available methods and descriptions to the console.
    */
   static help () {
-    const availableConfigs = new Map([
+    const availableMethods = new Map([
       ['insert(options?)', 'Shows or updates the backdrop. Returns an `ownerId`.'],
       ['remove(ownerId?)', 'Withdraws a backdrop request. If no `ownerId` given, removes the most recent one.']
     ]);
     console.info('%cBackdrop', 'font-size: 20px; font-weight: bold; color: red');
-    availableConfigs.forEach((value, key) => {
+    availableMethods.forEach((value, key) => {
       console.info(`%c${key}: %c${value}`, 'font-weight: bold; color: red', 'font-weight: normal; color: unset');
     });
   }

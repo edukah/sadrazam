@@ -10,12 +10,12 @@ class Spinner {
    * Prints available methods and descriptions to the console.
    */
   static help () {
-    const availableConfigs = new Map([
+    const availableMethods = new Map([
       ['show({ type })', 'Shows the spinner. `type` can be \'main\' or \'helper\'. Default: `main`.'],
       ['hide()', 'Withdraws a spinner reference. Hides the spinner when reference count reaches 0.']
     ]);
     console.info('%cSpinner', 'font-size: 20px; font-weight: bold; color: red');
-    availableConfigs.forEach((value, key) => {
+    availableMethods.forEach((value, key) => {
       console.info(`%c${key}: %c${value}`, 'font-weight: bold; color: red', 'font-weight: normal; color: unset');
     });
   }
