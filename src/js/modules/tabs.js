@@ -191,10 +191,19 @@ class Tabs {
     this.#tabHeads.forEach(head => {
       const handler = this.#clickHandlers.get(head);
       if (handler) head.removeEventListener('click', handler);
+      head.classList.remove('is-active');
       head.removeAttribute('role');
       head.removeAttribute('aria-selected');
       head.removeAttribute('aria-controls');
       head.removeAttribute('tabindex');
+
+      const panel = document.getElementById(head.getAttribute('data-tab-id'));
+      if (panel) {
+        panel.classList.remove('is-active');
+        panel.removeAttribute('role');
+        panel.removeAttribute('aria-labelledby');
+      }
+
       head.__tabs = null;
     });
     this.#clickHandlers.clear();
