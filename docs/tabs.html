@@ -128,16 +128,12 @@
                         <td>Marks which tab is active on initial page load.</td>
                     </tr>
                     <tr>
-                        <td><span class="code">data-tab-edit-url-hash</span></td>
+                        <td><span class="code">data-tab-hash</span></td>
                         <td>When present, selecting the tab updates the browser URL hash.</td>
                     </tr>
                     <tr>
-                        <td><span class="code">data-tab-external-target-id</span></td>
-                        <td>Allows an element outside the tab group to activate a specific tab.</td>
-                    </tr>
-                    <tr>
-                        <td><span class="code">data-tab-scroll-to-target</span></td>
-                        <td>Combined with external target, scrolls the panel into view on click.</td>
+                        <td><span class="code">data-tab-target</span></td>
+                        <td>Activates a tab from outside the tab group and scrolls to it.</td>
                     </tr>
                 </tbody>
             </table>
@@ -465,20 +461,20 @@
         <div class="section">
             <h2 class="section-title">URL Hash Integration</h2>
             <p class="section-desc">
-                Add <span class="code">data-tab-edit-url-hash</span> to each tab head. When selected,
+                Add <span class="code">data-tab-hash</span> to each tab head. When selected,
                 the browser URL updates to <span class="code">#tab-name</span>. Refreshing the page
                 restores the active tab from the hash.
             </p>
 
             <div class="tab-scroll__container">
                 <div class="tab-scroll__heading">
-                    <div class="tab-scroll__head is-active" data-tab-id="tab-hash-general" data-tab-edit-url-hash>
+                    <div class="tab-scroll__head is-active" data-tab-id="tab-hash-general" data-tab-hash>
                         <i class="ph-bold ph-house"></i>&nbsp; General
                     </div>
-                    <div class="tab-scroll__head" data-tab-id="tab-hash-security" data-tab-edit-url-hash>
+                    <div class="tab-scroll__head" data-tab-id="tab-hash-security" data-tab-hash>
                         <i class="ph-bold ph-lock"></i>&nbsp; Security
                     </div>
-                    <div class="tab-scroll__head" data-tab-id="tab-hash-notifications" data-tab-edit-url-hash>
+                    <div class="tab-scroll__head" data-tab-id="tab-hash-notifications" data-tab-hash>
                         <i class="ph-bold ph-bell"></i>&nbsp; Notifications
                     </div>
                 </div>
@@ -515,19 +511,18 @@
             <h2 class="section-title">External Trigger</h2>
             <p class="section-desc">
                 Buttons outside the tab group can activate a specific tab using
-                <span class="code">data-tab-external-target-id</span>. Add
-                <span class="code">data-tab-scroll-to-target</span> to also scroll the panel into view.
+                <span class="code">data-tab-target</span>. The panel is automatically scrolled into view.
             </p>
 
             <div class="row" style="margin-bottom: 1.2rem;">
                 <span class="label">Trigger Buttons</span>
-                <button class="bttn bttn--sm-rectangle bttn--pri" data-tab-external-target-id="tab-ext-red" data-tab-scroll-to-target>
+                <button class="bttn bttn--sm-rectangle bttn--pri" data-tab-target="tab-ext-red">
                     <i class="ph-bold ph-paint-bucket"></i>&nbsp; Show Red
                 </button>
-                <button class="bttn bttn--sm-rectangle bttn--sec" data-tab-external-target-id="tab-ext-green" data-tab-scroll-to-target>
+                <button class="bttn bttn--sm-rectangle bttn--sec" data-tab-target="tab-ext-green">
                     <i class="ph-bold ph-leaf"></i>&nbsp; Show Green
                 </button>
-                <button class="bttn bttn--sm-rectangle bttn--neutral" data-tab-external-target-id="tab-ext-blue" data-tab-scroll-to-target>
+                <button class="bttn bttn--sm-rectangle bttn--neutral" data-tab-target="tab-ext-blue">
                     <i class="ph-bold ph-drop"></i>&nbsp; Show Blue
                 </button>
             </div>
@@ -549,14 +544,14 @@
                         <div class="demo-panel-content" style="color: #d63031;">
                             <strong>Red</strong> panel activated. This can be triggered by clicking the
                             tab head above or the external "Show Red" button. The external button uses
-                            <span class="code">data-tab-external-target-id="tab-ext-red"</span>.
+                            <span class="code">data-tab-target="tab-ext-red"</span>.
                         </div>
                     </div>
                     <div class="tab-capsule__panel" id="tab-ext-green">
                         <div class="demo-panel-content" style="color: #00b894;">
                             <strong>Green</strong> panel activated. The
-                            <span class="code">data-tab-scroll-to-target</span> attribute on the
-                            external button also scrolls this panel into view via
+                            <span class="code">data-tab-target</span> attribute on the
+                            external button activates this tab and scrolls it into view via
                             <span class="code">Elem.scrollToView()</span>.
                         </div>
                     </div>
