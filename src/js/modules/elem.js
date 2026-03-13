@@ -9,14 +9,15 @@ class Elem {
    * Prints available methods and descriptions to the console.
    */
   static help () {
-    const availableConfigs = new Map([
+    const availableMethods = new Map([
       ['getStyle(el, styleProp)', 'Gets the computed style value of an element.'],
       ['onElementHeightChange(element, callback)', 'Runs a callback when an element is resized. Returns a ResizeObserver instance.'],
       ['getScrollbarWidth()', 'Calculates the browser scrollbar width (cached).'],
+      ['flash(element)', 'Briefly flashes the element with a background highlight (.is-flashing + sdrzm-flash animation).'],
       ['scrollToView(targetElement, options?)', 'Smoothly scrolls the page to the specified element.']
     ]);
     console.info('%cElem', 'font-size: 20px; font-weight: bold; color: red');
-    availableConfigs.forEach((value, key) => {
+    availableMethods.forEach((value, key) => {
       console.info(`%c${key}: %c${value}`, 'font-weight: bold; color: red', 'font-weight: normal; color: unset');
     });
   }
@@ -81,6 +82,19 @@ class Elem {
    * @param {object} [options={}] - Optional settings.
    * @param {number} [options.margin=10] - Margin above the target in pixels.
    */
+  /**
+   * Briefly flashes the element with a background highlight to draw attention.
+   * @param {HTMLElement} element - The element to flash.
+   */
+  static flash (element) {
+    if (!element) return;
+
+    element.classList.add('is-flashing');
+    element.addEventListener('animationend', () => {
+      element.classList.remove('is-flashing');
+    }, { once: true });
+  }
+
   static scrollToView (targetElement, { margin = 10 } = {}) {
     if (!targetElement) return;
 
