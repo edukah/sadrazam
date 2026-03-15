@@ -29,7 +29,7 @@ class Tabs {
     const availableMethods = new Map([
       ['Tabs.listen()', 'Finds and initializes all tab groups on the page.'],
       ['Tabs.getInstance(element)', 'Returns the Tabs instance for the element.'],
-      ['instance.activateTab(tabHead)', 'Activates the specified tab.'],
+      ['instance.activateTab(tabHead, { updateHash })', 'Activates the specified tab. updateHash (default: true) controls URL hash sync.'],
       ['instance.destroy()', 'Destroys and cleans up the Tabs instance.']
     ]);
     const availableBehaviors = new Map([
@@ -38,7 +38,8 @@ class Tabs {
       ['Element-in-panel', 'URL hash matching an element ID inside a panel activates that tab, scrolls and flashes it.'],
       ['In-page hash links', 'Clicking <a href="#hash"> activates the matching tab (by data-tab-hash or element-in-panel).'],
       ['Keyboard (WAI-ARIA)', 'Arrow keys cycle tabs. Home/End jump to first/last. Focus follows selection.'],
-      ['Hash clearing', 'Selecting the first tab clears the URL hash. Non-first tabs with data-tab-hash set it.']
+      ['Hash clearing', 'Selecting the first tab clears the URL hash. Non-first tabs with data-tab-hash set it.'],
+      ['Hash preservation', 'Initial tab activation (page load) preserves the original URL hash. Only user actions update it.']
     ]);
     console.info('%cTabs', 'font-size: 20px; font-weight: bold; color: red');
     console.info('%cHTML Attributes:', 'font-size: 14px; font-weight: bold; color: blue');
@@ -167,7 +168,7 @@ class Tabs {
    * Updates the URL hash if configured.
    * @param {Element} targetTabHead - The tab heading element to activate.
    */
-  activateTab = (targetTabHead) => {
+  activateTab = (targetTabHead, { updateHash = true } = {}) => {
     if (!targetTabHead || targetTabHead === this.#activeTabHead) return;
 
     if (this.#activeTabHead) {
@@ -187,12 +188,14 @@ class Tabs {
     this.#activeTabHead = targetTabHead;
     globalThis.sessionStorage.setItem(this.#storageKey, targetTabHead.getAttribute('data-tab-id'));
 
-    const hash = targetTabHead.getAttribute('data-tab-hash');
-    if (hash && targetTabHead !== this.#tabHeads[0]) {
-      const url = globalThis.location.pathname + globalThis.location.search + `#${hash}`;
-      globalThis.history.replaceState(null, null, url);
-    } else if (globalThis.location.hash) {
-      globalThis.history.replaceState(null, null, globalThis.location.pathname + globalThis.location.search);
+    if (updateHash) {
+      const hash = targetTabHead.getAttribute('data-tab-hash');
+      if (hash && targetTabHead !== this.#tabHeads[0]) {
+        const url = globalThis.location.pathname + globalThis.location.search + `#${hash}`;
+        globalThis.history.replaceState(null, null, url);
+      } else if (globalThis.location.hash) {
+        globalThis.history.replaceState(null, null, globalThis.location.pathname + globalThis.location.search);
+      }
     }
   };
 
@@ -255,7 +258,7 @@ class Tabs {
       }
     });
 
-    this.activateTab(this.#determineInitialTab());
+    this.activateTab(this.#determineInitialTab(), { updateHash: false });
 
     if (this.#hashTargetElement) {
       globalThis.setTimeout(() => {
