@@ -26,8 +26,7 @@
 // === Flexbox ===
 // Alignment
 .flex-vcenter { align-items: center; }
-.flex-hcenter { justify-content: center; }
-.flex-center { align-items: center; justify-content: center; }
+.flex-center  { align-items: center; justify-content: center; }
 
 // Direction
 .flex-row { flex-direction: row; }
@@ -37,10 +36,11 @@
 .flex-wrap { flex-wrap: wrap; }
 .flex-nowrap { flex-wrap: nowrap; }
 
-// Justify
-.flex-between { justify-content: space-between; }
-.flex-start { justify-content: flex-start; }
-.flex-end { justify-content: flex-end; }
+// Justify Content
+.flex-jc-between { justify-content: space-between; }
+.flex-jc-center  { justify-content: center; }
+.flex-jc-start   { justify-content: flex-start; }
+.flex-jc-end     { justify-content: flex-end; }
 
 // Align
 .flex-stretch { align-items: stretch; }
