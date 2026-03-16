@@ -135,6 +135,10 @@
                         <td><span class="code">data-tab-target</span></td>
                         <td>Activates a tab from outside the tab group and scrolls to it.</td>
                     </tr>
+                    <tr>
+                        <td><span class="code">data-tab-persist</span></td>
+                        <td>On heading container. Enables sessionStorage persistence. Without it, the active tab is not remembered across page loads.</td>
+                    </tr>
                 </tbody>
             </table>
 
@@ -145,7 +149,7 @@
             <ol style="font-size: 0.85rem; margin-top: 0.4rem; padding-left: 1.5rem; line-height: 1.8;">
                 <li><strong>URL hash &rarr; <span class="code">data-tab-hash</span></strong> &mdash; Hash matches a tab's <span class="code">data-tab-hash</span> value.</li>
                 <li><strong>URL hash &rarr; element-in-panel</strong> &mdash; Hash matches an element <span class="code">id</span> inside a tab panel. That tab activates and the element is scrolled into view with a flash effect.</li>
-                <li><strong>sessionStorage</strong> &mdash; Previously selected tab restored from <span class="code">sdrzm-tab:{pathname}:{groupIndex}</span>.</li>
+                <li><strong>sessionStorage</strong> (only if <span class="code">data-tab-persist</span>) &mdash; Previously selected tab restored from <span class="code">sdrzm-tab:{pathname}:{groupIndex}</span>.</li>
                 <li><strong><span class="code">.is-default</span></strong> &mdash; Tab head with the <span class="code">.is-default</span> class.</li>
                 <li><strong>First tab</strong> &mdash; Falls back to the first tab head.</li>
             </ol>
@@ -688,13 +692,15 @@
         <div class="section">
             <h2 class="section-title">Session Persistence</h2>
             <p class="section-desc">
-                The active tab is automatically saved to <span class="code">sessionStorage</span> on every tab change.
+                Session persistence is <strong>opt-in</strong>. Add <span class="code">data-tab-persist</span> to the heading container
+                to enable it. When enabled, the active tab is saved to <span class="code">sessionStorage</span> on every tab change.
                 When the page reloads, the previously active tab is restored &mdash; unless a URL hash takes higher priority.
                 The storage key format is <span class="code">sdrzm-tab:{pathname}:{groupIndex}</span>,
                 so each tab group on each page has its own independent memory.
             </p>
             <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 0.5rem;">
-                This is automatic and requires no configuration. Session data persists until the browser tab is closed.
+                Without <span class="code">data-tab-persist</span>, the tab group always starts from the hash, <span class="code">.is-default</span>, or the first tab.
+                Session data persists until the browser tab is closed.
             </p>
         </div>
 

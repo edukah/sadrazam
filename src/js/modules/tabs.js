@@ -12,6 +12,7 @@ class Tabs {
   #activeTabHead = null;
   #clickHandlers = new Map();
   #hashTargetElement = null;
+  #persist;
   #storageKey;
 
   /**
@@ -24,7 +25,8 @@ class Tabs {
       ['id="tab-ID"', 'Content panel ID. Must match the `data-tab-id` above.'],
       ['.is-default', 'Marks which tab opens by default (fallback when no hash or session).'],
       ['*[data-tab-hash]', 'Custom hash value. Sets URL to #value on select, restores tab on page load.'],
-      ['*[data-tab-target]', 'Activates a tab from outside the tab group and scrolls to it.']
+      ['*[data-tab-target]', 'Activates a tab from outside the tab group and scrolls to it.'],
+      ['data-tab-persist', 'On heading container. Enables sessionStorage persistence. Without it, session is not used.']
     ]);
     const availableMethods = new Map([
       ['Tabs.listen()', 'Finds and initializes all tab groups on the page.'],
@@ -33,8 +35,8 @@ class Tabs {
       ['instance.destroy()', 'Destroys and cleans up the Tabs instance.']
     ]);
     const availableBehaviors = new Map([
-      ['Tab priority', 'URL hash (data-tab-hash) → element-in-panel → sessionStorage → .is-default → first tab.'],
-      ['Session persistence', 'Active tab saved to sessionStorage per page. Key: sdrzm-tab:{pathname}:{groupIndex}.'],
+      ['Tab priority', 'URL hash (data-tab-hash) → element-in-panel → sessionStorage (if data-tab-persist) → .is-default → first tab.'],
+      ['Session persistence', 'Opt-in via data-tab-persist on heading container. Active tab saved to sessionStorage. Key: sdrzm-tab:{pathname}:{groupIndex}.'],
       ['Element-in-panel', 'URL hash matching an element ID inside a panel activates that tab, scrolls and flashes it.'],
       ['In-page hash links', 'Clicking <a href="#hash"> activates the matching tab (by data-tab-hash or element-in-panel).'],
       ['Keyboard (WAI-ARIA)', 'Arrow keys cycle tabs. Home/End jump to first/last. Focus follows selection.'],
@@ -145,6 +147,7 @@ class Tabs {
 
     this.#tabContainer = tabContainer;
     this.#tabHeads = this.#tabContainer.querySelectorAll('*[data-tab-id]');
+    this.#persist = this.#tabContainer.hasAttribute('data-tab-persist');
 
     const allContainers = document.querySelectorAll(HEADING_SELECTOR);
     const groupIndex = [...allContainers].indexOf(this.#tabContainer);
@@ -186,7 +189,10 @@ class Tabs {
     if (newTabPanel) newTabPanel.classList.add('is-active');
 
     this.#activeTabHead = targetTabHead;
-    globalThis.sessionStorage.setItem(this.#storageKey, targetTabHead.getAttribute('data-tab-id'));
+
+    if (this.#persist) {
+      globalThis.sessionStorage.setItem(this.#storageKey, targetTabHead.getAttribute('data-tab-id'));
+    }
 
     if (updateHash) {
       const hash = targetTabHead.getAttribute('data-tab-hash');
@@ -331,11 +337,13 @@ class Tabs {
       }
     }
 
-    // 3. sessionStorage'da kayıtlı tab var mı?
-    const storedTabId = globalThis.sessionStorage.getItem(this.#storageKey);
-    if (storedTabId) {
-      const storedTab = this.#tabContainer.querySelector(`*[data-tab-id="${storedTabId}"]`);
-      if (storedTab) return storedTab;
+    // 3. sessionStorage'da kayıtlı tab var mı? (sadece data-tab-persist varsa)
+    if (this.#persist) {
+      const storedTabId = globalThis.sessionStorage.getItem(this.#storageKey);
+      if (storedTabId) {
+        const storedTab = this.#tabContainer.querySelector(`*[data-tab-id="${storedTabId}"]`);
+        if (storedTab) return storedTab;
+      }
     }
 
     // 4. is-default işaretli tab var mı?
