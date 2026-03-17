@@ -30,7 +30,7 @@
   }
 }
 
-@media (width >= #{variables.$breakpoint-sm}) {
+@media (min-width: variables.$breakpoint-sm) {
   @for $i from 1 through 12 {
     .col-sm-#{$i} {
       grid-column: span #{$i} / span #{$i};
@@ -38,7 +38,7 @@
   }
 }
 
-@media (width >= #{variables.$breakpoint-md}) {
+@media (min-width: variables.$breakpoint-md) {
   @for $i from 1 through 12 {
     .col-md-#{$i} {
       grid-column: span #{$i} / span #{$i};
@@ -46,7 +46,7 @@
   }
 }
 
-@media (width >= #{variables.$breakpoint-lg}) {
+@media (min-width: variables.$breakpoint-lg) {
   @for $i from 1 through 12 {
     .col-lg-#{$i} {
       grid-column: span #{$i} / span #{$i};
@@ -54,7 +54,7 @@
   }
 }
 
-@media (width >= #{variables.$breakpoint-xl}) {
+@media (min-width: variables.$breakpoint-xl) {
   @for $i from 1 through 12 {
     .col-xl-#{$i} {
       grid-column: span #{$i} / span #{$i};
@@ -62,7 +62,7 @@
   }
 }
 
-@media (width >= #{variables.$breakpoint-xxl}) {
+@media (min-width: variables.$breakpoint-xxl) {
   @for $i from 1 through 12 {
     .col-xxl-#{$i} {
       grid-column: span #{$i} / span #{$i};
@@ -70,7 +70,7 @@
   }
 }
 
-@media (width >= #{variables.$breakpoint-xxxl}) {
+@media (min-width: variables.$breakpoint-xxxl) {
   @for $i from 1 through 12 {
     .col-xxxl-#{$i} {
       grid-column: span #{$i} / span #{$i};
@@ -78,7 +78,7 @@
   }
 }
 
-@media (width >= #{variables.$breakpoint-4k}) {
+@media (min-width: variables.$breakpoint-4k) {
   @for $i from 1 through 12 {
     .col-4k-#{$i} {
       grid-column: span #{$i} / span #{$i};

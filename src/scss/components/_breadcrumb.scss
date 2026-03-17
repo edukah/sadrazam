@@ -24,7 +24,7 @@
   white-space: nowrap;
   overflow: auto;
 
-  @media (width >= #{variables.$breakpoint-md}) {
+  @media only screen and (min-width: variables.$breakpoint-md) {
     white-space: initial;
     overflow: initial;
   }

@@ -28,14 +28,14 @@ $breakpoints: (
 
   // Kullanım: .d-none--md-up -> md (768px) ve üzeri ekranlarda gizlenir.
   .d-none--#{$name}-up {
-    @media (width >= #{$width}) {
+    @media (min-width: $width) {
       display: none !important;
     }
   }
 
   // Kullanım: .d-none--md-down -> md (768px) ve altındaki ekranlarda gizlenir.
   .d-none--#{$name}-down {
-    @media (width <= #{$width - 1px}) {
+    @media (max-width: ($width - 1px)) {
       display: none !important;
     }
   }
@@ -47,7 +47,7 @@ $breakpoints: (
   .d-show--#{$name}-up {
     display: none !important;
 
-    @media (width >= #{$width}) {
+    @media (min-width: $width) {
       display: initial !important;
     }
   }
@@ -56,7 +56,7 @@ $breakpoints: (
   .d-show--#{$name}-down {
     display: none !important;
 
-    @media (width <= #{$width - 1px}) {
+    @media (max-width: ($width - 1px)) {
       display: initial !important;
     }
   }
