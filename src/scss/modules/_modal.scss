@@ -61,7 +61,7 @@
     &--top {
       align-items: start;
 
-      @media (min-width: $breakpoint-md) {
+      @media (width >= #{$breakpoint-md}) {
         padding-top: clamp(1rem, 6vh, 5rem);
       }
     }
@@ -69,7 +69,7 @@
     &--bottom {
       align-items: end;
 
-      @media (min-width: $breakpoint-md) {
+      @media (width >= #{$breakpoint-md}) {
         padding-bottom: clamp(1rem, 6vh, 5rem);
       }
     }
@@ -122,7 +122,7 @@
 
     grid-column: 1 / -1;
 
-    @media (min-width: $breakpoint-md) {
+    @media (width >= #{$breakpoint-md}) {
       &.modal__dialog--sm {
         max-width: 470px;
       }
