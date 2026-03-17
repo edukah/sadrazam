@@ -188,3 +188,7 @@ $color-link-blue-light: rgba(130, 130, 255, 1);
 .tc-text-light-4 {
   color: var(--color-text-light-4);
 }
+
+/* ---- Inherit / Current ---- */
+.tc-inherit { color: inherit; }
+.tc-current { color: currentColor; }
