@@ -62,6 +62,7 @@ sadrazam/
   - `is-loading` (generic loading utility)
   - Static variants stay as BEM modifiers: `tooltip--top`, `bttn--loading` (has spinner)
 - **Media queries inside selectors**: `@media` sorguları (hover, breakpoint vb.) ilgili selector'ın **içine** yazılır, dışına değil. Bu, her class'ın responsive/interaction davranışını kendi tanımında tutar. Bkz. `docs/wiki/hover-media-query.md`
+- **Media query range syntax**: `min-width`/`max-width` yerine range syntax kullanılır: `@media (width >= #{variables.$breakpoint-md})`, `@media (width < #{variables.$breakpoint-sm})`. `-1` hack'i yapılmaz.
 - **`is-open`**: autocomplete dropdown visibility
 - Component SCSS files prefixed with `_` (partials)
 - JS modules export classes with static `help()` method for console docs
