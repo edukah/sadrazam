@@ -97,17 +97,13 @@
       position: absolute;
       top: 0;
       right: 0;
-      transform: translate(50%, -50%);
       margin: 0;
       padding: var(--space-2);
-      border-radius: 50%;
-      background-color: var(--color-grey-zero);
-      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
-      transition: background-color 0.15s;
+      transition: transform 0.15s;
 
       @media (hover: hover) and (pointer: fine) {
         &:hover {
-          background-color: var(--color-grey-100);
+          transform: rotate(90deg);
         }
       }
     }
@@ -178,7 +174,7 @@
       flex-direction: column;
       gap: var(--space-8);
 
-      > form {
+      >form {
         display: contents;
       }
 
