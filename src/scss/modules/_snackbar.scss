@@ -203,6 +203,10 @@
 
   button,
   .snackbar__static-close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
     margin: 0;
     padding: var(--space-2);
     font-size: var(--fsi-20);
@@ -212,7 +216,8 @@
     color: var(--color-text-dark-1);
     text-shadow: 0 1px 0 var(--color-grey-650--f);
     opacity: 0.3;
-    transition: transform 0.15s, opacity 0.15s;
+    transition: transform 0.15s;
+    transform-origin: center center;
 
     appearance: none;
 
