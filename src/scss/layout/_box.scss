@@ -133,12 +133,6 @@ main.content-wrapper {
   }
 }
 
-.content-wrapper::after,
-.content-container::after {
-  content: "";
-  display: table;
-  clear: both;
-}
 
 aside[id*="column-left"] {
   width: 100%;
