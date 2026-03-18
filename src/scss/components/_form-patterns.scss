@@ -5,6 +5,8 @@
      .input--error                  → Hata durumunda input border
      .form-field__password-toggle     → Şifre göster/gizle butonu
      .form-field--top-label / --checkbox → Label + input kombo stilleri
+     .form-input--minimal               → Placeholder-only modern input (doğrudan input'a)
+     .form-layout--stack / --row        → Genel form yerleşim yardımcıları
      .danger-text             → Hata / doğrulama mesajı metni
      .helper-text             → Form alanı altı açıklama metni
      .form__divider                  → Form bölümleri arası çizgi + başlık
@@ -115,6 +117,76 @@
 
     &:focus {
       border-color: var(--color-pri-500);
+    }
+  }
+}
+
+/* ---- Form Layout ---- */
+/* Genel form yerleşim yardımcıları — her form pattern'ıyla kullanılabilir */
+.form-layout--stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.form-layout--row {
+  display: flex;
+  gap: var(--space-5);
+}
+
+/* ---- Form Input Minimal ---- */
+/* Label yok, sadece placeholder. Modern SaaS form tarzı. */
+/* Kullanım: <input class="form-input--minimal" placeholder="..." /> */
+/* Password: <div class="form-input--minimal-password"><input class="form-input--minimal" /><button>eye</button></div> */
+input.form-input--minimal,
+textarea.form-input--minimal {
+  width: 100%;
+  height: 48px;
+  padding: 0 var(--space-7);
+  font-size: var(--fsi-15);
+  font-family: inherit;
+  color: var(--color-text-dark-1);
+  background: var(--color-grey-100);
+  border: 1.5px solid transparent;
+  border-radius: var(--radius-md);
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s, background-color 0.15s;
+
+  &::placeholder {
+    color: var(--color-text-dark-4);
+  }
+
+  &:focus {
+    border-color: var(--color-pri-300);
+    box-shadow: 0 0 0 3px var(--color-pri-100);
+    background: var(--color-grey-zero);
+  }
+}
+
+.form-input--minimal-password {
+  position: relative;
+
+  input {
+    padding-right: var(--space-13);
+  }
+
+  button {
+    position: absolute;
+    right: var(--space-5);
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--color-text-dark-3);
+    font-size: var(--fsi-19);
+    padding: 0;
+    display: flex;
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        color: var(--color-text-dark-1);
+      }
     }
   }
 }
