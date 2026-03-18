@@ -93,19 +93,26 @@
 
     appearance: none;
 
+    @keyframes modal-close-shake {
+      0%, 100% { transform: translateX(0); }
+      20% { transform: translateX(-3px); }
+      40% { transform: translateX(3px); }
+      60% { transform: translateX(-2px); }
+      80% { transform: translateX(1px); }
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        animation: modal-close-shake 0.4s ease;
+      }
+    }
+
     &--absolute {
       position: absolute;
       top: 0;
       right: 0;
       margin: 0;
       padding: var(--space-2);
-      transition: transform 0.15s;
-
-      @media (hover: hover) and (pointer: fine) {
-        &:hover {
-          transform: rotate(90deg);
-        }
-      }
     }
 
     &:active,
@@ -117,7 +124,7 @@
     &:hover {
       @media (hover: hover) and (pointer: fine) {
         outline: none;
-        color: var(--color-text-dark-2);
+        transform: rotate(90deg);
       }
     }
   }
