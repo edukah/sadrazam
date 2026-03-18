@@ -2,48 +2,49 @@
    Form Patterns — Tekrarlanan form kalıpları ve yardımcı bileşenler
 
    İçerik:
-     .input--error                  → Hata durumunda input border
-     .form-field__password-toggle     → Şifre göster/gizle butonu
+     .form-input--error                 → Hata durumunda input border
+     .form-field--password              → Şifre göster/gizle butonu (wrapper)
      .form-field--top-label / --checkbox → Label + input kombo stilleri
      .form-input--minimal               → Placeholder-only modern input (doğrudan input'a)
      .form-layout--stack / --row        → Genel form yerleşim yardımcıları
      .danger-text             → Hata / doğrulama mesajı metni
      .helper-text             → Form alanı altı açıklama metni
-     .form__divider                  → Form bölümleri arası çizgi + başlık
-     .form-standard-style           → Standart form yerleşim kuralları
+     .form-divider                   → Form bölümleri arası çizgi + başlık
+     .form-layout--standard          → Standart form yerleşim kuralları
    ========================================================================= */
 
 /* ---- Hata durumu ---- */
-.input--error {
+.form-input--error {
   border-color: var(--color-danger-500) !important;
 }
 
 /* ---- Şifre göster/gizle ---- */
-.form-field__password-toggle {
+.form-field--password {
   position: relative;
 
   input {
     width: 100%;
-    padding-right: 2.5rem;
+    padding-right: var(--space-13);
   }
 
   button {
-    padding: 0;
-    margin: 0;
-    border: none;
-    background: none;
-
-    font-size: var(--fsi-19);
-    color: var(--color-text-dark-2);
-
     position: absolute;
+    right: var(--space-5);
     top: 50%;
-    height: 100%;
-    right: 0;
-    padding: var(--space-0) var(--space-6);
     transform: translateY(-50%);
-
+    background: none;
+    border: none;
     cursor: pointer;
+    color: var(--color-text-dark-3);
+    font-size: var(--fsi-19);
+    padding: 0;
+    display: flex;
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        color: var(--color-text-dark-1);
+      }
+    }
   }
 }
 
@@ -137,7 +138,7 @@
 /* ---- Form Input Minimal ---- */
 /* Label yok, sadece placeholder. Modern SaaS form tarzı. */
 /* Kullanım: <input class="form-input--minimal" placeholder="..." /> */
-/* Password: <div class="form-input--minimal-password"><input class="form-input--minimal" /><button>eye</button></div> */
+/* Password: <div class="form-field--password"><input class="form-input--minimal" /><button>eye</button></div> */
 input.form-input--minimal,
 textarea.form-input--minimal {
   width: 100%;
@@ -160,34 +161,6 @@ textarea.form-input--minimal {
     border-color: var(--color-pri-300);
     box-shadow: 0 0 0 3px var(--color-pri-100);
     background: var(--color-grey-zero);
-  }
-}
-
-.form-input--minimal-password {
-  position: relative;
-
-  input {
-    padding-right: var(--space-13);
-  }
-
-  button {
-    position: absolute;
-    right: var(--space-5);
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: var(--color-text-dark-3);
-    font-size: var(--fsi-19);
-    padding: 0;
-    display: flex;
-
-    @media (hover: hover) and (pointer: fine) {
-      &:hover {
-        color: var(--color-text-dark-1);
-      }
-    }
   }
 }
 
@@ -237,7 +210,7 @@ textarea.form-input--minimal {
 
 /* ---- Form Divider ---- */
 /* Bölüm başlığı + sağa uzanan çizgi */
-.form__divider {
+.form-divider {
   display: flex;
   align-items: center;
   color: var(--color-text-dark-1);
@@ -265,7 +238,7 @@ textarea.form-input--minimal {
 
 /* ---- Form Standart Style ---- */
 /* Genel form yerleşim kuralları — label/fieldset arası boşluklar */
-.form-standard-style {
+.form-layout--standard {
 
   label,
   fieldset,
