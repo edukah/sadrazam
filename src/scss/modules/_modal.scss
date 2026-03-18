@@ -88,25 +88,18 @@
     align-self: flex-start;
     order: 999;
 
-    margin: 0 0 0 var(--space-11);
+    margin: 0;
     padding: 0;
 
     appearance: none;
 
     transition: transform 0.15s;
 
-    @media (hover: hover) and (pointer: fine) {
-      &:hover {
-        transform: rotate(90deg);
-      }
-    }
-
     &--absolute {
       position: absolute;
-      top: 0;
-      right: 0;
       margin: 0;
       padding: var(--space-2);
+      transform: rotate(0deg);
     }
 
     &:active,
