@@ -151,15 +151,10 @@
   &:active,
   &:focus {
     outline: 0;
-    border: none;
-    opacity: 0.5;
   }
 
   &:hover {
     @media (hover: hover) and (pointer: fine) {
-      outline: 0;
-      border: none;
-      opacity: 0.5;
       transform: translateY(-50%) rotate(90deg);
     }
   }

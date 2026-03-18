@@ -217,12 +217,11 @@
     appearance: none;
 
     &:focus {
-      opacity: 0.5;
+      outline: 0;
     }
 
     &:hover {
       @media (hover: hover) and (pointer: fine) {
-        opacity: 0.5;
         transform: rotate(90deg);
       }
     }
