@@ -77,8 +77,12 @@
 
   /* Modal Close Button */
   .modal__close-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     font-size: var(--fsi-27);
     font-weight: var(--fwe-regular);
+    line-height: 1;
     cursor: pointer;
     background: transparent;
     border: none;
@@ -95,6 +99,7 @@
 
     transition: transform 0.15s;
     transform: rotate(0deg);
+    transform-origin: center center;
 
     &--absolute {
       position: absolute;
