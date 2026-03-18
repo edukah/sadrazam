@@ -143,6 +143,7 @@
   text-shadow: 0 1px 0 var(--color-grey-650--f);
   opacity: 0.3;
   z-index: 1;
+  transition: transform 0.15s, opacity 0.15s;
 
   // flex
   order: 999;
@@ -159,6 +160,7 @@
       outline: 0;
       border: none;
       opacity: 0.5;
+      transform: translateY(-50%) rotate(90deg);
     }
   }
 }

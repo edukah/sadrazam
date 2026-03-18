@@ -212,22 +212,18 @@
     color: var(--color-text-dark-1);
     text-shadow: 0 1px 0 var(--color-grey-650--f);
     opacity: 0.3;
+    transition: transform 0.15s, opacity 0.15s;
 
     appearance: none;
 
     &:focus {
-      color: var(--color-text-dark-1);
-      text-decoration: none;
-      cursor: pointer;
       opacity: 0.5;
     }
 
     &:hover {
       @media (hover: hover) and (pointer: fine) {
-        color: var(--color-text-dark-1);
-        text-decoration: none;
-        cursor: pointer;
         opacity: 0.5;
+        transform: rotate(90deg);
       }
     }
   }

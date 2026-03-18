@@ -94,12 +94,14 @@
     appearance: none;
 
     transition: transform 0.15s;
+    transform: rotate(0deg);
 
     &--absolute {
       position: absolute;
+      top: var(--space-3);
+      right: var(--space-3);
       margin: 0;
       padding: var(--space-2);
-      transform: rotate(0deg);
     }
 
     &:active,
