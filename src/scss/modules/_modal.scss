@@ -178,15 +178,7 @@
       }
 
       &--has-close-button {
-        // Header varsa sağ tarafı koru
-        .modal__header {
-          padding-right: var(--space-13);
-        }
-
-        // Header yoksa ilk child'ın sağ üstünü koru
-        > :first-child:not(.modal__close-button):not(.modal__header) {
-          padding-right: var(--space-13);
-        }
+        padding-right: var(--space-16);
       }
 
       .modal__header {
