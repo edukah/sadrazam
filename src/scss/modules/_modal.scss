@@ -164,8 +164,8 @@
 
       padding: var(--space-11);
 
-      // Header'da sadece close button varsa (başlık yok) → minimal padding
-      &:has(.modal__header:not(:has(:not(.modal__close-button)))) {
+      // Header'da tek child varsa (sadece close button) → minimal padding
+      &:has(.modal__header > :only-child) {
         padding-top: var(--space-3);
       }
 
