@@ -153,6 +153,8 @@
     }
 
     .modal__content {
+      --gap-space: var(--space-8);
+
       position: relative;
       background-color: var(--color-grey-zero);
       border-radius: var(--radius-md);
@@ -162,13 +164,14 @@
 
       padding: var(--space-11);
 
-      &:has(.modal__header) {
-        padding-top: var(--space-5);
+      // Header'da sadece close button varsa (başlık yok) → minimal padding
+      &:has(.modal__header:not(:has(:not(.modal__close-button)))) {
+        padding-top: var(--space-3);
       }
 
       display: flex;
       flex-direction: column;
-      gap: var(--space-8);
+      gap: var(--gap-space);
 
       >form {
         display: contents;
@@ -181,6 +184,7 @@
         z-index: 10;
         padding-top: var(--space-5);
         padding-bottom: var(--space-5);
+        margin-bottom: calc(var(--gap-space) * -1);
 
         display: flex;
         align-items: center;
