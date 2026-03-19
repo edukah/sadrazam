@@ -22,7 +22,7 @@ class Modal {
     position: 'center',
     className: '',
     time: false,
-    closeButton: false,
+    closeButton: true,
     closeOnOuterClick: false,
     closeOnClick: false,
     closeAfterFunction: null,
@@ -39,7 +39,7 @@ class Modal {
       ['position', 'Vertical position (`top`, `center`, `bottom`). Default: `center`.'],
       ['className', 'Optional CSS class added to the modal__dialog element. Default: empty.'],
       ['time', 'Auto-close delay in ms. `false` disables auto-close. Default: `false`.'],
-      ['closeButton', 'Auto-inserts an absolute close button (X) in modal__content. Default: `false`.'],
+      ['closeButton', 'Auto-inserts an absolute close button (X) in modal__content. Default: `true`.'],
       ['closeOnOuterClick', 'Closes on click outside the modal content or on the backdrop. Default: `false`.'],
       ['closeOnClick', 'Closes on any click, including inside the modal content. Default: `false`.'],
       ['closeAfterFunction', 'Callback fired after the modal closes. Optional.'],
@@ -244,12 +244,15 @@ class Modal {
         header.className = 'modal__header';
         this.#modalContentElement.prepend(header);
       }
-      const closeBtn = document.createElement('button');
-      closeBtn.type = 'button';
-      closeBtn.className = 'modal__close-button';
-      closeBtn.setAttribute('data-modal-close', 'true');
-      closeBtn.innerHTML = '<i class="ph-light ph-x"></i>';
-      header.appendChild(closeBtn);
+      // Don't add if header already has a close button (from template)
+      if (!header.querySelector('.modal__close-button')) {
+        const closeBtn = document.createElement('button');
+        closeBtn.type = 'button';
+        closeBtn.className = 'modal__close-button';
+        closeBtn.setAttribute('data-modal-close', 'true');
+        closeBtn.innerHTML = '<i class="ph-light ph-x"></i>';
+        header.appendChild(closeBtn);
+      }
     }
 
     // aria-labelledby: link to modal heading if present
