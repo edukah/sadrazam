@@ -244,7 +244,6 @@ class Modal {
       closeBtn.setAttribute('data-modal-close', 'true');
       closeBtn.innerHTML = '<i class="ph-light ph-x"></i>';
       this.#modalContentElement.prepend(closeBtn);
-      this.#modalContentElement.classList.add('modal__content--has-close-button');
     }
 
     // aria-labelledby: link to modal heading if present
