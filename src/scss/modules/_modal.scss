@@ -177,6 +177,10 @@
         display: contents;
       }
 
+      &--has-close-button .modal__header {
+        padding-right: var(--space-13);
+      }
+
       .modal__header {
         position: sticky;
         top: 0;
