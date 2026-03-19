@@ -202,7 +202,13 @@
           padding-bottom: var(--space-4);
         }
 
+        .modal__header-slot {
+          flex: 1;
+          min-width: 0;
+        }
+
         .modal__title,
+        .modal__header-slot .modal__title,
         h1 {
           font-size: var(--fsi-25);
           font-weight: var(--fwe-semibold);

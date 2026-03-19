@@ -248,6 +248,17 @@ class Modal {
         header.className = 'modal__header';
         this.#modalContentElement.prepend(header);
       }
+
+      // Mevcut header children'ı slot'a sar (flex layout: [slot, closeBtn])
+      if (header.children.length > 0) {
+        const slot = document.createElement('div');
+        slot.className = 'modal__header-slot';
+        while (header.firstChild) {
+          slot.appendChild(header.firstChild);
+        }
+        header.appendChild(slot);
+      }
+
       // Don't add if header already has a close button (from template)
       if (!header.querySelector('.modal__close-button')) {
         const closeBtn = document.createElement('button');
