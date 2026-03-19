@@ -236,14 +236,20 @@ class Modal {
       throw new Error('Modal: Element with `.modal__content` class not found.');
     }
 
-    // Auto-insert close button
+    // Auto-insert close button into header (create header if missing)
     if (this.#config.closeButton) {
+      let header = this.#modalContentElement.querySelector('.modal__header');
+      if (!header) {
+        header = document.createElement('div');
+        header.className = 'modal__header';
+        this.#modalContentElement.prepend(header);
+      }
       const closeBtn = document.createElement('button');
       closeBtn.type = 'button';
-      closeBtn.className = 'modal__close-button modal__close-button--absolute';
+      closeBtn.className = 'modal__close-button';
       closeBtn.setAttribute('data-modal-close', 'true');
       closeBtn.innerHTML = '<i class="ph-light ph-x"></i>';
-      this.#modalContentElement.prepend(closeBtn);
+      header.appendChild(closeBtn);
     }
 
     // aria-labelledby: link to modal heading if present

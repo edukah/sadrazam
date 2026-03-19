@@ -80,7 +80,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-size: var(--fsi-27);
+    font-size: var(--fsi-22);
     font-weight: var(--fwe-regular);
     line-height: 1;
     cursor: pointer;
@@ -103,8 +103,8 @@
 
     &--absolute {
       position: absolute;
-      top: var(--space-8);
-      right: var(--space-8);
+      top: var(--space-4);
+      right: var(--space-3);
       margin: 0;
       padding: var(--space-2);
     }
@@ -168,7 +168,7 @@
       outline: 0;
       text-align: left;
 
-      padding: var(--space-11);
+      padding: var(--space-16) var(--space-13) var(--space-13) var(--space-13);
       display: flex;
       flex-direction: column;
       gap: var(--space-8);
