@@ -166,12 +166,12 @@
 
       // Header varsa → daha az üst padding (header kendi padding'ini sağlıyor)
       &:has(.modal__header) {
-        padding-top: var(--space-5);
+        padding-top: var(--space-4);
       }
 
       // Header'da sadece close button varsa → minimal padding
       &:has(.modal__header > .modal__close-button:only-child) {
-        padding-top: var(--space-3);
+        padding-top: var(--space-2);
       }
 
       display: flex;
@@ -187,7 +187,7 @@
         top: 0;
         background-color: var(--color-grey-zero);
         z-index: 10;
-        padding-top: var(--space-5);
+        padding-top: var(--space-7);
         padding-bottom: var(--space-5);
         margin-bottom: calc(var(--gap-space) * -1);
 
@@ -195,6 +195,12 @@
         align-items: center;
         justify-content: space-between;
         min-height: 1.4rem;
+
+        // Sadece close button varsa (başlık yok) → daha kompakt header
+        &:has(> .modal__close-button:only-child) {
+          padding-top: var(--space-3);
+          padding-bottom: var(--space-3);
+        }
 
         .modal__title,
         h1 {
