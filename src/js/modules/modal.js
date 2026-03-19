@@ -39,7 +39,7 @@ class Modal {
       ['position', 'Vertical position (`top`, `center`, `bottom`). Default: `center`.'],
       ['className', 'Optional CSS class added to the modal__dialog element. Default: empty.'],
       ['time', 'Auto-close delay in ms. `false` disables auto-close. Default: `false`.'],
-      ['closeButton', 'Auto-inserts an absolute close button (X) in modal__content. Default: `true`.'],
+      ['closeButton', 'Auto-inserts a close button (X) in modal__header (creates header if missing). Sticky with header. Set `false` to opt-out. Default: `true`.'],
       ['closeOnOuterClick', 'Closes on click outside the modal content or on the backdrop. Default: `false`.'],
       ['closeOnClick', 'Closes on any click, including inside the modal content. Default: `false`.'],
       ['closeAfterFunction', 'Callback fired after the modal closes. Optional.'],
@@ -58,6 +58,10 @@ class Modal {
       'Content is auto-wrapped with .modal__dialog + .modal__content.',
       'Templates should NOT include modal__dialog or modal__content — only inner content.',
       'Use .modal__header, .modal__body, .modal__footer inside content for layout (optional).',
+      'Close button is auto-inserted in modal__header by default (closeButton: true).',
+      'Do NOT add manual close buttons in templates — the framework handles it.',
+      'If template already has .modal__header, close button is appended to it.',
+      'If no .modal__header exists, an empty one is created automatically.',
       'Scope classes/IDs go on .modal__body, not as a wrapper div (breaks flex layout).',
       'If content already contains .modal__dialog (legacy), it is used as-is (backward compat).'
     ];
