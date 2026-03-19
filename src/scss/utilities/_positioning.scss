@@ -31,6 +31,12 @@
 .z-toast { z-index: var(--z-layer-toast); }
 .z-ceiling { z-index: var(--z-layer-ceiling); }
 
+// === Vertical Align ===
+.va-top      { vertical-align: top; }
+.va-middle   { vertical-align: middle; }
+.va-bottom   { vertical-align: bottom; }
+.va-baseline { vertical-align: baseline; }
+
 // === Float ===
 .fl-l {
   float: left;
