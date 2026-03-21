@@ -156,61 +156,59 @@
                 <a href="index.html" class="nav-logo">Sadrazam</a>
                 <ul class="nav-links">
                     <li><a href="index.html">Home</a></li>
-                    <li>
-                        <a href="javascript:void(0)" onclick="openPopup(); return false;">Examples</a>
-                        <div class="navi-popup-overlay" id="examplesPopupOverlay" onclick="closePopup()">
-                            <div class="navi-popup" id="examplesPopup" onclick="event.stopPropagation()">
-                                <h3>Examples</h3>
-                                <div class="popup-category">
-                                    <div class="popup-category-title">Components</div>
-                                    <ul class="popup-grid">
-                                        <li><a href="buttons.html">Button</a></li>
-                                        <li><a href="forms.html">Form</a></li>
-                                        <li><a href="form-patterns.html">Form Patterns</a></li>
-                                        <li><a href="links.html">Link</a></li>
-                                        <li><a href="switches.html">Switch</a></li>
-                                    </ul>
-                                </div>
-                                <div class="popup-category">
-                                    <div class="popup-category-title">Modules</div>
-                                    <ul class="popup-grid">
-                                        <li><a href="autocomplete.html">Autocomplete</a></li>
-                                        <li><a href="backdrop.html">Backdrop</a></li>
-                                        <li><a href="hovermenu.html">Hovermenu</a></li>
-                                        <li><a href="infinite-scroll.html">Infinite Scroll</a></li>
-                                        <li><a href="snackbar.html">Snackbar</a></li>
-                                        <li><a href="modals.html">Modal</a></li>
-                                        <li><a href="popovers.html">Popover</a></li>
-                                        <li><a href="slide-menu.html">Slide Menu</a></li>
-                                        <li><a href="spinners.html">Spinner</a></li>
-                                        <li><a href="tabs.html">Tabs</a></li>
-                                        <li><a href="tooltips.html">Tooltip</a></li>
-                                    </ul>
-                                </div>
-                                <div class="popup-category">
-                                    <div class="popup-category-title">Helpers</div>
-                                    <ul class="popup-grid">
-                                        <li><a href="form-validation.html">Form Validation</a></li>
-                                        <li><a href="autosize-textarea.html">Autosize Textarea</a></li>
-                                        <li><a href="autosize-select.html">Autosize Select</a></li>
-                                    </ul>
-                                </div>
-                                <div class="popup-category">
-                                    <div class="popup-category-title">Services &amp; Layout</div>
-                                    <ul class="popup-grid">
-                                        <li><a href="ajax.html">Ajax</a></li>
-                                        <li><a href="grid.html">Grid</a></li>
-                                        <li><a href="spacing.html">Spacing</a></li>
-                                        <li><a href="colors.html">Colors</a></li>
-                                        <li><a href="typography.html">Typography</a></li>
-                                    </ul>
-                                </div>
-                                <button class="close-popup" onclick="closePopup()">&#10005;</button>
-                            </div>
-                        </div>
-                    </li>
+                    <li><a href="javascript:void(0)" onclick="openPopup(); return false;">Examples</a></li>
                     <li><a href="https://github.com/edukah/sadrazam" target="_blank">GitHub</a></li>
                 </ul>
+                <div class="navi-popup-overlay" id="examplesPopupOverlay" onclick="closePopup()">
+                    <div class="navi-popup" id="examplesPopup" onclick="event.stopPropagation()">
+                        <h3>Examples</h3>
+                        <div class="popup-category">
+                            <div class="popup-category-title">Components</div>
+                            <ul class="popup-grid">
+                                <li><a href="buttons.html">Button</a></li>
+                                <li><a href="forms.html">Form</a></li>
+                                <li><a href="form-patterns.html">Form Patterns</a></li>
+                                <li><a href="links.html">Link</a></li>
+                                <li><a href="switches.html">Switch</a></li>
+                            </ul>
+                        </div>
+                        <div class="popup-category">
+                            <div class="popup-category-title">Modules</div>
+                            <ul class="popup-grid">
+                                <li><a href="autocomplete.html">Autocomplete</a></li>
+                                <li><a href="backdrop.html">Backdrop</a></li>
+                                <li><a href="hovermenu.html">Hovermenu</a></li>
+                                <li><a href="infinite-scroll.html">Infinite Scroll</a></li>
+                                <li><a href="snackbar.html">Snackbar</a></li>
+                                <li><a href="modals.html">Modal</a></li>
+                                <li><a href="popovers.html">Popover</a></li>
+                                <li><a href="slide-menu.html">Slide Menu</a></li>
+                                <li><a href="spinners.html">Spinner</a></li>
+                                <li><a href="tabs.html">Tabs</a></li>
+                                <li><a href="tooltips.html">Tooltip</a></li>
+                            </ul>
+                        </div>
+                        <div class="popup-category">
+                            <div class="popup-category-title">Helpers</div>
+                            <ul class="popup-grid">
+                                <li><a href="form-validation.html">Form Validation</a></li>
+                                <li><a href="autosize-textarea.html">Autosize Textarea</a></li>
+                                <li><a href="autosize-select.html">Autosize Select</a></li>
+                            </ul>
+                        </div>
+                        <div class="popup-category">
+                            <div class="popup-category-title">Services &amp; Layout</div>
+                            <ul class="popup-grid">
+                                <li><a href="ajax.html">Ajax</a></li>
+                                <li><a href="grid.html">Grid</a></li>
+                                <li><a href="spacing.html">Spacing</a></li>
+                                <li><a href="colors.html">Colors</a></li>
+                                <li><a href="typography.html">Typography</a></li>
+                            </ul>
+                        </div>
+                        <button class="close-popup" onclick="closePopup()">&#10005;</button>
+                    </div>
+                </div>
                 <div class="dark-mode-button-container">
                     <div class="mode-toggle-switch" onclick="toggleMode()"></div>
                 </div>
@@ -246,13 +244,16 @@
                     <tr><td><span class="code">--space-6</span></td><td>0.75rem</td><td>12px</td><td><span class="space-bar" style="width:12px;"></span></td></tr>
                     <tr><td><span class="code">--space-7</span></td><td>0.875rem</td><td>14px</td><td><span class="space-bar" style="width:14px;"></span></td></tr>
                     <tr><td><span class="code">--space-8</span></td><td>1rem</td><td>16px</td><td><span class="space-bar" style="width:16px;"></span></td></tr>
-                    <tr><td><span class="code">--space-9</span></td><td>1.25rem</td><td>20px</td><td><span class="space-bar" style="width:20px;"></span></td></tr>
-                    <tr><td><span class="code">--space-10</span></td><td>1.5rem</td><td>24px</td><td><span class="space-bar" style="width:24px;"></span></td></tr>
-                    <tr><td><span class="code">--space-11</span></td><td>1.75rem</td><td>28px</td><td><span class="space-bar" style="width:28px;"></span></td></tr>
-                    <tr><td><span class="code">--space-12</span></td><td>2rem</td><td>32px</td><td><span class="space-bar" style="width:32px;"></span></td></tr>
-                    <tr><td><span class="code">--space-13</span></td><td>2.5rem</td><td>40px</td><td><span class="space-bar" style="width:40px;"></span></td></tr>
-                    <tr><td><span class="code">--space-14</span></td><td>3rem</td><td>48px</td><td><span class="space-bar" style="width:48px;"></span></td></tr>
-                    <tr><td><span class="code">--space-15</span></td><td>4rem</td><td>64px</td><td><span class="space-bar" style="width:64px;"></span></td></tr>
+                    <tr><td><span class="code">--space-9</span></td><td>1.125rem</td><td>18px</td><td><span class="space-bar" style="width:18px;"></span></td></tr>
+                    <tr><td><span class="code">--space-10</span></td><td>1.25rem</td><td>20px</td><td><span class="space-bar" style="width:20px;"></span></td></tr>
+                    <tr><td><span class="code">--space-11</span></td><td>1.5rem</td><td>24px</td><td><span class="space-bar" style="width:24px;"></span></td></tr>
+                    <tr><td><span class="code">--space-12</span></td><td>1.75rem</td><td>28px</td><td><span class="space-bar" style="width:28px;"></span></td></tr>
+                    <tr><td><span class="code">--space-13</span></td><td>2rem</td><td>32px</td><td><span class="space-bar" style="width:32px;"></span></td></tr>
+                    <tr><td><span class="code">--space-14</span></td><td>2.25rem</td><td>36px</td><td><span class="space-bar" style="width:36px;"></span></td></tr>
+                    <tr><td><span class="code">--space-15</span></td><td>2.5rem</td><td>40px</td><td><span class="space-bar" style="width:40px;"></span></td></tr>
+                    <tr><td><span class="code">--space-16</span></td><td>3rem</td><td>48px</td><td><span class="space-bar" style="width:48px;"></span></td></tr>
+                    <tr><td><span class="code">--space-17</span></td><td>3.5rem</td><td>56px</td><td><span class="space-bar" style="width:56px;"></span></td></tr>
+                    <tr><td><span class="code">--space-18</span></td><td>4rem</td><td>64px</td><td><span class="space-bar" style="width:64px;"></span></td></tr>
                 </tbody>
             </table>
         </div>
@@ -561,22 +562,24 @@
     </div>
 
     <nav class="bottom-tab">
-        <a href="index.html" class="bottom-tab__item">
-            <i class="ph-fill ph-house"></i>
-            <span>Home</span>
-        </a>
-        <button class="bottom-tab__item" onclick="openPopup()">
-            <i class="ph-fill ph-squares-four"></i>
-            <span>Examples</span>
-        </button>
-        <button class="bottom-tab__item" onclick="toggleMode()">
-            <i class="ph-fill ph-moon"></i>
-            <span>Theme</span>
-        </button>
-        <a href="https://github.com/edukah/sadrazam" target="_blank" class="bottom-tab__item">
-            <i class="ph-fill ph-github-logo"></i>
-            <span>GitHub</span>
-        </a>
+        <div class="bottom-tab__bar">
+            <a href="index.html" class="bottom-tab__item">
+                <i class="ph-fill ph-house"></i>
+                <span>Home</span>
+            </a>
+            <button class="bottom-tab__item" onclick="openPopup()">
+                <i class="ph-fill ph-squares-four"></i>
+                <span>Examples</span>
+            </button>
+            <button class="bottom-tab__item" onclick="toggleMode()">
+                <i class="ph-fill ph-moon"></i>
+                <span>Theme</span>
+            </button>
+            <a href="https://github.com/edukah/sadrazam" target="_blank" class="bottom-tab__item">
+                <i class="ph-fill ph-github-logo"></i>
+                <span>GitHub</span>
+            </a>
+        </div>
     </nav>
 </body>
 
