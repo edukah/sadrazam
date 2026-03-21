@@ -1,15 +1,18 @@
 import Snackbar from '../modules/snackbar.js';
 import Language from '../language/core/language.js';
+import Viewport from './viewport.js';
+import Elem from '../modules/elem.js';
 
 /**
- * @summary Static document helpers for navigation, clipboard, and unique ID generation.
+ * @summary Static document helpers for navigation, clipboard, unique ID generation, and layout adjustments.
  */
 class Document {
   static help () {
     const availableConfigs = new Map([
       ['redirect(url, time?)', 'Redirects to the specified URL with a delay, or refreshes the page.'],
       ['copyInputText(button)', 'Copies the target input text to clipboard when a button is clicked.'],
-      ['uniqueId()', 'Generates a cryptographically secure unique ID (UUID v4).']
+      ['uniqueId()', 'Generates a cryptographically secure unique ID (UUID v4).'],
+      ['fixedElementAdjust(selector, options?)', 'Adjusts footer padding-bottom to account for a fixed element. options.breakpoint: number or CSS var name (e.g. "--breakpoint-lg"). Without breakpoint, always applies.']
     ]);
     console.info('%cDocument', 'font-size: 20px; font-weight: bold; color: red');
     availableConfigs.forEach((value, key) => {
@@ -72,7 +75,52 @@ class Document {
   static uniqueId () {
     return globalThis.crypto.randomUUID();
   }
-  
+
+  /**
+   * Adjusts footer padding to prevent content from being hidden behind a fixed/sticky element.
+   * Measures the fixed element's height, adds it to footer's original padding-bottom, and applies the total.
+   * Stores original padding in a data attribute for restoration.
+   *
+   * If breakpoint is provided: only applies below that breakpoint, restores original padding above it.
+   * If breakpoint is omitted: always applies (for elements that are always fixed).
+   *
+   * @param {string} selector - CSS selector for the fixed element.
+   * @param {object} [options] - Options.
+   * @param {number|string} [options.breakpoint] - Pixel value or CSS variable name (e.g. '--breakpoint-lg'). Adjust only below this width; restore above.
+   */
+  static fixedElementAdjust (selector, options = {}) {
+    const fixedElement = globalThis.document.querySelector(selector);
+    const footer = globalThis.document.querySelector('footer');
+
+    if (!fixedElement || !footer) {
+      return;
+    }
+
+    let breakpoint = options.breakpoint ?? null;
+
+    if (typeof breakpoint === 'string') {
+      breakpoint = parseInt(globalThis.getComputedStyle(globalThis.document.body).getPropertyValue(breakpoint));
+    }
+
+    if (breakpoint && Viewport.getWidth() >= breakpoint) {
+      if (footer.hasAttribute('data-default-padding-bottom')) {
+        footer.style.paddingBottom = footer.getAttribute('data-default-padding-bottom');
+        footer.removeAttribute('data-default-padding-bottom');
+      }
+
+      return;
+    }
+
+    if (!footer.hasAttribute('data-default-padding-bottom')) {
+      footer.setAttribute('data-default-padding-bottom', Elem.getStyle(footer, 'padding-bottom'));
+    }
+
+    const fixedElementHeight = parseFloat(Elem.getStyle(fixedElement, 'height'));
+    const originalPadding = parseFloat(footer.getAttribute('data-default-padding-bottom'));
+
+    footer.style.paddingBottom = `${fixedElementHeight + originalPadding}px`;
+  }
+
 }
 
 /**
