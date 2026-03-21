@@ -10,15 +10,19 @@ function toggleMode () {
 }
 
 function openPopup () {
-  document.getElementById("examplesPopupOverlay").style.visibility = "visible";
-  document.getElementById("examplesPopupOverlay").style.opacity = "1";
-  document.getElementById("examplesPopup").style.top = "20%";
+  const overlay = document.getElementById("examplesPopupOverlay");
+  const popup = document.getElementById("examplesPopup");
+  overlay.style.visibility = "visible";
+  overlay.style.opacity = "1";
+  popup.classList.add("is-open");
 }
 
 function closePopup () {
-  document.getElementById("examplesPopupOverlay").style.opacity = "0";
-  document.getElementById("examplesPopupOverlay").style.visibility = "hidden";
-  document.getElementById("examplesPopup").style.top = "-100%";
+  const overlay = document.getElementById("examplesPopupOverlay");
+  const popup = document.getElementById("examplesPopup");
+  overlay.style.opacity = "0";
+  overlay.style.visibility = "hidden";
+  popup.classList.remove("is-open");
 }
 
 document.addEventListener('DOMContentLoaded', () => {
