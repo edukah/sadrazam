@@ -8,7 +8,7 @@ Sadrazam is a UI component library (JS + SCSS) built with webpack. It provides r
 sadrazam/
 ├── src/                    # Source code
 │   ├── js/                 # JavaScript modules
-│   │   ├── index.js        # Main entry – exports Sadrazam class
+│   │   ├── index.js        # Main entry – exports Sadrazam object
 │   │   ├── core/           # Event system, polyfills
 │   │   ├── modules/        # UI modules (modal, tabs, tooltip, etc.)
 │   │   ├── helpers/        # Utility helpers (form validation, autosize, etc.)
@@ -48,7 +48,7 @@ sadrazam/
 ## Architecture
 - **UMD library**: Exported as `sadrazam` (dev) / `Sadrazam` (prod) global
 - **SCSS**: Uses `@use` imports (modern Sass API), layered architecture (base → layout → components → modules → utilities)
-- **JS**: ES6+ modules, transpiled via Babel. Main class in `src/js/index.js` aggregates all sub-modules
+- **JS**: ES6+ modules, transpiled via Babel. Main entry in `src/js/index.js` aggregates all sub-modules
 - **Dev server**: Serves from `dev/` and `docs/`, assets available at `/_hot/`
 - **Docs**: Static HTML pages referencing `assets/sadrazam.min.*`, deployable to GitHub Pages
 
@@ -62,7 +62,7 @@ sadrazam/
   - `is-loading` (generic loading utility)
   - Static variants stay as BEM modifiers: `tooltip--top`, `bttn--loading` (has spinner)
 - **Media queries inside selectors**: `@media` sorguları (hover, breakpoint vb.) ilgili selector'ın **içine** yazılır, dışına değil. Bu, her class'ın responsive/interaction davranışını kendi tanımında tutar. Bkz. `docs/wiki/hover-media-query.md`
-- **`is-open`**: autocomplete dropdown visibility
+- **`is-open`**: autocomplete dropdown visibility, slide-menu open state
 - Component SCSS files prefixed with `_` (partials)
 - JS modules export classes with static `help()` method for console docs
 - Demo pages in `docs/` follow consistent structure: same head, inline CSS, section cards
@@ -70,31 +70,42 @@ sadrazam/
 
 ## Color System
 
-6 dosya, katmanlı import zinciri:
+8 dosya (`src/scss/theme/`), flat import yapısı:
 
 ```
-main.scss → _colors-theme → _colors-accent → _colors-main → _variables
-                                                               ├── @forward _colors-text
-                                                               ├── @forward _colors-grey
-                                                               └── @forward _colors-interaction
+main.scss ─┬── _colors-pri
+            ├── _colors-sec
+            ├── _colors-ter
+            ├── _colors-accent
+            ├── _colors-main ──── @use/_forward pri, sec, ter, accent
+            ├── _colors-text ──── @use colors-main
+            ├── _colors-grey ──── @use colors-main
+            └── _colors-interaction ── @use colors-main
+
+_variables ─┬── @forward colors-main
+             ├── @forward colors-text
+             ├── @forward colors-grey
+             └── @forward colors-interaction
 ```
 
 | Dosya | İçerik |
 |-------|--------|
-| `_colors-theme.scss` | `theme-1/2/3` — her biri 5 ton (100/300/500/700/900) |
+| `_colors-pri.scss` | Primary renk — 5 ton (100/300/500/700/900) |
+| `_colors-sec.scss` | Secondary renk — 5 ton (100/300/500/700/900) |
+| `_colors-ter.scss` | Tertiary renk — 5 ton (100/300/500/700/900) |
 | `_colors-accent.scss` | 12 dekoratif renk × 5 ton. Compat alias: `-light` → 300, `-dark` → 700 |
-| `_colors-main.scss` | Ortak: white, black, backdrop, action, logo |
+| `_colors-main.scss` | Ortak: white, black, backdrop, action, logo. @use/_forward pri, sec, ter, accent |
 | `_colors-text.scss` | Text (`1`–`4`) + link renkleri. Bağımlılık: `@use 'colors-main'` |
-| `_colors-grey.scss` | Grey scale (13-unit intervals, 20 steps + zero), bg-grey utilities. Bkz. `docs/wiki/grey-scale.md` |
-| `_colors-interaction.scss` | safe, notice, caution, warning, danger. Bağımlılık: `@use 'colors-theme'` |
+| `_colors-grey.scss` | Grey scale (13-unit intervals, 20 steps + zero; son iki adım 910/950 13-unit pattern'ı kırar). Bkz. `docs/wiki/grey-scale.md` |
+| `_colors-interaction.scss` | safe, notice, caution, warning, danger. Bağımlılık: `@use 'colors-main'` |
 
 **`--f` suffix convention:** Sabit (fixed) renkler `--color-*--f` suffix'i alır, dark mode'da değişmez.
 
 **Utility class pattern:**
-- Text: `.color-text-dark-1`, `.color-text-light-1--f`
-- Background: `.bg-grey-light-100`, `.bg-safe-500`
-- Interaction text: `.color-safe-500`, `.color-danger-500`
-- Link: `.link-blue-dark`
+- Text: `.tc-text-dark-1`, `.tc-text-light-1--f`
+- Background: `.tbc-grey-100`, `.tbc-safe-500`
+- Interaction text: `.tc-safe-500`, `.tc-danger-500`
+- Link: `.tc-link-blue-dark`
 
 **Eski isimler (kaldırıldı):** `--palette-*`, `--color-constant-*`, `color-text-dark-primary/secondary/hint/divider`, `color-text-link-*`
 
@@ -143,7 +154,7 @@ Tüm JS modülleri DOM element'lerine instance referansı atar ve `getInstance()
 İki bildirim modülü, yemek metaforu ile ayrışır:
 
 - **Snackbar** — Yatay, renkli, ister hemen ye ister kenara koy. Inline (statik, sayfa içi) + popup (fixed, auto-dismiss) kullanım. Singleton, DOM-based. API: `Sadrazam.Snackbar.insert(message, time?)`
-- **Toast** — Tost makinasından fırlar gibi: açılır, mesajı iletir, kapanır. Modal-based, timed, dismiss butonu var. API: `Sadrazam.Toast.insert({ message, time, size, position, fontSize, dismissButton })`
+- **Toast** — Tost makinasından fırlar gibi: açılır, mesajı iletir, kapanır. Modal-based, timed, dismiss butonu var. API: `Sadrazam.Toast.insert({ message, time, size, position, fontSize, dismissButton, closeOnClick })`
 
 ## destroy() Konvansiyonu
 
