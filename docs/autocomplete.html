@@ -295,7 +295,7 @@
             </div>
 
             <div class="snippet">
-                <span class="kw">new</span> sadrazam.<span class="fn">Autocomplete</span>({<br>
+                <span class="kw">new</span> Sadrazam.<span class="fn">Autocomplete</span>({<br>
                 &nbsp;&nbsp;<span class="prop">selector</span>: <span class="str">'#ac-countries'</span>,<br>
                 &nbsp;&nbsp;<span class="prop">source</span>: <span class="str">'/api/countries'</span><br>
                 });
@@ -315,7 +315,7 @@
             </div>
 
             <div class="snippet">
-                <span class="kw">new</span> sadrazam.<span class="fn">Autocomplete</span>({<br>
+                <span class="kw">new</span> Sadrazam.<span class="fn">Autocomplete</span>({<br>
                 &nbsp;&nbsp;<span class="prop">selector</span>: <span class="str">'#ac-fruits'</span>,<br>
                 &nbsp;&nbsp;<span class="prop">source</span>: <span class="str">'/api/fruits'</span>,<br>
                 &nbsp;&nbsp;<span class="prop">minChars</span>: <span class="num">2</span><br>
@@ -336,7 +336,7 @@
             </div>
 
             <div class="snippet">
-                <span class="kw">new</span> sadrazam.<span class="fn">Autocomplete</span>({<br>
+                <span class="kw">new</span> Sadrazam.<span class="fn">Autocomplete</span>({<br>
                 &nbsp;&nbsp;<span class="prop">selector</span>: <span class="str">'#ac-cities'</span>,<br>
                 &nbsp;&nbsp;<span class="prop">source</span>: <span class="str">'/api/cities'</span>,<br>
                 &nbsp;&nbsp;<span class="prop">cache</span>: <span class="num">true</span><br>
@@ -365,13 +365,13 @@
 
             <div class="snippet">
                 <span class="cmt">// Fast -- 100ms debounce</span><br>
-                <span class="kw">new</span> sadrazam.<span class="fn">Autocomplete</span>({<br>
+                <span class="kw">new</span> Sadrazam.<span class="fn">Autocomplete</span>({<br>
                 &nbsp;&nbsp;<span class="prop">selector</span>: <span class="str">'#ac-lang-fast'</span>,<br>
                 &nbsp;&nbsp;<span class="prop">source</span>: <span class="str">'/api/languages'</span>,<br>
                 &nbsp;&nbsp;<span class="prop">delay</span>: <span class="num">100</span><br>
                 });<br><br>
                 <span class="cmt">// Slow -- 600ms debounce</span><br>
-                <span class="kw">new</span> sadrazam.<span class="fn">Autocomplete</span>({<br>
+                <span class="kw">new</span> Sadrazam.<span class="fn">Autocomplete</span>({<br>
                 &nbsp;&nbsp;<span class="prop">selector</span>: <span class="str">'#ac-lang-slow'</span>,<br>
                 &nbsp;&nbsp;<span class="prop">source</span>: <span class="str">'/api/languages'</span>,<br>
                 &nbsp;&nbsp;<span class="prop">delay</span>: <span class="num">600</span><br>
@@ -396,7 +396,7 @@
             </div>
 
             <div class="snippet">
-                <span class="kw">new</span> sadrazam.<span class="fn">Autocomplete</span>({<br>
+                <span class="kw">new</span> Sadrazam.<span class="fn">Autocomplete</span>({<br>
                 &nbsp;&nbsp;<span class="prop">selector</span>: <span class="str">'#ac-callback'</span>,<br>
                 &nbsp;&nbsp;<span class="prop">source</span>: <span class="str">'/api/countries'</span>,<br>
                 &nbsp;&nbsp;<span class="prop">onSelect</span>: <span class="kw">function</span> (<span class="prop">event</span>, <span class="prop">value</span>, <span class="prop">item</span>) {<br>
@@ -421,7 +421,7 @@
             </div>
 
             <div class="snippet">
-                <span class="kw">new</span> sadrazam.<span class="fn">Autocomplete</span>({<br>
+                <span class="kw">new</span> Sadrazam.<span class="fn">Autocomplete</span>({<br>
                 &nbsp;&nbsp;<span class="prop">selector</span>: <span class="str">'#ac-menuclass'</span>,<br>
                 &nbsp;&nbsp;<span class="prop">source</span>: <span class="str">'/api/countries'</span>,<br>
                 &nbsp;&nbsp;<span class="prop">menuClass</span>: <span class="str">'my-custom-dropdown'</span><br>
@@ -443,7 +443,7 @@
 
             <div class="snippet">
                 <span class="kw">const</span> inputEl = document.<span class="fn">getElementById</span>(<span class="str">'ac-element-ref'</span>);<br><br>
-                <span class="kw">new</span> sadrazam.<span class="fn">Autocomplete</span>({<br>
+                <span class="kw">new</span> Sadrazam.<span class="fn">Autocomplete</span>({<br>
                 &nbsp;&nbsp;<span class="prop">selector</span>: inputEl,<br>
                 &nbsp;&nbsp;<span class="prop">source</span>: <span class="str">'/api/countries'</span>,<br>
                 &nbsp;&nbsp;<span class="prop">minChars</span>: <span class="num">1</span>,<br>
@@ -465,7 +465,7 @@
             </div>
 
             <div class="snippet">
-                <span class="kw">new</span> sadrazam.<span class="fn">Autocomplete</span>({<br>
+                <span class="kw">new</span> Sadrazam.<span class="fn">Autocomplete</span>({<br>
                 &nbsp;&nbsp;<span class="prop">selector</span>: <span class="str">'#ac-badge'</span>,<br>
                 &nbsp;&nbsp;<span class="prop">source</span>: <span class="str">'/api/countries'</span>,<br>
                 &nbsp;&nbsp;<span class="prop">badge</span>: <span class="str">'#{country_code}'</span>,<br>
@@ -520,7 +520,7 @@
             </div>
 
             <div class="snippet">
-                <span class="kw">const</span> ac = <span class="kw">new</span> sadrazam.<span class="fn">Autocomplete</span>({<br>
+                <span class="kw">const</span> ac = <span class="kw">new</span> Sadrazam.<span class="fn">Autocomplete</span>({<br>
                 &nbsp;&nbsp;<span class="prop">selector</span>: <span class="str">'#ac-destroy'</span>,<br>
                 &nbsp;&nbsp;<span class="prop">source</span>: <span class="str">'/api/countries'</span><br>
                 });<br><br>

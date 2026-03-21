@@ -179,9 +179,9 @@
 
             <div class="code-block">
                 <span class="cmt">// Show the backdrop</span><br>
-                <span class="kw">const</span> ownerId = sadrazam.<span class="fn">Backdrop.insert</span>();<br><br>
+                <span class="kw">const</span> ownerId = Sadrazam.<span class="fn">Backdrop.insert</span>();<br><br>
                 <span class="cmt">// Hide it by ownerId</span><br>
-                sadrazam.<span class="fn">Backdrop.remove</span>(ownerId);
+                Sadrazam.<span class="fn">Backdrop.remove</span>(ownerId);
             </div>
         </div>
 
@@ -203,9 +203,9 @@
 
             <div class="code-block">
                 <span class="kw">let</span> id;<br>
-                id = sadrazam.<span class="fn">Backdrop.insert</span>({<br>
+                id = Sadrazam.<span class="fn">Backdrop.insert</span>({<br>
                 &nbsp;&nbsp;<span class="str">onClick</span>: () => {<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;sadrazam.<span class="fn">Backdrop.remove</span>(id);<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;Sadrazam.<span class="fn">Backdrop.remove</span>(id);<br>
                 &nbsp;&nbsp;}<br>
                 });
             </div>
@@ -245,7 +245,7 @@
             </div>
 
             <div class="code-block">
-                sadrazam.<span class="fn">Backdrop.insert</span>({<br>
+                Sadrazam.<span class="fn">Backdrop.insert</span>({<br>
                 &nbsp;&nbsp;<span class="str">zIndexVar</span>: <span class="str">'--z-overlay-backdrop'</span>,<br>
                 &nbsp;&nbsp;<span class="str">stackLevel</span>: 2<br>
                 });
@@ -288,10 +288,10 @@
 
             <div class="code-block">
                 <span class="cmt">// Push multiple owners onto the stack</span><br>
-                <span class="kw">const</span> id1 = sadrazam.<span class="fn">Backdrop.insert</span>({ <span class="str">onClick</span>: () => Sadrazam.Backdrop.remove(id1) });<br>
-                <span class="kw">const</span> id2 = sadrazam.<span class="fn">Backdrop.insert</span>({ <span class="str">onClick</span>: () => Sadrazam.Backdrop.remove(id2) });<br><br>
+                <span class="kw">const</span> id1 = Sadrazam.<span class="fn">Backdrop.insert</span>({ <span class="str">onClick</span>: () => Sadrazam.Backdrop.remove(id1) });<br>
+                <span class="kw">const</span> id2 = Sadrazam.<span class="fn">Backdrop.insert</span>({ <span class="str">onClick</span>: () => Sadrazam.Backdrop.remove(id2) });<br><br>
                 <span class="cmt">// Remove without ownerId pops the topmost entry</span><br>
-                sadrazam.<span class="fn">Backdrop.remove</span>();
+                Sadrazam.<span class="fn">Backdrop.remove</span>();
             </div>
         </div>
 
@@ -316,12 +316,12 @@
 
             <div class="code-block">
                 <span class="cmt">// Will not duplicate if called twice</span><br>
-                sadrazam.<span class="fn">Backdrop.insert</span>({<br>
+                Sadrazam.<span class="fn">Backdrop.insert</span>({<br>
                 &nbsp;&nbsp;<span class="str">ownerId</span>: <span class="str">'my-sidebar'</span>,<br>
                 &nbsp;&nbsp;<span class="str">onClick</span>: () => Sadrazam.Backdrop.remove(<span class="str">'my-sidebar'</span>)<br>
                 });<br><br>
                 <span class="cmt">// Remove by the exact ownerId</span><br>
-                sadrazam.<span class="fn">Backdrop.remove</span>(<span class="str">'my-sidebar'</span>);
+                Sadrazam.<span class="fn">Backdrop.remove</span>(<span class="str">'my-sidebar'</span>);
             </div>
         </div>
 

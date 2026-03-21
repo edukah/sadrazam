@@ -268,7 +268,7 @@
                 <span class="code">trigger: 'click'</span>
             </div>
 
-            <div class="code-block"><span class="kw">new</span> sadrazam.<span class="fn">Hovermenu</span>({
+            <div class="code-block"><span class="kw">new</span> Sadrazam.<span class="fn">Hovermenu</span>({
   <span class="prop">selector</span>: <span class="str">'#basic-click'</span>,
   <span class="prop">trigger</span>: <span class="str">'click'</span>,
   <span class="prop">content</span>: () => <span class="str">`
@@ -298,7 +298,7 @@
                 <span class="code">trigger: 'mouseenter'</span>
             </div>
 
-            <div class="code-block"><span class="kw">new</span> sadrazam.<span class="fn">Hovermenu</span>({
+            <div class="code-block"><span class="kw">new</span> Sadrazam.<span class="fn">Hovermenu</span>({
   <span class="prop">selector</span>: <span class="str">'#hover-trigger'</span>,
   <span class="prop">trigger</span>: <span class="str">'mouseenter'</span>,
   <span class="prop">content</span>: () => <span class="str">`
@@ -328,7 +328,7 @@
                 <span class="code">title: '&lt;div class="hovermenu-title"&gt;...&lt;/div&gt;'</span>
             </div>
 
-            <div class="code-block"><span class="kw">new</span> sadrazam.<span class="fn">Hovermenu</span>({
+            <div class="code-block"><span class="kw">new</span> Sadrazam.<span class="fn">Hovermenu</span>({
   <span class="prop">selector</span>: <span class="str">'#with-title'</span>,
   <span class="prop">title</span>: <span class="str">'&lt;div class="hovermenu-title"&gt;Sort Options&lt;/div&gt;'</span>,
   <span class="prop">content</span>: () => <span class="str">`
@@ -359,7 +359,7 @@
                 <span class="code">backdrop: true</span>
             </div>
 
-            <div class="code-block"><span class="kw">new</span> sadrazam.<span class="fn">Hovermenu</span>({
+            <div class="code-block"><span class="kw">new</span> Sadrazam.<span class="fn">Hovermenu</span>({
   <span class="prop">selector</span>: <span class="str">'#with-backdrop'</span>,
   <span class="prop">backdrop</span>: <span class="kw">true</span>,
   <span class="prop">content</span>: () => <span class="str">`
@@ -390,7 +390,7 @@
                 <span class="code">openFunc / closeFunc</span>
             </div>
 
-            <div class="code-block"><span class="kw">new</span> sadrazam.<span class="fn">Hovermenu</span>({
+            <div class="code-block"><span class="kw">new</span> Sadrazam.<span class="fn">Hovermenu</span>({
   <span class="prop">selector</span>: <span class="str">'#with-callbacks'</span>,
   <span class="prop">openFunc</span>: () => console.<span class="fn">log</span>(<span class="str">'Menu opened!'</span>),
   <span class="prop">closeFunc</span>: () => console.<span class="fn">log</span>(<span class="str">'Menu closed!'</span>),
@@ -422,7 +422,7 @@
 
             <div class="code-block"><span class="kw">const</span> el = document.<span class="fn">querySelector</span>(<span class="str">'#element-ref'</span>);
 
-<span class="kw">new</span> sadrazam.<span class="fn">Hovermenu</span>({
+<span class="kw">new</span> Sadrazam.<span class="fn">Hovermenu</span>({
   <span class="prop">selector</span>: el,
   <span class="prop">content</span>: () => <span class="str">`
     &lt;ul class="menu-list"&gt;
@@ -466,7 +466,7 @@
 
 <span class="kw">const</span> source = document.<span class="fn">querySelector</span>(<span class="str">'#dom-content-source'</span>);
 
-<span class="kw">new</span> sadrazam.<span class="fn">Hovermenu</span>({
+<span class="kw">new</span> Sadrazam.<span class="fn">Hovermenu</span>({
   <span class="prop">selector</span>: <span class="str">'#dom-content'</span>,
   <span class="prop">content</span>: (triggerEl, instance) => source
 });</div>
@@ -511,21 +511,21 @@
             </div>
 
             <div class="code-block"><span class="cm">// Avatar trigger</span>
-<span class="kw">new</span> sadrazam.<span class="fn">Hovermenu</span>({
+<span class="kw">new</span> Sadrazam.<span class="fn">Hovermenu</span>({
   <span class="prop">selector</span>: <span class="str">'#avatar-trigger'</span>,
   <span class="prop">title</span>: <span class="str">'&lt;div class="hovermenu-title"&gt;Account&lt;/div&gt;'</span>,
   <span class="prop">content</span>: () => <span class="str">`...profile menu HTML...`</span>
 });
 
 <span class="cm">// Badge trigger</span>
-<span class="kw">new</span> sadrazam.<span class="fn">Hovermenu</span>({
+<span class="kw">new</span> Sadrazam.<span class="fn">Hovermenu</span>({
   <span class="prop">selector</span>: <span class="str">'#badge-trigger'</span>,
   <span class="prop">title</span>: <span class="str">'&lt;div class="hovermenu-title"&gt;Notifications&lt;/div&gt;'</span>,
   <span class="prop">content</span>: () => <span class="str">`...notification list HTML...`</span>
 });
 
 <span class="cm">// Icon button trigger</span>
-<span class="kw">new</span> sadrazam.<span class="fn">Hovermenu</span>({
+<span class="kw">new</span> Sadrazam.<span class="fn">Hovermenu</span>({
   <span class="prop">selector</span>: <span class="str">'#icon-trigger'</span>,
   <span class="prop">content</span>: () => <span class="str">`...kebab menu HTML...`</span>
 });</div>
@@ -553,7 +553,7 @@
                 <span class="code">Hovermenu.remove(el)</span>
             </div>
 
-            <div class="code-block"><span class="kw">new</span> sadrazam.<span class="fn">Hovermenu</span>({
+            <div class="code-block"><span class="kw">new</span> Sadrazam.<span class="fn">Hovermenu</span>({
   <span class="prop">selector</span>: <span class="str">'#auto-close'</span>,
   <span class="prop">openFunc</span>: () => {
     <span class="fn">setTimeout</span>(() => {
@@ -583,7 +583,7 @@
                 <span class="code">All config options active</span>
             </div>
 
-            <div class="code-block"><span class="kw">new</span> sadrazam.<span class="fn">Hovermenu</span>({
+            <div class="code-block"><span class="kw">new</span> Sadrazam.<span class="fn">Hovermenu</span>({
   <span class="prop">selector</span>: <span class="str">'#combined'</span>,
   <span class="prop">trigger</span>: <span class="str">'mouseenter'</span>,
   <span class="prop">backdrop</span>: <span class="kw">true</span>,

@@ -108,7 +108,7 @@
                 <span class="code">content: () => '...'</span>
             </div>
 
-            <div class="code-block"><span class="kw">new</span> sadrazam.<span class="fn">SlideMenu</span>({
+            <div class="code-block"><span class="kw">new</span> Sadrazam.<span class="fn">SlideMenu</span>({
   <span class="str">selector</span>: <span class="str">'#trigger-basic'</span>,
   <span class="str">content</span>: () => <span class="str">`
     &lt;div class="slide-menu-header"&gt;
@@ -138,7 +138,7 @@
                 <span class="code">backdrop: true</span>
             </div>
 
-            <div class="code-block"><span class="kw">new</span> sadrazam.<span class="fn">SlideMenu</span>({
+            <div class="code-block"><span class="kw">new</span> Sadrazam.<span class="fn">SlideMenu</span>({
   <span class="str">selector</span>: <span class="str">'#trigger-backdrop'</span>,
   <span class="str">backdrop</span>: <span class="kw">true</span>,
   <span class="str">content</span>: () => <span class="str">'...'</span>
@@ -161,7 +161,7 @@
                 <span class="code">openFunc / closeFunc</span>
             </div>
 
-            <div class="code-block"><span class="kw">new</span> sadrazam.<span class="fn">SlideMenu</span>({
+            <div class="code-block"><span class="kw">new</span> Sadrazam.<span class="fn">SlideMenu</span>({
   <span class="str">selector</span>: <span class="str">'#trigger-callbacks'</span>,
   <span class="str">backdrop</span>: <span class="kw">true</span>,
   <span class="str">openFunc</span>: () => console.<span class="fn">log</span>(<span class="str">'Menu opened!'</span>),
@@ -205,7 +205,7 @@
                 </div>
             </div>
 
-            <div class="code-block"><span class="kw">new</span> sadrazam.<span class="fn">SlideMenu</span>({
+            <div class="code-block"><span class="kw">new</span> Sadrazam.<span class="fn">SlideMenu</span>({
   <span class="str">selector</span>: <span class="str">'#trigger-dom'</span>,
   <span class="str">backdrop</span>: <span class="kw">true</span>,
   <span class="str">content</span>: () => document.<span class="fn">querySelector</span>(<span class="str">'#dom-source'</span>)
@@ -294,11 +294,11 @@
             </div>
 
             <div class="code-block"><span class="cm">// CSS selector string</span>
-<span class="kw">new</span> sadrazam.<span class="fn">SlideMenu</span>({ <span class="str">selector</span>: <span class="str">'#my-button'</span>, ... });
+<span class="kw">new</span> Sadrazam.<span class="fn">SlideMenu</span>({ <span class="str">selector</span>: <span class="str">'#my-button'</span>, ... });
 
 <span class="cm">// Direct Element reference</span>
 <span class="kw">const</span> el = document.<span class="fn">getElementById</span>(<span class="str">'my-button'</span>);
-<span class="kw">new</span> sadrazam.<span class="fn">SlideMenu</span>({ <span class="str">selector</span>: el, ... });</div>
+<span class="kw">new</span> Sadrazam.<span class="fn">SlideMenu</span>({ <span class="str">selector</span>: el, ... });</div>
         </div>
 
         <!-- ==================== CONFIG REFERENCE ==================== -->
