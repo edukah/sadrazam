@@ -181,12 +181,12 @@ body.dark-mode .bottom-tab__bar {
   transform: scale(0.9);
 }
 
-.bottom-tab__item.is-active {
+.bottom-tab__item.active {
   color: var(--theme-color-primary);
   background: rgba(9, 132, 227, 0.08);
 }
 
-body.dark-mode .bottom-tab__item.is-active {
+body.dark-mode .bottom-tab__item.active {
   background: rgba(116, 185, 255, 0.12);
 }
 
@@ -532,7 +532,7 @@ body.dark-mode .mode-toggle-switch {
   content: "\1F319";
   position: absolute;
   right: 12%;
-  top: 55%;
+  top: 50%;
   transform: translateY(-50%);
   font-size: 0.9rem;
   z-index: 1;

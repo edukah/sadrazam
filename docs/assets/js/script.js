@@ -39,24 +39,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const currentPath = currentUrl.pathname;
   const currentPage = currentPath.split('/').pop() || 'index.html';
 
-  document.querySelectorAll('nav ul.nav-links > li').forEach(li => {
-    let hasActiveChild = false;
-
-    li.querySelectorAll('a').forEach(a => {
-      const linkUrl = new URL(a.href, globalThis.location.href);
-      const linkPath = linkUrl.pathname;
-      const linkPage = linkPath.split('/').pop();
-
-      a.classList.remove('active');
-
-      if (linkPage === currentPage) {
-        a.classList.add('active');
-        hasActiveChild = true;
-      }
-    });
-
-    if (hasActiveChild) {
-      li.querySelector('a:first-child').classList.add('active');
+  document.querySelectorAll('nav a, .navi-popup a, .bottom-tab a').forEach(a => {
+    const linkPage = new URL(a.href, globalThis.location.href).pathname.split('/').pop();
+    if (linkPage === currentPage) {
+      a.classList.add('active');
     }
   });
 });
