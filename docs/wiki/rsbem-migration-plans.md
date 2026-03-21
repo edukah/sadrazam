@@ -287,7 +287,7 @@ Tüm Sadrazam modüllerinde visibility/state yönetimini `is-*` CSS class conven
 - [x] **ProgressBar**: `style.opacity` → `is-active` class
 
 ### 8.3 BEM Modifier → is-* Rename
-- [x] **Body class**: `modal--opened` → `is-scroll-locked` (amacı tanımlar: scroll kilidi, kaynak değil)
+- [x] **Body class**: `modal--opened` → `is-scroll-locked` → `is-locked` (amacı tanımlar: scroll kilidi, kaynak değil)
   - Hem Modal hem SlideMenu aynı class'ı kullanıyor
   - Dükkan navigation.js + Bikonuvar flag.scss güncellendi
 
@@ -329,7 +329,7 @@ Her modülün SCSS dosyasına `is-*` state selector + transition tanımı eklend
 **Etki alanı:**
 - Sadrazam: 7 JS modül + 7 SCSS modül + Ajax service
 - Dükkan: navigation.js, order.js, product_form.js, review.js, 16 SCSS/TPL dosya
-- Bikonuvar: 1 SCSS dosya (flag.scss — `is-scroll-locked`)
+- Bikonuvar: 1 SCSS dosya (flag.scss — `is-locked`)
 
 **Yaklaşım:** Sektör analizi yapıldı (Bootstrap, Radix UI, Tippy.js, SMACSS).
 `is-*` class convention seçildi — Sadrazam'da zaten kısmen mevcut, sektörde en yaygın,

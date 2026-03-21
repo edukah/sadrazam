@@ -116,7 +116,7 @@ class SlideMenu {
     }
     
     this.#container.classList.add('is-open');
-    document.body.classList.add('is-scroll-locked');
+    document.body.classList.add('is-locked');
     
     // Start enter animation
     this.#container.classList.add('is-entering');
@@ -137,7 +137,7 @@ class SlideMenu {
     this.#container.addEventListener('animationend', () => {
       this.#container.classList.remove('is-open');
       this.#container.classList.remove('is-leaving');
-      document.body.classList.remove('is-scroll-locked');
+      document.body.classList.remove('is-locked');
       
       this.#config.closeFunc();
       

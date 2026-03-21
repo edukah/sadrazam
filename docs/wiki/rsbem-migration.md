@@ -170,7 +170,7 @@ JS tarafindan inline style ile yonetilen durum degisikliklerinin is-* CSS class 
 - `progress-bar.js/scss`: style.opacity → classList.add/remove('is-active') + CSS opacity
 
 **Body scroll lock (BEM modifier → is-* state):**
-- `modal--opened` → `is-scroll-locked` (amaci tanimlar: scroll kilidi)
+- `modal--opened` → `is-scroll-locked` → `is-locked` (amaci tanimlar: scroll kilidi)
 - `modal.js`, `slide-menu.js`: body class guncellendi
 - Dukkan: `navigation.js` guncellendi (3 referans)
 - Bikonuvar: `flag.scss` guncellendi (1 referans)

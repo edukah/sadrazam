@@ -1,8 +1,9 @@
 @use '../base/variables' as *;
 
-/* Modal Scroll Lock */
-.is-scroll-locked {
+/* Scroll Lock */
+.is-locked {
   position: relative;
+  overflow: hidden;
 }
 
 /* Modal Container */

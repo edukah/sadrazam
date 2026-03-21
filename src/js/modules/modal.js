@@ -150,7 +150,7 @@ class Modal {
     Backdrop.remove(this.#backdropId);
 
     if (!document.querySelector('body > .modal')) {
-      document.body.classList.remove('is-scroll-locked');
+      document.body.classList.remove('is-locked');
     }
 
     globalThis.clearTimeout(this.#closeTimer);
@@ -345,7 +345,7 @@ class Modal {
   };
   
   #insertIntoDOM = () => {
-    document.body.classList.add('is-scroll-locked');
+    document.body.classList.add('is-locked');
     document.body.appendChild(this.#modalElement);
 
     // Execute scripts inside the modal
