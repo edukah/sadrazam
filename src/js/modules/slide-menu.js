@@ -1,5 +1,5 @@
 import Backdrop from '../modules/backdrop.js';
-// import Elem from '../modules/elem.js';
+import Elem from '../modules/elem.js';
 
 /**
  * @summary Slide-in panel menu manager with backdrop and animation support.
@@ -116,7 +116,7 @@ class SlideMenu {
     }
     
     this.#container.classList.add('is-open');
-    document.body.classList.add('is-locked');
+    Elem.disableScroll();
     
     // Start enter animation
     this.#container.classList.add('is-entering');
@@ -137,7 +137,7 @@ class SlideMenu {
     this.#container.addEventListener('animationend', () => {
       this.#container.classList.remove('is-open');
       this.#container.classList.remove('is-leaving');
-      document.body.classList.remove('is-locked');
+      Elem.enableScroll();
       
       this.#config.closeFunc();
       
