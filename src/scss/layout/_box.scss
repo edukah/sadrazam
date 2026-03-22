@@ -90,6 +90,12 @@
 /* End of Panel */
 
 /* Container */
+
+// Sayfa kenarlık padding'i — content-container, header mobil ikonlar, bottom tab vb. bu değişkeni kullanır
+:root {
+  --content-padding: var(--space-7);
+}
+
 main.content-wrapper {
   flex-grow: 1;
 }
@@ -106,7 +112,7 @@ main.content-wrapper {
   position: relative;
   width: 100%;
   margin: 0 auto;
-  padding: 0 var(--space-7);
+  padding: 0 var(--content-padding);
 
   &--xs {
     max-width: 640px;
