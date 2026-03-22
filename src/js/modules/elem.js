@@ -4,6 +4,7 @@
 class Elem {
   // --- Private Static Fields ---
   static #scrollbarWidth = null;
+  static #scrollLockCount = 0;
 
   /**
    * Prints available methods and descriptions to the console.
@@ -13,6 +14,8 @@ class Elem {
       ['getStyle(el, styleProp)', 'Gets the computed style value of an element.'],
       ['onElementHeightChange(element, callback)', 'Runs a callback when an element is resized. Returns a ResizeObserver instance.'],
       ['getScrollbarWidth()', 'Calculates the browser scrollbar width (cached).'],
+      ['disableScroll()', 'Disables page scrolling. Scrollbar hidden, space preserved via paddingRight. Supports nested calls.'],
+      ['enableScroll()', 'Re-enables page scrolling. Must be called once per disableScroll().'],
       ['flash(element)', 'Briefly flashes the element with a background highlight (.is-flashing + sdrzm-flash animation).'],
       ['scrollToView(targetElement, options?)', 'Smoothly scrolls the page to the specified element.']
     ]);
@@ -77,11 +80,35 @@ class Elem {
   }
 
   /**
-   * Smoothly scrolls the page to the specified element.
-   * @param {HTMLElement} targetElement - The target element to scroll to.
-   * @param {object} [options={}] - Optional settings.
-   * @param {number} [options.margin=10] - Margin above the target in pixels.
+   * Disables page scrolling. Scrollbar is hidden but its space is preserved via paddingRight.
+   * Supports nested calls — scroll is re-enabled only when all callers have called enableScroll().
    */
+  static disableScroll () {
+    this.#scrollLockCount++;
+
+    if (this.#scrollLockCount === 1) {
+      const scrollbarWidth = globalThis.innerWidth - document.documentElement.clientWidth;
+      document.documentElement.style.paddingRight = `${scrollbarWidth}px`;
+      document.documentElement.classList.add('is-locked');
+      document.body.classList.add('is-locked');
+    }
+  }
+
+  /**
+   * Re-enables page scrolling. Must be called once per disableScroll().
+   */
+  static enableScroll () {
+    if (this.#scrollLockCount <= 0) return;
+
+    this.#scrollLockCount--;
+
+    if (this.#scrollLockCount === 0) {
+      document.documentElement.classList.remove('is-locked');
+      document.documentElement.style.paddingRight = '';
+      document.body.classList.remove('is-locked');
+    }
+  }
+
   /**
    * Briefly flashes the element with a background highlight to draw attention.
    * @param {HTMLElement} element - The element to flash.

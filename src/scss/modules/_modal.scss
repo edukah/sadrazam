@@ -1,8 +1,7 @@
 @use '../base/variables' as *;
 
 /* Scroll Lock */
-.is-locked {
-  position: relative;
+html.is-locked {
   overflow: hidden;
 }
 

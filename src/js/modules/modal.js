@@ -1,6 +1,6 @@
 import Backdrop from '../modules/backdrop.js';
 import Ajax from '../services/ajax.js';
-// import Elem from '../modules/elem.js';
+import Elem from '../modules/elem.js';
 import { InsertScript } from '../helpers/document.js';
 
 /**
@@ -150,7 +150,7 @@ class Modal {
     Backdrop.remove(this.#backdropId);
 
     if (!document.querySelector('body > .modal')) {
-      document.body.classList.remove('is-locked');
+      Elem.enableScroll();
     }
 
     globalThis.clearTimeout(this.#closeTimer);
@@ -345,7 +345,7 @@ class Modal {
   };
   
   #insertIntoDOM = () => {
-    document.body.classList.add('is-locked');
+    Elem.disableScroll();
     document.body.appendChild(this.#modalElement);
 
     // Execute scripts inside the modal
