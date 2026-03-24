@@ -27,6 +27,7 @@ class Autocomplete {
     minChars: 1,
     badge: null,
     menuClass: 'tbc-grey-zero',
+    targetContainer: null,
     onSelect: function (event, itemValue, item) {
       globalThis.setTimeout(function () {
         const targetUrl = item.firstElementChild?.getAttribute('data-href');
@@ -61,6 +62,7 @@ class Autocomplete {
       ['minChars', 'Minimum characters before search is triggered. Integer. Default: `1`.'],
       ['badge', 'Badge template shown in input after selection. Format: "#{field_name}". Optional.'],
       ['menuClass', 'CSS class appended to the suggestions container. String.'],
+      ['targetContainer', 'DOM element or selector to append suggestions into (instead of after input). Default: null (input.after).'],
       ['onSelect', 'Callback fired when a suggestion is selected. Receives (event, value, item).']
     ]);
     const availableMethods = new Map([
@@ -442,7 +444,18 @@ class Autocomplete {
     this.#suggestionContainer.id = listboxId;
     this.#suggestionContainer.className = `autocomplete__suggestions-container ${this.#config.menuClass}`;
     this.#suggestionContainer.setAttribute('role', 'listbox');
-    this.#searchTermInput.after(this.#suggestionContainer);
+    // targetContainer varsa sonuçları oraya append et, yoksa input'un hemen sonrasına
+    const target = this.#config.targetContainer
+      ? (typeof this.#config.targetContainer === 'string'
+        ? document.querySelector(this.#config.targetContainer)
+        : this.#config.targetContainer)
+      : null;
+
+    if (target) {
+      target.appendChild(this.#suggestionContainer);
+    } else {
+      this.#searchTermInput.after(this.#suggestionContainer);
+    }
 
     if (this.#badgeConfig) {
       this.#setupBadge();
