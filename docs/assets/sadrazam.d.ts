@@ -165,6 +165,7 @@ interface AutocompleteConfig {
   cache?: boolean;
   minChars?: number;
   menuClass?: string;
+  resultContainer?: string | Element | null;
   onSelect?: (event: Event, itemValue: string, item: Element) => void;
 }
 
