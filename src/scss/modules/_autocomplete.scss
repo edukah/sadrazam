@@ -20,10 +20,6 @@
   &.is-open {
     display: block;
   }
-
-  &.is-open ~ * {
-    display: none;
-  }
 }
 
 .autocomplete__suggestions-container ul {
