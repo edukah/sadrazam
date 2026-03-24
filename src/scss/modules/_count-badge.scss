@@ -1,0 +1,27 @@
+/* Count Badge — sayı gösteren küçük yuvarlak bildirim badge'i */
+
+/* Anchor — icon + badge'i saran wrapper, badge bu elemana göre konumlanır */
+.count-badge-anchor {
+  position: relative;
+  display: inline-flex;
+}
+
+/* Badge — anchor'ın sağ üst köşesine oturur, icon boyutundan bağımsız */
+.count-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 var(--space-1);
+  border-radius: var(--radius-pill);
+  background-color: var(--color-sec-500);
+  color: var(--color-text-white--f);
+  font-weight: 700;
+  border: 2px solid var(--color-grey-zero);
+  box-sizing: border-box;
+}

@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sadrazam – Count Badge Showcase</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/bold/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/light/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <script type="text/javascript" src="assets/js/script.js"></script>
+    <link rel="stylesheet" href="assets/sadrazam.min.css">
+    <script type="text/javascript" src="assets/sadrazam.min.js"></script>
+    <style>
+        .badge-demo-icon {
+            font-size: 24px;
+            color: var(--text-color);
+        }
+
+        .badge-demo-row {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            flex-wrap: wrap;
+        }
+    </style>
+</head>
+
+<body>
+<script>if(localStorage.getItem("dark-mode"))document.body.classList.add("dark-mode")</script>
+    <header>
+        <nav class="top-navbar">
+            <div class="nav-container">
+                <a href="index.html" class="nav-logo">Sadrazam</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="javascript:void(0)" onclick="openPopup(); return false;">Examples</a></li>
+                    <li><a href="https://github.com/edukah/sadrazam" target="_blank">GitHub</a></li>
+                </ul>
+                <div class="navi-popup-overlay" id="examplesPopupOverlay" onclick="closePopup()">
+                    <div class="navi-popup" id="examplesPopup" onclick="event.stopPropagation()">
+                        <h3>Examples</h3>
+                        <div class="popup-category">
+                            <div class="popup-category-title">Components</div>
+                            <ul class="popup-grid">
+                                <li><a href="buttons.html">Button</a></li>
+                                <li><a href="count-badge.html">Count Badge</a></li>
+                                <li><a href="forms.html">Form</a></li>
+                                <li><a href="form-patterns.html">Form Patterns</a></li>
+                                <li><a href="links.html">Link</a></li>
+                                <li><a href="switches.html">Switch</a></li>
+                            </ul>
+                        </div>
+                        <div class="popup-category">
+                            <div class="popup-category-title">Modules</div>
+                            <ul class="popup-grid">
+                                <li><a href="autocomplete.html">Autocomplete</a></li>
+                                <li><a href="backdrop.html">Backdrop</a></li>
+                                <li><a href="hovermenu.html">Hovermenu</a></li>
+                                <li><a href="infinite-scroll.html">Infinite Scroll</a></li>
+                                <li><a href="snackbar.html">Snackbar</a></li>
+                                <li><a href="modals.html">Modal</a></li>
+                                <li><a href="popovers.html">Popover</a></li>
+                                <li><a href="slide-menu.html">Slide Menu</a></li>
+                                <li><a href="spinners.html">Spinner</a></li>
+                                <li><a href="tabs.html">Tabs</a></li>
+                                <li><a href="tooltips.html">Tooltip</a></li>
+                            </ul>
+                        </div>
+                        <div class="popup-category">
+                            <div class="popup-category-title">Helpers</div>
+                            <ul class="popup-grid">
+                                <li><a href="form-validation.html">Form Validation</a></li>
+                                <li><a href="autosize-textarea.html">Autosize Textarea</a></li>
+                                <li><a href="autosize-select.html">Autosize Select</a></li>
+                            </ul>
+                        </div>
+                        <div class="popup-category">
+                            <div class="popup-category-title">Services &amp; Layout</div>
+                            <ul class="popup-grid">
+                                <li><a href="ajax.html">Ajax</a></li>
+                                <li><a href="grid.html">Grid</a></li>
+                                <li><a href="spacing.html">Spacing</a></li>
+                                <li><a href="colors.html">Colors</a></li>
+                                <li><a href="typography.html">Typography</a></li>
+                            </ul>
+                        </div>
+                        <button class="close-popup" onclick="closePopup()">&#10005;</button>
+                    </div>
+                </div>
+                <div class="dark-mode-button-container">
+                    <div class="mode-toggle-switch" onclick="toggleMode()"></div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1>Sadrazam – Count Badge Showcase</h1>
+        <p class="subtitle">Small rounded notification badge for displaying counts</p>
+
+        <!-- ==================== BASIC USAGE ==================== -->
+        <div class="section">
+            <h2 class="section-title">Basic Usage</h2>
+            <p class="section-desc">Wrap an icon (or any element) in <span class="code">.count-badge-anchor</span> and add a <span class="code">.count-badge</span> inside</p>
+
+            <div class="row">
+                <span class="label">Bell</span>
+                <span class="count-badge-anchor badge-demo-icon">
+                    <i class="ph-bold ph-bell"></i>
+                    <span class="count-badge">3</span>
+                </span>
+                <span class="code">.count-badge-anchor > .count-badge</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Cart</span>
+                <span class="count-badge-anchor badge-demo-icon">
+                    <i class="ph-bold ph-shopping-cart-simple"></i>
+                    <span class="count-badge">5</span>
+                </span>
+                <span class="code">.count-badge-anchor > .count-badge</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Envelope</span>
+                <span class="count-badge-anchor badge-demo-icon">
+                    <i class="ph-bold ph-envelope"></i>
+                    <span class="count-badge">12</span>
+                </span>
+                <span class="code">.count-badge-anchor > .count-badge</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Chat</span>
+                <span class="count-badge-anchor badge-demo-icon">
+                    <i class="ph-bold ph-chat-circle"></i>
+                    <span class="count-badge">99</span>
+                </span>
+                <span class="code">.count-badge-anchor > .count-badge</span>
+            </div>
+        </div>
+
+        <!-- ==================== FONT SIZE VARIANTS ==================== -->
+        <div class="section">
+            <h2 class="section-title">Font Size Variants</h2>
+            <p class="section-desc">Control badge text size with Sadrazam font-size utilities: <span class="code">.fsi-9</span>, <span class="code">.fsi-10</span>, <span class="code">.fsi-11</span></p>
+
+            <div class="row">
+                <span class="label">fsi-9</span>
+                <span class="count-badge-anchor badge-demo-icon">
+                    <i class="ph-bold ph-bell"></i>
+                    <span class="count-badge fsi-9">7</span>
+                </span>
+                <span class="code">.count-badge.fsi-9</span>
+            </div>
+
+            <div class="row">
+                <span class="label">fsi-10</span>
+                <span class="count-badge-anchor badge-demo-icon">
+                    <i class="ph-bold ph-bell"></i>
+                    <span class="count-badge fsi-10">7</span>
+                </span>
+                <span class="code">.count-badge.fsi-10</span>
+            </div>
+
+            <div class="row">
+                <span class="label">fsi-11</span>
+                <span class="count-badge-anchor badge-demo-icon">
+                    <i class="ph-bold ph-bell"></i>
+                    <span class="count-badge fsi-11">7</span>
+                </span>
+                <span class="code">.count-badge.fsi-11</span>
+            </div>
+
+            <hr class="divider">
+
+            <p class="section-desc">Side-by-side comparison with multi-digit numbers</p>
+            <div class="row">
+                <span class="label">Comparison</span>
+                <div class="badge-demo-row">
+                    <span class="count-badge-anchor badge-demo-icon">
+                        <i class="ph-bold ph-envelope"></i>
+                        <span class="count-badge fsi-9">24</span>
+                    </span>
+                    <span class="count-badge-anchor badge-demo-icon">
+                        <i class="ph-bold ph-envelope"></i>
+                        <span class="count-badge fsi-10">24</span>
+                    </span>
+                    <span class="count-badge-anchor badge-demo-icon">
+                        <i class="ph-bold ph-envelope"></i>
+                        <span class="count-badge fsi-11">24</span>
+                    </span>
+                </div>
+                <span class="code">fsi-9 / fsi-10 / fsi-11</span>
+            </div>
+        </div>
+
+        <!-- ==================== COLOR OVERRIDE ==================== -->
+        <div class="section">
+            <h2 class="section-title">Color Override</h2>
+            <p class="section-desc">Default background is <span class="code">--color-sec-500</span>. Override with utility classes like <span class="code">.bg-pri-500</span></p>
+
+            <div class="row">
+                <span class="label">Default (sec)</span>
+                <span class="count-badge-anchor badge-demo-icon">
+                    <i class="ph-bold ph-bell"></i>
+                    <span class="count-badge">3</span>
+                </span>
+                <span class="code">.count-badge</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Primary</span>
+                <span class="count-badge-anchor badge-demo-icon">
+                    <i class="ph-bold ph-bell"></i>
+                    <span class="count-badge bg-pri-500">3</span>
+                </span>
+                <span class="code">.count-badge.bg-pri-500</span>
+            </div>
+
+            <hr class="divider">
+
+            <p class="section-desc">All icons with both color variants</p>
+            <div class="row">
+                <span class="label">Default</span>
+                <div class="badge-demo-row">
+                    <span class="count-badge-anchor badge-demo-icon">
+                        <i class="ph-bold ph-bell"></i>
+                        <span class="count-badge">3</span>
+                    </span>
+                    <span class="count-badge-anchor badge-demo-icon">
+                        <i class="ph-bold ph-shopping-cart-simple"></i>
+                        <span class="count-badge">5</span>
+                    </span>
+                    <span class="count-badge-anchor badge-demo-icon">
+                        <i class="ph-bold ph-envelope"></i>
+                        <span class="count-badge">12</span>
+                    </span>
+                    <span class="count-badge-anchor badge-demo-icon">
+                        <i class="ph-bold ph-chat-circle"></i>
+                        <span class="count-badge">99</span>
+                    </span>
+                </div>
+                <span class="code">--color-sec-500</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Primary</span>
+                <div class="badge-demo-row">
+                    <span class="count-badge-anchor badge-demo-icon">
+                        <i class="ph-bold ph-bell"></i>
+                        <span class="count-badge bg-pri-500">3</span>
+                    </span>
+                    <span class="count-badge-anchor badge-demo-icon">
+                        <i class="ph-bold ph-shopping-cart-simple"></i>
+                        <span class="count-badge bg-pri-500">5</span>
+                    </span>
+                    <span class="count-badge-anchor badge-demo-icon">
+                        <i class="ph-bold ph-envelope"></i>
+                        <span class="count-badge bg-pri-500">12</span>
+                    </span>
+                    <span class="count-badge-anchor badge-demo-icon">
+                        <i class="ph-bold ph-chat-circle"></i>
+                        <span class="count-badge bg-pri-500">99</span>
+                    </span>
+                </div>
+                <span class="code">.bg-pri-500</span>
+            </div>
+        </div>
+
+        <!-- ==================== DYNAMIC VISIBILITY ==================== -->
+        <div class="section">
+            <h2 class="section-title">Dynamic Visibility</h2>
+            <p class="section-desc">Toggle badge visibility with <span class="code">.d-none</span> utility class. Useful for hiding the badge when count is zero.</p>
+
+            <div class="row">
+                <span class="label">Visible</span>
+                <span class="count-badge-anchor badge-demo-icon">
+                    <i class="ph-bold ph-bell"></i>
+                    <span class="count-badge">3</span>
+                </span>
+                <span class="code">.count-badge</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Hidden</span>
+                <span class="count-badge-anchor badge-demo-icon">
+                    <i class="ph-bold ph-bell"></i>
+                    <span class="count-badge d-none">0</span>
+                </span>
+                <span class="code">.count-badge.d-none</span>
+            </div>
+
+            <hr class="divider">
+
+            <div class="row">
+                <span class="label">Toggle Demo</span>
+                <span class="count-badge-anchor badge-demo-icon" id="toggleAnchor">
+                    <i class="ph-bold ph-bell"></i>
+                    <span class="count-badge" id="toggleBadge">3</span>
+                </span>
+                <button class="demo-btn" onclick="toggleBadge()" style="padding: 6px 16px; border: 1px solid var(--border-color); background: var(--card-bg); border-radius: 6px; cursor: pointer; font-size: 0.85rem;">
+                    <i class="ph-bold ph-eye"></i>&nbsp; Toggle Badge
+                </button>
+                <span class="code">classList.toggle('d-none')</span>
+            </div>
+        </div>
+
+        <!-- ==================== HTML STRUCTURE ==================== -->
+        <div class="section">
+            <h2 class="section-title">HTML Structure</h2>
+            <p class="section-desc">The anchor wrapper provides <span class="code">position: relative</span> for the absolutely positioned badge</p>
+
+            <div class="code-block">
+<span class="cmt">&lt;!-- Basic structure --&gt;</span>
+&lt;<span class="kw">span</span> <span class="str">class</span>=<span class="str">"count-badge-anchor"</span>&gt;
+    &lt;<span class="kw">i</span> <span class="str">class</span>=<span class="str">"ph-bold ph-bell"</span>&gt;&lt;/<span class="kw">i</span>&gt;
+    &lt;<span class="kw">span</span> <span class="str">class</span>=<span class="str">"count-badge"</span>&gt;3&lt;/<span class="kw">span</span>&gt;
+&lt;/<span class="kw">span</span>&gt;
+
+<span class="cmt">&lt;!-- With font size variant --&gt;</span>
+&lt;<span class="kw">span</span> <span class="str">class</span>=<span class="str">"count-badge-anchor"</span>&gt;
+    &lt;<span class="kw">i</span> <span class="str">class</span>=<span class="str">"ph-bold ph-bell"</span>&gt;&lt;/<span class="kw">i</span>&gt;
+    &lt;<span class="kw">span</span> <span class="str">class</span>=<span class="str">"count-badge fsi-10"</span>&gt;3&lt;/<span class="kw">span</span>&gt;
+&lt;/<span class="kw">span</span>&gt;
+
+<span class="cmt">&lt;!-- With color override --&gt;</span>
+&lt;<span class="kw">span</span> <span class="str">class</span>=<span class="str">"count-badge-anchor"</span>&gt;
+    &lt;<span class="kw">i</span> <span class="str">class</span>=<span class="str">"ph-bold ph-bell"</span>&gt;&lt;/<span class="kw">i</span>&gt;
+    &lt;<span class="kw">span</span> <span class="str">class</span>=<span class="str">"count-badge bg-pri-500"</span>&gt;3&lt;/<span class="kw">span</span>&gt;
+&lt;/<span class="kw">span</span>&gt;
+
+<span class="cmt">&lt;!-- Dynamic visibility (hidden when count is 0) --&gt;</span>
+&lt;<span class="kw">span</span> <span class="str">class</span>=<span class="str">"count-badge-anchor"</span>&gt;
+    &lt;<span class="kw">i</span> <span class="str">class</span>=<span class="str">"ph-bold ph-bell"</span>&gt;&lt;/<span class="kw">i</span>&gt;
+    &lt;<span class="kw">span</span> <span class="str">class</span>=<span class="str">"count-badge d-none"</span>&gt;0&lt;/<span class="kw">span</span>&gt;
+&lt;/<span class="kw">span</span>&gt;</div>
+        </div>
+
+        <!-- ==================== DARK BACKGROUND ==================== -->
+        <div class="section dark-section">
+            <h2 class="section-title">Dark Background</h2>
+            <p class="section-desc">Badge appearance on a dark surface</p>
+
+            <div class="row">
+                <span class="label">Default</span>
+                <div class="badge-demo-row">
+                    <span class="count-badge-anchor badge-demo-icon">
+                        <i class="ph-bold ph-bell"></i>
+                        <span class="count-badge">3</span>
+                    </span>
+                    <span class="count-badge-anchor badge-demo-icon">
+                        <i class="ph-bold ph-shopping-cart-simple"></i>
+                        <span class="count-badge">5</span>
+                    </span>
+                    <span class="count-badge-anchor badge-demo-icon">
+                        <i class="ph-bold ph-envelope"></i>
+                        <span class="count-badge">12</span>
+                    </span>
+                    <span class="count-badge-anchor badge-demo-icon">
+                        <i class="ph-bold ph-chat-circle"></i>
+                        <span class="count-badge">99</span>
+                    </span>
+                </div>
+                <span class="code">--color-sec-500</span>
+            </div>
+
+            <div class="row">
+                <span class="label">Primary</span>
+                <div class="badge-demo-row">
+                    <span class="count-badge-anchor badge-demo-icon">
+                        <i class="ph-bold ph-bell"></i>
+                        <span class="count-badge bg-pri-500">3</span>
+                    </span>
+                    <span class="count-badge-anchor badge-demo-icon">
+                        <i class="ph-bold ph-shopping-cart-simple"></i>
+                        <span class="count-badge bg-pri-500">5</span>
+                    </span>
+                    <span class="count-badge-anchor badge-demo-icon">
+                        <i class="ph-bold ph-envelope"></i>
+                        <span class="count-badge bg-pri-500">12</span>
+                    </span>
+                    <span class="count-badge-anchor badge-demo-icon">
+                        <i class="ph-bold ph-chat-circle"></i>
+                        <span class="count-badge bg-pri-500">99</span>
+                    </span>
+                </div>
+                <span class="code">.bg-pri-500</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleBadge() {
+            document.getElementById('toggleBadge').classList.toggle('d-none');
+        }
+    </script>
+
+    <nav class="bottom-tab">
+        <div class="bottom-tab__bar">
+            <a href="index.html" class="bottom-tab__item">
+                <i class="ph-fill ph-house"></i>
+                <span>Home</span>
+            </a>
+            <button class="bottom-tab__item" onclick="openPopup()">
+                <i class="ph-fill ph-squares-four"></i>
+                <span>Examples</span>
+            </button>
+            <button class="bottom-tab__item" onclick="toggleMode()">
+                <i class="ph-fill ph-moon"></i>
+                <span>Theme</span>
+            </button>
+            <a href="https://github.com/edukah/sadrazam" target="_blank" class="bottom-tab__item">
+                <i class="ph-fill ph-github-logo"></i>
+                <span>GitHub</span>
+            </a>
+        </div>
+    </nav>
+</body>
+
+</html>
