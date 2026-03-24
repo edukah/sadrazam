@@ -12,7 +12,7 @@ class Document {
       ['redirect(url, time?)', 'Redirects to the specified URL with a delay, or refreshes the page.'],
       ['copyInputText(button)', 'Copies the target input text to clipboard when a button is clicked.'],
       ['uniqueId()', 'Generates a cryptographically secure unique ID (UUID v4).'],
-      ['fixedElementAdjust(selector, options?)', 'Adjusts footer padding-bottom to account for a fixed element. options.breakpoint: number or CSS var name (e.g. "--breakpoint-lg"). Without breakpoint, always applies.']
+      ['fixedElementAdjust(selector)', 'Adjusts footer padding-bottom to account for a fixed element. Checks computed display — if the element is hidden by CSS (media queries, etc.), padding is restored.']
     ]);
     console.info('%cDocument', 'font-size: 20px; font-weight: bold; color: red');
     availableConfigs.forEach((value, key) => {
@@ -88,7 +88,7 @@ class Document {
    * @param {object} [options] - Options.
    * @param {number|string} [options.breakpoint] - Pixel value or CSS variable name (e.g. '--breakpoint-lg'). Adjust only below this width; restore above.
    */
-  static fixedElementAdjust (selector, options = {}) {
+  static fixedElementAdjust (selector) {
     const fixedElement = globalThis.document.querySelector(selector);
     const footer = globalThis.document.querySelector('footer');
 
@@ -96,13 +96,12 @@ class Document {
       return;
     }
 
-    let breakpoint = options.breakpoint ?? null;
+    // Element CSS tarafından gizlenmişse (display:none vb.) padding gerekmez.
+    // Breakpoint + hover/pointer gibi compound media query koşullarını CSS belirler,
+    // JS sadece sonucu okur — koşulları tekrar yazmaya gerek kalmaz.
+    const isHidden = globalThis.getComputedStyle(fixedElement).display === 'none';
 
-    if (typeof breakpoint === 'string') {
-      breakpoint = parseInt(globalThis.getComputedStyle(globalThis.document.body).getPropertyValue(breakpoint));
-    }
-
-    if (breakpoint && Viewport.getWidth() >= breakpoint) {
+    if (isHidden) {
       if (footer.hasAttribute('data-default-padding-bottom')) {
         footer.style.paddingBottom = footer.getAttribute('data-default-padding-bottom');
         footer.removeAttribute('data-default-padding-bottom');

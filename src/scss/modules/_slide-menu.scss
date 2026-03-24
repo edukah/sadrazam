@@ -13,7 +13,7 @@
   background-color: var(--color-grey-zero);
   /* Performans optimizasyonu */
 
-  @media only screen and (min-width: variables.$breakpoint-md) {
+  @media (min-width: variables.$breakpoint-md) {
     margin: 0 auto;
     width: initial;
     top: 0;
@@ -37,7 +37,7 @@
   }
 
   /* Giriş animasyonu - desktop */
-  @media only screen and (min-width: variables.$breakpoint-md) {
+  @media (min-width: variables.$breakpoint-md) {
     @keyframes menuSlideIn {
       0% {
         transform: translate(-50%, 20px) scale(0.8);
@@ -65,7 +65,7 @@
   }
 
   /* Çıkış animasyonu - desktop */
-  @media only screen and (min-width: variables.$breakpoint-md) {
+  @media (min-width: variables.$breakpoint-md) {
     @keyframes menuSlideOut {
       0% {
         transform: translate(-50%, 40px);
@@ -101,7 +101,7 @@
   width: 100%;
   max-width: 450px;
 
-  @media only screen and (min-width: variables.$breakpoint-md) {
+  @media (min-width: variables.$breakpoint-md) {
     padding: var(--space-11);
     width: 450px;
   }
