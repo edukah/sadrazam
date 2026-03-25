@@ -129,6 +129,8 @@ _variables ─┬── @forward colors-main
 
 **Extras:** `.margin-flow > * + *` (sibling spacing, space-3), `.padding-x-0--sm` (responsive reset)
 
+**Gap:** `.gap-1` (space-1), `.gap-2` (space-2), `.gap-4` (space-4), `.gap-6` (space-6), `.gap-8` (space-8) — flex ve grid'de kullanılır
+
 ## __instance DOM Property + getInstance() Pattern
 
 Tüm JS modülleri DOM element'lerine instance referansı atar ve `getInstance()` static metodu sağlar:
