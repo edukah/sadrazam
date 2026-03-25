@@ -33,7 +33,7 @@ class Elem {
    */
   static getStyle (el, styleProp) {
     if (!el) {
-      console.warn('Elem.getStyle: Element not found.');
+      console.warn('[Sadrazam|Elem] getStyle: Element not found.');
       
       return null;
     }

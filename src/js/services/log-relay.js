@@ -196,7 +196,7 @@ class LogRelay {
    */
   static #send (report) {
     // Always write to console (for developer visibility)
-    console.error('[LogRelay]', report.type, report.message, report);
+    console.error('[Sadrazam|LogRelay]', report.type, report.message, report);
 
     // Deduplicate: skip if the same error was sent recently
     const fingerprint = this.#fingerprint(report);

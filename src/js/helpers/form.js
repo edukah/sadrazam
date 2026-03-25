@@ -117,7 +117,7 @@ class Form {
       try {
         return !new RegExp(ruleValue).test(item.value) ? 'regexMismatch' : null;
       } catch (e) {
-        console.error('Form: Invalid regex pattern.', ruleValue, e);
+        console.error('[Sadrazam|Form] Invalid regex pattern.', ruleValue, e);
         
         return null;
       }
@@ -224,7 +224,7 @@ class Form {
         const result = ruleFn.call(this, item, form, ruleValue);
         if (result) return this.#formatErrorMessage(result);
       } else {
-        console.warn(`Form: Unknown validation rule '${ruleName}'.`, item);
+        console.warn(`[Sadrazam|Form] Unknown validation rule '${ruleName}'.`, item);
       }
     }
     
@@ -242,7 +242,7 @@ class Form {
       
       return message;
     }
-    console.warn(`Form: Missing language key '${errorKey}'.`);
+    console.warn(`[Sadrazam|Form] Missing language key '${errorKey}'.`);
     
     return errorKey;
   };

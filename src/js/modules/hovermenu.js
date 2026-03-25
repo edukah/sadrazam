@@ -95,6 +95,7 @@ class Hovermenu {
     if (!this.#initializeListenedElement()) return;
 
     this.#listenedElement.__hovermenu = this;
+    this.#ensureAccessibility();
     this.#bindInitialTrigger();
   }
 
@@ -116,6 +117,7 @@ class Hovermenu {
     this.#setPosition();
     
     this.#container.classList.add('is-visible');
+    this.#listenedElement.setAttribute('aria-expanded', 'true');
 
     if (this.#config.backdrop) {
       this.#backdropId = Backdrop.insert({ onClick: this.#remove });
@@ -144,6 +146,7 @@ class Hovermenu {
     this.#unbindToggleListeners();
 
     this.#container.classList.remove('is-visible');
+    this.#listenedElement.setAttribute('aria-expanded', 'false');
     this.#container.addEventListener('transitionend', () => {
       this.#cleanupDOM();
     }, { once: true });
@@ -160,12 +163,32 @@ class Hovermenu {
     }
 
     if (!this.#listenedElement) {
-      console.warn('Hovermenu: Target element not found.');
+      console.warn('[Sadrazam|Hovermenu] Target element not found.');
       
       return false;
     }
     
     return true;
+  };
+
+  #ensureAccessibility = () => {
+    const el = this.#listenedElement;
+    const tag = el.tagName.toLowerCase();
+
+    if (tag !== 'button' && tag !== 'a' && tag !== 'input') {
+      if (!el.hasAttribute('role')) el.setAttribute('role', 'button');
+      if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '0');
+
+      el.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          el.click();
+        }
+      });
+    }
+
+    el.setAttribute('aria-haspopup', 'true');
+    el.setAttribute('aria-expanded', 'false');
   };
 
   #bindInitialTrigger = () => {

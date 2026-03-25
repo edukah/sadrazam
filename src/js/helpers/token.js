@@ -38,7 +38,7 @@ class Token {
     if (tokenInput) {
       tokenInput.value = token;
     } else {
-      console.warn('Token: Input element not found.');
+      console.warn('[Sadrazam|Token] Input element not found.');
     }
   }
 }

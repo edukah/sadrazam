@@ -91,6 +91,7 @@ class SlideMenu {
     if (!this.#initializeListenedElement()) return;
 
     this.#listenedElement.__slideMenu = this;
+    this.#ensureAccessibility();
     this.#bindInitialTrigger();
   }
 
@@ -116,6 +117,7 @@ class SlideMenu {
     }
     
     this.#container.classList.add('is-open');
+    this.#listenedElement.setAttribute('aria-expanded', 'true');
     Elem.disableScroll();
     
     // Start enter animation
@@ -127,6 +129,8 @@ class SlideMenu {
 
   #remove = () => {
     if (!this.#container) return;
+
+    this.#listenedElement.setAttribute('aria-expanded', 'false');
 
     if (this.#config.backdrop) {
       Backdrop.remove(this.#backdropId);
@@ -156,12 +160,32 @@ class SlideMenu {
     }
 
     if (!this.#listenedElement) {
-      console.warn('SlideMenu: Target element not found.');
+      console.warn('[Sadrazam|SlideMenu] Target element not found.');
       
       return false;
     }
     
     return true;
+  };
+
+  #ensureAccessibility = () => {
+    const el = this.#listenedElement;
+    const tag = el.tagName.toLowerCase();
+
+    if (tag !== 'button' && tag !== 'a' && tag !== 'input') {
+      if (!el.hasAttribute('role')) el.setAttribute('role', 'button');
+      if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '0');
+
+      el.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          el.click();
+        }
+      });
+    }
+
+    el.setAttribute('aria-haspopup', 'dialog');
+    el.setAttribute('aria-expanded', 'false');
   };
 
   #bindInitialTrigger = () => {

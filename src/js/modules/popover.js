@@ -85,7 +85,7 @@ class Popover {
     }
 
     if (!referenceElement) {
-      console.warn(`Popover: Element (${config.selector}) not found.`);
+      console.warn(`[Sadrazam|Popover] Element (${config.selector}) not found.`);
 
       return;
     }
@@ -109,6 +109,7 @@ class Popover {
 
     this.#referenceElement.style.cursor = 'pointer';
     this.#referenceElement.__popover = this;
+    this.#ensureAccessibility();
 
     this.#setupDOM();
     this.#calculateAndSetPosition();
@@ -130,6 +131,7 @@ class Popover {
     this.#calculateAndSetPosition();
     this.#popoverElement.classList.add('is-visible');
     this.#isVisible = true;
+    this.#referenceElement.setAttribute('aria-expanded', 'true');
     this.#startObserver(false);
     globalThis.addEventListener('resize', this.#resizeHandler);
   };
@@ -142,6 +144,7 @@ class Popover {
     if (!this.#popoverElement || !this.#isVisible) return;
     this.#isVisible = false;
     this.#popoverElement.classList.remove('is-visible');
+    this.#referenceElement.setAttribute('aria-expanded', 'false');
     this.#startObserver(true);
     globalThis.removeEventListener('resize', this.#resizeHandler);
   };
@@ -274,6 +277,26 @@ class Popover {
 
     this.#popoverElement.style.top = `${y + window.scrollY}px`;
     this.#popoverElement.style.left = `${x + window.scrollX}px`;
+  };
+
+  #ensureAccessibility = () => {
+    const el = this.#referenceElement;
+    const tag = el.tagName.toLowerCase();
+
+    if (tag !== 'button' && tag !== 'a' && tag !== 'input') {
+      if (!el.hasAttribute('role')) el.setAttribute('role', 'button');
+      if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '0');
+
+      el.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          el.click();
+        }
+      });
+    }
+
+    el.setAttribute('aria-haspopup', 'true');
+    el.setAttribute('aria-expanded', 'false');
   };
 
   /** Binds trigger event listeners to the reference element. */

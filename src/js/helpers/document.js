@@ -53,7 +53,7 @@ class Document {
     const elem = document.getElementById(targetId);
 
     if (!elem) {
-      console.error('Document: copyInputText target element not found.', targetId);
+      console.error('[Sadrazam|Document] copyInputText target element not found.', targetId);
 
       return;
     }
@@ -164,7 +164,7 @@ class InsertScript {
       if (oldScript.src) {
         newScript.onload = () => resolve();
         newScript.onerror = () => {
-          console.error(`InsertScript: Failed to load ${oldScript.src}`);
+          console.error(`[Sadrazam|InsertScript] Failed to load ${oldScript.src}`);
           resolve(); // Continue running remaining scripts even on error
         };
       }

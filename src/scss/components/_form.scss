@@ -277,6 +277,16 @@ input[type="radio"] {
   }
 }
 
+/* ---- ARIA role="button" — non-native button erişilebilirliği ---- */
+[role="button"] {
+  cursor: pointer;
+
+  &:focus-visible {
+    outline: 2px solid var(--color-pri-300);
+    outline-offset: 1px;
+  }
+}
+
 /* ---- Button element — temel HTML button stili ---- */
 button {
   display: inline-flex;

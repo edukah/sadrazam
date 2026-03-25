@@ -171,13 +171,13 @@ class Language {
       const module = await import(`../locales/${langCode}.js`);
       this.load(module.default);
     } catch (err) {
-      console.warn(`Language file not found (${langCode}), loading fallback language.`, err);
+      console.warn(`[Sadrazam|Language] Language file not found (${langCode}), loading fallback language.`, err);
 
       try {
         const fallbackModule = await import(`../locales/en.js`);
         this.load(fallbackModule.default);
       } catch (fallbackErr) {
-        console.error('Failed to load fallback language file (en).', fallbackErr);
+        console.error('[Sadrazam|Language] Failed to load fallback language file (en).', fallbackErr);
       }
     }
   }

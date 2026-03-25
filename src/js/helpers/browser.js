@@ -56,7 +56,7 @@ class Browser {
       try {
         callback(isVisible);
       } catch (e) {
-        console.error('Browser: onChange callback threw an error.', e);
+        console.error('[Sadrazam|Browser] onChange callback threw an error.', e);
       }
     });
   };

@@ -117,7 +117,7 @@ class Ajax {
         const uiMessageObject = responseData?.message || 
           (parseError ? { error: ['Invalid server response (JSON parse error).'] } : standardError);
 
-        console.error('Ajax Error:', {
+        console.error('[Sadrazam|Ajax] Error:', {
           status: response.status,
           url: url,
           contentType: contentType,
@@ -142,12 +142,12 @@ class Ajax {
     } catch (error) {
       if (error.name === 'TypeError') {
         const networkError = { error: [Language.get('errorNetwork')] };
-        console.error('Ajax Network Error:', { error: error });
+        console.error('[Sadrazam|Ajax] Network error:', { error: error });
         Snackbar.insert(networkError);
         config.error(error);
       } else if (error.name === 'AbortError') {
         const timeoutError = { error: [Language.get('errorTimeout')] };
-        console.error('Ajax Timeout Error:', { error: error });
+        console.error('[Sadrazam|Ajax] Timeout error:', { error: error });
         Snackbar.insert(timeoutError);
         config.error(error);
       }

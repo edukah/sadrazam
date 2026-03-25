@@ -155,7 +155,7 @@ class Autocomplete {
     const value = item.getAttribute('data-autocomplete-value');
 
     if (value === null) {
-      console.warn('Autocomplete: Suggestion missing "data-autocomplete-value" attribute.', item);
+      console.warn('[Sadrazam|Autocomplete] Suggestion missing "data-autocomplete-value" attribute.', item);
       
       return;
     }
@@ -220,7 +220,7 @@ class Autocomplete {
       }
       this.#renderSuggestions(data);
     } catch (error) {
-      console.error('Autocomplete request failed:', error);
+      console.error('[Sadrazam|Autocomplete] Request failed:', error);
       this.#hideSuggestions();
     }
   };
@@ -236,7 +236,7 @@ class Autocomplete {
             if (typeof xhttp.responseText === 'string') {
               resolve(xhttp.responseText);
             } else {
-              console.warn('Autocomplete: Invalid server response (not JSON or text).', xhttp.responseText);
+              console.warn('[Sadrazam|Autocomplete] Invalid server response (not JSON or text).', xhttp.responseText);
               reject(new Error('Invalid server response'));
             }
           }
@@ -287,7 +287,7 @@ class Autocomplete {
     this.#selectedItem = null;
 
     if (!this.#suggestionContainer.querySelector('.autocomplete__suggestion')) {
-      console.warn('Autocomplete: No ".autocomplete__suggestion" elements found in response.');
+      console.warn('[Sadrazam|Autocomplete] No ".autocomplete__suggestion" elements found in response.');
     }
 
     // Add ARIA attributes to server-rendered items (if not in template)
@@ -327,7 +327,7 @@ class Autocomplete {
       const value = this.#selectedItem.getAttribute('data-autocomplete-value');
 
       if (value === null) {
-        console.warn('Autocomplete: Selected suggestion missing "data-autocomplete-value". Input not updated.', this.#selectedItem);
+        console.warn('[Sadrazam|Autocomplete] Selected suggestion missing "data-autocomplete-value". Input not updated.', this.#selectedItem);
         this.#searchTermInput.value = this.#lastValue; // Restore input to previous value
 
         return;
@@ -345,7 +345,7 @@ class Autocomplete {
   #parseBadgeConfig = () => {
     const match = this.#config.badge.match(/\{(.+?)\}/);
     if (!match) {
-      console.warn('Autocomplete: Invalid badge format — missing {field_name} placeholder.');
+      console.warn('[Sadrazam|Autocomplete] Invalid badge format — missing {field_name} placeholder.');
 
       return null;
     }
@@ -374,7 +374,7 @@ class Autocomplete {
 
     const hiddenInput = item.querySelector(`input[name="${this.#badgeConfig.field}"]`);
     if (!hiddenInput) {
-      console.warn(`Autocomplete: Badge field "${this.#badgeConfig.field}" not found in selected suggestion.`);
+      console.warn(`[Sadrazam|Autocomplete] Badge field "${this.#badgeConfig.field}" not found in selected suggestion.`);
 
       return;
     }
@@ -422,7 +422,7 @@ class Autocomplete {
       this.#searchTermInput = document.querySelector(this.#config.selector);
     }
     if (!this.#searchTermInput) {
-      console.warn('Autocomplete: Target element not found.');
+      console.warn('[Sadrazam|Autocomplete] Target element not found.');
 
       return false;
     }

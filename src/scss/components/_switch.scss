@@ -30,7 +30,11 @@
 
 .switch input,
 .switch input[type="checkbox"] {
-  display: none;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .switch__slider {
@@ -61,8 +65,9 @@ input:checked+.switch__slider {
   background-color: var(--color-sec-900--f);
 }
 
-input:focus+.switch__slider {
-  box-shadow: 0 0 0.0625em var(--color-sec-900--f);
+input:focus-visible+.switch__slider {
+  outline: 2px solid var(--color-pri-300);
+  outline-offset: 1px;
 }
 
 input:checked+.switch__slider:before {

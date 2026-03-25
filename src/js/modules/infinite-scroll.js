@@ -98,7 +98,7 @@ class InfiniteScroll {
         this.#destroySpinner();
       }
     } catch (error) {
-      console.error('InfiniteScroll: Data loading failed.', error);
+      console.error('[Sadrazam|InfiniteScroll] Data loading failed.', error);
       this.#isFinished = true; // Stop retrying on error
       this.pause();
     } finally {

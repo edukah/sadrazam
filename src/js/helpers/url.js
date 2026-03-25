@@ -32,7 +32,7 @@ class Url {
       
       return urlObj.searchParams.get(key);
     } catch (e) {
-      console.warn(`Url.get(): Invalid URL format: "${url}"`);
+      console.warn(`[Sadrazam|Url] get(): Invalid URL format: "${url}"`);
       
       return null;
     }
@@ -50,7 +50,7 @@ class Url {
       
       return urlObj.searchParams.has(key);
     } catch (e) {
-      console.warn(`Url.has(): Invalid URL format: "${url}"`);
+      console.warn(`[Sadrazam|Url] has(): Invalid URL format: "${url}"`);
       
       return false;
     }
@@ -70,7 +70,7 @@ class Url {
       
       return urlObj.href;
     } catch (e) {
-      console.warn(`Url.set(): Invalid URL format: "${url}". Returning original URL.`);
+      console.warn(`[Sadrazam|Url] set(): Invalid URL format: "${url}". Returning original URL.`);
       
       return url;
     }
@@ -89,7 +89,7 @@ class Url {
       
       return urlObj.href;
     } catch (e) {
-      console.warn(`Url.delete(): Invalid URL format: "${url}". Returning original URL.`);
+      console.warn(`[Sadrazam|Url] delete(): Invalid URL format: "${url}". Returning original URL.`);
       
       return url;
     }
@@ -106,7 +106,7 @@ class Url {
       
       return Object.fromEntries(urlObj.searchParams.entries());
     } catch (e) {
-      console.warn(`Url.getAll(): Invalid URL format: "${url}"`);
+      console.warn(`[Sadrazam|Url] getAll(): Invalid URL format: "${url}"`);
       
       return {};
     }

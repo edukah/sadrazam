@@ -260,7 +260,7 @@ class Tabs {
     this.#tabHeads.forEach(head => {
       const panel = document.getElementById(head.getAttribute('data-tab-id'));
       if (!panel) {
-        console.warn(`Tab content not found: #${head.getAttribute('data-tab-id')}`);
+        console.warn(`[Sadrazam|Tabs] Content not found: #${head.getAttribute('data-tab-id')}`);
       }
     });
 
