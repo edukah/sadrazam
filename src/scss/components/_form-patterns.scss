@@ -40,6 +40,15 @@
     padding: 0;
     display: flex;
 
+    &:focus {
+      outline: 0;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--color-pri-300);
+      outline-offset: 1px;
+    }
+
     @media (hover: hover) and (pointer: fine) {
       &:hover {
         color: var(--color-text-dark-1);

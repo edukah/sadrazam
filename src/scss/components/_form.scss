@@ -196,6 +196,15 @@ input[type="checkbox"] {
     }
   }
 
+  &:focus {
+    outline: 0;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-pri-300);
+    outline-offset: 1px;
+  }
+
   // Devre dışı bırakılmış durum
   &:disabled {
     cursor: not-allowed;
@@ -228,6 +237,15 @@ input[type="radio"] {
   display: inline-block;
   vertical-align: middle;
   transition: border-color 0.2s ease, background-color 0.2s ease;
+
+  &:focus {
+    outline: 0;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-pri-300);
+    outline-offset: 1px;
+  }
 
   &.block {
     display: block;

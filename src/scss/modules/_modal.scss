@@ -106,6 +106,11 @@ html.is-locked {
       outline: none;
     }
 
+    &:focus-visible {
+      outline: 2px solid var(--color-pri-300);
+      outline-offset: 1px;
+    }
+
     &:hover {
       @media (hover: hover) and (pointer: fine) {
         transform: rotate(90deg);
@@ -153,7 +158,7 @@ html.is-locked {
     }
 
     .modal__content {
-      --gap-space: var(--space-8);
+      --gap-space: var(--space-10);
 
       position: relative;
       background-color: var(--color-grey-zero);
@@ -162,7 +167,7 @@ html.is-locked {
       outline: 0;
       text-align: left;
 
-      padding: var(--space-11);
+      padding: var(--space-11) var(--space-11) var(--space-12);
 
       // Header varsa → daha az üst padding (header kendi padding'ini sağlıyor)
       &:has(.modal__header) {
@@ -198,8 +203,8 @@ html.is-locked {
 
         // Sadece close button varsa (başlık yok) → daha kompakt header
         &:has(> .modal__close-button:only-child) {
-          padding-top: var(--space-6);
-          padding-bottom: var(--space-4);
+          padding-top: var(--space-9);
+          padding-bottom: var(--space-2);
         }
 
         .modal__header-slot {

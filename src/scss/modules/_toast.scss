@@ -1,5 +1,14 @@
 *[data-toggle="toast"] {
   cursor: pointer;
+
+  &:focus {
+    outline: 0;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-pri-300);
+    outline-offset: 1px;
+  }
 }
 
 /* Toast — Modal-based notification boxes */
@@ -48,15 +57,15 @@ ul.toast__list {
 }
 
 .modal__body--sm {
-  font-size: var(--fsi-15);
+  font-size: var(--fsi-17);
 }
 
 .modal__body--md {
-  font-size: var(--fsi-21);
+  font-size: var(--fsi-19);
 }
 
 .modal__body--lg {
-  font-size: var(--fsi-23);
+  font-size: var(--fsi-21);
 }
 
 .toast__dismiss {

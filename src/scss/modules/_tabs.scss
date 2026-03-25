@@ -41,6 +41,15 @@
       white-space: nowrap;
       flex-grow: 1;
 
+      &:focus {
+        outline: 0;
+      }
+
+      &:focus-visible {
+        outline: 2px solid var(--color-pri-300);
+        outline-offset: 1px;
+      }
+
       &.is-active {
         border: var(--border-width-sm) solid var(--color-grey-150);
         background-color: var(--color-grey-zero);
@@ -94,6 +103,15 @@
       border: var(--border-width-sm) solid var(--color-grey-250);
       border-radius: var(--radius-sm) var(--radius-sm) var(--radius-xs) var(--radius-xs);
       background-color: var(--color-grey-100);
+
+      &:focus {
+        outline: 0;
+      }
+
+      &:focus-visible {
+        outline: 2px solid var(--color-pri-300);
+        outline-offset: 1px;
+      }
 
       &.is-active {
         padding-bottom: var(--space-4);
@@ -162,6 +180,15 @@
       border-radius: var(--radius-sm) var(--radius-sm) var(--radius-xs) var(--radius-xs);
       background-color: var(--color-grey-100);
 
+      &:focus {
+        outline: 0;
+      }
+
+      &:focus-visible {
+        outline: 2px solid var(--color-pri-300);
+        outline-offset: 1px;
+      }
+
       &.is-active {
         padding-bottom: calc(var(--space-5) - 2px);
         background-color: var(--color-grey-zero);
@@ -226,6 +253,15 @@
       user-select: none;
 
       transition: background-color var(--ease-fast), color var(--ease-fast);
+
+      &:focus {
+        outline: 0;
+      }
+
+      &:focus-visible {
+        outline: 2px solid var(--color-pri-300);
+        outline-offset: 1px;
+      }
 
       &:hover {
         @media (hover: hover) and (pointer: fine) {

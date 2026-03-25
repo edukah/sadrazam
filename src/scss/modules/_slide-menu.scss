@@ -158,6 +158,11 @@
     outline: 0;
   }
 
+  &:focus-visible {
+    outline: 2px solid var(--color-pri-300);
+    outline-offset: 1px;
+  }
+
   &:hover {
     @media (hover: hover) and (pointer: fine) {
       transform: translateY(-50%) rotate(90deg);
@@ -183,6 +188,15 @@
     border-radius: var(--radius-md);
     padding: var(--space-3);
     transition: box-shadow 0.2s ease-out;
+
+    &:focus {
+      outline: 0;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--color-pri-300);
+      outline-offset: 1px;
+    }
 
     &:hover {
       @media (hover: hover) and (pointer: fine) {

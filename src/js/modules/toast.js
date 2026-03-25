@@ -14,7 +14,7 @@ class Toast {
     const availableConfigs = new Map([
       ['message', 'Message to display. Object format (e.g. { success: "Done!" }). Required.'],
       ['time', 'Auto-close delay in ms. Default: `27000`.'],
-      ['size', 'Modal size (`small`, `medium`, `large`). Default: `medium`.'],
+      ['size', 'Modal size (`sm`, `md`, `lg`). Default: `md`.'],
       ['position', 'Vertical position (`top`, `center`, `bottom`). Default: `center`.'],
       ['fontSize', 'Message font size (`sm`, `md`, `lg`). Default: `md`.'],
       ['dismissButton', 'Shows a dismiss button. Default: `false`. `true` when opened via listen().']
@@ -43,7 +43,7 @@ class Toast {
       element.addEventListener('click', () => {
         const type = element.getAttribute('data-type') || 'hint';
         const text = element.getAttribute('data-message');
-        if (text) this.insert({ message: { [type]: text }, size: 'small', fontSize: 'sm', dismissButton: true });
+        if (text) this.insert({ message: { [type]: text }, size: 'sm', fontSize: 'sm', dismissButton: true });
       });
     });
   }
@@ -52,9 +52,8 @@ class Toast {
    * Displays a message in a modal with typed message lists and auto-dismiss.
    * @param {object} options - Message options.
    */
-  static insert ({ message = {}, time = 27000, size = 'medium', position = 'center', fontSize = 'md', closeOnClick = true, dismissButton = false, ...otherOptions }) {
-    const sizeMap = { small: 'sm', medium: 'md', large: 'lg' };
-    const modalSize = sizeMap[size] || 'md';
+  static insert ({ message = {}, time = 27000, size = 'md', position = 'center', fontSize = 'md', closeOnClick = true, dismissButton = false, ...otherOptions }) {
+    const modalSize = size;
     const fontSizeMap = { sm: 'modal__body--sm', md: 'modal__body--md', lg: 'modal__body--lg' };
     const fontSizeClass = fontSizeMap[fontSize] || 'modal__body--md';
 
