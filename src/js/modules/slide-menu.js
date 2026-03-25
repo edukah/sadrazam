@@ -11,6 +11,7 @@ class SlideMenu {
   #listenedElement;
   #container = null;
   #sourceContent = null;
+  #keydownHandler = null;
   #backdropId = null;
 
   // --- Static Defaults ---
@@ -100,7 +101,16 @@ class SlideMenu {
   destroy = () => {
     this.#remove();
     this.#listenedElement?.removeEventListener(this.#config.trigger, this.#insert);
-    if (this.#listenedElement) this.#listenedElement.__slideMenu = null;
+    if (this.#keydownHandler) {
+      this.#listenedElement?.removeEventListener('keydown', this.#keydownHandler);
+    }
+    if (this.#listenedElement) {
+      this.#listenedElement.removeAttribute('role');
+      this.#listenedElement.removeAttribute('tabindex');
+      this.#listenedElement.removeAttribute('aria-haspopup');
+      this.#listenedElement.removeAttribute('aria-expanded');
+      this.#listenedElement.__slideMenu = null;
+    }
   };
 
   // --- Private Event Handlers ---
@@ -176,12 +186,13 @@ class SlideMenu {
       if (!el.hasAttribute('role')) el.setAttribute('role', 'button');
       if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '0');
 
-      el.addEventListener('keydown', (e) => {
+      this.#keydownHandler = (e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
           el.click();
         }
-      });
+      };
+      el.addEventListener('keydown', this.#keydownHandler);
     }
 
     el.setAttribute('aria-haspopup', 'dialog');

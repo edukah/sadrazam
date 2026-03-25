@@ -17,6 +17,8 @@ class Popover {
   #observer;
   /** @type {boolean} */
   #isVisible = false;
+  /** @type {Function|null} */
+  #a11yKeydownHandler = null;
 
   // --- Static Structure ---
 
@@ -176,8 +178,16 @@ class Popover {
       this.#referenceElement?.removeEventListener(mutualEvents[trigger], this.toggle);
     }
 
+    if (this.#a11yKeydownHandler) {
+      this.#referenceElement?.removeEventListener('keydown', this.#a11yKeydownHandler);
+    }
+
     this.#popoverElement?.remove();
     if (this.#referenceElement) {
+      this.#referenceElement.removeAttribute('role');
+      this.#referenceElement.removeAttribute('tabindex');
+      this.#referenceElement.removeAttribute('aria-haspopup');
+      this.#referenceElement.removeAttribute('aria-expanded');
       this.#referenceElement.__popover = null;
     }
   };
@@ -287,12 +297,13 @@ class Popover {
       if (!el.hasAttribute('role')) el.setAttribute('role', 'button');
       if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '0');
 
-      el.addEventListener('keydown', (e) => {
+      this.#a11yKeydownHandler = (e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
           el.click();
         }
-      });
+      };
+      el.addEventListener('keydown', this.#a11yKeydownHandler);
     }
 
     el.setAttribute('aria-haspopup', 'true');

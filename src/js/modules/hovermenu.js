@@ -12,6 +12,7 @@ class Hovermenu {
   #contentContainer = null;
   #sourceContent = null;
   #backdropId = null;
+  #a11yKeydownHandler = null;
 
   // --- Static Defaults ---
   static defaultConfig = {
@@ -104,7 +105,16 @@ class Hovermenu {
   destroy = () => {
     this.#remove();
     this.#listenedElement?.removeEventListener(this.#config.trigger, this.#insert);
-    if (this.#listenedElement) this.#listenedElement.__hovermenu = null;
+    if (this.#a11yKeydownHandler) {
+      this.#listenedElement?.removeEventListener('keydown', this.#a11yKeydownHandler);
+    }
+    if (this.#listenedElement) {
+      this.#listenedElement.removeAttribute('role');
+      this.#listenedElement.removeAttribute('tabindex');
+      this.#listenedElement.removeAttribute('aria-haspopup');
+      this.#listenedElement.removeAttribute('aria-expanded');
+      this.#listenedElement.__hovermenu = null;
+    }
   };
 
   // --- Private Event Handlers ---
@@ -179,12 +189,13 @@ class Hovermenu {
       if (!el.hasAttribute('role')) el.setAttribute('role', 'button');
       if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '0');
 
-      el.addEventListener('keydown', (e) => {
+      this.#a11yKeydownHandler = (e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
           el.click();
         }
-      });
+      };
+      el.addEventListener('keydown', this.#a11yKeydownHandler);
     }
 
     el.setAttribute('aria-haspopup', 'true');
