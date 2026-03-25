@@ -4,7 +4,8 @@
    HTML <button> element stili _form.scss'te kalır, bu dosya sadece
    .bttn class sistemi içindir.
 
-   Boyutlar:    --lg, --md, --sm, --xs (+ rectangle varyantları)
+   Kullanım:    bttn--pri (base class gerekmez, :is() otomatik uygular)
+   Boyutlar:    --lg, --md (default), --sm, --xs (+ rectangle varyantları)
    Kademeler:   filled (default), --soft, --outline
    Bağımsız:    --ghost
    Renkler:     --pri, --sec, --ter, --neutral,
@@ -13,7 +14,20 @@
    Yerleşim:    --block (tam genişlik)
    ========================================================================= */
 
-.bttn {
+// Base stiller — .bttn veya herhangi bir renk modifier'ı ile otomatik uygulanır
+:is(
+  .bttn,
+  .bttn--pri,
+  .bttn--sec,
+  .bttn--ter,
+  .bttn--neutral,
+  .bttn--safe,
+  .bttn--notice,
+  .bttn--caution,
+  .bttn--warning,
+  .bttn--danger,
+  .bttn--ghost
+) {
   position: relative;
   display: inline-flex;
   justify-content: center;
@@ -29,8 +43,9 @@
   line-height: 1;
   text-shadow: 0 0 0 var(--color-grey-250);
   box-shadow: 0 0 0 var(--color-grey-250);
-  transition: filter 0.2s, background-color 0.2s;
+  transition: background-color 0.2s;
   outline: none;
+  padding: var(--space-5);
   background-color: var(--button-color, transparent);
   color: var(--color-text-white--f);
   border-color: var(--button-color, transparent);
@@ -40,7 +55,9 @@
   }
 
   &:hover {
-    filter: brightness(0.9);
+    @media (hover: hover) and (pointer: fine) {
+      background-color: color-mix(in srgb, var(--button-color, transparent), black 10%);
+    }
   }
 
   &:hover,
@@ -49,175 +66,132 @@
     outline: none;
   }
 
-  // ---- Boyutlar (kare padding) ----
-  &--lg {
-    padding: var(--space-7);
+  &:focus-visible {
+    outline: 2px solid var(--color-pri-300);
+    outline-offset: 1px;
   }
+}
 
-  &--md {
-    padding: var(--space-5);
+// ---- Boyutlar (kare padding) ----
+.bttn--lg { padding: var(--space-7); }
+.bttn--md { padding: var(--space-5); }
+.bttn--sm { padding: var(--space-4); }
+.bttn--xs { padding: var(--space-3); }
+
+// ---- Rectangle varyantları (yatay padding artırılır) ----
+.bttn--lg-rectangle { padding: var(--space-7) var(--space-11); }
+.bttn--md-rectangle { padding: var(--space-5) var(--space-8); }
+.bttn--sm-rectangle { padding: var(--space-4) var(--space-6); }
+.bttn--xs-rectangle { padding: var(--space-3) var(--space-5); }
+
+// ---- Block buton (tam genişlik) ----
+.bttn--block {
+  display: block;
+  width: 100%;
+
+  &+& {
+    margin-top: var(--space-3);
   }
+}
 
-  &--sm {
-    padding: var(--space-4);
-  }
+// ---- Renk varyantları (sadece --button-color set eder) ----
+.bttn--pri     { --button-color: var(--color-pri-500); }
+.bttn--sec     { --button-color: var(--color-sec-500); }
+.bttn--ter     { --button-color: var(--color-ter-500); }
+.bttn--safe    { --button-color: var(--color-safe-500); }
+.bttn--notice  { --button-color: var(--color-notice-500); }
+.bttn--caution { --button-color: var(--color-caution-500); }
+.bttn--warning { --button-color: var(--color-warning-500); }
+.bttn--danger  { --button-color: var(--color-danger-500); }
 
-  &--xs {
-    padding: var(--space-3);
-  }
+// ---- Kademe: Soft ----
+.bttn--soft {
+  background-color: color-mix(in srgb, var(--button-color) 12%, transparent);
+  color: var(--button-color);
+  border-color: transparent;
 
-  // ---- Rectangle varyantları (yatay padding artırılır) ----
-  &--lg-rectangle {
-    padding: var(--space-7) var(--space-11);
-  }
-
-  &--md-rectangle {
-    padding: var(--space-5) var(--space-8);
-  }
-
-  &--sm-rectangle {
-    padding: var(--space-4) var(--space-6);
-  }
-
-  &--xs-rectangle {
-    padding: var(--space-3) var(--space-5);
-  }
-
-  // ---- Block buton (tam genişlik) ----
-  &--block {
-    display: block;
-    width: 100%;
-
-    &+& {
-      margin-top: var(--space-3);
+  &:hover {
+    @media (hover: hover) and (pointer: fine) {
+      background-color: color-mix(in srgb, var(--button-color) 20%, transparent);
     }
   }
+}
 
-  // ---- Renk varyantları (sadece --button-color set eder) ----
-  &--pri {
-    --button-color: var(--color-pri-500);
-  }
+// ---- Kademe: Outline ----
+.bttn--outline {
+  background-color: transparent;
+  color: var(--button-color);
+  border-color: var(--button-color);
 
-  &--sec {
-    --button-color: var(--color-sec-500);
-  }
-
-  &--ter {
-    --button-color: var(--color-ter-500);
-  }
-
-  &--safe {
-    --button-color: var(--color-safe-500);
-  }
-
-  &--notice {
-    --button-color: var(--color-notice-500);
-  }
-
-  &--caution {
-    --button-color: var(--color-caution-500);
-  }
-
-  &--warning {
-    --button-color: var(--color-warning-500);
-  }
-
-  &--danger {
-    --button-color: var(--color-danger-500);
-  }
-
-  // ---- Kademe: Soft ----
-  &--soft {
-    background-color: color-mix(in srgb, var(--button-color) 12%, transparent);
-    color: var(--button-color);
-    border-color: transparent;
-
-    &:hover {
-      @media (hover: hover) and (pointer: fine) {
-        background-color: color-mix(in srgb, var(--button-color) 20%, transparent);
-      }
+  &:hover {
+    @media (hover: hover) and (pointer: fine) {
+      background-color: color-mix(in srgb, var(--button-color) 8%, transparent);
     }
   }
+}
 
-  // ---- Kademe: Outline ----
-  &--outline {
-    background-color: transparent;
-    color: var(--button-color);
-    border-color: var(--button-color);
+// ---- Neutral (kendi renk sistemi) ----
+.bttn--neutral {
+  --button-color: var(--color-grey-250);
+  background-color: transparent;
+  color: var(--color-text-dark-2);
+  border-color: var(--color-grey-300);
 
-    &:hover {
-      @media (hover: hover) and (pointer: fine) {
-        background-color: color-mix(in srgb, var(--button-color) 8%, transparent);
-      }
-    }
-
-    &:focus {
-      box-shadow: 0 0 0 2px color-mix(in srgb, var(--button-color) 15%, transparent);
+  &:hover {
+    @media (hover: hover) and (pointer: fine) {
+      background-color: var(--color-grey-50);
     }
   }
+}
 
-  // ---- Neutral (kendi renk sistemi) ----
-  &--neutral {
-    --button-color: var(--color-grey-250);
-    background-color: transparent;
-    color: var(--color-text-dark-2);
-    border-color: var(--color-text-dark-2);
+// ---- Neutral + Soft kombinasyonu ----
+.bttn--neutral.bttn--soft {
+  background-color: transparent;
+  color: var(--color-grey-400);
+  border-color: var(--color-grey-400);
 
-    &:hover {
-      filter: brightness(0.75);
+  &:hover {
+    @media (hover: hover) and (pointer: fine) {
+      background-color: var(--color-grey-50);
     }
   }
+}
 
-  // ---- Neutral + Soft kombinasyonu ----
-  &--neutral#{&}--soft {
-    background-color: transparent;
-    color: var(--color-grey-400);
-    border-color: var(--color-grey-400);
+// ---- Neutral + Outline kombinasyonu ----
+.bttn--neutral.bttn--outline {
+  background-color: transparent;
+  color: var(--color-grey-600);
+  border-color: var(--color-grey-600);
 
-    &:hover {
-      background-color: transparent;
+  &:hover {
+    @media (hover: hover) and (pointer: fine) {
+      background-color: var(--color-grey-50);
     }
   }
+}
 
-  // ---- Neutral + Outline kombinasyonu ----
-  &--neutral#{&}--outline {
-    background-color: transparent;
-    color: var(--color-grey-600);
-    border-color: var(--color-grey-600);
+// ---- Bağımsız: Ghost ----
+.bttn--ghost {
+  background-color: transparent;
+  color: var(--color-text-dark-3);
+  border-color: transparent;
+  box-shadow: none;
+  text-shadow: none;
+}
 
-    &:hover {
-      background-color: transparent;
-    }
-
-    &:focus {
-      border-color: var(--color-pri-300);
-      box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-pri-500) 15%, transparent);
-    }
-  }
-
-  // ---- Bağımsız: Ghost ----
-  &--ghost {
-    --button-color: none;
-    background-color: transparent;
-    color: var(--color-text-dark-3);
-    border-color: transparent;
-    box-shadow: none;
-    text-shadow: none;
-  }
-
-  // ---- Disabled durumu ----
-  &--disabled,
+// ---- Disabled durumu ----
+:is(.bttn, [class*="bttn--"]) {
+  &.bttn--disabled,
   &[disabled] {
     background-color: var(--color-grey-100) !important;
     border-color: var(--color-grey-150) !important;
     color: var(--color-grey-400) !important;
     cursor: not-allowed;
-    pointer-events: none;
   }
 
   // ---- Loading durumu (disabled'i ezer) ----
-  &--loading,
-  &--loading[disabled] {
+  &.bttn--loading,
+  &.bttn--loading[disabled] {
     cursor: wait;
     pointer-events: none;
     background-color: var(--color-grey-400) !important;
