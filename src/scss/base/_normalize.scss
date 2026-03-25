@@ -305,16 +305,13 @@ textarea {
 }
 
 /**
- * 1. Correct the odd appearance in Chrome and Safari.
- * 2. Correct the outline style in Safari.
+ * Correct the odd appearance in Chrome and Safari.
  */
 
 [type="search"] {
   -webkit-appearance: textfield;
-  /* 1 */
-  outline-offset: -2px;
-  /* 2 */
 }
+/* outline-offset: -2px kaldırıldı — :focus-visible outline-offset: 1px ile çakışıyordu */
 
 /**
  * Remove the inner padding in Chrome and Safari on macOS.
