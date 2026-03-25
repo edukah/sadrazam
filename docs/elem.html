@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sadrazam – Elem Showcase</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/bold/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/light/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <script type="text/javascript" src="assets/js/script.js"></script>
+    <link rel="stylesheet" href="assets/sadrazam.min.css">
+    <script type="text/javascript" src="assets/sadrazam.min.js"></script>
+    <style>
+        .result-output {
+            margin-top: 8px;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.82rem;
+            font-family: monospace;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            min-height: 20px;
+            color: var(--text-color);
+        }
+
+        .style-target {
+            padding: 16px 24px;
+            background: #0984e3;
+            color: #fff;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .flash-target {
+            padding: 16px 24px;
+            background: var(--card-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: var(--text-color);
+            display: inline-block;
+        }
+
+        .scroll-anchor {
+            padding: 20px 24px;
+            background: #00b894;
+            color: #fff;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .btn-row {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
+            flex-wrap: wrap;
+        }
+
+        .height-log {
+            margin-top: 8px;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-family: monospace;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            max-height: 120px;
+            overflow-y: auto;
+            color: var(--text-color);
+        }
+
+        .api-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.82rem;
+            margin-top: 8px;
+        }
+
+        .api-table th,
+        .api-table td {
+            text-align: left;
+            padding: 8px 12px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-color);
+        }
+
+        .api-table th {
+            font-weight: 600;
+            background: var(--card-bg);
+        }
+
+        .api-table td:first-child {
+            font-family: monospace;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+
+<body>
+<script>if(localStorage.getItem("dark-mode"))document.body.classList.add("dark-mode")</script>
+    <header>
+        <nav class="top-navbar">
+            <div class="nav-container">
+                <a href="index.html" class="nav-logo">Sadrazam</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="javascript:void(0)" onclick="openPopup(); return false;">Examples</a></li>
+                    <li><a href="https://github.com/edukah/sadrazam" target="_blank">GitHub</a></li>
+                </ul>
+                <div class="navi-popup-overlay" id="examplesPopupOverlay" onclick="closePopup()">
+                    <div class="navi-popup" id="examplesPopup" onclick="event.stopPropagation()">
+                        <h3>Examples</h3>
+                        <div class="popup-category">
+                            <div class="popup-category-title">Components</div>
+                            <ul class="popup-grid">
+                                <li><a href="buttons.html">Button</a></li>
+                                <li><a href="count-badge.html">Count Badge</a></li>
+                                <li><a href="forms.html">Form</a></li>
+                                <li><a href="form-patterns.html">Form Patterns</a></li>
+                                <li><a href="links.html">Link</a></li>
+                                <li><a href="switches.html">Switch</a></li>
+                            </ul>
+                        </div>
+                        <div class="popup-category">
+                            <div class="popup-category-title">Modules</div>
+                            <ul class="popup-grid">
+                                <li><a href="autocomplete.html">Autocomplete</a></li>
+                                <li><a href="backdrop.html">Backdrop</a></li>
+                                <li><a href="hovermenu.html">Hovermenu</a></li>
+                                <li><a href="infinite-scroll.html">Infinite Scroll</a></li>
+                                <li><a href="snackbar.html">Snackbar</a></li>
+                                <li><a href="modals.html">Modal</a></li>
+                                <li><a href="popovers.html">Popover</a></li>
+                                <li><a href="slide-menu.html">Slide Menu</a></li>
+                                <li><a href="spinners.html">Spinner</a></li>
+                                <li><a href="tabs.html">Tabs</a></li>
+                                <li><a href="tooltips.html">Tooltip</a></li>
+                            </ul>
+                        </div>
+                        <div class="popup-category">
+                            <div class="popup-category-title">Helpers</div>
+                            <ul class="popup-grid">
+                                <li><a href="form-validation.html">Form Validation</a></li>
+                                <li><a href="autosize-textarea.html">Autosize Textarea</a></li>
+                                <li><a href="autosize-select.html">Autosize Select</a></li>
+                                <li><a href="elem.html">Elem</a></li>
+                                <li><a href="document.html">Document</a></li>
+                            </ul>
+                        </div>
+                        <div class="popup-category">
+                            <div class="popup-category-title">Services &amp; Layout</div>
+                            <ul class="popup-grid">
+                                <li><a href="ajax.html">Ajax</a></li>
+                                <li><a href="grid.html">Grid</a></li>
+                                <li><a href="spacing.html">Spacing</a></li>
+                                <li><a href="colors.html">Colors</a></li>
+                                <li><a href="typography.html">Typography</a></li>
+                            </ul>
+                        </div>
+                        <button class="close-popup" onclick="closePopup()">&#10005;</button>
+                    </div>
+                </div>
+                <div class="dark-mode-button-container">
+                    <div class="mode-toggle-switch" onclick="toggleMode()"></div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1>Sadrazam – Elem Showcase</h1>
+        <p class="subtitle">DOM element utilities: computed styles, scroll control, resize observation, flash animation, and scroll-to-view</p>
+
+        <!-- ==================== GET STYLE ==================== -->
+        <div class="section">
+            <h2 class="section-title">1. getStyle(el, styleProp)</h2>
+            <p class="section-desc">Gets the computed style value of an element using <span class="code">window.getComputedStyle()</span>. Returns the value as a string, or <span class="code">null</span> if the element is not found.</p>
+
+            <div class="row">
+                <span class="label">Target</span>
+                <div id="style-target" class="style-target">Styled Element</div>
+            </div>
+
+            <div class="btn-row">
+                <button class="demo-btn" onclick="getStyleDemo('background-color')">
+                    <i class="ph-bold ph-palette"></i>&nbsp; background-color
+                </button>
+                <button class="demo-btn" onclick="getStyleDemo('font-size')">
+                    <i class="ph-bold ph-text-aa"></i>&nbsp; font-size
+                </button>
+                <button class="demo-btn" onclick="getStyleDemo('padding')">
+                    <i class="ph-bold ph-arrows-out"></i>&nbsp; padding
+                </button>
+                <button class="demo-btn" onclick="getStyleDemo('border-radius')">
+                    <i class="ph-bold ph-corners-out"></i>&nbsp; border-radius
+                </button>
+            </div>
+
+            <div id="getStyleResult" class="result-output">Click a button to get the computed style value</div>
+
+            <div class="row" style="margin-top: 10px;">
+                <span class="label">Code</span>
+                <span class="code">Sadrazam.Elem.getStyle(element, 'background-color')</span>
+            </div>
+        </div>
+
+        <!-- ==================== DISABLE / ENABLE SCROLL ==================== -->
+        <div class="section">
+            <h2 class="section-title">2. disableScroll / enableScroll</h2>
+            <p class="section-desc">Disables page scrolling while preserving scrollbar space via <span class="code">paddingRight</span>. Supports nested calls — scroll is only re-enabled when all callers have called <span class="code">enableScroll()</span>.</p>
+
+            <div class="btn-row">
+                <button class="demo-btn demo-btn--primary" onclick="disableScrollDemo()">
+                    <i class="ph-bold ph-lock"></i>&nbsp; disableScroll()
+                </button>
+                <button class="demo-btn" onclick="enableScrollDemo()">
+                    <i class="ph-bold ph-lock-open"></i>&nbsp; enableScroll()
+                </button>
+            </div>
+
+            <div id="scrollLockResult" class="result-output">Lock count: 0 — Scroll is enabled</div>
+
+            <div class="row" style="margin-top: 10px;">
+                <span class="label">Code</span>
+                <span class="code">Sadrazam.Elem.disableScroll()</span>
+                <span class="code">Sadrazam.Elem.enableScroll()</span>
+            </div>
+        </div>
+
+        <!-- ==================== GET SCROLLBAR WIDTH ==================== -->
+        <div class="section">
+            <h2 class="section-title">3. getScrollbarWidth()</h2>
+            <p class="section-desc">Calculates the browser scrollbar width in pixels. The result is cached after the first call.</p>
+
+            <div class="btn-row">
+                <button class="demo-btn" onclick="getScrollbarWidthDemo()">
+                    <i class="ph-bold ph-ruler"></i>&nbsp; Calculate Scrollbar Width
+                </button>
+            </div>
+
+            <div id="scrollbarWidthResult" class="result-output">Click the button to measure</div>
+
+            <div class="row" style="margin-top: 10px;">
+                <span class="label">Code</span>
+                <span class="code">Sadrazam.Elem.getScrollbarWidth()</span>
+            </div>
+        </div>
+
+        <!-- ==================== FLASH ==================== -->
+        <div class="section">
+            <h2 class="section-title">4. flash(element)</h2>
+            <p class="section-desc">Briefly flashes the element with a background highlight animation (<span class="code">.is-flashing</span> + <span class="code">sdrzm-flash</span> keyframes). The class is removed automatically on <span class="code">animationend</span>.</p>
+
+            <div class="row">
+                <span class="label">Target</span>
+                <div id="flash-target" class="flash-target">
+                    <i class="ph-bold ph-lightning"></i>&nbsp; Flash this element
+                </div>
+            </div>
+
+            <div class="btn-row">
+                <button class="demo-btn demo-btn--primary" onclick="flashDemo()">
+                    <i class="ph-bold ph-lightning"></i>&nbsp; Flash!
+                </button>
+            </div>
+
+            <div class="row" style="margin-top: 10px;">
+                <span class="label">Code</span>
+                <span class="code">Sadrazam.Elem.flash(element)</span>
+            </div>
+        </div>
+
+        <!-- ==================== SCROLL TO VIEW ==================== -->
+        <div class="section">
+            <h2 class="section-title">5. scrollToView(element, options?)</h2>
+            <p class="section-desc">Smoothly scrolls the page to bring the target element into view. Accepts an optional <span class="code">margin</span> (default: 10px) for top offset. Prevents over-scrolling past page boundaries.</p>
+
+            <div class="btn-row">
+                <button class="demo-btn demo-btn--primary" onclick="scrollToViewDemo()">
+                    <i class="ph-bold ph-arrow-down"></i>&nbsp; Scroll to Target Below
+                </button>
+                <button class="demo-btn" onclick="scrollToViewDemo(50)">
+                    <i class="ph-bold ph-arrow-down"></i>&nbsp; Scroll with margin: 50
+                </button>
+            </div>
+
+            <div class="row" style="margin-top: 10px;">
+                <span class="label">Code</span>
+                <span class="code">Sadrazam.Elem.scrollToView(element)</span>
+                <span class="code">Sadrazam.Elem.scrollToView(element, { margin: 50 })</span>
+            </div>
+        </div>
+
+        <!-- ==================== ON ELEMENT HEIGHT CHANGE ==================== -->
+        <div class="section">
+            <h2 class="section-title">6. onElementHeightChange(element, callback)</h2>
+            <p class="section-desc">Observes an element for resize events using <span class="code">ResizeObserver</span>. Returns the observer instance — call <span class="code">.disconnect()</span> to stop observing.</p>
+
+            <div class="row">
+                <span class="label">Resize me</span>
+                <textarea id="resize-textarea" rows="3" style="width: 400px; max-width: 100%; resize: both; padding: 10px; border: 1px solid var(--border-color); border-radius: 6px; font-size: 0.9rem; color: var(--text-color);" placeholder="Drag the corner to resize this textarea..."></textarea>
+            </div>
+
+            <div id="height-log" class="height-log">Waiting for resize events...</div>
+
+            <div class="btn-row">
+                <button class="demo-btn demo-btn--danger" onclick="disconnectObserver()">
+                    <i class="ph-bold ph-stop"></i>&nbsp; Disconnect Observer
+                </button>
+                <button class="demo-btn" onclick="reconnectObserver()">
+                    <i class="ph-bold ph-play"></i>&nbsp; Reconnect Observer
+                </button>
+            </div>
+
+            <div class="row" style="margin-top: 10px;">
+                <span class="label">Code</span>
+                <span class="code">const observer = Sadrazam.Elem.onElementHeightChange(el, callback)</span>
+            </div>
+            <div class="row">
+                <span class="label">Stop</span>
+                <span class="code">observer.disconnect()</span>
+            </div>
+        </div>
+
+        <!-- ==================== CONSOLE HELP ==================== -->
+        <div class="section">
+            <h2 class="section-title">7. Console Help</h2>
+            <p class="section-desc">Run <span class="code">Sadrazam.Elem.help()</span> in the browser console to see all available methods and their descriptions.</p>
+
+            <div class="btn-row">
+                <button class="demo-btn" onclick="Sadrazam.Elem.help()">
+                    <i class="ph-bold ph-terminal"></i>&nbsp; Run Sadrazam.Elem.help()
+                </button>
+            </div>
+
+            <div class="row" style="margin-top: 10px;">
+                <span class="label">Code</span>
+                <span class="code">Sadrazam.Elem.help()</span>
+            </div>
+        </div>
+
+        <!-- ==================== API REFERENCE ==================== -->
+        <div class="section">
+            <h2 class="section-title">8. API Reference</h2>
+            <p class="section-desc">All static methods available on <span class="code">Sadrazam.Elem</span></p>
+
+            <table class="api-table">
+                <thead>
+                    <tr>
+                        <th>Method</th>
+                        <th>Parameters</th>
+                        <th>Returns</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>getStyle(el, styleProp)</td>
+                        <td>el: HTMLElement, styleProp: string</td>
+                        <td>string | null</td>
+                        <td>Gets the computed style value of an element.</td>
+                    </tr>
+                    <tr>
+                        <td>disableScroll()</td>
+                        <td>—</td>
+                        <td>void</td>
+                        <td>Disables page scrolling. Supports nested calls.</td>
+                    </tr>
+                    <tr>
+                        <td>enableScroll()</td>
+                        <td>—</td>
+                        <td>void</td>
+                        <td>Re-enables page scrolling. Must be called once per disableScroll().</td>
+                    </tr>
+                    <tr>
+                        <td>getScrollbarWidth()</td>
+                        <td>—</td>
+                        <td>number</td>
+                        <td>Calculates the browser scrollbar width in pixels (cached).</td>
+                    </tr>
+                    <tr>
+                        <td>flash(element)</td>
+                        <td>element: HTMLElement</td>
+                        <td>void</td>
+                        <td>Briefly flashes the element with a background highlight.</td>
+                    </tr>
+                    <tr>
+                        <td>scrollToView(el, options?)</td>
+                        <td>el: HTMLElement, options?: { margin: number }</td>
+                        <td>void</td>
+                        <td>Smoothly scrolls the page to the specified element. Default margin: 10px.</td>
+                    </tr>
+                    <tr>
+                        <td>onElementHeightChange(el, cb)</td>
+                        <td>el: HTMLElement, cb: function</td>
+                        <td>ResizeObserver | null</td>
+                        <td>Runs a callback when the element is resized. Returns the observer instance.</td>
+                    </tr>
+                    <tr>
+                        <td>help()</td>
+                        <td>—</td>
+                        <td>void</td>
+                        <td>Prints available methods to the console.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- ==================== SCROLL TARGET ==================== -->
+        <div id="scroll-target" class="scroll-anchor">
+            <i class="ph-bold ph-flag-checkered"></i>&nbsp; scrollToView target — you scrolled here!
+        </div>
+    </div>
+
+    <footer>
+        <p>Sadrazam Component Library &copy; <span id="currentYear"></span> | MIT License</p>
+    </footer>
+
+    <script>
+        // --- 1. getStyle ---
+        function getStyleDemo(prop) {
+            const el = document.getElementById('style-target');
+            const value = Sadrazam.Elem.getStyle(el, prop);
+            document.getElementById('getStyleResult').textContent = prop + ': ' + value;
+        }
+
+        // --- 2. disableScroll / enableScroll ---
+        let scrollLockCount = 0;
+
+        function disableScrollDemo() {
+            Sadrazam.Elem.disableScroll();
+            scrollLockCount++;
+            updateScrollLockDisplay();
+        }
+
+        function enableScrollDemo() {
+            if (scrollLockCount <= 0) return;
+            Sadrazam.Elem.enableScroll();
+            scrollLockCount--;
+            updateScrollLockDisplay();
+        }
+
+        function updateScrollLockDisplay() {
+            const el = document.getElementById('scrollLockResult');
+            if (scrollLockCount > 0) {
+                el.textContent = 'Lock count: ' + scrollLockCount + ' — Scroll is DISABLED';
+            } else {
+                el.textContent = 'Lock count: 0 — Scroll is enabled';
+            }
+        }
+
+        // --- 3. getScrollbarWidth ---
+        function getScrollbarWidthDemo() {
+            const width = Sadrazam.Elem.getScrollbarWidth();
+            document.getElementById('scrollbarWidthResult').textContent = 'Scrollbar width: ' + width + 'px';
+        }
+
+        // --- 4. flash ---
+        function flashDemo() {
+            const el = document.getElementById('flash-target');
+            Sadrazam.Elem.flash(el);
+        }
+
+        // --- 5. scrollToView ---
+        function scrollToViewDemo(margin) {
+            const target = document.getElementById('scroll-target');
+            if (margin !== undefined) {
+                Sadrazam.Elem.scrollToView(target, { margin: margin });
+            } else {
+                Sadrazam.Elem.scrollToView(target);
+            }
+        }
+
+        // --- 6. onElementHeightChange ---
+        let resizeCount = 0;
+        let resizeObserver = null;
+
+        function initObserver() {
+            const textarea = document.getElementById('resize-textarea');
+            const log = document.getElementById('height-log');
+
+            resizeObserver = Sadrazam.Elem.onElementHeightChange(textarea, function () {
+                resizeCount++;
+                const height = textarea.offsetHeight;
+                const entry = document.createElement('div');
+                entry.textContent = '[' + resizeCount + '] Height changed: ' + height + 'px';
+                log.appendChild(entry);
+                log.scrollTop = log.scrollHeight;
+            });
+        }
+
+        function disconnectObserver() {
+            if (resizeObserver) {
+                resizeObserver.disconnect();
+                resizeObserver = null;
+                const log = document.getElementById('height-log');
+                const entry = document.createElement('div');
+                entry.textContent = '— Observer disconnected —';
+                entry.style.color = '#d63031';
+                log.appendChild(entry);
+                log.scrollTop = log.scrollHeight;
+            }
+        }
+
+        function reconnectObserver() {
+            if (!resizeObserver) {
+                initObserver();
+                const log = document.getElementById('height-log');
+                const entry = document.createElement('div');
+                entry.textContent = '— Observer reconnected —';
+                entry.style.color = '#00b894';
+                log.appendChild(entry);
+                log.scrollTop = log.scrollHeight;
+            }
+        }
+
+        initObserver();
+    </script>
+
+    <nav class="bottom-tab">
+        <div class="bottom-tab__bar">
+            <a href="index.html" class="bottom-tab__item">
+                <i class="ph-fill ph-house"></i>
+                <span>Home</span>
+            </a>
+            <button class="bottom-tab__item" onclick="openPopup()">
+                <i class="ph-fill ph-squares-four"></i>
+                <span>Examples</span>
+            </button>
+            <button class="bottom-tab__item" onclick="toggleMode()">
+                <i class="ph-fill ph-moon"></i>
+                <span>Theme</span>
+            </button>
+            <a href="https://github.com/edukah/sadrazam" target="_blank" class="bottom-tab__item">
+                <i class="ph-fill ph-github-logo"></i>
+                <span>GitHub</span>
+            </a>
+        </div>
+    </nav>
+</body>
+
+</html>
