@@ -1,6 +1,5 @@
 import Snackbar from '../modules/snackbar.js';
 import Language from '../language/core/language.js';
-import Viewport from './viewport.js';
 import Elem from '../modules/elem.js';
 
 /**
@@ -80,13 +79,9 @@ class Document {
    * Adjusts footer padding to prevent content from being hidden behind a fixed/sticky element.
    * Measures the fixed element's height, adds it to footer's original padding-bottom, and applies the total.
    * Stores original padding in a data attribute for restoration.
-   *
-   * If breakpoint is provided: only applies below that breakpoint, restores original padding above it.
-   * If breakpoint is omitted: always applies (for elements that are always fixed).
+   * Checks computed display — if the element is hidden by CSS (media queries, etc.), padding is restored.
    *
    * @param {string} selector - CSS selector for the fixed element.
-   * @param {object} [options] - Options.
-   * @param {number|string} [options.breakpoint] - Pixel value or CSS variable name (e.g. '--breakpoint-lg'). Adjust only below this width; restore above.
    */
   static fixedElementAdjust (selector) {
     const fixedElement = globalThis.document.querySelector(selector);
