@@ -105,7 +105,7 @@ const Sadrazam = {
     const messages = lines.map(([text]) => text);
     const styles = lines.flatMap(([_, style]) => style || '');
 
-    console.log(messages.join(''), ...styles);
+    console.info(messages.join(''), ...styles);
   }
 };
 

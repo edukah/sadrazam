@@ -167,7 +167,7 @@ html.is-locked {
       outline: 0;
       text-align: left;
 
-      padding: var(--space-11) var(--space-11) var(--space-12);
+      padding: var(--space-11) var(--space-11) var(--space-13);
 
       // Header varsa → daha az üst padding (header kendi padding'ini sağlıyor)
       &:has(.modal__header) {

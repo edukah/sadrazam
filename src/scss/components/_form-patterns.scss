@@ -49,8 +49,8 @@
       outline-offset: 1px;
     }
 
-    @media (hover: hover) and (pointer: fine) {
-      &:hover {
+    &:hover {
+      @media (hover: hover) and (pointer: fine) {
         color: var(--color-text-dark-1);
       }
     }

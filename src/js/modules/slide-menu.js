@@ -11,7 +11,7 @@ class SlideMenu {
   #listenedElement;
   #container = null;
   #sourceContent = null;
-  #keydownHandler = null;
+  #a11yKeydownHandler = null;
   #backdropId = null;
 
   // --- Static Defaults ---
@@ -101,8 +101,8 @@ class SlideMenu {
   destroy = () => {
     this.#remove();
     this.#listenedElement?.removeEventListener(this.#config.trigger, this.#insert);
-    if (this.#keydownHandler) {
-      this.#listenedElement?.removeEventListener('keydown', this.#keydownHandler);
+    if (this.#a11yKeydownHandler) {
+      this.#listenedElement?.removeEventListener('keydown', this.#a11yKeydownHandler);
     }
     if (this.#listenedElement) {
       this.#listenedElement.removeAttribute('role');
@@ -186,13 +186,13 @@ class SlideMenu {
       if (!el.hasAttribute('role')) el.setAttribute('role', 'button');
       if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '0');
 
-      this.#keydownHandler = (e) => {
+      this.#a11yKeydownHandler = (e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
           el.click();
         }
       };
-      el.addEventListener('keydown', this.#keydownHandler);
+      el.addEventListener('keydown', this.#a11yKeydownHandler);
     }
 
     el.setAttribute('aria-haspopup', 'dialog');
@@ -226,7 +226,7 @@ class SlideMenu {
       while (this.#sourceContent.childNodes.length > 0) {
         contentContainer.appendChild(this.#sourceContent.childNodes[0]);
       }
-      this.#sourceContent.setAttribute('data-hovermenu-id-source', id);
+      this.#sourceContent.setAttribute('data-slide-menu-id-source', id);
     } else if (typeof this.#sourceContent === 'string') {
       contentContainer.innerHTML = this.#sourceContent;
     }
@@ -242,7 +242,7 @@ class SlideMenu {
       while (contentContainer?.childNodes.length > 0) {
         this.#sourceContent.appendChild(contentContainer.childNodes[0]);
       }
-      this.#sourceContent.removeAttribute('data-hovermenu-id-source');
+      this.#sourceContent.removeAttribute('data-slide-menu-id-source');
     }
     
     this.#container?.remove();

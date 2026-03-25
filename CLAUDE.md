@@ -67,6 +67,10 @@ sadrazam/
 - **`is-open`**: autocomplete dropdown visibility, slide-menu open state
 - Component SCSS files prefixed with `_` (partials)
 - JS modules export classes with static `help()` method for console docs
+- **Console logging convention**:
+  - `console.info` — only for `help()` methods (styled API docs in browser console)
+  - `console.warn` / `console.error` — namespaced: `[Sadrazam|ClassName] Message.` (e.g. `[Sadrazam|Autocomplete] Target element not found.`)
+  - `console.log` / `console.debug` — stripped by Terser `pure_funcs` in production builds
 - Demo pages in `docs/` follow consistent structure: same head, inline CSS, section cards
 - English language for all code and docs
 
@@ -99,7 +103,7 @@ _variables ─┬── @forward colors-main
 | `_colors-main.scss` | Ortak: white, black, backdrop, action, logo. @use/_forward pri, sec, ter, accent |
 | `_colors-text.scss` | Text (`1`–`4`) + link renkleri. Bağımlılık: `@use 'colors-main'` |
 | `_colors-grey.scss` | Grey scale (13-unit intervals, 20 steps + zero; son iki adım 910/950 13-unit pattern'ı kırar). Bkz. `docs/wiki/grey-scale.md` |
-| `_colors-interaction.scss` | safe, notice, caution, warning, danger. Bağımlılık: `@use 'colors-main'` |
+| `_colors-interaction.scss` | safe (green), notice (blue), caution (amber), warning (orange), danger (red). Bağımlılık: `@use 'colors-main'` |
 
 **`--f` suffix convention:** Sabit (fixed) renkler `--color-*--f` suffix'i alır, dark mode'da değişmez.
 
@@ -168,3 +172,37 @@ Tüm instance-bazlı modüller `destroy()` metodu sağlar (sektör standardı: j
 - **Hovermenu, SlideMenu**: `instance.destroy()` + `Module.destroy(element)` — static `remove()` (sadece close) backwards compat için korunuyor (Bikonuvar TPL'lerinde ~60+ yerde onclick ile kullanılıyor)
 
 **Breaking change:** Popover'da eski `remove()` metodu kaldırıldı, yerine `destroy()` geldi. Dükkan/Bikonuvar'da Popover instance'ı doğrudan kullanılmadığı için etki yok.
+
+## Keyboard Accessibility (Focus & ARIA)
+
+### Focus/Focus-Visible Pattern
+Mouse click'te outline yok, Tab ile gezinirken görünür:
+```
+:focus { outline: 0; }
+:focus-visible { outline: 2px solid var(--color-pri-300); outline-offset: 1px; }
+```
+
+**Sadrazam global olarak kapsar:** `a`, `button`, `:is(.bttn, .bttn--*)`, `input[type="checkbox"]`, `input[type="radio"]`, `[role="button"]`, `*[data-toggle="toast"]`
+**Form input'ları:** `:focus` ile `border-color` + `box-shadow` (focus-visible değil — her zaman aktif alanı göster)
+
+### Non-Native Interactive Element Pattern
+`<div>`/`<span>` yerine **her zaman `<button>`** kullan. Native `<button>` Tab, Enter, Space, focus-visible, screen reader desteği bedavaya gelir. `<div onclick>` kullanma.
+
+Eğer `<button>` kullanılamıyorsa (modül trigger'ları gibi), modül JS'inde otomatik eklenir:
+- `role="button"` + `tabindex="0"` + Enter/Space keydown handler
+- `destroy()` çağrıldığında temizlenir
+
+### ARIA Attributes
+| Modül | Trigger ARIA | Container ARIA |
+|-------|-------------|----------------|
+| Modal | — (programmatic) | `role="dialog"`, `aria-modal`, `aria-labelledby` |
+| SlideMenu | `aria-haspopup="dialog"`, `aria-expanded` | — |
+| Hovermenu | `aria-haspopup="true"`, `aria-expanded` | — |
+| Popover | `aria-haspopup="true"`, `aria-expanded` | — |
+| Tabs | — | `role="tablist"`, `role="tab"`, `role="tabpanel"`, `aria-selected`, `aria-controls` |
+| Autocomplete | — | `role="combobox"`, `aria-expanded`, `aria-autocomplete`, `role="option"` |
+| Tooltip | — | `aria-describedby` |
+| Toast | — | `role="alert"`, `aria-live="polite"` |
+
+### Switch Accessibility
+Input `display: none` yerine **visually hidden** (`position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none`). Tab ile erişilebilir, `input:focus-visible + .switch__slider` ile slider'a outline uygulanır.
