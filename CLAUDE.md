@@ -54,12 +54,14 @@ sadrazam/
 
 ## Conventions
 - BEM-like CSS naming: `.bttn--pri`, `.bttn--pri.bttn--soft`, `.bttn--neutral.bttn--outline`, `.modal__header`, `.tab-heading`
+- **Button `:is()` pattern**: Base stiller `:is(.bttn, .bttn--pri, ..., .bttn--ghost)` ile tüm renk modifier'larına otomatik uygulanır. `.bttn` base class **opsiyonel** — `bttn--pri` tek başına yeterli. Default boyut md (`--space-5`), sadece farklı boyut için `bttn--sm`/`bttn--lg` eklenir.
 - **Button tier system**: Colors set `--button-color` CSS variable, tiers (filled/soft/outline) read it. See `docs/wiki/button-system.md`
 - **State convention**: JS-toggled dynamic states use `is-*` / `has-*` prefix, scoped inside component SCSS blocks:
   - `is-entering`, `is-leaving` (slide-menu animation states)
   - `is-visible` (backdrop, anim-fade)
   - `is-selected` (autocomplete)
   - `is-loading` (generic loading utility)
+  - `is-locked` (body scroll lock — modal, toast, slide-menu açıkken)
   - Static variants stay as BEM modifiers: `tooltip--top`, `bttn--loading` (has spinner)
 - **Media queries inside selectors**: `@media` sorguları (hover, breakpoint vb.) ilgili selector'ın **içine** yazılır, dışına değil. Bu, her class'ın responsive/interaction davranışını kendi tanımında tutar. Bkz. `docs/wiki/hover-media-query.md`
 - **`is-open`**: autocomplete dropdown visibility, slide-menu open state

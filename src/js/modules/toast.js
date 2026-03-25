@@ -71,7 +71,7 @@ class Toast {
     const bodyHTML = `
       <div class="modal__body ${fontSizeClass}" role="alert" aria-live="polite" aria-atomic="true">
         ${messageListsHTML}
-        ${dismissButton ? `<div class="toast__dismiss"><button type="button" class="bttn bttn--neutral bttn--${fontSize}-rectangle" data-modal-close>${Language.get('buttonDismiss')}</button></div>` : ''}
+        ${dismissButton ? `<div class="toast__dismiss"><button type="button" class="bttn--neutral bttn--${fontSize}-rectangle" data-modal-close>${Language.get('buttonDismiss')}</button></div>` : ''}
       </div>
     `;
 

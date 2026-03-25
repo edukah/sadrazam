@@ -5,6 +5,18 @@
 Buton sistemi `--button-color` CSS custom property uzerine kurulu.
 Her renk varyanti bu variable'i set eder, kademeler (soft/outline) bu variable'i okur.
 
+### `:is()` Base Selector
+
+Base stiller (display, cursor, border-radius, padding, transition...) `:is()` ile tum renk modifier'larina otomatik uygulanir:
+
+```scss
+:is(.bttn, .bttn--pri, .bttn--sec, ..., .bttn--ghost) { /* base styles */ }
+```
+
+- `.bttn` base class **opsiyonel** — `bttn--pri` tek basina yeterli
+- Default boyut **md** (`--space-5`) — sadece farkli boyut icin `bttn--sm`/`bttn--lg` eklenir
+- Backward compatible — eski `bttn bttn--pri bttn--md` pattern hala calisir
+
 ## Colors
 
 | Class | Color Variable |
@@ -51,7 +63,7 @@ Outline focus: pri-300 border + pri-500 15% box-shadow.
 Inline `--button-color` ile herhangi bir renk kullanilabilir:
 
 ```html
-<button class="bttn bttn--md-rectangle" style="--button-color: #e91e63;">Custom</button>
+<button class="bttn--md-rectangle" style="--button-color: #e91e63;">Custom</button>
 ```
 
 Soft ve outline otomatik calisir.
