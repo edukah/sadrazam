@@ -454,15 +454,15 @@
             </div>
         </div>
 
-        <!-- ==================== FORM STANDART STYLE ==================== -->
+        <!-- ==================== FORM LAYOUT STANDARD ==================== -->
         <div class="section">
-            <h2 class="section-title">.form-standart-style</h2>
-            <p class="section-desc">Standard form layout rules — adds consistent spacing between label, fieldset, and panel-label elements</p>
+            <h2 class="section-title">.form-layout--standard</h2>
+            <p class="section-desc">Standard form layout rules — adds consistent spacing between label, fieldset, and form-label-like elements</p>
 
             <div class="row" style="align-items: flex-start;">
                 <span class="label">With Layout</span>
                 <div class="demo-box demo-box-wide" style="max-width: 100%; flex: 1;">
-                    <form class="form-standart-style">
+                    <form class="form-layout--standard">
                         <div class="form-divider">Account Setup</div>
 
                         <label class="label-text-input-type-two">
@@ -525,7 +525,120 @@
 
             <div class="row">
                 <span class="label">Class</span>
-                <span class="code">.form-standart-style</span>
+                <span class="code">.form-layout--standard</span>
+            </div>
+        </div>
+
+        <!-- ==================== FORM FIELDSET ==================== -->
+        <div class="section">
+            <h2 class="section-title">.form-fieldset</h2>
+            <p class="section-desc">Base fieldset class — legend spacing. Structure: <span class="code">&lt;fieldset&gt;</span> → <span class="code">&lt;legend&gt;</span> (optional) → <span class="code">&lt;div&gt;</span> → content</p>
+
+            <div class="row" style="align-items: flex-start;">
+                <span class="label">Base</span>
+                <div class="demo-box demo-box-wide" style="max-width: 100%; flex: 1;">
+                    <form class="form-layout--standard" style="max-width: 400px;" onsubmit="return false;">
+                        <fieldset class="form-fieldset">
+                            <legend>Multi-language Field</legend>
+                            <div>
+                                <div style="display:flex; gap:8px; align-items:center; margin-bottom:4px;">
+                                    <span style="font-size:0.85rem;">🇹🇷</span>
+                                    <input type="text" placeholder="Ürün adı (TR)">
+                                </div>
+                                <div style="display:flex; gap:8px; align-items:center;">
+                                    <span style="font-size:0.85rem;">🇬🇧</span>
+                                    <input type="text" placeholder="Product name (EN)">
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+
+            <div class="row">
+                <span class="label">Class</span>
+                <span class="code">.form-fieldset</span>
+            </div>
+        </div>
+
+        <!-- ==================== FORM FIELDSET INLINE ==================== -->
+        <div class="section">
+            <h2 class="section-title">.form-fieldset--inline</h2>
+            <p class="section-desc">Radio/checkbox options displayed inline — uses <span class="code">&lt;div&gt;</span> wrapper for flex layout</p>
+
+            <div class="row" style="align-items: flex-start;">
+                <span class="label">Inline</span>
+                <div class="demo-box demo-box-wide" style="max-width: 100%; flex: 1;">
+                    <form class="form-layout--standard" style="max-width: 400px;" onsubmit="return false;">
+                        <fieldset class="form-fieldset form-fieldset--inline">
+                            <legend>Invoice Type</legend>
+                            <div>
+                                <label>
+                                    <input type="radio" name="demo_invoice" value="individual" checked />
+                                    <span>Individual</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="demo_invoice" value="corporate" />
+                                    <span>Corporate</span>
+                                </label>
+                            </div>
+                        </fieldset>
+
+                        <fieldset class="form-fieldset form-fieldset--inline">
+                            <legend>Gender</legend>
+                            <div>
+                                <label>
+                                    <input type="radio" name="demo_gender" value="male" />
+                                    <span>Male</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="demo_gender" value="female" />
+                                    <span>Female</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="demo_gender" value="other" />
+                                    <span>Other</span>
+                                </label>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+
+            <div class="row">
+                <span class="label">Class</span>
+                <span class="code">.form-fieldset .form-fieldset--inline</span>
+            </div>
+        </div>
+
+        <!-- ==================== FORM LABEL HINT ==================== -->
+        <div class="section">
+            <h2 class="section-title">.form-label-hint</h2>
+            <p class="section-desc">Small, subtle hint text inside labels — typically used for "(optional)" notes</p>
+
+            <div class="row" style="align-items: flex-start;">
+                <span class="label">Usage</span>
+                <div class="demo-box demo-box-wide" style="max-width: 100%; flex: 1;">
+                    <form class="form-layout--standard" style="max-width: 400px;" onsubmit="return false;">
+                        <label>
+                            <span>Full Name</span>
+                            <input type="text" placeholder="John Doe">
+                        </label>
+                        <label>
+                            <span>Phone <span class="form-label-hint">(optional)</span></span>
+                            <input type="text" placeholder="+90 555 123 4567">
+                        </label>
+                        <label>
+                            <span>Email</span>
+                            <input type="email" placeholder="you@example.com">
+                        </label>
+                    </form>
+                </div>
+            </div>
+
+            <div class="row">
+                <span class="label">Class</span>
+                <span class="code">.form-label-hint</span>
             </div>
         </div>
 
@@ -535,7 +648,7 @@
             <p class="section-desc">All form pattern classes used together in a realistic registration form</p>
 
             <div style="max-width: 500px;">
-                <form class="form-standart-style">
+                <form class="form-layout--standard">
                     <div class="form-divider">Account</div>
 
                     <label class="form-field--top-label">

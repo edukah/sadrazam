@@ -6,7 +6,7 @@
      .form-field--password              → Şifre göster/gizle butonu (wrapper)
      .form-field--top-label / --checkbox → Label + input kombo stilleri
      .form-input--minimal               → Placeholder-only modern input (doğrudan input'a)
-     .form-layout--stack / --row        → Genel form yerleşim yardımcıları
+     .form-field--stack / --row         → Genel form yerleşim yardımcıları
      .danger-text             → Hata / doğrulama mesajı metni
      .helper-text             → Form alanı altı açıklama metni
      .form-divider                   → Form bölümleri arası çizgi + başlık
@@ -133,15 +133,49 @@
 
 /* ---- Form Layout ---- */
 /* Genel form yerleşim yardımcıları — her form pattern'ıyla kullanılabilir */
-.form-layout--stack {
+.form-field--stack {
   display: flex;
   flex-direction: column;
   gap: var(--space-6);
 }
 
-.form-layout--row {
+.form-field--row {
   display: flex;
   gap: var(--space-5);
+
+  // form-layout--standard'daki label + label margin-top'u yan yana layout'ta geçersiz
+  >label,
+  >fieldset {
+    margin-top: 0 !important;
+  }
+}
+
+/* ---- Fieldset — yapı: <fieldset> → <legend> (opsiyonel) → <div> → içerik ---- */
+.form-fieldset {
+  legend {
+    margin-bottom: var(--space-2);
+  }
+}
+
+/* Inline varyant — radio/checkbox seçenekleri yan yana */
+.form-fieldset--inline {
+  > div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4) var(--space-8);
+
+    > label {
+      display: flex;
+      gap: var(--space-3);
+      align-items: center;
+      margin-top: 0;
+
+      span {
+        font-size: var(--fsi-15);
+        color: var(--color-text-dark-1);
+      }
+    }
+  }
 }
 
 /* ---- Form Input Minimal ---- */
@@ -181,11 +215,18 @@ textarea.form-input--minimal {
   }
 }
 
+/* ---- Label Hint — label içi opsiyonel/açıklama notu ---- */
+.form-label-hint {
+  font-size: var(--fsi-12);
+  font-weight: var(--fwe-regular);
+  color: var(--color-text-dark-3);
+}
+
 /* ---- Helper Text ---- */
 /* Form alanı altındaki açıklama metni, opsiyonel ? işareti ile */
 .helper-text {
   display: block;
-  margin-top: var(--space-3);
+  margin-top: var(--space-1);
   font-size: 0.8em;
   color: var(--color-text-dark-3);
 
@@ -208,12 +249,12 @@ textarea.form-input--minimal {
 /* Hata / doğrulama mesajı metni */
 .danger-text {
   display: block;
-  margin-top: var(--space-3);
+  margin-top: var(--space-1);
   font-size: 0.8em;
   color: var(--color-danger-500);
 }
 
-.danger-text + .helper-text {
+.danger-text+.helper-text {
   display: none;
 }
 
@@ -246,21 +287,71 @@ textarea.form-input--minimal {
 }
 
 /* ---- Form Standart Style ---- */
-/* Genel form yerleşim kuralları — label/fieldset arası boşluklar */
+/* Genel form yerleşim kuralları — ardışık form field'lar arası boşluk.
+   margin-bottom yerine adjacent sibling (+) pattern: sadece birbiri ardına
+   gelen label/fieldset/form-label-like arasında boşluk olur. */
 .form-layout--standard {
 
-  label,
-  fieldset,
-  div[class*="panel-label"] {
-    margin-bottom: var(--space-7);
+  // Ardışık form field'lar arası boşluk
+  label+label,
+  label+fieldset,
+  label+div[class*="form-label-like"],
+  fieldset+label,
+  fieldset+fieldset,
+  fieldset+div[class*="form-label-like"],
+  div[class*="form-label-like"]+label,
+  div[class*="form-label-like"]+fieldset,
+  div[class*="form-label-like"]+div[class*="form-label-like"] {
+    margin-top: var(--space-7);
   }
 
-  div[class*="panel-label"] label {
-    margin-bottom: 0;
+  // form-label-like içindeki ardışık label'lar — aynı aralık
+  div[class*="form-label-like"] label+label {
+    margin-top: var(--space-7);
   }
 
-  label > span:first-child {
+  // Fieldset içindeki label'lar — radio/checkbox grubu, spacing sıfırlanır
+  // form-label-like içindeki fieldset'lerde de geçerli olması için ek specificity
+  fieldset label + label,
+  div[class*="form-label-like"] fieldset label + label {
+    margin-top: 0;
+  }
+
+  label>span:first-child {
     margin-bottom: var(--space-2);
     display: inline-block;
+  }
+}
+
+/* ---- Form Actions — form buton alanı ---- */
+.form-actions {
+  margin-top: var(--space-8);
+
+  button, a[class*="bttn"] {
+    width: 100%;
+  }
+}
+
+/* ---- Form Lang — çok dilli input satırı (bayrak + content) ---- */
+.form-lang {
+  display: flex;
+  gap: var(--space-8);
+  padding: var(--space-5) var(--space-7);
+  background-color: var(--color-grey-100);
+
+  &+& {
+    margin-top: var(--space-3);
+  }
+
+  &__flag {
+    img {
+      width: 29px;
+      height: 100%;
+      border-radius: var(--radius-sm);
+    }
+  }
+
+  &__content {
+    flex-grow: 1;
   }
 }
