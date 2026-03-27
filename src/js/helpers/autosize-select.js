@@ -70,17 +70,18 @@ class AutosizeSelect {
 
     const selectedOption = this.#selectElement.options[this.#selectElement.selectedIndex];
     if (!selectedOption) return;
-    
-    // Update measurement span content with the selected option's text
+
     this.#measurementSpan.textContent = selectedOption.textContent;
+    const textWidth = this.#measurementSpan.offsetWidth;
 
-    // Measure the span's width
-    const width = this.#measurementSpan.offsetWidth;
+    // Select'in padding + border alanını hesapla (ok ikonu dahil)
+    const styles = window.getComputedStyle(this.#selectElement);
+    const nonTextWidth = parseFloat(styles.paddingLeft)
+      + parseFloat(styles.paddingRight)
+      + parseFloat(styles.borderLeftWidth)
+      + parseFloat(styles.borderRightWidth);
 
-    // Add extra space for the dropdown arrow and margins
-    const extraPadding = 30; // Adjust this value as needed
-
-    this.#selectElement.style.width = `${width + extraPadding}px`;
+    this.#selectElement.style.width = `${textWidth + nonTextWidth}px`;
   };
 
   destroy = () => {
@@ -113,13 +114,12 @@ class AutosizeSelect {
     this.#measurementSpan.style.whiteSpace = 'nowrap';
     this.#measurementSpan.style.left = '-9999px';
     
-    // Copy the select element's font styles to the span
+    // Copy the select element's font styles to the span (padding hariç — sadece text ölçülür)
     const selectStyles = window.getComputedStyle(this.#selectElement);
     this.#measurementSpan.style.fontFamily = selectStyles.fontFamily;
     this.#measurementSpan.style.fontSize = selectStyles.fontSize;
     this.#measurementSpan.style.fontWeight = selectStyles.fontWeight;
     this.#measurementSpan.style.letterSpacing = selectStyles.letterSpacing;
-    this.#measurementSpan.style.padding = selectStyles.padding;
 
     document.body.appendChild(this.#measurementSpan);
   };
