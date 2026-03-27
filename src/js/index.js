@@ -1,17 +1,33 @@
 import './core/polyfills.js';
 import helpData from './docs/help.json';
 
-// Core
+// ---------------------------------------------------------------------------
+// Core — Event system and polyfills
+// ---------------------------------------------------------------------------
 import Event from './core/event.js';
 
-// Language
+// ---------------------------------------------------------------------------
+// Language — i18n singleton with async locale loading (en, tr)
+// ---------------------------------------------------------------------------
 import Language from './language/core/language.js';
 
-// Services
+// ---------------------------------------------------------------------------
+// Services — Application-level singletons (network, error tracking)
+//   Ajax       : Promise-based Fetch wrapper with button lock & ref counting
+//   LogRelay   : Global JS error capture → backend relay (sendBeacon)
+// ---------------------------------------------------------------------------
 import Ajax from './services/ajax.js';
 import LogRelay from './services/log-relay.js';
 
-// Helpers
+// ---------------------------------------------------------------------------
+// Helpers — Stateless utilities (no DOM rendering, no lifecycle)
+//   Form / Token               : Form validation (data-fvalidate) & CSRF
+//   Cookie / Url               : Cookie CRUD, URL param helpers
+//   Document / InsertScript     : Redirect, clipboard, UUID, script execution
+//   AutosizeSelect / Textarea  : Auto-sizing form inputs
+//   Browser / Device / Viewport : Environment detection (visibility, touch, dimensions)
+//   ScrollHistory               : Scroll position persistence via cookie
+// ---------------------------------------------------------------------------
 import AutosizeSelect from './helpers/autosize-select.js';
 import AutosizeTextarea from './helpers/autosize-textarea.js';
 import Browser from './helpers/browser.js';
@@ -24,21 +40,47 @@ import Token from './helpers/token.js';
 import Url from './helpers/url.js';
 import Viewport from './helpers/viewport.js';
 
-// Modules
-import Autocomplete from './modules/autocomplete.js';
-import Backdrop from './modules/backdrop.js';
-import Elem from './modules/elem.js';
-import Hovermenu from './modules/hovermenu.js';
-import InfiniteScroll from './modules/infinite-scroll.js';
+// ---------------------------------------------------------------------------
+// Modules — Interactive UI components (DOM rendering, lifecycle, destroy)
+// ---------------------------------------------------------------------------
+
+// Overlay / Dialog — Positioned layers above page content
+//   Modal     : Dialog with focus trap, backdrop, auto-close
+//   Toast     : Modal-based timed alert (pops up, delivers message, disappears)
+//   Snackbar  : Inline/popup notification bar (colorful, horizontal)
+//   Tooltip   : Smart-positioned hover/touch tooltip
+//   Popover   : Smart-positioned click/hover popover with content callback
 import Modal from './modules/modal.js';
-import Popover from './modules/popover.js';
-import ProgressBar from './modules/progress-bar.js';
-import SlideMenu from './modules/slide-menu.js';
-import Snackbar from './modules/snackbar.js';
-import Spinner from './modules/spinner.js';
-import Tabs from './modules/tabs.js';
 import Toast from './modules/toast.js';
+import Snackbar from './modules/snackbar.js';
 import Tooltip from './modules/tooltip.js';
+import Popover from './modules/popover.js';
+
+// Navigation — Menus and tabbed content
+//   Tabs       : Tab groups with URL hash sync, session persistence, WAI-ARIA
+//   SlideMenu  : Slide-in panel with backdrop and animation
+//   Hovermenu  : Dropdown menu with hover protection
+import Tabs from './modules/tabs.js';
+import SlideMenu from './modules/slide-menu.js';
+import Hovermenu from './modules/hovermenu.js';
+
+// Data / Input — Content loading and form enhancement
+//   Autocomplete    : Search-as-you-type with caching, keyboard nav, badges
+//   InfiniteScroll  : Lazy-load on scroll with AJAX pagination
+import Autocomplete from './modules/autocomplete.js';
+import InfiniteScroll from './modules/infinite-scroll.js';
+
+// Visual Indicators — Singletons with reference counting
+//   Spinner     : Loading overlay (main/helper types)
+//   ProgressBar : Top loading bar with trickle animation
+//   Backdrop    : Stack-based shared backdrop (multi-owner)
+import Spinner from './modules/spinner.js';
+import ProgressBar from './modules/progress-bar.js';
+import Backdrop from './modules/backdrop.js';
+
+// DOM Utilities — Static helpers for scroll, style, and element manipulation
+//   Elem : getStyle, scrollToView, disableScroll, flash, getScrollbarWidth
+import Elem from './modules/elem.js';
 
 const Sadrazam = {
   // Core
@@ -51,7 +93,7 @@ const Sadrazam = {
   Ajax,
   LogRelay,
 
-  // Helpers
+  // Helpers — Stateless utilities
   AutosizeSelect,
   AutosizeTextarea,
   Browser,
@@ -65,21 +107,29 @@ const Sadrazam = {
   Url,
   Viewport,
 
-  // Modules
-  Autocomplete,
-  Backdrop,
-  Elem,
-  Hovermenu,
-  InfiniteScroll,
+  // Modules — Overlay / Dialog
   Modal,
-  Popover,
-  ProgressBar,
-  SlideMenu,
-  Snackbar,
-  Spinner,
-  Tabs,
   Toast,
+  Snackbar,
   Tooltip,
+  Popover,
+
+  // Modules — Navigation
+  Tabs,
+  SlideMenu,
+  Hovermenu,
+
+  // Modules — Data / Input
+  Autocomplete,
+  InfiniteScroll,
+
+  // Modules — Visual Indicators (singletons, ref-counted)
+  Spinner,
+  ProgressBar,
+  Backdrop,
+
+  // Modules — DOM Utilities
+  Elem,
 
   /**
    * Configures Sadrazam and initializes its services.
@@ -122,7 +172,7 @@ export {
   Ajax,
   LogRelay,
 
-  // Helpers
+  // Helpers — Stateless utilities
   AutosizeSelect,
   AutosizeTextarea,
   Browser,
@@ -136,19 +186,27 @@ export {
   Url,
   Viewport,
 
-  // Modules
-  Autocomplete,
-  Backdrop,
-  Elem,
-  Hovermenu,
-  InfiniteScroll,
+  // Modules — Overlay / Dialog
   Modal,
-  Popover,
-  ProgressBar,
-  SlideMenu,
-  Snackbar,
-  Spinner,
-  Tabs,
   Toast,
-  Tooltip
+  Snackbar,
+  Tooltip,
+  Popover,
+
+  // Modules — Navigation
+  Tabs,
+  SlideMenu,
+  Hovermenu,
+
+  // Modules — Data / Input
+  Autocomplete,
+  InfiniteScroll,
+
+  // Modules — Visual Indicators
+  Spinner,
+  ProgressBar,
+  Backdrop,
+
+  // Modules — DOM Utilities
+  Elem
 };

@@ -1,3 +1,6 @@
+/**
+ * @summary Cross-browser event listener wrapper with feature detection.
+ */
 class Event {
   static add (element, eventName, handler) {
     if (element.attachEvent) element.attachEvent(eventName, handler);

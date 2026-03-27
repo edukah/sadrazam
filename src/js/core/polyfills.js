@@ -1,3 +1,6 @@
+/**
+ * @summary globalThis polyfill for environments that lack it (IE, older Node).
+ */
 if (typeof globalThis === 'undefined') {
   (function () {
     const getGlobal = function () {
