@@ -59,16 +59,6 @@
   }
 }
 
-.panel__body::before,
-.panel__body::after {
-  content: " ";
-  display: table;
-}
-
-.panel__body::after {
-  clear: both;
-}
-
 .panel--default {
   border-color: var(--color-grey-250);
 }

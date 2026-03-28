@@ -158,7 +158,7 @@ html.is-locked {
     }
 
     .modal__content {
-      --gap-space: var(--space-10);
+      --gap-space: var(--space-12);
 
       position: relative;
       background-color: var(--color-grey-zero);
@@ -228,16 +228,6 @@ html.is-locked {
 
       .modal__footer {
         text-align: right;
-
-        &:before,
-        &:after {
-          content: "";
-          display: table;
-        }
-
-        &:after {
-          clear: both;
-        }
 
         .bttn+.bttn {
           margin-left: 5px;

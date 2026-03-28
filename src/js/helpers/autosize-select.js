@@ -74,7 +74,6 @@ class AutosizeSelect {
     this.#measurementSpan.textContent = selectedOption.textContent;
     const textWidth = this.#measurementSpan.offsetWidth;
 
-    // Select'in padding + border alanını hesapla (ok ikonu dahil)
     const styles = window.getComputedStyle(this.#selectElement);
     const nonTextWidth = parseFloat(styles.paddingLeft)
       + parseFloat(styles.paddingRight)
@@ -87,34 +86,32 @@ class AutosizeSelect {
   destroy = () => {
     this.#unbindEvents();
     this.#measurementSpan?.remove();
-    this.#selectElement.style.width = ''; // Restore original state
+    this.#selectElement.style.width = '';
   };
 
   // --- Private Helper Methods ---
   #initialize = () => {
     this.#createMeasurementSpan();
     this.#bindEvents();
-    this.update(); // Set initial width based on the selected value
+    this.update();
   };
 
   #bindEvents = () => {
     this.#selectElement.addEventListener('change', this.update);
   };
-  
+
   #unbindEvents = () => {
     this.#selectElement.removeEventListener('change', this.update);
   };
 
   #createMeasurementSpan = () => {
     this.#measurementSpan = document.createElement('span');
-    
-    // Make the span invisible but keep it measurable
+
     this.#measurementSpan.style.visibility = 'hidden';
     this.#measurementSpan.style.position = 'absolute';
     this.#measurementSpan.style.whiteSpace = 'nowrap';
     this.#measurementSpan.style.left = '-9999px';
-    
-    // Copy the select element's font styles to the span (padding hariç — sadece text ölçülür)
+
     const selectStyles = window.getComputedStyle(this.#selectElement);
     this.#measurementSpan.style.fontFamily = selectStyles.fontFamily;
     this.#measurementSpan.style.fontSize = selectStyles.fontSize;
