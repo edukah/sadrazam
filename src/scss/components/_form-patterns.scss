@@ -2,6 +2,8 @@
    Form Patterns — Tekrarlanan form kalıpları ve yardımcı bileşenler
 
    İçerik:
+     .form-label-text (--sm, --lg)      → Form label tipografisi (boyut varyantları)
+     .form-style--calm                  → Form stil varyantı (muted renk/ağırlık)
      .form-input--error                 → Hata durumunda input border
      .form-field--password              → Şifre göster/gizle butonu (wrapper)
      .form-field--top-label / --checkbox → Label + input kombo stilleri
@@ -12,6 +14,28 @@
      .form-divider                   → Form bölümleri arası çizgi + başlık
      .form-layout--standard          → Standart form yerleşim kuralları
    ========================================================================= */
+
+/* ---- Label Text — form label tipografisi ---- */
+/* Kullanım: <label><span class="form-label-text">Label</span><input /></label>
+   legend, switch__label gibi non-label context'lerde de kullanılabilir. */
+.form-label-text {
+  display: block;
+  font-family: var(--ffa-sans);
+  font-weight: var(--fwe-semibold);
+  font-size: var(--fsi-14);
+
+  &--sm { font-size: var(--fsi-13); }
+  &--lg { font-size: var(--fsi-15); }
+}
+
+/* ---- Form Style — container-level stil varyantları ---- */
+/* form veya wrapper'a konur, içindeki form-label-text'leri cascade ile etkiler. */
+.form-style--calm {
+  .form-label-text {
+    font-weight: var(--fwe-regular);
+    color: var(--color-text-dark-2);
+  }
+}
 
 /* ---- Hata durumu ---- */
 .form-input--error {
@@ -317,9 +341,37 @@ textarea.form-input--minimal {
     margin-top: 0;
   }
 
-  label>span:first-child {
+  // Label içindeki form-label-text: input'tan önce boşluk (display: block zaten base class'ta)
+  label > .form-label-text {
     margin-bottom: var(--space-2);
-    display: inline-block;
+  }
+}
+
+/* ---- Form Disclosure — tıkla aç/kapat bölüm başlığı ---- */
+.form-disclosure {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-7);
+  font-size: var(--fsi-17);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--color-text-dark-1);
+  cursor: pointer;
+  user-select: none;
+
+  .form-disclosure__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+    font-size: var(--fsi-19);
+    color: var(--color-text-dark-3);
+  }
+
+  &.is-open .form-disclosure__icon {
+    transform: rotate(90deg);
   }
 }
 
