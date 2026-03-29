@@ -9,6 +9,7 @@ class Document {
   static help () {
     const availableConfigs = new Map([
       ['redirect(url, time?)', 'Redirects to the specified URL with a delay, or refreshes the page.'],
+      ['navigateBack(fallbackUrl)', 'Goes back to the previous page via history.back(). If the user came from an external site or opened the page directly, navigates to the fallback URL instead.'],
       ['copyInputText(button)', 'Copies the target input text to clipboard when a button is clicked.'],
       ['uniqueId()', 'Generates a cryptographically secure unique ID (UUID v4).'],
       ['fixedElementAdjust(selector)', 'Adjusts footer padding-bottom to account for a fixed element. Checks computed display — if the element is hidden by CSS (media queries, etc.), padding is restored.']
@@ -42,6 +43,20 @@ class Document {
         }
       }
     }, delay);
+  }
+
+  /**
+   * Navigates back to the previous page via history.back().
+   * If the user came from an external site or opened the page directly (no same-origin referrer),
+   * navigates to the fallback URL instead — prevents leaving the site unexpectedly.
+   * @param {string} fallbackUrl - URL to navigate to when there's no same-origin history.
+   */
+  static navigateBack (fallbackUrl) {
+    if (globalThis.document.referrer && globalThis.document.referrer.includes(globalThis.location.hostname)) {
+      globalThis.history.back();
+    } else {
+      globalThis.location.href = fallbackUrl;
+    }
   }
 
   /**
