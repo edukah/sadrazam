@@ -47,12 +47,11 @@ class Document {
 
   /**
    * Navigates back to the previous page via history.back().
-   * If the user came from an external site or opened the page directly (no same-origin referrer),
-   * navigates to the fallback URL instead — prevents leaving the site unexpectedly.
-   * @param {string} fallbackUrl - URL to navigate to when there's no same-origin history.
+   * Fallback URL'e sadece history boşsa gider (yeni tab'da direkt açılan sayfa).
+   * @param {string} fallbackUrl - URL to navigate to when there's no browser history.
    */
   static navigateBack (fallbackUrl) {
-    if (globalThis.document.referrer && globalThis.document.referrer.includes(globalThis.location.hostname)) {
+    if (globalThis.history.length > 1) {
       globalThis.history.back();
     } else {
       globalThis.location.href = fallbackUrl;
