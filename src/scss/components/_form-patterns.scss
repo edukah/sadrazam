@@ -297,6 +297,7 @@ textarea.form-input--minimal {
   h1+&,
   h2+&,
   h3+&,
+  .form-disclosure+&,
   &:first-child {
     margin-top: 0;
   }
@@ -352,7 +353,6 @@ textarea.form-input--minimal {
   display: flex;
   align-items: center;
   gap: var(--space-3);
-  margin-bottom: var(--space-7);
   font-size: var(--fsi-17);
   font-weight: 600;
   text-transform: uppercase;
@@ -377,10 +377,14 @@ textarea.form-input--minimal {
 
 /* ---- Form Actions — form buton alanı ---- */
 .form-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
   margin-top: var(--space-8);
 
   button, a[class*="bttn"] {
     width: 100%;
+    text-align: center;
   }
 }
 

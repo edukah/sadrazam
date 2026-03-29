@@ -104,6 +104,10 @@ main.content-wrapper {
   margin: 0 auto;
   padding: 0 var(--content-padding);
 
+  &--xxs {
+    max-width: 430px;
+  }
+
   &--xs {
     max-width: 640px;
   }
