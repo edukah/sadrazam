@@ -30,7 +30,10 @@
   padding: 0;
 }
 
-html,
+html {
+  height: 100%;
+}
+
 body {
   min-height: 100%;
 }
