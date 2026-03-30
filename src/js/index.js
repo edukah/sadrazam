@@ -53,6 +53,7 @@ import Viewport from './helpers/viewport.js';
 import Modal from './modules/modal.js';
 import Toast from './modules/toast.js';
 import Snackbar from './modules/snackbar.js';
+import SnackbarRelay from './modules/snackbar-relay.js';
 import Tooltip from './modules/tooltip.js';
 import Popover from './modules/popover.js';
 
@@ -111,6 +112,7 @@ const Sadrazam = {
   Modal,
   Toast,
   Snackbar,
+  SnackbarRelay,
   Tooltip,
   Popover,
 
@@ -190,6 +192,7 @@ export {
   Modal,
   Toast,
   Snackbar,
+  SnackbarRelay,
   Tooltip,
   Popover,
 
