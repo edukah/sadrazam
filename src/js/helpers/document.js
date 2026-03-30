@@ -57,6 +57,7 @@ class Document {
 
       if (referrerHost === globalThis.location.hostname) {
         globalThis.history.back();
+
         return;
       }
     } catch {
