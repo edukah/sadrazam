@@ -46,14 +46,14 @@ class Document {
   }
 
   /**
-   * Navigates back to the referring page.
-   * document.referrer ile gelinen sayfaya döner. Referrer yoksa (yeni tab, dış site,
-   * privacy ayarları) fallback URL'e gider.
-   * @param {string} fallbackUrl - Referrer yoksa gidilecek URL.
+   * Navigates back to the previous page via browser history.
+   * history.back() gerçek stack kullanır — referrer gibi ping pong yapmaz.
+   * History yoksa (yeni tab'da direkt açılan sayfa) fallback URL'e gider.
+   * @param {string} fallbackUrl - History yoksa gidilecek URL.
    */
   static navigateBack (fallbackUrl) {
-    if (globalThis.document.referrer) {
-      globalThis.location.href = globalThis.document.referrer;
+    if (globalThis.history.length > 1) {
+      globalThis.history.back();
     } else {
       globalThis.location.href = fallbackUrl;
     }
