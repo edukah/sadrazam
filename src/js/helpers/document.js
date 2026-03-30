@@ -52,13 +52,18 @@ class Document {
    * @param {string} fallbackUrl - Güvenli geri dönüş yoksa gidilecek URL.
    */
   static navigateBack (fallbackUrl) {
-    const referrer = globalThis.document.referrer;
+    try {
+      const referrerHost = new globalThis.URL(globalThis.document.referrer).hostname;
 
-    if (referrer && referrer.includes(globalThis.location.hostname)) {
-      globalThis.history.back();
-    } else {
-      globalThis.location.href = fallbackUrl;
+      if (referrerHost === globalThis.location.hostname) {
+        globalThis.history.back();
+        return;
+      }
+    } catch {
+      // Referrer boş veya geçersiz — fallback'e düş
     }
+
+    globalThis.location.href = fallbackUrl;
   }
 
   /**
