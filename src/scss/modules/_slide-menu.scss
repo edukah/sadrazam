@@ -117,6 +117,9 @@
   border: var(--border-width-sm) solid var(--color-grey-100);
 
   header {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 
