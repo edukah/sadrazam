@@ -206,3 +206,13 @@ Eğer `<button>` kullanılamıyorsa (modül trigger'ları gibi), modül JS'inde 
 
 ### Switch Accessibility
 Input `display: none` yerine **visually hidden** (`position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none`). Tab ile erişilebilir, `input:focus-visible + .switch__slider` ile slider'a outline uygulanır.
+
+## Yapılacaklar
+
+### Ajax: JS hatası ile network hatasını ayırt et
+
+**Sorun:** Ajax modülünün error handler'ı JS runtime hataları ile gerçek network hatalarını ayırt edemiyor. Callback içinde JS hatası fırladığında (ör. `undefined` bir modüle erişim — `Sadrazam.SnackbarRelay` dist'te yokken çağrılması gibi) request "başarısız" sayılıyor ve kullanıcıya "İnternet bağlantınızı kontrol edin" mesajı gösteriliyor.
+
+**Beklenen davranış:** JS runtime hatası → geliştirici konsolunda hata logu (veya LogRelay ile backend'e gönderim), kullanıcıya yanıltıcı network mesajı gösterilmemeli. Network hatası → mevcut davranış korunmalı.
+
+**Etkilenen dosya:** `src/js/services/ajax.js` — `onerror` / `catch` bloğunda hata tipine göre ayrım yapılmalı.
