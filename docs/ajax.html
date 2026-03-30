@@ -278,7 +278,7 @@
                         <td>route</td>
                         <td>string</td>
                         <td><span class="code">''</span></td>
-                        <td>Endpoint URL. Full URLs (http...) are used as-is; otherwise prepended with <span class="code">index.php?route=</span></td>
+                        <td>Endpoint URL. Must be a full URL (<span class="code">https://...</span>) or absolute path (<span class="code">/api/...</span>)</td>
                     </tr>
                     <tr>
                         <td>type</td>
@@ -336,6 +336,52 @@
                     </tr>
                 </tbody>
             </table>
+        </div>
+
+        <!-- ==================== ERROR RESPONSE FORMAT ==================== -->
+        <div class="section">
+            <h2 class="section-title">Error Response Format</h2>
+            <p class="section-desc">On HTTP 4xx/5xx errors, the response body is checked for a <span class="code">message</span> key. If found, it is displayed via Snackbar.</p>
+
+            <pre class="code-block"><span class="hl-cmt">// Expected error response body (optional)</span>
+{
+  <span class="hl-key">"message"</span>: {
+    <span class="hl-key">"error"</span>: [<span class="hl-str">"Product not found."</span>],
+    <span class="hl-key">"warning"</span>: [<span class="hl-str">"Stock is low."</span>]
+  }
+}</pre>
+
+            <p class="section-desc" style="margin-top: 1rem;">
+                If no <span class="code">message</span> key is present, a generic error is shown.
+            </p>
+        </div>
+
+        <!-- ==================== TOKEN (CSRF) ==================== -->
+        <div class="section">
+            <h2 class="section-title">Token (CSRF)</h2>
+            <p class="section-desc">The <span class="code">Token</span> helper reads/updates a CSRF token from a hidden input on the page.</p>
+
+            <div class="row">
+                <span class="label">Default Selector</span>
+                <span><span class="code">input[name*='token_common']</span></span>
+            </div>
+            <div class="row">
+                <span class="label">Custom Selector</span>
+                <span><span class="code">Sadrazam.Token.setSelector("input[name='_token']")</span></span>
+            </div>
+            <div class="row">
+                <span class="label">Via configure()</span>
+                <span><span class="code">Sadrazam.configure({ tokenSelector: "input[name='_token']" })</span></span>
+            </div>
+
+            <pre class="code-block"><span class="hl-cmt">// Read token</span>
+const token = Sadrazam.Token.get();
+
+<span class="hl-cmt">// Update token (e.g. after AJAX response)</span>
+Sadrazam.Token.update(newTokenValue);
+
+<span class="hl-cmt">// HTML — hidden input in page footer</span>
+&lt;input type="hidden" name="token_common" value="abc123" /&gt;</pre>
         </div>
 
         <!-- ==================== GET REQUEST ==================== -->

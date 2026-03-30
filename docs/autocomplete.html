@@ -282,6 +282,17 @@
             <p class="section-desc" style="margin-top: 1rem;">
                 Items with <span class="code">data-autocomplete-disabled</span> are skipped during keyboard navigation and click selection.
             </p>
+
+            <hr class="divider">
+
+            <div class="row">
+                <span class="label">Request Param</span>
+                <span>The search query is sent as <span class="code">search_term</span>: <span class="code">GET /endpoint?search_term=fra</span></span>
+            </div>
+            <div class="row">
+                <span class="label">Response</span>
+                <span>HTML string directly, or JSON with an <span class="code">html</span> key: <span class="code">{ "html": "&lt;ul&gt;...&lt;/ul&gt;" }</span></span>
+            </div>
         </div>
 
         <!-- ==================== BASIC USAGE (COUNTRIES) ==================== -->

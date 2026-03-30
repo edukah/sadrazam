@@ -209,4 +209,3 @@ Input `display: none` yerine **visually hidden** (`position: absolute; width: 1p
 
 ## Yapılacaklar
 
-- **Ajax: JS hatası ile network hatasını ayırt et** — `docs/plans/2026-03-30-ajax-error-differentiation.md`
