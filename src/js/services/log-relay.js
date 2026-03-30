@@ -12,7 +12,7 @@
  * Usage:
  *   LogRelay.init({ endpoint: '/api/log/js-error' });
  *   LogRelay.capture(error);
- *   LogRelay.capture(error, { component: 'SaleOrderJS', action: 'shipped' });
+ *   LogRelay.capture(error, { component: 'MyComponent', action: 'submit' });
  */
 class LogRelay {
   // Backend endpoint — if null, only writes to console

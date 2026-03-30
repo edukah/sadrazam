@@ -77,7 +77,7 @@ class Ajax {
 
     if (config.spinner) Spinner.show({ type: config.spinner });
 
-    let url = config.route.startsWith('http') ? config.route : `index.php?route=${config.route}`;
+    let url = config.route;
 
     if (config.type.toUpperCase() === 'GET' && Object.keys(config.data).length > 0) {
       const queryParams = new globalThis.URLSearchParams(config.data).toString();
@@ -207,7 +207,7 @@ class Ajax {
    * (nested/chained requests). The outer request's finally block would remove
    * bttn--loading before the inner request finishes, making the button clickable again.
    *
-   * Example: changeOrderProductState(button) -> success -> reloadOrderItemView(button)
+   * Example: submitForm(button) -> success -> reloadView(button)
    *   t0: Outer request -> lock (refCount=1, loading+disabled)
    *   t1: success callback -> inner request -> lock (refCount=2)
    *   t2: Outer finally -> unlock (refCount=1, button STAYS LOCKED)

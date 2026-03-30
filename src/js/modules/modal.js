@@ -1,5 +1,4 @@
 import Backdrop from '../modules/backdrop.js';
-import Ajax from '../services/ajax.js';
 import Elem from '../modules/elem.js';
 import { InsertScript } from '../helpers/document.js';
 
@@ -48,7 +47,6 @@ class Modal {
     const availableMethods = new Map([
       ['Modal.insert(options)', 'Creates and shows a new modal. Returns the Modal instance.'],
       ['Modal.getInstance(element)', 'Returns the Modal instance containing the given element.'],
-      ['Modal.login(closeAfterFunction?)', 'Loads the login form via AJAX and shows it in a modal.'],
       ['instance.close()', 'Closes and cleans up the modal.'],
       ['instance.destroy()', 'Alias for close().'],
       ['instance.querySelector(selector)', 'Finds an element inside the modal.'],
@@ -97,20 +95,6 @@ class Modal {
    */
   static getInstance (element) {
     return element?.closest('.modal')?.__modal;
-  }
-
-  /**
-   * Loads the login form via AJAX and displays it in a modal.
-   * @param {function} [closeAfterFunction] - Optional callback to run after the modal closes.
-   */
-  static login (closeAfterFunction) {
-    Ajax.send({
-      success: (xhttp) => {
-        Modal.insert({ content: xhttp.responseText, closeAfterFunction });
-      },
-      route: 'account/join_us/ajax',
-      spinner: 'helper'
-    });
   }
 
   constructor (options = {}) {

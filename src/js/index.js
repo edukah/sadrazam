@@ -135,21 +135,24 @@ const Sadrazam = {
 
   /**
    * Configures Sadrazam and initializes its services.
-   * Called once by Dükkan on page load.
+   * Called once on page load by the consumer application.
    *
    * @param {object}  [config]
    * @param {string}  [config.languageCode]     Language code (e.g. 'tr', 'en', 'auto'). Default: 'auto'
    * @param {string}  [config.logEndpoint]     Backend log endpoint URL
+   * @param {string}  [config.tokenSelector]   CSS selector for CSRF token input. Default: "input[name*='token_common']"
    *
    * @example
    * Sadrazam.configure({
    *     languageCode: 'tr',
-   *     logEndpoint: '/api/log/js-error'
+   *     logEndpoint: '/api/log/js-error',
+   *     tokenSelector: "input[name='_token']"
    * });
    */
   configure (config = {}) {
     Language.init(config.languageCode);
     LogRelay.init({ endpoint: config.logEndpoint });
+    if (config.tokenSelector) Token.setSelector(config.tokenSelector);
   },
 
   help () {
