@@ -66,102 +66,120 @@ class Ajax {
     
     const standardError = { error: [Language.get('errorUnexpected')] };
 
+    if (config.button) this.#lockButton(config.button);
+
     try {
-      if (config.button) {
-        this.#lockButton(config.button);
-      }
-
       config.beforeStart();
-      if (config.spinner) Spinner.show({ type: config.spinner });
+    } catch (callbackError) {
+      console.error('[Sadrazam|Ajax] Runtime error in beforeStart callback:', callbackError);
+      LogRelay.capture(callbackError, { component: 'Ajax.beforeStart', route: config.route });
+    }
 
-      let url = config.route.startsWith('http') ? config.route : `index.php?route=${config.route}`;
-      
-      if (config.type.toUpperCase() === 'GET' && Object.keys(config.data).length > 0) {
-        const queryParams = new globalThis.URLSearchParams(config.data).toString();
-        url += (url.includes('?') ? '&' : '?') + queryParams;
-      }
-      
-      const fetchOptions = this.#prepareFetchOptions(config, controller.signal);
-      
-      const response = await globalThis.fetch(url, fetchOptions);
-      const responseText = await response.text();
-      
-      // Content-Type check
-      const contentType = response.headers.get('Content-Type') || '';
-      const isJsonResponse = contentType.includes('application/json');
-      
-      // JSON parse only when Content-Type is JSON
-      let responseData = null;
-      let parseError = false;
-      
-      if (isJsonResponse) {
-        try {
-          responseData = JSON.parse(responseText);
-        } catch (e) {
-          parseError = true;
-        }
-      }
-      
-      const mockXhttp = {
-        responseText: responseText,
-        responseData: responseData,
-        status: response.status,
-        ok: response.ok,
-        headers: response.headers
-      };
-      
-      config.complete(mockXhttp);
+    if (config.spinner) Spinner.show({ type: config.spinner });
 
-      // Error: HTTP error OR (expected JSON but parse failed)
-      if (!response.ok || (isJsonResponse && parseError)) {
-        const uiMessageObject = responseData?.message || 
-          (parseError ? { error: ['Invalid server response (JSON parse error).'] } : standardError);
+    let url = config.route.startsWith('http') ? config.route : `index.php?route=${config.route}`;
 
-        console.error('[Sadrazam|Ajax] Error:', {
-          status: response.status,
-          url: url,
-          contentType: contentType,
-          parseError: parseError,
-          body: responseText
-        });
+    if (config.type.toUpperCase() === 'GET' && Object.keys(config.data).length > 0) {
+      const queryParams = new globalThis.URLSearchParams(config.data).toString();
+      url += (url.includes('?') ? '&' : '?') + queryParams;
+    }
 
-        Snackbar.insert(uiMessageObject);
-        
-        const errorText = uiMessageObject.error?.[0] || uiMessageObject.warning?.[0] || standardError.error[0];
-        const errorObj = new Error(errorText);
-        config.error(errorObj);
-        
-        throw errorObj;
-      }
-      
-      // Success
-      config.success(mockXhttp);
+    const fetchOptions = this.#prepareFetchOptions(config, controller.signal);
 
-      return responseData ?? responseText;
-      
+    // Network ve timeout hataları sadece fetch()'ten gelir
+    let response, responseText;
+    try {
+      response = await globalThis.fetch(url, fetchOptions);
+      responseText = await response.text();
     } catch (error) {
       if (error.name === 'TypeError') {
-        const networkError = { error: [Language.get('errorNetwork')] };
         console.error('[Sadrazam|Ajax] Network error:', { error: error });
-        Snackbar.insert(networkError);
-        config.error(error);
+        Snackbar.insert({ error: [Language.get('errorNetwork')] });
       } else if (error.name === 'AbortError') {
-        const timeoutError = { error: [Language.get('errorTimeout')] };
         console.error('[Sadrazam|Ajax] Timeout error:', { error: error });
-        Snackbar.insert(timeoutError);
-        config.error(error);
+        Snackbar.insert({ error: [Language.get('errorTimeout')] });
       }
+
+      try { config.error(error); } catch (callbackError) {
+        console.error('[Sadrazam|Ajax] Runtime error in error callback:', callbackError);
+        LogRelay.capture(callbackError, { component: 'Ajax.error', route: config.route });
+      }
+
+      this.#cleanup(config, timeoutId);
 
       throw error;
-    } finally {
-      globalThis.clearTimeout(timeoutId);
-      config.afterEnd();
-      if (config.spinner) Spinner.hide();
+    }
 
-      if (config.button) {
-        this.#unlockButton(config.button);
+    // Content-Type check
+    const contentType = response.headers.get('Content-Type') || '';
+    const isJsonResponse = contentType.includes('application/json');
+
+    // JSON parse only when Content-Type is JSON
+    let responseData = null;
+    let parseError = false;
+
+    if (isJsonResponse) {
+      try {
+        responseData = JSON.parse(responseText);
+      } catch (e) {
+        parseError = true;
       }
     }
+
+    const mockXhttp = {
+      responseText: responseText,
+      responseData: responseData,
+      status: response.status,
+      ok: response.ok,
+      headers: response.headers
+    };
+
+    try {
+      config.complete(mockXhttp);
+    } catch (callbackError) {
+      console.error('[Sadrazam|Ajax] Runtime error in complete callback:', callbackError);
+      LogRelay.capture(callbackError, { component: 'Ajax.complete', route: config.route });
+    }
+
+    // Error: HTTP error OR (expected JSON but parse failed)
+    if (!response.ok || (isJsonResponse && parseError)) {
+      const uiMessageObject = responseData?.message ||
+        (parseError ? { error: ['Invalid server response (JSON parse error).'] } : standardError);
+
+      console.error('[Sadrazam|Ajax] Error:', {
+        status: response.status,
+        url: url,
+        contentType: contentType,
+        parseError: parseError,
+        body: responseText
+      });
+
+      Snackbar.insert(uiMessageObject);
+
+      const errorText = uiMessageObject.error?.[0] || uiMessageObject.warning?.[0] || standardError.error[0];
+      const errorObj = new Error(errorText);
+
+      try { config.error(errorObj); } catch (callbackError) {
+        console.error('[Sadrazam|Ajax] Runtime error in error callback:', callbackError);
+        LogRelay.capture(callbackError, { component: 'Ajax.error', route: config.route });
+      }
+
+      this.#cleanup(config, timeoutId);
+
+      throw errorObj;
+    }
+
+    // Success
+    try {
+      config.success(mockXhttp);
+    } catch (callbackError) {
+      console.error('[Sadrazam|Ajax] Runtime error in success callback:', callbackError);
+      LogRelay.capture(callbackError, { component: 'Ajax.success', route: config.route });
+    }
+
+    this.#cleanup(config, timeoutId);
+
+    return responseData ?? responseText;
   }
 
   /**
@@ -218,6 +236,18 @@ class Ajax {
       button.disabled = false;
       button.__ajaxRefCount = 0;
     }
+  };
+
+  static #cleanup = (config, timeoutId) => {
+    globalThis.clearTimeout(timeoutId);
+
+    try { config.afterEnd(); } catch (callbackError) {
+      console.error('[Sadrazam|Ajax] Runtime error in afterEnd callback:', callbackError);
+      LogRelay.capture(callbackError, { component: 'Ajax.afterEnd', route: config.route });
+    }
+
+    if (config.spinner) Spinner.hide();
+    if (config.button) this.#unlockButton(config.button);
   };
 
   static #prepareFetchOptions = (config, signal) => {
