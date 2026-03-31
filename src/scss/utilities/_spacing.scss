@@ -79,10 +79,11 @@ $space-steps: (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18)
 
 // Cancels a heading's margin-bottom so the next element sits flush against it.
 // Natural line-height provides minimal visual separation.
-.after-h1 { margin-top: -0.9em; margin-bottom: 0.9em; }
-.after-h2 { margin-top: -0.7em; margin-bottom: 0.7em; }
-.after-h3 { margin-top: -0.5em; margin-bottom: 0.5em; }
-.after-h4 { margin-top: -0.4em; margin-bottom: 0.4em; }
+// margin-top uses heading's font-size var to match its em-based margin-bottom exactly.
+.after-h1 { margin-top: calc(var(--fsi-35) * -0.7); margin-bottom: calc(var(--fsi-35) * 0.9); }
+.after-h2 { margin-top: calc(var(--fsi-28) * -0.5); margin-bottom: calc(var(--fsi-28) * 0.7); }
+.after-h3 { margin-top: calc(var(--fsi-24) * -0.3); margin-bottom: calc(var(--fsi-24) * 0.5); }
+.after-h4 { margin-top: calc(var(--fsi-21) * -0.2); margin-bottom: calc(var(--fsi-21) * 0.4); }
 
 // === Centering ===
 .margin-x-auto {
