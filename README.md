@@ -36,7 +36,8 @@ npm install sadrazam
 <script>
   Sadrazam.configure({
     languageCode: 'tr',
-    logEndpoint: '/api/log/js-error'
+    logEndpoint: '/api/log/js-error',
+    tokenSelector: "input[name='_token']"
   });
 </script>
 ```
@@ -117,6 +118,7 @@ src/
 | `Modal` | ✓ | Modal window manager |
 | `Toast` | ✓ | Modal-based toast notifications |
 | `Snackbar` | ✓ | Toast notifications (singleton) |
+| `SnackbarRelay` | — | Cross-page snackbar relay via sessionStorage |
 | `Spinner` | ✓ | Loading indicator (reference counting) |
 | `Tabs` | ✓ | Tab navigation (4 variants) |
 | `Tooltip` | ✓ | Tooltip |

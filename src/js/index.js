@@ -47,8 +47,9 @@ import Viewport from './helpers/viewport.js';
 // Overlay / Dialog — Positioned layers above page content
 //   Modal     : Dialog with focus trap, backdrop, auto-close
 //   Toast     : Modal-based timed alert (pops up, delivers message, disappears)
-//   Snackbar  : Inline/popup notification bar (colorful, horizontal)
-//   Tooltip   : Smart-positioned hover/touch tooltip
+//   Snackbar       : Inline/popup notification bar (colorful, horizontal)
+//   SnackbarRelay  : Cross-page snackbar relay via sessionStorage
+//   Tooltip        : Smart-positioned hover/touch tooltip
 //   Popover   : Smart-positioned click/hover popover with content callback
 import Modal from './modules/modal.js';
 import Toast from './modules/toast.js';

@@ -4,7 +4,7 @@
 export default Sadrazam;
 
 declare const Sadrazam: {
-  configure(config?: { languageCode?: string; logEndpoint?: string }): void;
+  configure(config?: { languageCode?: string; logEndpoint?: string; tokenSelector?: string }): void;
   help(): void;
 
   Modal: typeof Modal;
@@ -16,6 +16,7 @@ declare const Sadrazam: {
   Autocomplete: typeof Autocomplete;
   Backdrop: typeof Backdrop;
   Snackbar: typeof Snackbar;
+  SnackbarRelay: typeof SnackbarRelay;
   Toast: typeof Toast;
   Spinner: typeof Spinner;
   ProgressBar: typeof ProgressBar;
@@ -201,6 +202,13 @@ declare class Snackbar {
     message: string | Record<string, string | string[]>,
     time?: number | false
   ): void;
+}
+
+declare class SnackbarRelay {
+  private constructor();
+
+  static set(message: string | Record<string, string | string[]>): void;
+  static show(): void;
 }
 
 interface ToastOptions {
@@ -408,6 +416,8 @@ declare class Token {
   private constructor();
 
   static help(): void;
+  static getSelector(): string;
+  static setSelector(selector: string): void;
   static get(): string | null;
   static update(token: string): void;
 }
