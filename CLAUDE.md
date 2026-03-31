@@ -135,6 +135,8 @@ _variables ─┬── @forward colors-main
 
 **Gap:** `.gap-1` (space-1), `.gap-2` (space-2), `.gap-4` (space-4), `.gap-6` (space-6), `.gap-8` (space-8) — flex ve grid'de kullanılır
 
+**After-heading:** `.after-h1`, `.after-h2`, `.after-h3`, `.after-h4` — heading'in `margin-bottom`'unu negatif `margin-top` ile sıfırlar, aynı değeri kendi `margin-bottom`'u olarak uygular. Heading altına subtitle/açıklama metni yerleştirmek için.
+
 ## __instance DOM Property + getInstance() Pattern
 
 Tüm JS modülleri DOM element'lerine instance referansı atar ve `getInstance()` static metodu sağlar:
@@ -162,6 +164,7 @@ Tüm JS modülleri DOM element'lerine instance referansı atar ve `getInstance()
 İki bildirim modülü, yemek metaforu ile ayrışır:
 
 - **Snackbar** — Yatay, renkli, ister hemen ye ister kenara koy. Inline (statik, sayfa içi) + popup (fixed, auto-dismiss) kullanım. Singleton, DOM-based. API: `Sadrazam.Snackbar.insert(message, time?)`
+- **SnackbarRelay** — Cross-page snackbar iletimi. Redirect öncesi mesajı sessionStorage'a yazar, sonraki sayfa yüklendiğinde snackbar olarak gösterir ve siler. API: `SnackbarRelay.set(message)` (kaydet), `SnackbarRelay.show()` (göster+sil)
 - **Toast** — Tost makinasından fırlar gibi: açılır, mesajı iletir, kapanır. Modal-based, timed, dismiss butonu var. API: `Sadrazam.Toast.insert({ message, time, size, position, fontSize, dismissButton, closeOnClick })`
 
 ## destroy() Konvansiyonu
@@ -206,6 +209,4 @@ Eğer `<button>` kullanılamıyorsa (modül trigger'ları gibi), modül JS'inde 
 
 ### Switch Accessibility
 Input `display: none` yerine **visually hidden** (`position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none`). Tab ile erişilebilir, `input:focus-visible + .switch__slider` ile slider'a outline uygulanır.
-
-## Yapılacaklar
 
