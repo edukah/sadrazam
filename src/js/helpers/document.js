@@ -12,7 +12,7 @@ class Document {
       ['navigateBack(fallbackUrl)', 'Goes back to the previous page via history.back(). If the user came from an external site or opened the page directly, navigates to the fallback URL instead.'],
       ['copyInputText(button)', 'Copies the target input text to clipboard when a button is clicked.'],
       ['uniqueId()', 'Generates a cryptographically secure unique ID (UUID v4).'],
-      ['fixedElementAdjust(selector)', 'Adjusts footer padding-bottom to account for a fixed element. Checks computed display — if the element is hidden by CSS (media queries, etc.), padding is restored.']
+      ['fixedElementAdjust(selector)', 'Adjusts footer padding-bottom to account for a fixed element. Checks computed display and position — if hidden or not fixed (e.g. relative on desktop), padding is restored.']
     ]);
     console.info('%cDocument', 'font-size: 20px; font-weight: bold; color: red');
     availableConfigs.forEach((value, key) => {
@@ -99,10 +99,10 @@ class Document {
   }
 
   /**
-   * Adjusts footer padding to prevent content from being hidden behind a fixed/sticky element.
+   * Adjusts footer padding to prevent content from being hidden behind a fixed element.
    * Measures the fixed element's height, adds it to footer's original padding-bottom, and applies the total.
    * Stores original padding in a data attribute for restoration.
-   * Checks computed display — if the element is hidden by CSS (media queries, etc.), padding is restored.
+   * Checks computed display and position — if hidden or not fixed (e.g. position: relative on desktop), padding is restored.
    *
    * @param {string} selector - CSS selector for the fixed element.
    */
@@ -114,12 +114,13 @@ class Document {
       return;
     }
 
-    // Element CSS tarafından gizlenmişse (display:none vb.) padding gerekmez.
-    // Breakpoint + hover/pointer gibi compound media query koşullarını CSS belirler,
-    // JS sadece sonucu okur — koşulları tekrar yazmaya gerek kalmaz.
-    const isHidden = globalThis.getComputedStyle(fixedElement).display === 'none';
+    // Element gizliyse veya fixed değilse padding gerekmez.
+    // display:none → element yok, position !== fixed → normal akışta yer kaplıyor.
+    // getComputedStyle media query sonrası gerçek değeri döner.
+    const style = globalThis.getComputedStyle(fixedElement);
+    const needsSpacing = style.display !== 'none' && style.position === 'fixed';
 
-    if (isHidden) {
+    if (!needsSpacing) {
       if (footer.hasAttribute('data-default-padding-bottom')) {
         footer.style.paddingBottom = footer.getAttribute('data-default-padding-bottom');
         footer.removeAttribute('data-default-padding-bottom');
