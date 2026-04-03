@@ -6,13 +6,18 @@ import Elem from '../modules/elem.js';
  * @summary Static document helpers for navigation, clipboard, unique ID generation, and layout adjustments.
  */
 class Document {
+  // Kayıtlı fixed element selector'ları. Birden fazla fixed element olduğunda
+  // en yüksek z-index'li olanın yüksekliği footer padding'i belirler.
+  static #fixedSelectors = new Set();
+  static #fixedRafId = null;
+
   static help () {
     const availableConfigs = new Map([
       ['redirect(url, time?)', 'Redirects to the specified URL with a delay, or refreshes the page.'],
       ['navigateBack(fallbackUrl)', 'Goes back to the previous page via history.back(). If the user came from an external site or opened the page directly, navigates to the fallback URL instead.'],
       ['copyInputText(button)', 'Copies the target input text to clipboard when a button is clicked.'],
       ['uniqueId()', 'Generates a cryptographically secure unique ID (UUID v4).'],
-      ['fixedElementAdjust(selector)', 'Adjusts footer padding-bottom to account for a fixed element. Checks computed display and position — if hidden or not fixed (e.g. relative on desktop), padding is restored.']
+      ['fixedElementAdjust(selector)', 'Registers a fixed element and adjusts footer padding-bottom. When multiple fixed elements overlap, the one with the highest z-index determines the padding.']
     ]);
     console.info('%cDocument', 'font-size: 20px; font-weight: bold; color: red');
     availableConfigs.forEach((value, key) => {
@@ -99,44 +104,86 @@ class Document {
   }
 
   /**
-   * Adjusts footer padding to prevent content from being hidden behind a fixed element.
-   * Measures the fixed element's height, adds it to footer's original padding-bottom, and applies the total.
-   * Stores original padding in a data attribute for restoration.
-   * Checks computed display and position — if hidden or not fixed (e.g. position: relative on desktop), padding is restored.
+   * Registers a fixed element and adjusts footer padding to prevent content from being hidden.
+   * When multiple fixed elements are registered, the one with the highest computed z-index
+   * determines the padding — lower z-index elements are visually behind it and don't contribute.
    *
    * @param {string} selector - CSS selector for the fixed element.
    */
   static fixedElementAdjust (selector) {
-    const fixedElement = globalThis.document.querySelector(selector);
-    const footer = globalThis.document.querySelector('footer');
+    this.#fixedSelectors.add(selector);
 
-    if (!fixedElement || !footer) {
+    // Aynı frame'deki çağrıları birleştir — tüm register'lar tamamlandıktan sonra tek hesaplama
+    globalThis.cancelAnimationFrame(this.#fixedRafId);
+    this.#fixedRafId = globalThis.requestAnimationFrame(() => this.#applyFixedAdjust());
+  }
+
+  static #applyFixedAdjust () {
+    const footer = globalThis.document.querySelector('footer');
+    if (!footer) {
       return;
     }
 
-    // Element gizliyse veya fixed değilse padding gerekmez.
-    // display:none → element yok, position !== fixed → normal akışta yer kaplıyor.
-    // getComputedStyle media query sonrası gerçek değeri döner.
-    const style = globalThis.getComputedStyle(fixedElement);
-    const needsSpacing = style.display !== 'none' && style.position === 'fixed';
+    // Önceki çağrıdan kalan state'i temizle — her şeyi doğal haline döndür
+    for (const sel of this.#fixedSelectors) {
+      const el = globalThis.document.querySelector(sel);
+      if (el && el.hasAttribute('data-original-display')) {
+        el.style.display = el.getAttribute('data-original-display') || '';
+        el.removeAttribute('data-original-display');
+      }
+    }
 
-    if (!needsSpacing) {
-      if (footer.hasAttribute('data-default-padding-bottom')) {
-        footer.style.paddingBottom = footer.getAttribute('data-default-padding-bottom');
-        footer.removeAttribute('data-default-padding-bottom');
+    if (footer.hasAttribute('data-default-padding-bottom')) {
+      footer.style.paddingBottom = footer.getAttribute('data-default-padding-bottom');
+      footer.removeAttribute('data-default-padding-bottom');
+    }
+
+    // Tüm kayıtlı selector'lar arasında visible + fixed olanları bul
+    let winner = null;
+    let winnerZIndex = -Infinity;
+    const candidates = [];
+
+    for (const sel of this.#fixedSelectors) {
+      const el = globalThis.document.querySelector(sel);
+      if (!el) {
+        continue;
       }
 
+      const style = globalThis.getComputedStyle(el);
+      if (style.display === 'none' || style.position !== 'fixed') {
+        continue;
+      }
+
+      const zIndex = parseInt(style.zIndex, 10) || 0;
+      candidates.push({ el, zIndex });
+
+      if (zIndex > winnerZIndex) {
+        winnerZIndex = zIndex;
+        winner = el;
+      }
+    }
+
+    // Hiçbir fixed element yoksa — reset zaten yapıldı, çık
+    if (!winner) {
       return;
+    }
+
+    // Kaybedenleri gizle — orijinal display'i sakla
+    for (const { el, zIndex } of candidates) {
+      if (zIndex < winnerZIndex) {
+        el.setAttribute('data-original-display', el.style.display);
+        el.style.display = 'none';
+      }
     }
 
     if (!footer.hasAttribute('data-default-padding-bottom')) {
       footer.setAttribute('data-default-padding-bottom', Elem.getStyle(footer, 'padding-bottom'));
     }
 
-    const fixedElementHeight = parseFloat(Elem.getStyle(fixedElement, 'height'));
+    const winnerHeight = parseFloat(Elem.getStyle(winner, 'height'));
     const originalPadding = parseFloat(footer.getAttribute('data-default-padding-bottom'));
 
-    footer.style.paddingBottom = `${fixedElementHeight + originalPadding}px`;
+    footer.style.paddingBottom = `${winnerHeight + originalPadding}px`;
   }
 
 }

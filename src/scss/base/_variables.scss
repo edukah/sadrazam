@@ -126,6 +126,7 @@ $breakpoint-4k: 2560px; // Gerçek 4K
   /** @group Base Layer (100'ler) */
   --z-header-sticky: var(--z-layer-base);
   --z-form-validation-inline: calc(var(--z-layer-base) + 1);
+  --z-fixed-action-bar: calc(var(--z-layer-base) + 2);
 
   /** @group UI Layer (200'ler) */
   --z-dropdown-backdrop: var(--z-layer-ui);
