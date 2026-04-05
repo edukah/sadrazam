@@ -1,17 +1,42 @@
 @use '../base/variables';
 
 /* =========================================================================
-   Spinner — Inline loading indicator (CSS-only)
+   Spinner — CSS-only loading indicators
 
+   .spinner--block  → Akis icinde, belirli bir alanin yuklenme durumu
    .spinner--inline → Satir ici, metin veya buton yaninda (1em boyut)
 
-   Diger varyantlar (main, helper, block) kaldirildi.
+   Ajax spinner varyantlari (main, helper) kaldirildi.
    Ajax loading feedback icin ProgressBar + bttn--loading kullanilir.
    ========================================================================= */
 
-@keyframes spin {
+@keyframes spinner-rotate {
   0%   { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+/* Blok spinner — akis icinde, belirli bir alan icin (InfiniteScroll vb.) */
+.spinner--block {
+  position: relative !important;
+  width: 28px !important;
+  height: 28px !important;
+  margin: 16px auto !important;
+  transform: translateY(0) !important;
+  visibility: hidden;
+
+  &.is-loading {
+    visibility: visible;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border: 2.5px solid var(--color-grey-100);
+    border-top-color: var(--color-pri-500);
+    border-radius: var(--radius-pill);
+    animation: spinner-rotate 0.7s linear infinite;
+  }
 }
 
 /* Satir ici spinner — buton veya metin yaninda */
@@ -35,6 +60,6 @@
     border: 0.15em solid var(--color-grey-150);
     border-top-color: currentColor;
     border-radius: var(--radius-pill);
-    animation: spin 0.7s linear infinite;
+    animation: spinner-rotate 0.7s linear infinite;
   }
 }
