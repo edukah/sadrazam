@@ -1,4 +1,4 @@
-import Spinner from '../modules/spinner.js';
+import ProgressBar from '../modules/progress-bar.js';
 import Snackbar from '../modules/snackbar.js';
 import Language from '../language/core/language.js';
 import LogRelay from './log-relay.js';
@@ -31,7 +31,7 @@ class Ajax {
       ['route', 'Request endpoint. Required.'],
       ['data', 'Data to send. Object or FormData. Default: `{}`.'],
       ['type', 'Request method. `get` or `post`. Default: `post`.'],
-      ['spinner', 'Spinner type during request. `false`, `main`, or `helper`. Default: `false`.'],
+      ['spinner', 'Shows progress bar during request. Any truthy value enables it. Ignored when `button` is provided. Default: `false`.'],
       ['success', 'Callback on successful response (HTTP 2xx).'],
       ['error', 'Callback on error (network error, timeout, HTTP 4xx/5xx).'],
       ['beforeStart', 'Callback fired just before the request starts.'],
@@ -75,7 +75,7 @@ class Ajax {
       LogRelay.capture(callbackError, { component: 'Ajax.beforeStart', route: config.route });
     }
 
-    if (config.spinner) Spinner.show({ type: config.spinner });
+    if (config.spinner && !config.button) ProgressBar.start();
 
     let url = config.route;
 
@@ -226,6 +226,19 @@ class Ajax {
     button.__ajaxRefCount = (button.__ajaxRefCount || 0) + 1;
     button.classList.add('bttn--loading');
     button.disabled = true;
+
+    // Ayni scope'taki diger butonlari disable et
+    const scope = button.dataset.scope;
+    if (scope) {
+      const siblings = globalThis.document.querySelectorAll(`[data-scope="${scope}"]`);
+
+      for (const sibling of siblings) {
+        if (sibling !== button && !sibling.disabled) {
+          sibling.disabled = true;
+          sibling.setAttribute('data-scope-locked', '');
+        }
+      }
+    }
   };
 
   static #unlockButton = (button) => {
@@ -235,6 +248,17 @@ class Ajax {
       button.classList.remove('bttn--loading');
       button.disabled = false;
       button.__ajaxRefCount = 0;
+
+      // Scope ile kilitlenmis butonlari geri ac
+      const scope = button.dataset.scope;
+      if (scope) {
+        const locked = globalThis.document.querySelectorAll(`[data-scope="${scope}"][data-scope-locked]`);
+
+        for (const el of locked) {
+          el.disabled = false;
+          el.removeAttribute('data-scope-locked');
+        }
+      }
     }
   };
 
@@ -246,7 +270,7 @@ class Ajax {
       LogRelay.capture(callbackError, { component: 'Ajax.afterEnd', route: config.route });
     }
 
-    if (config.spinner) Spinner.hide();
+    if (config.spinner && !config.button) ProgressBar.done();
     if (config.button) this.#unlockButton(config.button);
   };
 
