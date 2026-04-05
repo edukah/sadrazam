@@ -12,7 +12,6 @@
   {"text": "  Modal            Modal pencere yoneticisi", "style": ""},
   {"text": "  Toast            Modal tabanli toast bildirim yoneticisi", "style": ""},
   {"text": "  Snackbar         Toast bildirim yoneticisi (singleton)", "style": ""},
-  {"text": "  Spinner          Yukleme gostergesi (reference counting)", "style": ""},
   {"text": "  ProgressBar      Sayfa ust yukleme cubugu (top loading bar)", "style": ""},
   {"text": "  Tabs             Sekme navigasyonu", "style": ""},
   {"text": "  Tooltip          Arac ipucu", "style": ""},
