@@ -216,7 +216,6 @@ interface ToastOptions {
   time?: number;
   size?: 'small' | 'medium' | 'large';
   position?: 'top' | 'center' | 'bottom';
-  fontSize?: 'sm' | 'md' | 'lg';
   closeOnClick?: boolean;
   dismissButton?: boolean;
   [key: string]: unknown;

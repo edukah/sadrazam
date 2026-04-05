@@ -5,7 +5,8 @@
    .bttn class sistemi içindir.
 
    Kullanım:    bttn--pri (base class gerekmez, :is() otomatik uygular)
-   Boyutlar:    --lg, --md (default), --sm, --xs (+ rectangle varyantları)
+   Boyutlar:    --lg, --md (default), --sm, --xs
+   Şekil:       rectangle (default), --square (icon butonlar)
    Kademeler:   filled (default), --soft, --outline
    Bağımsız:    --ghost
    Renkler:     --pri, --sec, --ter, --neutral,
@@ -45,7 +46,9 @@
   box-shadow: 0 0 0 var(--color-grey-250);
   transition: background-color 0.2s;
   outline: none;
-  padding: var(--space-5);
+  --_bttn-py: var(--space-5);
+  --_bttn-px: var(--space-9);
+  padding: var(--_bttn-py) var(--_bttn-px);
   background-color: var(--button-color, transparent);
   color: var(--color-text-white--f);
   border-color: var(--button-color, transparent);
@@ -72,17 +75,14 @@
   }
 }
 
-// ---- Boyutlar (kare padding) ----
-.bttn--lg { padding: var(--space-7); }
-.bttn--md { padding: var(--space-5); }
-.bttn--sm { padding: var(--space-4); }
-.bttn--xs { padding: var(--space-3); }
+// ---- Boyutlar ----
+.bttn--lg { --_bttn-py: var(--space-7); --_bttn-px: var(--space-13); }
+.bttn--md { --_bttn-py: var(--space-5); --_bttn-px: var(--space-9); }
+.bttn--sm { --_bttn-py: var(--space-4); --_bttn-px: var(--space-7); }
+.bttn--xs { --_bttn-py: var(--space-3); --_bttn-px: var(--space-5); }
 
-// ---- Rectangle varyantları (yatay padding artırılır) ----
-.bttn--lg-rectangle { padding: var(--space-7) var(--space-11); }
-.bttn--md-rectangle { padding: var(--space-5) var(--space-8); }
-.bttn--sm-rectangle { padding: var(--space-4) var(--space-6); }
-.bttn--xs-rectangle { padding: var(--space-3) var(--space-5); }
+// ---- Kare varyant (icon butonlar) ----
+.bttn--square { --_bttn-px: var(--_bttn-py); }
 
 // ---- Block buton (tam genişlik) ----
 .bttn--block {

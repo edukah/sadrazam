@@ -51,17 +51,17 @@ describe('Ajax', () => {
       expect(result).toEqual(responseBody);
     });
 
-    it('route prefix: route otomatik olarak index.php?route= ile sarılır', async () => {
+    it('route olduğu gibi kullanılır (prefix eklenmez)', async () => {
       fetchMock.mockReturnValue(mockResponse({ ok: true }));
 
-      await Ajax.request({ route: 'catalog/product' });
+      await Ajax.request({ route: '/api/catalog/product' });
       expect(fetchMock).toHaveBeenCalledWith(
-        'index.php?route=catalog/product',
+        '/api/catalog/product',
         expect.any(Object)
       );
     });
 
-    it('http ile başlayan route olduğu gibi kullanılır', async () => {
+    it('tam URL route olduğu gibi kullanılır', async () => {
       fetchMock.mockReturnValue(mockResponse({ ok: true }));
 
       await Ajax.request({ route: 'https://api.example.com/data' });

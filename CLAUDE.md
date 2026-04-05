@@ -54,7 +54,7 @@ sadrazam/
 
 ## Conventions
 - BEM-like CSS naming: `.bttn--pri`, `.bttn--pri.bttn--soft`, `.bttn--neutral.bttn--outline`, `.modal__header`, `.tab-heading`
-- **Button `:is()` pattern**: Base stiller `:is(.bttn, .bttn--pri, ..., .bttn--ghost)` ile tüm renk modifier'larına otomatik uygulanır. `.bttn` base class **opsiyonel** — `bttn--pri` tek başına yeterli. Default boyut md (`--space-5`), sadece farklı boyut için `bttn--sm`/`bttn--lg` eklenir.
+- **Button `:is()` pattern**: Base stiller `:is(.bttn, .bttn--pri, ..., .bttn--ghost)` ile tüm renk modifier'larına otomatik uygulanır. `.bttn` base class **opsiyonel** — `bttn--pri` tek başına yeterli. Default shape **rectangle** (asymmetric padding: `--_bttn-py` / `--_bttn-px`), `bttn--square` modifier icon-only butonlar için. Default boyut **md** — `bttn--md` explicit class olarak da mevcut, `bttn--sm`/`bttn--lg`/`bttn--xs` farklı boyutlar için.
 - **Button tier system**: Colors set `--button-color` CSS variable, tiers (filled/soft/outline) read it. See `docs/wiki/button-system.md`
 - **State convention**: JS-toggled dynamic states use `is-*` / `has-*` prefix, scoped inside component SCSS blocks:
   - `is-entering`, `is-leaving` (slide-menu animation states)
@@ -165,7 +165,7 @@ Tüm JS modülleri DOM element'lerine instance referansı atar ve `getInstance()
 
 - **Snackbar** — Yatay, renkli, ister hemen ye ister kenara koy. Inline (statik, sayfa içi) + popup (fixed, auto-dismiss) kullanım. Singleton, DOM-based. API: `Sadrazam.Snackbar.insert(message, time?)`
 - **SnackbarRelay** — Cross-page snackbar iletimi. Redirect öncesi mesajı sessionStorage'a yazar, sonraki sayfa yüklendiğinde snackbar olarak gösterir ve siler. API: `SnackbarRelay.set(message)` (kaydet), `SnackbarRelay.show()` (göster+sil)
-- **Toast** — Tost makinasından fırlar gibi: açılır, mesajı iletir, kapanır. Modal-based, timed, dismiss butonu var. API: `Sadrazam.Toast.insert({ message, time, size, position, fontSize, dismissButton, closeOnClick })`
+- **Toast** — Tost makinasından fırlar gibi: açılır, mesajı iletir, kapanır. Modal-based, timed, dismiss butonu var. API: `Sadrazam.Toast.insert({ message, time, size, position, dismissButton, closeOnClick })`
 
 ## destroy() Konvansiyonu
 

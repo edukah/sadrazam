@@ -14,7 +14,9 @@ Base stiller (display, cursor, border-radius, padding, transition...) `:is()` il
 ```
 
 - `.bttn` base class **opsiyonel** — `bttn--pri` tek basina yeterli
-- Default boyut **md** (`--space-5`) — sadece farkli boyut icin `bttn--sm`/`bttn--lg` eklenir
+- Default shape **rectangle** (asymmetric padding: `--_bttn-py` / `--_bttn-px`). `bttn--*-rectangle` class'lari kaldirildi.
+- `bttn--square` modifier icon-only butonlar icin (symmetric padding)
+- Default boyut **md** — `bttn--md` explicit class olarak da mevcut, `bttn--sm`/`bttn--lg`/`bttn--xs` farkli boyutlar icin
 - Backward compatible — eski `bttn bttn--pri bttn--md` pattern hala calisir
 
 ## Colors
@@ -83,7 +85,7 @@ Sadrazam covers globally: `a`, `button`, `.bttn--*`, `input`, `textarea`, `selec
 Inline `--button-color` ile herhangi bir renk kullanilabilir:
 
 ```html
-<button class="bttn--md-rectangle" style="--button-color: #e91e63;">Custom</button>
+<button class="bttn--md" style="--button-color: #e91e63;">Custom</button>
 ```
 
 Soft ve outline otomatik calisir.

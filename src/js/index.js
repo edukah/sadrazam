@@ -73,10 +73,8 @@ import Autocomplete from './modules/autocomplete.js';
 import InfiniteScroll from './modules/infinite-scroll.js';
 
 // Visual Indicators — Singletons with reference counting
-//   Spinner     : Loading overlay (main/helper types)
 //   ProgressBar : Top loading bar with trickle animation
 //   Backdrop    : Stack-based shared backdrop (multi-owner)
-import Spinner from './modules/spinner.js';
 import ProgressBar from './modules/progress-bar.js';
 import Backdrop from './modules/backdrop.js';
 
@@ -127,7 +125,6 @@ const Sadrazam = {
   InfiniteScroll,
 
   // Modules — Visual Indicators (singletons, ref-counted)
-  Spinner,
   ProgressBar,
   Backdrop,
 
@@ -210,7 +207,6 @@ export {
   InfiniteScroll,
 
   // Modules — Visual Indicators
-  Spinner,
   ProgressBar,
   Backdrop,
 

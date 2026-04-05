@@ -40,7 +40,7 @@ class Snackbar {
     // If message is a string, normalize it to object format
     const messageGroups = typeof message === 'string' ? { info: [message] } : message;
 
-    for (const type in messageGroups) {
+    for (const type of Object.keys(messageGroups)) {
       const messages = Array.isArray(messageGroups[type]) ? messageGroups[type] : [messageGroups[type]];
       const groupElement = this.#createMessageGroup(type, messages);
       this.#wrapper.appendChild(groupElement);
@@ -79,7 +79,7 @@ class Snackbar {
    * Removes the notification box and clears the timer.
    */
   static #cleanup = () => {
-    if(this.#timer) globalThis.clearTimeout(this.#timer);
+    if (this.#timer) globalThis.clearTimeout(this.#timer);
     this.#wrapper?.remove();
     this.#wrapper = null;
     this.#timer = null;
@@ -103,23 +103,21 @@ class Snackbar {
    * @returns {HTMLElement} The created div element.
    */
   static #createMessageGroup = (type, messages) => {
-    // Template literals are more readable than createElement for this structure.
-    const groupHTML = `
-      <ul class="snackbar__static-list">
-        ${messages.map(msg => `<li>${msg}</li>`).join('')}
-      </ul>
-      <button type="button" class="snackbar__static-close">
-        <i class="ph-light ph-x"></i>
-      </button>
-    `;
-
     const groupContainer = document.createElement('div');
     groupContainer.className = `snackbar__static-container snackbar__static-container--${type}`;
-    groupContainer.innerHTML = groupHTML;
 
-    // Attach close button event listener
-    const closeButton = groupContainer.querySelector('.snackbar__static-close');
-    closeButton?.addEventListener('click', this.#handleCloseClick);
+    const ul = document.createElement('ul');
+    ul.className = 'snackbar__static-list';
+    ul.innerHTML = messages.map(msg => `<li>${msg}</li>`).join('');
+
+    const closeButton = document.createElement('button');
+    closeButton.type = 'button';
+    closeButton.className = 'snackbar__static-close';
+    closeButton.innerHTML = '<i class="ph-light ph-x"></i>';
+    closeButton.addEventListener('click', this.#handleCloseClick);
+
+    groupContainer.appendChild(ul);
+    groupContainer.appendChild(closeButton);
 
     return groupContainer;
   };

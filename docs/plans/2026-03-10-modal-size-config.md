@@ -243,7 +243,7 @@ static insert ({ message = {}, time = 27000, size = 'medium', fontSize = 'md', c
   const bodyHTML = `
     <div class="modal__body ${fontSizeClass}">
       ${messageListsHTML}
-      ${dismissButton ? `<div class="toast__dismiss"><button type="button" class="bttn bttn--neutral bttn--${fontSize}-rectangle" data-modal-close>${Language.get('buttonDismiss')}</button></div>` : ''}
+      ${dismissButton ? `<div class="toast__action"><button type="button" class="bttn bttn--neutral bttn--${fontSize}-rectangle" data-modal-close>${Language.get('buttonDismiss')}</button></div>` : ''}
     </div>
   `;
 

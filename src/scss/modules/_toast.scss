@@ -1,4 +1,4 @@
-*[data-toggle="toast"] {
+[data-toggle="toast"] {
   cursor: pointer;
 
   &:focus {
@@ -11,13 +11,22 @@
   }
 }
 
+.toast__container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+}
+
 /* Toast — Modal-based notification boxes */
 ul.toast__list {
   position: relative;
-  display: block;
   text-align: center;
   list-style-type: none;
   font-size: inherit;
+
+  display: flex;
+  gap: var(--space-6);
+  flex-direction: column;
 
   &::before {
     display: block;
@@ -26,7 +35,7 @@ ul.toast__list {
     // margin-bottom: var(--space-4);
 
     font-family: "Phosphor-Fill";
-    font-size: 2.5em;
+    font-size: 3.5em;
   }
 
   &--error::before {
@@ -56,21 +65,9 @@ ul.toast__list {
 
 }
 
-.modal__body--sm {
-  font-size: var(--fsi-17);
-}
-
-.modal__body--md {
-  font-size: var(--fsi-19);
-}
-
-.modal__body--lg {
-  font-size: var(--fsi-21);
-}
-
-.toast__dismiss {
+.toast__action {
+  font-size: var(--fsi-15);
   text-align: center;
-  margin-top: var(--space-12);
 }
 
 /* End of Toast */

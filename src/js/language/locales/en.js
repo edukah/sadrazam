@@ -19,6 +19,6 @@ export default {
   // Clipboard
   clipboardSuccess: 'Copied',
   clipboardError: 'Could not copy',
-  // Modal Message
+  // Toast
   buttonDismiss: 'Got it',
 };

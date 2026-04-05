@@ -300,22 +300,22 @@ Mevcut buton bölümünü kaldır, yerine yeni tier sistemini gösteren kapsaml�
     <div class="row">
         <span class="label">--lg</span>
         <button class="bttn bttn--lg bttn--pri">LG</button>
-        <button class="bttn bttn--lg-rectangle bttn--pri">LG Rectangle</button>
+        <button class="bttn bttn--lg bttn--pri">LG Rectangle</button>
     </div>
     <div class="row">
         <span class="label">--md</span>
         <button class="bttn bttn--md bttn--pri">MD</button>
-        <button class="bttn bttn--md-rectangle bttn--pri">MD Rectangle</button>
+        <button class="bttn bttn--md bttn--pri">MD Rectangle</button>
     </div>
     <div class="row">
         <span class="label">--sm</span>
         <button class="bttn bttn--sm bttn--pri">SM</button>
-        <button class="bttn bttn--sm-rectangle bttn--pri">SM Rectangle</button>
+        <button class="bttn bttn--sm bttn--pri">SM Rectangle</button>
     </div>
     <div class="row">
         <span class="label">--xs</span>
         <button class="bttn bttn--xs bttn--pri">XS</button>
-        <button class="bttn bttn--xs-rectangle bttn--pri">XS Rectangle</button>
+        <button class="bttn bttn--xs bttn--pri">XS Rectangle</button>
     </div>
 
     <hr class="dev-sep">
@@ -326,33 +326,33 @@ Mevcut buton bölümünü kaldır, yerine yeni tier sistemini gösteren kapsaml�
     <!-- Pri -->
     <div class="row">
         <span class="label">pri</span>
-        <button class="bttn bttn--md-rectangle bttn--pri">Filled</button>
-        <button class="bttn bttn--md-rectangle bttn--pri bttn--soft">Soft</button>
-        <button class="bttn bttn--md-rectangle bttn--pri bttn--outline">Outline</button>
+        <button class="bttn bttn--md bttn--pri">Filled</button>
+        <button class="bttn bttn--md bttn--pri bttn--soft">Soft</button>
+        <button class="bttn bttn--md bttn--pri bttn--outline">Outline</button>
     </div>
 
     <!-- Sec -->
     <div class="row">
         <span class="label">sec</span>
-        <button class="bttn bttn--md-rectangle bttn--sec">Filled</button>
-        <button class="bttn bttn--md-rectangle bttn--sec bttn--soft">Soft</button>
-        <button class="bttn bttn--md-rectangle bttn--sec bttn--outline">Outline</button>
+        <button class="bttn bttn--md bttn--sec">Filled</button>
+        <button class="bttn bttn--md bttn--sec bttn--soft">Soft</button>
+        <button class="bttn bttn--md bttn--sec bttn--outline">Outline</button>
     </div>
 
     <!-- Ter -->
     <div class="row">
         <span class="label">ter</span>
-        <button class="bttn bttn--md-rectangle bttn--ter">Filled</button>
-        <button class="bttn bttn--md-rectangle bttn--ter bttn--soft">Soft</button>
-        <button class="bttn bttn--md-rectangle bttn--ter bttn--outline">Outline</button>
+        <button class="bttn bttn--md bttn--ter">Filled</button>
+        <button class="bttn bttn--md bttn--ter bttn--soft">Soft</button>
+        <button class="bttn bttn--md bttn--ter bttn--outline">Outline</button>
     </div>
 
     <!-- Neutral -->
     <div class="row">
         <span class="label">neutral</span>
-        <button class="bttn bttn--md-rectangle bttn--neutral">Filled</button>
-        <button class="bttn bttn--md-rectangle bttn--neutral bttn--soft">Soft</button>
-        <button class="bttn bttn--md-rectangle bttn--neutral bttn--outline">Outline</button>
+        <button class="bttn bttn--md bttn--neutral">Filled</button>
+        <button class="bttn bttn--md bttn--neutral bttn--soft">Soft</button>
+        <button class="bttn bttn--md bttn--neutral bttn--outline">Outline</button>
     </div>
 
     <hr class="dev-sep">
@@ -362,37 +362,37 @@ Mevcut buton bölümünü kaldır, yerine yeni tier sistemini gösteren kapsaml�
 
     <div class="row">
         <span class="label">danger</span>
-        <button class="bttn bttn--md-rectangle bttn--danger">Filled</button>
-        <button class="bttn bttn--md-rectangle bttn--danger bttn--soft">Soft</button>
-        <button class="bttn bttn--md-rectangle bttn--danger bttn--outline">Outline</button>
+        <button class="bttn bttn--md bttn--danger">Filled</button>
+        <button class="bttn bttn--md bttn--danger bttn--soft">Soft</button>
+        <button class="bttn bttn--md bttn--danger bttn--outline">Outline</button>
     </div>
 
     <div class="row">
         <span class="label">safe</span>
-        <button class="bttn bttn--md-rectangle bttn--safe">Filled</button>
-        <button class="bttn bttn--md-rectangle bttn--safe bttn--soft">Soft</button>
-        <button class="bttn bttn--md-rectangle bttn--safe bttn--outline">Outline</button>
+        <button class="bttn bttn--md bttn--safe">Filled</button>
+        <button class="bttn bttn--md bttn--safe bttn--soft">Soft</button>
+        <button class="bttn bttn--md bttn--safe bttn--outline">Outline</button>
     </div>
 
     <div class="row">
         <span class="label">warning</span>
-        <button class="bttn bttn--md-rectangle bttn--warning">Filled</button>
-        <button class="bttn bttn--md-rectangle bttn--warning bttn--soft">Soft</button>
-        <button class="bttn bttn--md-rectangle bttn--warning bttn--outline">Outline</button>
+        <button class="bttn bttn--md bttn--warning">Filled</button>
+        <button class="bttn bttn--md bttn--warning bttn--soft">Soft</button>
+        <button class="bttn bttn--md bttn--warning bttn--outline">Outline</button>
     </div>
 
     <div class="row">
         <span class="label">notice</span>
-        <button class="bttn bttn--md-rectangle bttn--notice">Filled</button>
-        <button class="bttn bttn--md-rectangle bttn--notice bttn--soft">Soft</button>
-        <button class="bttn bttn--md-rectangle bttn--notice bttn--outline">Outline</button>
+        <button class="bttn bttn--md bttn--notice">Filled</button>
+        <button class="bttn bttn--md bttn--notice bttn--soft">Soft</button>
+        <button class="bttn bttn--md bttn--notice bttn--outline">Outline</button>
     </div>
 
     <div class="row">
         <span class="label">caution</span>
-        <button class="bttn bttn--md-rectangle bttn--caution">Filled</button>
-        <button class="bttn bttn--md-rectangle bttn--caution bttn--soft">Soft</button>
-        <button class="bttn bttn--md-rectangle bttn--caution bttn--outline">Outline</button>
+        <button class="bttn bttn--md bttn--caution">Filled</button>
+        <button class="bttn bttn--md bttn--caution bttn--soft">Soft</button>
+        <button class="bttn bttn--md bttn--caution bttn--outline">Outline</button>
     </div>
 
     <hr class="dev-sep">
@@ -400,7 +400,7 @@ Mevcut buton bölümünü kaldır, yerine yeni tier sistemini gösteren kapsaml�
     <!-- Ghost (standalone) -->
     <div class="sub-title">Ghost (standalone)</div>
     <div class="row">
-        <button class="bttn bttn--md-rectangle bttn--ghost"><i class="ph-bold ph-x"></i>&nbsp; Cancel</button>
+        <button class="bttn bttn--md bttn--ghost"><i class="ph-bold ph-x"></i>&nbsp; Cancel</button>
         <button class="bttn bttn--md bttn--ghost"><i class="ph-bold ph-dots-three"></i></button>
     </div>
 
@@ -409,14 +409,14 @@ Mevcut buton bölümünü kaldır, yerine yeni tier sistemini gösteren kapsaml�
     <!-- Custom Color -->
     <div class="sub-title">Custom Color <code>style="--button-color: ..."</code></div>
     <div class="row">
-        <button class="bttn bttn--md-rectangle" style="--button-color: #e91e63;">Custom Filled</button>
-        <button class="bttn bttn--md-rectangle bttn--soft" style="--button-color: #e91e63;">Custom Soft</button>
-        <button class="bttn bttn--md-rectangle bttn--outline" style="--button-color: #e91e63;">Custom Outline</button>
+        <button class="bttn bttn--md" style="--button-color: #e91e63;">Custom Filled</button>
+        <button class="bttn bttn--md bttn--soft" style="--button-color: #e91e63;">Custom Soft</button>
+        <button class="bttn bttn--md bttn--outline" style="--button-color: #e91e63;">Custom Outline</button>
     </div>
     <div class="row">
-        <button class="bttn bttn--md-rectangle" style="--button-color: #00bcd4;">Teal Filled</button>
-        <button class="bttn bttn--md-rectangle bttn--soft" style="--button-color: #00bcd4;">Teal Soft</button>
-        <button class="bttn bttn--md-rectangle bttn--outline" style="--button-color: #00bcd4;">Teal Outline</button>
+        <button class="bttn bttn--md" style="--button-color: #00bcd4;">Teal Filled</button>
+        <button class="bttn bttn--md bttn--soft" style="--button-color: #00bcd4;">Teal Soft</button>
+        <button class="bttn bttn--md bttn--outline" style="--button-color: #00bcd4;">Teal Outline</button>
     </div>
 
     <hr class="dev-sep">
@@ -424,9 +424,9 @@ Mevcut buton bölümünü kaldır, yerine yeni tier sistemini gösteren kapsaml�
     <!-- With Icons -->
     <div class="sub-title">With Icons</div>
     <div class="row">
-        <button class="bttn bttn--md-rectangle bttn--pri"><i class="ph-bold ph-plus"></i>&nbsp; Add</button>
-        <button class="bttn bttn--md-rectangle bttn--danger bttn--soft"><i class="ph-bold ph-trash"></i>&nbsp; Delete</button>
-        <button class="bttn bttn--md-rectangle bttn--neutral bttn--outline"><i class="ph-bold ph-gear"></i>&nbsp; Settings</button>
+        <button class="bttn bttn--md bttn--pri"><i class="ph-bold ph-plus"></i>&nbsp; Add</button>
+        <button class="bttn bttn--md bttn--danger bttn--soft"><i class="ph-bold ph-trash"></i>&nbsp; Delete</button>
+        <button class="bttn bttn--md bttn--neutral bttn--outline"><i class="ph-bold ph-gear"></i>&nbsp; Settings</button>
         <button class="bttn bttn--md bttn--pri bttn--outline"><i class="ph-bold ph-heart"></i></button>
         <button class="bttn bttn--md bttn--ghost"><i class="ph-bold ph-x"></i></button>
     </div>
@@ -437,20 +437,20 @@ Mevcut buton bölümünü kaldır, yerine yeni tier sistemini gösteren kapsaml�
     <div class="sub-title">Action Hierarchy Examples</div>
     <div class="row">
         <span class="label">Modal footer</span>
-        <button class="bttn bttn--md-rectangle bttn--pri">Save</button>
-        <button class="bttn bttn--md-rectangle bttn--neutral bttn--outline">Cancel</button>
+        <button class="bttn bttn--md bttn--pri">Save</button>
+        <button class="bttn bttn--md bttn--neutral bttn--outline">Cancel</button>
     </div>
     <div class="row">
         <span class="label">Delete confirm</span>
-        <button class="bttn bttn--md-rectangle bttn--danger">Delete</button>
-        <button class="bttn bttn--md-rectangle bttn--danger bttn--soft">Keep</button>
-        <button class="bttn bttn--md-rectangle bttn--ghost">Cancel</button>
+        <button class="bttn bttn--md bttn--danger">Delete</button>
+        <button class="bttn bttn--md bttn--danger bttn--soft">Keep</button>
+        <button class="bttn bttn--md bttn--ghost">Cancel</button>
     </div>
     <div class="row">
         <span class="label">Form actions</span>
-        <button class="bttn bttn--md-rectangle bttn--pri">Submit</button>
-        <button class="bttn bttn--md-rectangle bttn--pri bttn--soft">Save Draft</button>
-        <button class="bttn bttn--md-rectangle bttn--ghost">Discard</button>
+        <button class="bttn bttn--md bttn--pri">Submit</button>
+        <button class="bttn bttn--md bttn--pri bttn--soft">Save Draft</button>
+        <button class="bttn bttn--md bttn--ghost">Discard</button>
     </div>
 
     <hr class="dev-sep">
@@ -459,20 +459,20 @@ Mevcut buton bölümünü kaldır, yerine yeni tier sistemini gösteren kapsaml�
     <div class="sub-title">Loading &amp; Disabled States</div>
     <p style="font-size:0.75rem; color:var(--color-text-dark-3); margin-bottom:10px;">Click to toggle loading (2s auto-reset)</p>
     <div class="row">
-        <button class="bttn bttn--md-rectangle bttn--pri" onclick="toggleLoading(this, 2000)"><i class="ph-bold ph-paper-plane-tilt"></i>&nbsp; Send</button>
-        <button class="bttn bttn--md-rectangle bttn--danger" onclick="toggleLoading(this, 2000)"><i class="ph-bold ph-trash"></i>&nbsp; Delete</button>
-        <button class="bttn bttn--md-rectangle bttn--neutral" onclick="toggleLoading(this, 2000)"><i class="ph-bold ph-gear"></i>&nbsp; Process</button>
+        <button class="bttn bttn--md bttn--pri" onclick="toggleLoading(this, 2000)"><i class="ph-bold ph-paper-plane-tilt"></i>&nbsp; Send</button>
+        <button class="bttn bttn--md bttn--danger" onclick="toggleLoading(this, 2000)"><i class="ph-bold ph-trash"></i>&nbsp; Delete</button>
+        <button class="bttn bttn--md bttn--neutral" onclick="toggleLoading(this, 2000)"><i class="ph-bold ph-gear"></i>&nbsp; Process</button>
     </div>
     <div class="row">
         <span class="label">Static loading</span>
-        <button class="bttn bttn--md-rectangle bttn--pri bttn--loading">Loading</button>
-        <button class="bttn bttn--md-rectangle bttn--danger bttn--loading">Loading</button>
+        <button class="bttn bttn--md bttn--pri bttn--loading">Loading</button>
+        <button class="bttn bttn--md bttn--danger bttn--loading">Loading</button>
     </div>
     <div class="row">
         <span class="label">Disabled</span>
-        <button class="bttn bttn--md-rectangle bttn--pri bttn--disabled">Disabled</button>
-        <button class="bttn bttn--md-rectangle bttn--pri bttn--soft bttn--disabled">Disabled Soft</button>
-        <button class="bttn bttn--md-rectangle bttn--pri bttn--outline bttn--disabled">Disabled Outline</button>
+        <button class="bttn bttn--md bttn--pri bttn--disabled">Disabled</button>
+        <button class="bttn bttn--md bttn--pri bttn--soft bttn--disabled">Disabled Soft</button>
+        <button class="bttn bttn--md bttn--pri bttn--outline bttn--disabled">Disabled Outline</button>
     </div>
 
     <hr class="dev-sep">
@@ -480,8 +480,8 @@ Mevcut buton bölümünü kaldır, yerine yeni tier sistemini gösteren kapsaml�
     <!-- Block Button -->
     <div class="sub-title">Block Button <code>.bttn--block</code></div>
     <div style="max-width:400px;">
-        <button class="bttn bttn--md-rectangle bttn--pri bttn--block"><i class="ph-bold ph-sign-in"></i>&nbsp; Sign In</button>
-        <button class="bttn bttn--md-rectangle bttn--neutral bttn--outline bttn--block">Register</button>
+        <button class="bttn bttn--md bttn--pri bttn--block"><i class="ph-bold ph-sign-in"></i>&nbsp; Sign In</button>
+        <button class="bttn bttn--md bttn--neutral bttn--outline bttn--block">Register</button>
     </div>
 </div>
 ```
@@ -579,7 +579,7 @@ Her renk varyantı bu variable'ı set eder, kademeler (soft/outline) bu variable
 
 Inline `--button-color` ile herhangi bir renk kullanılabilir:
 
-    <button class="bttn bttn--md-rectangle" style="--button-color: #e91e63;">Custom</button>
+    <button class="bttn bttn--md" style="--button-color: #e91e63;">Custom</button>
 
 Soft ve outline otomatik çalışır.
 

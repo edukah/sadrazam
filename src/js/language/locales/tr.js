@@ -19,6 +19,6 @@ export default {
   // Clipboard
   clipboardSuccess: 'Kopyalandı',
   clipboardError: 'Kopyalanamadı',
-  // Modal Message
+  // Toast
   buttonDismiss: 'Anladım',
 };

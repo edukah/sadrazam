@@ -42,7 +42,7 @@ Yapılan değişiklikler:
 - `src/js/modules/modal-message.js` → `toast.js`
 - `src/scss/modules/modal-message.scss` → `toast.scss`
 - JS class: `ModalMessage` → `Toast`
-- CSS: `modal__notification-list` → `toast__list`, `modal__dismiss` → `toast__dismiss`
+- CSS: `modal__notification-list` → `toast__list`, `modal__dismiss` → `toast__action`
 - API: `Sadrazam.ModalMessage.insert()` → `Sadrazam.Toast.insert()`
 - Data attribute: `data-toggle="modal-message"` → `data-toggle="toast"`
 - `modal__body--sm/md/lg` — değişmedi (modal element modifierleri)

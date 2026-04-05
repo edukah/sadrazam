@@ -16,7 +16,7 @@ class Toast {
       ['time', 'Auto-close delay in ms. Default: `27000`.'],
       ['size', 'Modal size (`sm`, `md`, `lg`). Default: `md`.'],
       ['position', 'Vertical position (`top`, `center`, `bottom`). Default: `center`.'],
-      ['fontSize', 'Message font size (`sm`, `md`, `lg`). Default: `md`.'],
+
       ['dismissButton', 'Shows a dismiss button. Default: `false`. `true` when opened via listen().']
     ]);
     const availableMethods = new Map([
@@ -39,11 +39,11 @@ class Toast {
    * Reads data-type (default: hint) and data-message attributes.
    */
   static listen () {
-    document.querySelectorAll('*[data-toggle="toast"]').forEach(element => {
+    document.querySelectorAll('[data-toggle="toast"]').forEach(element => {
       element.addEventListener('click', () => {
         const type = element.getAttribute('data-type') || 'hint';
         const text = element.getAttribute('data-message');
-        if (text) this.insert({ message: { [type]: text }, size: 'sm', fontSize: 'sm', dismissButton: true });
+        if (text) this.insert({ message: { [type]: text }, size: 'sm', dismissButton: true });
       });
     });
   }
@@ -52,30 +52,43 @@ class Toast {
    * Displays a message in a modal with typed message lists and auto-dismiss.
    * @param {object} options - Message options.
    */
-  static insert ({ message = {}, time = 27000, size = 'md', position = 'center', fontSize = 'md', closeOnClick = true, dismissButton = false, ...otherOptions }) {
-    const modalSize = size;
-    const fontSizeMap = { sm: 'modal__body--sm', md: 'modal__body--md', lg: 'modal__body--lg' };
-    const fontSizeClass = fontSizeMap[fontSize] || 'modal__body--md';
+  static insert ({ message = {}, time = 27000, size = 'md', position = 'center', closeOnClick = true, dismissButton = false, ...otherOptions }) {
+    if (!message || Object.keys(message).length === 0) {
+      return;
+    }
 
-    const messageListsHTML = Object.keys(message)
-      .map(type => {
-        const messages = Array.isArray(message[type]) ? message[type] : [message[type]];
+    const body = document.createElement('div');
+    body.className = 'modal__body';
+    body.setAttribute('role', 'alert');
+    body.setAttribute('aria-live', 'polite');
+    body.setAttribute('aria-atomic', 'true');
 
-        return `
-          <ul class="toast__list toast__list--${type}">
-            ${messages.map(msg => `<li>${msg}</li>`).join('')}
-          </ul>
-        `;
-      }).join('');
+    const container = document.createElement('div');
+    container.className = 'toast__container';
 
-    const bodyHTML = `
-      <div class="modal__body ${fontSizeClass}" role="alert" aria-live="polite" aria-atomic="true">
-        ${messageListsHTML}
-        ${dismissButton ? `<div class="toast__dismiss"><button type="button" class="bttn--neutral bttn--${fontSize}-rectangle" data-modal-close>${Language.get('buttonDismiss')}</button></div>` : ''}
-      </div>
-    `;
+    for (const type of Object.keys(message)) {
+      const messages = Array.isArray(message[type]) ? message[type] : [message[type]];
+      const ul = document.createElement('ul');
+      ul.className = `toast__list toast__list--${type}`;
+      ul.innerHTML = messages.map(msg => `<li>${msg}</li>`).join('');
+      container.appendChild(ul);
+    }
 
-    Modal.insert({ content: bodyHTML, size: modalSize, position, time, closeOnClick, closeOtherModals: false, ...otherOptions });
+    if (dismissButton) {
+      const action = document.createElement('div');
+      action.className = 'toast__action';
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'bttn--neutral';
+      btn.setAttribute('data-modal-close', '');
+      btn.textContent = Language.get('buttonDismiss');
+      action.appendChild(btn);
+      container.appendChild(action);
+    }
+
+    body.appendChild(container);
+
+    return Modal.insert({ content: body, size, position, time, closeOnClick, closeOtherModals: false, ...otherOptions });
   }
 }
 
