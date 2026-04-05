@@ -17,10 +17,10 @@ class Form {
     const availableConfigs = new Map([
       ['perform(selector?)', 'Starts real-time and on-submit validation for forms on the page.'],
       ['validate(element)', 'Manually validates a single form or input.'],
-      ['[data-fvalidate]', 'Input to validate. Contains rules (e.g. "required|email").'],
-      ['[data-fvalidate-message]', 'Custom message that overrides the default error message.'],
-      ['[data-fvalidate-display]', 'Where to display the error message (\'placeholder\' or a CSS selector).'],
-      ['[data-fvalidate-scope]', 'Error message scope. "parent" → inserts message after the input parent element.'],
+      ['[data-form-validate]', 'Input to validate. Contains rules (e.g. "required|email").'],
+      ['[data-form-validate-message]', 'Custom message that overrides the default error message.'],
+      ['[data-form-validate-display]', 'Where to display the error message (\'placeholder\' or a CSS selector).'],
+      ['[data-form-validate-scope]', 'Error message scope. "parent" → inserts message after the input parent element.'],
       ['togglePasswordVisibility(button)', 'Toggles password field visibility when the button is clicked.']
     ]);
     console.info('%cForm', 'font-size: 20px; font-weight: bold; color: red');
@@ -41,7 +41,7 @@ class Form {
       ['greater_than:fieldName', 'Value must be greater than the input with `name="fieldName"` (numeric).'],
       ['regex:pattern', 'Value must match the specified regular expression pattern.']
     ]);
-    console.info('%cAvailable Rules (used in data-fvalidate)', 'margin-top: 10px; font-size: 14px; font-weight: bold; color: blue');
+    console.info('%cAvailable Rules (used in data-form-validate)', 'margin-top: 10px; font-size: 14px; font-weight: bold; color: blue');
     availableRules.forEach((value, key) => {
       console.info(`%c${key}: %c${value}`, 'font-weight: bold; color: blue', 'font-weight: normal; color: unset');
     });
@@ -178,7 +178,7 @@ class Form {
     const isSubmitEvent = elemOrEvent instanceof globalThis.Event && elemOrEvent.type === 'submit';
     const targetElem = isSubmitEvent ? elemOrEvent.target : elemOrEvent;
     const formElem = targetElem.closest('form');
-    const itemsToValidate = targetElem.hasAttribute('data-fvalidate') ? [targetElem] : (formElem ? Array.from(formElem.querySelectorAll('[data-fvalidate]')) : []);
+    const itemsToValidate = targetElem.hasAttribute('data-form-validate') ? [targetElem] : (formElem ? Array.from(formElem.querySelectorAll('[data-form-validate]')) : []);
     
     let isFormValid = true;
     let firstErrorItem = null;
@@ -216,7 +216,7 @@ class Form {
   };
 
   static #validateSingleInput = (item, form) => {
-    const ruleStrings = (item.getAttribute('data-fvalidate') || '').split('|');
+    const ruleStrings = (item.getAttribute('data-form-validate') || '').split('|');
     for (const ruleString of ruleStrings) {
       const [ruleName, ruleValue] = ruleString.split(/:(.*)/s);
       const ruleFn = this.rules[ruleName];
@@ -249,16 +249,16 @@ class Form {
 
   static #insertMessageForInput = (targetInput, warningMessage = '') => {
     this.#attachValidationListener(targetInput);
-    if (document.getElementById(targetInput.getAttribute('data-fvalidate-message-id'))) return;
+    if (document.getElementById(targetInput.getAttribute('data-form-validate-message-id'))) return;
 
     targetInput.style.borderColor = 'red';
     const uniqueId = 'warn-' + globalThis.crypto.randomUUID();
-    targetInput.setAttribute('data-fvalidate-message-id', uniqueId);
+    targetInput.setAttribute('data-form-validate-message-id', uniqueId);
 
-    const finalMessage = targetInput.getAttribute('data-fvalidate-message') || warningMessage;
+    const finalMessage = targetInput.getAttribute('data-form-validate-message') || warningMessage;
 
-    if (targetInput.getAttribute('data-fvalidate-display') === 'placeholder' && targetInput.placeholder) {
-      targetInput.setAttribute('data-fvalidate-default-placeholder', targetInput.placeholder);
+    if (targetInput.getAttribute('data-form-validate-display') === 'placeholder' && targetInput.placeholder) {
+      targetInput.setAttribute('data-form-validate-default-placeholder', targetInput.placeholder);
       targetInput.placeholder = finalMessage;
       
       return;
@@ -269,11 +269,14 @@ class Form {
     span.className = 'danger-text';
     span.textContent = finalMessage;
 
-    const container = document.querySelector(targetInput.getAttribute('data-fvalidate-display')) || document.getElementById(`err-${targetInput.name}`);
+    const errId = 'err' + targetInput.name.charAt(0).toUpperCase()
+      + targetInput.name.slice(1).replace(/[-_](.)/g, (_, c) => c.toUpperCase());
+    const container = document.querySelector(targetInput.getAttribute('data-form-validate-display'))
+      || document.getElementById(errId);
 
     if (container) {
       container.appendChild(span);
-    } else if (targetInput.getAttribute('data-fvalidate-scope') === 'parent') {
+    } else if (targetInput.getAttribute('data-form-validate-scope') === 'parent') {
       targetInput.parentNode.after(span);
     } else {
       targetInput.after(span);
@@ -282,33 +285,33 @@ class Form {
 
   static #removeInputMessage = (targetInput) => {
     targetInput.style.borderColor = '';
-    const defaultPlaceholder = targetInput.getAttribute('data-fvalidate-default-placeholder');
+    const defaultPlaceholder = targetInput.getAttribute('data-form-validate-default-placeholder');
     if (defaultPlaceholder) {
       targetInput.placeholder = defaultPlaceholder;
-      targetInput.removeAttribute('data-fvalidate-default-placeholder');
+      targetInput.removeAttribute('data-form-validate-default-placeholder');
     }
-    const warnId = targetInput.getAttribute('data-fvalidate-message-id');
+    const warnId = targetInput.getAttribute('data-form-validate-message-id');
     if (warnId) {
       document.getElementById(warnId)?.remove();
-      targetInput.removeAttribute('data-fvalidate-message-id');
+      targetInput.removeAttribute('data-form-validate-message-id');
     }
   };
 
   static #insertMessageForForm = (formElem) => {
-    const msg = formElem.getAttribute('data-fvalidate-message');
+    const msg = formElem.getAttribute('data-form-validate-message');
     if (!msg) return;
 
-    if (formElem.getAttribute('data-fvalidate-display') === 'popup') {
+    if (formElem.getAttribute('data-form-validate-display') === 'popup') {
       Snackbar.insert({ error: [msg] });
       
       return;
     }
 
-    const container = document.querySelector(formElem.getAttribute('data-fvalidate-display'));
-    if (!container || formElem.getAttribute('data-fvalidate-message-id')) return;
+    const container = document.querySelector(formElem.getAttribute('data-form-validate-display'));
+    if (!container || formElem.getAttribute('data-form-validate-message-id')) return;
 
     const uniqueId = 'form-warn-' + globalThis.crypto.randomUUID();
-    formElem.setAttribute('data-fvalidate-message-id', uniqueId);
+    formElem.setAttribute('data-form-validate-message-id', uniqueId);
 
     const span = document.createElement('span');
     span.id = uniqueId;
@@ -317,10 +320,10 @@ class Form {
   };
 
   static #removeFormMessage = (formElem) => {
-    const warnId = formElem.getAttribute('data-fvalidate-message-id');
+    const warnId = formElem.getAttribute('data-form-validate-message-id');
     if (warnId) {
       document.getElementById(warnId)?.remove();
-      formElem.removeAttribute('data-fvalidate-message-id');
+      formElem.removeAttribute('data-form-validate-message-id');
     }
   };
 

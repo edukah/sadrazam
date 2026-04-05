@@ -21,7 +21,7 @@ import LogRelay from './services/log-relay.js';
 
 // ---------------------------------------------------------------------------
 // Helpers — Stateless utilities (no DOM rendering, no lifecycle)
-//   Form / Token               : Form validation (data-fvalidate) & CSRF
+//   Form / Token               : Form validation (data-form-validate) & CSRF
 //   Cookie / Url               : Cookie CRUD, URL param helpers
 //   Document / InsertScript     : Redirect, clipboard, UUID, script execution
 //   AutosizeSelect / Textarea  : Auto-sizing form inputs

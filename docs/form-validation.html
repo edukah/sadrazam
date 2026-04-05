@@ -193,15 +193,15 @@
             </div>
             <div class="row">
                 <span class="label">Mark a field</span>
-                <span class="code">data-fvalidate="required|email"</span>
+                <span class="code">data-form-validate="required|email"</span>
             </div>
             <div class="row">
                 <span class="label">Custom message</span>
-                <span class="code">data-fvalidate-message="Custom error text"</span>
+                <span class="code">data-form-validate-message="Custom error text"</span>
             </div>
             <div class="row">
                 <span class="label">Display target</span>
-                <span class="code">data-fvalidate-display="placeholder"</span> or a CSS selector
+                <span class="code">data-form-validate-display="placeholder"</span> or a CSS selector
             </div>
             <div class="row">
                 <span class="label">Manual validate</span>
@@ -221,12 +221,12 @@
             <form id="form-required" class="demo-form" novalidate>
                 <div class="form-group">
                     <label>Full Name</label>
-                    <input type="text" name="fullname" placeholder="Enter your full name" data-fvalidate="required">
+                    <input type="text" name="fullname" placeholder="Enter your full name" data-form-validate="required">
                 </div>
 
                 <div class="form-group">
                     <label>Country</label>
-                    <select name="country" data-fvalidate="required">
+                    <select name="country" data-form-validate="required">
                         <option value="">-- Select a country --</option>
                         <option value="us">United States</option>
                         <option value="uk">United Kingdom</option>
@@ -238,9 +238,9 @@
                 <div class="form-group">
                     <label>Gender</label>
                     <div class="radio-group">
-                        <label><input type="radio" name="gender" value="male" data-fvalidate="required"> Male</label>
-                        <label><input type="radio" name="gender" value="female" data-fvalidate="required"> Female</label>
-                        <label><input type="radio" name="gender" value="other" data-fvalidate="required"> Other</label>
+                        <label><input type="radio" name="gender" value="male" data-form-validate="required"> Male</label>
+                        <label><input type="radio" name="gender" value="female" data-form-validate="required"> Female</label>
+                        <label><input type="radio" name="gender" value="other" data-form-validate="required"> Other</label>
                     </div>
                 </div>
 
@@ -249,7 +249,7 @@
                         <i class="ph-bold ph-paper-plane-tilt"></i>&nbsp; Submit
                     </button>
                     <button type="reset" class="bttn--md bttn--ghost">Reset</button>
-                    <span class="code">data-fvalidate="required"</span>
+                    <span class="code">data-form-validate="required"</span>
                 </div>
                 <div class="result-box" id="result-required"></div>
             </form>
@@ -263,12 +263,12 @@
             <form id="form-email" class="demo-form" novalidate>
                 <div class="form-group">
                     <label>Email Address</label>
-                    <input type="text" name="email" placeholder="user@example.com" data-fvalidate="required|email">
+                    <input type="text" name="email" placeholder="user@example.com" data-form-validate="required|email">
                 </div>
 
                 <div class="form-group">
                     <label>Optional Email (no required rule)</label>
-                    <input type="text" name="optional_email" placeholder="Leave blank or enter valid email" data-fvalidate="email">
+                    <input type="text" name="optional_email" placeholder="Leave blank or enter valid email" data-form-validate="email">
                     <p class="note">The <span class="code">email</span> rule alone only triggers when the field has a value.</p>
                 </div>
 
@@ -276,7 +276,7 @@
                     <button type="submit" class="bttn--md bttn--pri">
                         <i class="ph-bold ph-check"></i>&nbsp; Validate
                     </button>
-                    <span class="code">data-fvalidate="required|email"</span>
+                    <span class="code">data-form-validate="required|email"</span>
                 </div>
                 <div class="result-box" id="result-email"></div>
             </form>
@@ -290,25 +290,25 @@
             <form id="form-length" class="demo-form" novalidate>
                 <div class="form-group">
                     <label>Username (3 to 20 characters)</label>
-                    <input type="text" name="username" placeholder="Pick a username" data-fvalidate="required|min_length:3|max_length:20">
+                    <input type="text" name="username" placeholder="Pick a username" data-form-validate="required|min_length:3|max_length:20">
                     <p class="note">Try typing fewer than 3 or more than 20 characters.</p>
                 </div>
 
                 <div class="form-group">
                     <label>Bio (max 140 characters)</label>
-                    <textarea name="bio" rows="3" placeholder="Tell us about yourself..." data-fvalidate="max_length:140"></textarea>
+                    <textarea name="bio" rows="3" placeholder="Tell us about yourself..." data-form-validate="max_length:140"></textarea>
                 </div>
 
                 <div class="form-group">
                     <label>Password (min 8 characters)</label>
-                    <input type="password" name="password_len" placeholder="Enter a strong password" data-fvalidate="required|min_length:8">
+                    <input type="password" name="password_len" placeholder="Enter a strong password" data-form-validate="required|min_length:8">
                 </div>
 
                 <div class="form-actions">
                     <button type="submit" class="bttn--md bttn--pri">
                         <i class="ph-bold ph-check"></i>&nbsp; Validate
                     </button>
-                    <span class="code">data-fvalidate="required|min_length:3|max_length:20"</span>
+                    <span class="code">data-form-validate="required|min_length:3|max_length:20"</span>
                 </div>
                 <div class="result-box" id="result-length"></div>
             </form>
@@ -322,17 +322,17 @@
             <form id="form-value" class="demo-form" novalidate>
                 <div class="form-group">
                     <label>Age (18 to 120)</label>
-                    <input type="number" name="age" placeholder="Enter your age" data-fvalidate="required|min_value:18|max_value:120">
+                    <input type="number" name="age" placeholder="Enter your age" data-form-validate="required|min_value:18|max_value:120">
                 </div>
 
                 <div class="form-group">
                     <label>Min Price</label>
-                    <input type="number" name="min_price" placeholder="e.g. 10" data-fvalidate="required|min_value:0|less_than:max_price">
+                    <input type="number" name="min_price" placeholder="e.g. 10" data-form-validate="required|min_value:0|less_than:max_price">
                 </div>
 
                 <div class="form-group">
                     <label>Max Price</label>
-                    <input type="number" name="max_price" placeholder="e.g. 1000" data-fvalidate="required|min_value:0|greater_than:min_price">
+                    <input type="number" name="max_price" placeholder="e.g. 1000" data-form-validate="required|min_value:0|greater_than:min_price">
                     <p class="note"><span class="code">less_than:max_price</span> on Min Price ensures it stays below Max Price, and vice versa.</p>
                 </div>
 
@@ -340,7 +340,7 @@
                     <button type="submit" class="bttn--md bttn--pri">
                         <i class="ph-bold ph-check"></i>&nbsp; Validate
                     </button>
-                    <span class="code">data-fvalidate="required|min_value:18|max_value:120"</span>
+                    <span class="code">data-form-validate="required|min_value:18|max_value:120"</span>
                 </div>
                 <div class="result-box" id="result-value"></div>
             </form>
@@ -354,24 +354,24 @@
             <form id="form-match" class="demo-form" novalidate>
                 <div class="form-group">
                     <label>Password</label>
-                    <input type="password" name="password" placeholder="Create a password" data-fvalidate="required|min_length:6">
+                    <input type="password" name="password" placeholder="Create a password" data-form-validate="required|min_length:6">
                 </div>
 
                 <div class="form-group">
                     <label>Confirm Password</label>
-                    <input type="password" name="password_confirm" placeholder="Repeat your password" data-fvalidate="required|matches:password">
+                    <input type="password" name="password_confirm" placeholder="Repeat your password" data-form-validate="required|matches:password">
                 </div>
 
                 <hr class="divider">
 
                 <div class="form-group">
                     <label>Current Password</label>
-                    <input type="password" name="current_password" placeholder="Enter current password" data-fvalidate="required">
+                    <input type="password" name="current_password" placeholder="Enter current password" data-form-validate="required">
                 </div>
 
                 <div class="form-group">
                     <label>New Password (must differ from current)</label>
-                    <input type="password" name="new_password" placeholder="Enter new password" data-fvalidate="required|min_length:6|not_match:current_password">
+                    <input type="password" name="new_password" placeholder="Enter new password" data-form-validate="required|min_length:6|not_match:current_password">
                     <p class="note"><span class="code">not_match:current_password</span> prevents reuse of the same password.</p>
                 </div>
 
@@ -379,7 +379,7 @@
                     <button type="submit" class="bttn--md bttn--pri">
                         <i class="ph-bold ph-check"></i>&nbsp; Validate
                     </button>
-                    <span class="code">data-fvalidate="required|matches:password"</span>
+                    <span class="code">data-form-validate="required|matches:password"</span>
                 </div>
                 <div class="result-box" id="result-match"></div>
             </form>
@@ -393,25 +393,25 @@
             <form id="form-regex" class="demo-form" novalidate>
                 <div class="form-group">
                     <label>Phone Number (digits, dashes, spaces only)</label>
-                    <input type="text" name="phone" placeholder="+1 555-123-4567" data-fvalidate="required|regex:^[0-9+\-\s()]+$">
+                    <input type="text" name="phone" placeholder="+1 555-123-4567" data-form-validate="required|regex:^[0-9+\-\s()]+$">
                 </div>
 
                 <div class="form-group">
                     <label>Hex Color Code</label>
-                    <input type="text" name="hex_color" placeholder="#FF5733" data-fvalidate="required|regex:^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$" data-fvalidate-message="Please enter a valid hex color (e.g. #FF5733)">
-                    <p class="note">This field uses <span class="code">data-fvalidate-message</span> for a custom error instead of the default "Regex mismatch" message.</p>
+                    <input type="text" name="hex_color" placeholder="#FF5733" data-form-validate="required|regex:^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$" data-form-validate-message="Please enter a valid hex color (e.g. #FF5733)">
+                    <p class="note">This field uses <span class="code">data-form-validate-message</span> for a custom error instead of the default "Regex mismatch" message.</p>
                 </div>
 
                 <div class="form-group">
                     <label>Slug (lowercase letters, numbers, hyphens)</label>
-                    <input type="text" name="slug" placeholder="my-page-slug" data-fvalidate="required|regex:^[a-z0-9]+(-[a-z0-9]+)*$" data-fvalidate-message="Only lowercase letters, numbers, and hyphens are allowed.">
+                    <input type="text" name="slug" placeholder="my-page-slug" data-form-validate="required|regex:^[a-z0-9]+(-[a-z0-9]+)*$" data-form-validate-message="Only lowercase letters, numbers, and hyphens are allowed.">
                 </div>
 
                 <div class="form-actions">
                     <button type="submit" class="bttn--md bttn--pri">
                         <i class="ph-bold ph-check"></i>&nbsp; Validate
                     </button>
-                    <span class="code">data-fvalidate="required|regex:^[a-z0-9-]+$"</span>
+                    <span class="code">data-form-validate="required|regex:^[a-z0-9-]+$"</span>
                 </div>
                 <div class="result-box" id="result-regex"></div>
             </form>
@@ -420,12 +420,12 @@
         <!-- ==================== CUSTOM ERROR DISPLAY ==================== -->
         <div class="section">
             <h2 class="section-title">7. Error Display Options</h2>
-            <p class="section-desc">Control where and how error messages appear using <span class="code">data-fvalidate-display</span> and <span class="code">data-fvalidate-message</span>.</p>
+            <p class="section-desc">Control where and how error messages appear using <span class="code">data-form-validate-display</span> and <span class="code">data-form-validate-message</span>.</p>
 
             <form id="form-display" class="demo-form" novalidate>
                 <div class="form-group">
                     <label>Default (error appended to parent)</label>
-                    <input type="text" name="default_display" placeholder="Leave empty and submit" data-fvalidate="required">
+                    <input type="text" name="default_display" placeholder="Leave empty and submit" data-form-validate="required">
                     <p class="note">Error message is appended as a <span class="code">&lt;span&gt;</span> inside the parent element.</p>
                 </div>
 
@@ -433,41 +433,41 @@
 
                 <div class="form-group">
                     <label>Placeholder Mode</label>
-                    <input type="text" name="placeholder_display" placeholder="This placeholder will change on error" data-fvalidate="required" data-fvalidate-display="placeholder">
-                    <p class="note">With <span class="code">data-fvalidate-display="placeholder"</span>, the error replaces the placeholder text.</p>
+                    <input type="text" name="placeholder_display" placeholder="This placeholder will change on error" data-form-validate="required" data-form-validate-display="placeholder">
+                    <p class="note">With <span class="code">data-form-validate-display="placeholder"</span>, the error replaces the placeholder text.</p>
                 </div>
 
                 <hr class="divider">
 
                 <div class="form-group">
                     <label>Custom Target (CSS selector)</label>
-                    <input type="text" name="custom_target" placeholder="Error appears below in the red box" data-fvalidate="required|email" data-fvalidate-display="#custom-error-target">
+                    <input type="text" name="custom_target" placeholder="Error appears below in the red box" data-form-validate="required|email" data-form-validate-display="#custom-error-target">
                 </div>
                 <div id="custom-error-target" style="min-height: 24px; padding: 4px 8px; background: var(--bg-subtle); border-radius: 4px; border: 1px dashed #d63031;"></div>
-                <p class="note">The error is appended to <span class="code">#custom-error-target</span> via <span class="code">data-fvalidate-display="#custom-error-target"</span>.</p>
+                <p class="note">The error is appended to <span class="code">#custom-error-target</span> via <span class="code">data-form-validate-display="#custom-error-target"</span>.</p>
 
                 <hr class="divider">
 
                 <div class="form-group">
                     <label>Custom Message Override</label>
-                    <input type="text" name="custom_msg" placeholder="Enter your company name" data-fvalidate="required" data-fvalidate-message="Company name is mandatory for business accounts.">
-                    <p class="note"><span class="code">data-fvalidate-message</span> overrides the default language-based error text.</p>
+                    <input type="text" name="custom_msg" placeholder="Enter your company name" data-form-validate="required" data-form-validate-message="Company name is mandatory for business accounts.">
+                    <p class="note"><span class="code">data-form-validate-message</span> overrides the default language-based error text.</p>
                 </div>
 
                 <hr class="divider">
 
                 <div class="form-group">
-                    <label>Named Error Container (<span class="code">id="err-fieldname"</span>)</label>
-                    <input type="text" name="named_err" placeholder="Error goes to #err-named_err" data-fvalidate="required">
+                    <label>Named Error Container (<span class="code">id="errFieldname"</span>)</label>
+                    <input type="text" name="named_err" placeholder="Error goes to #errNamedErr" data-form-validate="required">
                 </div>
-                <div id="err-named_err" style="min-height: 20px;"></div>
-                <p class="note">If no <span class="code">data-fvalidate-display</span> is set, the system also checks for an element with <span class="code">id="err-{name}"</span> before falling back to the parent.</p>
+                <div id="errNamedErr" style="min-height: 20px;"></div>
+                <p class="note">If no <span class="code">data-form-validate-display</span> is set, the system also checks for an element with <span class="code">id="err{Name}"</span> before falling back to the parent.</p>
 
                 <div class="form-actions">
                     <button type="submit" class="bttn--md bttn--pri">
                         <i class="ph-bold ph-check"></i>&nbsp; Submit
                     </button>
-                    <span class="code">data-fvalidate-display="placeholder | #selector"</span>
+                    <span class="code">data-form-validate-display="placeholder | #selector"</span>
                 </div>
                 <div class="result-box" id="result-display"></div>
             </form>
@@ -476,17 +476,17 @@
         <!-- ==================== FORM-LEVEL MESSAGE ==================== -->
         <div class="section">
             <h2 class="section-title">8. Form-Level Messages</h2>
-            <p class="section-desc">Add <span class="code">data-fvalidate-message</span> on the <span class="code">&lt;form&gt;</span> element itself to show a summary message when validation fails. Use <span class="code">data-fvalidate-display</span> to control where it appears.</p>
+            <p class="section-desc">Add <span class="code">data-form-validate-message</span> on the <span class="code">&lt;form&gt;</span> element itself to show a summary message when validation fails. Use <span class="code">data-form-validate-display</span> to control where it appears.</p>
 
-            <form id="form-formlevel" class="demo-form" novalidate data-fvalidate-message="Please correct the errors above before submitting." data-fvalidate-display="#form-level-error-area">
+            <form id="form-formlevel" class="demo-form" novalidate data-form-validate-message="Please correct the errors above before submitting." data-form-validate-display="#form-level-error-area">
                 <div class="form-group">
                     <label>First Name</label>
-                    <input type="text" name="first_name_fl" placeholder="Required" data-fvalidate="required">
+                    <input type="text" name="first_name_fl" placeholder="Required" data-form-validate="required">
                 </div>
 
                 <div class="form-group">
                     <label>Email</label>
-                    <input type="text" name="email_fl" placeholder="Required + valid email" data-fvalidate="required|email">
+                    <input type="text" name="email_fl" placeholder="Required + valid email" data-form-validate="required|email">
                 </div>
 
                 <div id="form-level-error-area" class="form-level-msg"></div>
@@ -495,7 +495,7 @@
                     <button type="submit" class="bttn--md bttn--danger">
                         <i class="ph-bold ph-warning"></i>&nbsp; Submit
                     </button>
-                    <span class="code">data-fvalidate-display="#form-level-error-area"</span>
+                    <span class="code">data-form-validate-display="#form-level-error-area"</span>
                 </div>
                 <div class="result-box" id="result-formlevel"></div>
             </form>
@@ -509,12 +509,12 @@
             <form id="form-manual" class="demo-form" novalidate>
                 <div class="form-group">
                     <label>Coupon Code (required, 5-10 chars)</label>
-                    <input type="text" name="coupon" id="coupon-input" placeholder="SAVE20" data-fvalidate="required|min_length:5|max_length:10">
+                    <input type="text" name="coupon" id="coupon-input" placeholder="SAVE20" data-form-validate="required|min_length:5|max_length:10">
                 </div>
 
                 <div class="form-group">
                     <label>Email Address</label>
-                    <input type="text" name="manual_email" id="manual-email-input" placeholder="user@example.com" data-fvalidate="required|email">
+                    <input type="text" name="manual_email" id="manual-email-input" placeholder="user@example.com" data-form-validate="required|email">
                 </div>
 
                 <div class="form-actions" style="flex-wrap: wrap;">
@@ -539,7 +539,7 @@
                 <div class="form-group">
                     <label>Password</label>
                     <div class="form-toggle-password-visibility">
-                        <input type="password" name="pw_toggle" placeholder="Enter password" data-fvalidate="required|min_length:8">
+                        <input type="password" name="pw_toggle" placeholder="Enter password" data-form-validate="required|min_length:8">
                         <button type="button" onclick="Sadrazam.Form.togglePasswordVisibility(this)">
                             <i class="ph ph-eye"></i>
                         </button>
@@ -561,26 +561,26 @@
             <h2 class="section-title">11. Complete Registration Form</h2>
             <p class="section-desc">A realistic example combining multiple validation rules: required, email, min_length, matches, regex, and custom messages.</p>
 
-            <form id="form-complete" class="demo-form" novalidate data-fvalidate-message="Please fix all errors before submitting." data-fvalidate-display="#complete-form-error">
+            <form id="form-complete" class="demo-form" novalidate data-form-validate-message="Please fix all errors before submitting." data-form-validate-display="#complete-form-error">
                 <div class="form-group">
                     <label>Full Name</label>
-                    <input type="text" name="reg_fullname" placeholder="Jane Doe" data-fvalidate="required|min_length:2|max_length:50">
+                    <input type="text" name="reg_fullname" placeholder="Jane Doe" data-form-validate="required|min_length:2|max_length:50">
                 </div>
 
                 <div class="form-group">
                     <label>Email</label>
-                    <input type="text" name="reg_email" placeholder="jane@example.com" data-fvalidate="required|email">
+                    <input type="text" name="reg_email" placeholder="jane@example.com" data-form-validate="required|email">
                 </div>
 
                 <div class="form-group">
                     <label>Phone</label>
-                    <input type="text" name="reg_phone" placeholder="+1 555-0123" data-fvalidate="regex:^[0-9+\-\s()]+$" data-fvalidate-message="Please enter a valid phone number.">
+                    <input type="text" name="reg_phone" placeholder="+1 555-0123" data-form-validate="regex:^[0-9+\-\s()]+$" data-form-validate-message="Please enter a valid phone number.">
                 </div>
 
                 <div class="form-group">
                     <label>Password</label>
                     <div class="form-toggle-password-visibility">
-                        <input type="password" name="reg_password" placeholder="Min 8 characters" data-fvalidate="required|min_length:8">
+                        <input type="password" name="reg_password" placeholder="Min 8 characters" data-form-validate="required|min_length:8">
                         <button type="button" onclick="Sadrazam.Form.togglePasswordVisibility(this)">
                             <i class="ph ph-eye"></i>
                         </button>
@@ -589,24 +589,24 @@
 
                 <div class="form-group">
                     <label>Confirm Password</label>
-                    <input type="password" name="reg_password_confirm" placeholder="Re-enter password" data-fvalidate="required|matches:reg_password">
+                    <input type="password" name="reg_password_confirm" placeholder="Re-enter password" data-form-validate="required|matches:reg_password">
                 </div>
 
                 <div class="form-group">
                     <label>Age</label>
-                    <input type="number" name="reg_age" placeholder="Must be 18 or older" data-fvalidate="required|min_value:18|max_value:120">
+                    <input type="number" name="reg_age" placeholder="Must be 18 or older" data-form-validate="required|min_value:18|max_value:120">
                 </div>
 
                 <div class="form-group">
                     <label>Website (optional)</label>
-                    <input type="text" name="reg_website" placeholder="https://example.com" data-fvalidate="regex:^https?://.+" data-fvalidate-message="Please enter a valid URL starting with http:// or https://">
+                    <input type="text" name="reg_website" placeholder="https://example.com" data-form-validate="regex:^https?://.+" data-form-validate-message="Please enter a valid URL starting with http:// or https://">
                 </div>
 
                 <div class="form-group">
                     <label>Account Type</label>
                     <div class="radio-group">
-                        <label><input type="radio" name="reg_type" value="personal" data-fvalidate="required"> Personal</label>
-                        <label><input type="radio" name="reg_type" value="business" data-fvalidate="required"> Business</label>
+                        <label><input type="radio" name="reg_type" value="personal" data-form-validate="required"> Personal</label>
+                        <label><input type="radio" name="reg_type" value="business" data-form-validate="required"> Business</label>
                     </div>
                 </div>
 
@@ -635,7 +635,7 @@
 
                 <div class="form-group">
                     <label>Optional Detail</label>
-                    <input type="text" name="optional_detail" id="optional-detail-input" placeholder="This field is required when enabled" data-fvalidate="required|min_length:3">
+                    <input type="text" name="optional_detail" id="optional-detail-input" placeholder="This field is required when enabled" data-form-validate="required|min_length:3">
                 </div>
 
                 <div class="form-actions">

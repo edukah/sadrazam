@@ -24,7 +24,7 @@
   }
 
   /* Giriş animasyonu - mobile */
-  @keyframes menuSlideIn {
+  @keyframes slide-menu-enter {
     0% {
       transform: translateY(100%);
       opacity: 0;
@@ -38,7 +38,7 @@
 
   /* Giriş animasyonu - desktop */
   @media (min-width: variables.$breakpoint-md) {
-    @keyframes menuSlideIn {
+    @keyframes slide-menu-enter {
       0% {
         transform: translate(-50%, 20px) scale(0.8);
         opacity: 0;
@@ -52,7 +52,7 @@
   }
 
   /* Çıkış animasyonu - mobile */
-  @keyframes menuSlideOut {
+  @keyframes slide-menu-leave {
     0% {
       transform: translateY(0);
       opacity: 1;
@@ -66,7 +66,7 @@
 
   /* Çıkış animasyonu - desktop */
   @media (min-width: variables.$breakpoint-md) {
-    @keyframes menuSlideOut {
+    @keyframes slide-menu-leave {
       0% {
         transform: translate(-50%, 40px);
         opacity: 1;
@@ -85,12 +85,12 @@
 
   &.is-entering {
     will-change: transform, opacity;
-    animation: menuSlideIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    animation: slide-menu-enter 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
   }
 
   &.is-leaving {
     will-change: transform, opacity;
-    animation: menuSlideOut 0.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation: slide-menu-leave 0.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   }
 }
 

@@ -32,9 +32,9 @@ html.is-locked {
   backdrop-filter: blur(var(--backdrop-blur));
   overflow: auto;
 
-  animation: fadeIn 0.2s ease-out;
+  animation: modal-fade-in 0.2s ease-out;
 
-  @keyframes fadeIn {
+  @keyframes modal-fade-in {
     from {
       opacity: 0;
     }

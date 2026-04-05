@@ -134,7 +134,7 @@ src/
 
 | Module | Description |
 |---|---|
-| `Form` | Rule-based form validation (`data-fvalidate`) |
+| `Form` | Rule-based form validation (`data-form-validate`) |
 | `AutosizeTextarea` | Auto-height based on content |
 | `AutosizeSelect` | Auto-width based on content |
 

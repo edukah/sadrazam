@@ -28,10 +28,10 @@
   flex-direction: column;
   gap: var(--space-5);
 
-  animation-name: animatetop;
+  animation-name: snackbar-slide-in;
   animation-duration: 0.2s;
 
-  @keyframes animatetop {
+  @keyframes snackbar-slide-in {
     from {
       top: -300px;
       opacity: 0;
