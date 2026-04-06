@@ -219,8 +219,6 @@ class InsertScript {
     for (const script of scriptsToRun) {
       await this.#executeScript(script);
     }
-
-    this.#dispatchDOMContentLoaded();
   }
 
   /**
@@ -263,13 +261,6 @@ class InsertScript {
     return script;
   }
   
-  /**
-   * @private Dispatches a DOMContentLoaded event after all scripts complete.
-   */
-  static #dispatchDOMContentLoaded () {
-    const event = new globalThis.Event('DOMContentLoaded', { bubbles: true, cancelable: true });
-    document.dispatchEvent(event);
-  }
 }
 
 
