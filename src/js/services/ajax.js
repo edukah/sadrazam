@@ -15,7 +15,7 @@ class Ajax {
     beforeStart: () => {},
     afterEnd: () => {},
     complete: () => {},
-    spinner: false,
+    progressBar: false,
     data: {},
     route: '',
     type: 'post',
@@ -31,7 +31,7 @@ class Ajax {
       ['route', 'Request endpoint. Required.'],
       ['data', 'Data to send. Object or FormData. Default: `{}`.'],
       ['type', 'Request method. `get` or `post`. Default: `post`.'],
-      ['spinner', 'Shows progress bar during request. Any truthy value enables it. Ignored when `button` is provided. Default: `false`.'],
+      ['progressBar', 'Shows progress bar during request. Ignored when `button` is provided. Default: `false`.'],
       ['success', 'Callback on successful response (HTTP 2xx).'],
       ['error', 'Callback on error (network error, timeout, HTTP 4xx/5xx).'],
       ['beforeStart', 'Callback fired just before the request starts.'],
@@ -75,7 +75,7 @@ class Ajax {
       LogRelay.capture(callbackError, { component: 'Ajax.beforeStart', route: config.route });
     }
 
-    if (config.spinner && !config.button) ProgressBar.start();
+    if (config.progressBar && !config.button) ProgressBar.start();
 
     let url = config.route;
 
@@ -270,7 +270,7 @@ class Ajax {
       LogRelay.capture(callbackError, { component: 'Ajax.afterEnd', route: config.route });
     }
 
-    if (config.spinner && !config.button) ProgressBar.done();
+    if (config.progressBar && !config.button) ProgressBar.done();
     if (config.button) this.#unlockButton(config.button);
   };
 
