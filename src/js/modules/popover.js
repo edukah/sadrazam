@@ -108,6 +108,7 @@ class Popover {
     this.#referenceElement = this.#config.referenceElement;
 
     if (!this.#referenceElement) return;
+    if (this.#referenceElement.__popover) return this.#referenceElement.__popover;
 
     this.#referenceElement.style.cursor = 'pointer';
     this.#referenceElement.__popover = this;

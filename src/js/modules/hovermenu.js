@@ -94,6 +94,7 @@ class Hovermenu {
       throw new Error('Hovermenu: `content` function is required.');
     }
     if (!this.#initializeListenedElement()) return;
+    if (this.#listenedElement.__hovermenu) return this.#listenedElement.__hovermenu;
 
     this.#listenedElement.__hovermenu = this;
     this.#ensureAccessibility();

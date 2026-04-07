@@ -426,6 +426,8 @@ class Autocomplete {
 
       return false;
     }
+    if (this.#searchTermInput.__autocomplete) return false;
+
     this.#searchTermInput.__autocomplete = this;
 
     return true;

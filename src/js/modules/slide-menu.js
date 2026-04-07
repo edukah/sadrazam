@@ -90,6 +90,7 @@ class SlideMenu {
       throw new Error('SlideMenu: `content` function is required.');
     }
     if (!this.#initializeListenedElement()) return;
+    if (this.#listenedElement.__slideMenu) return this.#listenedElement.__slideMenu;
 
     this.#listenedElement.__slideMenu = this;
     this.#ensureAccessibility();

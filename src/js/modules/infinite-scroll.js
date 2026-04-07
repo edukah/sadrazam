@@ -58,6 +58,8 @@ class InfiniteScroll {
     this.#page = startPage;
     this.#setInnerItem = setInnerItem;
 
+    if (this.#listElement.__infiniteScroll) return this.#listElement.__infiniteScroll;
+
     this.#listElement.__infiniteScroll = this;
 
     this.#createSpinner();
