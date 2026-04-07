@@ -1,8 +1,8 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 
 // Bağımlılıkları mock'la
-vi.mock('../../src/js/modules/spinner.js', () => ({
-  default: { show: vi.fn(), hide: vi.fn() }
+vi.mock('../../src/js/modules/progress-bar.js', () => ({
+  default: { start: vi.fn(), done: vi.fn() }
 }));
 vi.mock('../../src/js/modules/snackbar.js', () => ({
   default: { insert: vi.fn() }
@@ -15,7 +15,7 @@ vi.mock('../../src/js/services/log-relay.js', () => ({
 }));
 
 import Ajax from '../../src/js/services/ajax.js';
-import Spinner from '../../src/js/modules/spinner.js';
+import ProgressBar from '../../src/js/modules/progress-bar.js';
 import Snackbar from '../../src/js/modules/snackbar.js';
 
 describe('Ajax', () => {
@@ -187,21 +187,21 @@ describe('Ajax', () => {
     });
   });
 
-  // --- Spinner ---
-  describe('spinner', () => {
-    it('spinner: true ise gösterilir ve gizlenir', async () => {
+  // --- ProgressBar ---
+  describe('progressBar', () => {
+    it('progressBar: true ise gösterilir ve gizlenir', async () => {
       fetchMock.mockReturnValue(mockResponse({ ok: true }));
 
-      await Ajax.request({ route: 'test', spinner: 'main' });
-      expect(Spinner.show).toHaveBeenCalledWith({ type: 'main' });
-      expect(Spinner.hide).toHaveBeenCalled();
+      await Ajax.request({ route: 'test', progressBar: true });
+      expect(ProgressBar.start).toHaveBeenCalled();
+      expect(ProgressBar.done).toHaveBeenCalled();
     });
 
-    it('spinner: false ise gösterilmez', async () => {
+    it('progressBar: false ise gösterilmez', async () => {
       fetchMock.mockReturnValue(mockResponse({ ok: true }));
 
-      await Ajax.request({ route: 'test', spinner: false });
-      expect(Spinner.show).not.toHaveBeenCalled();
+      await Ajax.request({ route: 'test', progressBar: false });
+      expect(ProgressBar.start).not.toHaveBeenCalled();
     });
   });
 
