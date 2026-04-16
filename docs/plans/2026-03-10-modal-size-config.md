@@ -378,10 +378,10 @@ All `Modal.insert()` calls currently pass pre-built content containing `modal__d
 | `admin/setting/setting_form.js` | `filemanager.tpl` | `lg` |
 | `admin/design/banner_form.js` | `filemanager.tpl` | `lg` |
 | `admin/design/logo.js` | `filemanager.tpl` | `lg` |
-| `frontstore/product/detail.js` | `detail_notify_modal.tpl` | `sm` |
-| `frontstore/checkout/address.js` | `address_form_modal.tpl` | `lg` |
-| `frontstore/checkout/payment.js` | `privacy/membership/preinform/diselcon_modal.tpl` | `md` |
-| `frontstore/account/login.js` | `privacy/membership_modal.tpl` | `md` |
+| `shopfront/product/detail.js` | `detail_notify_modal.tpl` | `sm` |
+| `shopfront/checkout/address.js` | `address_form_modal.tpl` | `lg` |
+| `shopfront/checkout/payment.js` | `privacy/membership/preinform/diselcon_modal.tpl` | `md` |
+| `shopfront/account/login.js` | `privacy/membership_modal.tpl` | `md` |
 
 **Step 1: Update each JS caller**
 
@@ -485,17 +485,17 @@ Remove: outermost `<div class="modal__dialog ...">` and `<div class="modal__cont
 10. `admin/marketplace/trendyol/claim_create_form_modal.tpl` — remove `modal__dialog--lg` + `modal__content`
 11. `admin/marketplace/trendyol/claim_issue_form_modal.tpl` — remove `modal__dialog--lg` + `modal__content`
 12. `admin/marketplace/etsy/category_form_modal.tpl` — remove `modal__dialog--lg marketplace-etsy-category_form_modal` + `modal__content`
-13. `frontstore/checkout/address_form_modal.tpl` — remove `modal__dialog--lg` + `modal__content`
-14. `frontstore/information/membership_modal.tpl` — remove `modal__dialog--md` + `modal__content`
-15. `frontstore/information/privacy_modal.tpl` — remove `modal__dialog--md` + `modal__content`
-16. `frontstore/information/preinform_modal.tpl` — remove `modal__dialog--md` + `modal__content`
-17. `frontstore/information/diselcon_modal.tpl` — remove `modal__dialog--md` + `modal__content`
+13. `shopfront/checkout/address_form_modal.tpl` — remove `modal__dialog--lg` + `modal__content`
+14. `shopfront/information/membership_modal.tpl` — remove `modal__dialog--md` + `modal__content`
+15. `shopfront/information/privacy_modal.tpl` — remove `modal__dialog--md` + `modal__content`
+16. `shopfront/information/preinform_modal.tpl` — remove `modal__dialog--md` + `modal__content`
+17. `shopfront/information/diselcon_modal.tpl` — remove `modal__dialog--md` + `modal__content`
 
 **Special — instrument_modal.tpl:**
 18. `admin/sale/instrument_modal.tpl` — remove `modal__dialog--lg sale-instrument_modal` + `modal__content`. Keep `<style>` tag. `sale-instrument_modal` class moves to a wrapper div inside content OR is passed via `className`.
 
 **Special — detail_notify_modal.tpl (form wrapper):**
-19. `frontstore/product/detail_notify_modal.tpl` — remove `modal__dialog--sm`. Change `<form class="modal__content">` to `<form>` (form goes inside auto-generated `modal__content`, `display: contents` handles flex layout).
+19. `shopfront/product/detail_notify_modal.tpl` — remove `modal__dialog--sm`. Change `<form class="modal__content">` to `<form>` (form goes inside auto-generated `modal__content`, `display: contents` handles flex layout).
 
 **Special — header.tpl (inline template):**
 20. `admin/common/header.tpl` — remove `modal__dialog modal__dialog--md` and `modal__content common-search__modal` wrappers from `#common-search__modal-template`. Content becomes just the search input container.

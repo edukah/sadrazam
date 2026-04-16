@@ -277,20 +277,20 @@ npm run release
 **Ayni esleme tablosu kullanilir.** Dosya dosya gorsel kontrol gerekir.
 
 **Oncelik sirasi:**
-1. Frontstore common (header, footer, navigation, pagination, home) — kullanici yuzlu
-2. Frontstore product (detail, listing, review, filter) — urun sayfalari
-3. Frontstore account/checkout — kullanici islemleri
+1. Shopfront common (header, footer, navigation, pagination, home) — kullanici yuzlu
+2. Shopfront product (detail, listing, review, filter) — urun sayfalari
+3. Shopfront account/checkout — kullanici islemleri
 4. Admin common — admin panel
 5. Admin diger — admin alt sayfalar
 
 **Commit'ler:** Klasor bazli commit'ler:
-- `refactor(frontstore): remap grey references to new scale`
+- `refactor(shopfront): remap grey references to new scale`
 - `refactor(admin): remap grey references to new scale`
 
 ### Task 3.2: Dukkan gorsel kontrol
 
 **Adimlar:**
-1. Frontstore: anasayfa, urun listesi, urun detay, sepet, checkout
+1. Shopfront: anasayfa, urun listesi, urun detay, sepet, checkout
 2. Admin: dashboard, siparis listesi, urun formu
 3. Sorun varsa kademe ayarla
 

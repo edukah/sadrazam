@@ -77,9 +77,9 @@ Her varyant kendi block'u olur — ic ice kullanimda scope cakismasi olmaz.
 |-------|---------|-------|
 | `templates/admin/product/product_form.tpl` | tabv3 + tabv2 (ic ice) | Rename |
 | `templates/admin/product/category_form.tpl` | tabv3 + tabv2 (ic ice) | Rename |
-| `templates/frontstore/product/detail.tpl` | tabv4 | Rename |
-| `resources/scopes/css/frontstore/product/detail.scss` | `.tab__container` override (satir 230) | `.tab-capsule__container` olacak |
-| `resources/scopes/css/frontstore/product/review.scss` | Yorum: `tabv4__panel` referansi | Yorum guncelle |
+| `templates/shopfront/product/detail.tpl` | tabv4 | Rename |
+| `resources/scopes/css/shopfront/product/detail.scss` | `.tab__container` override (satir 230) | `.tab-capsule__container` olacak |
+| `resources/scopes/css/shopfront/product/review.scss` | Yorum: `tabv4__panel` referansi | Yorum guncelle |
 
 ### Dukkan v1 tab dosyalari (`tab__*` → `tab-classic__*`)
 
@@ -147,7 +147,7 @@ document.querySelectorAll(
 1. Sadrazam: `npm run build`
 2. Dukkan: `npm run build`
 3. Dukkan admin: product_form, category_form tab'lari gorsel kontrol
-4. Dukkan frontstore: detail sayfasi tab'lari gorsel kontrol
+4. Dukkan shopfront: detail sayfasi tab'lari gorsel kontrol
 
 ### Adim 6: Commit
 ```

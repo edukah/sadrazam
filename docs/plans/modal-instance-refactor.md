@@ -8,7 +8,7 @@ Cannot read properties of undefined (reading 'close')
 
 - **Sayfa:** `https://dukkan.dev/teslimat-bilgileri`
 - **Route:** `account/address/edit?customer_address_id=140`
-- **Konum:** `resources/scopes/js/frontstore/checkout/address_form_modal.js`
+- **Konum:** `resources/scopes/js/shopfront/checkout/address_form_modal.js`
 
 `address_form_modal.js`'de `addressFormModal.__modal.close()` çağrılıyor ama `Modal.insert()` instance döndürüyordu, `__modal` property'si instance'ta değil DOM element'te.
 

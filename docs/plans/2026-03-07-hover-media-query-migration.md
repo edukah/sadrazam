@@ -60,7 +60,7 @@
 
 ---
 
-## Phase 2: Dukkan Frontstore (Kullanici-Yuzlu)
+## Phase 2: Dukkan Shopfront (Kullanici-Yuzlu)
 
 ### Yuksek Oncelik
 
@@ -94,7 +94,7 @@
 | `information/faq.scss` | 46 | FAQ item renk | Az kullanilan sayfa |
 | `information/installments.scss` | 29 | Bos hover block | Zaten etkisiz |
 
-### Zaten Tamamlanmis (Dukkan Frontstore)
+### Zaten Tamamlanmis (Dukkan Shopfront)
 
 | Dosya | Satir | Durum |
 |-------|-------|-------|
@@ -130,7 +130,7 @@ Yine de uzun vadede sarmalanmali:
 
 6 dosya, 8 hover sarmalandi. Detaylar yukaridaki listede.
 
-### Phase 2: Dukkan Frontstore — Tamamlandi (2026-03-08)
+### Phase 2: Dukkan Shopfront — Tamamlandi (2026-03-08)
 
 17 dosya duzenlendi, ~27 hover sarmalandi. Ek duzeltmeler:
 - `product/detail.scss:121` — `&::hover` / `&::focus` typo'su `:hover` / `:focus` olarak duzeltildi
@@ -170,8 +170,8 @@ Her iki projede `@media (hover: hover)` icinde **olmayan** `:hover` kullanimi ar
 # Sadrazam SCSS
 grep -rn ':hover' src/scss/ | grep -v '@media (hover' | grep -v '//' | grep -v '/\*'
 
-# Dukkan Frontstore SCSS
-grep -rn ':hover' resources/scopes/css/frontstore/ | grep -v '@media (hover' | grep -v '//' | grep -v '/\*'
+# Dukkan Shopfront SCSS
+grep -rn ':hover' resources/scopes/css/shopfront/ | grep -v '@media (hover' | grep -v '//' | grep -v '/\*'
 
 # Dukkan Admin SCSS (Phase 3 hazirligi)
 grep -rn ':hover' resources/scopes/css/admin/ | grep -v '@media (hover' | grep -v '//' | grep -v '/\*'
@@ -188,7 +188,7 @@ Her sonuc icin karar verilmeli:
 
 ```bash
 # Multiline grep: :hover { ... @media (hover iceren bloklar
-grep -Pzo '&:hover\s*\{[^}]*@media' src/scss/ resources/scopes/css/frontstore/
+grep -Pzo '&:hover\s*\{[^}]*@media' src/scss/ resources/scopes/css/shopfront/
 ```
 
 Bu desen calisiyorsa da konvansiyon disindadir; `@media > &:hover` sirasina cevirilmeli.
@@ -208,7 +208,7 @@ grep -rn '::hover\|::focus\|::active' src/scss/ resources/scopes/css/
 Hover sarmalanirken `:focus` veya `:active`'in yanlislikla media query icine alinmadigi dogrulanmali:
 
 ```bash
-grep -A2 '@media (hover: hover)' src/scss/**/*.scss resources/scopes/css/frontstore/**/*.scss | grep ':focus\|:active'
+grep -A2 '@media (hover: hover)' src/scss/**/*.scss resources/scopes/css/shopfront/**/*.scss | grep ':focus\|:active'
 ```
 
 Eger `:focus` veya `:active` media query icindeyse, disari cikarilmali — klavye/dokunmatik erisilebilirlik icin gerekli.
@@ -219,7 +219,7 @@ Eger `:focus` veya `:active` media query icindeyse, disari cikarilmali — klavy
 
 ```bash
 # &:hover, &--modifier veya &:hover, &.state seklindeki birlesimler
-grep -B1 -A1 ':hover' src/scss/**/*.scss resources/scopes/css/frontstore/**/*.scss | grep -E '&--[a-z]|&\.[a-z]'
+grep -B1 -A1 ':hover' src/scss/**/*.scss resources/scopes/css/shopfront/**/*.scss | grep -E '&--[a-z]|&\.[a-z]'
 ```
 
 Bu birlesimler ayrilmali: `:hover` media query icine, modifier/state disarida kalmali.
@@ -229,7 +229,7 @@ Bu birlesimler ayrilmali: `:hover` media query icine, modifier/state disarida ka
 Yorum icinde kalan `:hover` bloklari proje genelinde taranmali; gereksizse silinmeli:
 
 ```bash
-grep -B2 ':hover' src/scss/**/*.scss resources/scopes/css/frontstore/**/*.scss | grep -E '^\s*/?\*|^\s*//'
+grep -B2 ':hover' src/scss/**/*.scss resources/scopes/css/shopfront/**/*.scss | grep -E '^\s*/?\*|^\s*//'
 ```
 
 ---
