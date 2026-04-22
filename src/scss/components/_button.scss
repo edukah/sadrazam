@@ -44,7 +44,7 @@
   line-height: 1;
   text-shadow: 0 0 0 var(--color-grey-250);
   box-shadow: 0 0 0 var(--color-grey-250);
-  transition: background-color 0.2s;
+  transition: background-color 0.2s, border-color 0.2s;
   outline: none;
   --_bttn-py: var(--space-5);
   --_bttn-px: var(--space-9);
@@ -186,6 +186,8 @@
     background-color: var(--color-grey-100) !important;
     border-color: var(--color-grey-150) !important;
     color: var(--color-grey-400) !important;
+    outline: none !important;
+    pointer-events: none;
     cursor: not-allowed;
   }
 
