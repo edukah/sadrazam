@@ -41,10 +41,40 @@ import Ajax from 'sadrazam/js/services/ajax';
 
 ### Browser (no bundler)
 
+**unpkg**
+
 ```html
 <link rel="stylesheet" href="https://unpkg.com/sadrazam/dist/sadrazam.min.css">
 <script type="module">
   import Sadrazam from 'https://unpkg.com/sadrazam/dist/sadrazam.esm.js';
+  Sadrazam.configure({
+    languageCode: 'tr',
+    logEndpoint: '/api/log/js-error',
+    tokenSelector: "input[name='_token']"
+  });
+</script>
+```
+
+**jsDelivr (npm)**
+
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sadrazam/dist/sadrazam.min.css">
+<script type="module">
+  import Sadrazam from 'https://cdn.jsdelivr.net/npm/sadrazam/dist/sadrazam.esm.js';
+  Sadrazam.configure({
+    languageCode: 'tr',
+    logEndpoint: '/api/log/js-error',
+    tokenSelector: "input[name='_token']"
+  });
+</script>
+```
+
+**jsDelivr (GitHub — works without npm publish)**
+
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/edukah/sadrazam/dist/sadrazam.min.css">
+<script type="module">
+  import Sadrazam from 'https://cdn.jsdelivr.net/gh/edukah/sadrazam/dist/sadrazam.esm.js';
   Sadrazam.configure({
     languageCode: 'tr',
     logEndpoint: '/api/log/js-error',
