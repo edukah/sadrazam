@@ -17,7 +17,7 @@ npm run release   # Build + update GitHub Pages docs
 npm test          # Run tests
 ```
 
-Build output goes to `dist/`: `sadrazam.min.js` (UMD), `sadrazam.esm.js` (ESM), and `sadrazam.min.css`.
+Build output goes to `dist/`: `sadrazam.esm.js` and `sadrazam.min.css`.
 
 ## Usage
 
@@ -25,21 +25,6 @@ Build output goes to `dist/`: `sadrazam.min.js` (UMD), `sadrazam.esm.js` (ESM), 
 
 ```bash
 npm install sadrazam
-```
-
-### Script Tag
-
-```html
-<link rel="stylesheet" href="dist/sadrazam.min.css">
-<script src="dist/sadrazam.min.js"></script>
-
-<script>
-  Sadrazam.configure({
-    languageCode: 'tr',
-    logEndpoint: '/api/log/js-error',
-    tokenSelector: "input[name='_token']"
-  });
-</script>
 ```
 
 ### Module Import
@@ -52,6 +37,20 @@ import Sadrazam from 'sadrazam';
 import Modal from 'sadrazam/js/modules/modal';
 import Tooltip from 'sadrazam/js/modules/tooltip';
 import Ajax from 'sadrazam/js/services/ajax';
+```
+
+### Browser (no bundler)
+
+```html
+<link rel="stylesheet" href="https://unpkg.com/sadrazam/dist/sadrazam.min.css">
+<script type="module">
+  import Sadrazam from 'https://unpkg.com/sadrazam/dist/sadrazam.esm.js';
+  Sadrazam.configure({
+    languageCode: 'tr',
+    logEndpoint: '/api/log/js-error',
+    tokenSelector: "input[name='_token']"
+  });
+</script>
 ```
 
 ```scss

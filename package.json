@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Zero-dependency vanilla JavaScript UI component library — modals, tooltips, tabs, forms, and more.",
   "type": "module",
-  "main": "dist/sadrazam.min.js",
+  "main": "dist/sadrazam.esm.js",
   "module": "dist/sadrazam.esm.js",
   "types": "dist/sadrazam.d.ts",
   "files": [
