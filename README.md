@@ -8,6 +8,8 @@ A zero-dependency UI toolkit built from scratch. Vanilla JavaScript modules and 
 
 I wrote this for my own project. If you're curious about building a UI toolkit from scratch with vanilla JS, keeping consistency across modules, or organizing SCSS architecture, this might give you some ideas.
 
+> Maintained on best-effort basis. Issues welcome but not guaranteed to be addressed.
+
 ## Development
 
 ```bash
