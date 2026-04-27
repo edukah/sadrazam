@@ -29,7 +29,7 @@ class Hovermenu {
    */
   static help () {
     const availableConfigs = new Map([
-      ['target (positional, 1st arg)', 'Target element for the hovermenu. CSS selector string or HTMLElement. Required.'],
+      ['options.target', 'Target element for the hovermenu. CSS selector string or HTMLElement. Required.'],
       ['trigger', 'Trigger event. Default: `click`.'],
       ['backdrop', 'Show backdrop. Default: `false`.'],
       ['title', 'Menu title. Default: `null`.'],

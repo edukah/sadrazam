@@ -38,14 +38,14 @@ class Popover {
    */
   static help () {
     const availableConfigs = new Map([
-      ['target (positional, 1st arg)', 'Element that triggers the popover. CSS selector string or HTMLElement. Required.'],
+      ['options.target', 'Element that triggers the popover. CSS selector string or HTMLElement. Required.'],
       ['trigger', 'Trigger event. Default: `click`.'],
       ['placement', 'Popover position (`top`, `right`, `bottom`, `left`). Default: `bottom`.'],
       ['title', 'Popover title. Default: `null`.'],
       ['content', 'Function that returns the content. Required.']
     ]);
     const availableMethods = new Map([
-      ['Popover.autoInit(config)', 'Adds a lazy popover listener for the specified element.'],
+      ['Popover.autoInit(options)', 'Adds a lazy popover listener (options.target required).'],
       ['Popover.getInstance(element)', 'Returns the Popover instance for the element.'],
       ['instance.show()', 'Shows the popover and recalculates position.'],
       ['instance.hide()', 'Hides the popover (fade-out).'],

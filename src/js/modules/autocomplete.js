@@ -54,7 +54,7 @@ class Autocomplete {
    */
   static help () {
     const availableConfigs = new Map([
-      ['target (positional, 1st arg)', 'Target input element. CSS selector string or DOM Element. Required.'],
+      ['options.target', 'Target input element. CSS selector string or DOM Element. Required.'],
       ['source', 'Endpoint URL for the search query. String. Required.'],
       ['delay', 'Debounce delay in ms after last keystroke. Default: `250`.'],
       ['cache', 'Cache results for repeated queries? Boolean. Default: `false`.'],
