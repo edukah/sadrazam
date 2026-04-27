@@ -27,7 +27,6 @@ class Popover {
    * @type {PopoverConfig}
    */
   static DEFAULTS = {
-    referenceElement: null,
     trigger: 'click',
     placement: 'bottom',
     title: null,
@@ -39,7 +38,7 @@ class Popover {
    */
   static help () {
     const availableConfigs = new Map([
-      ['selector', 'Element that triggers the popover. CSS selector string or HTMLElement. Required.'],
+      ['target (positional, 1st arg)', 'Element that triggers the popover. CSS selector string or HTMLElement. Required.'],
       ['trigger', 'Trigger event. Default: `click`.'],
       ['placement', 'Popover position (`top`, `right`, `bottom`, `left`). Default: `bottom`.'],
       ['title', 'Popover title. Default: `null`.'],
@@ -74,40 +73,38 @@ class Popover {
   }
 
   /**
-   * Adds a one-time popover initialization listener for the specified element.
+   * Adds a one-time popover initialization listener for the specified target.
    * The instance is created on first trigger and manages its own lifecycle thereafter.
-   * @param {PopoverListenConfig} config - Popover settings (`selector` + standard config).
+   * @param {string|HTMLElement} target - CSS selector string or DOM element.
+   * @param {PopoverConfig} [options={}] - Popover settings.
    */
-  static autoInit (config) {
-    let referenceElement;
-    if (typeof config.selector === 'string') {
-      referenceElement = document.querySelector(config.selector);
-    } else if (config.selector instanceof globalThis.HTMLElement) {
-      referenceElement = config.selector;
-    }
+  static autoInit (target, options = {}) {
+    const referenceElement = typeof target === 'string' ? document.querySelector(target) : target;
 
-    if (!referenceElement) {
-      console.warn(`[Sadrazam|Popover] Element (${config.selector}) not found.`);
+    if (!(referenceElement instanceof globalThis.HTMLElement)) {
+      console.warn(`[Sadrazam|Popover] Element (${target}) not found.`);
 
       return;
     }
 
+    const trigger = options.trigger ?? Popover.DEFAULTS.trigger;
     // `{ once: true }` auto-removes this listener after the first trigger.
-    referenceElement.addEventListener(config.trigger, () => {
-      new Popover({ referenceElement, ...config });
+    referenceElement.addEventListener(trigger, () => {
+      new Popover(referenceElement, options);
     }, { once: true });
   }
 
   /**
    * Creates and shows a new Popover instance.
    * The instance is stored on `referenceElement.__popover`.
+   * @param {string|HTMLElement} target - CSS selector string or DOM element (popover trigger).
    * @param {PopoverConfig} [options={}] - Popover settings.
    */
-  constructor (options = {}) {
+  constructor (target, options = {}) {
     this.#options = { ...Popover.DEFAULTS, ...options };
-    this.#referenceElement = this.#options.referenceElement;
+    this.#referenceElement = typeof target === 'string' ? document.querySelector(target) : target;
 
-    if (!this.#referenceElement) return;
+    if (!(this.#referenceElement instanceof globalThis.HTMLElement)) return;
     if (this.#referenceElement.__popover) return this.#referenceElement.__popover;
 
     this.#referenceElement.style.cursor = 'pointer';
@@ -365,11 +362,6 @@ class Popover {
  * @property {'top'|'right'|'bottom'|'left'} [placement='bottom'] - Preferred position.
  * @property {string|null} [title=null] - Popover title HTML.
  * @property {function(string): (string|HTMLElement)} [content] - Function that returns the content. Receives the popover ID as parameter.
- */
-
-/**
- * @typedef {PopoverConfig & {selector: string|HTMLElement}} PopoverListenConfig
- * @property {string|HTMLElement} selector - CSS selector or HTMLElement. Required for `listen()`.
  */
 
 export default Popover;

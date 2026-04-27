@@ -612,7 +612,7 @@
                 Sadrazam.Autocomplete.<span class="fn">help</span>();<br><br>
                 <span class="cmt">// Output:</span><br>
                 <span class="cmt">// Autocomplete</span><br>
-                <span class="cmt">// selector:  Target input element. String (class or id).</span><br>
+                <span class="cmt">// target (positional, 1st arg):  Target input element. String selector or HTMLElement.</span><br>
                 <span class="cmt">// source:    Query endpoint. String.</span><br>
                 <span class="cmt">// delay:     Debounce delay in ms. Default: 250.</span><br>
                 <span class="cmt">// cache:     Cache results? Boolean. Default: false.</span><br>
@@ -761,16 +761,14 @@
         // ============================================================
         // 1. Basic Usage -- Country Search
         // ============================================================
-        new Sadrazam.Autocomplete({
-            selector: '#ac-countries',
+        new Sadrazam.Autocomplete('#ac-countries', {
             source: '/api/countries'
         });
 
         // ============================================================
         // 2. Minimum Characters -- Fruit Search
         // ============================================================
-        new Sadrazam.Autocomplete({
-            selector: '#ac-fruits',
+        new Sadrazam.Autocomplete('#ac-fruits', {
             source: '/api/fruits',
             minChars: 2
         });
@@ -778,8 +776,7 @@
         // ============================================================
         // 3. Cache Enabled -- City Search
         // ============================================================
-        new Sadrazam.Autocomplete({
-            selector: '#ac-cities',
+        new Sadrazam.Autocomplete('#ac-cities', {
             source: '/api/cities',
             cache: true
         });
@@ -787,14 +784,12 @@
         // ============================================================
         // 4. Custom Delay -- Programming Languages
         // ============================================================
-        new Sadrazam.Autocomplete({
-            selector: '#ac-lang-fast',
+        new Sadrazam.Autocomplete('#ac-lang-fast', {
             source: '/api/languages',
             delay: 100
         });
 
-        new Sadrazam.Autocomplete({
-            selector: '#ac-lang-slow',
+        new Sadrazam.Autocomplete('#ac-lang-slow', {
             source: '/api/languages',
             delay: 600
         });
@@ -802,8 +797,7 @@
         // ============================================================
         // 5. Custom onSelect Callback
         // ============================================================
-        new Sadrazam.Autocomplete({
-            selector: '#ac-callback',
+        new Sadrazam.Autocomplete('#ac-callback', {
             source: '/api/countries',
             onSelect: function (event, value, item) {
                 var logEl = document.getElementById('callback-log');
@@ -824,8 +818,7 @@
         // ============================================================
         // 6. Custom Menu Class
         // ============================================================
-        new Sadrazam.Autocomplete({
-            selector: '#ac-menuclass',
+        new Sadrazam.Autocomplete('#ac-menuclass', {
             source: '/api/countries',
             menuClass: 'my-custom-dropdown'
         });
@@ -834,8 +827,7 @@
         // 7. Selector as DOM Element
         // ============================================================
         var inputEl = document.getElementById('ac-element-ref');
-        new Sadrazam.Autocomplete({
-            selector: inputEl,
+        new Sadrazam.Autocomplete(inputEl, {
             source: '/api/countries',
             minChars: 1,
             cache: true
@@ -844,8 +836,7 @@
         // ============================================================
         // 8. Badge
         // ============================================================
-        var badgeInstance = new Sadrazam.Autocomplete({
-            selector: '#ac-badge',
+        var badgeInstance = new Sadrazam.Autocomplete('#ac-badge', {
             source: '/api/countries-badge',
             badge: '#{country_code}',
             onSelect: function (event, value) {
@@ -867,8 +858,7 @@
         var destroyInstance = null;
 
         function initDestroyDemo() {
-            destroyInstance = new Sadrazam.Autocomplete({
-                selector: '#ac-destroy',
+            destroyInstance = new Sadrazam.Autocomplete('#ac-destroy', {
                 source: '/api/countries',
                 onSelect: function (event, value) {
                     document.getElementById('ac-destroy').value = value;
@@ -904,8 +894,7 @@
         // ============================================================
         // 10. Keyboard Navigation
         // ============================================================
-        new Sadrazam.Autocomplete({
-            selector: '#ac-keyboard',
+        new Sadrazam.Autocomplete('#ac-keyboard', {
             source: '/api/countries',
             onSelect: function (event, value) {
                 document.getElementById('ac-keyboard').value = value;

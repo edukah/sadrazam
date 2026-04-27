@@ -16,7 +16,6 @@ class Hovermenu {
 
   // --- Static Defaults ---
   static DEFAULTS = {
-    selector: null,
     trigger: 'click',
     backdrop: false,
     title: null,
@@ -30,7 +29,7 @@ class Hovermenu {
    */
   static help () {
     const availableConfigs = new Map([
-      ['selector', 'Target element for the hovermenu. Required.'],
+      ['target (positional, 1st arg)', 'Target element for the hovermenu. CSS selector string or HTMLElement. Required.'],
       ['trigger', 'Trigger event. Default: `click`.'],
       ['backdrop', 'Show backdrop. Default: `false`.'],
       ['title', 'Menu title. Default: `null`.'],
@@ -84,16 +83,22 @@ class Hovermenu {
 
   /**
    * Creates a new Hovermenu instance.
-   * @param {HovermenuConfig} options - Hovermenu configuration.
+   * @param {string|HTMLElement} target - CSS selector string or DOM element (the trigger).
+   * @param {HovermenuConfig} [options={}] - Hovermenu configuration.
    * @throws {Error} `content` function is required.
    */
-  constructor (options) {
+  constructor (target, options = {}) {
     this.#options = { ...Hovermenu.DEFAULTS, ...options };
 
     if (typeof this.#options.content !== 'function') {
       throw new Error('Hovermenu: `content` function is required.');
     }
-    if (!this.#initializeListenedElement()) return;
+    this.#listenedElement = typeof target === 'string' ? document.querySelector(target) : target;
+    if (!(this.#listenedElement instanceof globalThis.Element)) {
+      console.warn('[Sadrazam|Hovermenu] Target element not found.');
+
+      return;
+    }
     if (this.#listenedElement.__hovermenu) return this.#listenedElement.__hovermenu;
 
     this.#listenedElement.__hovermenu = this;
@@ -164,23 +169,6 @@ class Hovermenu {
   };
 
   // --- Private Helper Methods ---
-
-  #initializeListenedElement = () => {
-    const { selector } = this.#options;
-    if (selector instanceof globalThis.Element) {
-      this.#listenedElement = selector;
-    } else if (typeof selector === 'string') {
-      this.#listenedElement = document.querySelector(selector);
-    }
-
-    if (!this.#listenedElement) {
-      console.warn('[Sadrazam|Hovermenu] Target element not found.');
-      
-      return false;
-    }
-    
-    return true;
-  };
 
   #ensureAccessibility = () => {
     const el = this.#listenedElement;

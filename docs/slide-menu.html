@@ -284,7 +284,7 @@
                 <button id="trigger-css-sel" class="bttn--md bttn--neutral">
                     <i class="ph-bold ph-hash"></i>&nbsp; CSS Selector
                 </button>
-                <span class="code">selector: '#trigger-css-sel'</span>
+                <span class="code">target: '#trigger-css-sel'</span>
             </div>
 
             <div class="row">
@@ -292,15 +292,15 @@
                 <button id="trigger-elem-ref" class="bttn--md bttn--neutral">
                     <i class="ph-bold ph-brackets-curly"></i>&nbsp; Element Reference
                 </button>
-                <span class="code">selector: document.getElementById(...)</span>
+                <span class="code">target: document.getElementById(...)</span>
             </div>
 
             <div class="code-block"><span class="cm">// CSS selector string</span>
-<span class="kw">new</span> Sadrazam.<span class="fn">SlideMenu</span>({ <span class="str">selector</span>: <span class="str">'#my-button'</span>, ... });
+<span class="kw">new</span> Sadrazam.<span class="fn">SlideMenu</span>(<span class="str">'#my-button'</span>, { ... });
 
 <span class="cm">// Direct Element reference</span>
 <span class="kw">const</span> el = document.<span class="fn">getElementById</span>(<span class="str">'my-button'</span>);
-<span class="kw">new</span> Sadrazam.<span class="fn">SlideMenu</span>({ <span class="str">selector</span>: el, ... });</div>
+<span class="kw">new</span> Sadrazam.<span class="fn">SlideMenu</span>(el, { ... });</div>
         </div>
 
         <!-- ==================== CONFIG REFERENCE ==================== -->
@@ -411,8 +411,7 @@ Sadrazam.SlideMenu.<span class="fn">destroy</span>(element); <span class="cm">//
         // =====================================================
         // 1. Basic Slide Menu (string content, no backdrop)
         // =====================================================
-        new Sadrazam.SlideMenu({
-            selector: '#trigger-basic',
+        new Sadrazam.SlideMenu('#trigger-basic', {
             content: () => `
                 <div class="slide-menu-header">
                     <header>Basic Menu</header>
@@ -435,8 +434,7 @@ Sadrazam.SlideMenu.<span class="fn">destroy</span>(element); <span class="cm">//
         // =====================================================
         // 2. Slide Menu with Backdrop
         // =====================================================
-        new Sadrazam.SlideMenu({
-            selector: '#trigger-backdrop',
+        new Sadrazam.SlideMenu('#trigger-backdrop', {
             backdrop: true,
             content: () => `
                 <div class="slide-menu-header">
@@ -463,8 +461,7 @@ Sadrazam.SlideMenu.<span class="fn">destroy</span>(element); <span class="cm">//
         // =====================================================
         // 3. Open & Close Callbacks
         // =====================================================
-        new Sadrazam.SlideMenu({
-            selector: '#trigger-callbacks',
+        new Sadrazam.SlideMenu('#trigger-callbacks', {
             backdrop: true,
             openFunc: () => console.log('%c[SlideMenu] Menu opened!', 'color: #00b894; font-weight: bold'),
             closeFunc: () => console.log('%c[SlideMenu] Menu closed!', 'color: #e17055; font-weight: bold'),
@@ -490,8 +487,7 @@ Sadrazam.SlideMenu.<span class="fn">destroy</span>(element); <span class="cm">//
         // =====================================================
         // 4. DOM Element as Content
         // =====================================================
-        new Sadrazam.SlideMenu({
-            selector: '#trigger-dom',
+        new Sadrazam.SlideMenu('#trigger-dom', {
             backdrop: true,
             content: () => document.querySelector('#dom-source')
         });
@@ -499,8 +495,7 @@ Sadrazam.SlideMenu.<span class="fn">destroy</span>(element); <span class="cm">//
         // =====================================================
         // 5. Programmatic Close via SlideMenu.remove()
         // =====================================================
-        new Sadrazam.SlideMenu({
-            selector: '#trigger-remove',
+        new Sadrazam.SlideMenu('#trigger-remove', {
             backdrop: true,
             content: () => `
                 <div class="slide-menu-header">
@@ -524,8 +519,7 @@ Sadrazam.SlideMenu.<span class="fn">destroy</span>(element); <span class="cm">//
         // =====================================================
         // 6. Rich Content - Settings Panel
         // =====================================================
-        new Sadrazam.SlideMenu({
-            selector: '#trigger-rich',
+        new Sadrazam.SlideMenu('#trigger-rich', {
             backdrop: true,
             content: () => `
                 <div class="slide-menu-header">
@@ -558,8 +552,7 @@ Sadrazam.SlideMenu.<span class="fn">destroy</span>(element); <span class="cm">//
         // =====================================================
         // 7. Rich Content - Share Panel
         // =====================================================
-        new Sadrazam.SlideMenu({
-            selector: '#trigger-share',
+        new Sadrazam.SlideMenu('#trigger-share', {
             backdrop: true,
             content: () => `
                 <div class="slide-menu-header">
@@ -589,8 +582,7 @@ Sadrazam.SlideMenu.<span class="fn">destroy</span>(element); <span class="cm">//
         // =====================================================
         // 8. Selector as CSS string
         // =====================================================
-        new Sadrazam.SlideMenu({
-            selector: '#trigger-css-sel',
+        new Sadrazam.SlideMenu('#trigger-css-sel', {
             backdrop: true,
             content: () => `
                 <div class="slide-menu-header">
@@ -599,7 +591,7 @@ Sadrazam.SlideMenu.<span class="fn">destroy</span>(element); <span class="cm">//
                 </div>
                 <div class="slide-menu-option-container">
                     <div class="slide-menu-option-item">
-                        <span>Opened via <code>selector: '#trigger-css-sel'</code></span>
+                        <span>Opened via <code>target: '#trigger-css-sel'</code></span>
                     </div>
                 </div>
             `
@@ -608,8 +600,7 @@ Sadrazam.SlideMenu.<span class="fn">destroy</span>(element); <span class="cm">//
         // =====================================================
         // 9. Selector as Element reference
         // =====================================================
-        new Sadrazam.SlideMenu({
-            selector: document.getElementById('trigger-elem-ref'),
+        new Sadrazam.SlideMenu(document.getElementById('trigger-elem-ref'), {
             backdrop: true,
             content: () => `
                 <div class="slide-menu-header">
@@ -618,7 +609,7 @@ Sadrazam.SlideMenu.<span class="fn">destroy</span>(element); <span class="cm">//
                 </div>
                 <div class="slide-menu-option-container">
                     <div class="slide-menu-option-item">
-                        <span>Opened via <code>selector: document.getElementById('trigger-elem-ref')</code></span>
+                        <span>Opened via <code>target: document.getElementById('trigger-elem-ref')</code></span>
                     </div>
                 </div>
             `

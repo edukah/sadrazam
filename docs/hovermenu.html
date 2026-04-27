@@ -419,13 +419,12 @@
  <i class="ph-bold ph-code"></i> Element Ref
  </button>
  </div>
- <span class="code">selector: document.querySelector(...)</span>
+ <span class="code">target: document.querySelector(...)</span>
  </div>
 
  <div class="code-block"><span class="kw">const</span> el = document.<span class="fn">querySelector</span>(<span class="str">'#element-ref'</span>);
 
-<span class="kw">new</span> Sadrazam.<span class="fn">Hovermenu</span>({
- <span class="prop">selector</span>: el,
+<span class="kw">new</span> Sadrazam.<span class="fn">Hovermenu</span>(el, {
  <span class="prop">content</span>: () => <span class="str">`
  &lt;ul class="menu-list"&gt;
  &lt;li&gt;&lt;i class="ph-light ph-check"&gt;&lt;/i&gt; Passed as Element&lt;/li&gt;
@@ -632,8 +631,7 @@
 
  <script>
  // 1. Basic Click Dropdown
- new Sadrazam.Hovermenu({
- selector: '#basic-click',
+ new Sadrazam.Hovermenu('#basic-click', {
  trigger: 'click',
  content: () => `
  <ul class="menu-list">
@@ -646,8 +644,7 @@
  });
 
  // 2. Hover Trigger
- new Sadrazam.Hovermenu({
- selector: '#hover-trigger',
+ new Sadrazam.Hovermenu('#hover-trigger', {
  trigger: 'mouseenter',
  content: () => `
  <ul class="menu-list">
@@ -658,8 +655,7 @@
  });
 
  // 3. With Title
- new Sadrazam.Hovermenu({
- selector: '#with-title',
+ new Sadrazam.Hovermenu('#with-title', {
  title: '<div class="hovermenu-title">Sort Options</div>',
  content: () => `
  <ul class="menu-list">
@@ -671,8 +667,7 @@
  });
 
  // 4. With Backdrop
- new Sadrazam.Hovermenu({
- selector: '#with-backdrop',
+ new Sadrazam.Hovermenu('#with-backdrop', {
  backdrop: true,
  content: () => `
  <ul class="menu-list">
@@ -684,8 +679,7 @@
  });
 
  // 5. With Callbacks
- new Sadrazam.Hovermenu({
- selector: '#with-callbacks',
+ new Sadrazam.Hovermenu('#with-callbacks', {
  openFunc: () => console.log('Hovermenu opened!'),
  closeFunc: () => console.log('Hovermenu closed!'),
  content: () => `
@@ -696,8 +690,7 @@
  });
 
  // 6. Selector as DOM Element
- new Sadrazam.Hovermenu({
- selector: document.querySelector('#element-ref'),
+ new Sadrazam.Hovermenu(document.querySelector('#element-ref'), {
  content: () => `
  <ul class="menu-list">
  <li><i class="ph-light ph-check"></i> Passed as Element</li>
@@ -706,14 +699,12 @@
  });
 
  // 7. Content From DOM Element
- new Sadrazam.Hovermenu({
- selector: '#dom-content',
+ new Sadrazam.Hovermenu('#dom-content', {
  content: (triggerEl, instance) => document.querySelector('#dom-content-source')
  });
 
  // 8a. Avatar trigger
- new Sadrazam.Hovermenu({
- selector: '#avatar-trigger',
+ new Sadrazam.Hovermenu('#avatar-trigger', {
  title: '<div class="hovermenu-title">Account</div>',
  content: () => `
  <div class="profile-card">
@@ -730,8 +721,7 @@
  });
 
  // 8b. Badge trigger
- new Sadrazam.Hovermenu({
- selector: '#badge-trigger',
+ new Sadrazam.Hovermenu('#badge-trigger', {
  title: '<div class="hovermenu-title">Notifications</div>',
  content: () => `
  <ul class="notif-list">
@@ -742,8 +732,7 @@
  });
 
  // 8c. Icon button trigger
- new Sadrazam.Hovermenu({
- selector: '#icon-trigger',
+ new Sadrazam.Hovermenu('#icon-trigger', {
  content: () => `
  <ul class="menu-list">
  <li><i class="ph-light ph-pencil-simple"></i> Edit</li>
@@ -753,8 +742,7 @@
  });
 
  // 9. Programmatic Removal
- new Sadrazam.Hovermenu({
- selector: '#auto-close',
+ new Sadrazam.Hovermenu('#auto-close', {
  openFunc: () => {
  setTimeout(() => {
  const el = document.querySelector('#auto-close');
@@ -765,8 +753,7 @@
  });
 
  // 10. Combined Example
- new Sadrazam.Hovermenu({
- selector: '#combined',
+ new Sadrazam.Hovermenu('#combined', {
  trigger: 'mouseenter',
  backdrop: true,
  title: '<div class="hovermenu-title">Quick Actions</div>',

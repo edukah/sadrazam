@@ -20,7 +20,6 @@ class Autocomplete {
 
   // --- Static Config ---
   static DEFAULTS = {
-    selector: null,
     source: null,
     delay: 250,
     cache: false,
@@ -55,7 +54,7 @@ class Autocomplete {
    */
   static help () {
     const availableConfigs = new Map([
-      ['selector', 'Target input element. CSS selector string or DOM Element reference.'],
+      ['target (positional, 1st arg)', 'Target input element. CSS selector string or DOM Element. Required.'],
       ['source', 'Endpoint URL for the search query. String. Required.'],
       ['delay', 'Debounce delay in ms after last keystroke. Default: `250`.'],
       ['cache', 'Cache results for repeated queries? Boolean. Default: `false`.'],
@@ -93,13 +92,20 @@ class Autocomplete {
     });
   }
 
-  constructor (options) {
+  constructor (target, options = {}) {
     this.#options = { ...Autocomplete.DEFAULTS, ...options };
 
-    if (!this.#initializeQueryInput()) return;
+    this.#searchTermInput = typeof target === 'string' ? document.querySelector(target) : target;
+    if (!(this.#searchTermInput instanceof globalThis.Element)) {
+      console.warn('[Sadrazam|Autocomplete] Target element not found.');
+
+      return;
+    }
+    if (this.#searchTermInput.__autocomplete) return this.#searchTermInput.__autocomplete;
     if (!this.#options.source) {
       throw new Error('Autocomplete: `source` is a required parameter.');
     }
+    this.#searchTermInput.__autocomplete = this;
 
     this.#originalAutocompleteAttr = this.#searchTermInput.getAttribute('autocomplete');
 
@@ -413,24 +419,6 @@ class Autocomplete {
     this.#suggestionContainer.classList.remove('is-open');
     this.#searchTermInput.setAttribute('aria-expanded', 'false');
     this.#searchTermInput.removeAttribute('aria-activedescendant');
-  };
-
-  #initializeQueryInput = () => {
-    if (this.#options.selector instanceof globalThis.Element) {
-      this.#searchTermInput = this.#options.selector;
-    } else if (typeof this.#options.selector === 'string') {
-      this.#searchTermInput = document.querySelector(this.#options.selector);
-    }
-    if (!this.#searchTermInput) {
-      console.warn('[Sadrazam|Autocomplete] Target element not found.');
-
-      return false;
-    }
-    if (this.#searchTermInput.__autocomplete) return false;
-
-    this.#searchTermInput.__autocomplete = this;
-
-    return true;
   };
 
   #setupDOM = () => {

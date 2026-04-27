@@ -16,7 +16,6 @@ class SlideMenu {
 
   // --- Static Defaults ---
   static DEFAULTS = {
-    selector: null,
     trigger: 'click',
     backdrop: false,
     content: null,
@@ -29,7 +28,7 @@ class SlideMenu {
    */
   static help () {
     const availableConfigs = new Map([
-      ['selector', 'Target element for the slide menu. Required.'],
+      ['target (positional, 1st arg)', 'Target element for the slide menu. CSS selector string or HTMLElement. Required.'],
       ['trigger', 'Trigger event. Default: `click`.'],
       ['backdrop', 'Show backdrop. Default: `false`.'],
       ['content', 'Function that returns the content. Required.'],
@@ -80,16 +79,22 @@ class SlideMenu {
 
   /**
    * Creates a new SlideMenu instance.
-   * @param {SlideMenuConfig} options - SlideMenu configuration.
+   * @param {string|HTMLElement} target - CSS selector string or DOM element (the trigger).
+   * @param {SlideMenuConfig} [options={}] - SlideMenu configuration.
    * @throws {Error} `content` function is required.
    */
-  constructor (options) {
+  constructor (target, options = {}) {
     this.#options = { ...SlideMenu.DEFAULTS, ...options };
 
     if (typeof this.#options.content !== 'function') {
       throw new Error('SlideMenu: `content` function is required.');
     }
-    if (!this.#initializeListenedElement()) return;
+    this.#listenedElement = typeof target === 'string' ? document.querySelector(target) : target;
+    if (!(this.#listenedElement instanceof globalThis.Element)) {
+      console.warn('[Sadrazam|SlideMenu] Target element not found.');
+
+      return;
+    }
     if (this.#listenedElement.__slideMenu) return this.#listenedElement.__slideMenu;
 
     this.#listenedElement.__slideMenu = this;
@@ -161,23 +166,6 @@ class SlideMenu {
   };
 
   // --- Private Helper Methods ---
-
-  #initializeListenedElement = () => {
-    const { selector } = this.#options;
-    if (selector instanceof globalThis.Element) {
-      this.#listenedElement = selector;
-    } else if (typeof selector === 'string') {
-      this.#listenedElement = document.querySelector(selector);
-    }
-
-    if (!this.#listenedElement) {
-      console.warn('[Sadrazam|SlideMenu] Target element not found.');
-      
-      return false;
-    }
-    
-    return true;
-  };
 
   #ensureAccessibility = () => {
     const el = this.#listenedElement;

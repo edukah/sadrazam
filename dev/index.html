@@ -1233,8 +1233,7 @@
  });
 
  // Hovermenu demos
- new Sadrazam.Hovermenu({
- selector: document.getElementById('hovermenu-click'),
+ new Sadrazam.Hovermenu(document.getElementById('hovermenu-click'), {
  trigger: 'click',
  title: 'Actions',
  content: function () {
@@ -1249,8 +1248,7 @@
  }
  });
 
- new Sadrazam.Hovermenu({
- selector: document.getElementById('hovermenu-options'),
+ new Sadrazam.Hovermenu(document.getElementById('hovermenu-options'), {
  trigger: 'click',
  content: function () {
  const div = document.createElement('div');
@@ -1267,8 +1265,7 @@
  });
 
  // SlideMenu demos
- new Sadrazam.SlideMenu({
- selector: document.getElementById('slide-menu-trigger'),
+ new Sadrazam.SlideMenu(document.getElementById('slide-menu-trigger'), {
  trigger: 'click',
  content: function () {
  const div = document.createElement('div');
@@ -1292,8 +1289,7 @@
  }
  });
 
- new Sadrazam.SlideMenu({
- selector: document.getElementById('slide-menu-trigger-backdrop'),
+ new Sadrazam.SlideMenu(document.getElementById('slide-menu-trigger-backdrop'), {
  trigger: 'click',
  backdrop: true,
  content: function () {
