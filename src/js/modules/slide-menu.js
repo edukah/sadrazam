@@ -79,17 +79,17 @@ class SlideMenu {
 
   /**
    * Creates a new SlideMenu instance.
-   * @param {string|HTMLElement} target - CSS selector string or DOM element (the trigger).
-   * @param {SlideMenuConfig} [options={}] - SlideMenu configuration.
+   * @param {Object} options - SlideMenu configuration (must include `target` + `content`).
+   * @param {string|HTMLElement} options.target - CSS selector string or DOM element (the trigger).
    * @throws {Error} `content` function is required.
    */
-  constructor (target, options = {}) {
+  constructor (options = {}) {
     this.#options = { ...SlideMenu.DEFAULTS, ...options };
 
     if (typeof this.#options.content !== 'function') {
       throw new Error('SlideMenu: `content` function is required.');
     }
-    this.#listenedElement = typeof target === 'string' ? document.querySelector(target) : target;
+    this.#listenedElement = typeof options.target === 'string' ? document.querySelector(options.target) : options.target;
     if (!(this.#listenedElement instanceof globalThis.Element)) {
       console.warn('[Sadrazam|SlideMenu] Target element not found.');
 

@@ -64,7 +64,7 @@ class Tooltip {
       element.setAttribute('title', ''); // Prevent the browser's native tooltip
 
       const initAndShow = () => {
-        const tooltip = new Tooltip(element);
+        const tooltip = new Tooltip({ target: element });
         if (tooltip.#title) tooltip.#show();
       };
 
@@ -73,14 +73,19 @@ class Tooltip {
 
       // Touch: create and show on first touch
       element.addEventListener('touchstart', () => {
-        const tooltip = new Tooltip(element);
+        const tooltip = new Tooltip({ target: element });
         if (tooltip.#title) tooltip.#handleTouch();
       }, { once: true, passive: true });
     });
   }
 
-  constructor (referenceElement, options = {}) {
-    // options reserved for future per-instance configuration; currently unused
+  constructor (options = {}) {
+    const referenceElement = typeof options.target === 'string' ? document.querySelector(options.target) : options.target;
+    if (!(referenceElement instanceof globalThis.Element)) {
+      console.warn('[Sadrazam|Tooltip] Target element not found.');
+
+      return;
+    }
     // Skip if an instance already exists
     if (referenceElement.__tooltip) return referenceElement.__tooltip;
 

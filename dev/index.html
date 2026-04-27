@@ -1201,7 +1201,7 @@
 
  // Popover demos
  new Sadrazam.Popover({
- referenceElement: document.getElementById('popover-bottom'),
+ target: document.getElementById('popover-bottom'),
  placement: 'bottom',
  title: 'Popover Title',
  content: function () {
@@ -1212,7 +1212,7 @@
  });
 
  new Sadrazam.Popover({
- referenceElement: document.getElementById('popover-top'),
+ target: document.getElementById('popover-top'),
  placement: 'top',
  content: function () {
  const div = document.createElement('div');
@@ -1222,7 +1222,7 @@
  });
 
  new Sadrazam.Popover({
- referenceElement: document.getElementById('popover-right'),
+ target: document.getElementById('popover-right'),
  placement: 'right',
  title: 'Right Popover',
  content: function () {
@@ -1233,8 +1233,9 @@
  });
 
  // Hovermenu demos
- new Sadrazam.Hovermenu(document.getElementById('hovermenu-click'), {
- trigger: 'click',
+ new Sadrazam.Hovermenu({
+            target: document.getElementById('hovermenu-click'),
+            trigger: 'click',
  title: 'Actions',
  content: function () {
  const div = document.createElement('div');
@@ -1246,10 +1247,11 @@
  `;
  return div;
  }
- });
+        });
 
- new Sadrazam.Hovermenu(document.getElementById('hovermenu-options'), {
- trigger: 'click',
+ new Sadrazam.Hovermenu({
+            target: document.getElementById('hovermenu-options'),
+            trigger: 'click',
  content: function () {
  const div = document.createElement('div');
  div.style.padding = '10px';
@@ -1262,11 +1264,12 @@
  `;
  return div;
  }
- });
+        });
 
  // SlideMenu demos
- new Sadrazam.SlideMenu(document.getElementById('slide-menu-trigger'), {
- trigger: 'click',
+ new Sadrazam.SlideMenu({
+            target: document.getElementById('slide-menu-trigger'),
+            trigger: 'click',
  content: function () {
  const div = document.createElement('div');
  div.innerHTML = `
@@ -1287,10 +1290,11 @@
  `;
  return div;
  }
- });
+        });
 
- new Sadrazam.SlideMenu(document.getElementById('slide-menu-trigger-backdrop'), {
- trigger: 'click',
+ new Sadrazam.SlideMenu({
+            target: document.getElementById('slide-menu-trigger-backdrop'),
+            trigger: 'click',
  backdrop: true,
  content: function () {
  const div = document.createElement('div');
@@ -1311,7 +1315,7 @@
  `;
  return div;
  }
- });
+        });
 
  // Log init
  devLog('Sadrazam v' + (Sadrazam.version || '1.0.0') + ' initialized', 'success');

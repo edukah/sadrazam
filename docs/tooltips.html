@@ -398,7 +398,7 @@
  Sadrazam.Tooltip.autoInit();<br><br>
  <span class="comment">// 2. Imperative: Attach tooltip to a specific element</span><br>
  const el = document.querySelector('#my-button');<br>
- new Sadrazam.Tooltip(el);<br><br>
+ new Sadrazam.Tooltip({ target: el });<br><br>
  <span class="comment">// 3. Get an existing instance</span><br>
  const instance = Sadrazam.Tooltip.getInstance(el);<br>
  instance.toggle();<br><br>
@@ -414,7 +414,7 @@
  <h2 class="section-title">Imperative API Demo</h2>
  <p class="section-desc">
  The button below is not declared with <span class="code">data-toggle="tooltip"</span>.
- Instead, its tooltip is attached programmatically via <span class="code">new Sadrazam.Tooltip(el)</span>
+ Instead, its tooltip is attached programmatically via <span class="code">new Sadrazam.Tooltip({ target: el })</span>
  when you click"Attach Tooltip".
  </p>
 
@@ -436,7 +436,7 @@
  <div class="code-block">
  <span class="comment">// Element must have title and data-original-title set</span><br>
  const target = document.querySelector('#js-api-target');<br>
- new Sadrazam.Tooltip(target);<br>
+ new Sadrazam.Tooltip({ target: target });<br>
  <span class="comment">// Now hover the element to see the tooltip</span>
  </div>
  </div>
@@ -621,7 +621,7 @@
  document.querySelector('#js-api-status').textContent = 'Already attached!';
  return;
  }
- new Sadrazam.Tooltip(target);
+ new Sadrazam.Tooltip({ target: target });
  document.querySelector('#js-api-status').textContent = 'Attached! Now hover the target.';
  document.querySelector('#js-api-status').style.color = '#00b894';
  }

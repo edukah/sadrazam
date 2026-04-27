@@ -83,17 +83,17 @@ class Hovermenu {
 
   /**
    * Creates a new Hovermenu instance.
-   * @param {string|HTMLElement} target - CSS selector string or DOM element (the trigger).
-   * @param {HovermenuConfig} [options={}] - Hovermenu configuration.
+   * @param {Object} options - Hovermenu configuration (must include `target` + `content`).
+   * @param {string|HTMLElement} options.target - CSS selector string or DOM element (the trigger).
    * @throws {Error} `content` function is required.
    */
-  constructor (target, options = {}) {
+  constructor (options = {}) {
     this.#options = { ...Hovermenu.DEFAULTS, ...options };
 
     if (typeof this.#options.content !== 'function') {
       throw new Error('Hovermenu: `content` function is required.');
     }
-    this.#listenedElement = typeof target === 'string' ? document.querySelector(target) : target;
+    this.#listenedElement = typeof options.target === 'string' ? document.querySelector(options.target) : options.target;
     if (!(this.#listenedElement instanceof globalThis.Element)) {
       console.warn('[Sadrazam|Hovermenu] Target element not found.');
 

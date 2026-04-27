@@ -75,14 +75,14 @@ class Popover {
   /**
    * Adds a one-time popover initialization listener for the specified target.
    * The instance is created on first trigger and manages its own lifecycle thereafter.
-   * @param {string|HTMLElement} target - CSS selector string or DOM element.
-   * @param {PopoverConfig} [options={}] - Popover settings.
+   * @param {Object} options - Popover settings (must include `target`).
+   * @param {string|HTMLElement} options.target - CSS selector string or DOM element.
    */
-  static autoInit (target, options = {}) {
-    const referenceElement = typeof target === 'string' ? document.querySelector(target) : target;
+  static autoInit (options = {}) {
+    const referenceElement = typeof options.target === 'string' ? document.querySelector(options.target) : options.target;
 
     if (!(referenceElement instanceof globalThis.HTMLElement)) {
-      console.warn(`[Sadrazam|Popover] Element (${target}) not found.`);
+      console.warn(`[Sadrazam|Popover] Element (${options.target}) not found.`);
 
       return;
     }
@@ -90,19 +90,19 @@ class Popover {
     const trigger = options.trigger ?? Popover.DEFAULTS.trigger;
     // `{ once: true }` auto-removes this listener after the first trigger.
     referenceElement.addEventListener(trigger, () => {
-      new Popover(referenceElement, options);
+      new Popover({ ...options, target: referenceElement });
     }, { once: true });
   }
 
   /**
    * Creates and shows a new Popover instance.
    * The instance is stored on `referenceElement.__popover`.
-   * @param {string|HTMLElement} target - CSS selector string or DOM element (popover trigger).
-   * @param {PopoverConfig} [options={}] - Popover settings.
+   * @param {Object} options - Popover settings (must include `target`).
+   * @param {string|HTMLElement} options.target - CSS selector string or DOM element.
    */
-  constructor (target, options = {}) {
+  constructor (options = {}) {
     this.#options = { ...Popover.DEFAULTS, ...options };
-    this.#referenceElement = typeof target === 'string' ? document.querySelector(target) : target;
+    this.#referenceElement = typeof options.target === 'string' ? document.querySelector(options.target) : options.target;
 
     if (!(this.#referenceElement instanceof globalThis.HTMLElement)) return;
     if (this.#referenceElement.__popover) return this.#referenceElement.__popover;

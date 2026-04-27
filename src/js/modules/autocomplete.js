@@ -92,10 +92,10 @@ class Autocomplete {
     });
   }
 
-  constructor (target, options = {}) {
+  constructor (options = {}) {
     this.#options = { ...Autocomplete.DEFAULTS, ...options };
 
-    this.#searchTermInput = typeof target === 'string' ? document.querySelector(target) : target;
+    this.#searchTermInput = typeof options.target === 'string' ? document.querySelector(options.target) : options.target;
     if (!(this.#searchTermInput instanceof globalThis.Element)) {
       console.warn('[Sadrazam|Autocomplete] Target element not found.');
 
