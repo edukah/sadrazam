@@ -7,7 +7,7 @@ import Ajax from '../services/ajax.js';
 */
 class Autocomplete {
   // --- Private Class Fields ---
-  #config;
+  #options;
   #searchTermInput;
   #suggestionContainer;
   #cache = {};
@@ -19,7 +19,7 @@ class Autocomplete {
   #badgeConfig = null;
 
   // --- Static Config ---
-  static defaultConfig = {
+  static DEFAULTS = {
     selector: null,
     source: null,
     delay: 250,
@@ -93,17 +93,17 @@ class Autocomplete {
     });
   }
 
-  constructor (userConfig) {
-    this.#config = { ...Autocomplete.defaultConfig, ...userConfig };
+  constructor (options) {
+    this.#options = { ...Autocomplete.DEFAULTS, ...options };
 
     if (!this.#initializeQueryInput()) return;
-    if (!this.#config.source) {
+    if (!this.#options.source) {
       throw new Error('Autocomplete: `source` is a required parameter.');
     }
 
     this.#originalAutocompleteAttr = this.#searchTermInput.getAttribute('autocomplete');
 
-    if (this.#config.badge) {
+    if (this.#options.badge) {
       this.#badgeConfig = this.#parseBadgeConfig();
     }
 
@@ -160,7 +160,7 @@ class Autocomplete {
       return;
     }
 
-    this.#config.onSelect(event, value, item);
+    this.#options.onSelect(event, value, item);
     this.#updateBadgeFromItem(item);
     this.#hideSuggestions();
   };
@@ -192,14 +192,14 @@ class Autocomplete {
   // --- Core Logic ---
   #triggerSearchWithDelay = () => {
     globalThis.clearTimeout(this.#debounceTimer);
-    if (this.#searchTermInput.value.length < this.#config.minChars) {
+    if (this.#searchTermInput.value.length < this.#options.minChars) {
       this.#hideSuggestions();
       
       return;
     }
     this.#debounceTimer = globalThis.setTimeout(() => {
       this.#performSearch();
-    }, this.#config.delay);
+    }, this.#options.delay);
   };
 
   #performSearch = async () => {
@@ -207,7 +207,7 @@ class Autocomplete {
     if (searchTerm === this.#lastValue) return;
     this.#lastValue = searchTerm;
 
-    if (this.#config.cache && this.#cache[searchTerm]) {
+    if (this.#options.cache && this.#cache[searchTerm]) {
       this.#renderSuggestions(this.#cache[searchTerm]);
       
       return;
@@ -215,7 +215,7 @@ class Autocomplete {
 
     try {
       const data = await this.#fetchSuggestions(searchTerm);
-      if (this.#config.cache) {
+      if (this.#options.cache) {
         this.#cache[searchTerm] = data;
       }
       this.#renderSuggestions(data);
@@ -242,7 +242,7 @@ class Autocomplete {
           }
         },
         error: (xhttp, status, error) => reject(new Error(`AJAX Error: ${status} ${error}`)),
-        route: this.#config.source,
+        route: this.#options.source,
         data: { search_term: searchTerm }
       });
     });
@@ -343,14 +343,14 @@ class Autocomplete {
 
   // --- Badge Methods ---
   #parseBadgeConfig = () => {
-    const match = this.#config.badge.match(/\{(.+?)\}/);
+    const match = this.#options.badge.match(/\{(.+?)\}/);
     if (!match) {
       console.warn('[Sadrazam|Autocomplete] Invalid badge format — missing {field_name} placeholder.');
 
       return null;
     }
 
-    return { field: match[1], format: this.#config.badge };
+    return { field: match[1], format: this.#options.badge };
   };
 
   #setupBadge = () => {
@@ -416,10 +416,10 @@ class Autocomplete {
   };
 
   #initializeQueryInput = () => {
-    if (this.#config.selector instanceof globalThis.Element) {
-      this.#searchTermInput = this.#config.selector;
-    } else if (typeof this.#config.selector === 'string') {
-      this.#searchTermInput = document.querySelector(this.#config.selector);
+    if (this.#options.selector instanceof globalThis.Element) {
+      this.#searchTermInput = this.#options.selector;
+    } else if (typeof this.#options.selector === 'string') {
+      this.#searchTermInput = document.querySelector(this.#options.selector);
     }
     if (!this.#searchTermInput) {
       console.warn('[Sadrazam|Autocomplete] Target element not found.');
@@ -444,10 +444,10 @@ class Autocomplete {
 
     this.#suggestionContainer = document.createElement('div');
     this.#suggestionContainer.id = listboxId;
-    this.#suggestionContainer.className = `autocomplete__suggestions-container ${this.#config.menuClass}`;
+    this.#suggestionContainer.className = `autocomplete__suggestions-container ${this.#options.menuClass}`;
     this.#suggestionContainer.setAttribute('role', 'listbox');
     // resultContainer varsa sonuçları oraya append et, yoksa input'un hemen sonrasına
-    const rc = this.#config.resultContainer;
+    const rc = this.#options.resultContainer;
     const target = rc ? (typeof rc === 'string' ? document.querySelector(rc) : rc) : null;
 
     if (target) {

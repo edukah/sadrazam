@@ -47,6 +47,18 @@ class InfiniteScroll {
     });
   }
 
+  /**
+   * Returns the InfiniteScroll instance attached to the given listElement.
+   * Unlike other Sadrazam modules, InfiniteScroll doesn't tag the listElement with a CSS class,
+   * so descendant `closest()` traversal isn't supported — pass the listElement itself.
+   *
+   * @param {Element} element - listElement that was passed to the constructor.
+   * @returns {InfiniteScroll|undefined} instance or undefined.
+   */
+  static getInstance (element) {
+    return element?.__infiniteScroll;
+  }
+
   constructor ({ scrollElement = null, listElement = null, source = null, startPage = 1, setInnerItem = () => {} }) {
     if (!scrollElement || !listElement || !source) {
       throw new Error('InfiniteScroll: Missing required parameter (scrollElement, listElement, or source).');

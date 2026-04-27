@@ -31,7 +31,7 @@ class ScrollHistory {
    * @param {object} [options] - Optional settings.
    * @param {number} [options.cookieTimeOut=60] - Cookie expiration time (seconds).
    */
-  static listen ({ cookieTimeOut = 60 } = {}) {
+  static autoInit ({ cookieTimeOut = 60 } = {}) {
     if (this.#isListening) return;
 
     this.#cookieTimeOutMs = (cookieTimeOut >= 0 ? cookieTimeOut : 999999999) * 1000;

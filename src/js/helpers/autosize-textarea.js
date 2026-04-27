@@ -23,7 +23,7 @@ class AutosizeTextarea {
    * Initializes auto-height for all textareas matching the given selector.
    * @param {string} [selector='textarea[data-autosize]'] - CSS selector to target textarea elements.
    */
-  static listen (selector = 'textarea[data-autosize]') {
+  static autoInit (selector = 'textarea[data-autosize]') {
     const elements = document.querySelectorAll(selector);
     elements.forEach(element => {
       if (!this.#instances.has(element)) {

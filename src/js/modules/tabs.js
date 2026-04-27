@@ -29,7 +29,7 @@ class Tabs {
       ['data-tab-persist', 'On heading container. Enables sessionStorage persistence. Without it, session is not used.']
     ]);
     const availableMethods = new Map([
-      ['Tabs.listen()', 'Finds and initializes all tab groups on the page.'],
+      ['Tabs.autoInit()', 'Finds and initializes all tab groups on the page.'],
       ['Tabs.getInstance(element)', 'Returns the Tabs instance for the element.'],
       ['instance.activateTab(tabHead, { updateHash })', 'Activates the specified tab. updateHash (default: true) controls URL hash sync.'],
       ['instance.destroy()', 'Destroys and cleans up the Tabs instance.']
@@ -71,7 +71,7 @@ class Tabs {
    * Finds all tab groups on the page and initializes a Tabs instance for each.
    * Also listens for external control links and in-page hash links.
    */
-  static listen () {
+  static autoInit () {
     document.querySelectorAll(HEADING_SELECTOR).forEach(container => new this(container));
 
     document.querySelectorAll('*[data-tab-target]').forEach(button => {
@@ -142,8 +142,9 @@ class Tabs {
     });
   }
 
-  constructor (tabContainer) {
+  constructor (tabContainer, options = {}) {
     if (tabContainer.__tabs) return;
+    // options reserved for future per-instance configuration; currently unused
 
     this.#tabContainer = tabContainer;
     this.#tabHeads = this.#tabContainer.querySelectorAll('*[data-tab-id]');

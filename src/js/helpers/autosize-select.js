@@ -22,7 +22,7 @@ class AutosizeSelect {
    * Initializes auto-width for all selects matching the given selector.
    * @param {string} [selector='select[data-autosize-select]'] - CSS selector to target select elements.
    */
-  static listen (selector = 'select[data-autosize-select]') {
+  static autoInit (selector = 'select[data-autosize-select]') {
     const elements = document.querySelectorAll(selector);
     elements.forEach(element => {
       if (!this.#instances.has(element)) {

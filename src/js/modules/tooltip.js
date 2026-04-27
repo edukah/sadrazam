@@ -25,7 +25,7 @@ class Tooltip {
       ['data-placement', 'Tooltip position (`top`, `right`, `bottom`, `left`). Default: `top`.']
     ]);
     const availableMethods = new Map([
-      ['Tooltip.listen()', 'Finds all tooltip triggers on the page and attaches listeners.'],
+      ['Tooltip.autoInit()', 'Finds all tooltip triggers on the page and attaches listeners.'],
       ['Tooltip.getInstance(element)', 'Returns the Tooltip instance for the element.'],
       ['instance.toggle()', 'Toggles tooltip visibility.'],
       ['instance.destroy()', 'Destroys the tooltip and cleans up.']
@@ -54,7 +54,7 @@ class Tooltip {
    * Finds all tooltip triggers on the page and attaches a one-time
    * initialization listener for each. Supports both mouse and touch devices.
    */
-  static listen () {
+  static autoInit () {
     const referenceElements = document.querySelectorAll('*[data-toggle="tooltip"]');
     referenceElements.forEach(element => {
       const title = element.getAttribute('title');
@@ -79,7 +79,8 @@ class Tooltip {
     });
   }
 
-  constructor (referenceElement) {
+  constructor (referenceElement, options = {}) {
+    // options reserved for future per-instance configuration; currently unused
     // Skip if an instance already exists
     if (referenceElement.__tooltip) return referenceElement.__tooltip;
 

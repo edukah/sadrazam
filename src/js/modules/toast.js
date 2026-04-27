@@ -21,7 +21,7 @@ class Toast {
     ]);
     const availableMethods = new Map([
       ['Toast.insert(options)', 'Displays the message in a modal.'],
-      ['Toast.listen()', 'Adds click listeners to elements with data-toggle="toast".']
+      ['Toast.autoInit()', 'Adds click listeners to elements with data-toggle="toast".']
     ]);
     console.info('%cToast', 'font-size: 20px; font-weight: bold; color: red');
     console.info('%cConfig:', 'font-size: 14px; font-weight: bold; color: blue');
@@ -38,7 +38,7 @@ class Toast {
    * Adds click listeners to elements with data-toggle="toast".
    * Reads data-type (default: hint) and data-message attributes.
    */
-  static listen () {
+  static autoInit () {
     document.querySelectorAll('[data-toggle="toast"]').forEach(element => {
       element.addEventListener('click', () => {
         const type = element.getAttribute('data-type') || 'hint';

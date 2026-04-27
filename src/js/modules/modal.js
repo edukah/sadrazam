@@ -7,7 +7,7 @@ import { InsertScript } from '../helpers/document.js';
  */
 class Modal {
   // --- Private Instance Fields ---
-  #config;
+  #options;
   #modalElement;
   #modalContentElement;
   #backdropId = null;
@@ -15,7 +15,7 @@ class Modal {
   #previouslyFocusedElement = null;
 
   // --- Static Config ---
-  static defaultConfig = {
+  static DEFAULTS = {
     content: '',
     size: 'md',
     position: 'center',
@@ -98,10 +98,10 @@ class Modal {
   }
 
   constructor (options = {}) {
-    this.#config = { ...Modal.defaultConfig, ...options };
+    this.#options = { ...Modal.DEFAULTS, ...options };
     this.#previouslyFocusedElement = document.activeElement;
 
-    if (this.#config.closeOtherModals) {
+    if (this.#options.closeOtherModals) {
       this.#closeOtherModals();
     }
 
@@ -111,8 +111,8 @@ class Modal {
     this.#bindEvents();
     this.#insertIntoDOM();
 
-    if (typeof this.#config.time === 'number') {
-      this.#closeTimer = globalThis.setTimeout(this.close, this.#config.time);
+    if (typeof this.#options.time === 'number') {
+      this.#closeTimer = globalThis.setTimeout(this.close, this.#options.time);
     }
   }
 
@@ -144,8 +144,8 @@ class Modal {
       this.#previouslyFocusedElement.focus();
     }
 
-    if (typeof this.#config.closeAfterFunction === 'function') {
-      this.#config.closeAfterFunction();
+    if (typeof this.#options.closeAfterFunction === 'function') {
+      this.#options.closeAfterFunction();
     }
   };
 
@@ -179,14 +179,14 @@ class Modal {
     const modalInner = document.createElement('div');
     modalInner.className = 'modal__inner';
 
-    const { position } = this.#config;
+    const { position } = this.#options;
     if (position && position !== 'center') {
       modalInner.classList.add(`modal__inner--${position}`);
     }
 
     this.#modalElement.appendChild(modalInner);
 
-    const { content } = this.#config;
+    const { content } = this.#options;
     if (content instanceof globalThis.Element) {
       modalInner.appendChild(content);
     } else if (typeof content === 'string') {
@@ -203,7 +203,7 @@ class Modal {
       const dialog = document.createElement('div');
       dialog.className = 'modal__dialog';
 
-      const { size, className } = this.#config;
+      const { size, className } = this.#options;
       if (size) dialog.classList.add(`modal__dialog--${size}`);
       if (className) dialog.classList.add(className);
 
@@ -225,7 +225,7 @@ class Modal {
     }
 
     // Auto-insert close button into header (create header if missing)
-    if (this.#config.closeButton) {
+    if (this.#options.closeButton) {
       let header = this.#modalContentElement.querySelector('.modal__header');
       if (!header) {
         header = document.createElement('div');
@@ -272,13 +272,13 @@ class Modal {
     document.addEventListener('keydown', this.#handleKeydown);
 
     // If closeOnOuterClick is active, close on backdrop or outer click
-    if (this.#config.closeOnClick) {
+    if (this.#options.closeOnClick) {
       this.#backdropId = Backdrop.insert({ onClick: this.close });
 
       this.#modalElement.addEventListener('click', (event) => {
         this.close();
       });
-    } else if (this.#config.closeOnOuterClick) {
+    } else if (this.#options.closeOnOuterClick) {
       this.#backdropId = Backdrop.insert({ onClick: this.close });
 
       this.#modalElement.addEventListener('click', (event) => {

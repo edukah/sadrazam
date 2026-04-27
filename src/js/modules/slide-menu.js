@@ -7,7 +7,7 @@ import Elem from '../modules/elem.js';
  */
 class SlideMenu {
   // --- Private Instance Fields ---
-  #config;
+  #options;
   #listenedElement;
   #container = null;
   #sourceContent = null;
@@ -15,7 +15,7 @@ class SlideMenu {
   #backdropId = null;
 
   // --- Static Defaults ---
-  static defaultConfig = {
+  static DEFAULTS = {
     selector: null,
     trigger: 'click',
     backdrop: false,
@@ -80,13 +80,13 @@ class SlideMenu {
 
   /**
    * Creates a new SlideMenu instance.
-   * @param {SlideMenuConfig} userConfig - SlideMenu configuration.
+   * @param {SlideMenuConfig} options - SlideMenu configuration.
    * @throws {Error} `content` function is required.
    */
-  constructor (userConfig) {
-    this.#config = { ...SlideMenu.defaultConfig, ...userConfig };
+  constructor (options) {
+    this.#options = { ...SlideMenu.DEFAULTS, ...options };
 
-    if (typeof this.#config.content !== 'function') {
+    if (typeof this.#options.content !== 'function') {
       throw new Error('SlideMenu: `content` function is required.');
     }
     if (!this.#initializeListenedElement()) return;
@@ -101,7 +101,7 @@ class SlideMenu {
 
   destroy = () => {
     this.#remove();
-    this.#listenedElement?.removeEventListener(this.#config.trigger, this.#insert);
+    this.#listenedElement?.removeEventListener(this.#options.trigger, this.#insert);
     if (this.#a11yKeydownHandler) {
       this.#listenedElement?.removeEventListener('keydown', this.#a11yKeydownHandler);
     }
@@ -120,10 +120,10 @@ class SlideMenu {
     // Skip if already open
     if (this.#container) return;
     
-    this.#config.openFunc();
+    this.#options.openFunc();
     this.#setupDOM();
     
-    if (this.#config.backdrop) {
+    if (this.#options.backdrop) {
       this.#backdropId = Backdrop.insert({ onClick: this.#remove });
     }
     
@@ -143,7 +143,7 @@ class SlideMenu {
 
     this.#listenedElement.setAttribute('aria-expanded', 'false');
 
-    if (this.#config.backdrop) {
+    if (this.#options.backdrop) {
       Backdrop.remove(this.#backdropId);
     }
     
@@ -154,7 +154,7 @@ class SlideMenu {
       this.#container.classList.remove('is-leaving');
       Elem.enableScroll();
       
-      this.#config.closeFunc();
+      this.#options.closeFunc();
       
       this.#cleanupDOM();
     }, { once: true });
@@ -163,7 +163,7 @@ class SlideMenu {
   // --- Private Helper Methods ---
 
   #initializeListenedElement = () => {
-    const { selector } = this.#config;
+    const { selector } = this.#options;
     if (selector instanceof globalThis.Element) {
       this.#listenedElement = selector;
     } else if (typeof selector === 'string') {
@@ -202,7 +202,7 @@ class SlideMenu {
 
   #bindInitialTrigger = () => {
     // No toggle logic in this class; the trigger only opens.
-    this.#listenedElement.addEventListener(this.#config.trigger, this.#insert);
+    this.#listenedElement.addEventListener(this.#options.trigger, this.#insert);
   };
   
   #setupDOM = () => {
@@ -222,7 +222,7 @@ class SlideMenu {
     contentContainer.className = 'slide-menu__content';
     inner.appendChild(contentContainer);
 
-    this.#sourceContent = this.#config.content(this.#listenedElement, this);
+    this.#sourceContent = this.#options.content(this.#listenedElement, this);
     if (this.#sourceContent instanceof globalThis.Element) {
       while (this.#sourceContent.childNodes.length > 0) {
         contentContainer.appendChild(this.#sourceContent.childNodes[0]);
@@ -232,7 +232,7 @@ class SlideMenu {
       contentContainer.innerHTML = this.#sourceContent;
     }
     
-    inner.querySelector('.slide-menu__close-button')?.addEventListener(this.#config.trigger, this.#remove);
+    inner.querySelector('.slide-menu__close-button')?.addEventListener(this.#options.trigger, this.#remove);
 
     document.body.appendChild(this.#container);
   };

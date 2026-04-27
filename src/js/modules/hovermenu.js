@@ -6,7 +6,7 @@ import Backdrop from '../modules/backdrop.js';
  */
 class Hovermenu {
   // --- Private Instance Fields ---
-  #config;
+  #options;
   #listenedElement;
   #container = null;
   #contentContainer = null;
@@ -15,7 +15,7 @@ class Hovermenu {
   #a11yKeydownHandler = null;
 
   // --- Static Defaults ---
-  static defaultConfig = {
+  static DEFAULTS = {
     selector: null,
     trigger: 'click',
     backdrop: false,
@@ -84,13 +84,13 @@ class Hovermenu {
 
   /**
    * Creates a new Hovermenu instance.
-   * @param {HovermenuConfig} userConfig - Hovermenu configuration.
+   * @param {HovermenuConfig} options - Hovermenu configuration.
    * @throws {Error} `content` function is required.
    */
-  constructor (userConfig) {
-    this.#config = { ...Hovermenu.defaultConfig, ...userConfig };
+  constructor (options) {
+    this.#options = { ...Hovermenu.DEFAULTS, ...options };
 
-    if (typeof this.#config.content !== 'function') {
+    if (typeof this.#options.content !== 'function') {
       throw new Error('Hovermenu: `content` function is required.');
     }
     if (!this.#initializeListenedElement()) return;
@@ -105,7 +105,7 @@ class Hovermenu {
 
   destroy = () => {
     this.#remove();
-    this.#listenedElement?.removeEventListener(this.#config.trigger, this.#insert);
+    this.#listenedElement?.removeEventListener(this.#options.trigger, this.#insert);
     if (this.#a11yKeydownHandler) {
       this.#listenedElement?.removeEventListener('keydown', this.#a11yKeydownHandler);
     }
@@ -123,14 +123,14 @@ class Hovermenu {
   #insert = (event) => {
     if (this.#container) return;
     
-    this.#config.openFunc();
+    this.#options.openFunc();
     this.#setupDOM();
     this.#setPosition();
     
     this.#container.classList.add('is-visible');
     this.#listenedElement.setAttribute('aria-expanded', 'true');
 
-    if (this.#config.backdrop) {
+    if (this.#options.backdrop) {
       this.#backdropId = Backdrop.insert({ onClick: this.#remove });
     }
 
@@ -138,7 +138,7 @@ class Hovermenu {
   };
 
   #remove = (event) => {
-    if (this.#config.trigger === 'mouseenter') {
+    if (this.#options.trigger === 'mouseenter') {
       if (event && event.relatedTarget && this.#container?.contains(event.relatedTarget)) {
         this.#container.addEventListener('mouseleave', this.#remove, { once: true });
         
@@ -148,9 +148,9 @@ class Hovermenu {
     
     if (!this.#container) return;
 
-    this.#config.closeFunc();
+    this.#options.closeFunc();
 
-    if (this.#config.backdrop) {
+    if (this.#options.backdrop) {
       Backdrop.remove(this.#backdropId);
     }
     
@@ -166,7 +166,7 @@ class Hovermenu {
   // --- Private Helper Methods ---
 
   #initializeListenedElement = () => {
-    const { selector } = this.#config;
+    const { selector } = this.#options;
     if (selector instanceof globalThis.Element) {
       this.#listenedElement = selector;
     } else if (typeof selector === 'string') {
@@ -204,27 +204,27 @@ class Hovermenu {
   };
 
   #bindInitialTrigger = () => {
-    this.#listenedElement.addEventListener(this.#config.trigger, this.#insert);
+    this.#listenedElement.addEventListener(this.#options.trigger, this.#insert);
   };
   
   #bindToggleListeners = () => {
-    this.#listenedElement.removeEventListener(this.#config.trigger, this.#insert);
+    this.#listenedElement.removeEventListener(this.#options.trigger, this.#insert);
     
-    if (this.#config.trigger === 'mouseenter') {
+    if (this.#options.trigger === 'mouseenter') {
       this.#listenedElement.addEventListener('mouseleave', this.#remove);
       this.#listenedElement.addEventListener('click', this.#remove, { once: true });
     } else {
-      this.#listenedElement.addEventListener(this.#config.trigger, this.#remove);
+      this.#listenedElement.addEventListener(this.#options.trigger, this.#remove);
     }
   };
   
   #unbindToggleListeners = () => {
-    if (this.#config.trigger === 'mouseenter') {
+    if (this.#options.trigger === 'mouseenter') {
       this.#listenedElement.removeEventListener('mouseleave', this.#remove);
     } else {
-      this.#listenedElement.removeEventListener(this.#config.trigger, this.#remove);
+      this.#listenedElement.removeEventListener(this.#options.trigger, this.#remove);
     }
-    this.#listenedElement.addEventListener(this.#config.trigger, this.#insert);
+    this.#listenedElement.addEventListener(this.#options.trigger, this.#insert);
   };
 
   #setupDOM = () => {
@@ -240,9 +240,9 @@ class Hovermenu {
     arrow.className = 'hovermenu__arrow-up';
     this.#container.appendChild(arrow);
 
-    if (this.#config.title) {
+    if (this.#options.title) {
       const title = document.createElement('div');
-      title.innerHTML = this.#config.title;
+      title.innerHTML = this.#options.title;
       this.#container.appendChild(title);
     }
 
@@ -250,7 +250,7 @@ class Hovermenu {
     this.#contentContainer.className = 'hovermenu__content';
     this.#container.appendChild(this.#contentContainer);
 
-    this.#sourceContent = this.#config.content(this.#listenedElement, this);
+    this.#sourceContent = this.#options.content(this.#listenedElement, this);
     if (this.#sourceContent instanceof globalThis.Element) {
       while (this.#sourceContent.childNodes.length > 0) {
         this.#contentContainer.appendChild(this.#sourceContent.childNodes[0]);
