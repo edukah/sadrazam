@@ -46,7 +46,7 @@ sadrazam/
 - `npm run release` – Build + copy dist files to `docs/assets/`
 
 ## Architecture
-- **UMD library**: Exported as `sadrazam` (dev) / `Sadrazam` (prod) global
+- **Build outputs**: ESM in production (`dist/sadrazam.esm.js`, `library: { type: 'module' }` in webpack.prod.js), UMD in dev for hot-reload sandbox compatibility (exposed as `Sadrazam` global)
 - **SCSS**: Uses `@use` imports (modern Sass API), layered architecture (base → layout → components → modules → utilities)
 - **JS**: ES6+ modules, transpiled via Babel. Main entry in `src/js/index.js` aggregates all sub-modules
 - **Dev server**: Serves from `dev/` and `docs/`, assets available at `/_hot/`

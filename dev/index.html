@@ -1178,22 +1178,22 @@
  document.addEventListener('DOMContentLoaded', function () {
 
  // Tabs
- Sadrazam.Tabs.listen();
+ Sadrazam.Tabs.autoInit();
 
  // Tooltips
- Sadrazam.Tooltip.listen();
+ Sadrazam.Tooltip.autoInit();
 
  // Toast declarative
- if (Sadrazam.Toast.listen) {
- Sadrazam.Toast.listen();
+ if (Sadrazam.Toast.autoInit) {
+ Sadrazam.Toast.autoInit();
  }
 
  // Form validation
  Sadrazam.Form.perform('#demo-validation-form');
 
  // Autosize
- Sadrazam.AutosizeTextarea.listen();
- Sadrazam.AutosizeSelect.listen();
+ Sadrazam.AutosizeTextarea.autoInit();
+ Sadrazam.AutosizeSelect.autoInit();
 
  // Browser visibility (static class — accessed via Sadrazam.browser which is an instance)
  // Note: Browser methods are static, so isVisible/onChange are on the class, not instance.

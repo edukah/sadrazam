@@ -163,7 +163,7 @@
         <!-- ==================== BASIC USAGE ==================== -->
         <div class="section">
             <h2 class="section-title">Basic Usage</h2>
-            <p class="section-desc">Add <span class="code">data-autosize</span> attribute, then call <span class="code">Sadrazam.AutosizeTextarea.listen()</span></p>
+            <p class="section-desc">Add <span class="code">data-autosize</span> attribute, then call <span class="code">Sadrazam.AutosizeTextarea.autoInit()</span></p>
 
             <div class="row">
                 <span class="label">Default</span>
@@ -267,7 +267,7 @@ It will auto-resize on initialization to fit these lines of text that are alread
 
             <div class="row">
                 <span class="label">Code</span>
-                <span class="code">Sadrazam.AutosizeTextarea.listen('.my-autosize')</span>
+                <span class="code">Sadrazam.AutosizeTextarea.autoInit('.my-autosize')</span>
             </div>
         </div>
 
@@ -324,10 +324,10 @@ It will auto-resize on initialization to fit these lines of text that are alread
 
     <script>
         // Initialize all data-autosize textareas
-        Sadrazam.AutosizeTextarea.listen();
+        Sadrazam.AutosizeTextarea.autoInit();
 
         // Initialize the custom selector textarea
-        Sadrazam.AutosizeTextarea.listen('.my-autosize');
+        Sadrazam.AutosizeTextarea.autoInit('.my-autosize');
 
         // --- Programmatic Control ---
         function injectContent() {
@@ -348,7 +348,7 @@ It will auto-resize on initialization to fit these lines of text that are alread
 
         function reinitAutosize() {
             const el = document.getElementById('controlled-textarea');
-            Sadrazam.AutosizeTextarea.listen('#controlled-textarea');
+            Sadrazam.AutosizeTextarea.autoInit('#controlled-textarea');
         }
 
         // --- Event Listener ---

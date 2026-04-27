@@ -150,7 +150,7 @@
         <!-- ==================== BASIC USAGE ==================== -->
         <div class="section">
             <h2 class="section-title">Basic Usage</h2>
-            <p class="section-desc">Add <span class="code">data-autosize-select</span> attribute, then call <span class="code">Sadrazam.AutosizeSelect.listen()</span></p>
+            <p class="section-desc">Add <span class="code">data-autosize-select</span> attribute, then call <span class="code">Sadrazam.AutosizeSelect.autoInit()</span></p>
 
             <div class="row">
                 <span class="label">Default</span>
@@ -333,7 +333,7 @@
                     <option>A wider option with more text</option>
                     <option>Even wider with a longer description</option>
                 </select>
-                <span class="code">Sadrazam.AutosizeSelect.listen('.my-autosize-select')</span>
+                <span class="code">Sadrazam.AutosizeSelect.autoInit('.my-autosize-select')</span>
             </div>
         </div>
 
@@ -377,10 +377,10 @@
 
     <script>
         // Initialize all data-autosize-select elements
-        Sadrazam.AutosizeSelect.listen();
+        Sadrazam.AutosizeSelect.autoInit();
 
         // Initialize the custom selector select
-        Sadrazam.AutosizeSelect.listen('.my-autosize-select');
+        Sadrazam.AutosizeSelect.autoInit('.my-autosize-select');
 
         // --- Width Indicator ---
         const controlledSelect = document.getElementById('controlled-select');
@@ -421,7 +421,7 @@
         }
 
         function reinitAutosize() {
-            Sadrazam.AutosizeSelect.listen('#controlled-select');
+            Sadrazam.AutosizeSelect.autoInit('#controlled-select');
             setTimeout(updateWidthDisplay, 50);
         }
     </script>

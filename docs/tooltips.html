@@ -299,7 +299,7 @@
  <h2 class="section-title">Data Attributes Reference</h2>
  <p class="section-desc">
  All configuration is done via HTML attributes. No JavaScript is required
- beyond calling <span class="code">Tooltip.listen()</span> once on page load.
+ beyond calling <span class="code">Tooltip.autoInit()</span> once on page load.
  </p>
 
  <div class="row">
@@ -330,9 +330,9 @@
  </p>
 
  <div class="code-block">
- <span class="comment">&lt;!-- Before Tooltip.listen() --&gt;</span><br>
+ <span class="comment">&lt;!-- Before Tooltip.autoInit() --&gt;</span><br>
  &lt;<span class="tag">span</span> <span class="attr">data-toggle</span>=<span class="val">"tooltip"</span> <span class="attr">title</span>=<span class="val">"Hello"</span>&gt;...&lt;/<span class="tag">span</span>&gt;<br><br>
- <span class="comment">&lt;!-- After Tooltip.listen() processes it --&gt;</span><br>
+ <span class="comment">&lt;!-- After Tooltip.autoInit() processes it --&gt;</span><br>
  &lt;<span class="tag">span</span> <span class="attr">data-toggle</span>=<span class="val">"tooltip"</span> <span class="attr">title</span>=<span class="val">""</span> <span class="attr">data-original-title</span>=<span class="val">"Hello"</span>&gt;...&lt;/<span class="tag">span</span>&gt;
  </div>
  </div>
@@ -395,7 +395,7 @@
 
  <div class="code-block">
  <span class="comment">// 1. Declarative: Initialize all tooltips on the page</span><br>
- Sadrazam.Tooltip.listen();<br><br>
+ Sadrazam.Tooltip.autoInit();<br><br>
  <span class="comment">// 2. Imperative: Attach tooltip to a specific element</span><br>
  const el = document.querySelector('#my-button');<br>
  new Sadrazam.Tooltip(el);<br><br>
@@ -495,9 +495,9 @@
  </div>
 
  <div class="code-block">
- <span class="comment">// Tooltip.listen() registers both mouseover and touchstart handlers.</span><br>
+ <span class="comment">// Tooltip.autoInit() registers both mouseover and touchstart handlers.</span><br>
  <span class="comment">// No additional configuration is needed for touch support.</span><br>
- Sadrazam.Tooltip.listen();
+ Sadrazam.Tooltip.autoInit();
  </div>
  </div>
 
@@ -612,7 +612,7 @@
 
  <script>
  // Initialize all declarative tooltips on the page
- Sadrazam.Tooltip.listen();
+ Sadrazam.Tooltip.autoInit();
 
  // Imperative API demo: attach tooltip to an element without data-toggle
  function attachTooltipDemo() {
@@ -641,7 +641,7 @@
  setTimeout(() => {
  parent.insertBefore(container, nextSibling);
  // Re-register so a new tooltip can be created on next hover
- Sadrazam.Tooltip.listen();
+ Sadrazam.Tooltip.autoInit();
  }, 1500);
  }
  </script>

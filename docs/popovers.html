@@ -262,7 +262,7 @@
         <div class="section">
             <h2 class="section-title">Static Listen Method</h2>
             <p class="section-desc">
-                <span class="code">Popover.listen()</span> attaches a one-time event listener.
+                <span class="code">Popover.autoInit()</span> attaches a one-time event listener.
                 The popover is created lazily on the first trigger event, via
                 <span class="code">{ once: true }</span>. Subsequent toggles use the live instance.
             </p>
@@ -272,7 +272,7 @@
                 <button id="pop-listen" class="demo-btn primary">
                     <i class="ph-bold ph-lightning"></i>&nbsp; Click to Init
                 </button>
-                <span class="code">Popover.listen({ selector, ... })</span>
+                <span class="code">Popover.autoInit({ selector, ... })</span>
             </div>
 
             <p class="note">
@@ -284,7 +284,7 @@
   <span class="fn">trigger</span>: <span class="str">'click'</span>,
   <span class="fn">placement</span>: <span class="str">'bottom'</span>,
   <span class="fn">title</span>: <span class="str">'Lazy Popover'</span>,
-  <span class="fn">content</span>: () => <span class="str">'Created on first click via Popover.listen().'</span>
+  <span class="fn">content</span>: () => <span class="str">'Created on first click via Popover.autoInit().'</span>
 });</pre>
         </div>
 
@@ -458,7 +458,7 @@ pop.<span class="fn">destroy</span>(); <span class="cm">// destroy and detach ob
             <div class="row">
                 <span class="label"></span>
                 <span class="code">selector</span>
-                <span style="font-size:0.8rem; color:var(--text-muted);">CSS selector string or HTMLElement. Used with Popover.listen().</span>
+                <span style="font-size:0.8rem; color:var(--text-muted);">CSS selector string or HTMLElement. Used with Popover.autoInit().</span>
             </div>
             <div class="row">
                 <span class="label"></span>
@@ -508,7 +508,7 @@ pop.<span class="fn">destroy</span>(); <span class="cm">// destroy and detach ob
 
             <div class="row">
                 <span class="label">Static</span>
-                <span class="code">Popover.listen(config)</span>
+                <span class="code">Popover.autoInit(config)</span>
                 <span style="font-size:0.8rem; color:var(--text-muted);">Lazy init: attaches a { once: true } listener for deferred creation.</span>
             </div>
             <div class="row">
@@ -591,12 +591,12 @@ pop.<span class="fn">destroy</span>(); <span class="cm">// destroy and detach ob
         // ======================================================
         // STATIC LISTEN METHOD
         // ======================================================
-        Sadrazam.Popover.listen({
+        Sadrazam.Popover.autoInit({
             selector: '#pop-listen',
             trigger: 'click',
             placement: 'bottom',
             title: 'Lazy Popover',
-            content: () => 'Created on first click via <strong>Popover.listen()</strong>. Now it toggles normally.'
+            content: () => 'Created on first click via <strong>Popover.autoInit()</strong>. Now it toggles normally.'
         });
 
         // ======================================================
