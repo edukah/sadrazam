@@ -8,7 +8,7 @@ class Popover {
   // --- Private Instance Fields ---
 
   /** @type {PopoverConfig} */
-  #options;
+  #config;
   /** @type {HTMLElement} */
   #referenceElement;
   /** @type {HTMLElement} */
@@ -38,14 +38,14 @@ class Popover {
    */
   static help () {
     const availableConfigs = new Map([
-      ['options.target', 'Element that triggers the popover. CSS selector string or HTMLElement. Required.'],
+      ['config.target', 'Element that triggers the popover. CSS selector string or HTMLElement. Required.'],
       ['trigger', 'Trigger event. Default: `click`.'],
       ['placement', 'Popover position (`top`, `right`, `bottom`, `left`). Default: `bottom`.'],
       ['title', 'Popover title. Default: `null`.'],
       ['content', 'Function that returns the content. Required.']
     ]);
     const availableMethods = new Map([
-      ['Popover.autoInit(options)', 'Adds a lazy popover listener (options.target required).'],
+      ['Popover.autoInit(config)', 'Adds a lazy popover listener (config.target required).'],
       ['Popover.getInstance(element)', 'Returns the Popover instance for the element.'],
       ['instance.show()', 'Shows the popover and recalculates position.'],
       ['instance.hide()', 'Hides the popover (fade-out).'],
@@ -75,34 +75,34 @@ class Popover {
   /**
    * Adds a one-time popover initialization listener for the specified target.
    * The instance is created on first trigger and manages its own lifecycle thereafter.
-   * @param {Object} options - Popover settings (must include `target`).
-   * @param {string|HTMLElement} options.target - CSS selector string or DOM element.
+   * @param {Object} config - Popover settings (must include `target`).
+   * @param {string|HTMLElement} config.target - CSS selector string or DOM element.
    */
-  static autoInit (options = {}) {
-    const referenceElement = typeof options.target === 'string' ? document.querySelector(options.target) : options.target;
+  static autoInit (config = {}) {
+    const referenceElement = typeof config.target === 'string' ? document.querySelector(config.target) : config.target;
 
     if (!(referenceElement instanceof globalThis.HTMLElement)) {
-      console.warn(`[Sadrazam|Popover] Element (${options.target}) not found.`);
+      console.warn(`[Sadrazam|Popover] Element (${config.target}) not found.`);
 
       return;
     }
 
-    const trigger = options.trigger ?? Popover.DEFAULTS.trigger;
+    const trigger = config.trigger ?? Popover.DEFAULTS.trigger;
     // `{ once: true }` auto-removes this listener after the first trigger.
     referenceElement.addEventListener(trigger, () => {
-      new Popover({ ...options, target: referenceElement });
+      new Popover({ ...config, target: referenceElement });
     }, { once: true });
   }
 
   /**
    * Creates and shows a new Popover instance.
    * The instance is stored on `referenceElement.__popover`.
-   * @param {Object} options - Popover settings (must include `target`).
-   * @param {string|HTMLElement} options.target - CSS selector string or DOM element.
+   * @param {Object} config - Popover settings (must include `target`).
+   * @param {string|HTMLElement} config.target - CSS selector string or DOM element.
    */
-  constructor (options = {}) {
-    this.#options = { ...Popover.DEFAULTS, ...options };
-    this.#referenceElement = typeof options.target === 'string' ? document.querySelector(options.target) : options.target;
+  constructor (config = {}) {
+    this.#config = { ...Popover.DEFAULTS, ...config };
+    this.#referenceElement = typeof config.target === 'string' ? document.querySelector(config.target) : config.target;
 
     if (!(this.#referenceElement instanceof globalThis.HTMLElement)) return;
     if (this.#referenceElement.__popover) return this.#referenceElement.__popover;
@@ -168,7 +168,7 @@ class Popover {
     this.#observer?.disconnect();
     globalThis.removeEventListener('resize', this.#resizeHandler);
 
-    const { trigger } = this.#options;
+    const { trigger } = this.#config;
     const mutualEvents = { mouseover: 'mouseout', focus: 'blur' };
 
     this.#referenceElement?.removeEventListener(trigger, this.toggle);
@@ -201,7 +201,7 @@ class Popover {
 
   /** Creates the popover DOM structure and appends it to `document.body`. */
   #setupDOM = () => {
-    const { title, content, placement } = this.#options;
+    const { title, content, placement } = this.#config;
     const popoverId = `popover-${Date.now()}`;
 
     this.#referenceElement.setAttribute('data-popover-id', popoverId);
@@ -236,7 +236,7 @@ class Popover {
     arrow.style.left = '';
     arrow.style.top = '';
 
-    let placement = this.#options.placement;
+    let placement = this.#config.placement;
 
     const positions = {
       top: {
@@ -310,7 +310,7 @@ class Popover {
 
   /** Binds trigger event listeners to the reference element. */
   #bindEvents = () => {
-    const { trigger } = this.#options;
+    const { trigger } = this.#config;
     const mutualEvents = { mouseover: 'mouseout', focus: 'blur' };
 
     this.#referenceElement.addEventListener(trigger, this.toggle);

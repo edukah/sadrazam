@@ -7,7 +7,7 @@ import Elem from '../modules/elem.js';
  */
 class SlideMenu {
   // --- Private Instance Fields ---
-  #options;
+  #config;
   #listenedElement;
   #container = null;
   #sourceContent = null;
@@ -28,7 +28,7 @@ class SlideMenu {
    */
   static help () {
     const availableConfigs = new Map([
-      ['options.target', 'Target element for the slide menu. CSS selector string or HTMLElement. Required.'],
+      ['config.target', 'Target element for the slide menu. CSS selector string or HTMLElement. Required.'],
       ['trigger', 'Trigger event. Default: `click`.'],
       ['backdrop', 'Show backdrop. Default: `false`.'],
       ['content', 'Function that returns the content. Required.'],
@@ -79,17 +79,17 @@ class SlideMenu {
 
   /**
    * Creates a new SlideMenu instance.
-   * @param {Object} options - SlideMenu configuration (must include `target` + `content`).
-   * @param {string|HTMLElement} options.target - CSS selector string or DOM element (the trigger).
+   * @param {Object} config - SlideMenu configuration (must include `target` + `content`).
+   * @param {string|HTMLElement} config.target - CSS selector string or DOM element (the trigger).
    * @throws {Error} `content` function is required.
    */
-  constructor (options = {}) {
-    this.#options = { ...SlideMenu.DEFAULTS, ...options };
+  constructor (config = {}) {
+    this.#config = { ...SlideMenu.DEFAULTS, ...config };
 
-    if (typeof this.#options.content !== 'function') {
+    if (typeof this.#config.content !== 'function') {
       throw new Error('SlideMenu: `content` function is required.');
     }
-    this.#listenedElement = typeof options.target === 'string' ? document.querySelector(options.target) : options.target;
+    this.#listenedElement = typeof config.target === 'string' ? document.querySelector(config.target) : config.target;
     if (!(this.#listenedElement instanceof globalThis.Element)) {
       console.warn('[Sadrazam|SlideMenu] Target element not found.');
 
@@ -106,7 +106,7 @@ class SlideMenu {
 
   destroy = () => {
     this.#remove();
-    this.#listenedElement?.removeEventListener(this.#options.trigger, this.#insert);
+    this.#listenedElement?.removeEventListener(this.#config.trigger, this.#insert);
     if (this.#a11yKeydownHandler) {
       this.#listenedElement?.removeEventListener('keydown', this.#a11yKeydownHandler);
     }
@@ -125,10 +125,10 @@ class SlideMenu {
     // Skip if already open
     if (this.#container) return;
     
-    this.#options.openFunc();
+    this.#config.openFunc();
     this.#setupDOM();
     
-    if (this.#options.backdrop) {
+    if (this.#config.backdrop) {
       this.#backdropId = Backdrop.insert({ onClick: this.#remove });
     }
     
@@ -148,7 +148,7 @@ class SlideMenu {
 
     this.#listenedElement.setAttribute('aria-expanded', 'false');
 
-    if (this.#options.backdrop) {
+    if (this.#config.backdrop) {
       Backdrop.remove(this.#backdropId);
     }
     
@@ -159,7 +159,7 @@ class SlideMenu {
       this.#container.classList.remove('is-leaving');
       Elem.enableScroll();
       
-      this.#options.closeFunc();
+      this.#config.closeFunc();
       
       this.#cleanupDOM();
     }, { once: true });
@@ -190,7 +190,7 @@ class SlideMenu {
 
   #bindInitialTrigger = () => {
     // No toggle logic in this class; the trigger only opens.
-    this.#listenedElement.addEventListener(this.#options.trigger, this.#insert);
+    this.#listenedElement.addEventListener(this.#config.trigger, this.#insert);
   };
   
   #setupDOM = () => {
@@ -210,7 +210,7 @@ class SlideMenu {
     contentContainer.className = 'slide-menu__content';
     inner.appendChild(contentContainer);
 
-    this.#sourceContent = this.#options.content(this.#listenedElement, this);
+    this.#sourceContent = this.#config.content(this.#listenedElement, this);
     if (this.#sourceContent instanceof globalThis.Element) {
       while (this.#sourceContent.childNodes.length > 0) {
         contentContainer.appendChild(this.#sourceContent.childNodes[0]);
@@ -220,7 +220,7 @@ class SlideMenu {
       contentContainer.innerHTML = this.#sourceContent;
     }
     
-    inner.querySelector('.slide-menu__close-button')?.addEventListener(this.#options.trigger, this.#remove);
+    inner.querySelector('.slide-menu__close-button')?.addEventListener(this.#config.trigger, this.#remove);
 
     document.body.appendChild(this.#container);
   };

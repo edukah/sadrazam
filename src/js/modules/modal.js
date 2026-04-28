@@ -7,7 +7,7 @@ import { InsertScript } from '../helpers/document.js';
  */
 class Modal {
   // --- Private Instance Fields ---
-  #options;
+  #config;
   #modalElement;
   #modalContentElement;
   #backdropId = null;
@@ -45,7 +45,7 @@ class Modal {
       ['closeOtherModals', 'Closes other open modals when this modal opens. Default: `false`.']
     ]);
     const availableMethods = new Map([
-      ['Modal.insert(options)', 'Creates and shows a new modal. Returns the Modal instance.'],
+      ['Modal.insert(config)', 'Creates and shows a new modal. Returns the Modal instance.'],
       ['Modal.getInstance(element)', 'Returns the Modal instance containing the given element.'],
       ['instance.close()', 'Closes and cleans up the modal.'],
       ['instance.destroy()', 'Alias for close().'],
@@ -81,11 +81,11 @@ class Modal {
 
   /**
    * Creates a new modal and displays it.
-   * @param {object} options - Modal options.
+   * @param {object} config - Modal config.
    * @returns {Modal} The created Modal instance.
    */
-  static insert (options = {}) {
-    return new this(options);
+  static insert (config = {}) {
+    return new this(config);
   }
 
   /**
@@ -97,11 +97,11 @@ class Modal {
     return element?.closest('.modal')?.__modal;
   }
 
-  constructor (options = {}) {
-    this.#options = { ...Modal.DEFAULTS, ...options };
+  constructor (config = {}) {
+    this.#config = { ...Modal.DEFAULTS, ...config };
     this.#previouslyFocusedElement = document.activeElement;
 
-    if (this.#options.closeOtherModals) {
+    if (this.#config.closeOtherModals) {
       this.#closeOtherModals();
     }
 
@@ -111,8 +111,8 @@ class Modal {
     this.#bindEvents();
     this.#insertIntoDOM();
 
-    if (typeof this.#options.time === 'number') {
-      this.#closeTimer = globalThis.setTimeout(this.close, this.#options.time);
+    if (typeof this.#config.time === 'number') {
+      this.#closeTimer = globalThis.setTimeout(this.close, this.#config.time);
     }
   }
 
@@ -144,8 +144,8 @@ class Modal {
       this.#previouslyFocusedElement.focus();
     }
 
-    if (typeof this.#options.closeAfterFunction === 'function') {
-      this.#options.closeAfterFunction();
+    if (typeof this.#config.closeAfterFunction === 'function') {
+      this.#config.closeAfterFunction();
     }
   };
 
@@ -179,14 +179,14 @@ class Modal {
     const modalInner = document.createElement('div');
     modalInner.className = 'modal__inner';
 
-    const { position } = this.#options;
+    const { position } = this.#config;
     if (position && position !== 'center') {
       modalInner.classList.add(`modal__inner--${position}`);
     }
 
     this.#modalElement.appendChild(modalInner);
 
-    const { content } = this.#options;
+    const { content } = this.#config;
     if (content instanceof globalThis.Element) {
       modalInner.appendChild(content);
     } else if (typeof content === 'string') {
@@ -203,7 +203,7 @@ class Modal {
       const dialog = document.createElement('div');
       dialog.className = 'modal__dialog';
 
-      const { size, className } = this.#options;
+      const { size, className } = this.#config;
       if (size) dialog.classList.add(`modal__dialog--${size}`);
       if (className) dialog.classList.add(className);
 
@@ -225,7 +225,7 @@ class Modal {
     }
 
     // Auto-insert close button into header (create header if missing)
-    if (this.#options.closeButton) {
+    if (this.#config.closeButton) {
       let header = this.#modalContentElement.querySelector('.modal__header');
       if (!header) {
         header = document.createElement('div');
@@ -272,13 +272,13 @@ class Modal {
     document.addEventListener('keydown', this.#handleKeydown);
 
     // If closeOnOuterClick is active, close on backdrop or outer click
-    if (this.#options.closeOnClick) {
+    if (this.#config.closeOnClick) {
       this.#backdropId = Backdrop.insert({ onClick: this.close });
 
       this.#modalElement.addEventListener('click', (event) => {
         this.close();
       });
-    } else if (this.#options.closeOnOuterClick) {
+    } else if (this.#config.closeOnOuterClick) {
       this.#backdropId = Backdrop.insert({ onClick: this.close });
 
       this.#modalElement.addEventListener('click', (event) => {

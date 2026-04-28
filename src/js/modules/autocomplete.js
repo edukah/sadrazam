@@ -7,7 +7,7 @@ import Ajax from '../services/ajax.js';
 */
 class Autocomplete {
   // --- Private Class Fields ---
-  #options;
+  #config;
   #searchTermInput;
   #suggestionContainer;
   #cache = {};
@@ -54,7 +54,7 @@ class Autocomplete {
    */
   static help () {
     const availableConfigs = new Map([
-      ['options.target', 'Target input element. CSS selector string or DOM Element. Required.'],
+      ['config.target', 'Target input element. CSS selector string or DOM Element. Required.'],
       ['source', 'Endpoint URL for the search query. String. Required.'],
       ['delay', 'Debounce delay in ms after last keystroke. Default: `250`.'],
       ['cache', 'Cache results for repeated queries? Boolean. Default: `false`.'],
@@ -92,24 +92,24 @@ class Autocomplete {
     });
   }
 
-  constructor (options = {}) {
-    this.#options = { ...Autocomplete.DEFAULTS, ...options };
+  constructor (config = {}) {
+    this.#config = { ...Autocomplete.DEFAULTS, ...config };
 
-    this.#searchTermInput = typeof options.target === 'string' ? document.querySelector(options.target) : options.target;
+    this.#searchTermInput = typeof config.target === 'string' ? document.querySelector(config.target) : config.target;
     if (!(this.#searchTermInput instanceof globalThis.Element)) {
       console.warn('[Sadrazam|Autocomplete] Target element not found.');
 
       return;
     }
     if (this.#searchTermInput.__autocomplete) return this.#searchTermInput.__autocomplete;
-    if (!this.#options.source) {
+    if (!this.#config.source) {
       throw new Error('Autocomplete: `source` is a required parameter.');
     }
     this.#searchTermInput.__autocomplete = this;
 
     this.#originalAutocompleteAttr = this.#searchTermInput.getAttribute('autocomplete');
 
-    if (this.#options.badge) {
+    if (this.#config.badge) {
       this.#badgeConfig = this.#parseBadgeConfig();
     }
 
@@ -166,7 +166,7 @@ class Autocomplete {
       return;
     }
 
-    this.#options.onSelect(event, value, item);
+    this.#config.onSelect(event, value, item);
     this.#updateBadgeFromItem(item);
     this.#hideSuggestions();
   };
@@ -198,14 +198,14 @@ class Autocomplete {
   // --- Core Logic ---
   #triggerSearchWithDelay = () => {
     globalThis.clearTimeout(this.#debounceTimer);
-    if (this.#searchTermInput.value.length < this.#options.minChars) {
+    if (this.#searchTermInput.value.length < this.#config.minChars) {
       this.#hideSuggestions();
       
       return;
     }
     this.#debounceTimer = globalThis.setTimeout(() => {
       this.#performSearch();
-    }, this.#options.delay);
+    }, this.#config.delay);
   };
 
   #performSearch = async () => {
@@ -213,7 +213,7 @@ class Autocomplete {
     if (searchTerm === this.#lastValue) return;
     this.#lastValue = searchTerm;
 
-    if (this.#options.cache && this.#cache[searchTerm]) {
+    if (this.#config.cache && this.#cache[searchTerm]) {
       this.#renderSuggestions(this.#cache[searchTerm]);
       
       return;
@@ -221,7 +221,7 @@ class Autocomplete {
 
     try {
       const data = await this.#fetchSuggestions(searchTerm);
-      if (this.#options.cache) {
+      if (this.#config.cache) {
         this.#cache[searchTerm] = data;
       }
       this.#renderSuggestions(data);
@@ -248,7 +248,7 @@ class Autocomplete {
           }
         },
         error: (xhttp, status, error) => reject(new Error(`AJAX Error: ${status} ${error}`)),
-        route: this.#options.source,
+        route: this.#config.source,
         data: { search_term: searchTerm }
       });
     });
@@ -349,14 +349,14 @@ class Autocomplete {
 
   // --- Badge Methods ---
   #parseBadgeConfig = () => {
-    const match = this.#options.badge.match(/\{(.+?)\}/);
+    const match = this.#config.badge.match(/\{(.+?)\}/);
     if (!match) {
       console.warn('[Sadrazam|Autocomplete] Invalid badge format — missing {field_name} placeholder.');
 
       return null;
     }
 
-    return { field: match[1], format: this.#options.badge };
+    return { field: match[1], format: this.#config.badge };
   };
 
   #setupBadge = () => {
@@ -432,10 +432,10 @@ class Autocomplete {
 
     this.#suggestionContainer = document.createElement('div');
     this.#suggestionContainer.id = listboxId;
-    this.#suggestionContainer.className = `autocomplete__suggestions-container ${this.#options.menuClass}`;
+    this.#suggestionContainer.className = `autocomplete__suggestions-container ${this.#config.menuClass}`;
     this.#suggestionContainer.setAttribute('role', 'listbox');
     // resultContainer varsa sonuçları oraya append et, yoksa input'un hemen sonrasına
-    const rc = this.#options.resultContainer;
+    const rc = this.#config.resultContainer;
     const target = rc ? (typeof rc === 'string' ? document.querySelector(rc) : rc) : null;
 
     if (target) {

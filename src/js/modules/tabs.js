@@ -142,15 +142,15 @@ class Tabs {
     });
   }
 
-  constructor (options = {}) {
-    const tabContainer = typeof options.target === 'string' ? document.querySelector(options.target) : options.target;
+  constructor (config = {}) {
+    const tabContainer = typeof config.target === 'string' ? document.querySelector(config.target) : config.target;
     if (!(tabContainer instanceof globalThis.Element)) {
       console.warn('[Sadrazam|Tabs] Target element not found.');
 
       return;
     }
     if (tabContainer.__tabs) return;
-    // options.target consumed; rest reserved for future per-instance config
+    // config.target consumed; rest reserved for future per-instance config
 
     this.#tabContainer = tabContainer;
     this.#tabHeads = this.#tabContainer.querySelectorAll('*[data-tab-id]');

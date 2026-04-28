@@ -79,8 +79,8 @@ class Tooltip {
     });
   }
 
-  constructor (options = {}) {
-    const referenceElement = typeof options.target === 'string' ? document.querySelector(options.target) : options.target;
+  constructor (config = {}) {
+    const referenceElement = typeof config.target === 'string' ? document.querySelector(config.target) : config.target;
     if (!(referenceElement instanceof globalThis.Element)) {
       console.warn('[Sadrazam|Tooltip] Target element not found.');
 
