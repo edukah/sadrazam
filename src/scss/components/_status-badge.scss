@@ -1,0 +1,50 @@
+/* =========================================================================
+   Status Badge — Durum rozeti (renkli pill + metin)
+   Tablo/liste satırlarında ve detay alanlarında durum göstermek için.
+   Renk modifier'ı ile kullanılır: .status-badge.status-badge--success vb.
+
+   Renkler:  --success/--safe, --warning, --danger, --info/--primary,
+             --secondary, --dark
+   ========================================================================= */
+
+.status-badge {
+  display: inline-block;
+  padding: var(--space-1) var(--space-4);
+  font-size: var(--fsi-12);
+  font-weight: var(--fwe-medium);
+  border-radius: var(--radius-md);
+
+  &--success,
+  &--safe {
+    background-color: var(--color-safe-100);
+    color: var(--color-safe-900);
+  }
+
+  &--warning {
+    background-color: var(--color-warning-100);
+    color: var(--color-warning-900);
+  }
+
+  &--danger {
+    background-color: var(--color-danger-100);
+    color: var(--color-danger-900);
+  }
+
+  &--info,
+  &--primary {
+    background-color: var(--color-notice-100);
+    color: var(--color-notice-900);
+  }
+
+  &--secondary {
+    background-color: var(--color-grey-100);
+    color: var(--color-text-dark-2);
+  }
+
+  // Koyu/kapalı durum (ör. TransactionStatus::Refunded color() => 'dark'). Ters çift:
+  // koyu bg + açık text (pale-bg badge'lerden ayrışır, kapanmış/geri-alınmış durumu vurgular).
+  &--dark {
+    background-color: var(--color-text-dark-1);
+    color: var(--color-grey-zero);
+  }
+}
