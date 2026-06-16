@@ -89,6 +89,46 @@ describe('Form.rules', () => {
     });
   });
 
+  // --- required_with ---
+  describe('required_with', () => {
+    it('hiçbir tetikleyici alan dolu değilse null döndürür (boş olsa bile)', () => {
+      createInput({ name: 'width', value: '' });
+      createInput({ name: 'height', value: '' });
+      const length = createInput({ name: 'length', value: '' });
+      expect(Form.rules.required_with(length, form, 'length,width,height')).toBeNull();
+    });
+
+    it('bir kardeş alan doluyken boş input için requiredDefault döndürür', () => {
+      createInput({ name: 'length', value: '20' });
+      createInput({ name: 'height', value: '' });
+      const width = createInput({ name: 'width', value: '' });
+      expect(Form.rules.required_with(width, form, 'length,width,height')).toBe('requiredDefault');
+    });
+
+    it('bir kardeş alan doluyken dolu input için null döndürür', () => {
+      createInput({ name: 'length', value: '20' });
+      const width = createInput({ name: 'width', value: '30' });
+      expect(Form.rules.required_with(width, form, 'length,width,height')).toBeNull();
+    });
+
+    it('tetiklenince boş select için requiredSelect döndürür', () => {
+      createInput({ name: 'length', value: '20' });
+      const unit = createSelect('');
+      expect(Form.rules.required_with(unit, form, 'length,width,height')).toBe('requiredSelect');
+    });
+
+    it('alan adlarındaki boşlukları tolere eder', () => {
+      createInput({ name: 'mass', value: '5' });
+      const unit = createInput({ name: 'mass_unit', value: '' });
+      expect(Form.rules.required_with(unit, form, ' mass ')).toBe('requiredDefault');
+    });
+
+    it('parametre boşsa null döndürür (tetikleyici yok)', () => {
+      const input = createInput({ value: '' });
+      expect(Form.rules.required_with(input, form, '')).toBeNull();
+    });
+  });
+
   // --- email ---
   describe('email', () => {
     it('geçerli e-posta için null döndürür', () => {

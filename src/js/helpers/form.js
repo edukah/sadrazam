@@ -30,6 +30,7 @@ class Form {
 
     const availableRules = new Map([
       ['required', 'Required field. Cannot be empty.'],
+      ['required_with:fieldA,fieldB', 'Required only if any of the listed fields has a value.'],
       ['matches:fieldName', 'Value must match the input with `name="fieldName"`.'],
       ['not_match:fieldName', 'Value must not match the input with `name="fieldName"`.'],
       ['email', 'Must be a valid email address format.'],
@@ -56,6 +57,24 @@ class Form {
         return !form.querySelector(`[name="${item.name}"]:checked`) ? 'requiredRadio' : null;
       }
       
+      return !item.value.trim() ? (item.matches('select') ? 'requiredSelect' : 'requiredDefault') : null;
+    },
+    required_with: (item, form, ruleValue) => {
+      // Required only if any of the comma-separated sibling fields has a value (Laravel-style).
+      const triggered = (ruleValue || '').split(',').some((name) => {
+        const sibling = form.querySelector(`[name="${name.trim()}"]`);
+
+        return sibling && sibling.value.trim() !== '';
+      });
+
+      if (!triggered) {
+        return null;
+      }
+
+      if (['radio', 'checkbox'].includes(item.type)) {
+        return !form.querySelector(`[name="${item.name}"]:checked`) ? 'requiredRadio' : null;
+      }
+
       return !item.value.trim() ? (item.matches('select') ? 'requiredSelect' : 'requiredDefault') : null;
     },
     matches: (item, form, ruleValue) => {
