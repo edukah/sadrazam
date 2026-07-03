@@ -56,6 +56,7 @@ sadrazam/
 - BEM-like CSS naming: `.bttn--pri`, `.bttn--pri.bttn--soft`, `.bttn--neutral.bttn--outline`, `.modal__header`, `.tab-heading`
 - **Button `:is()` pattern**: Base stiller `:is(.bttn, .bttn--pri, ..., .bttn--ghost)` ile tüm renk modifier'larına otomatik uygulanır. `.bttn` base class **opsiyonel** — `bttn--pri` tek başına yeterli. Default shape **rectangle** (asymmetric padding: `--_bttn-py` / `--_bttn-px`), `bttn--square` modifier icon-only butonlar için. Default boyut **md** — `bttn--md` explicit class olarak da mevcut, `bttn--sm`/`bttn--lg`/`bttn--xs` farklı boyutlar için.
 - **Button tier system**: Colors set `--button-color` CSS variable, tiers (filled/soft/outline) read it. See `docs/wiki/button-system.md`
+- **İkon+metin gap**: `.bttn` base'inde `gap: var(--space-2)` → ikon+metin butonlarda (`<i></i> Metin`) ikon↔metin boşluğu OTOMATİK. Flex, iki flex-item arasındaki collapsible literal space'i kırptığı için `&nbsp;` / ikon-`margin` ile boşluk VERME (base gap'le çift-boşluk olur). Yalnız-ikon (`--square`, tek çocuk) + yalnız-metin (tek text-run) etkilenmez; `.bttn--loading::after` `position:absolute` (flex-item değil, gap'e girmez).
 - **State convention**: JS-toggled dynamic states use `is-*` / `has-*` prefix, scoped inside component SCSS blocks:
   - `is-entering`, `is-leaving` (slide-menu animation states)
   - `is-visible` (backdrop, anim-fade)
