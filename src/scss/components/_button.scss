@@ -235,3 +235,44 @@
     }
   }
 }
+
+// ---- Link görünümlü buton (bağımsız — `bttn--` DEĞİL) ----
+// Semantik olarak <button> (aksiyon + native disabled + klavye erişimi) ama link gibi görünür:
+// dolgusuz, arkaplansız, altı çizili hover, disabled'da soluk. `bttn--` ADI KULLANILMAZ çünkü
+// yukarıdaki `:is(.bttn, [class*="bttn--"])[disabled] { background: grey !important }` kuralı tüm
+// bttn variant'larını disabled'da zorla gri-dolgulu yapar → link buton griye dönerdi; bu class o
+// selector'a takılmaz. Autoprefixer'sız derleyen projeler için appearance prefix'i ELLE yazılır
+// (yoksa webkit native buton chrome'u hover/disabled'da gri basar).
+.link-button {
+  padding: 0;
+  border: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: none;
+  box-shadow: none;
+  color: var(--color-pri-700);
+  font-weight: var(--fwe-semibold);
+  cursor: pointer;
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover:not(:disabled) {
+      text-decoration: underline;
+    }
+  }
+
+  &:disabled {
+    // Generic `button { &[disabled] { background: grey-100; opacity: 0.8 } }` (_form.scss) TÜM
+    // <button> element'lerine vurur (specificity button[disabled] = 0,1,1 > .link-button base 0,1,0).
+    // Ez: background/opacity burada (0,2,0); disabled:hover için de (button[disabled]:hover 0,2,1'i
+    // yenmek üzere 0,3,0). !important YOK — salt specificity.
+    background: none;
+    color: var(--color-text-dark-3);
+    opacity: 1;
+    cursor: default;
+
+    &:hover {
+      background: none;
+    }
+  }
+}
