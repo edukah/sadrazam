@@ -290,7 +290,10 @@
   background: none;
   box-shadow: none;
   color: inherit;
-  font: inherit;
+  // font-family + font-size inherit (UA buton fontunu nötrle) — font-weight'e DOKUNMA: `font: inherit`
+  // shorthand'i weight'i de sıfırlar → fwe-* utility class'larından bold alan butonlar incelirdi.
+  font-family: inherit;
+  font-size: inherit;
   text-align: inherit;
   cursor: pointer;
 
