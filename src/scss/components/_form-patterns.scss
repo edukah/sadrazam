@@ -168,6 +168,24 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-8);
+
+  // Alan-İÇİ eksen: label metni ↔ kontrol. Taşıyıcının gap'i buraya ULAŞAMAZ
+  // (alan kabının içi), o yüzden kabın kendisi kendi iç ritmini verir.
+  //
+  // Seçici POZİTİF: "doğrudan çocuğu olarak label metni taşıyan kap". Böylece
+  // yatay kalıplar :not() listesi büyütmeden kendiliğinden dışarıda kalır —
+  // radio/checkbox label'ları (input önce gelir), .switch, .form-field--checkbox,
+  // ve layout işareti taşıyan sarmalayıcılar (.gr-row / .form-field--row) hiç
+  // eşleşmez çünkü onlarda label metni doğrudan çocuk değildir.
+  //
+  // .form-label-like, projenin "<label>'ın uymadığı yerdeki alan kabı" desenidir;
+  // aynı rol → aynı iç ritim.
+  label:has(> .form-label-text),
+  .form-label-like:has(> .form-label-text) {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
 }
 
 /* ---- Form Layout (legacy) ---- */
