@@ -8,7 +8,8 @@
      .form-field--password              → Şifre göster/gizle butonu (wrapper)
      .form-field--top-label / --checkbox → Label + input kombo stilleri
      .form-input--minimal               → Placeholder-only modern input (doğrudan input'a)
-     .form-field--stack / --row         → Genel form yerleşim yardımcıları
+     .form-layout--{tarz}               → Form yerleşimi (gap tabanlı) — --regular
+     .form-field--stack / --row         → Genel form yerleşim yardımcıları (--stack legacy)
      .danger-text             → Hata / doğrulama mesajı metni
      .helper-text             → Form alanı altı açıklama metni
      .form-divider                   → Form bölümleri arası çizgi + başlık
@@ -155,7 +156,21 @@
   }
 }
 
-/* ---- Form Layout ---- */
+/* ---- Form Layout — gap tabanlı form yerleşimi ---- */
+/* Boşluğun TEK kaynağı gap'tir; alanlar arası ritmi taşıyıcı verir.
+   Son ek bir yoğunluk temasıdır — okuyan hangi ritmin geçerli olduğunu görür.
+   Taşıyıcı, alanları DOĞRUDAN çocuk olarak tutan elemana konur (gap yalnız
+   doğrudan çocuklara işler); araya stilsiz sarmalayıcı girmişse ona inilir.
+
+   İleride gerekirse: --compact (space-6) / --loose (space-11). Şimdi YAZILMAZ.
+   Plan: workbench/dukkan/docs/plans/2026-07-27-form-layout-gap-migration-spec.md */
+.form-layout--regular {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+/* ---- Form Layout (legacy) ---- */
 /* Genel form yerleşim yardımcıları — her form pattern'ıyla kullanılabilir */
 .form-field--stack {
   display: flex;
