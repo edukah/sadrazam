@@ -78,8 +78,11 @@
   &::before {
     font-family: "Phosphor-Bold";
     font-size: var(--fsi-30);
-    // 1 değil 1.2: half-leading ikonu kutusunda biraz aşağı alır (optik denge).
-    line-height: 1.2;
+    line-height: 1;
+
+    // Optik nudge — ikonu 2px aşağı alır. transform, çünkü yerleşimi ETKİLEMEZ: line-height büyütmek
+    // ikon kutusunu şişirir, ortalanmış (align-self: center) metni de aynı miktar aşağı iterdi.
+    transform: translateY(var(--space-1));
   }
 
   &--error {
