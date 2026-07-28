@@ -162,8 +162,12 @@
   flex-direction: column;
   gap: var(--space-6);
 
+  // Boşluk yalnız gap'ten gelsin. Flex'te gap ile margin TOPLANIR, o yüzden .form-actions'ın
+  // kendi margin-top'u buton alanını alanlardan daha aşağı itiyordu (gap + 6px).
+  // SIFIRLA, SİLME: bu kural aynı zamanda tabandaki .form-actions{margin-top:space-8}'i de
+  // eziyor — silinirse boşluk 6px'e değil 16px'e çıkar.
   > .form-actions {
-    margin-top: var(--space-3);
+    margin-top: 0;
   }
 }
 
@@ -298,10 +302,9 @@ textarea.form-input--minimal {
   letter-spacing: 0.5px;
   margin: var(--space-15) 0 var(--space-7) 0;
 
-  h1+&,
-  h2+&,
-  h3+&,
-  .form-disclosure+&,
+  // Konteynerin tepesindeki bölüm başlığı üstten boşluk almaz — padding zaten ayırıyor.
+  // (h1+/h2+/h3+/.form-disclosure+ dalları vardı; Dükkan'daki 42 divider'ın hiçbirinde
+  //  ateşlenmiyordu, Bikonuvar/Burtest ise .form-divider hiç kullanmıyor → silindi.)
   &:first-child {
     margin-top: 0;
   }
