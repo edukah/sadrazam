@@ -37,7 +37,7 @@ Sadrazam'da uygulanan rsBEM v2 migration'larinin ozeti ve mevcut durum.
 - `.fl-l`, `.fl-r` → `_positioning.scss`'e taşındı; `.clear` silindi (tüketiciler flexbox'a migrate edildi)
 
 ### Faz 4: Sadrazam + Dukkan (5-21 dosya)
-- `.form-divider` → `.form__divider`
+- ~~`.form-divider` → `.form__divider`~~ — **YAPILMADI** (kaynakta hâlâ `.form-divider`; 2026-07-27 denetimi)
 - `.image-inline` → `.img-inline` / `.img-inline--2x`
 - `.helper-text` → aynen kaldi
 - `.color-link-blue-dark` → `.tc-link-blue-dark` (theme migration ile)

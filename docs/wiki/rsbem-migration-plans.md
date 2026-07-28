@@ -101,7 +101,9 @@ Dükkan etki alanı: ~200+ dosya (tpl + js + scss)
 
 ## Faz 4: Sadrazam + Dükkan (5-21 dosya etkilenir) ✅ TAMAMLANDI
 
-- [x] `.form-divider` → `.form__divider` (Dükkan: 9 dosya)
+- [ ] ~~`.form-divider` → `.form__divider` (Dükkan: 9 dosya)~~ — **YAPILMAMIŞ, kutu yanlışlıkla
+  işaretlenmiş.** Kaynakta hâlâ `.form-divider` (`src/scss/components/_form-patterns.scss:291`);
+  `form__divider` ne Sadrazam'da ne Dükkan'da hiç geçmiyor. (2026-07-27 denetimi)
 - [x] `.image-inline` / `.image-inline-2x` → `.img-inline` / `.img-inline--2x` (Dükkan: 16 dosya)
 - [x] `.helper-text` → **AYNEN KALACAK** (29 dosya, yeterince açık isim)
 - [x] `.color-link-blue-dark` → **AYNEN KALACAK** ~~(zaten `color-` prefix'i ile uyumlu)~~ → Theme Layer migration'da `.tc-link-blue-dark` olarak güncellendi
