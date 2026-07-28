@@ -60,11 +60,15 @@
   position: relative;
 
   display: flex;
-  /* İkon da metin de ÜSTE dayalı — dikey ortalama BİLEREK yok (align-items/align-self: center EKLEME).
-     Sebep optik: ikon glifi kendi kutusunda ortalıdır, metnin glifi ise kendi satır kutusunda aşağıda
-     durur (font ascent'i cap-height'tan belirgin yüksek, descent kısa). İki kutu üste dayandığında bu
-     iki asimetri birbirini götürür ve ikon ile ilk satırın optik merkezleri çakışır. Ortalandığında
-     ise metin ikondan ~2px aşağı, çok satırlı mesajda ikon ilk satırdan ~20px aşağı kayıyordu. */
+  // İkon da metin de ÜSTE dayalı — dikey ortalama BİLEREK yok (align-items/align-self: center EKLEME).
+  // Sebep optik: ikon glifi kendi kutusunda ortalıdır, metnin glifi ise kendi satır kutusunda aşağıda
+  // durur (font ascent'i cap-height'tan belirgin yüksek, descent kısa). İkisi de üste dayandığında bu
+  // asimetriler birbirini götürür; ortalandığında metin ikondan ~2px aşağı, çok satırlı mesajda ikon
+  // ilk satırdan ~20px aşağı kayıyordu.
+  // SINIR: denge, ikon kutusu (--fsi-30 × 1) ile metnin satır kutusu oranına bağlı. Ölçüm (headless
+  // Chrome, mürekkep merkezleri farkı): 15–18px metinde ≤0,5px; 14px'te −1,5px; 12px'te −4,5px. Gövde
+  // metni --base-font-size clamp'i sayesinde 14,9–17px aralığında kaldığı için güvenli — snackbar
+  // metnini bu aralığın altına çeken bir bağlam eklenirse hizalama yeniden ölçülmeli.
   align-items: flex-start;
   gap: var(--space-8);
 
