@@ -276,3 +276,34 @@
     }
   }
 }
+
+// Saf <button> reset — component-özel ikon/close-X/chip/tab/grip/toggle butonlarının tekrarladığı
+// default-chrome sıfırlaması. .link-button'ın AKSİNE renk/font-weight/underline YOK (nötr — görünümü
+// component verir). bttn-- ADI TAŞIMAZ (Sadrazam :is(.bttn,[class*="bttn--"])[disabled] gri kuralına girmesin).
+.button-reset {
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: none;
+  box-shadow: none;
+  color: inherit;
+  font: inherit;
+  text-align: inherit;
+  cursor: pointer;
+
+  // Generic `button[disabled] { background: grey; opacity }` (_form.scss, specificity 0,1,1) TÜM
+  // <button>'lara vurur → base (0,1,0) yetmez; :disabled (0,2,0) + :disabled:hover (0,3,0) ile ez
+  // (.link-button paterni; !important YOK — salt specificity).
+  &:disabled {
+    background: none;
+    opacity: 1;
+    cursor: default;
+
+    &:hover {
+      background: none;
+    }
+  }
+}
