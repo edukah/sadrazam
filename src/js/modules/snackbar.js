@@ -113,7 +113,10 @@ class Snackbar {
 
     const ul = document.createElement('ul');
     ul.className = 'snackbar__static-list';
-    ul.innerHTML = messages.map(msg => `<li>${msg}</li>`).join('');
+    // Mesaj TEK bir <div> ile sarılır: <li> bir flex container (madde işareti + mesaj bloğu).
+    // Sarılmazsa mesajdaki metin düğümleri ile inline HTML (<a>, <strong>) ayrı birer flex item
+    // olur ve aralarındaki boşluk yutulur ("için giriş yapın" → "içingiriş yapın").
+    ul.innerHTML = messages.map(msg => `<li><div>${msg}</div></li>`).join('');
 
     const closeButton = document.createElement('button');
     closeButton.type = 'button';

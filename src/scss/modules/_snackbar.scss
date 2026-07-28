@@ -60,15 +60,12 @@
   position: relative;
 
   display: flex;
-  // İkon da metin de ÜSTE dayalı — dikey ortalama BİLEREK yok (align-items/align-self: center EKLEME).
-  // Sebep optik: ikon glifi kendi kutusunda ortalıdır, metnin glifi ise kendi satır kutusunda aşağıda
-  // durur (font ascent'i cap-height'tan belirgin yüksek, descent kısa). İkisi de üste dayandığında bu
-  // asimetriler birbirini götürür; ortalandığında metin ikondan ~2px aşağı, çok satırlı mesajda ikon
-  // ilk satırdan ~20px aşağı kayıyordu.
-  // SINIR: denge, ikon kutusu (--fsi-30 × 1) ile metnin satır kutusu oranına bağlı. Ölçüm (headless
-  // Chrome, mürekkep merkezleri farkı): 15–18px metinde ≤0,5px; 14px'te −1,5px; 12px'te −4,5px. Gövde
-  // metni --base-font-size clamp'i sayesinde 14,9–17px aralığında kaldığı için güvenli — snackbar
-  // metnini bu aralığın altına çeken bir bağlam eklenirse hizalama yeniden ölçülmeli.
+  // Dikey hizalama iki parçalı, ikisi de gerekli:
+  //   · Konteyner flex-start → İKON üstte kalır. Çok satırlı mesajda ikon ilk satırla hizalanır;
+  //     ortalanırsa 3 satırlık mesajda ikon ilk satırdan ~20px aşağı kayıyordu.
+  //   · Liste (ul) align-self: center → TEK satırlık mesajda metin, ikon kutusunun ortasına gelir.
+  //     Metin bloğu ikondan uzunsa (çok satır) zaten en uzun item olur ve ortalama no-op'a düşer,
+  //     yani ikon-üstte davranışı bozulmaz.
   align-items: flex-start;
   gap: var(--space-8);
 
@@ -82,6 +79,13 @@
     font-family: "Phosphor-Bold";
     font-size: var(--fsi-30);
     line-height: 1;
+
+    // Optik nudge: ikon glifi kendi kutusunda ortalıdır, metnin ALGILANAN merkezi ise ölçülen mürekkep
+    // merkezinden aşağıdadır (satır ağırlığı x-height bandında, cap-height ortasında değil) — ~1,3px.
+    // İkonu o kadar aşağı alıyoruz. Negatif alt marj kutu yüksekliğini SABİT tutar: ikon en uzun flex
+    // item olduğu için salt margin-top kutuyu büyütür ve ortalanmış metni de aşağı iterdi (net etki 0).
+    margin-top: var(--space-1);
+    margin-bottom: calc(var(--space-1) * -1);
   }
 
   &--error {
@@ -157,7 +161,13 @@
     font-weight: var(--fwe-regular);
 
     flex-grow: 2;
+    align-self: center;
 
+    // Satır = madde işareti (::before) + mesaj bloğu, iki flex item.
+    // ⚠ MESAJ TEK BİR ELEMANLA SARILMALI (`<li><div>…</div></li>`). Sarılmazsa mesajdaki metin
+    // düğümleri ile inline HTML (<a>, <strong>) AYRI birer flex item olur, aralarındaki boşluk
+    // yutulur ve "için giriş yapın" → "içingiriş yapın" diye yapışır. Sarmalı üreten yerler:
+    // Snackbar.insert (snackbar.js) ve tüketicilerin message.tpl'leri.
     li {
       display: flex;
       align-items: flex-start;
@@ -170,9 +180,10 @@
       }
     }
 
+    // Tek mesajda madde işareti anlamsız — pseudo hiç üretilmesin (content: '' boş bir flex item
+    // bırakırdı; genişliği 0 olsa da kutu yine oluşuyordu).
     li:only-child::before {
-      content: '';
-      margin: 0;
+      content: none;
     }
   }
 
