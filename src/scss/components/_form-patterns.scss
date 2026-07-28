@@ -186,6 +186,39 @@
     flex-direction: column;
     gap: var(--space-2);
   }
+
+  // ---- Margin sweep ----
+  // gap margin ile collapse ETMEZ, toplar. Kendi dikey margin'i olup flex item
+  // olacak her element burada sıfırlanır; boşluk yalnız gap'ten gelsin.
+  //
+  // HEPSİ BU SINIFIN ALTINDA: taban kurallara DOKUNULMAZ. Sebep — göç dosya
+  // dosya ilerliyor; taban sıfırlanırsa henüz taşınmamış .form-layout--standard
+  // şablonları boşluğunu kaybeder ve yerine gelecek gap henüz yoktur. Ayrıca
+  // taban .form-actions'ı Bikonuvar da tüketiyor ve hiç göç etmiyor.
+  > .form-actions {
+    margin-top: 0;
+  }
+
+  // Bölüm kırılımı = gap + delta → 16 + 16 = 32px.
+  // :first-child reset'i KORUNUR (konteyner tepesinde üst boşluk istenmez);
+  // flex'te ilk çocuğun margin-top'u collapse olmaz, doğrudan sızar.
+  > .form-divider {
+    margin-top: var(--space-8);
+    margin-bottom: 0;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  // .gr-row kendi gap'ini (space-10) zaten taşıyor; satır ritmi taşıyıcıya devredilir.
+  > .gr-row + .gr-row {
+    margin-top: 0;
+  }
+
+  .form-lang + .form-lang {
+    margin-top: 0;
+  }
 }
 
 /* ---- Form Layout (legacy) ---- */
