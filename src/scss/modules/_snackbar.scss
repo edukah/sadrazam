@@ -47,10 +47,8 @@
 
   .snackbar__static-container {
     margin: 0;
-    padding: 0;
     border: 0;
 
-    align-items: center;
     padding: var(--space-5) var(--space-7);
   }
 }
@@ -62,6 +60,11 @@
   position: relative;
 
   display: flex;
+  /* İkon da metin de ÜSTE dayalı — dikey ortalama BİLEREK yok (align-items/align-self: center EKLEME).
+     Sebep optik: ikon glifi kendi kutusunda ortalıdır, metnin glifi ise kendi satır kutusunda aşağıda
+     durur (font ascent'i cap-height'tan belirgin yüksek, descent kısa). İki kutu üste dayandığında bu
+     iki asimetri birbirini götürür ve ikon ile ilk satırın optik merkezleri çakışır. Ortalandığında
+     ise metin ikondan ~2px aşağı, çok satırlı mesajda ikon ilk satırdan ~20px aşağı kayıyordu. */
   align-items: flex-start;
   gap: var(--space-8);
 
@@ -75,8 +78,6 @@
     font-family: "Phosphor-Bold";
     font-size: var(--fsi-30);
     line-height: 1;
-
-    margin-top: var(--space-0);
   }
 
   &--error {
@@ -152,7 +153,6 @@
     font-weight: var(--fwe-regular);
 
     flex-grow: 2;
-    align-self: center;
 
     li {
       display: flex;
