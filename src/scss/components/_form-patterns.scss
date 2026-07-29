@@ -2,7 +2,7 @@
    Form Patterns — Tekrarlanan form kalıpları ve yardımcı bileşenler
 
    İçerik:
-     .form-label-text (--sm, --lg)      → Form label tipografisi (boyut varyantları)
+     .form-text-label (--sm, --lg)      → Form label tipografisi (boyut varyantları)
      .form-theme--calm / --filled       → Form TEMASI: kaba konur, içindekiler uyar
      .form-input--password              → Şifre göster/gizle butonu (wrapper)
      .form-field--choice / --checkbox   → Kontrolü radio/checkbox olan alan
@@ -11,14 +11,14 @@
      .form-field--choice                       → Bir radio/checkbox seçeneği (kontrol ↔ metin)
      .form-choices--stack / --row       → Seçim alanı listesi (alan ritminden DAR)
      .form-actions--stack / --row       → Buton alanı (taban sınıf YOK, yön varyantı tam)
-     .form-field-help / -error          → Alanın ALTINDAKİ açıklama / hata metni
+     .form-text-help / -error          → Alanın ALTINDAKİ açıklama / hata metni
      .form-divider                   → Form bölümleri arası çizgi + başlık
    ========================================================================= */
 
 /* ---- Label Text — form label tipografisi ---- */
-/* Kullanım: <label><span class="form-label-text">Label</span><input /></label>
+/* Kullanım: <label><span class="form-text-label">Label</span><input /></label>
    legend, switch__label gibi non-label context'lerde de kullanılabilir. */
-.form-label-text {
+.form-text-label {
   display: block;
   font-family: var(--ffa-sans);
   font-weight: var(--fwe-semibold);
@@ -38,7 +38,7 @@
 
 /* Soluk etiketler — müşteri tarafı formların sakin tonu. */
 .form-theme--calm {
-  .form-label-text {
+  .form-text-label {
     font-weight: var(--fwe-regular);
     color: var(--color-text-dark-2);
   }
@@ -54,7 +54,7 @@
     padding-bottom: 0;
   }
 
-  .form-label-text,
+  .form-text-label,
   > span:first-child {
     display: inline-block;
     color: var(--color-text-dark-2);
@@ -177,10 +177,10 @@ textarea.is-error {
   // KURAL: alan kabı DİKEY bir yığındır — kendisi yatay olduğunu İLAN etmedikçe.
   //
   // Dışlama içerikten tahmin edilmez, sınıftan okunur. Eskiden pozitif seçici
-  // vardı (`label:has(> .form-label-text)`) ve doğruluk tipografi sınıfının
+  // vardı (`label:has(> .form-text-label)`) ve doğruluk tipografi sınıfının
   // KONUMUNA bağlıydı: metin bir kat derine sarmalanınca kural sessizce
   // düşüyordu — .form-label-like tarafında tam olarak bu 21 yeri bozmuştu.
-  // Aynı tuzak <label> tarafında da vardı: radio label'ına form-label-text
+  // Aynı tuzak <label> tarafında da vardı: radio label'ına form-text-label
   // eklenirse dikeye dönüyordu (3 yer bunu d-flex ile atlatmıştı).
   //
   // Yatay olanların HEPSİ kendini ilan eder:
@@ -205,8 +205,8 @@ textarea.is-error {
     // Alan-altı mesajların kendi margin'i kabın gap'ine EKLENİYORDU
     // (ölçüm: etiket→input 3.7px ama input→açıklama 5.6px). Kap içinde ritmi
     // gap verir; taban margin form DIŞI kullanım için korunur.
-    > .form-field-help,
-    > .form-field-error {
+    > .form-text-help,
+    > .form-text-error {
       margin-top: 0;
     }
   }
@@ -341,26 +341,26 @@ textarea.form-input--minimal {
 /* label-checkbox-input-type-two → form-field--checkbox ile birleştirildi (birebir aynı) */
 
 /* ---- Label Hint — label içi opsiyonel/açıklama notu ---- */
-.form-label-hint {
+.form-text-hint {
   font-size: var(--fsi-12);
   font-weight: var(--fwe-regular);
   color: var(--color-text-dark-3);
 }
 
 /* ---- Field Messages — alanın ALTINDAKİ metinler ---- */
-/* form-label-hint'ten farkı konum: hint label'ın İÇİNDE ve satır içi, bunlar
+/* form-text-hint'ten farkı konum: hint label'ın İÇİNDE ve satır içi, bunlar
    kontrolün ALTINDA ve blok. İkisi ortak taban, yalnız renk ayrışıyor.
    margin-top: alan kabının DIŞINDA kullanıldıklarında (dashboard dipnotu gibi)
    kendi boşluklarını taşımaları için; kap içinde gap zaten veriyor, orada
    sıfırlanır (bkz. form-layout--stack alan kuralı). */
-.form-field-help,
-.form-field-error {
+.form-text-help,
+.form-text-error {
   display: block;
   margin-top: var(--space-1);
   font-size: 0.8em;
 }
 
-.form-field-help {
+.form-text-help {
   color: var(--color-text-dark-3);
 
   // Soru işaretli varyasyon
@@ -378,12 +378,12 @@ textarea.form-input--minimal {
   }
 }
 
-.form-field-error {
+.form-text-error {
   color: var(--color-danger-500);
 }
 
 /* Hata görünürken açıklama gizlenir — iki mesaj üst üste binmesin. */
-.form-field-error + .form-field-help {
+.form-text-error + .form-text-help {
   display: none;
 }
 

@@ -285,7 +285,7 @@ class Form {
 
     const span = document.createElement('span');
     span.id = uniqueId;
-    span.className = 'form-field-error';
+    span.className = 'form-text-error';
     span.textContent = finalMessage;
 
     const errId = 'err' + targetInput.name.charAt(0).toUpperCase()
