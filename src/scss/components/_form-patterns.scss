@@ -9,11 +9,11 @@
      .form-field--top-label / --checkbox → Label + input kombo stilleri
      .form-input--minimal               → Placeholder-only modern input (doğrudan input'a)
      .form-layout--{tarz}               → Form yerleşimi (gap tabanlı) — --regular
-     .form-field--stack / --row         → Genel form yerleşim yardımcıları (--stack legacy)
+     .form-field--row                   → Yatay alan grubu (--stack DEPRECATED)
      .danger-text             → Hata / doğrulama mesajı metni
      .helper-text             → Form alanı altı açıklama metni
      .form-divider                   → Form bölümleri arası çizgi + başlık
-     .form-layout--standard          → Standart form yerleşim kuralları
+     .form-layout--standard          → DEPRECATED (komşu-kardeş margin) — --regular kullan
    ========================================================================= */
 
 /* ---- Label Text — form label tipografisi ---- */
@@ -232,8 +232,12 @@
   }
 }
 
-/* ---- Form Layout (legacy) ---- */
-/* Genel form yerleşim yardımcıları — her form pattern'ıyla kullanılabilir */
+/* ---- Form Layout — DEPRECATED ---- */
+/* @deprecated .form-layout--regular kullan.
+   Aynı mekanizma (flex + gap), eski adı ve yanlış namespace'i: container olduğu
+   hâlde `form-field--` altında duruyor ve gerçek kardeşi `--standard`'dan ayrı.
+   Dükkan göç etti (0 kullanım); Bikonuvar'ın 6 auth şablonu hâlâ tüketiyor,
+   bu yüzden SİLİNMEDİ. Bikonuvar da göç edince kaldırılabilir. */
 .form-field--stack {
   display: flex;
   flex-direction: column;
@@ -395,10 +399,15 @@ textarea.form-input--minimal {
   }
 }
 
-/* ---- Form Standart Style ---- */
-/* Genel form yerleşim kuralları — ardışık form field'lar arası boşluk.
-   margin-bottom yerine adjacent sibling (+) pattern: sadece birbiri ardına
-   gelen label/fieldset/form-label-like arasında boşluk olur. */
+/* ---- Form Standart Style — DEPRECATED ---- */
+/* @deprecated .form-layout--regular kullan.
+   Komşu-kardeş (+) margin tabanlı: yalnız ardışık label/fieldset/form-label-like
+   çiftleri arasında boşluk verir. Bu tip-duyarlılık bir gereksinim değil, margin
+   tabanlı olmanın bedeliydi — gap'li bağlamlarla kesişince boşlukları topluyor ve
+   telafi için ~20 satır karşı-kural gerektiriyordu (!important, 3× attribute
+   selector, fieldset reset'i).
+   Dükkan göç etti (0 kullanım); Bikonuvar'ın 6 şablonu hâlâ tüketiyor → SİLİNMEDİ.
+   Göç planı: workbench/dukkan/docs/plans/2026-07-27-form-layout-gap-migration-spec.md */
 .form-layout--standard {
 
   // Ardışık form field'lar arası boşluk
