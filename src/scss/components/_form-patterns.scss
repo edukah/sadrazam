@@ -9,6 +9,7 @@
      .form-input--minimal               → Placeholder-only modern input (doğrudan input'a)
      .form-layout--stack / --row        → Form yerleşim kabı (gap tabanlı) — YÖN belirtir
      .form-choice                       → Radio/checkbox seçenek satırı (yatay olduğunu ilan eder)
+     .form-actions (--stack / --row)    → Buton alanı; yön AYRI sınıfla ilan edilir
      .danger-text             → Hata / doğrulama mesajı metni
      .helper-text             → Form alanı altı açıklama metni
      .form-divider                   → Form bölümleri arası çizgi + başlık
@@ -396,16 +397,29 @@ textarea.form-input--minimal {
 }
 
 /* ---- Form Actions — form buton alanı ---- */
+/* Taban YÖNSÜZ: yalnız buton alanı olduğunu ve form gövdesinden ayrıldığını söyler.
+   Yön ayrı sınıfla İLAN edilir — eskiden taban `flex-direction: column` +
+   `button{width:100%}` dayatıyordu ve yatay isteyen kullanamıyordu (kanıt:
+   .admin-listing__search-form-buttons ayrı yazılmıştı). */
 .form-actions {
   display: flex;
-  flex-direction: column;
   gap: var(--space-6);
   margin-top: var(--space-8);
+}
+
+/* Dikey — butonlar alt alta, tam genişlik. Auth/dar kart formlarının deseni. */
+.form-actions--stack {
+  flex-direction: column;
 
   button, a[class*="bttn"] {
     width: 100%;
     text-align: center;
   }
+}
+
+/* Yatay — butonlar sağa yaslı. Filtre barları, liste araç çubukları. */
+.form-actions--row {
+  justify-content: flex-end;
 }
 
 /* ---- Form Lang — çok dilli input satırı (bayrak + content) ---- */
