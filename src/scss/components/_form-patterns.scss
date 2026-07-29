@@ -12,7 +12,6 @@
      .danger-text             → Hata / doğrulama mesajı metni
      .helper-text             → Form alanı altı açıklama metni
      .form-divider                   → Form bölümleri arası çizgi + başlık
-     .form-layout--standard          → DEPRECATED (komşu-kardeş margin) — --stack kullan
    ========================================================================= */
 
 /* ---- Label Text — form label tipografisi ---- */
@@ -164,7 +163,7 @@
   //   .form-layout--row     → alanları yan yana dizen kap (23)
   //   [class*="d-flex"]     → yazar display'i açıkça bildirmiş
   label:not(.form-choice):not(.switch):not(.form-field--checkbox):not([class*="d-flex"]),
-  .form-label-like:not(.form-layout--row):not(.form-field--row):not([class*="d-flex"]) {
+  .form-label-like:not(.form-layout--row):not([class*="d-flex"]) {
     display: flex;
     flex-direction: column;
     gap: var(--space-2);
@@ -181,10 +180,9 @@
   // gap margin ile collapse ETMEZ, toplar. Kendi dikey margin'i olup flex item
   // olacak her element burada sıfırlanır; boşluk yalnız gap'ten gelsin.
   //
-  // HEPSİ BU SINIFIN ALTINDA: taban kurallara DOKUNULMAZ. Sebep — göç dosya
-  // dosya ilerliyor; taban sıfırlanırsa henüz taşınmamış .form-layout--standard
-  // şablonları boşluğunu kaybeder ve yerine gelecek gap henüz yoktur. Ayrıca
-  // taban .form-actions'ı Bikonuvar da tüketiyor ve hiç göç etmiyor.
+  // HEPSİ BU SINIFIN ALTINDA: taban kurallara DOKUNULMAZ — taban .form-actions'ı
+  // (margin-top: space-8) Bikonuvar 7 şablonda kap sınıfı OLMADAN tüketiyor;
+  // sıfırlanırsa oradaki buton alanı forma yapışır.
   > .form-actions {
     margin-top: 0;
   }
@@ -219,44 +217,16 @@
   }
 }
 
-/* ---- Form Layout — DEPRECATED ---- */
-/* @deprecated .form-layout--stack kullan.
-   Aynı mekanizma (flex + gap), eski adı ve yanlış namespace'i: container olduğu
-   hâlde `form-field--` altında duruyor ve gerçek kardeşi `--standard`'dan ayrı.
-   Dükkan göç etti (0 kullanım); Bikonuvar'ın 6 auth şablonu hâlâ tüketiyor,
-   bu yüzden SİLİNMEDİ. Bikonuvar da göç edince kaldırılabilir. */
-.form-field--stack {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-6);
-
-  // Boşluk yalnız gap'ten gelsin. Flex'te gap ile margin TOPLANIR, o yüzden .form-actions'ın
-  // kendi margin-top'u buton alanını alanlardan daha aşağı itiyordu (gap + 6px).
-  // SIFIRLA, SİLME: bu kural aynı zamanda tabandaki .form-actions{margin-top:space-8}'i de
-  // eziyor — silinirse boşluk 6px'e değil 16px'e çıkar.
-  > .form-actions {
-    margin-top: 0;
-  }
-}
-
 /* ---- Form Layout Row — alanları yan yana dizen kap ---- */
 /* --stack'in yatay kardeşi. Aynı yuva (yön), aynı önek (kap).
    wrap: seçenek listeleri uzun olabiliyor (7 seçenekli modal var). Mevcut
    alan-çiftlerinde NO-OP — çocukları flex-1 (flex-basis:0), sarmak yerine
    küçülürler.
    İki eksenli gap: satır 8px / sütun 16px — form-fieldset--inline'dan devralındı. */
-.form-layout--row,
-.form-field--row {           // @deprecated .form-field--row → .form-layout--row (Bikonuvar 1 kullanım)
+.form-layout--row {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-4) var(--space-8);
-
-  // @deprecated — yalnız .form-layout--standard'ın label+label margin'ini karşılar.
-  // --stack/--row bağlamında ölü; Bikonuvar göç edince silinecek.
-  >label,
-  >fieldset {
-    margin-top: 0 !important;
-  }
 }
 
 /* ---- Fieldset — yapı: <fieldset> → <legend> (opsiyonel) → <div> → içerik ---- */
@@ -398,39 +368,6 @@ textarea.form-input--minimal {
    selector, fieldset reset'i).
    Dükkan göç etti (0 kullanım); Bikonuvar'ın 6 şablonu hâlâ tüketiyor → SİLİNMEDİ.
    Göç planı: workbench/dukkan/docs/plans/2026-07-27-form-layout-gap-migration-spec.md */
-.form-layout--standard {
-
-  // Ardışık form field'lar arası boşluk
-  label+label,
-  label+fieldset,
-  label+div[class*="form-label-like"],
-  fieldset+label,
-  fieldset+fieldset,
-  fieldset+div[class*="form-label-like"],
-  div[class*="form-label-like"]+label,
-  div[class*="form-label-like"]+fieldset,
-  div[class*="form-label-like"]+div[class*="form-label-like"] {
-    margin-top: var(--space-7);
-  }
-
-  // form-label-like içindeki ardışık label'lar — aynı aralık
-  div[class*="form-label-like"] label+label {
-    margin-top: var(--space-7);
-  }
-
-  // Fieldset içindeki label'lar — radio/checkbox grubu, spacing sıfırlanır
-  // form-label-like içindeki fieldset'lerde de geçerli olması için ek specificity
-  fieldset label + label,
-  div[class*="form-label-like"] fieldset label + label {
-    margin-top: 0;
-  }
-
-  // Label içindeki form-label-text: input'tan önce boşluk (display: block zaten base class'ta)
-  label > .form-label-text {
-    margin-bottom: var(--space-2);
-  }
-}
-
 /* ---- Form Disclosure — tıkla aç/kapat bölüm başlığı ---- */
 .form-disclosure {
   display: flex;
