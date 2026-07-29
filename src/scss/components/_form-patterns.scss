@@ -10,7 +10,7 @@
      .form-layout--stack / --row        → Form yerleşim kabı (gap tabanlı) — YÖN belirtir
      .form-choice                       → Bir radio/checkbox seçeneği (kontrol ↔ metin)
      .form-choices--stack / --row       → Seçenek listesi (alan ritminden DAR)
-     .form-actions (--stack / --row)    → Buton alanı; yön AYRI sınıfla ilan edilir
+     .form-actions--stack / --row       → Buton alanı (taban sınıf YOK, yön varyantı tam)
      .form-field-help / -error          → Alanın ALTINDAKİ açıklama / hata metni
      .form-divider                   → Form bölümleri arası çizgi + başlık
    ========================================================================= */
@@ -198,10 +198,10 @@ textarea.is-error {
   // gap margin ile collapse ETMEZ, toplar. Kendi dikey margin'i olup flex item
   // olacak her element burada sıfırlanır; boşluk yalnız gap'ten gelsin.
   //
-  // HEPSİ BU SINIFIN ALTINDA: taban kurallara DOKUNULMAZ — taban .form-actions'ı
-  // (margin-top: space-8) Bikonuvar 7 şablonda kap sınıfı OLMADAN tüketiyor;
-  // sıfırlanırsa oradaki buton alanı forma yapışır.
-  > .form-actions {
+  // Buton alanının kendi margin-top'u (space-8) kap içinde gap'e binerdi.
+  // Taban sınıf kalktığı için varyantlar doğrudan hedeflenir.
+  > .form-actions--stack,
+  > .form-actions--row {
     margin-top: 0;
   }
 
@@ -433,11 +433,13 @@ textarea.form-input--minimal {
 }
 
 /* ---- Form Actions — form buton alanı ---- */
-/* Taban YÖNSÜZ: yalnız buton alanı olduğunu ve form gövdesinden ayrıldığını söyler.
-   Yön ayrı sınıfla İLAN edilir — eskiden taban `flex-direction: column` +
-   `button{width:100%}` dayatıyordu ve yatay isteyen kullanamıyordu (kanıt:
-   .admin-listing__search-form-buttons ayrı yazılmıştı). */
-.form-actions {
+/* TABAN SINIFI YOK — form-layout ve form-choices ile aynı desen: yön varyantı
+   tek başına tam. Eskiden ayrı bir `.form-actions` tabanı vardı ama 56/56
+   kullanımın hepsi varyantla birlikteydi, yani hiç tek başına durmuyordu;
+   markup'ta iki sınıf taşımak gereksizdi.
+   Ortak bildirimler seçici listesinde paylaşılır, tekrar edilmez. */
+.form-actions--stack,
+.form-actions--row {
   display: flex;
   gap: var(--space-6);
   margin-top: var(--space-8);
