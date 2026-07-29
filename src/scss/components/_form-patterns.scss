@@ -210,6 +210,20 @@ textarea.is-error {
     }
   }
 
+  // Aynı çift-boşluk taşıyıcının KENDİ çocuğunda da vardı (13 yer: bir fieldset'i
+  // açıklayan metin alanın içinde değil, yanında duruyor) — orada gap + margin
+  // toplanıp 16.9px veriyordu. Ritmi yine gap versin.
+  //
+  // Eski sistemde bu metin 1.9px ile yapışıktı, ama bu bir KARAR DEĞİLDİ:
+  // --standard yalnız label/fieldset/form-label-like üçlüsünü hedefliyordu ve
+  // .helper-text o listede yoktu → hiç kardeş boşluğu almıyordu. Gap tabanlı
+  // sistemde çocuk ayrımı yok, hepsi aynı ritmi alır. Bir açıklamanın üstündekine
+  // YAPIŞMASI isteniyorsa çözüm markup'ta: onu alanın/fieldset'in İÇİNE koy.
+  > .form-text-help,
+  > .form-text-error {
+    margin-top: 0;
+  }
+
   // ---- Margin sweep ----
   // gap margin ile collapse ETMEZ, toplar. Kendi dikey margin'i olup flex item
   // olacak her element burada sıfırlanır; boşluk yalnız gap'ten gelsin.
