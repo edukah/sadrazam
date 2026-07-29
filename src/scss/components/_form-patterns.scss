@@ -7,13 +7,12 @@
      .form-field--password              → Şifre göster/gizle butonu (wrapper)
      .form-field--top-label / --checkbox → Label + input kombo stilleri
      .form-input--minimal               → Placeholder-only modern input (doğrudan input'a)
-     .form-layout--{tarz}               → Form yerleşimi (gap tabanlı) — --regular
-     .form-row                          → Yatay alan grubu (alanları yan yana dizer)
+     .form-layout--stack / --row        → Form yerleşim kabı (gap tabanlı) — YÖN belirtir
      .form-choice                       → Radio/checkbox seçenek satırı (yatay olduğunu ilan eder)
      .danger-text             → Hata / doğrulama mesajı metni
      .helper-text             → Form alanı altı açıklama metni
      .form-divider                   → Form bölümleri arası çizgi + başlık
-     .form-layout--standard          → DEPRECATED (komşu-kardeş margin) — --regular kullan
+     .form-layout--standard          → DEPRECATED (komşu-kardeş margin) — --stack kullan
    ========================================================================= */
 
 /* ---- Label Text — form label tipografisi ---- */
@@ -133,14 +132,15 @@
 }
 
 /* ---- Form Layout — gap tabanlı form yerleşimi ---- */
-/* Boşluğun TEK kaynağı gap'tir; alanlar arası ritmi taşıyıcı verir.
-   Son ek bir yoğunluk temasıdır — okuyan hangi ritmin geçerli olduğunu görür.
-   Taşıyıcı, alanları DOĞRUDAN çocuk olarak tutan elemana konur (gap yalnız
-   doğrudan çocuklara işler); araya stilsiz sarmalayıcı girmişse ona inilir.
+/* Boşluğun TEK kaynağı gap'tir; alanları dizen KAP ritmi verir. Son ek YÖN
+   söyler: --stack (alt alta) / --row (yan yana). Kap, alanları DOĞRUDAN çocuk
+   olarak tutan elemana konur (gap yalnız doğrudan çocuklara işler); araya
+   stilsiz sarmalayıcı girmişse ona inilir.
 
-   İleride gerekirse: --compact (space-6) / --loose (space-11). Şimdi YAZILMAZ.
+   Yoğunluk ileride gerekirse ikinci sınıf olur (--compact / --loose), yön
+   yuvasına KARIŞTIRILMAZ. Şimdi YAZILMAZ.
    Plan: workbench/dukkan/docs/plans/2026-07-27-form-layout-gap-migration-spec.md */
-.form-layout--regular {
+.form-layout--stack {
   display: flex;
   flex-direction: column;
   gap: var(--space-8);
@@ -161,10 +161,10 @@
   //   .form-choice          → radio/checkbox seçenek satırı (116)
   //   .switch               → toggle (57)
   //   .form-field--checkbox → onay kutusu kombosu (2)
-  //   .form-row             → alanları yan yana dizen grup (23)
+  //   .form-layout--row     → alanları yan yana dizen kap (23)
   //   [class*="d-flex"]     → yazar display'i açıkça bildirmiş
   label:not(.form-choice):not(.switch):not(.form-field--checkbox):not([class*="d-flex"]),
-  .form-label-like:not(.form-row):not(.form-field--row):not([class*="d-flex"]) {
+  .form-label-like:not(.form-layout--row):not(.form-field--row):not([class*="d-flex"]) {
     display: flex;
     flex-direction: column;
     gap: var(--space-2);
@@ -220,7 +220,7 @@
 }
 
 /* ---- Form Layout — DEPRECATED ---- */
-/* @deprecated .form-layout--regular kullan.
+/* @deprecated .form-layout--stack kullan.
    Aynı mekanizma (flex + gap), eski adı ve yanlış namespace'i: container olduğu
    hâlde `form-field--` altında duruyor ve gerçek kardeşi `--standard`'dan ayrı.
    Dükkan göç etti (0 kullanım); Bikonuvar'ın 6 auth şablonu hâlâ tüketiyor,
@@ -239,15 +239,20 @@
   }
 }
 
-/* ---- Form Row — alanları yan yana dizen grup ---- */
-/* Kap, alan DEĞİL: içinde alanlar var. `form-field--` altında durması yanlış
-   namespace'ti (aynı sebeple .form-field--stack de deprecate edilmişti). */
-.form-row,
-.form-field--row {           // @deprecated .form-field--row → .form-row (Bikonuvar 1 kullanım)
+/* ---- Form Layout Row — alanları yan yana dizen kap ---- */
+/* --stack'in yatay kardeşi. Aynı yuva (yön), aynı önek (kap).
+   wrap: seçenek listeleri uzun olabiliyor (7 seçenekli modal var). Mevcut
+   alan-çiftlerinde NO-OP — çocukları flex-1 (flex-basis:0), sarmak yerine
+   küçülürler.
+   İki eksenli gap: satır 8px / sütun 16px — form-fieldset--inline'dan devralındı. */
+.form-layout--row,
+.form-field--row {           // @deprecated .form-field--row → .form-layout--row (Bikonuvar 1 kullanım)
   display: flex;
-  gap: var(--space-5);
+  flex-wrap: wrap;
+  gap: var(--space-4) var(--space-8);
 
-  // form-layout--standard'daki label + label margin-top'u yan yana layout'ta geçersiz
+  // @deprecated — yalnız .form-layout--standard'ın label+label margin'ini karşılar.
+  // --stack/--row bağlamında ölü; Bikonuvar göç edince silinecek.
   >label,
   >fieldset {
     margin-top: 0 !important;
@@ -385,7 +390,7 @@ textarea.form-input--minimal {
 }
 
 /* ---- Form Standart Style — DEPRECATED ---- */
-/* @deprecated .form-layout--regular kullan.
+/* @deprecated .form-layout--stack kullan.
    Komşu-kardeş (+) margin tabanlı: yalnız ardışık label/fieldset/form-label-like
    çiftleri arasında boşluk verir. Bu tip-duyarlılık bir gereksinim değil, margin
    tabanlı olmanın bedeliydi — gap'li bağlamlarla kesişince boşlukları topluyor ve

@@ -457,12 +457,12 @@
         <!-- ==================== FORM LAYOUT STANDARD ==================== -->
         <div class="section">
             <h2 class="section-title">.form-layout--{tarz}</h2>
-            <p class="section-desc">Form layout carrier — flex + gap. Put it on the element whose DIRECT children are the fields (gap does not reach deeper). Today one style: <span class="code">--regular</span> (16px). <span class="code">.form-layout--regular</span> is deprecated (adjacent-sibling margin).</p>
+            <p class="section-desc">Form layout carrier — flex + gap. Put it on the element whose DIRECT children are the fields (gap does not reach deeper). Today one style: <span class="code">--regular</span> (16px). <span class="code">.form-layout--stack</span> is deprecated (adjacent-sibling margin).</p>
 
             <div class="row" style="align-items: flex-start;">
                 <span class="label">With Layout</span>
                 <div class="demo-box demo-box-wide" style="max-width: 100%; flex: 1;">
-                    <form class="form-layout--regular">
+                    <form class="form-layout--stack">
                         <div class="form-divider">Account Setup</div>
 
                         <label class="label-text-input-type-two">
@@ -525,7 +525,7 @@
 
             <div class="row">
                 <span class="label">Class</span>
-                <span class="code">.form-layout--regular</span>
+                <span class="code">.form-layout--stack</span>
             </div>
         </div>
 
@@ -537,7 +537,7 @@
             <div class="row" style="align-items: flex-start;">
                 <span class="label">Base</span>
                 <div class="demo-box demo-box-wide" style="max-width: 100%; flex: 1;">
-                    <form class="form-layout--regular" style="max-width: 400px;" onsubmit="return false;">
+                    <form class="form-layout--stack" style="max-width: 400px;" onsubmit="return false;">
                         <fieldset class="form-fieldset">
                             <legend>Multi-language Field</legend>
                             <div>
@@ -569,7 +569,7 @@
             <div class="row" style="align-items: flex-start;">
                 <span class="label">Inline</span>
                 <div class="demo-box demo-box-wide" style="max-width: 100%; flex: 1;">
-                    <form class="form-layout--regular" style="max-width: 400px;" onsubmit="return false;">
+                    <form class="form-layout--stack" style="max-width: 400px;" onsubmit="return false;">
                         <fieldset class="form-fieldset form-fieldset--inline">
                             <legend>Invoice Type</legend>
                             <div>
@@ -619,7 +619,7 @@
             <div class="row" style="align-items: flex-start;">
                 <span class="label">Usage</span>
                 <div class="demo-box demo-box-wide" style="max-width: 100%; flex: 1;">
-                    <form class="form-layout--regular" style="max-width: 400px;" onsubmit="return false;">
+                    <form class="form-layout--stack" style="max-width: 400px;" onsubmit="return false;">
                         <label>
                             <span>Full Name</span>
                             <input type="text" placeholder="John Doe">
@@ -648,7 +648,7 @@
             <p class="section-desc">All form pattern classes used together in a realistic registration form</p>
 
             <div style="max-width: 500px;">
-                <form class="form-layout--regular">
+                <form class="form-layout--stack">
                     <div class="form-divider">Account</div>
 
                     <label class="form-field--top-label">
