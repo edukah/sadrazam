@@ -4,7 +4,7 @@
    İçerik:
      .form-label-text (--sm, --lg)      → Form label tipografisi (boyut varyantları)
      .form-labels--calm                 → KAP modifier: içindeki etiketleri soluklaştırır
-     .form-field--password              → Şifre göster/gizle butonu (wrapper)
+     .form-input--password              → Şifre göster/gizle butonu (wrapper)
      .form-field--top-label / --checkbox → Label + input kombo stilleri
      .form-input--minimal               → Placeholder-only modern input (doğrudan input'a)
      .form-layout--stack / --row        → Form yerleşim kabı (gap tabanlı) — YÖN belirtir
@@ -51,8 +51,13 @@ textarea.is-error {
   border-color: var(--color-danger-500);
 }
 
-/* ---- Şifre göster/gizle ---- */
-.form-field--password {
+/* ---- Password Input — input + göz butonu tek kontrol gibi ---- */
+/* AMACI input kurmak, alan tanımlamak DEĞİL: input ile butonu tek görsel kutu
+   hâline getirir. Bu yüzden `form-input--` yuvasında.
+   Sarmalayıcıya konur (mutlak konumlu buton için konumlanmış ata gerekiyor) —
+   kardeşi form-input--minimal ise doğrudan input'a konur. İkisi BİRLİKTE
+   kullanılabilir: <div class="form-input--password"><input class="form-input--minimal"> */
+.form-input--password {
   position: relative;
 
   input {
@@ -295,7 +300,7 @@ textarea.is-error {
 /* ---- Form Input Minimal ---- */
 /* Label yok, sadece placeholder. Modern SaaS form tarzı. */
 /* Kullanım: <input class="form-input--minimal" placeholder="..." /> */
-/* Password: <div class="form-field--password"><input class="form-input--minimal" /><button>eye</button></div> */
+/* Password: <div class="form-input--password"><input class="form-input--minimal" /><button>eye</button></div> */
 input.form-input--minimal,
 textarea.form-input--minimal {
   width: 100%;
