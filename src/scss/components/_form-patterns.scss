@@ -8,7 +8,8 @@
      .form-field--top-label / --checkbox → Label + input kombo stilleri
      .form-input--minimal               → Placeholder-only modern input (doğrudan input'a)
      .form-layout--stack / --row        → Form yerleşim kabı (gap tabanlı) — YÖN belirtir
-     .form-choice                       → Radio/checkbox seçenek satırı (yatay olduğunu ilan eder)
+     .form-choice                       → Bir radio/checkbox seçeneği (kontrol ↔ metin)
+     .form-choices--stack / --row       → Seçenek listesi (alan ritminden DAR)
      .form-actions (--stack / --row)    → Buton alanı; yön AYRI sınıfla ilan edilir
      .danger-text             → Hata / doğrulama mesajı metni
      .helper-text             → Form alanı altı açıklama metni
@@ -237,25 +238,33 @@
   }
 }
 
-/* Inline varyant — radio/checkbox seçenekleri yan yana */
-.form-fieldset--inline {
-  > div {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-4) var(--space-8);
+/* ---- Form Choice — bir radio/checkbox seçeneği (kontrol ↔ metin) ---- */
+/* Yatay olduğunu İLAN eder: form-layout--stack'in alan kuralı bunu dışlar.
+   Reçete Dükkan'ın 3 kopya `__radio-group`'undan devralındı, tek farkla:
+   align-items center (eskiden flex-start + input'a 0.25em optik nudge). */
+.form-choice {
+  display: flex;
+  gap: var(--space-5);
+  align-items: center;
+  cursor: pointer;
+  font-size: var(--fsi-17);
+  font-family: var(--ffa-sans);
+}
 
-    > label {
-      display: flex;
-      gap: var(--space-3);
-      align-items: center;
-      margin-top: 0;
+/* ---- Form Choices — seçenek LİSTESİ ---- */
+/* Kendi ritmi var ve ALAN ritminden (space-8) dardır — seçenekler birbirine
+   alanlardan daha yakın durur. Bu yüzden form-layout--stack/--row bu iş için
+   kullanılmaz. Sınıf, seçenekleri DOĞRUDAN tutan elemana konur. */
+.form-choices--stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
 
-      span {
-        font-size: var(--fsi-15);
-        color: var(--color-text-dark-1);
-      }
-    }
-  }
+.form-choices--row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4) var(--space-8);
 }
 
 /* ---- Form Input Minimal ---- */
