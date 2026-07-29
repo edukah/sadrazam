@@ -12,6 +12,26 @@
      .tab-capsule__*   → Yuvarlak köşeli, aktif sekme dolgulu arka plan
    ========================================================================= */
 
+/* ---- Sekme başlığı tipografisi — dört varyantta ortak ----
+   Bileşen yerleşim veriyordu (padding/border/cursor) ama fonta HİÇ dokunmuyordu.
+   Tüketici bu boşluğu üç ayrı yoldan doldurmuştu — hepsi aynı değere çıkıyordu:
+     · her head'in içine <span class="form-text-label--lg">   (31 yer)
+     · __heading'e fsi-15 fwe-semibold ffa-sans utility'leri  (5 yer)
+   Oybirliği olan değer bileşenin kendi kararıdır; buraya taşındı.
+
+   __head'e DEĞİL __heading'e yazılır: bundle'da utility'ler (~45k) bileşenlerden
+   (~79k) önce derleniyor, yani head'e yazılan eşit-özgüllüklü kural head'e konan
+   fsi-* utility'sini EZERDİ — bileşen override edilemez hale gelirdi. Ebeveyne
+   yazılınca font miras yoluyla iner ve head'teki HERHANGİ bir sınıf onu ezebilir. */
+.tab-classic__heading,
+.tab-card__heading,
+.tab-scroll__heading,
+.tab-capsule__heading {
+  font-family: var(--ffa-sans);
+  font-weight: var(--fwe-semibold);
+  font-size: var(--fsi-15);
+}
+
 /* ---- tab-classic: Klasik Tab ---- */
 .tab-classic__container {
   position: relative;
