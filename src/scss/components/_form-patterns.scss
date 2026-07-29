@@ -3,7 +3,7 @@
 
    İçerik:
      .form-label-text (--sm, --lg)      → Form label tipografisi (boyut varyantları)
-     .form-style--calm                  → Form stil varyantı (muted renk/ağırlık)
+     .form-labels--calm                 → KAP modifier: içindeki etiketleri soluklaştırır
      .form-field--password              → Şifre göster/gizle butonu (wrapper)
      .form-field--top-label / --checkbox → Label + input kombo stilleri
      .form-input--minimal               → Placeholder-only modern input (doğrudan input'a)
@@ -11,8 +11,7 @@
      .form-choice                       → Bir radio/checkbox seçeneği (kontrol ↔ metin)
      .form-choices--stack / --row       → Seçenek listesi (alan ritminden DAR)
      .form-actions (--stack / --row)    → Buton alanı; yön AYRI sınıfla ilan edilir
-     .danger-text             → Hata / doğrulama mesajı metni
-     .helper-text             → Form alanı altı açıklama metni
+     .form-field-help / -error          → Alanın ALTINDAKİ açıklama / hata metni
      .form-divider                   → Form bölümleri arası çizgi + başlık
    ========================================================================= */
 
@@ -29,9 +28,11 @@
   &--lg { font-size: var(--fsi-15); }
 }
 
-/* ---- Form Style — container-level stil varyantları ---- */
-/* form veya wrapper'a konur, içindeki form-label-text'leri cascade ile etkiler. */
-.form-style--calm {
+/* ---- Form Labels Calm — KAP modifier ---- */
+/* Kaba (form / wrapper) konur, içindeki form-label-text'leri cascade ile
+   soluklaştırır. Ad "labels" çoğul çünkü metnin kendisine değil, metinleri
+   KAPSAYAN elemana konur. */
+.form-labels--calm {
   .form-label-text {
     font-weight: var(--fwe-regular);
     color: var(--color-text-dark-2);
@@ -176,6 +177,14 @@
     > div:empty {
       display: none;
     }
+
+    // Alan-altı mesajların kendi margin'i kabın gap'ine EKLENİYORDU
+    // (ölçüm: etiket→input 3.7px ama input→açıklama 5.6px). Kap içinde ritmi
+    // gap verir; taban margin form DIŞI kullanım için korunur.
+    > .form-field-help,
+    > .form-field-error {
+      margin-top: 0;
+    }
   }
 
   // ---- Margin sweep ----
@@ -307,12 +316,20 @@ textarea.form-input--minimal {
   color: var(--color-text-dark-3);
 }
 
-/* ---- Helper Text ---- */
-/* Form alanı altındaki açıklama metni, opsiyonel ? işareti ile */
-.helper-text {
+/* ---- Field Messages — alanın ALTINDAKİ metinler ---- */
+/* form-label-hint'ten farkı konum: hint label'ın İÇİNDE ve satır içi, bunlar
+   kontrolün ALTINDA ve blok. İkisi ortak taban, yalnız renk ayrışıyor.
+   margin-top: alan kabının DIŞINDA kullanıldıklarında (dashboard dipnotu gibi)
+   kendi boşluklarını taşımaları için; kap içinde gap zaten veriyor, orada
+   sıfırlanır (bkz. form-layout--stack alan kuralı). */
+.form-field-help,
+.form-field-error {
   display: block;
   margin-top: var(--space-1);
   font-size: 0.8em;
+}
+
+.form-field-help {
   color: var(--color-text-dark-3);
 
   // Soru işaretli varyasyon
@@ -330,16 +347,12 @@ textarea.form-input--minimal {
   }
 }
 
-/* ---- Danger Text ---- */
-/* Hata / doğrulama mesajı metni */
-.danger-text {
-  display: block;
-  margin-top: var(--space-1);
-  font-size: 0.8em;
+.form-field-error {
   color: var(--color-danger-500);
 }
 
-.danger-text+.helper-text {
+/* Hata görünürken açıklama gizlenir — iki mesaj üst üste binmesin. */
+.form-field-error + .form-field-help {
   display: none;
 }
 
