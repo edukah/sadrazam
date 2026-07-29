@@ -89,9 +89,18 @@
    idi ve üç projede de 0 kullanımdaydı — kimse uygulamıyordu; Dükkan aynı
    ihtiyaç için kendi `.is-error`'ünü yazmıştı (sistem dışı --color-red ile).
    Eleman seçicisi özgüllüğü taşıdığı için !important gerekmiyor. */
+/* `:focus` de listelenir — hata durumu odaklanınca KAYBOLMAMALI. Sade
+   `select.is-error` (0,1,1) ile `select:focus` (0,1,1) eşit özgüllükte ve
+   `_form.scss`'in select bloğu bundle'da SONRA geliyor (74040 > 67753) →
+   odaklanmış hatalı select kenarlığı primary'ye dönerdi. `.is-error:focus`
+   (0,2,1) sırayı önemsiz kılar. Odak halkası (box-shadow) dokunulmadan kalır —
+   eski inline `red` de onu ezmiyordu. */
 input.is-error,
 select.is-error,
-textarea.is-error {
+textarea.is-error,
+input.is-error:focus,
+select.is-error:focus,
+textarea.is-error:focus {
   border-color: var(--color-danger-500);
 }
 
