@@ -73,8 +73,12 @@
     border-radius: 0;
     padding: 2px 10px 6px 10px;
 
+    // Odak geri bildirimi ALT ÇİZGİDEN gelir. Taban kural (_form.scss:66)
+    // odakta `box-shadow: 0 0 0 2px` ile input'un ETRAFINA halka çiziyor —
+    // kenarlıksız dolgulu kutuda o halka yüzen bir çerçeve gibi duruyordu.
     &:focus {
       border-bottom: 2px solid var(--color-pri-500);
+      box-shadow: none;
     }
   }
 }
