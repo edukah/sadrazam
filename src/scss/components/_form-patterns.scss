@@ -4,12 +4,12 @@
    İçerik:
      .form-label-text (--sm, --lg)      → Form label tipografisi (boyut varyantları)
      .form-style--calm                  → Form stil varyantı (muted renk/ağırlık)
-     .form-input--error                 → Hata durumunda input border
      .form-field--password              → Şifre göster/gizle butonu (wrapper)
      .form-field--top-label / --checkbox → Label + input kombo stilleri
      .form-input--minimal               → Placeholder-only modern input (doğrudan input'a)
      .form-layout--{tarz}               → Form yerleşimi (gap tabanlı) — --regular
-     .form-field--row                   → Yatay alan grubu (--stack DEPRECATED)
+     .form-row                          → Yatay alan grubu (alanları yan yana dizer)
+     .form-choice                       → Radio/checkbox seçenek satırı (yatay olduğunu ilan eder)
      .danger-text             → Hata / doğrulama mesajı metni
      .helper-text             → Form alanı altı açıklama metni
      .form-divider                   → Form bölümleri arası çizgi + başlık
@@ -132,30 +132,6 @@
   }
 }
 
-/* ---- Label-Combi Type Two ---- */
-/* Label üstte ayrık, input altta standart border */
-.form-field--text {
-  padding-bottom: 0;
-  margin-bottom: var(--space-5);
-
-  &>span:first-child {
-    display: inline-block;
-    color: var(--color-text-dark-2);
-    font-size: var(--fsi-14);
-    font-weight: var(--fwe-regular);
-    padding-bottom: var(--space-2);
-  }
-
-  input {
-    font-size: var(--fsi-15);
-    font-weight: var(--fwe-regular);
-
-    &:focus {
-      border-color: var(--color-pri-500);
-    }
-  }
-}
-
 /* ---- Form Layout — gap tabanlı form yerleşimi ---- */
 /* Boşluğun TEK kaynağı gap'tir; alanlar arası ritmi taşıyıcı verir.
    Son ek bir yoğunluk temasıdır — okuyan hangi ritmin geçerli olduğunu görür.
@@ -172,25 +148,23 @@
   // Alan-İÇİ eksen: label metni ↔ kontrol. Taşıyıcının gap'i buraya ULAŞAMAZ
   // (alan kabının içi), o yüzden kabın kendisi kendi iç ritmini verir.
   //
-  // İki ayrı kap tipi, iki ayrı yolla tanınır — ÇÜNKÜ İKİSİNİN SİNYALİ FARKLI:
+  // KURAL: alan kabı DİKEY bir yığındır — kendisi yatay olduğunu İLAN etmedikçe.
   //
-  // 1) .form-label-like — sınıfın KENDİSİ sinyal ("<label>'ın uymadığı yerdeki
-  //    alan kabı"). İçeriğe bakmaya gerek yok; yatay olanlar zaten kendilerini
-  //    .form-field--row veya d-flex ile ilan ediyor, o yüzden dışlama açık.
-  //    Etiketin kaçıncı katta olduğu ÖNEMSİZ — <label><span class="form-label-text">
-  //    gibi sarmalanmış hâller de doğru çalışır.
+  // Dışlama içerikten tahmin edilmez, sınıftan okunur. Eskiden pozitif seçici
+  // vardı (`label:has(> .form-label-text)`) ve doğruluk tipografi sınıfının
+  // KONUMUNA bağlıydı: metin bir kat derine sarmalanınca kural sessizce
+  // düşüyordu — .form-label-like tarafında tam olarak bu 21 yeri bozmuştu.
+  // Aynı tuzak <label> tarafında da vardı: radio label'ına form-label-text
+  // eklenirse dikeye dönüyordu (3 yer bunu d-flex ile atlatmıştı).
   //
-  // 2) <label> — burada sınıf yok, etiketin varlığı sinyal. :has() gerçek iş
-  //    yapıyor: radio/checkbox label'ında input önce gelir ve metin sarmalanmaz,
-  //    o yüzden eşleşmez ve yatay kalır. (112 çıplak radio/checkbox label'ı var;
-  //    onlara da sınıf verilirse bu :has() de kalkabilir — ayrı iş.)
-  //
-  // :not([class*="d-flex"]) — şablon yazarı display'i AÇIKÇA bildirmişse kural
-  // onunla kavga etmez. Karşı-örnek: <label class="d-flex gap-5 fl-align-center">
-  // <input type="checkbox"> + <span class="form-label-text"> — yatay bir onay
-  // kutusu ama form-label-text'i doğrudan çocuk, yani pozitif seçici tutuyor.
-  label:has(> .form-label-text):not([class*="d-flex"]),
-  .form-label-like:not(.form-field--row):not([class*="d-flex"]) {
+  // Yatay olanların HEPSİ kendini ilan eder:
+  //   .form-choice          → radio/checkbox seçenek satırı (116)
+  //   .switch               → toggle (57)
+  //   .form-field--checkbox → onay kutusu kombosu (2)
+  //   .form-row             → alanları yan yana dizen grup (23)
+  //   [class*="d-flex"]     → yazar display'i açıkça bildirmiş
+  label:not(.form-choice):not(.switch):not(.form-field--checkbox):not([class*="d-flex"]),
+  .form-label-like:not(.form-row):not(.form-field--row):not([class*="d-flex"]) {
     display: flex;
     flex-direction: column;
     gap: var(--space-2);
@@ -265,7 +239,11 @@
   }
 }
 
-.form-field--row {
+/* ---- Form Row — alanları yan yana dizen grup ---- */
+/* Kap, alan DEĞİL: içinde alanlar var. `form-field--` altında durması yanlış
+   namespace'ti (aynı sebeple .form-field--stack de deprecate edilmişti). */
+.form-row,
+.form-field--row {           // @deprecated .form-field--row → .form-row (Bikonuvar 1 kullanım)
   display: flex;
   gap: var(--space-5);
 
@@ -334,12 +312,6 @@ textarea.form-input--minimal {
 }
 
 /* label-checkbox-input-type-two → form-field--checkbox ile birleştirildi (birebir aynı) */
-
-.form-field--text {
-  *[data-type="warningMessage"] {
-    padding-top: var(--space-1);
-  }
-}
 
 /* ---- Label Hint — label içi opsiyonel/açıklama notu ---- */
 .form-label-hint {
