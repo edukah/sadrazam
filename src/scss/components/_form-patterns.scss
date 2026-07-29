@@ -8,8 +8,8 @@
      .form-field--top-label / --checkbox → Label + input kombo stilleri
      .form-input--minimal               → Placeholder-only modern input (doğrudan input'a)
      .form-layout--stack / --row        → Form yerleşim kabı (gap tabanlı) — YÖN belirtir
-     .form-choice                       → Bir radio/checkbox seçeneği (kontrol ↔ metin)
-     .form-choices--stack / --row       → Seçenek listesi (alan ritminden DAR)
+     .form-field--choice                       → Bir radio/checkbox seçeneği (kontrol ↔ metin)
+     .form-choices--stack / --row       → Seçim alanı listesi (alan ritminden DAR)
      .form-actions--stack / --row       → Buton alanı (taban sınıf YOK, yön varyantı tam)
      .form-field-help / -error          → Alanın ALTINDAKİ açıklama / hata metni
      .form-divider                   → Form bölümleri arası çizgi + başlık
@@ -167,12 +167,12 @@ textarea.is-error {
   // eklenirse dikeye dönüyordu (3 yer bunu d-flex ile atlatmıştı).
   //
   // Yatay olanların HEPSİ kendini ilan eder:
-  //   .form-choice          → radio/checkbox seçenek satırı (116)
+  //   .form-field--choice          → radio/checkbox seçenek satırı (116)
   //   .switch               → toggle (57)
   //   .form-field--checkbox → onay kutusu kombosu (2)
   //   .form-layout--row     → alanları yan yana dizen kap (23)
   //   [class*="d-flex"]     → yazar display'i açıkça bildirmiş
-  label:not(.form-choice):not(.switch):not(.form-field--checkbox):not([class*="d-flex"]),
+  label:not(.form-field--choice):not(.switch):not(.form-field--checkbox):not([class*="d-flex"]),
   .form-label-like:not(.form-layout--row):not([class*="d-flex"]) {
     display: flex;
     flex-direction: column;
@@ -261,11 +261,13 @@ textarea.is-error {
   }
 }
 
-/* ---- Form Choice — bir radio/checkbox seçeneği (kontrol ↔ metin) ---- */
-/* Yatay olduğunu İLAN eder: form-layout--stack'in alan kuralı bunu dışlar.
+/* ---- Form Field Choice — kontrolü radio/checkbox olan alan ---- */
+/* form-field--checkbox ile aynı KAPSAM: ikisi de <label> içinde kontrol + metin.
+   Fark yalnız kullanıldıkları yer (bu listede, o tek başına), NE OLDUKLARI değil.
+   Yatay olduğunu İLAN eder: form-layout--stack'in alan kuralı bunu dışlar.
    Reçete Dükkan'ın 3 kopya `__radio-group`'undan devralındı, tek farkla:
    align-items center (eskiden flex-start + input'a 0.25em optik nudge). */
-.form-choice {
+.form-field--choice {
   display: flex;
   gap: var(--space-5);
   align-items: center;
