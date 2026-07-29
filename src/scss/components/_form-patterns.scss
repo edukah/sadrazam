@@ -221,14 +221,16 @@
 
 /* ---- Form Layout Row — alanları yan yana dizen kap ---- */
 /* --stack'in yatay kardeşi. Aynı yuva (yön), aynı önek (kap).
-   wrap: seçenek listeleri uzun olabiliyor (7 seçenekli modal var). Mevcut
-   alan-çiftlerinde NO-OP — çocukları flex-1 (flex-basis:0), sarmak yerine
-   küçülürler.
-   İki eksenli gap: satır 8px / sütun 16px — form-fieldset--inline'dan devralındı. */
+   Gap ALAN çiftlerinin ritmi (Ad/Soyad, İl/İlçe) — seçenek listesininkinden
+   ayrı, o .form-choices--row'da. Bir ara ikisini tek sınıfta birleştirmeye
+   çalışırken bu değer geçici olarak açılmıştı; seçenekler kendi sınıfına
+   gidince geri alındı.
+   wrap: dar ekranda alanlar alt alta düşebilsin. Mevcut kullanımlarda NO-OP —
+   çocukları flex-1 (flex-basis:0), sarmak yerine küçülürler. */
 .form-layout--row {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-4) var(--space-8);
+  gap: var(--space-5);
 }
 
 /* ---- Fieldset — yapı: <fieldset> → <legend> (opsiyonel) → <div> → içerik ---- */
