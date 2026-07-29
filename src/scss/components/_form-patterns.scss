@@ -180,8 +180,12 @@
   //
   // .form-label-like, projenin "<label>'ın uymadığı yerdeki alan kabı" desenidir;
   // aynı rol → aynı iç ritim.
-  label:has(> .form-label-text),
-  .form-label-like:has(> .form-label-text) {
+  // :not([class*="d-flex"]) — şablon yazarı display'i AÇIKÇA bildirmişse kural
+  // onunla kavga etmez. Karşı-örnek: <label class="d-flex gap-5 fl-align-center">
+  // <input type="checkbox"> + <span class="form-label-text"> — yatay bir onay
+  // kutusu ama form-label-text'i doğrudan çocuk, yani pozitif seçici tutuyor.
+  label:has(> .form-label-text):not([class*="d-flex"]),
+  .form-label-like:has(> .form-label-text):not([class*="d-flex"]) {
     display: flex;
     flex-direction: column;
     gap: var(--space-2);
