@@ -230,7 +230,12 @@ textarea.is-error {
     margin-top: 0;
   }
 
-  .form-lang + .form-lang {
+  // `>` ZORUNLU — kardeş sweep'lerin hepsinde var, burada YOKTU. Descendant
+  // olduğu için fieldset'in derinindeki dil satırlarına ulaşıp ritmini siliyordu
+  // (ölçüm: taşıyıcı içinde 0px, dışında 5.6px). Dükkan'da form-lang hiçbir yerde
+  // taşıyıcının doğrudan çocuğu DEĞİL (0 doğrudan / 11 iç içe) — kural bugün hiç
+  // ateşlemiyor, ileride gerekirse diye kardeşleriyle hizalı bırakıldı.
+  > .form-lang + .form-lang {
     margin-top: 0;
   }
 }
