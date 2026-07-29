@@ -172,20 +172,25 @@
   // Alan-İÇİ eksen: label metni ↔ kontrol. Taşıyıcının gap'i buraya ULAŞAMAZ
   // (alan kabının içi), o yüzden kabın kendisi kendi iç ritmini verir.
   //
-  // Seçici POZİTİF: "doğrudan çocuğu olarak label metni taşıyan kap". Böylece
-  // yatay kalıplar :not() listesi büyütmeden kendiliğinden dışarıda kalır —
-  // radio/checkbox label'ları (input önce gelir), .switch, .form-field--checkbox,
-  // ve layout işareti taşıyan sarmalayıcılar (.gr-row / .form-field--row) hiç
-  // eşleşmez çünkü onlarda label metni doğrudan çocuk değildir.
+  // İki ayrı kap tipi, iki ayrı yolla tanınır — ÇÜNKÜ İKİSİNİN SİNYALİ FARKLI:
   //
-  // .form-label-like, projenin "<label>'ın uymadığı yerdeki alan kabı" desenidir;
-  // aynı rol → aynı iç ritim.
+  // 1) .form-label-like — sınıfın KENDİSİ sinyal ("<label>'ın uymadığı yerdeki
+  //    alan kabı"). İçeriğe bakmaya gerek yok; yatay olanlar zaten kendilerini
+  //    .form-field--row veya d-flex ile ilan ediyor, o yüzden dışlama açık.
+  //    Etiketin kaçıncı katta olduğu ÖNEMSİZ — <label><span class="form-label-text">
+  //    gibi sarmalanmış hâller de doğru çalışır.
+  //
+  // 2) <label> — burada sınıf yok, etiketin varlığı sinyal. :has() gerçek iş
+  //    yapıyor: radio/checkbox label'ında input önce gelir ve metin sarmalanmaz,
+  //    o yüzden eşleşmez ve yatay kalır. (112 çıplak radio/checkbox label'ı var;
+  //    onlara da sınıf verilirse bu :has() de kalkabilir — ayrı iş.)
+  //
   // :not([class*="d-flex"]) — şablon yazarı display'i AÇIKÇA bildirmişse kural
   // onunla kavga etmez. Karşı-örnek: <label class="d-flex gap-5 fl-align-center">
   // <input type="checkbox"> + <span class="form-label-text"> — yatay bir onay
   // kutusu ama form-label-text'i doğrudan çocuk, yani pozitif seçici tutuyor.
   label:has(> .form-label-text):not([class*="d-flex"]),
-  .form-label-like:has(> .form-label-text):not([class*="d-flex"]) {
+  .form-label-like:not(.form-field--row):not([class*="d-flex"]) {
     display: flex;
     flex-direction: column;
     gap: var(--space-2);
@@ -208,6 +213,14 @@
   // taban .form-actions'ı Bikonuvar da tüketiyor ve hiç göç etmiyor.
   > .form-actions {
     margin-top: 0;
+  }
+
+  // Başlıklar taban tipografiden `margin: 0.4em 0` alır (_typography.scss). Blok
+  // akışta bu margin komşusuyla collapse olurdu; flex item olunca gap'in ÜSTÜNE
+  // biner (ölçüm: 7.5 + 15 = 22.4px). Ritim tek kaynaktan gelsin.
+  > :is(h1, h2, h3, h4, h5, h6) {
+    margin-top: 0;
+    margin-bottom: 0;
   }
 
   // Bölüm kırılımı = gap + delta → 16 + 16 = 32px.
