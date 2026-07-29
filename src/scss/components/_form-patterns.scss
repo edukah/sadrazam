@@ -300,10 +300,20 @@ textarea.is-error {
 .form-field--choice {
   display: flex;
   gap: var(--space-5);
-  align-items: center;
+  align-items: flex-start;
   cursor: pointer;
   font-size: var(--fsi-17);
   font-family: var(--ffa-sans);
+
+  // İşaret kutusu İLK METİN SATIRIYLA hizalanır, kutunun ortasıyla değil.
+  // `center` yalnız tek satırlık seçenekte doğru görünür; gömülü kontrol taşıyan
+  // seçenekte (32 yer — marketplace/entegrasyon fiyat ayarları) kutu 60px'e
+  // çıkıyor ve işaret ortaya, metnin ALTINA kayıyordu (ölçüm: 30.3px vs 12.8px).
+  // Tüketicinin sildiğimiz 4 kopya reçetesi de tam bu yüzden flex-start yazmıştı.
+  > input[type="radio"],
+  > input[type="checkbox"] {
+    margin-top: 0.25em;
+  }
 }
 
 /* ---- Form Choices — seçenek LİSTESİ ---- */
@@ -365,7 +375,13 @@ textarea.form-input--minimal {
    kontrolün ALTINDA ve blok. İkisi ortak taban, yalnız renk ayrışıyor.
    margin-top: alan kabının DIŞINDA kullanıldıklarında (dashboard dipnotu gibi)
    kendi boşluklarını taşımaları için; kap içinde gap zaten veriyor, orada
-   sıfırlanır (bkz. form-layout--stack alan kuralı). */
+   sıfırlanır (bkz. form-layout--stack alan kuralı).
+
+   ⚠ İKİZİ VAR — `.helper-text` (utilities/_typography.scss) form DIŞI karşılığı
+   ve dört bildirimi de BUNUNLA AYNI. Buradaki görünümü değiştirirsen orayı da
+   güncelle, yoksa aynı görünmesi gereken iki metin sessizce ayrışır. Ayrı
+   duruyorlar çünkü form makinesi (hata kardeşi gizleme + kap içinde margin
+   sıfırlama) yalnız bu tarafa ait. */
 .form-text-help,
 .form-text-error {
   display: block;
