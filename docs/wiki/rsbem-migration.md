@@ -11,7 +11,7 @@ Sadrazam'da uygulanan rsBEM v2 migration'larinin ozeti ve mevcut durum.
 - `.no-select` → `.sel-none`
 - `.full-width` → `.w-full`
 - `.input-error` → `.input--error`
-- `.label-text-input-type-one` → `.form-field--top-label`
+- `.label-text-input-type-one` → `.form-field--top-label` — ⚠ sonradan **`form-theme--filled`** oldu (tema ekseni)
 - `.label-checkbox-input-type-one` → `.form-field--checkbox`
 - `.initialism`, `.circle`, `.sequential-box-15` → silindi
 - `.modal__close-button.absolute` → `.modal__close-button--absolute`
@@ -31,7 +31,7 @@ Sadrazam'da uygulanan rsBEM v2 migration'larinin ozeti ve mevcut durum.
 ### Faz 3: Sadrazam + Dukkan (1-5 dosya)
 - `.pointer` + `.c-pointer` → `.cursor-pointer`
 - `.form-toggle-password-visibility` → `.form-field__password-toggle`
-- `.label-text-input-type-two` → `.form-field--text`
+- `.label-text-input-type-two` → `.form-field--text` — ⚠ `form-field--text` sonradan **silindi** (üç projede de 0 kullanım, form-layout gap göçü)
 - `.danger-dialog-box` → `.dialog-box--danger` (+ warning/caution/notice/safe)
 - `.d-table` component → `.data-table` + BEM elements
 - `.fl-l`, `.fl-r` → `_positioning.scss`'e taşındı; `.clear` silindi (tüketiciler flexbox'a migrate edildi)

@@ -39,7 +39,7 @@
             width: 100%;
         }
 
-        .demo-form .form-actions {
+        .demo-form .demo-actions {
             margin-top: 16px;
             display: flex;
             align-items: center;
@@ -244,7 +244,7 @@
                     </div>
                 </div>
 
-                <div class="form-actions">
+                <div class="demo-actions">
                     <button type="submit" class="bttn--md bttn--pri">
                         <i class="ph-bold ph-paper-plane-tilt"></i> Submit
                     </button>
@@ -272,7 +272,7 @@
                     <p class="note">The <span class="code">email</span> rule alone only triggers when the field has a value.</p>
                 </div>
 
-                <div class="form-actions">
+                <div class="demo-actions">
                     <button type="submit" class="bttn--md bttn--pri">
                         <i class="ph-bold ph-check"></i> Validate
                     </button>
@@ -304,7 +304,7 @@
                     <input type="password" name="password_len" placeholder="Enter a strong password" data-form-validate="required|min_length:8">
                 </div>
 
-                <div class="form-actions">
+                <div class="demo-actions">
                     <button type="submit" class="bttn--md bttn--pri">
                         <i class="ph-bold ph-check"></i> Validate
                     </button>
@@ -336,7 +336,7 @@
                     <p class="note"><span class="code">less_than:max_price</span> on Min Price ensures it stays below Max Price, and vice versa.</p>
                 </div>
 
-                <div class="form-actions">
+                <div class="demo-actions">
                     <button type="submit" class="bttn--md bttn--pri">
                         <i class="ph-bold ph-check"></i> Validate
                     </button>
@@ -375,7 +375,7 @@
                     <p class="note"><span class="code">not_match:current_password</span> prevents reuse of the same password.</p>
                 </div>
 
-                <div class="form-actions">
+                <div class="demo-actions">
                     <button type="submit" class="bttn--md bttn--pri">
                         <i class="ph-bold ph-check"></i> Validate
                     </button>
@@ -407,7 +407,7 @@
                     <input type="text" name="slug" placeholder="my-page-slug" data-form-validate="required|regex:^[a-z0-9]+(-[a-z0-9]+)*$" data-form-validate-message="Only lowercase letters, numbers, and hyphens are allowed.">
                 </div>
 
-                <div class="form-actions">
+                <div class="demo-actions">
                     <button type="submit" class="bttn--md bttn--pri">
                         <i class="ph-bold ph-check"></i> Validate
                     </button>
@@ -463,7 +463,7 @@
                 <div id="errNamedErr" style="min-height: 20px;"></div>
                 <p class="note">If no <span class="code">data-form-validate-display</span> is set, the system also checks for an element with <span class="code">id="err{Name}"</span> before falling back to the parent.</p>
 
-                <div class="form-actions">
+                <div class="demo-actions">
                     <button type="submit" class="bttn--md bttn--pri">
                         <i class="ph-bold ph-check"></i> Submit
                     </button>
@@ -491,7 +491,7 @@
 
                 <div id="form-level-error-area" class="form-level-msg"></div>
 
-                <div class="form-actions">
+                <div class="demo-actions">
                     <button type="submit" class="bttn--md bttn--danger">
                         <i class="ph-bold ph-warning"></i> Submit
                     </button>
@@ -517,7 +517,7 @@
                     <input type="text" name="manual_email" id="manual-email-input" placeholder="user@example.com" data-form-validate="required|email">
                 </div>
 
-                <div class="form-actions" style="flex-wrap: wrap;">
+                <div class="demo-actions" style="flex-wrap: wrap;">
                     <button type="button" class="bttn--md bttn--sec" onclick="validateSingleField()">
                         <i class="ph-bold ph-cursor-click"></i> Validate Coupon Only
                     </button>
@@ -546,7 +546,7 @@
                     </div>
                 </div>
 
-                <div class="form-actions">
+                <div class="demo-actions">
                     <button type="submit" class="bttn--md bttn--pri">
                         <i class="ph-bold ph-sign-in"></i> Sign In
                     </button>
@@ -612,7 +612,7 @@
 
                 <div id="complete-form-error" class="form-level-msg"></div>
 
-                <div class="form-actions">
+                <div class="demo-actions">
                     <button type="submit" class="bttn--md bttn--pri bttn--block">
                         <i class="ph-bold ph-user-plus"></i> Create Account
                     </button>
@@ -638,7 +638,7 @@
                     <input type="text" name="optional_detail" id="optional-detail-input" placeholder="This field is required when enabled" data-form-validate="required|min_length:3">
                 </div>
 
-                <div class="form-actions">
+                <div class="demo-actions">
                     <button type="submit" class="bttn--md bttn--pri">
                         <i class="ph-bold ph-check"></i> Submit
                     </button>
