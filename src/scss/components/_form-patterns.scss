@@ -313,6 +313,31 @@ textarea.is-error:focus {
   cursor: pointer;
   font-size: var(--fsi-15);
   font-family: var(--ffa-sans);
+
+  // Seçeneğin İÇİNDE ayrıca bir kontrol varsa (ör. "Yüzde komisyon ekle [ % ]")
+  // satır tek-satırdan yükseğe çıkar ve `center` işareti bloğun ortasına —
+  // yani yazının ALTINA, gömülü kutunun hizasına — koyar. Bu durumda işaret
+  // İLK METİN SATIRINA hizalanır.
+  //
+  // Ayrı bir modifier sınıfı (`--top`) yerine :has(): 32 şablonu elle
+  // işaretlemek gerekmez ve yarın eklenen gömülü seçenekte kimse sınıf
+  // yazmayı unutamaz. Kendi radio/checkbox'ımız dışlanır, yoksa her seçenek
+  // eşleşirdi.
+  //
+  // Nudge TÜRETİLİR: kutuyu ilk satırın ortasına indirmek için satır kutusu
+  // ile işaret kutusu farkının yarısı.
+  //   1.5em → line-height (base/_typography.scss evrensel kural)
+  //   1.2em → input[type=checkbox|radio] boyutu (components/_form.scss)
+  &:has(input:not([type="radio"]):not([type="checkbox"])),
+  &:has(select),
+  &:has(textarea) {
+    align-items: flex-start;
+
+    > input[type="radio"],
+    > input[type="checkbox"] {
+      margin-top: calc((1.5em - 1.2em) / 2);
+    }
+  }
 }
 
 /* ---- Form Choices — seçenek LİSTESİ ---- */
