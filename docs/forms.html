@@ -592,28 +592,28 @@
         <!-- ==================== LABEL-INPUT TYPE TWO ==================== -->
         <div class="section">
             <h2 class="section-title">Label-Input Combo Type Two</h2>
-            <p class="section-desc">Label on top, standard bordered input below — <span class="code">.label-text-input-type-two</span></p>
+            <p class="section-desc">Label on top, standard bordered input below — <span class="code">label + .form-text-label</span></p>
 
             <div class="row">
                 <span class="label">Text Input</span>
                 <div class="demo-input-wrap">
-                    <label class="label-text-input-type-two">
-                        <span>Username</span>
+                    <label>
+                        <span class="form-text-label">Username</span>
                         <input type="text" placeholder="Enter username">
                     </label>
                 </div>
-                <span class="code">.label-text-input-type-two</span>
+                <span class="code">label + .form-text-label</span>
             </div>
 
             <div class="row">
                 <span class="label">Password Input</span>
                 <div class="demo-input-wrap">
-                    <label class="label-text-input-type-two">
-                        <span>Password</span>
+                    <label>
+                        <span class="form-text-label">Password</span>
                         <input type="password" placeholder="Enter password">
                     </label>
                 </div>
-                <span class="code">.label-text-input-type-two</span>
+                <span class="code">label + .form-text-label</span>
             </div>
 
             <hr class="divider">
@@ -698,18 +698,18 @@
             <p class="section-desc">Form layout carrier — flex + gap on the direct parent of the fields — <span class="code">.form-layout--stack</span></p>
 
             <form class="form-layout--stack" style="max-width: 450px;" onsubmit="return false;">
-                <label class="label-text-input-type-two">
-                    <span>First Name</span>
+                <label>
+                    <span class="form-text-label">First Name</span>
                     <input type="text" placeholder="John">
                 </label>
 
-                <label class="label-text-input-type-two">
-                    <span>Last Name</span>
+                <label>
+                    <span class="form-text-label">Last Name</span>
                     <input type="text" placeholder="Doe">
                 </label>
 
-                <label class="label-text-input-type-two">
-                    <span>Email</span>
+                <label>
+                    <span class="form-text-label">Email</span>
                     <input type="email" placeholder="john@example.com">
                 </label>
 
@@ -771,8 +771,8 @@
 
                 <div class="form-divider">Security</div>
 
-                <label class="label-text-input-type-two">
-                    <span>Password</span>
+                <label>
+                    <span class="form-text-label">Password</span>
                     <div class="form-input--password">
                         <input type="password" placeholder="Create a password" id="demo-pw-full">
                         <button type="button" onclick="togglePwFull()">
@@ -784,8 +784,8 @@
 
                 <div class="form-divider">Preferences</div>
 
-                <label class="label-text-input-type-two">
-                    <span>Country</span>
+                <label>
+                    <span class="form-text-label">Country</span>
                     <select>
                         <option value="" disabled selected>Select your country</option>
                         <option value="us">United States</option>
@@ -796,8 +796,8 @@
                     </select>
                 </label>
 
-                <label class="label-text-input-type-two">
-                    <span>Bio</span>
+                <label>
+                    <span class="form-text-label">Bio</span>
                     <textarea rows="3" placeholder="Tell us about yourself..."></textarea>
                 </label>
                 <span class="form-text-help" style="margin-top:-10px; margin-bottom:16px;">Maximum 280 characters.</span>

@@ -151,7 +151,7 @@
             </div>
         </div>
 
-        <!-- ==================== LABEL TEXT INPUT TYPE ONE ==================== -->
+        <!-- ==================== FORM THEME FILLED ==================== -->
         <div class="section">
             <h2 class="section-title">.form-theme--filled</h2>
             <p class="section-desc">Label above, input below, shared grey background with bottom border focus effect</p>
@@ -190,7 +190,7 @@
             </div>
         </div>
 
-        <!-- ==================== LABEL CHECKBOX INPUT TYPE ONE ==================== -->
+        <!-- ==================== FORM FIELD CHECKBOX ==================== -->
         <div class="section">
             <h2 class="section-title">.form-field--checkbox</h2>
             <p class="section-desc">Checkbox with label, flex layout, cursor pointer, user-select none</p>
@@ -235,118 +235,6 @@
             </div>
         </div>
 
-        <!-- ==================== LABEL TEXT INPUT TYPE TWO ==================== -->
-        <div class="section">
-            <h2 class="section-title">.label-text-input-type-two</h2>
-            <p class="section-desc">Label above (separate), input below with standard border and focus color</p>
-
-            <div class="row">
-                <span class="label">Text Input</span>
-                <div class="demo-box">
-                    <label class="label-text-input-type-two">
-                        <span>Company Name</span>
-                        <input type="text" placeholder="Acme Inc.">
-                    </label>
-                </div>
-                <span class="code">.label-text-input-type-two</span>
-            </div>
-
-            <div class="row">
-                <span class="label">With Value</span>
-                <div class="demo-box">
-                    <label class="label-text-input-type-two">
-                        <span>Phone Number</span>
-                        <input type="tel" value="+1 (555) 123-4567">
-                    </label>
-                </div>
-            </div>
-
-            <div class="row">
-                <span class="label">With Warning</span>
-                <div class="demo-box">
-                    <label class="label-text-input-type-two">
-                        <span>Website URL</span>
-                        <input type="url" value="not-a-url">
-                        <div data-type="warningMessage" style="color: #d63031; font-size: 0.75em;">Please enter a valid URL</div>
-                    </label>
-                </div>
-                <span class="code">*[data-type="warningMessage"]</span>
-            </div>
-        </div>
-
-        <!-- ==================== LABEL CHECKBOX INPUT TYPE TWO ==================== -->
-        <div class="section">
-            <h2 class="section-title">.form-field--checkbox</h2>
-            <p class="section-desc">Checkbox variant with flex layout, same pattern as type one but different warning spacing</p>
-
-            <div class="row">
-                <span class="label">Checkbox</span>
-                <div class="demo-box">
-                    <label class="form-field--checkbox">
-                        <div>
-                            <input type="checkbox">
-                            <span>Enable notifications</span>
-                        </div>
-                    </label>
-                </div>
-                <span class="code">.form-field--checkbox</span>
-            </div>
-
-            <div class="row">
-                <span class="label">Checked</span>
-                <div class="demo-box">
-                    <label class="form-field--checkbox">
-                        <div>
-                            <input type="checkbox" checked>
-                            <span>Remember this device</span>
-                        </div>
-                    </label>
-                </div>
-            </div>
-
-            <div class="row">
-                <span class="label">With Warning</span>
-                <div class="demo-box">
-                    <label class="form-field--checkbox">
-                        <div>
-                            <input type="checkbox">
-                            <span>Confirm deletion</span>
-                        </div>
-                        <div data-type="warningMessage" style="color: #d63031; font-size: 0.75em;">Please confirm before proceeding</div>
-                    </label>
-                </div>
-                <span class="code">*[data-type="warningMessage"]</span>
-            </div>
-        </div>
-
-        <!-- ==================== TYPE ONE vs TYPE TWO COMPARISON ==================== -->
-        <div class="section">
-            <h2 class="section-title">Type One vs Type Two — Side by Side</h2>
-            <p class="section-desc">Visual comparison of the two label-input combo styles</p>
-
-            <div class="row" style="align-items: flex-start;">
-                <span class="label">Type One</span>
-                <div class="demo-box">
-                    <label class="form-theme--filled">
-                        <span>First Name</span>
-                        <input type="text" placeholder="Shared background style">
-                    </label>
-                </div>
-                <span class="code">.form-theme--filled</span>
-            </div>
-
-            <div class="row" style="align-items: flex-start;">
-                <span class="label">Type Two</span>
-                <div class="demo-box">
-                    <label class="label-text-input-type-two">
-                        <span>First Name</span>
-                        <input type="text" placeholder="Separate label style">
-                    </label>
-                </div>
-                <span class="code">.label-text-input-type-two</span>
-            </div>
-        </div>
-
         <!-- ==================== INPUT HELPER TEXT ==================== -->
         <div class="section">
             <h2 class="section-title">.form-text-help</h2>
@@ -355,8 +243,8 @@
             <div class="row" style="align-items: flex-start;">
                 <span class="label">Basic</span>
                 <div class="demo-box">
-                    <label class="label-text-input-type-two">
-                        <span>Password</span>
+                    <label>
+                        <span class="form-text-label">Password</span>
                         <input type="password" placeholder="Enter a strong password">
                     </label>
                     <span class="form-text-help">Must be at least 8 characters with one uppercase letter and one number.</span>
@@ -369,8 +257,8 @@
             <div class="row" style="align-items: flex-start;">
                 <span class="label">With ? Mark</span>
                 <div class="demo-box">
-                    <label class="label-text-input-type-two">
-                        <span>Tax ID Number</span>
+                    <label>
+                        <span class="form-text-label">Tax ID Number</span>
                         <input type="text" placeholder="XX-XXXXXXX">
                     </label>
                     <span class="form-text-help form-text-help--with-mark">Your Tax ID is a unique number assigned by the tax authority. You can find it on your tax return or official correspondence.</span>
@@ -414,12 +302,12 @@
                     <div class="form-divider">Personal Information</div>
 
                     <div style="display: flex; gap: 12px;">
-                        <label class="label-text-input-type-two" style="flex:1;">
-                            <span>First Name</span>
+                        <label style="flex:1;">
+                            <span class="form-text-label">First Name</span>
                             <input type="text" placeholder="John">
                         </label>
-                        <label class="label-text-input-type-two" style="flex:1;">
-                            <span>Last Name</span>
+                        <label style="flex:1;">
+                            <span class="form-text-label">Last Name</span>
                             <input type="text" placeholder="Doe">
                         </label>
                     </div>
@@ -427,12 +315,12 @@
                     <div class="form-divider">Contact Details</div>
 
                     <div style="display: flex; gap: 12px;">
-                        <label class="label-text-input-type-two" style="flex:1;">
-                            <span>Email</span>
+                        <label style="flex:1;">
+                            <span class="form-text-label">Email</span>
                             <input type="email" placeholder="john@example.com">
                         </label>
-                        <label class="label-text-input-type-two" style="flex:1;">
-                            <span>Phone</span>
+                        <label style="flex:1;">
+                            <span class="form-text-label">Phone</span>
                             <input type="tel" placeholder="+1 (555) 000-0000">
                         </label>
                     </div>
@@ -465,18 +353,18 @@
                     <form class="form-layout--stack">
                         <div class="form-divider">Account Setup</div>
 
-                        <label class="label-text-input-type-two">
-                            <span>Username</span>
+                        <label>
+                            <span class="form-text-label">Username</span>
                             <input type="text" placeholder="Choose a username">
                         </label>
 
-                        <label class="label-text-input-type-two">
-                            <span>Email</span>
+                        <label>
+                            <span class="form-text-label">Email</span>
                             <input type="email" placeholder="you@example.com">
                         </label>
 
-                        <label class="label-text-input-type-two">
-                            <span>Password</span>
+                        <label>
+                            <span class="form-text-label">Password</span>
                             <div class="form-input--password">
                                 <input type="password" placeholder="Create a password">
                                 <button type="button">
@@ -561,18 +449,19 @@
             </div>
         </div>
 
-        <!-- ==================== FORM FIELDSET INLINE ==================== -->
+        <!-- ==================== FORM CHOICES ==================== -->
         <div class="section">
-            <h2 class="section-title">.form-fieldset--inline</h2>
-            <p class="section-desc">Radio/checkbox options displayed inline — uses <span class="code">&lt;div&gt;</span> wrapper for flex layout</p>
+            <h2 class="section-title">.form-choices--stack / .form-choices--row</h2>
+            <p class="section-desc">Option list rhythm. The fieldset carries no layout — the list wrapper does.
+               <span class="code">--stack</span> lists options vertically, <span class="code">--row</span> side by side.</p>
 
             <div class="row" style="align-items: flex-start;">
                 <span class="label">Inline</span>
                 <div class="demo-box demo-box-wide" style="max-width: 100%; flex: 1;">
                     <form class="form-layout--stack" style="max-width: 400px;" onsubmit="return false;">
-                        <fieldset class="form-fieldset form-fieldset--inline">
+                        <fieldset class="form-fieldset">
                             <legend>Invoice Type</legend>
-                            <div>
+                            <div class="form-choices--row">
                                 <label class="form-field--choice">
                                     <input type="radio" name="demo_invoice" value="individual" checked />
                                     <span>Individual</span>
@@ -584,9 +473,9 @@
                             </div>
                         </fieldset>
 
-                        <fieldset class="form-fieldset form-fieldset--inline">
+                        <fieldset class="form-fieldset">
                             <legend>Gender</legend>
-                            <div>
+                            <div class="form-choices--stack">
                                 <label class="form-field--choice">
                                     <input type="radio" name="demo_gender" value="male" />
                                     <span>Male</span>
@@ -607,7 +496,7 @@
 
             <div class="row">
                 <span class="label">Class</span>
-                <span class="code">.form-fieldset .form-fieldset--inline</span>
+                <span class="code">.form-fieldset &gt; .form-choices--row | .form-choices--stack</span>
             </div>
         </div>
 
@@ -680,13 +569,13 @@
 
                     <div class="form-divider">Personal Info</div>
 
-                    <label class="label-text-input-type-two">
-                        <span>Full Name</span>
+                    <label>
+                        <span class="form-text-label">Full Name</span>
                         <input type="text" placeholder="John Doe">
                     </label>
 
-                    <label class="label-text-input-type-two">
-                        <span>Organization</span>
+                    <label>
+                        <span class="form-text-label">Organization</span>
                         <input type="text" placeholder="Company or team name">
                     </label>
                     <span class="form-text-help">Optional. This helps us personalize your experience.</span>
