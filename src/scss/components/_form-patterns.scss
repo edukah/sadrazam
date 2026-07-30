@@ -318,10 +318,17 @@ textarea.is-error:focus {
   // `center` yalnız tek satırlık seçenekte doğru görünür; gömülü kontrol taşıyan
   // seçenekte (32 yer — marketplace/entegrasyon fiyat ayarları) kutu 60px'e
   // çıkıyor ve işaret ortaya, metnin ALTINA kayıyordu (ölçüm: 30.3px vs 12.8px).
-  // Tüketicinin sildiğimiz 4 kopya reçetesi de tam bu yüzden flex-start yazmıştı.
+  //
+  // Nudge TÜRETİLİR, seçilmez: kutuyu ilk satırın ortasına oturtmak için
+  // satır kutusuyla işaret kutusu arasındaki farkın yarısı kadar iner.
+  //   1.5em → line-height (base/_typography.scss `*` kuralı)
+  //   1.2em → input[type=checkbox|radio] genişlik/yükseklik (components/_form.scss)
+  // İkisinden biri değişirse bu da değişmeli — o yüzden calc, sabit değil.
+  // (Sildiğimiz 4 kopya reçete 0.25em yazıyordu; kopyalanmış bir değerdi ve
+  //  kutuyu 1.49px aşağı kaçırıyordu — ölçümle yakalandı.)
   > input[type="radio"],
   > input[type="checkbox"] {
-    margin-top: 0.25em;
+    margin-top: calc((1.5em - 1.2em) / 2);
   }
 }
 
