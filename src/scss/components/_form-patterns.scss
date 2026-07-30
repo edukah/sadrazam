@@ -2,23 +2,23 @@
    Form Patterns — Tekrarlanan form kalıpları ve yardımcı bileşenler
 
    İçerik:
-     .form-label-text (--sm, --lg)      → Form label tipografisi (boyut varyantları)
-     .form-style--calm                  → Form stil varyantı (muted renk/ağırlık)
-     .form-input--error                 → Hata durumunda input border
-     .form-field--password              → Şifre göster/gizle butonu (wrapper)
-     .form-field--top-label / --checkbox → Label + input kombo stilleri
+     .form-text-label (--sm, --lg)      → Form label tipografisi (boyut varyantları)
+     .form-theme--calm / --filled       → Form TEMASI: kaba konur, içindekiler uyar
+     .form-input--password              → Şifre göster/gizle butonu (wrapper)
+     .form-field--choice / --checkbox   → Kontrolü radio/checkbox olan alan
      .form-input--minimal               → Placeholder-only modern input (doğrudan input'a)
-     .form-field--stack / --row         → Genel form yerleşim yardımcıları
-     .danger-text             → Hata / doğrulama mesajı metni
-     .helper-text             → Form alanı altı açıklama metni
+     .form-layout--stack / --row        → Form yerleşim kabı (gap tabanlı) — YÖN belirtir
+     .form-field--choice                       → Bir radio/checkbox seçeneği (kontrol ↔ metin)
+     .form-choices--stack / --row       → Seçim alanı listesi (alan ritminden DAR)
+     .form-actions--stack / --row       → Buton alanı (taban sınıf YOK, yön varyantı tam)
+     .form-text-help / -error          → Alanın ALTINDAKİ açıklama / hata metni
      .form-divider                   → Form bölümleri arası çizgi + başlık
-     .form-layout--standard          → Standart form yerleşim kuralları
    ========================================================================= */
 
 /* ---- Label Text — form label tipografisi ---- */
-/* Kullanım: <label><span class="form-label-text">Label</span><input /></label>
+/* Kullanım: <label><span class="form-text-label">Label</span><input /></label>
    legend, switch__label gibi non-label context'lerde de kullanılabilir. */
-.form-label-text {
+.form-text-label {
   display: block;
   font-family: var(--ffa-sans);
   font-weight: var(--fwe-semibold);
@@ -28,22 +28,89 @@
   &--lg { font-size: var(--fsi-15); }
 }
 
-/* ---- Form Style — container-level stil varyantları ---- */
-/* form veya wrapper'a konur, içindeki form-label-text'leri cascade ile etkiler. */
-.form-style--calm {
-  .form-label-text {
+/* =========================================================================
+   FORM TEMALARI — kaba (form / wrapper) konur, içindekiler uyar
+   -------------------------------------------------------------------------
+   Tema bir GÖRÜNÜM kararıdır ve alan alan tekrarlanmaz: bir kez kaba yazılır,
+   cascade içerideki alan/etiket/input'a taşır. Alanın NE olduğunu değiştirmez
+   (o `form-field--choice` gibi kendi yuvasında), yalnız NASIL göründüğünü.
+   ========================================================================= */
+
+/* Soluk etiketler — müşteri tarafı formların sakin tonu. */
+.form-theme--calm {
+  .form-text-label {
     font-weight: var(--fwe-regular);
     color: var(--color-text-dark-2);
   }
 }
 
-/* ---- Hata durumu ---- */
-.form-input--error {
-  border-color: var(--color-danger-500) !important;
+/* Dolgulu alanlar — gri kutu, etiket kutunun İÇİNDE, alttan çizgi
+   (Material'ın "filled text field" deseni). Eskiden `.form-field--top-label`
+   idi: her alana TEK TEK yazılıyordu ve ad yanıltıcıydı — bu sistemde zaten
+   her alanda etiket üstte, ayırt edici olan dolgulu görünüm. */
+.form-theme--filled {
+  label {
+    background-color: var(--color-grey-100);
+    padding-bottom: 0;
+  }
+
+  .form-text-label,
+  > span:first-child {
+    display: inline-block;
+    color: var(--color-text-dark-2);
+    font-size: var(--fsi-14);
+    font-weight: var(--fwe-regular);
+    padding-top: var(--space-3);
+    padding-left: var(--space-5);
+  }
+
+  input {
+    font-size: var(--fsi-15);
+    font-weight: var(--fwe-regular);
+    background-color: var(--color-grey-100);
+    border: none;
+    border-bottom: 2px solid var(--color-grey-250);
+    border-radius: 0;
+    padding: 2px 10px 6px 10px;
+
+    // Odak geri bildirimi ALT ÇİZGİDEN gelir. Taban kural (_form.scss:66)
+    // odakta `box-shadow: 0 0 0 2px` ile input'un ETRAFINA halka çiziyor —
+    // kenarlıksız dolgulu kutuda o halka yüzen bir çerçeve gibi duruyordu.
+    &:focus {
+      border-bottom: 2px solid var(--color-pri-500);
+      box-shadow: none;
+    }
+  }
 }
 
-/* ---- Şifre göster/gizle ---- */
-.form-field--password {
+/* ---- Geçersiz kontrol — JS ile açılıp kapanan DURUM ---- */
+/* Projenin durum geleneği `is-*` (CLAUDE.md): BEM modifier statik varyantlar
+   için, JS toggle'ı olan durumlar için değil. Eski adı `.form-input--error`
+   idi ve üç projede de 0 kullanımdaydı — kimse uygulamıyordu; Dükkan aynı
+   ihtiyaç için kendi `.is-error`'ünü yazmıştı (sistem dışı --color-red ile).
+   Eleman seçicisi özgüllüğü taşıdığı için !important gerekmiyor. */
+/* `:focus` de listelenir — hata durumu odaklanınca KAYBOLMAMALI. Sade
+   `select.is-error` (0,1,1) ile `select:focus` (0,1,1) eşit özgüllükte ve
+   `_form.scss`'in select bloğu bundle'da SONRA geliyor (74040 > 67753) →
+   odaklanmış hatalı select kenarlığı primary'ye dönerdi. `.is-error:focus`
+   (0,2,1) sırayı önemsiz kılar. Odak halkası (box-shadow) dokunulmadan kalır —
+   eski inline `red` de onu ezmiyordu. */
+input.is-error,
+select.is-error,
+textarea.is-error,
+input.is-error:focus,
+select.is-error:focus,
+textarea.is-error:focus {
+  border-color: var(--color-danger-500);
+}
+
+/* ---- Password Input — input + göz butonu tek kontrol gibi ---- */
+/* AMACI input kurmak, alan tanımlamak DEĞİL: input ile butonu tek görsel kutu
+   hâline getirir. Bu yüzden `form-input--` yuvasında.
+   Sarmalayıcıya konur (mutlak konumlu buton için konumlanmış ata gerekiyor) —
+   kardeşi form-input--minimal ise doğrudan input'a konur. İkisi BİRLİKTE
+   kullanılabilir: <div class="form-input--password"><input class="form-input--minimal"> */
+.form-input--password {
   position: relative;
 
   input {
@@ -81,39 +148,7 @@
   }
 }
 
-/* ---- Label-Combi Type One ---- */
-/* Label üstte, input altta, ortak arka plan */
-.form-field--top-label {
-  background-color: var(--color-grey-100);
-  padding-bottom: 0;
-  margin-bottom: var(--space-5);
-
-  span:first-child {
-    display: inline-block;
-    color: var(--color-text-dark-2);
-    font-size: var(--fsi-14);
-    font-weight: var(--fwe-regular);
-    padding-top: var(--space-3);
-    padding-left: var(--space-5);
-  }
-
-  input {
-    font-size: var(--fsi-15);
-    font-weight: var(--fwe-regular);
-    background-color: var(--color-grey-100);
-    border: none;
-    border-bottom: 2px solid var(--color-grey-250);
-    border-radius: 0;
-    padding: 2px 10px 6px 10px;
-
-    &:focus {
-      border-bottom: 2px solid var(--color-pri-500);
-    }
-  }
-}
-
 .form-field--checkbox {
-  margin-bottom: var(--space-5);
   cursor: pointer;
   user-select: none;
 
@@ -124,58 +159,138 @@
   }
 }
 
-.form-field--top-label,
 .form-field--checkbox {
   *[data-type="warningMessage"] {
     padding: var(--space-1) var(--space-3);
   }
 }
 
-/* ---- Label-Combi Type Two ---- */
-/* Label üstte ayrık, input altta standart border */
-.form-field--text {
-  padding-bottom: 0;
-  margin-bottom: var(--space-5);
+/* ---- Form Layout — gap tabanlı form yerleşimi ---- */
+/* Boşluğun TEK kaynağı gap'tir; alanları dizen KAP ritmi verir. Son ek YÖN
+   söyler: --stack (alt alta) / --row (yan yana). Kap, alanları DOĞRUDAN çocuk
+   olarak tutan elemana konur (gap yalnız doğrudan çocuklara işler); araya
+   stilsiz sarmalayıcı girmişse ona inilir.
 
-  &>span:first-child {
-    display: inline-block;
-    color: var(--color-text-dark-2);
-    font-size: var(--fsi-14);
-    font-weight: var(--fwe-regular);
-    padding-bottom: var(--space-2);
-  }
-
-  input {
-    font-size: var(--fsi-15);
-    font-weight: var(--fwe-regular);
-
-    &:focus {
-      border-color: var(--color-pri-500);
-    }
-  }
-}
-
-/* ---- Form Layout ---- */
-/* Genel form yerleşim yardımcıları — her form pattern'ıyla kullanılabilir */
-.form-field--stack {
+   Yoğunluk ileride gerekirse ikinci sınıf olur (--compact / --loose), yön
+   yuvasına KARIŞTIRILMAZ. Şimdi YAZILMAZ.
+   Plan: workbench/dukkan/docs/plans/2026-07-27-form-layout-gap-migration-spec.md */
+.form-layout--stack {
   display: flex;
   flex-direction: column;
-  gap: var(--space-6);
+  gap: var(--space-8);
 
-  > .form-actions {
-    margin-top: var(--space-3);
+  // Alan-İÇİ eksen: label metni ↔ kontrol. Taşıyıcının gap'i buraya ULAŞAMAZ
+  // (alan kabının içi), o yüzden kabın kendisi kendi iç ritmini verir.
+  //
+  // KURAL: alan kabı DİKEY bir yığındır — kendisi yatay olduğunu İLAN etmedikçe.
+  //
+  // Dışlama içerikten tahmin edilmez, sınıftan okunur. Eskiden pozitif seçici
+  // vardı (`label:has(> .form-text-label)`) ve doğruluk tipografi sınıfının
+  // KONUMUNA bağlıydı: metin bir kat derine sarmalanınca kural sessizce
+  // düşüyordu — .form-label-like tarafında tam olarak bu 21 yeri bozmuştu.
+  // Aynı tuzak <label> tarafında da vardı: radio label'ına form-text-label
+  // eklenirse dikeye dönüyordu (3 yer bunu d-flex ile atlatmıştı).
+  //
+  // Yatay olanların HEPSİ kendini ilan eder:
+  //   .form-field--choice          → radio/checkbox seçenek satırı (116)
+  //   .switch               → toggle (57)
+  //   .form-field--checkbox → onay kutusu kombosu (2)
+  //   .form-layout--row     → alanları yan yana dizen kap (23)
+  //   [class*="d-flex"]     → yazar display'i açıkça bildirmiş
+  label:not(.form-field--choice):not(.switch):not(.form-field--checkbox):not([class*="d-flex"]),
+  .form-label-like:not(.form-layout--row):not([class*="d-flex"]) {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+
+    // Boş hata kutusu bir gap slotu yerdi (0px içerik, 4px boşluk). Validator
+    // hatayı appendChild ile içeri koyduğu için :empty dolunca kendiliğinden
+    // düşer ve kutu normal şekilde görünür — JS'e dokunmadan.
+    > div:empty {
+      display: none;
+    }
+
+    // Alan-altı mesajların kendi margin'i kabın gap'ine EKLENİYORDU
+    // (ölçüm: etiket→input 3.7px ama input→açıklama 5.6px). Kap içinde ritmi
+    // gap verir; taban margin form DIŞI kullanım için korunur.
+    > .form-text-help,
+    > .form-text-error {
+      margin-top: 0;
+    }
+  }
+
+  // Aynı çift-boşluk taşıyıcının KENDİ çocuğunda da vardı (13 yer: bir fieldset'i
+  // açıklayan metin alanın içinde değil, yanında duruyor) — orada gap + margin
+  // toplanıp 16.9px veriyordu. Ritmi yine gap versin.
+  //
+  // Eski sistemde bu metin 1.9px ile yapışıktı, ama bu bir KARAR DEĞİLDİ:
+  // --standard yalnız label/fieldset/form-label-like üçlüsünü hedefliyordu ve
+  // .helper-text o listede yoktu → hiç kardeş boşluğu almıyordu. Gap tabanlı
+  // sistemde çocuk ayrımı yok, hepsi aynı ritmi alır. Bir açıklamanın üstündekine
+  // YAPIŞMASI isteniyorsa çözüm markup'ta: onu alanın/fieldset'in İÇİNE koy.
+  > .form-text-help,
+  > .form-text-error {
+    margin-top: 0;
+  }
+
+  // ---- Margin sweep ----
+  // gap margin ile collapse ETMEZ, toplar. Kendi dikey margin'i olup flex item
+  // olacak her element burada sıfırlanır; boşluk yalnız gap'ten gelsin.
+  //
+  // Buton alanının kendi margin-top'u (space-8) kap içinde gap'e binerdi.
+  // Taban sınıf kalktığı için varyantlar doğrudan hedeflenir.
+  > .form-actions--stack,
+  > .form-actions--row {
+    margin-top: 0;
+  }
+
+  // Başlıklar taban tipografiden `margin: 0.4em 0` alır (_typography.scss). Blok
+  // akışta bu margin komşusuyla collapse olurdu; flex item olunca gap'in ÜSTÜNE
+  // biner (ölçüm: 7.5 + 15 = 22.4px). Ritim tek kaynaktan gelsin.
+  > :is(h1, h2, h3, h4, h5, h6) {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  // Bölüm kırılımı = gap + delta → 16 + 16 = 32px.
+  // :first-child reset'i KORUNUR (konteyner tepesinde üst boşluk istenmez);
+  // flex'te ilk çocuğun margin-top'u collapse olmaz, doğrudan sızar.
+  > .form-divider {
+    margin-top: var(--space-8);
+    margin-bottom: 0;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  // .gr-row kendi gap'ini (space-10) zaten taşıyor; satır ritmi taşıyıcıya devredilir.
+  > .gr-row + .gr-row {
+    margin-top: 0;
+  }
+
+  // `>` ZORUNLU — kardeş sweep'lerin hepsinde var, burada YOKTU. Descendant
+  // olduğu için fieldset'in derinindeki dil satırlarına ulaşıp ritmini siliyordu
+  // (ölçüm: taşıyıcı içinde 0px, dışında 5.6px). Dükkan'da form-lang hiçbir yerde
+  // taşıyıcının doğrudan çocuğu DEĞİL (0 doğrudan / 11 iç içe) — kural bugün hiç
+  // ateşlemiyor, ileride gerekirse diye kardeşleriyle hizalı bırakıldı.
+  > .form-lang + .form-lang {
+    margin-top: 0;
   }
 }
 
-.form-field--row {
+/* ---- Form Layout Row — alanları yan yana dizen kap ---- */
+/* --stack'in yatay kardeşi. Aynı yuva (yön), aynı önek (kap).
+   Gap ALAN çiftlerinin ritmi (Ad/Soyad, İl/İlçe) — seçenek listesininkinden
+   ayrı, o .form-choices--row'da. Bir ara ikisini tek sınıfta birleştirmeye
+   çalışırken bu değer geçici olarak açılmıştı; seçenekler kendi sınıfına
+   gidince geri alındı.
+   wrap: dar ekranda alanlar alt alta düşebilsin. Mevcut kullanımlarda NO-OP —
+   çocukları flex-1 (flex-basis:0), sarmak yerine küçülürler. */
+.form-layout--row {
   display: flex;
+  flex-wrap: wrap;
   gap: var(--space-5);
-
-  // form-layout--standard'daki label + label margin-top'u yan yana layout'ta geçersiz
-  >label,
-  >fieldset {
-    margin-top: 0 !important;
-  }
 }
 
 /* ---- Fieldset — yapı: <fieldset> → <legend> (opsiyonel) → <div> → içerik ---- */
@@ -185,31 +300,51 @@
   }
 }
 
-/* Inline varyant — radio/checkbox seçenekleri yan yana */
-.form-fieldset--inline {
-  > div {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-4) var(--space-8);
+/* ---- Form Field Choice — kontrolü radio/checkbox olan alan ---- */
+/* form-field--checkbox ile aynı KAPSAM: ikisi de <label> içinde kontrol + metin.
+   Fark yalnız kullanıldıkları yer (bu listede, o tek başına), NE OLDUKLARI değil.
+   Yatay olduğunu İLAN eder: form-layout--stack'in alan kuralı bunu dışlar.
+   Reçete Dükkan'ın 3 kopya `__radio-group`'undan devralındı, tek farkla:
+   align-items center (eskiden flex-start + input'a 0.25em optik nudge). */
+.form-field--choice {
+  display: flex;
+  gap: var(--space-5);
+  align-items: flex-start;
+  cursor: pointer;
+  font-size: var(--fsi-17);
+  font-family: var(--ffa-sans);
 
-    > label {
-      display: flex;
-      gap: var(--space-3);
-      align-items: center;
-      margin-top: 0;
-
-      span {
-        font-size: var(--fsi-15);
-        color: var(--color-text-dark-1);
-      }
-    }
+  // İşaret kutusu İLK METİN SATIRIYLA hizalanır, kutunun ortasıyla değil.
+  // `center` yalnız tek satırlık seçenekte doğru görünür; gömülü kontrol taşıyan
+  // seçenekte (32 yer — marketplace/entegrasyon fiyat ayarları) kutu 60px'e
+  // çıkıyor ve işaret ortaya, metnin ALTINA kayıyordu (ölçüm: 30.3px vs 12.8px).
+  // Tüketicinin sildiğimiz 4 kopya reçetesi de tam bu yüzden flex-start yazmıştı.
+  > input[type="radio"],
+  > input[type="checkbox"] {
+    margin-top: 0.25em;
   }
+}
+
+/* ---- Form Choices — seçenek LİSTESİ ---- */
+/* Kendi ritmi var ve ALAN ritminden (space-8) dardır — seçenekler birbirine
+   alanlardan daha yakın durur. Bu yüzden form-layout--stack/--row bu iş için
+   kullanılmaz. Sınıf, seçenekleri DOĞRUDAN tutan elemana konur. */
+.form-choices--stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.form-choices--row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4) var(--space-8);
 }
 
 /* ---- Form Input Minimal ---- */
 /* Label yok, sadece placeholder. Modern SaaS form tarzı. */
 /* Kullanım: <input class="form-input--minimal" placeholder="..." /> */
-/* Password: <div class="form-field--password"><input class="form-input--minimal" /><button>eye</button></div> */
+/* Password: <div class="form-input--password"><input class="form-input--minimal" /><button>eye</button></div> */
 input.form-input--minimal,
 textarea.form-input--minimal {
   width: 100%;
@@ -237,25 +372,33 @@ textarea.form-input--minimal {
 
 /* label-checkbox-input-type-two → form-field--checkbox ile birleştirildi (birebir aynı) */
 
-.form-field--text {
-  *[data-type="warningMessage"] {
-    padding-top: var(--space-1);
-  }
-}
-
 /* ---- Label Hint — label içi opsiyonel/açıklama notu ---- */
-.form-label-hint {
+.form-text-hint {
   font-size: var(--fsi-12);
   font-weight: var(--fwe-regular);
   color: var(--color-text-dark-3);
 }
 
-/* ---- Helper Text ---- */
-/* Form alanı altındaki açıklama metni, opsiyonel ? işareti ile */
-.helper-text {
+/* ---- Field Messages — alanın ALTINDAKİ metinler ---- */
+/* form-text-hint'ten farkı konum: hint label'ın İÇİNDE ve satır içi, bunlar
+   kontrolün ALTINDA ve blok. İkisi ortak taban, yalnız renk ayrışıyor.
+   margin-top: alan kabının DIŞINDA kullanıldıklarında (dashboard dipnotu gibi)
+   kendi boşluklarını taşımaları için; kap içinde gap zaten veriyor, orada
+   sıfırlanır (bkz. form-layout--stack alan kuralı).
+
+   ⚠ İKİZİ VAR — `.helper-text` (utilities/_typography.scss) form DIŞI karşılığı
+   ve dört bildirimi de BUNUNLA AYNI. Buradaki görünümü değiştirirsen orayı da
+   güncelle, yoksa aynı görünmesi gereken iki metin sessizce ayrışır. Ayrı
+   duruyorlar çünkü form makinesi (hata kardeşi gizleme + kap içinde margin
+   sıfırlama) yalnız bu tarafa ait. */
+.form-text-help,
+.form-text-error {
   display: block;
   margin-top: var(--space-1);
   font-size: 0.8em;
+}
+
+.form-text-help {
   color: var(--color-text-dark-3);
 
   // Soru işaretli varyasyon
@@ -273,16 +416,12 @@ textarea.form-input--minimal {
   }
 }
 
-/* ---- Danger Text ---- */
-/* Hata / doğrulama mesajı metni */
-.danger-text {
-  display: block;
-  margin-top: var(--space-1);
-  font-size: 0.8em;
+.form-text-error {
   color: var(--color-danger-500);
 }
 
-.danger-text+.helper-text {
+/* Hata görünürken açıklama gizlenir — iki mesaj üst üste binmesin. */
+.form-text-error + .form-text-help {
   display: none;
 }
 
@@ -298,10 +437,9 @@ textarea.form-input--minimal {
   letter-spacing: 0.5px;
   margin: var(--space-15) 0 var(--space-7) 0;
 
-  h1+&,
-  h2+&,
-  h3+&,
-  .form-disclosure+&,
+  // Konteynerin tepesindeki bölüm başlığı üstten boşluk almaz — padding zaten ayırıyor.
+  // (h1+/h2+/h3+/.form-disclosure+ dalları vardı; Dükkan'daki 42 divider'ın hiçbirinde
+  //  ateşlenmiyordu, Bikonuvar/Burtest ise .form-divider hiç kullanmıyor → silindi.)
   &:first-child {
     margin-top: 0;
   }
@@ -315,43 +453,15 @@ textarea.form-input--minimal {
   }
 }
 
-/* ---- Form Standart Style ---- */
-/* Genel form yerleşim kuralları — ardışık form field'lar arası boşluk.
-   margin-bottom yerine adjacent sibling (+) pattern: sadece birbiri ardına
-   gelen label/fieldset/form-label-like arasında boşluk olur. */
-.form-layout--standard {
-
-  // Ardışık form field'lar arası boşluk
-  label+label,
-  label+fieldset,
-  label+div[class*="form-label-like"],
-  fieldset+label,
-  fieldset+fieldset,
-  fieldset+div[class*="form-label-like"],
-  div[class*="form-label-like"]+label,
-  div[class*="form-label-like"]+fieldset,
-  div[class*="form-label-like"]+div[class*="form-label-like"] {
-    margin-top: var(--space-7);
-  }
-
-  // form-label-like içindeki ardışık label'lar — aynı aralık
-  div[class*="form-label-like"] label+label {
-    margin-top: var(--space-7);
-  }
-
-  // Fieldset içindeki label'lar — radio/checkbox grubu, spacing sıfırlanır
-  // form-label-like içindeki fieldset'lerde de geçerli olması için ek specificity
-  fieldset label + label,
-  div[class*="form-label-like"] fieldset label + label {
-    margin-top: 0;
-  }
-
-  // Label içindeki form-label-text: input'tan önce boşluk (display: block zaten base class'ta)
-  label > .form-label-text {
-    margin-bottom: var(--space-2);
-  }
-}
-
+/* ---- Form Standart Style — DEPRECATED ---- */
+/* @deprecated .form-layout--stack kullan.
+   Komşu-kardeş (+) margin tabanlı: yalnız ardışık label/fieldset/form-label-like
+   çiftleri arasında boşluk verir. Bu tip-duyarlılık bir gereksinim değil, margin
+   tabanlı olmanın bedeliydi — gap'li bağlamlarla kesişince boşlukları topluyor ve
+   telafi için ~20 satır karşı-kural gerektiriyordu (!important, 3× attribute
+   selector, fieldset reset'i).
+   Dükkan göç etti (0 kullanım); Bikonuvar'ın 6 şablonu hâlâ tüketiyor → SİLİNMEDİ.
+   Göç planı: workbench/dukkan/docs/plans/2026-07-27-form-layout-gap-migration-spec.md */
 /* ---- Form Disclosure — tıkla aç/kapat bölüm başlığı ---- */
 .form-disclosure {
   display: flex;
@@ -380,16 +490,31 @@ textarea.form-input--minimal {
 }
 
 /* ---- Form Actions — form buton alanı ---- */
-.form-actions {
+/* TABAN SINIFI YOK — form-layout ve form-choices ile aynı desen: yön varyantı
+   tek başına tam. Eskiden ayrı bir `.form-actions` tabanı vardı ama 56/56
+   kullanımın hepsi varyantla birlikteydi, yani hiç tek başına durmuyordu;
+   markup'ta iki sınıf taşımak gereksizdi.
+   Ortak bildirimler seçici listesinde paylaşılır, tekrar edilmez. */
+.form-actions--stack,
+.form-actions--row {
   display: flex;
-  flex-direction: column;
   gap: var(--space-6);
   margin-top: var(--space-8);
+}
+
+/* Dikey — butonlar alt alta, tam genişlik. Auth/dar kart formlarının deseni. */
+.form-actions--stack {
+  flex-direction: column;
 
   button, a[class*="bttn"] {
     width: 100%;
     text-align: center;
   }
+}
+
+/* Yatay — butonlar sağa yaslı. Filtre barları, liste araç çubukları. */
+.form-actions--row {
+  justify-content: flex-end;
 }
 
 /* ---- Form Lang — çok dilli input satırı (bayrak + content) ---- */

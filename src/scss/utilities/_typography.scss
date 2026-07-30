@@ -44,3 +44,18 @@
     }
   }
 }
+// === Yardımcı Metin ===
+// Küçük, soluk destek metni — dipnot, liste etiketi, ikincil açıklama.
+// FORM DIŞI kullanım içindir. Formun alan-altı açıklaması .form-text-help'tir:
+// aynı görünüm, ama iki form mekanizması taşır — hata kardeşi varken gizlenir
+// ve alan kabının içinde margin'i sıfırlanır. Form dışında ikisi de anlamsız.
+//
+// font-size EM: bulunduğu bağlama göre küçülür — dashboard dipnotunda ~12px,
+// zaten küçük bir liste satırında ~9px. Sabit fsi-* utility'si bu uyumu veremez
+// (ölçüm: liste satırında 9.0 → 11.3px, %25 sıçrama).
+.helper-text {
+  display: block;
+  margin-top: var(--space-1);
+  font-size: 0.8em;
+  color: var(--color-text-dark-3);
+}

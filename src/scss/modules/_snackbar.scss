@@ -60,11 +60,12 @@
   position: relative;
 
   display: flex;
-  /* İkon da metin de ÜSTE dayalı — dikey ortalama BİLEREK yok (align-items/align-self: center EKLEME).
-     Sebep optik: ikon glifi kendi kutusunda ortalıdır, metnin glifi ise kendi satır kutusunda aşağıda
-     durur (font ascent'i cap-height'tan belirgin yüksek, descent kısa). İki kutu üste dayandığında bu
-     iki asimetri birbirini götürür ve ikon ile ilk satırın optik merkezleri çakışır. Ortalandığında
-     ise metin ikondan ~2px aşağı, çok satırlı mesajda ikon ilk satırdan ~20px aşağı kayıyordu. */
+  // Dikey hizalama iki parçalı, ikisi de gerekli:
+  //   · Konteyner flex-start → İKON üstte kalır. Çok satırlı mesajda ikon ilk satırla hizalanır;
+  //     ortalanırsa 3 satırlık mesajda ikon ilk satırdan ~20px aşağı kayıyordu.
+  //   · Liste (ul) align-self: center → TEK satırlık mesajda metin, ikon kutusunun ortasına gelir.
+  //     Metin bloğu ikondan uzunsa (çok satır) zaten en uzun item olur ve ortalama no-op'a düşer,
+  //     yani ikon-üstte davranışı bozulmaz.
   align-items: flex-start;
   gap: var(--space-8);
 
@@ -78,6 +79,10 @@
     font-family: "Phosphor-Bold";
     font-size: var(--fsi-30);
     line-height: 1;
+
+    // Optik nudge — ikonu 2px aşağı alır. transform, çünkü yerleşimi ETKİLEMEZ: line-height büyütmek
+    // ikon kutusunu şişirir, ortalanmış (align-self: center) metni de aynı miktar aşağı iterdi.
+    transform: translateY(var(--space-1));
   }
 
   &--error {
@@ -153,7 +158,13 @@
     font-weight: var(--fwe-regular);
 
     flex-grow: 2;
+    align-self: center;
 
+    // Satır = madde işareti (::before) + mesaj bloğu, iki flex item.
+    // ⚠ MESAJ TEK BİR ELEMANLA SARILMALI (`<li><div>…</div></li>`). Sarılmazsa mesajdaki metin
+    // düğümleri ile inline HTML (<a>, <strong>) AYRI birer flex item olur, aralarındaki boşluk
+    // yutulur ve "için giriş yapın" → "içingiriş yapın" diye yapışır. Sarmalı üreten yerler:
+    // Snackbar.insert (snackbar.js) ve tüketicilerin message.tpl'leri.
     li {
       display: flex;
       align-items: flex-start;
@@ -166,9 +177,10 @@
       }
     }
 
+    // Tek mesajda madde işareti anlamsız — pseudo hiç üretilmesin (content: '' boş bir flex item
+    // bırakırdı; genişliği 0 olsa da kutu yine oluşuyordu).
     li:only-child::before {
-      content: '';
-      margin: 0;
+      content: none;
     }
   }
 

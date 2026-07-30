@@ -270,7 +270,10 @@ class Form {
     this.#attachValidationListener(targetInput);
     if (document.getElementById(targetInput.getAttribute('data-form-validate-message-id'))) return;
 
-    targetInput.style.borderColor = 'red';
+    // Durum sınıfla taşınır, inline stille değil: ham 'red' palet dışıydı ve
+    // inline stil temanın/consumer'ın ezmesine kapalıydı. `is-error` kuralı
+    // components/_form-patterns.scss'te (--color-danger-500).
+    targetInput.classList.add('is-error');
     const uniqueId = 'warn-' + globalThis.crypto.randomUUID();
     targetInput.setAttribute('data-form-validate-message-id', uniqueId);
 
@@ -285,7 +288,7 @@ class Form {
 
     const span = document.createElement('span');
     span.id = uniqueId;
-    span.className = 'danger-text';
+    span.className = 'form-text-error';
     span.textContent = finalMessage;
 
     const errId = 'err' + targetInput.name.charAt(0).toUpperCase()
@@ -303,7 +306,7 @@ class Form {
   };
 
   static #removeInputMessage = (targetInput) => {
-    targetInput.style.borderColor = '';
+    targetInput.classList.remove('is-error');
     const defaultPlaceholder = targetInput.getAttribute('data-form-validate-default-placeholder');
     if (defaultPlaceholder) {
       targetInput.placeholder = defaultPlaceholder;

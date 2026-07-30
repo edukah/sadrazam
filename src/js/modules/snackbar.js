@@ -37,8 +37,13 @@ class Snackbar {
 
     this.#wrapper = this.#createWrapper();
 
-    // If message is a string, normalize it to object format
-    const messageGroups = typeof message === 'string' ? { info: [message] } : message;
+    // If message is a string, normalize it to object format.
+    // The fallback type MUST be one that _snackbar.scss defines a modifier for
+    // (error / warning / notice / success / hint) — the type is interpolated straight into
+    // `snackbar__static-container--${type}` in #createMessageGroup(). An unstyled type still
+    // renders, but with no icon, no colour and no border: it silently looks broken.
+    // 'notice' is the neutral informational type; Toast falls back to 'hint' for the same reason.
+    const messageGroups = typeof message === 'string' ? { notice: [message] } : message;
 
     for (const type of Object.keys(messageGroups)) {
       const messages = Array.isArray(messageGroups[type]) ? messageGroups[type] : [messageGroups[type]];
@@ -108,7 +113,10 @@ class Snackbar {
 
     const ul = document.createElement('ul');
     ul.className = 'snackbar__static-list';
-    ul.innerHTML = messages.map(msg => `<li>${msg}</li>`).join('');
+    // Mesaj TEK bir <div> ile sarılır: <li> bir flex container (madde işareti + mesaj bloğu).
+    // Sarılmazsa mesajdaki metin düğümleri ile inline HTML (<a>, <strong>) ayrı birer flex item
+    // olur ve aralarındaki boşluk yutulur ("için giriş yapın" → "içingiriş yapın").
+    ul.innerHTML = messages.map(msg => `<li><div>${msg}</div></li>`).join('');
 
     const closeButton = document.createElement('button');
     closeButton.type = 'button';
