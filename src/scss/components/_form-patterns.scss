@@ -2,17 +2,37 @@
    Form Patterns — Tekrarlanan form kalıpları ve yardımcı bileşenler
 
    İçerik:
-     .form-text-label (--sm, --lg)      → Form label tipografisi (boyut varyantları)
-     .form-theme--calm / --filled       → Form TEMASI: kaba konur, içindekiler uyar
-     .form-input--password              → Şifre göster/gizle butonu (wrapper)
-     .form-field--choice / --checkbox   → Kontrolü radio/checkbox olan alan
-     .form-input--minimal               → Placeholder-only modern input (doğrudan input'a)
-     .form-layout--stack / --row        → Form yerleşim kabı (gap tabanlı) — YÖN belirtir
-     .form-field--choice                       → Bir radio/checkbox seçeneği (kontrol ↔ metin)
-     .form-choices--stack / --row       → Seçim alanı listesi (alan ritminden DAR)
-     .form-actions--stack / --row       → Buton alanı (taban sınıf YOK, yön varyantı tam)
-     .form-text-help / -error          → Alanın ALTINDAKİ açıklama / hata metni
-     .form-divider                   → Form bölümleri arası çizgi + başlık
+     KAP (yerleşim) — taban DİKEY, --row yatay sapma
+       .form-layout / --row            → Alan yerleşim kabı (gap tabanlı)
+       .form-choices / --row           → Seçenek listesi (alan ritminden DAR)
+       .form-actions / --row           → Buton alanı
+       .form-fieldset                  → Bölüm grubu (yerleşim TAŞIMAZ, legend boşluğu)
+
+     ALAN — taban yok, bağımsız sınıflar (tek tire)
+       .form-field-choice              → Bir radio/checkbox seçeneği (kontrol ↔ metin)
+       .form-field-checkbox            → Onay kutusu kombosu (metin bloğu + kutu)
+       .form-label-like                → Label olmayan karmaşık alan kabı (kanca)
+       .form-lang                      → Çok dilli input satırı
+
+     INPUT — input'un KENDİSİNİ hedefler
+       .form-input-minimal             → Placeholder-only modern input
+       .form-input-password            → Input + göz butonu tek kutu (sarmalayıcı)
+
+     METİN — taban VAR, --sm/--lg gerçek modifier (markup'ta ikisi birlikte)
+       .form-text-label (--sm, --lg)   → Form label tipografisi
+       .form-text-hint                 → Label İÇİNDE satır içi not
+       .form-text-help (--with-mark)   → Alan ALTINDA açıklama
+       .form-text-error                → Alan ALTINDA hata
+
+     TEMA / BÖLÜM / DURUM
+       .form-theme-calm / -filled      → Kaba konur, içindekiler uyar
+       .form-divider · .form-disclosure
+       .is-error                       → Geçersiz kontrol (JS toggle)
+
+     ADLANDIRMA: `--` yalnız GERÇEK modifier'da (tabanı olan ve markup'ta
+     tabanla BİRLİKTE yazılan). Tabanı olmayan varyant tek tire alır —
+     olmayan bir sözleşmeye işaret etmesin diye.
+
    ========================================================================= */
 
 /* ---- Label Text — form label tipografisi ---- */
@@ -33,11 +53,11 @@
    -------------------------------------------------------------------------
    Tema bir GÖRÜNÜM kararıdır ve alan alan tekrarlanmaz: bir kez kaba yazılır,
    cascade içerideki alan/etiket/input'a taşır. Alanın NE olduğunu değiştirmez
-   (o `form-field--choice` gibi kendi yuvasında), yalnız NASIL göründüğünü.
+   (o `form-field-choice` gibi kendi yuvasında), yalnız NASIL göründüğünü.
    ========================================================================= */
 
 /* Soluk etiketler — müşteri tarafı formların sakin tonu. */
-.form-theme--calm {
+.form-theme-calm {
   .form-text-label {
     font-weight: var(--fwe-regular);
     color: var(--color-text-dark-2);
@@ -48,7 +68,7 @@
    (Material'ın "filled text field" deseni). Eskiden `.form-field--top-label`
    idi: her alana TEK TEK yazılıyordu ve ad yanıltıcıydı — bu sistemde zaten
    her alanda etiket üstte, ayırt edici olan dolgulu görünüm. */
-.form-theme--filled {
+.form-theme-filled {
   label {
     background-color: var(--color-grey-100);
     padding-bottom: 0;
@@ -106,11 +126,11 @@ textarea.is-error:focus {
 
 /* ---- Password Input — input + göz butonu tek kontrol gibi ---- */
 /* AMACI input kurmak, alan tanımlamak DEĞİL: input ile butonu tek görsel kutu
-   hâline getirir. Bu yüzden `form-input--` yuvasında.
+   hâline getirir. Bu yüzden alan değil INPUT ekseninde.
    Sarmalayıcıya konur (mutlak konumlu buton için konumlanmış ata gerekiyor) —
-   kardeşi form-input--minimal ise doğrudan input'a konur. İkisi BİRLİKTE
-   kullanılabilir: <div class="form-input--password"><input class="form-input--minimal"> */
-.form-input--password {
+   kardeşi form-input-minimal ise doğrudan input'a konur. İkisi BİRLİKTE
+   kullanılabilir: <div class="form-input-password"><input class="form-input-minimal"> */
+.form-input-password {
   position: relative;
 
   input {
@@ -148,7 +168,7 @@ textarea.is-error:focus {
   }
 }
 
-.form-field--checkbox {
+.form-field-checkbox {
   cursor: pointer;
   user-select: none;
 
@@ -159,7 +179,7 @@ textarea.is-error:focus {
   }
 }
 
-.form-field--checkbox {
+.form-field-checkbox {
   *[data-type="warningMessage"] {
     padding: var(--space-1) var(--space-3);
   }
@@ -174,7 +194,7 @@ textarea.is-error:focus {
    Yoğunluk ileride gerekirse ikinci sınıf olur (--compact / --loose), yön
    yuvasına KARIŞTIRILMAZ. Şimdi YAZILMAZ.
    Plan: workbench/dukkan/docs/plans/2026-07-27-form-layout-gap-migration-spec.md */
-.form-layout--stack {
+.form-layout {
   display: flex;
   flex-direction: column;
   gap: var(--space-8);
@@ -192,12 +212,12 @@ textarea.is-error:focus {
   // eklenirse dikeye dönüyordu (3 yer bunu d-flex ile atlatmıştı).
   //
   // Yatay olanların HEPSİ kendini ilan eder:
-  //   .form-field--choice          → radio/checkbox seçenek satırı (116)
+  //   .form-field-choice          → radio/checkbox seçenek satırı (116)
   //   .switch               → toggle (57)
-  //   .form-field--checkbox → onay kutusu kombosu (2)
+  //   .form-field-checkbox → onay kutusu kombosu (2)
   //   .form-layout--row     → alanları yan yana dizen kap (23)
   //   [class*="d-flex"]     → yazar display'i açıkça bildirmiş
-  label:not(.form-field--choice):not(.switch):not(.form-field--checkbox):not([class*="d-flex"]),
+  label:not(.form-field-choice):not(.switch):not(.form-field-checkbox):not([class*="d-flex"]),
   .form-label-like:not(.form-layout--row):not([class*="d-flex"]) {
     display: flex;
     flex-direction: column;
@@ -239,8 +259,7 @@ textarea.is-error:focus {
   //
   // Buton alanının kendi margin-top'u (space-8) kap içinde gap'e binerdi.
   // Taban sınıf kalktığı için varyantlar doğrudan hedeflenir.
-  > .form-actions--stack,
-  > .form-actions--row {
+  > .form-actions {
     margin-top: 0;
   }
 
@@ -288,7 +307,7 @@ textarea.is-error:focus {
    wrap: dar ekranda alanlar alt alta düşebilsin. Mevcut kullanımlarda NO-OP —
    çocukları flex-1 (flex-basis:0), sarmak yerine küçülürler. */
 .form-layout--row {
-  display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
   gap: var(--space-5);
 }
@@ -301,12 +320,12 @@ textarea.is-error:focus {
 }
 
 /* ---- Form Field Choice — kontrolü radio/checkbox olan alan ---- */
-/* form-field--checkbox ile aynı KAPSAM: ikisi de <label> içinde kontrol + metin.
+/* form-field-checkbox ile aynı KAPSAM: ikisi de <label> içinde kontrol + metin.
    Fark yalnız kullanıldıkları yer (bu listede, o tek başına), NE OLDUKLARI değil.
-   Yatay olduğunu İLAN eder: form-layout--stack'in alan kuralı bunu dışlar.
+   Yatay olduğunu İLAN eder: form-layout'un alan kuralı bunu dışlar.
    Reçete Dükkan'ın 3 kopya `__radio-group`'undan devralındı, tek farkla:
    align-items center (eskiden flex-start + input'a 0.25em optik nudge). */
-.form-field--choice {
+.form-field-choice {
   display: flex;
   gap: var(--space-5);
   align-items: center;
@@ -342,26 +361,26 @@ textarea.is-error:focus {
 
 /* ---- Form Choices — seçenek LİSTESİ ---- */
 /* Kendi ritmi var ve ALAN ritminden (space-8) dardır — seçenekler birbirine
-   alanlardan daha yakın durur. Bu yüzden form-layout--stack/--row bu iş için
+   alanlardan daha yakın durur. Bu yüzden form-layout / --row bu iş için
    kullanılmaz. Sınıf, seçenekleri DOĞRUDAN tutan elemana konur. */
-.form-choices--stack {
+.form-choices {
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
 }
 
 .form-choices--row {
-  display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
   gap: var(--space-4) var(--space-8);
 }
 
 /* ---- Form Input Minimal ---- */
 /* Label yok, sadece placeholder. Modern SaaS form tarzı. */
-/* Kullanım: <input class="form-input--minimal" placeholder="..." /> */
-/* Password: <div class="form-input--password"><input class="form-input--minimal" /><button>eye</button></div> */
-input.form-input--minimal,
-textarea.form-input--minimal {
+/* Kullanım: <input class="form-input-minimal" placeholder="..." /> */
+/* Password: <div class="form-input-password"><input class="form-input-minimal" /><button>eye</button></div> */
+input.form-input-minimal,
+textarea.form-input-minimal {
   width: 100%;
   height: 48px;
   padding: 0 var(--space-7);
@@ -385,7 +404,7 @@ textarea.form-input--minimal {
   }
 }
 
-/* label-checkbox-input-type-two → form-field--checkbox ile birleştirildi (birebir aynı) */
+/* label-checkbox-input-type-two → form-field-checkbox ile birleştirildi (birebir aynı) */
 
 /* ---- Label Hint — label içi opsiyonel/açıklama notu ---- */
 .form-text-hint {
@@ -399,7 +418,7 @@ textarea.form-input--minimal {
    kontrolün ALTINDA ve blok. İkisi ortak taban, yalnız renk ayrışıyor.
    margin-top: alan kabının DIŞINDA kullanıldıklarında (dashboard dipnotu gibi)
    kendi boşluklarını taşımaları için; kap içinde gap zaten veriyor, orada
-   sıfırlanır (bkz. form-layout--stack alan kuralı).
+   sıfırlanır (bkz. form-layout alan kuralı).
 
    ⚠ İKİZİ VAR — `.helper-text` (utilities/_typography.scss) form DIŞI karşılığı
    ve dört bildirimi de BUNUNLA AYNI. Buradaki görünümü değiştirirsen orayı da
@@ -469,7 +488,7 @@ textarea.form-input--minimal {
 }
 
 /* ---- Form Standart Style — DEPRECATED ---- */
-/* @deprecated .form-layout--stack kullan.
+/* @deprecated .form-layout kullan.
    Komşu-kardeş (+) margin tabanlı: yalnız ardışık label/fieldset/form-label-like
    çiftleri arasında boşluk verir. Bu tip-duyarlılık bir gereksinim değil, margin
    tabanlı olmanın bedeliydi — gap'li bağlamlarla kesişince boşlukları topluyor ve
@@ -510,26 +529,31 @@ textarea.form-input--minimal {
    kullanımın hepsi varyantla birlikteydi, yani hiç tek başına durmuyordu;
    markup'ta iki sınıf taşımak gereksizdi.
    Ortak bildirimler seçici listesinde paylaşılır, tekrar edilmez. */
-.form-actions--stack,
-.form-actions--row {
+.form-actions {
   display: flex;
+  flex-direction: column;
   gap: var(--space-6);
   margin-top: var(--space-8);
-}
 
-/* Dikey — butonlar alt alta, tam genişlik. Auth/dar kart formlarının deseni. */
-.form-actions--stack {
-  flex-direction: column;
-
-  button, a[class*="bttn"] {
+  button,
+  a[class*="bttn"] {
     width: 100%;
     text-align: center;
   }
 }
 
+/* Dikey — butonlar alt alta, tam genişlik. Auth/dar kart formlarının deseni. */
+
 /* Yatay — butonlar sağa yaslı. Filtre barları, liste araç çubukları. */
+/* Yatay — butonlar yan yana, sağa yaslı. Tabanın tam-genişliği geri alınır. */
 .form-actions--row {
+  flex-direction: row;
   justify-content: flex-end;
+
+  button,
+  a[class*="bttn"] {
+    width: auto;
+  }
 }
 
 /* ---- Form Lang — çok dilli input satırı (bayrak + content) ---- */

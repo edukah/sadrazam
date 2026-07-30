@@ -94,9 +94,9 @@
       display: block;
 
       // Panel aynı zamanda form yerleşim taşıyıcısıysa flex kalmalı.
-      // Bu kural (0,3,0); .form-layout--stack (0,1,0) tek başına yenemez —
+      // Bu kural (0,3,0); .form-layout (0,1,0) tek başına yenemez —
       // taşıyıcı sekme panelinde sessizce no-op olur, gap hiç uygulanmazdı.
-      &[class*="form-layout--"] {
+      &[class*="form-layout"] {
         display: flex;
       }
     }
@@ -176,9 +176,9 @@
       display: block;
 
       // Panel aynı zamanda form yerleşim taşıyıcısıysa flex kalmalı.
-      // Bu kural (0,3,0); .form-layout--stack (0,1,0) tek başına yenemez —
+      // Bu kural (0,3,0); .form-layout (0,1,0) tek başına yenemez —
       // taşıyıcı sekme panelinde sessizce no-op olur, gap hiç uygulanmazdı.
-      &[class*="form-layout--"] {
+      &[class*="form-layout"] {
         display: flex;
       }
     }
@@ -248,9 +248,9 @@
       display: block;
 
       // Panel aynı zamanda form yerleşim taşıyıcısıysa flex kalmalı.
-      // Bu kural (0,3,0); .form-layout--stack (0,1,0) tek başına yenemez —
+      // Bu kural (0,3,0); .form-layout (0,1,0) tek başına yenemez —
       // taşıyıcı sekme panelinde sessizce no-op olur, gap hiç uygulanmazdı.
-      &[class*="form-layout--"] {
+      &[class*="form-layout"] {
         display: flex;
       }
     }
@@ -334,9 +334,9 @@
       display: block;
 
       // Panel aynı zamanda form yerleşim taşıyıcısıysa flex kalmalı.
-      // Bu kural (0,3,0); .form-layout--stack (0,1,0) tek başına yenemez —
+      // Bu kural (0,3,0); .form-layout (0,1,0) tek başına yenemez —
       // taşıyıcı sekme panelinde sessizce no-op olur, gap hiç uygulanmazdı.
-      &[class*="form-layout--"] {
+      &[class*="form-layout"] {
         display: flex;
       }
     }
@@ -356,9 +356,9 @@
       display: block;
 
       // Panel aynı zamanda form yerleşim taşıyıcısıysa flex kalmalı.
-      // Bu kural (0,3,0); .form-layout--stack (0,1,0) tek başına yenemez —
+      // Bu kural (0,3,0); .form-layout (0,1,0) tek başına yenemez —
       // taşıyıcı sekme panelinde sessizce no-op olur, gap hiç uygulanmazdı.
-      &[class*="form-layout--"] {
+      &[class*="form-layout"] {
         display: flex;
       }
     }

@@ -11,8 +11,8 @@ Sadrazam'da uygulanan rsBEM v2 migration'larinin ozeti ve mevcut durum.
 - `.no-select` → `.sel-none`
 - `.full-width` → `.w-full`
 - `.input-error` → `.input--error`
-- `.label-text-input-type-one` → `.form-field--top-label` — ⚠ sonradan **`form-theme--filled`** oldu (tema ekseni)
-- `.label-checkbox-input-type-one` → `.form-field--checkbox`
+- `.label-text-input-type-one` → `.form-field--top-label` — ⚠ sonradan **`form-theme-filled`** oldu (tema ekseni)
+- `.label-checkbox-input-type-one` → `.form-field--checkbox` — ⚠ sonradan **`form-field-checkbox`** oldu (tabanı olmayan varyant tek tire alır)
 - `.initialism`, `.circle`, `.sequential-box-15` → silindi
 - `.modal__close-button.absolute` → `.modal__close-button--absolute`
 - `.flow-space` → `.margin-flow`

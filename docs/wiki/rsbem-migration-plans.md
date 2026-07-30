@@ -48,7 +48,7 @@ En kolaydan zora doğru sıralı. Her fazda blast radius artar.
 - [x] `.full-width` → `.w-full`
 - [x] `.input-error` → `.input--error`
 - [x] `.label-text-input-type-one` → `.form-field--top-label`
-- [x] `.label-checkbox-input-type-one` → `.form-field--checkbox`
+- [x] `.label-checkbox-input-type-one` → `.form-field--checkbox` (sonradan `form-field-checkbox`)
 - [x] `.initialism` → **SİLİNDİ**
 - [x] `.circle` → **SİLİNDİ**
 - [x] `.sequential-box-15` → **SİLİNDİ**
@@ -91,7 +91,7 @@ Dükkan etki alanı: ~200+ dosya (tpl + js + scss)
 - [x] `.pointer` + `.c-pointer` → `.cursor-pointer` (Dükkan: 8 dosya)
 - [x] `.form-toggle-password-visibility` → `.form-field__password-toggle` (Dükkan: 5 dosya)
 - [x] `.label-text-input-type-two` → `.form-field--text` (Dükkan: 1 dosya)
-- [x] `.label-checkbox-input-type-two` → **SİLİNDİ** (`.form-field--checkbox` ile birebir aynı)
+- [x] `.label-checkbox-input-type-two` → **SİLİNDİ** (`.form-field-checkbox` ile birebir aynı)
 - [x] `.danger-dialog-box` → `.dialog-box--danger` (+ warning/caution/notice/safe)
 - [x] `.is-loading` → `.--loading` (BEM modifier)
 - [x] `.d-table` component → `.data-table` + BEM elements (`data-table__row`, `data-table__cell`, vb.)

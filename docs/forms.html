@@ -391,15 +391,15 @@
 
             <div class="row">
                 <span class="label">Default (inline)</span>
-                <label class="demo-radio-label form-field--choice">
+                <label class="demo-radio-label form-field-choice">
                     <input type="radio" name="demo-radio" value="1" checked>
                     <span>Option A</span>
                 </label>
-                <label class="demo-radio-label form-field--choice">
+                <label class="demo-radio-label form-field-choice">
                     <input type="radio" name="demo-radio" value="2">
                     <span>Option B</span>
                 </label>
-                <label class="demo-radio-label form-field--choice">
+                <label class="demo-radio-label form-field-choice">
                     <input type="radio" name="demo-radio" value="3">
                     <span>Option C</span>
                 </label>
@@ -408,11 +408,11 @@
 
             <div class="row">
                 <span class="label">Disabled</span>
-                <label class="demo-radio-label form-field--choice">
+                <label class="demo-radio-label form-field-choice">
                     <input type="radio" name="demo-radio-dis" value="1" disabled>
                     <span>Disabled unchecked</span>
                 </label>
-                <label class="demo-radio-label form-field--choice">
+                <label class="demo-radio-label form-field-choice">
                     <input type="radio" name="demo-radio-dis" value="2" checked disabled>
                     <span>Disabled checked</span>
                 </label>
@@ -423,11 +423,11 @@
 
             <div class="row-vertical">
                 <span class="label">Block Variant</span>
-                <label class="demo-radio-label form-field--choice">
+                <label class="demo-radio-label form-field-choice">
                     <input type="radio" class="block" name="demo-radio-block" value="1" checked>
                     <span>Block radio A</span>
                 </label>
-                <label class="demo-radio-label form-field--choice">
+                <label class="demo-radio-label form-field-choice">
                     <input type="radio" class="block" name="demo-radio-block" value="2">
                     <span>Block radio B</span>
                 </label>
@@ -530,47 +530,47 @@
         <!-- ==================== PASSWORD VISIBILITY TOGGLE ==================== -->
         <div class="section">
             <h2 class="section-title">Password Visibility Toggle</h2>
-            <p class="section-desc">Wrap input and button in <span class="code">.form-input--password</span></p>
+            <p class="section-desc">Wrap input and button in <span class="code">.form-input-password</span></p>
 
             <div class="row">
                 <span class="label">Toggle Password</span>
                 <div class="demo-input-wrap">
-                    <div class="form-input--password">
+                    <div class="form-input-password">
                         <input type="password" placeholder="Enter password" id="demo-pw">
                         <button type="button" onclick="togglePw()">
                             <i class="ph-bold ph-eye" id="demo-pw-icon"></i>
                         </button>
                     </div>
                 </div>
-                <span class="code">.form-input--password</span>
+                <span class="code">.form-input-password</span>
             </div>
         </div>
 
         <!-- ==================== LABEL-INPUT TYPE ONE ==================== -->
         <div class="section">
             <h2 class="section-title">Label-Input Combo Type One</h2>
-            <p class="section-desc">Label on top with shared background, bottom-border input — <span class="code">.form-theme--filled</span></p>
+            <p class="section-desc">Label on top with shared background, bottom-border input — <span class="code">.form-theme-filled</span></p>
 
             <div class="row">
                 <span class="label">Text Input</span>
                 <div class="demo-input-wrap">
-                    <label class="form-theme--filled">
+                    <label class="form-theme-filled">
                         <span>Full Name</span>
                         <input type="text" placeholder="John Doe">
                     </label>
                 </div>
-                <span class="code">.form-theme--filled</span>
+                <span class="code">.form-theme-filled</span>
             </div>
 
             <div class="row">
                 <span class="label">Email Input</span>
                 <div class="demo-input-wrap">
-                    <label class="form-theme--filled">
+                    <label class="form-theme-filled">
                         <span>Email Address</span>
                         <input type="email" placeholder="user@example.com">
                     </label>
                 </div>
-                <span class="code">.form-theme--filled</span>
+                <span class="code">.form-theme-filled</span>
             </div>
 
             <hr class="divider">
@@ -578,14 +578,14 @@
             <div class="row">
                 <span class="label">Checkbox Type One</span>
                 <div class="demo-input-wrap">
-                    <label class="form-field--checkbox">
+                    <label class="form-field-checkbox">
                         <div>
                             <input type="checkbox">
                             <span>I accept the terms and conditions</span>
                         </div>
                     </label>
                 </div>
-                <span class="code">.form-field--checkbox</span>
+                <span class="code">.form-field-checkbox</span>
             </div>
         </div>
 
@@ -621,14 +621,14 @@
             <div class="row">
                 <span class="label">Checkbox Type Two</span>
                 <div class="demo-input-wrap">
-                    <label class="form-field--checkbox">
+                    <label class="form-field-checkbox">
                         <div>
                             <input type="checkbox" checked>
                             <span>Subscribe to newsletter</span>
                         </div>
                     </label>
                 </div>
-                <span class="code">.form-field--checkbox</span>
+                <span class="code">.form-field-checkbox</span>
             </div>
         </div>
 
@@ -695,9 +695,9 @@
         <!-- ==================== FORM STANDARD STYLE ==================== -->
         <div class="section">
             <h2 class="section-title">Form Standard Style</h2>
-            <p class="section-desc">Form layout carrier — flex + gap on the direct parent of the fields — <span class="code">.form-layout--stack</span></p>
+            <p class="section-desc">Form layout carrier — flex + gap on the direct parent of the fields — <span class="code">.form-layout</span></p>
 
-            <form class="form-layout--stack" style="max-width: 450px;" onsubmit="return false;">
+            <form class="form-layout" style="max-width: 450px;" onsubmit="return false;">
                 <label>
                     <span class="form-text-label">First Name</span>
                     <input type="text" placeholder="John">
@@ -715,13 +715,13 @@
 
                 <fieldset>
                     <legend class="styled">Notification Settings</legend>
-                    <label class="form-field--checkbox">
+                    <label class="form-field-checkbox">
                         <div>
                             <input type="checkbox" checked>
                             <span>Email notifications</span>
                         </div>
                     </label>
-                    <label class="form-field--checkbox">
+                    <label class="form-field-checkbox">
                         <div>
                             <input type="checkbox">
                             <span>SMS notifications</span>
@@ -730,7 +730,7 @@
                 </fieldset>
             </form>
 
-            <span class="code">.form-layout--stack</span>
+            <span class="code">.form-layout</span>
         </div>
 
         <!-- ==================== HTML BUTTON ELEMENT ==================== -->
@@ -756,15 +756,15 @@
             <h2 class="section-title">Complete Form Example</h2>
             <p class="section-desc">All elements combined into a realistic registration form</p>
 
-            <form class="form-layout--stack" style="max-width: 500px;" onsubmit="return false;">
+            <form class="form-layout" style="max-width: 500px;" onsubmit="return false;">
                 <div class="form-divider">Personal Info</div>
 
-                <label class="form-theme--filled">
+                <label class="form-theme-filled">
                     <span>Full Name</span>
                     <input type="text" placeholder="Jane Smith">
                 </label>
 
-                <label class="form-theme--filled">
+                <label class="form-theme-filled">
                     <span>Email</span>
                     <input type="email" placeholder="jane@example.com">
                 </label>
@@ -773,7 +773,7 @@
 
                 <label>
                     <span class="form-text-label">Password</span>
-                    <div class="form-input--password">
+                    <div class="form-input-password">
                         <input type="password" placeholder="Create a password" id="demo-pw-full">
                         <button type="button" onclick="togglePwFull()">
                             <i class="ph-bold ph-eye" id="demo-pw-full-icon"></i>
@@ -805,14 +805,14 @@
                 <fieldset>
                     <legend class="styled">Communication</legend>
 
-                    <label class="form-field--checkbox">
+                    <label class="form-field-checkbox">
                         <div>
                             <input type="checkbox" checked>
                             <span>Email updates about new features</span>
                         </div>
                     </label>
 
-                    <label class="form-field--checkbox">
+                    <label class="form-field-checkbox">
                         <div>
                             <input type="checkbox">
                             <span>Weekly digest newsletter</span>
@@ -822,15 +822,15 @@
 
                 <div style="display:flex; align-items:center; gap:16px; margin-top:8px;">
                     <span style="font-size:0.9rem;">Theme:</span>
-                    <label class="demo-radio-label form-field--choice">
+                    <label class="demo-radio-label form-field-choice">
                         <input type="radio" name="theme" value="light" checked>
                         <span>Light</span>
                     </label>
-                    <label class="demo-radio-label form-field--choice">
+                    <label class="demo-radio-label form-field-choice">
                         <input type="radio" name="theme" value="dark">
                         <span>Dark</span>
                     </label>
-                    <label class="demo-radio-label form-field--choice">
+                    <label class="demo-radio-label form-field-choice">
                         <input type="radio" name="theme" value="system">
                         <span>System</span>
                     </label>
@@ -888,11 +888,11 @@
 
             <div class="row">
                 <span class="label">Radio</span>
-                <label class="demo-radio-label form-field--choice">
+                <label class="demo-radio-label form-field-choice">
                     <input type="radio" name="dark-radio" value="1" checked>
                     <span>Selected</span>
                 </label>
-                <label class="demo-radio-label form-field--choice">
+                <label class="demo-radio-label form-field-choice">
                     <input type="radio" name="dark-radio" value="2">
                     <span>Unselected</span>
                 </label>
