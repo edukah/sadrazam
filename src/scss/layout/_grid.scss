@@ -116,3 +116,28 @@
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   gap: var(--space-10);
 }
+
+/* =========================================================================
+   Flex Row (flx-row) — container-responsive esnek satır
+   gr-row'un dar-kap alternatifi. Alanlar geniş kapta yan yana; kap daraldıkça
+   otomatik ALT ALTA (flex-wrap + esnek taban). gr-row'un ~220px gap-tabanı YOK:
+   flex `gap` yalnız GERÇEK komşular arası boşluk verir → kap darsa item'lar tek
+   sütuna sarar, column-gap 0 → taban oluşmaz. VIEWPORT değil KAP genişliğine
+   tepki verir → per-case media-query override GEREKMEZ. Sidebar / modal /
+   dar-kolon içine 12'lik grid gömüp taşırmak yerine bunu kullan.
+
+   Sarma eşiği = item'ın esnek tabanı: item bu değerden dar kalacaksa alt satıra
+   sarar. Varsayılan 200px; instance'ta ayarla → `.flx-row { --flx-col: 150px; }`.
+   Asimetri gerekirse ilgili item'a `flex-basis` override; geniş 2D-hizalı sayfa
+   iskeleti için gr-row (yeterince geniş kapta) kullanmaya devam et.
+   ========================================================================= */
+.flx-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-10);
+}
+
+.flx-row > * {
+  flex: 1 1 var(--flx-col, 200px);
+  min-width: 0; // içerik taşmasına karşı (geniş tablo / uzun metin)
+}
