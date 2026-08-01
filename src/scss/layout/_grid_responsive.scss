@@ -1,9 +1,10 @@
 @use '../base/variables';
 
 /* =========================================================================
-   Grid Sistemi
-   12'lik responsive grid yapısı ve auto-fit grid varyantları.
-   Eski adı: layout/_responsive.scss → layout/_grid.scss olarak yeniden adlandırıldı.
+   Grid Responsive — CSS Grid tabanlı responsive layout sistemleri
+   12'lik responsive grid (gr-row + col-*) + auto-fit grid (grid-auto) varyantları.
+   Flex tabanlı responsive satır (flx-row) → layout/_flex_responsive.scss.
+   Dosya geçmişi: _responsive.scss → _grid.scss → _grid_responsive.scss.
    Visibility class'ları: utilities/_visibility.scss
    ========================================================================= */
 
@@ -115,29 +116,4 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   gap: var(--space-10);
-}
-
-/* =========================================================================
-   Flex Row (flx-row) — container-responsive esnek satır
-   gr-row'un dar-kap alternatifi. Alanlar geniş kapta yan yana; kap daraldıkça
-   otomatik ALT ALTA (flex-wrap + esnek taban). gr-row'un ~220px gap-tabanı YOK:
-   flex `gap` yalnız GERÇEK komşular arası boşluk verir → kap darsa item'lar tek
-   sütuna sarar, column-gap 0 → taban oluşmaz. VIEWPORT değil KAP genişliğine
-   tepki verir → per-case media-query override GEREKMEZ. Sidebar / modal /
-   dar-kolon içine 12'lik grid gömüp taşırmak yerine bunu kullan.
-
-   Sarma eşiği = item'ın esnek tabanı: item bu değerden dar kalacaksa alt satıra
-   sarar. Varsayılan 200px; instance'ta ayarla → `.flx-row { --flx-col: 150px; }`.
-   Asimetri gerekirse ilgili item'a `flex-basis` override; geniş 2D-hizalı sayfa
-   iskeleti için gr-row (yeterince geniş kapta) kullanmaya devam et.
-   ========================================================================= */
-.flx-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-10);
-}
-
-.flx-row > * {
-  flex: 1 1 var(--flx-col, 200px);
-  min-width: 0; // içerik taşmasına karşı (geniş tablo / uzun metin)
 }
