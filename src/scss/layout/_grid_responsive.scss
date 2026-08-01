@@ -1,9 +1,10 @@
 @use '../base/variables';
 
 /* =========================================================================
-   Grid Sistemi
-   12'lik responsive grid yapısı ve auto-fit grid varyantları.
-   Eski adı: layout/_responsive.scss → layout/_grid.scss olarak yeniden adlandırıldı.
+   Grid Responsive — CSS Grid tabanlı responsive layout sistemleri
+   12'lik responsive grid (gr-row + col-*) + auto-fit grid (grid-auto) varyantları.
+   Flex tabanlı responsive satır (flx-row) → layout/_flex_responsive.scss.
+   Dosya geçmişi: _responsive.scss → _grid.scss → _grid_responsive.scss.
    Visibility class'ları: utilities/_visibility.scss
    ========================================================================= */
 
