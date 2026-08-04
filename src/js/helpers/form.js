@@ -17,6 +17,7 @@ class Form {
     const availableConfigs = new Map([
       ['perform(selector?)', 'Starts real-time and on-submit validation for forms on the page.'],
       ['validate(element)', 'Manually validates a single form or input.'],
+      ['clearInputMessage(input)', 'Clears a shown validation error (is-error + message) for an input.'],
       ['[data-form-validate]', 'Input to validate. Contains rules (e.g. "required|email").'],
       ['[data-form-validate-message]', 'Custom message that overrides the default error message.'],
       ['[data-form-validate-display]', 'Where to display the error message (\'placeholder\' or a CSS selector).'],
@@ -355,6 +356,22 @@ class Form {
     const isPw = input.type === 'password';
     input.type = isPw ? 'text' : 'password';
     button.innerHTML = isPw ? '<i class="ph ph-eye-closed"></i>' : '<i class="ph ph-eye"></i>';
+  }
+
+  /**
+   * Clears a shown validation error (is-error class + message) for an input, programmatically.
+   *
+   * Use when a field is removed from view WITHOUT being disabled (e.g. a multi-step form that hides
+   * the step): the observer-based auto-cleanup only fires on disabled→true, so a stale error would
+   * otherwise linger. Does NOT detach the real-time validate listener — live validation resumes when
+   * the field is filled again.
+   *
+   * @param {HTMLElement} input The input whose error message should be cleared.
+   */
+  static clearInputMessage (input) {
+    if (input) {
+      this.#removeInputMessage(input);
+    }
   }
 }
 
