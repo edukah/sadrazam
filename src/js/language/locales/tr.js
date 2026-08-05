@@ -1,4 +1,8 @@
 export default {
+  // Locale — bir METİN değil, biçim gerçeği. Sayısal karşılaştırma kuralları
+  // (min_value/max_value/less_than/greater_than) ondalık ayracı buradan okur.
+  // Tüketici uygulama kendi diliyle ezebilir (Language.load); bu bir VARSAYILAN.
+  decimalPoint: ',',
   // Ajax
   errorUnexpected: 'Beklenmeyen bir hata oluştu. Lütfen daha sonra tekrar deneyin.',
   errorNetwork: 'İnternet bağlantınızı kontrol edin.',

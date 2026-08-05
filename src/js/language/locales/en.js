@@ -1,4 +1,7 @@
 export default {
+  // Locale — see tr.js: a format fact, not a message. Numeric comparison rules
+  // read the decimal separator from here. Consumers may override via Language.load().
+  decimalPoint: '.',
   // Ajax
   errorUnexpected: 'An unexpected error occurred. Please try again later.',
   errorNetwork: 'Please check your internet connection.',
