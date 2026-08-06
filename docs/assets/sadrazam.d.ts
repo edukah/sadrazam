@@ -344,9 +344,12 @@ declare class Form {
 
   static help(): void;
   static rules: Record<string, FormRuleFn>;
+  /** Locale-aware decimal parse; null when empty or unrecognised. */
+  static parseDecimal(value: string): number | null;
   static perform(formSelector?: string): void;
   static validate(elemOrEvent: HTMLElement | Event): boolean;
   static togglePasswordVisibility(button: HTMLElement): void;
+  static clearInputMessage(input: HTMLElement): void;
 }
 
 declare class AutosizeTextarea {

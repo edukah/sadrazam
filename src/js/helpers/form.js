@@ -144,12 +144,95 @@ class Form {
     }
   };
 
-  static #parseNumericValue = (value) => {
-    if (typeof value !== 'string' || value.trim() === '') return null;
-    const number = Number(value.replaceAll(',', ''));
-    
+  /**
+   * Parses a decimal the way the active locale writes it.
+   *
+   * The separator is NOT guessed — it comes from the loaded language file
+   * (`decimalPoint`). Consumers pass `languageCode` to `Sadrazam.configure()`,
+   * which loads that file; the same key can be overridden via `Language.load()`.
+   *
+   * Decision tree — only the last branch needs the locale:
+   *   1. two different markers      -> the LAST one is decimal   "1.234,56" · "1,234.56"
+   *   2. one marker, NOT 3 trailing -> decimal                   "1,5" · "1.5" · "1.2345"
+   *   3. space / NBSP               -> grouping (SI, 22nd CGPM 2003 Res. 10)
+   *   4. one marker + EXACTLY 3     -> genuinely ambiguous -> locale decides
+   *                                    tr: "1.500" = 1500 · "1,500" = 1.5
+   *
+   * Previously this stripped every comma (`value.replaceAll(',', '')`), i.e. it
+   * assumed the English convention. Under a comma-decimal locale that silently
+   * multiplied by ten: "10,5" was read as 105, so a shipping rule with
+   * min 10,5 / max 20 failed `less_than` and the form never submitted.
+   *
+   * @param  {string} value
+   * @return {number|null} null when the value is empty or not a recognised number
+   */
+  static parseDecimal = (value) => {
+    if (typeof value !== 'string') return null;
+
+    // Currency decoration is dropped; letters are NOT — 'abc1,5' must stay invalid.
+    const cleaned = value
+      .trim()
+      .replace(/[\u0024\u00A2-\u00A5\u058F\u060B\u09FB\u0AF1\u0BF9\u20A0-\u20BF]/gu, '')
+      .replace(/[\s\u00A0\u202F]/gu, '')
+      .trim();
+
+    if (cleaned === '' || !/^[+-]?[\d.,]*$/.test(cleaned) || !/\d/.test(cleaned)) return null;
+
+    const dots = (cleaned.match(/\./g) || []).length;
+    const commas = (cleaned.match(/,/g) || []).length;
+
+    // A repeated marker can only be regular 3-digit grouping.
+    if ((dots > 1 || commas > 1) && !/^[+-]?\d{1,3}(?:([.,])\d{3})+(?:(?!\1)[.,]\d+)?$/.test(cleaned)) {
+      return null;
+    }
+
+    // No separator at all — the marker is irrelevant.
+    if (dots === 0 && commas === 0) {
+      const plain = Number(cleaned);
+
+      return isNaN(plain) ? null : plain;
+    }
+
+    const lastDot = cleaned.lastIndexOf('.');
+    const lastComma = cleaned.lastIndexOf(',');
+    let decimalPos;
+
+    if (lastDot !== -1 && lastComma !== -1) {
+      decimalPos = Math.max(lastDot, lastComma);
+    } else {
+      const position = lastDot !== -1 ? lastDot : lastComma;
+      const marker = lastDot !== -1 ? '.' : ',';
+      const trailing = cleaned.length - position - 1;
+      // Ambiguous only here. Separator unknown (locale file not loaded yet) -> refuse
+      // to guess; the caller skips the rule and the server still validates.
+      const decimalPoint = Language.getAll().get('decimalPoint');
+
+      if (trailing !== 3) {
+        decimalPos = position;                    // unambiguous — locale irrelevant
+      } else if (decimalPoint === undefined) {
+        return null;                              // ambiguous + no locale -> refuse to guess
+      } else {
+        decimalPos = marker === decimalPoint ? position : -1;
+      }
+    }
+
+    let canonical;
+
+    if (decimalPos === -1) {
+      canonical = cleaned.replace(/[^\d\-+]/g, '');   // every marker was grouping
+    } else {
+      const whole = cleaned.slice(0, decimalPos).replace(/[^\d\-+]/g, '');
+      const fraction = cleaned.slice(decimalPos + 1).replace(/\D/g, '');
+
+      canonical = `${whole}.${fraction}`;
+    }
+
+    const number = Number(canonical);
+
     return isNaN(number) ? null : number;
   };
+
+  static #parseNumericValue = (value) => Form.parseDecimal(value);
 
   static perform (formSelector = 'form') {
     document.querySelectorAll(formSelector).forEach(form => {

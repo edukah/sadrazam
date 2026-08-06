@@ -88,6 +88,29 @@ class Language {
   }
 
   /**
+   * Fills gaps only — never overwrites a key the consumer already set.
+   *
+   * The library's own locale file is a DEFAULT, so it must not clobber the
+   * consuming application. Load order made that happen silently: `configure()`
+   * kicks off an async `import()` while `Language.load(appLocale)` runs
+   * synchronously right after, so the library file landed LAST and won.
+   * Measured: consumer set 'requiredDefault' -> library overwrote it on resolve.
+   * Harmless today (app locales only carry keys the library lacks) but it meant
+   * a consumer simply could not override anything, and racily so.
+   *
+   * @param {object} translations
+   */
+  static loadDefaults (translations) {
+    Object.entries(translations).forEach(([key, value]) => {
+      if (!this.#words.has(key)) {
+        this.#words.set(key, value);
+      }
+    });
+
+    this.#loaded = true;
+  }
+
+  /**
    * Adds or updates a single key-value pair.
    *
    * @param  {string} key
@@ -169,13 +192,14 @@ class Language {
   static async #loadFromFile (langCode) {
     try {
       const module = await import(`../locales/${langCode}.js`);
-      this.load(module.default);
+      // Gap-fill, not overwrite — the consumer's Language.load() wins (see loadDefaults).
+      this.loadDefaults(module.default);
     } catch (err) {
       console.warn(`[Sadrazam|Language] Language file not found (${langCode}), loading fallback language.`, err);
 
       try {
         const fallbackModule = await import(`../locales/en.js`);
-        this.load(fallbackModule.default);
+        this.loadDefaults(fallbackModule.default);
       } catch (fallbackErr) {
         console.error('[Sadrazam|Language] Failed to load fallback language file (en).', fallbackErr);
       }

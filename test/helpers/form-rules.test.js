@@ -1,5 +1,6 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import Form from '../../src/js/helpers/form.js';
+import Language from '../../src/js/language/core/language.js';
 
 // Snackbar mock (Form import ediyor)
 vi.mock('../../src/js/modules/snackbar.js', () => ({
@@ -244,8 +245,58 @@ describe('Form.rules', () => {
     });
 
     it('virgüllü sayıyı doğru parse eder', () => {
+      // tr locale: virgül ONDALIK -> '1,500' = 1.5, yani 1000'in ALTINDA -> hata.
+      // Eski davranış virgülü binlik sanıp 1500 okuyordu ve bu test onu kilitliyordu.
+      Language.load({ decimalPoint: ',' });
       const input = createInput({ value: '1,500' });
-      expect(Form.rules.min_value(input, form, '1000')).toBeNull();
+      expect(Form.rules.min_value(input, form, '1')).toBeNull();
+      expect(Form.rules.min_value(input, form, '1000')).toEqual({ key: 'limitMin', params: { value: '1000' } });
+    });
+  });
+
+  // =====================================================================
+  // parseDecimal — locale-aware ondalık okuma
+  // =====================================================================
+  describe('parseDecimal', () => {
+    it('tr locale: ayraçları doğru çözer', () => {
+      Language.load({ decimalPoint: ',' });
+
+      expect(Form.parseDecimal('10,5')).toBe(10.5);
+      expect(Form.parseDecimal('1.500')).toBe(1500);      // nokta binlik
+      expect(Form.parseDecimal('1,500')).toBe(1.5);       // virgül ondalık
+      expect(Form.parseDecimal('1.234,56')).toBe(1234.56);
+      expect(Form.parseDecimal('1,234.56')).toBe(1234.56); // iki işaretçi -> sonuncusu ondalık
+      expect(Form.parseDecimal('1 234,56')).toBe(1234.56); // SI boşluk gruplama
+      expect(Form.parseDecimal('1.5')).toBe(1.5);          // tek ayraç + 1 hane -> ondalık
+      expect(Form.parseDecimal('-2,5')).toBe(-2.5);
+      expect(Form.parseDecimal('20')).toBe(20);
+    });
+
+    it('en locale: aynı girdi ters yorumlanır', () => {
+      Language.load({ decimalPoint: '.' });
+
+      expect(Form.parseDecimal('1.500')).toBe(1.5);        // nokta ondalık
+      expect(Form.parseDecimal('1,500')).toBe(1500);       // virgül binlik
+    });
+
+    it('çözülemeyen girdide null döner (tahmin etmez)', () => {
+      Language.load({ decimalPoint: ',' });
+
+      ['abc', '1,5,5', '1.5.5', '(2,5)', '5-', 'abc1,5', '', '   '].forEach((bad) => {
+        expect(Form.parseDecimal(bad)).toBeNull();
+      });
+    });
+
+    it('ayraç bilinmiyorsa BELİRSİZ girdide tahmin etmez', () => {
+      // Locale dosyası dinamik import ile asenkron geliyor; henüz gelmediyse
+      // "tek ayraç + tam 3 hane" kalıbı çözülemez -> null -> kural atlanır.
+      // Sunucu zaten doğruluyor; yanlış sayı üretmektense kuralı atlamak güvenli.
+      Language.getAll().delete('decimalPoint');
+
+      expect(Form.parseDecimal('1.500')).toBeNull();
+      // Belirsiz OLMAYAN girdiler ayraçsız çözülebiliyor:
+      expect(Form.parseDecimal('1.234,56')).toBe(1234.56);
+      expect(Form.parseDecimal('20')).toBe(20);
     });
   });
 
