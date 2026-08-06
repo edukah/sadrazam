@@ -279,6 +279,31 @@ describe('Form.rules', () => {
       expect(Form.parseDecimal('1,500')).toBe(1500);       // virgül binlik
     });
 
+    it('baştaki sıfır belirsizliği kaldırır', () => {
+      // Gruplanmış bir sayının ilk grubu '0' ile başlamaz: "0.001" gruplama olsaydı
+      // "0001" demek olurdu ve kimse 1'i böyle yazmaz. Bu dal olmadan tr locale
+      // "0.001"i 1 okuyordu — bin kat, yüksek hassasiyetli para biriminde ölümcül.
+      Language.load({ decimalPoint: ',' });
+
+      expect(Form.parseDecimal('0.001')).toBe(0.001);
+      expect(Form.parseDecimal('0.500')).toBe(0.5);
+      expect(Form.parseDecimal('00.500')).toBe(0.5);
+      expect(Form.parseDecimal('-0.001')).toBe(-0.001);
+
+      // Baştaki sıfır YOKSA belirsiz dal korunur
+      expect(Form.parseDecimal('1.500')).toBe(1500);
+      expect(Form.parseDecimal('12.500')).toBe(12500);
+      expect(Form.parseDecimal('999.500')).toBe(999500);
+    });
+
+    it('baştaki sıfırda ayraç bilinmese bile çözer', () => {
+      // Belirsizlik olmadığı için locale'e hiç sorulmuyor -> null dönmemeli.
+      Language.getAll().delete('decimalPoint');
+
+      expect(Form.parseDecimal('0.001')).toBe(0.001);
+      expect(Form.parseDecimal('1.500')).toBeNull();   // bu hâlâ belirsiz
+    });
+
     it('çözülemeyen girdide null döner (tahmin etmez)', () => {
       Language.load({ decimalPoint: ',' });
 
