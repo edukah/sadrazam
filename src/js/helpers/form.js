@@ -157,8 +157,9 @@ class Form {
    *   3. space / NBSP               -> grouping (SI, 22nd CGPM 2003 Res. 10)
    *   4. one marker + EXACTLY 3     -> genuinely ambiguous -> locale decides
    *                                    tr: "1.500" = 1500 · "1,500" = 1.5
-   *   5. ...unless a leading zero precedes the marker -> decimal, no ambiguity
-   *                                    "0.001" -> 0.001 ("0001" is not how anyone writes 1)
+   *   5. ...unless the first group is invalid (empty or '0'-prefixed) -> decimal
+   *                                    ".125" -> 0.125 · "0.001" -> 0.001
+   *                                    ("125"/"0001" is not how anyone writes those)
    *
    * Previously this stripped every comma (`value.replaceAll(',', '')`), i.e. it
    * assumed the English convention. Under a comma-decimal locale that silently
@@ -208,13 +209,16 @@ class Form {
       const position = lastDot !== -1 ? lastDot : lastComma;
       const marker = lastDot !== -1 ? '.' : ',';
       const trailing = cleaned.length - position - 1;
-      // A leading zero removes the ambiguity: a grouped number's first group never starts
-      // with '0'. "0.001" as grouping would mean "0001", and nobody writes 1 that way — so
-      // the marker is decidedly decimal and the locale is irrelevant. Without this branch
-      // a comma-decimal locale read "0.001" as 1 (1000x, fatal for high-precision money).
-      const leadingZero = cleaned.slice(0, position).replace(/^[+-]/, '').startsWith('0');
+      // An INVALID FIRST GROUP removes the ambiguity: a grouped number's first group can
+      // be neither empty nor '0'-prefixed.
+      //   ".125"  as grouping would mean "125"  — nobody writes 125 that way
+      //   "0.001" as grouping would mean "0001" — nobody writes 1 that way
+      // In both the marker is decidedly decimal and the locale is irrelevant. Without this
+      // branch a comma-decimal locale read them as 125 and 1 (1000x, fatal for money).
+      const leading = cleaned.slice(0, position).replace(/^[+-]/, '');
+      const invalidFirstGroup = leading === '' || leading.startsWith('0');
 
-      if (trailing !== 3 || leadingZero) {
+      if (trailing !== 3 || invalidFirstGroup) {
         decimalPos = position;                    // unambiguous — locale irrelevant
       } else {
         // Genuinely ambiguous. Separator unknown (locale file not loaded yet) -> refuse

@@ -279,6 +279,20 @@ describe('Form.rules', () => {
       expect(Form.parseDecimal('1,500')).toBe(1500);       // virgül binlik
     });
 
+    it('ayraçla BAŞLAYAN girdi belirsiz değildir', () => {
+      // Gruplanmış sayının ilk grubu BOŞ olamaz: ".125" gruplama olsaydı "125" demek
+      // olurdu. Baştaki sıfırla aynı kural; ikisi tek koşulda.
+      Language.load({ decimalPoint: ',' });
+
+      expect(Form.parseDecimal('.125')).toBe(0.125);
+      expect(Form.parseDecimal('.500')).toBe(0.5);
+      expect(Form.parseDecimal(',500')).toBe(0.5);
+      expect(Form.parseDecimal('-.125')).toBe(-0.125);
+
+      // İlk grup geçerliyse belirsiz dal korunur
+      expect(Form.parseDecimal('1.500')).toBe(1500);
+    });
+
     it('baştaki sıfır belirsizliği kaldırır', () => {
       // Gruplanmış bir sayının ilk grubu '0' ile başlamaz: "0.001" gruplama olsaydı
       // "0001" demek olurdu ve kimse 1'i böyle yazmaz. Bu dal olmadan tr locale
