@@ -296,6 +296,21 @@ describe('Form.rules', () => {
       expect(Form.parseDecimal('999.500')).toBe(999500);
     });
 
+    it('para sembolü süslemesi elenir (\\p{Sc} — PHP ile aynı sınıf)', () => {
+      Language.load({ decimalPoint: ',' });
+
+      // Elle yazılmış kod-noktası listesi 21 sembol eksikti; Unicode özelliğine geçildi.
+      expect(Form.parseDecimal('$1,500.00')).toBe(1500);
+      expect(Form.parseDecimal('₺1.500,50')).toBe(1500.5);
+      expect(Form.parseDecimal('₴7,25')).toBe(7.25);    // eski listede vardı
+      expect(Form.parseDecimal('₸9.75')).toBe(9.75);    // eski listede vardı
+      expect(Form.parseDecimal('₲8,5')).toBe(8.5);      // eski listede YOKTU
+      expect(Form.parseDecimal('﷼12,5')).toBe(12.5);    // eski listede YOKTU
+
+      // Harf hâlâ elenmiyor — 'abc1,5' geçersiz kalmalı.
+      expect(Form.parseDecimal('abc1,5')).toBeNull();
+    });
+
     it('baştaki sıfırda ayraç bilinmese bile çözer', () => {
       // Belirsizlik olmadığı için locale'e hiç sorulmuyor -> null dönmemeli.
       Language.getAll().delete('decimalPoint');

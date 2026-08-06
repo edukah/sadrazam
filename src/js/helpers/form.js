@@ -174,7 +174,10 @@ class Form {
     // Currency decoration is dropped; letters are NOT — 'abc1,5' must stay invalid.
     const cleaned = value
       .trim()
-      .replace(/[\u0024\u00A2-\u00A5\u058F\u060B\u09FB\u0AF1\u0BF9\u20A0-\u20BF]/gu, '')
+      // \p{Sc} = Unicode "Currency Symbol" — elle yazılmış kod-noktası listesinin yerine.
+      // Eski liste 21 sembol eksikti ve \u20A0-\u20BF aralığı eskimişti. Sunucu tarafı
+      // (PHP Decimal::normalize) zaten \p{Sc} kullanıyor; iki gramer ayrışmasın.
+      .replace(/\p{Sc}/gu, '')
       .replace(/[\s\u00A0\u202F]/gu, '')
       .trim();
 
