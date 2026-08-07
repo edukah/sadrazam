@@ -28,13 +28,27 @@ html.is-locked {
   justify-content: center;
   grid-template-columns: 1fr 1fr;
 
-  // KARARTMA BURADA DEĞİL — `Backdrop`'tan geliyor. Eskiden burada elle yazılmış
-  // `rgba(0, 0, 0, 0.5)` + blur vardı ve Modal ayrıca Backdrop.insert() çağırdığı için
-  // ikisi ÜST ÜSTE biniyordu; üstteki tema-kör olduğundan koyu temada perde koyulaşmıyordu
-  // (ölçüldü: Backdrop .4 → .8 değişirken bu sabit kalıyordu).
-  // Kaldırmak güvenli: `.modal` elemanını yalnız Modal JS üretiyor (hiçbir projede statik
-  // `class="modal"` markup'ı yok) ve üç dalın üçü de Backdrop.insert() çağırıyor.
+  // İLK katmanın karartması BURADA DEĞİL — `Backdrop`'tan geliyor. Eskiden burada elle
+  // yazılmış `rgba(0, 0, 0, 0.5)` + blur vardı ve Modal ayrıca Backdrop.insert() çağırdığı
+  // için ikisi ÜST ÜSTE biniyordu; üstteki tema-kör olduğundan koyu temada perde
+  // koyulaşmıyordu (ölçüldü: Backdrop .4 → .8 değişirken bu sabit kalıyordu).
+  //
+  // Statik `class="modal"` markup'ı da olabilir (Dükkan çerez rızası katmanı böyle);
+  // o durumda Backdrop'u açmak tüketicinin sorumluluğunda.
   overflow: auto;
+
+  // Üst üste binen modaller (`closeOtherModals: false` — VARSAYILAN, yani desteklenen
+  // davranış): Backdrop tek elemandır ve yalnız en alttaki katmanın altında durur, iki
+  // modal arasına perde çekemez. Ayrımı, ikinciden itibaren her katman kendi taşır.
+  // Aynı tema token'ı — koyu temada Backdrop ile birlikte koyulaşır.
+  //
+  // İlk katman ES GEÇİLİR (`~` ilk kardeşi eşleştirmez): perdesi zaten Backdrop'ta,
+  // burada da olsa çift sayılırdı. Modal JS örnekleri `body` altına kardeş olarak
+  // ekliyor; statik markup kendi sarmalayıcısında durduğu için bu kurala girmiyor.
+  & ~ .modal {
+    background-color: var(--backdrop-background);
+    backdrop-filter: blur(var(--backdrop-blur));
+  }
 
   animation: modal-fade-in 0.2s ease-out;
 
