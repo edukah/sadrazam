@@ -177,7 +177,13 @@
 // ---- Bağımsız: Ghost ----
 .bttn--ghost {
   background-color: transparent;
-  color: var(--color-text-dark-3);
+  // dark-3 DEĞİL: beyaz zeminde kontrastı 3.69:1 ve WCAG AA normal-metin eşiğini
+  // (4.5:1) geçmiyordu — buton metni "pasif" gibi okunuyordu. dark-2 → 7.94:1.
+  // Koyu temada ikisi de geçiyor (4.86 / 10.21) ama tek token ile iki temayı da
+  // güvenli kılan dark-2.
+  // NOT: renk modifier'ı (--pri vb.) eklemek ETKİSİZ — bu satır onu eziyor; ghost
+  // bilinçli olarak nötr, vurguyu --outline/--filled taşır.
+  color: var(--color-text-dark-2);
   border-color: transparent;
   box-shadow: none;
   text-shadow: none;
