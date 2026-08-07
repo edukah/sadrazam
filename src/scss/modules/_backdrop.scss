@@ -2,7 +2,11 @@
    Backdrop — Arka plan perdesi
    JS modülü: modules/backdrop.js
    Backdrop.insert() ile açılır, Backdrop.remove() ile kapanır.
-   z-index değeri --z-overlay-backdrop CSS variable'ından gelir.
+
+   z-index VARSAYILANI --z-overlay-backdrop (300). Bileşenin kartı --z-overlay-content
+   (301) ile eşleşir — ikisi bir ÇİFT, ayrı ayrı seçilmez.
+   Dropdown seviyesindeki tüketiciler insert({ zIndexVar: '--z-dropdown-backdrop' })
+   ile ezer; Hovermenu böyle yapıyor.
    ========================================================================= */
 
 .backdrop {

@@ -111,14 +111,6 @@ $breakpoint-4k: 2560px; // Gerçek 4K
   --z-layer-ceiling: 1000;
 
   /* --------------------------------------------------------------------------
-   * DİNAMİK YIĞINLAMA (STACKING)
-   * İç içe açılan ve aynı katmanı paylaşan bileşenler için.
-   * Şimdilik sadece "overlay" katmanı için tanımlı.
-   * -------------------------------------------------------------------------- */
-  --z-overlay-stack-level: 0;
-  /* JS tarafından yönetilir (0, 1, 2...). */
-
-  /* --------------------------------------------------------------------------
    * BİLEŞEN DEĞİŞKENLERİ (COMPONENTS)
    * Her bileşen, ait olduğu katmandan türetilir.
    * -------------------------------------------------------------------------- */
@@ -132,10 +124,12 @@ $breakpoint-4k: 2560px; // Gerçek 4K
   --z-dropdown-backdrop: var(--z-layer-ui);
   --z-dropdown-content: calc(var(--z-layer-ui) + 1);
 
-  /** @group Overlay Layer (300'ler - DİNAMİK) */
-  /* Bu katman, Backdrop sınıfımızla tam uyumludur. */
-  --z-overlay-backdrop: calc(var(--z-layer-overlay) + (var(--z-overlay-stack-level) * 2));
-  --z-overlay-content: calc(var(--z-layer-overlay) + (var(--z-overlay-stack-level) * 2) + 1);
+  /** @group Overlay Layer (300'ler) */
+  /* ÇİFT kullanılır: perde Backdrop.insert() varsayılanıyla --z-overlay-backdrop'a,
+     bileşenin kartı bir üstündeki --z-overlay-content'e oturur. Biri seçilip diğeri
+     başka katmandan alınırsa aradaki bant (201-300) perdenin üstünde kalır. */
+  --z-overlay-backdrop: var(--z-layer-overlay);
+  --z-overlay-content: calc(var(--z-layer-overlay) + 1);
 
   /** @group Floating Layer (400'ler) */
   --z-popover: var(--z-layer-floating);

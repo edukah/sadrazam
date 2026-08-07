@@ -136,7 +136,13 @@ class Hovermenu {
     this.#listenedElement.setAttribute('aria-expanded', 'true');
 
     if (this.#config.backdrop) {
-      this.#backdropId = Backdrop.insert({ onClick: this.#remove });
+      // Hovermenu is dropdown-level, not overlay-level: its content sits at
+      // `--z-dropdown-content` (201). Backdrop's default is the overlay backdrop (300),
+      // which would cover the menu — so the dropdown layer is passed explicitly.
+      this.#backdropId = Backdrop.insert({
+        zIndexVar: '--z-dropdown-backdrop',
+        onClick: this.#remove
+      });
     }
 
     this.#bindToggleListeners();

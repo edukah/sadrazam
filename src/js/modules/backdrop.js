@@ -49,15 +49,17 @@ class Backdrop {
    * Shows or updates the backdrop.
    * @param {object} [options] - Optional settings.
    * @param {string} [options.ownerId] - Unique owner ID. Auto-generated if omitted.
-   * @param {string} [options.zIndexVar] - CSS z-index variable. Default: '--z-dropdown-backdrop'.
-   * @param {number} [options.stackLevel] - Nesting level for stacked modals.
+   * @param {string} [options.zIndexVar] - CSS z-index variable. Default: '--z-overlay-backdrop'.
+   *   Overlay-level consumers (Modal, SlideMenu, blocking layers) keep the default: backdrop 300 /
+   *   content `--z-overlay-content` 301 — a matched pair.
+   *   Dropdown-level consumers MUST pass '--z-dropdown-backdrop'; their content sits at
+   *   `--z-dropdown-content` (201) and the overlay backdrop (300) would cover it. Hovermenu does this.
    * @param {function} [options.onClick] - Callback invoked on backdrop click.
    * @returns {string} The `ownerId` used to manage this backdrop request.
    */
   static insert (options = {}) {
     const finalOptions = {
-      zIndexVar: '--z-dropdown-backdrop',
-      stackLevel: null,
+      zIndexVar: '--z-overlay-backdrop',
       onClick: null,
       ownerId: `backdrop-owner-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`,
       ...options
@@ -120,16 +122,7 @@ class Backdrop {
   static #updateStyle () {
     if (!this.#element || this.#stack.length === 0) return;
 
-    const topOwner = this.#stack[this.#stack.length - 1];
-    const { zIndexVar, stackLevel = null } = topOwner;
-
-    this.#element.style.zIndex = `var(${zIndexVar})`;
-    
-    if (stackLevel !== null) {
-      this.#element.style.setProperty('--z-modal-stack-level', stackLevel);
-    } else {
-      this.#element.style.removeProperty('--z-modal-stack-level');
-    }
+    this.#element.style.zIndex = `var(${this.#stack[this.#stack.length - 1].zIndexVar})`;
   }
 }
 
