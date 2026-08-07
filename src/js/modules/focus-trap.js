@@ -61,7 +61,7 @@ class FocusTrap {
   }
 
   /**
-   * Releases one trap and restores focus.
+   * Releases one trap. Focus is restored only when the topmost trap is released.
    * @param {string} ownerId - The ID returned by `insert()`. Releasing a trap you do not own is ignored.
    */
   static remove (ownerId) {
@@ -71,11 +71,18 @@ class FocusTrap {
 
     if (index === -1) return;
 
+    const wasTopmost = index === this.#stack.length - 1;
+
     const [owner] = this.#stack.splice(index, 1);
 
     if (this.#stack.length === 0) {
       document.removeEventListener('keydown', this.#handleKeydown);
     }
+
+    // A layer below the top was released out of order — a higher layer is still open
+    // and owns focus. Restoring here would pull focus behind a layer the user can still
+    // see. The remaining top keeps the focus it already has.
+    if (!wasTopmost) return;
 
     // Restore focus only if the element is still in the document — it may have been
     // removed while the layer was open.

@@ -216,5 +216,27 @@ describe('FocusTrap', () => {
       FocusTrap.remove(inner);
       FocusTrap.remove(outer);
     });
+
+    it('alttaki katman kapatılınca üsttekinin odağını çalmaz', () => {
+      document.getElementById('outside').focus();
+
+      const outer = FocusTrap.insert(document.getElementById('view-a'), 'dis');
+
+      document.getElementById('view-b').classList.remove('d-none');
+      const inner = FocusTrap.insert(document.getElementById('view-b'), 'ic');
+
+      expect(document.activeElement.id).toBe('b1');
+
+      // Alttaki sıra dışı kapanıyor, üstteki HÂLÂ açık. Odak geri verilirse
+      // kullanıcı hâlâ görünen katmanın arkasına düşer.
+      FocusTrap.remove(outer);
+
+      expect(document.activeElement.id).toBe('b1');
+
+      // Üstteki kapanınca odak restore edilir — kendi kaydına.
+      FocusTrap.remove(inner);
+
+      expect(document.activeElement.id).toBe('a1');
+    });
   });
 });
