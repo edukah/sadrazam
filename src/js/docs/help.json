@@ -19,6 +19,7 @@
   {"text": "  Hovermenu        Dropdown acilir menu", "style": ""},
   {"text": "  SlideMenu        Kayarak acilan menu (mobil uyumlu)", "style": ""},
   {"text": "  Backdrop         Arka plan perdesi", "style": ""},
+  {"text": "  FocusTrap        Klavye odagini katman icinde tutar", "style": ""},
   {"text": "  Autocomplete     Otomatik tamamlama input'u", "style": ""},
   {"text": "  InfiniteScroll   Sonsuz kaydirma", "style": ""},
   {"text": "  CountBadge       Sayi gosteren bildirim badge'i (CSS-only)", "style": ""},

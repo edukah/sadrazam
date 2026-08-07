@@ -75,8 +75,10 @@ import InfiniteScroll from './modules/infinite-scroll.js';
 // Visual Indicators — Singletons with reference counting
 //   ProgressBar : Top loading bar with trickle animation
 //   Backdrop    : Stack-based shared backdrop (multi-owner)
+//   FocusTrap   : Stack-based keyboard focus containment (multi-owner)
 import ProgressBar from './modules/progress-bar.js';
 import Backdrop from './modules/backdrop.js';
+import FocusTrap from './modules/focus-trap.js';
 
 // DOM Utilities — Static helpers for scroll, style, and element manipulation
 //   Elem : getStyle, scrollToView, disableScroll, flash, getScrollbarWidth
@@ -127,6 +129,7 @@ const Sadrazam = {
   // Modules — Visual Indicators (singletons, ref-counted)
   ProgressBar,
   Backdrop,
+  FocusTrap,
 
   // Modules — DOM Utilities
   Elem,
@@ -209,6 +212,7 @@ export {
   // Modules — Visual Indicators
   ProgressBar,
   Backdrop,
+  FocusTrap,
 
   // Modules — DOM Utilities
   Elem
