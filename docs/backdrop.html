@@ -219,24 +219,25 @@
             <p class="section-desc">
                 Override the CSS custom property used for <span class="code">z-index</span> via the
                 <span class="code">zIndexVar</span> option. Default is
-                <span class="code">--z-dropdown-backdrop</span>.
-                You can also pass <span class="code">stackLevel</span> to set <span class="code">--z-modal-stack-level</span>.
+                <span class="code">--z-overlay-backdrop</span> — the layer modals and consent
+                overlays live on, which is what most callers want. Dropdown-level consumers opt
+                down explicitly; <span class="code">Hovermenu</span> is the one that does.
             </p>
 
             <div class="row">
-                <span class="label">Dropdown z</span>
+                <span class="label">Overlay z (default)</span>
                 <button class="demo-btn demo-btn--primary" id="btnZDefault">
                     <i class="ph-bold ph-stack"></i>&nbsp; Default z-index
                 </button>
-                <span class="code">--z-dropdown-backdrop</span>
+                <span class="code">--z-overlay-backdrop</span>
             </div>
 
             <div class="row">
-                <span class="label">Overlay z</span>
+                <span class="label">Dropdown z</span>
                 <button class="demo-btn demo-btn--success" id="btnZOverlay">
-                    <i class="ph-bold ph-stack"></i>&nbsp; Overlay z-index
+                    <i class="ph-bold ph-stack"></i>&nbsp; Dropdown z-index
                 </button>
-                <span class="code">--z-overlay-backdrop</span>
+                <span class="code">--z-dropdown-backdrop</span>
             </div>
 
             <div class="row">
@@ -247,9 +248,11 @@
             </div>
 
             <div class="code-block">
+                <span class="cmt">// Default — no option needed</span><br>
+                Sadrazam.<span class="fn">Backdrop.insert</span>();<br><br>
+                <span class="cmt">// Opt down to the dropdown layer</span><br>
                 Sadrazam.<span class="fn">Backdrop.insert</span>({<br>
-                &nbsp;&nbsp;<span class="str">zIndexVar</span>: <span class="str">'--z-overlay-backdrop'</span>,<br>
-                &nbsp;&nbsp;<span class="str">stackLevel</span>: 2<br>
+                &nbsp;&nbsp;<span class="str">zIndexVar</span>: <span class="str">'--z-dropdown-backdrop'</span><br>
                 });
             </div>
         </div>
@@ -347,7 +350,6 @@
                 <span style="font-size: 0.82rem;">
                     <span class="code">ownerId</span> &middot;
                     <span class="code">zIndexVar</span> &middot;
-                    <span class="code">stackLevel</span> &middot;
                     <span class="code">onClick</span>
                 </span>
             </div>
@@ -465,8 +467,8 @@
         }
 
         document.getElementById('btnZDefault').addEventListener('click', function () {
+            // zIndexVar geçilmiyor — varsayılanı (--z-overlay-backdrop) göstersin diye.
             const id = Backdrop.insert({
-                zIndexVar: '--z-dropdown-backdrop',
                 onClick: function () {
                     Backdrop.remove(id);
                     const idx = zOwnerIds.indexOf(id);
@@ -480,8 +482,7 @@
 
         document.getElementById('btnZOverlay').addEventListener('click', function () {
             const id = Backdrop.insert({
-                zIndexVar: '--z-overlay-backdrop',
-                stackLevel: 2,
+                zIndexVar: '--z-dropdown-backdrop',
                 onClick: function () {
                     Backdrop.remove(id);
                     const idx = zOwnerIds.indexOf(id);

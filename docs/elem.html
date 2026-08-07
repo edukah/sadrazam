@@ -213,7 +213,7 @@
         <!-- ==================== DISABLE / ENABLE SCROLL ==================== -->
         <div class="section">
             <h2 class="section-title">2. disableScroll / enableScroll</h2>
-            <p class="section-desc">Disables page scrolling while preserving scrollbar space via <span class="code">paddingRight</span>. Supports nested calls — scroll is only re-enabled when all callers have called <span class="code">enableScroll()</span>.</p>
+            <p class="section-desc">Disables page scrolling while preserving scrollbar space via <span class="code">paddingRight</span>. Ownership-based, not a counter: <span class="code">disableScroll()</span> returns an owner ID and scroll is restored only once every owner has released it. Pass that ID back to <span class="code">enableScroll(ownerId)</span> — calling it without one is ignored with a console warning, so a stray release cannot drop a lock another component still holds.</p>
 
             <div class="btn-row">
                 <button class="demo-btn demo-btn--primary" onclick="disableScrollDemo()">
@@ -224,12 +224,12 @@
                 </button>
             </div>
 
-            <div id="scrollLockResult" class="result-output">Lock count: 0 — Scroll is enabled</div>
+            <div id="scrollLockResult" class="result-output">Owners: 0 — Scroll is enabled</div>
 
             <div class="row" style="margin-top: 10px;">
                 <span class="label">Code</span>
-                <span class="code">Sadrazam.Elem.disableScroll()</span>
-                <span class="code">Sadrazam.Elem.enableScroll()</span>
+                <span class="code">const id = Sadrazam.Elem.disableScroll()</span>
+                <span class="code">Sadrazam.Elem.enableScroll(id)</span>
             </div>
         </div>
 
@@ -368,15 +368,15 @@
                     </tr>
                     <tr>
                         <td>disableScroll()</td>
-                        <td>—</td>
-                        <td>void</td>
-                        <td>Disables page scrolling. Supports nested calls.</td>
+                        <td>ownerId?: string</td>
+                        <td>string</td>
+                        <td>Disables page scrolling and returns the owner ID (generated when omitted). Keep it — it is the release handle.</td>
                     </tr>
                     <tr>
                         <td>enableScroll()</td>
-                        <td>—</td>
+                        <td>ownerId: string</td>
                         <td>void</td>
-                        <td>Re-enables page scrolling. Must be called once per disableScroll().</td>
+                        <td>Releases one owner's lock; scroll returns once the last owner releases. Required — a call without an ID is ignored with a console warning.</td>
                     </tr>
                     <tr>
                         <td>getScrollbarWidth()</td>
@@ -431,27 +431,28 @@
         }
 
         // --- 2. disableScroll / enableScroll ---
-        let scrollLockCount = 0;
+        // disableScroll() RETURNS an owner ID and enableScroll() requires it back.
+        // Keeping a plain counter is no longer enough — the ID is the handle, and
+        // calling enableScroll() without one is ignored with a console warning.
+        const scrollLockIds = [];
 
         function disableScrollDemo() {
-            Sadrazam.Elem.disableScroll();
-            scrollLockCount++;
+            scrollLockIds.push(Sadrazam.Elem.disableScroll());
             updateScrollLockDisplay();
         }
 
         function enableScrollDemo() {
-            if (scrollLockCount <= 0) return;
-            Sadrazam.Elem.enableScroll();
-            scrollLockCount--;
+            if (scrollLockIds.length === 0) return;
+            Sadrazam.Elem.enableScroll(scrollLockIds.pop());
             updateScrollLockDisplay();
         }
 
         function updateScrollLockDisplay() {
             const el = document.getElementById('scrollLockResult');
-            if (scrollLockCount > 0) {
-                el.textContent = 'Lock count: ' + scrollLockCount + ' — Scroll is DISABLED';
+            if (scrollLockIds.length > 0) {
+                el.textContent = 'Owners: ' + scrollLockIds.length + ' — Scroll is DISABLED';
             } else {
-                el.textContent = 'Lock count: 0 — Scroll is enabled';
+                el.textContent = 'Owners: 0 — Scroll is enabled';
             }
         }
 
