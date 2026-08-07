@@ -181,6 +181,21 @@
   border-color: transparent;
   box-shadow: none;
   text-shadow: none;
+
+  // Ghost'un ne zemini ne kenarlığı var; "tıklanabilir" hissi yalnız metinden geliyor.
+  // Bu yüzden hover geri bildirimi ZEMİN değil METİN üzerinde: altı çizilir.
+  //
+  // Blok aynı zamanda taban kuralı İPTAL EDİYOR: `:is(.bttn, …):hover` hepsine
+  // `color-mix(var(--button-color, transparent), black 10%)` zemin veriyor ve ghost'ta
+  // --button-color tanımsız olduğu için ortaya soluk gri bir kutu çıkıyordu.
+  // --soft ve --outline zaten kendi hover'larıyla eziyor; eksik olan yalnız ghost'tu.
+  &:hover {
+    @media (hover: hover) and (pointer: fine) {
+      background-color: transparent;
+      text-decoration: underline;
+      text-underline-offset: 0.2em;
+    }
+  }
 }
 
 // ---- Disabled durumu ----
