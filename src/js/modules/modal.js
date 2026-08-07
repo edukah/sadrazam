@@ -11,6 +11,7 @@ class Modal {
   #modalElement;
   #modalContentElement;
   #backdropId = null;
+  #scrollLockId = null;
   #closeTimer = null;
   #previouslyFocusedElement = null;
 
@@ -133,9 +134,11 @@ class Modal {
 
     Backdrop.remove(this.#backdropId);
 
-    if (!document.querySelector('body > .modal')) {
-      Elem.enableScroll();
-    }
+    // Each modal releases ITS OWN lock. The old guard was "is any other modal left?",
+    // but every modal acquired the lock separately, so the count never returned to zero:
+    // after a form modal + a Toast (Toast is Modal-based) both closed, the page stayed
+    // `overflow: hidden` and could not be scrolled again. Owner IDs fix that by design.
+    Elem.enableScroll(this.#scrollLockId);
 
     globalThis.clearTimeout(this.#closeTimer);
 
@@ -329,7 +332,7 @@ class Modal {
   };
   
   #insertIntoDOM = () => {
-    Elem.disableScroll();
+    this.#scrollLockId = Elem.disableScroll();
     document.body.appendChild(this.#modalElement);
 
     // Execute scripts inside the modal

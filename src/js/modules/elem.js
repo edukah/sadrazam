@@ -4,7 +4,12 @@
 class Elem {
   // --- Private Static Fields ---
   static #scrollbarWidth = null;
-  static #scrollLockCount = 0;
+  // Owner IDs, not a bare count. A count can be decremented by a caller that never
+  // incremented it — measured twice in the wild: a resize handler released a layer's
+  // lock it never took, and Modal acquired once per modal but released only when the
+  // last one closed, leaving the page permanently `overflow: hidden`. Backdrop already
+  // uses owner IDs; this mirrors it.
+  static #scrollLockOwners = [];
 
   /**
    * Prints available methods and descriptions to the console.
@@ -14,8 +19,8 @@ class Elem {
       ['getStyle(el, styleProp)', 'Gets the computed style value of an element.'],
       ['onElementHeightChange(element, callback)', 'Runs a callback when an element is resized. Returns a ResizeObserver instance.'],
       ['getScrollbarWidth()', 'Calculates the browser scrollbar width (cached).'],
-      ['disableScroll()', 'Disables page scrolling. Scrollbar hidden, space preserved via paddingRight. Supports nested calls.'],
-      ['enableScroll()', 'Re-enables page scrolling. Must be called once per disableScroll().'],
+      ['disableScroll(ownerId?)', 'Disables page scrolling. Scrollbar hidden, space preserved via paddingRight. Returns an `ownerId`.'],
+      ['enableScroll(ownerId)', 'Withdraws one lock request. `ownerId` is required — releasing a lock you do not hold is ignored.'],
       ['flash(element)', 'Briefly flashes the element with a background highlight (.is-flashing + sdrzm-flash animation).'],
       ['scrollToView(targetElement, options?)', 'Smoothly scrolls the page to the specified element.']
     ]);
@@ -81,28 +86,50 @@ class Elem {
 
   /**
    * Disables page scrolling. Scrollbar is hidden but its space is preserved via paddingRight.
-   * Supports nested calls — scroll is re-enabled only when all callers have called enableScroll().
+   * Multiple owners may hold the lock at once; it is released when the last one lets go.
+   * @param {string} [ownerId] - Unique owner ID. Auto-generated if omitted. Re-locking with the
+   *   same ID is a no-op, so callers reached from more than one path stay idempotent.
+   * @returns {string} The `ownerId` to pass back to `enableScroll()`.
    */
-  static disableScroll () {
-    this.#scrollLockCount++;
+  static disableScroll (ownerId) {
+    const finalOwnerId = ownerId ?? `scroll-lock-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
 
-    if (this.#scrollLockCount === 1) {
+    if (!this.#scrollLockOwners.includes(finalOwnerId)) {
+      this.#scrollLockOwners.push(finalOwnerId);
+    }
+
+    if (this.#scrollLockOwners.length === 1) {
       const scrollbarWidth = globalThis.innerWidth - document.documentElement.clientWidth;
       document.documentElement.style.paddingRight = `${scrollbarWidth}px`;
       document.documentElement.classList.add('is-locked');
       document.body.classList.add('is-locked');
     }
+
+    return finalOwnerId;
   }
 
   /**
-   * Re-enables page scrolling. Must be called once per disableScroll().
+   * Withdraws one lock request. Scrolling resumes once no owner is left.
+   * @param {string} ownerId - The ID returned by `disableScroll()`. REQUIRED: without it a caller
+   *   could release a lock it never took, which is exactly how the page ended up scroll-dead
+   *   after a modal + toast, and how a resize handler unlocked the page behind a blocking layer.
    */
-  static enableScroll () {
-    if (this.#scrollLockCount <= 0) return;
+  static enableScroll (ownerId) {
+    if (!ownerId) {
+      console.warn('[Sadrazam|Elem] enableScroll: `ownerId` is required — call ignored. Pass the ID returned by disableScroll().');
 
-    this.#scrollLockCount--;
+      return;
+    }
 
-    if (this.#scrollLockCount === 0) {
+    const index = this.#scrollLockOwners.indexOf(ownerId);
+
+    // Not an owner — nothing to release. Silent on purpose: releasing twice (e.g. a close
+    // handler that also fires on resize) is legitimate, only the first call does the work.
+    if (index === -1) return;
+
+    this.#scrollLockOwners.splice(index, 1);
+
+    if (this.#scrollLockOwners.length === 0) {
       document.documentElement.classList.remove('is-locked');
       document.documentElement.style.paddingRight = '';
       document.body.classList.remove('is-locked');
