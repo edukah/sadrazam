@@ -28,8 +28,12 @@ html.is-locked {
   justify-content: center;
   grid-template-columns: 1fr 1fr;
 
-  background-color: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(var(--backdrop-blur));
+  // KARARTMA BURADA DEĞİL — `Backdrop`'tan geliyor. Eskiden burada elle yazılmış
+  // `rgba(0, 0, 0, 0.5)` + blur vardı ve Modal ayrıca Backdrop.insert() çağırdığı için
+  // ikisi ÜST ÜSTE biniyordu; üstteki tema-kör olduğundan koyu temada perde koyulaşmıyordu
+  // (ölçüldü: Backdrop .4 → .8 değişirken bu sabit kalıyordu).
+  // Kaldırmak güvenli: `.modal` elemanını yalnız Modal JS üretiyor (hiçbir projede statik
+  // `class="modal"` markup'ı yok) ve üç dalın üçü de Backdrop.insert() çağırıyor.
   overflow: auto;
 
   animation: modal-fade-in 0.2s ease-out;
