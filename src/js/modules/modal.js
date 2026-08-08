@@ -1,5 +1,6 @@
 import Backdrop from '../modules/backdrop.js';
 import Elem from '../modules/elem.js';
+import FocusTrap from '../modules/focus-trap.js';
 import { InsertScript } from '../helpers/document.js';
 
 /**
@@ -11,8 +12,9 @@ class Modal {
   #modalElement;
   #modalContentElement;
   #backdropId = null;
+  #scrollLockId = null;
+  #focusTrapId = null;
   #closeTimer = null;
-  #previouslyFocusedElement = null;
 
   // --- Static Config ---
   static DEFAULTS = {
@@ -99,7 +101,6 @@ class Modal {
 
   constructor (config = {}) {
     this.#config = { ...Modal.DEFAULTS, ...config };
-    this.#previouslyFocusedElement = document.activeElement;
 
     if (this.#config.closeOtherModals) {
       this.#closeOtherModals();
@@ -133,16 +134,16 @@ class Modal {
 
     Backdrop.remove(this.#backdropId);
 
-    if (!document.querySelector('body > .modal')) {
-      Elem.enableScroll();
-    }
+    // Each modal releases ITS OWN lock. The old guard was "is any other modal left?",
+    // but every modal acquired the lock separately, so the count never returned to zero:
+    // after a form modal + a Toast (Toast is Modal-based) both closed, the page stayed
+    // `overflow: hidden` and could not be scrolled again. Owner IDs fix that by design.
+    Elem.enableScroll(this.#scrollLockId);
+
+    // Releases the trap AND restores focus to whatever was focused before the modal opened.
+    FocusTrap.remove(this.#focusTrapId);
 
     globalThis.clearTimeout(this.#closeTimer);
-
-    // Restore focus to the previously focused element
-    if (this.#previouslyFocusedElement && document.body.contains(this.#previouslyFocusedElement)) {
-      this.#previouslyFocusedElement.focus();
-    }
 
     if (typeof this.#config.closeAfterFunction === 'function') {
       this.#config.closeAfterFunction();
@@ -303,49 +304,22 @@ class Modal {
       return;
     }
 
-    // Focus trap: keep Tab cycling within the modal
-    if (event.key === 'Tab') {
-      if (!this.#modalElement) return;
-      const focusableElements = this.#modalElement.querySelectorAll(
-        'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
-      );
-      if (focusableElements.length === 0) return;
-
-      const firstFocusable = focusableElements[0];
-      const lastFocusable = focusableElements[focusableElements.length - 1];
-
-      if (event.shiftKey) {
-        if (document.activeElement === firstFocusable) {
-          event.preventDefault();
-          lastFocusable.focus();
-        }
-      } else {
-        if (document.activeElement === lastFocusable) {
-          event.preventDefault();
-          firstFocusable.focus();
-        }
-      }
-    }
+    // Tab is FocusTrap's job now. Escape stays here because closing on Escape is a
+    // per-component decision — a blocking consent layer traps focus but must not close.
   };
   
   #insertIntoDOM = () => {
-    Elem.disableScroll();
+    this.#scrollLockId = Elem.disableScroll();
     document.body.appendChild(this.#modalElement);
 
     // Execute scripts inside the modal
     globalThis.setTimeout(() => InsertScript.run(this.#modalElement), 0);
 
-    // Focus the first focusable element
+    // Deferred so it runs AFTER InsertScript above: scripts inside the modal may replace
+    // content, and focus must land on what finally rendered. FocusTrap.insert also moves
+    // focus into the layer (first focusable, else the layer itself via tabindex="-1").
     globalThis.setTimeout(() => {
-      const firstFocusable = this.#modalElement.querySelector(
-        'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
-      );
-      if (firstFocusable) {
-        firstFocusable.focus();
-      } else {
-        this.#modalElement.setAttribute('tabindex', '-1');
-        this.#modalElement.focus();
-      }
+      this.#focusTrapId = FocusTrap.insert(this.#modalElement);
     }, 0);
   };
   

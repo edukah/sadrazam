@@ -13,6 +13,7 @@ class SlideMenu {
   #sourceContent = null;
   #a11yKeydownHandler = null;
   #backdropId = null;
+  #scrollLockId = null;
 
   // --- Static Defaults ---
   static DEFAULTS = {
@@ -134,7 +135,7 @@ class SlideMenu {
     
     this.#container.classList.add('is-open');
     this.#listenedElement.setAttribute('aria-expanded', 'true');
-    Elem.disableScroll();
+    this.#scrollLockId = Elem.disableScroll();
     
     // Start enter animation
     this.#container.classList.add('is-entering');
@@ -157,7 +158,8 @@ class SlideMenu {
     this.#container.addEventListener('animationend', () => {
       this.#container.classList.remove('is-open');
       this.#container.classList.remove('is-leaving');
-      Elem.enableScroll();
+      Elem.enableScroll(this.#scrollLockId);
+      this.#scrollLockId = null;
       
       this.#config.closeFunc();
       

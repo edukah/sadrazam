@@ -15,6 +15,7 @@ declare const Sadrazam: {
   SlideMenu: typeof SlideMenu;
   Autocomplete: typeof Autocomplete;
   Backdrop: typeof Backdrop;
+  FocusTrap: typeof FocusTrap;
   Snackbar: typeof Snackbar;
   SnackbarRelay: typeof SnackbarRelay;
   Toast: typeof Toast;
@@ -181,8 +182,8 @@ declare class Autocomplete {
 
 interface BackdropOptions {
   ownerId?: string;
+  /** Default: '--z-overlay-backdrop'. Dropdown-level consumers pass '--z-dropdown-backdrop'. */
   zIndexVar?: string;
-  stackLevel?: number | null;
   onClick?: () => void;
 }
 
@@ -192,6 +193,14 @@ declare class Backdrop {
   static help(): void;
   static insert(options?: BackdropOptions): string;
   static remove(ownerId?: string): void;
+}
+
+declare class FocusTrap {
+  private constructor();
+
+  static help(): void;
+  static insert(element: Element, ownerId?: string): string | null;
+  static remove(ownerId: string): void;
 }
 
 declare class Snackbar {
@@ -380,6 +389,11 @@ declare class Elem {
     callback: ResizeObserverCallback
   ): ResizeObserver | null;
   static getScrollbarWidth(): number;
+  /** Returns an ownerId; pass it back to enableScroll(). Re-locking with the same ID is a no-op. */
+  static disableScroll(ownerId?: string): string;
+  /** ownerId is required — releasing a lock you do not hold is ignored. */
+  static enableScroll(ownerId: string): void;
+  static flash(element: HTMLElement): void;
   static scrollToView(
     targetElement: HTMLElement,
     options?: { margin?: number }
