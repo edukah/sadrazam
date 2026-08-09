@@ -125,6 +125,15 @@
   // (_colors-grey.scss dark-mode swap) → buton açık griye döner, yazı sabit beyaz olduğu için okunmaz.
   --button-color: var(--color-grey-800--f);
 
+  // Koyu temada sayfa zemini de koyu (#1D1D1D): antrasit dolgu ondan yalnız 1,42:1 ayrışıyor,
+  // WCAG 1.4.11 arayüz sınırı için 3:1 istiyor. Ölçüldü — diğer dolgulu varyantlar koyu temada
+  // eşiği geçiyor (pri 5,09 · danger 3,39 · notice 3,03), yalnız --black kalıyordu.
+  // Dolguyu açmak antrasit kimliğini bitirirdi; standart görünür bir SINIRI da kabul ediyor
+  // (GitHub/Apple deseni). grey-550--f sayfaya 3,82:1 — grey-600 3,16 ile ancak geçiyordu, pay yok.
+  body.dark-mode & {
+    border-color: var(--color-grey-550--f);
+  }
+
   &:hover {
     @media (hover: hover) and (pointer: fine) {
       // Taban hover'ı KOYULAŞTIRIYOR (color-mix(--button-color, black 10%)). Zemin zaten koyu
