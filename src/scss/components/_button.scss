@@ -112,6 +112,14 @@
 // ---- Siyah/antrasit (kendi hover'ı var — türetilen hover ÖLÜ) ----
 // Nötr-koyu CTA: renk taşımayan ama vurgulu aksiyonlar (ör. "seçim gerektiriyor" gibi satın alma
 // OLMAYAN ana eylemler) — renkli varyantların yanında ayrışır, marka rengini tüketmez.
+// Değer siyah DEĞİL antrasit (#373737): saf siyah kartlarda sert duruyor, grey-800 zaten paletin
+// nötr-koyu basamağı.
+//
+// ⚠ BU BLOK --soft / --outline'DAN ÖNCE DURMALI — TAŞIMA. Kendi `&:hover`'ı olan bir renk
+// varyantı kademelerden SONRA gelirse hover'ı onların hover'ını ezer ve `--neutral`'ın
+// aşağıda yapmak zorunda kaldığı gibi ayrı `.bttn--X.bttn--soft` / `.bttn--X.bttn--outline`
+// kombinasyon kuralları yazmak gerekir. Buradan itibaren üç kombinasyon da doğrulandı
+// (ölçüldü): filled #373737/beyaz · soft %12 tint/#373737 · outline saydam/#373737 kenar.
 .bttn--black {
   // --f (sabit) ZORUNLU: çıplak --color-grey-800 koyu temada grey-100'e takla atıyor
   // (_colors-grey.scss dark-mode swap) → buton açık griye döner, yazı sabit beyaz olduğu için okunmaz.
