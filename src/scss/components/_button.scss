@@ -9,7 +9,7 @@
    Şekil:       rectangle (default), --square (icon butonlar)
    Kademeler:   filled (default), --soft, --outline
    Bağımsız:    --ghost
-   Renkler:     --pri, --sec, --ter, --neutral,
+   Renkler:     --pri, --sec, --ter, --neutral, --black,
                 --safe, --notice, --caution, --warning, --danger
    Durumlar:    --disabled, --loading
    Yerleşim:    --block (tam genişlik)
@@ -22,6 +22,7 @@
   .bttn--sec,
   .bttn--ter,
   .bttn--neutral,
+  .bttn--black,
   .bttn--safe,
   .bttn--notice,
   .bttn--caution,
@@ -107,6 +108,32 @@
 .bttn--caution { --button-color: var(--color-caution-500); }
 .bttn--warning { --button-color: var(--color-warning-500); }
 .bttn--danger  { --button-color: var(--color-danger-500); }
+
+// ---- Siyah/antrasit (kendi hover'ı var — türetilen hover ÖLÜ) ----
+// Nötr-koyu CTA: renk taşımayan ama vurgulu aksiyonlar (ör. "seçim gerektiriyor" gibi satın alma
+// OLMAYAN ana eylemler) — renkli varyantların yanında ayrışır, marka rengini tüketmez.
+// Değer siyah DEĞİL antrasit (#373737): saf siyah kartlarda sert duruyor, grey-800 zaten paletin
+// nötr-koyu basamağı.
+//
+// ⚠ BU BLOK --soft / --outline'DAN ÖNCE DURMALI — TAŞIMA. Kendi `&:hover`'ı olan bir renk
+// varyantı kademelerden SONRA gelirse hover'ı onların hover'ını ezer ve `--neutral`'ın
+// aşağıda yapmak zorunda kaldığı gibi ayrı `.bttn--X.bttn--soft` / `.bttn--X.bttn--outline`
+// kombinasyon kuralları yazmak gerekir. Buradan itibaren üç kombinasyon da doğrulandı
+// (ölçüldü): filled #373737/beyaz · soft %12 tint/#373737 · outline saydam/#373737 kenar.
+.bttn--black {
+  // --f (sabit) ZORUNLU: çıplak --color-grey-800 koyu temada grey-100'e takla atıyor
+  // (_colors-grey.scss dark-mode swap) → buton açık griye döner, yazı sabit beyaz olduğu için okunmaz.
+  --button-color: var(--color-grey-800--f);
+
+  &:hover {
+    @media (hover: hover) and (pointer: fine) {
+      // Taban hover'ı KOYULAŞTIRIYOR (color-mix(--button-color, black 10%)). Zemin zaten koyu
+      // olduğu için bu hiçbir şey yapmıyor — ölçüldü: rgb(55,55,55) → rgb(50,50,50), 5 kanal.
+      // Koyu butonun geri bildirimi AÇILARAK verilir.
+      background-color: color-mix(in srgb, var(--button-color), white 18%);
+    }
+  }
+}
 
 // ---- Kademe: Soft ----
 .bttn--soft {
