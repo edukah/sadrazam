@@ -196,6 +196,37 @@ input[type="checkbox"] {
     }
   }
 
+  // Kısmi seçim — master/"tümünü seç" checkbox'ının 3. durumu (JS: el.indeterminate = true).
+  // :checked'in aynası; iç dolgu aynı, işaret tik yerine YATAY ÇİZGİ.
+  &:indeterminate {
+    border-color: var(--color-link-blue-dark-hover);
+
+    // İç dolgu kutusu (:checked::after ile birebir)
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: var(--color-link-blue-dark-hover);
+      border-radius: 0;
+    }
+
+    // Yatay çizgi (tik değil)
+    &::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 25%;
+      width: 50%;
+      height: 0.17em;
+      background-color: white;
+      transform: translateY(-50%);
+      z-index: 1;
+    }
+  }
+
   &:focus {
     outline: 0;
   }
