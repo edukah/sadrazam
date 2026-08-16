@@ -9,10 +9,9 @@ class Url {
     const availableConfigs = new Map([
       ['get(key, url?)', 'Gets the value of the specified parameter from the URL.'],
       ['has(key, url?)', 'Checks if the specified parameter exists in the URL.'],
-      ['set(key, value, url?)', 'Adds or updates a parameter in the URL.'],
-      ['delete(key, url?)', 'Deletes a parameter from the URL.'],
-      ['getAll(url?)', 'Returns all parameters from the URL as a JavaScript object.'],
-      ['fixUrlRoute(urlString)', 'Restores encoded slashes (%2F) in the URL route parameter.']
+      ['set(key, value, url?)', 'Adds or updates a parameter in the URL. Slashes in the query stay readable (/, not %2F).'],
+      ['delete(key, url?)', 'Deletes a parameter from the URL. Slashes in the query stay readable (/, not %2F).'],
+      ['getAll(url?)', 'Returns all parameters from the URL as a JavaScript object.']
     ]);
     console.info('%cUrl', 'font-size: 20px; font-weight: bold; color: red');
     availableConfigs.forEach((value, key) => {
@@ -67,8 +66,8 @@ class Url {
     try {
       const urlObj = new globalThis.URL(url, window.location.origin);
       urlObj.searchParams.set(key, value);
-      
-      return urlObj.href;
+
+      return this.#withReadableQuery(urlObj);
     } catch (e) {
       console.warn(`[Sadrazam|Url] set(): Invalid URL format: "${url}". Returning original URL.`);
       
@@ -86,8 +85,8 @@ class Url {
     try {
       const urlObj = new globalThis.URL(url, window.location.origin);
       urlObj.searchParams.delete(key);
-      
-      return urlObj.href;
+
+      return this.#withReadableQuery(urlObj);
     } catch (e) {
       console.warn(`[Sadrazam|Url] delete(): Invalid URL format: "${url}". Returning original URL.`);
       
@@ -113,14 +112,23 @@ class Url {
   }
 
   /**
-   * Restores encoded slashes (%2F) in the URL route parameter.
-   * @param {string} urlString - URL string to fix.
-   * @returns {string} URL with decoded slashes in the route parameter.
+   * Serializes the URL with readable slashes in the query.
+   *
+   * URLSearchParams re-serializes the whole query with the form-urlencoded rules and turns
+   * every `/` into `%2F` (`route=a/b/c` → `route=a%2Fb%2Fc`). A slash is a legal raw
+   * character in a query (RFC 3986 §3.4) and servers decode both forms identically, so this
+   * only restores readability — it is not a decoding step. Only the query is touched
+   * (`%2F` in the path is meaningful and stays); `&`, `=`, `?`, `#`, `+`, `%` stay encoded,
+   * so nested URLs inside a value keep their structure. The `search` setter does not
+   * re-encode `/`.
+   *
+   * @param {URL} urlObj - Already-mutated URL object.
+   * @returns {string} Absolute URL string.
    */
-  static fixUrlRoute (urlString) {
-    return urlString.replace(/(route=[^&]*)/g, (match) =>
-      match.replace(/%2F/g, '/')
-    );
+  static #withReadableQuery (urlObj) {
+    urlObj.search = urlObj.search.replace(/%2F/g, '/');
+
+    return urlObj.href;
   }
 }
 

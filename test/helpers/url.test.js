@@ -72,6 +72,29 @@ describe('Url', () => {
       const result = Url.set('key', 'val', '/page');
       expect(result).toContain('key=val');
     });
+
+    // URLSearchParams query'yi form-urlencoded kuralıyla yeniden yazar ve `/`'ı %2F yapar;
+    // set() bunu geri açar — route'a özel değil, query'deki her parametre için.
+    it('query\'deki slash\'ları okunur bırakır (route ve diğer parametreler)', () => {
+      const result = Url.set('page', '2', 'https://example.com/index.php?route=catalog/product&path=a/b');
+      expect(result).toBe('https://example.com/index.php?route=catalog/product&path=a/b&page=2');
+    });
+
+    it('eklenen değerdeki slash da okunur kalır', () => {
+      const result = Url.set('route', 'account/order/info', 'https://example.com/index.php?token=t');
+      expect(result).toBe('https://example.com/index.php?token=t&route=account/order/info');
+    });
+
+    it('slash dışındaki kodlamalara dokunmaz — iç içe URL değeri yapısını korur', () => {
+      const result = Url.set('page', '2', 'https://example.com/x?redirect=%2Fhesabim%2Fadres%3Fa%3D1%26b%3D2&q=a%26b');
+      expect(result).toBe('https://example.com/x?redirect=/hesabim/adres%3Fa%3D1%26b%3D2&q=a%26b&page=2');
+      expect(Url.get('redirect', result)).toBe('/hesabim/adres?a=1&b=2');
+    });
+
+    it('path\'teki %2F anlamlıdır, ona dokunmaz; hash korunur', () => {
+      const result = Url.set('k', 'v', 'https://example.com/x%2Fy?route=a/b#top');
+      expect(result).toBe('https://example.com/x%2Fy?route=a/b&k=v#top');
+    });
   });
 
   describe('delete()', () => {
@@ -95,6 +118,11 @@ describe('Url', () => {
       const result = Url.delete('key', '/page');
       expect(result).toContain('/page');
     });
+
+    it('silme sonrası kalan parametrelerin slash\'ları okunur kalır', () => {
+      const result = Url.delete('page', 'https://example.com/index.php?route=catalog/product&page=2');
+      expect(result).toBe('https://example.com/index.php?route=catalog/product');
+    });
   });
 
   describe('getAll()', () => {
@@ -109,27 +137,6 @@ describe('Url', () => {
 
     it('geçersiz URL için boş obje döndürür', () => {
       expect(Url.getAll(':::invalid')).toEqual({});
-    });
-  });
-
-  describe('fixUrlRoute()', () => {
-    it('route parametresindeki %2F\'leri slash\'a çevirir', () => {
-      expect(Url.fixUrlRoute('index.php?route=catalog%2Fproduct')).toBe('index.php?route=catalog/product');
-    });
-
-    it('birden fazla %2F içeren route\'u düzeltir', () => {
-      expect(Url.fixUrlRoute('index.php?route=account%2Forder%2Finfo')).toBe('index.php?route=account/order/info');
-    });
-
-    it('route dışındaki parametreleri etkilemez', () => {
-      const input = 'index.php?route=catalog%2Fproduct&path=a%2Fb';
-      const result = Url.fixUrlRoute(input);
-      expect(result).toContain('route=catalog/product');
-      expect(result).toContain('path=a%2Fb');
-    });
-
-    it('%2F içermeyen URL\'i olduğu gibi bırakır', () => {
-      expect(Url.fixUrlRoute('index.php?page=1')).toBe('index.php?page=1');
     });
   });
 });

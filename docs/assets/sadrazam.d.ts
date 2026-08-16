@@ -425,7 +425,6 @@ declare class Url {
   static set(key: string, value: string, url?: string): string;
   static delete(key: string, url?: string): string;
   static getAll(url?: string): Record<string, string>;
-  static fixUrlRoute(urlString: string): string;
 }
 
 declare class Token {
