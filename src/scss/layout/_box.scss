@@ -57,10 +57,17 @@
 
 .panel__toolbar {}
 
+// ⚠ AYIRICI ÇİZGİ YOK ve OLMAMALI — başlığın arka plan tonu (`.panel__heading`) zaten
+// ayırımı yapıyor. Buraya `border-top` konursa BAŞLIKSIZ panelde (yalnız gövde) panelin
+// KENDİ üst kenarıyla üst üste biner: ölçüldü, 1px yerine 2px kalınlaşıyor.
+// `.panel__heading`e `border-bottom` olarak taşımak da çözüm DEĞİL — bu sefer aynı
+// çakışma gövdesiz panelde olur (ölçüldü: alt kenar 3px → 4px). Sınır her iki uçta da
+// panelin kendi kenarına komşu; tek doğru cevap çizgiyi hiç koymamak.
+//
+// `.panel__footer` KENDİ `border-top`'unu KORUR — onun arka plan tonu yok, tek ayırıcısı o.
 .panel__body {
   position: relative;
   padding: var(--space-8);
-  border-top: var(--border-width-sm) solid var(--color-grey-150);
 
   &--no-padding {
     padding: 0;
