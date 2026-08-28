@@ -28,12 +28,29 @@
   height: 1.375em;
 }
 
+/* Gizli kontrol — İKİ mekanizmayla birden gizlenir, bilerek.
+ *
+ * `opacity: 0` TEK BAŞINA YETMİYOR: genel form stilindeki
+ * `input[type="checkbox"]:disabled { opacity: .7 }` kuralı ile specificity EŞİT (0,2,1) ve
+ * o kural stylesheet'te SONRA geldiği için kazanıyor. Sonuç: disabled switch'te gizli
+ * kontrol görünür oluyor — switch'in sol üstünde 4px'lik açık gri kutu (ölçüldü, gerçek
+ * Chrome: opacity 0 yerine 0.7, arka plan #e0e0e0, 2px kenarlık).
+ *
+ * `clip-path` o yarışın dışında: hiçbir genel kural onu vermiyor, dolayısıyla opacity
+ * ezilse bile görünen alan sıfır kalıyor.
+ *
+ * ⚠ `display: none` ya da `visibility: hidden` KULLANMA — ikisi de kontrolün odaklanmasını
+ * engeller, yani switch klavyeyle kullanılamaz olur (ölçüldü: `display:none` ile
+ * `document.activeElement` kontrole GELMİYOR). Aşağıdaki `:focus-visible` kuralı zaten
+ * klavye kullanımını açıkça destekliyor; onu ölü hâle getirirlerdi. Kontrolün odaklanabilir
+ * kalması şart, yalnız GÖRÜNMEZ olmalı — `sr-only` utility'sinin izlediği yaklaşımın aynısı. */
 .switch input,
 .switch input[type="checkbox"] {
   position: absolute;
   width: 1px;
   height: 1px;
   opacity: 0;
+  clip-path: inset(50%);
   pointer-events: none;
 }
 
@@ -74,7 +91,26 @@ input:checked+.switch__slider:before {
   transform: translateX(1.125em);
 }
 
-input:disabled+.switch__slider {
+/* Kilitli görünüm — RENK de değişir, yalnız soluklaşmaz.
+ *
+ * `opacity` TEK BAŞINA YETMİYOR: açık switch'in track'i doygun bir mor
+ * (`--color-sec-900--f`) ve 0.7'de hâlâ mor okunuyor, yani "kilitli" olduğu anlaşılmıyor.
+ * Sorun yalnız AÇIK durumda; kapalı switch'in track'i zaten gri.
+ *
+ * `grayscale(1)` moru griye indiriyor ve `:before`'u (topu) da kapsıyor — top için ayrı
+ * kural gerekmiyor. Projenin geri kalanı da disabled'ı gri arka planla gösteriyor
+ * (`input[disabled]`, `button[disabled]`, `select[disabled]` → `--color-grey-100`);
+ * switch bu desenin dışında kalmıştı.
+ *
+ * ⚠ AÇIK/KAPALI BİLGİSİ KAYBOLMUYOR: durumu topun KONUMU taşıyor (sol kapalı, sağ açık),
+ * rengi değil. Material Design de kilitli switch'i tümüyle grileştiriyor.
+ *
+ * Değerler iki temada birlikte seçildi: switch bilinçli olarak tema-sabit (`--f` token'lar),
+ * bu yüzden tek değer hem açık hem koyu zeminde okunur olmalı. 0.55 + grayscale ikisinde de
+ * dengeli; yalnız opacity düşürmek (0.45) koyu zeminde moru büsbütün kaybediyor, yalnız
+ * grayscale bırakmak açık zeminde fazla koyu duruyor. */
+input:disabled + .switch__slider {
   cursor: not-allowed;
-  opacity: 0.7;
+  opacity: 0.55;
+  filter: grayscale(1);
 }
