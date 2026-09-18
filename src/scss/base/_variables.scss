@@ -6,17 +6,9 @@
 
 @use "fonts";
 @forward "fonts";
-
-/* MEDIA QUERIES */
-$breakpoint-xs: 360px; // Küçük telefonlar
-$breakpoint-sm: 576px; // Mobil (Bootstrap uyumlu)
-$breakpoint-md: 768px; // Tablet (dikey)
-$breakpoint-lg: 992px; // Tablet (yatay) / Küçük laptop
-$breakpoint-xl: 1200px; // Desktop
-$breakpoint-xxl: 1440px; // Büyük desktop
-$breakpoint-xxxl: 1920px; // Full HD / 2K
-$breakpoint-4k: 2560px; // Gerçek 4K
-/* END OF MEDIA QUERIES */
+// Breakpoint bildirimleri abstracts/'a taşındı; buradan @forward ile eski API korunuyor.
+@use "../abstracts/breakpoints" as *;
+@forward "../abstracts/breakpoints";
 
 :where(:root) {
   --breakpoint-xs: #{$breakpoint-xs};

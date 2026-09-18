@@ -1,10 +1,5 @@
-/** Secondary Colors (semantic — dark mode'da simetrik swap: 100↔900, 300↔700, 500 sabit) **/
-$color-sec-100: rgba(254, 244, 211, 1);
-$color-sec-300: rgba(252, 238, 191, 1);
-$color-sec-500: rgba(254, 163, 96, 1);
-$color-sec-700: rgba(244, 130, 60, 1);
-$color-sec-900: rgba(241, 101, 29, 1);
-/** End of Secondary Colors **/
+@forward '../abstracts/colors-sec';
+@use '../abstracts/colors-sec' as *;
 
 :root {
   --color-sec-100: #{$color-sec-100};

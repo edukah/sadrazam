@@ -1,0 +1,22 @@
+/**
+ * SESSİZ KATMAN — bu klasörden CSS ÇIKMAZ.
+ *
+ * Burada yalnız Sass bildirimleri durur: değişkenler, fonksiyonlar, ileride mixin'ler.
+ * CSS üreten karşılıkları `theme/` ve `base/` altındadır ve oradaki dosyalar bu
+ * klasörü @forward eder; yani eski import yolları aynen çalışmaya devam eder.
+ *
+ * NEDEN: Sass bir modülün CSS'ini HER derleme girdisinde yeniden yayar. `base/variables`
+ * hem bildirim tutup hem CSS bastığı için, onu yalnız 4 breakpoint sayısı uğruna çağıran
+ * 141 rota dosyasının her biri ~52 KB tema CSS'ini kendi çıktısına kopyalıyordu.
+ * Ayrım 7-1 deseninin `abstracts/` kuralıdır (ITCSS'te Settings+Tools, Bootstrap'ta
+ * `_variables.scss` ile `_root.scss` ayrımı).
+ *
+ * KURAL: Buraya `:root`, seçici ya da @media yazma. Yazarsan tekrar 141 kopya doğar.
+ * Nöbetçi: dukkan/tests/test_scss_silent_tokens.php
+ */
+
+@forward 'colors-main';
+@forward 'colors-text';
+@forward 'colors-grey';
+@forward 'colors-interaction';
+@forward 'breakpoints';

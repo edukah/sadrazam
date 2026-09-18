@@ -1,10 +1,5 @@
-/** Primary Colors (semantic — dark mode'da simetrik swap: 100↔900, 300↔700, 500 sabit) **/
-$color-pri-100: rgba(133, 199, 217, 1);
-$color-pri-300: rgba(84, 180, 203, 1);
-$color-pri-500: rgba(10, 150, 183, 1);
-$color-pri-700: rgba(5, 120, 147, 1);
-$color-pri-900: rgba(2, 91, 112, 1);
-/** End of Primary Colors **/
+@forward '../abstracts/colors-pri';
+@use '../abstracts/colors-pri' as *;
 
 :root {
   --color-pri-100: #{$color-pri-100};

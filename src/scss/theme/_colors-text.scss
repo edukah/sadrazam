@@ -1,35 +1,6 @@
 @use 'colors-main' as *;
-
-// Grey skalasi degistiginde asagidaki eslesmeler kontrol edilmeli.
-// Ayni degerler kullanilir ama bagimsiz tanimlanir — grey'den alinmaz.
-
-/** Text Colors **/
-/*** Light Theme Text Colors ***/
-$color-text-dark-1: rgba(23, 23, 23, 1); // = grey-910
-$color-text-dark-2: rgba(81, 81, 81, 1); // = grey-700
-$color-text-dark-3: rgba(133, 133, 133, 1); // = grey-500
-$color-text-dark-4: rgba(185, 185, 185, 1); // = grey-300
-/*** End of Light Theme Text Colors ***/
-
-/*** Dark Theme Text Colors (warm ton, grey'e baglanamaz) ***/
-$color-text-light-1: rgba(235, 231, 222, 1);
-$color-text-light-2: rgba(200, 195, 184, 1);
-$color-text-light-3: rgba(165, 158, 165, 1);
-$color-text-light-4: rgba(123, 123, 123, 1);
-/*** End of Dark Theme Text Colors ***/
-
-/*** Light Theme Link Colors ***/
-$color-link-dark: rgba(23, 23, 23, 1); // = grey-910
-$color-link-dark-hover: rgba(29, 29, 29, 1); // = grey-900
-$color-link-blue-dark: rgba(0, 102, 204, 1);
-/*** End of Light Theme Link Colors ***/
-
-/*** Dark Theme Link Colors ***/
-$color-link-light: rgba(235, 231, 222, 1);
-$color-link-light-hover: rgba(229, 225, 216, 0.87);
-$color-link-blue-light: rgba(130, 130, 255, 1);
-/*** End of Dark Theme Link Colors ***/
-/** End of Text Colors **/
+@forward '../abstracts/colors-text';
+@use '../abstracts/colors-text' as *;
 
 :root {
   // Sabit (--f) — dark mode'da değişmez

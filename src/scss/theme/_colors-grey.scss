@@ -1,27 +1,6 @@
 @use 'colors-main' as *;
-
-/** Grey Scale (esit aralikli: 13 birim, simetrik dark mode swap) **/
-$color-grey-50: rgba(250, 250, 250, 1);
-$color-grey-100: rgba(237, 237, 237, 1);
-$color-grey-150: rgba(224, 224, 224, 1);
-$color-grey-200: rgba(211, 211, 211, 1);
-$color-grey-250: rgba(198, 198, 198, 1);
-$color-grey-300: rgba(185, 185, 185, 1);
-$color-grey-350: rgba(172, 172, 172, 1);
-$color-grey-400: rgba(159, 159, 159, 1);
-$color-grey-450: rgba(146, 146, 146, 1);
-$color-grey-500: rgba(133, 133, 133, 1);
-$color-grey-550: rgba(120, 120, 120, 1);
-$color-grey-600: rgba(107, 107, 107, 1);
-$color-grey-650: rgba(94, 94, 94, 1);
-$color-grey-700: rgba(81, 81, 81, 1);
-$color-grey-750: rgba(68, 68, 68, 1);
-$color-grey-800: rgba(55, 55, 55, 1);
-$color-grey-850: rgba(42, 42, 42, 1);
-$color-grey-900: rgba(29, 29, 29, 1);
-$color-grey-910: rgba(23, 23, 23, 1);
-$color-grey-950: rgba(16, 16, 16, 1);
-/** End of Grey Scale **/
+@forward '../abstracts/colors-grey';
+@use '../abstracts/colors-grey' as *;
 
 :root {
   // Adaptive — dark mode'da capraz swap
