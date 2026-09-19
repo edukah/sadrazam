@@ -77,31 +77,48 @@ sadrazam/
 
 ## Color System
 
-8 dosya (`src/scss/theme/`), flat import yapısı:
+⚠⚠ **HER RENK AİLESİ ARTIK İKİ DOSYA — bildirim `abstracts/`te, CSS `theme/`de (2026-09-19).**
+Aynı adlı iki dosya var; hangisine dokunacağın ne yaptığına bağlı:
+
+| istediğin | dosya | içinde ne var |
+|---|---|---|
+| bir tonu değiştir / yeni ton ekle | `src/scss/abstracts/_colors-X.scss` | yalnız `$` bildirimi — **CSS ÜRETMEZ** |
+| `:root` değişkeni ya da `.tc-`/`.tbc-` sınıfı | `src/scss/theme/_colors-X.scss` | `@forward abstracts` + `:root` + yardımcı sınıflar |
+
+**NEDEN:** Sass bir modülün CSS'ini **her derleme girdisinde** yeniden yayar. `base/variables`
+hem bildirim tutup hem CSS bastığı için, onu yalnız `$breakpoint-md` uğruna çağıran tüketiciler
+51.737 baytlık temayı kendi çıktılarına kopyalıyordu — Dükkan'da 141 dosya, bir ürün sayfasında
+8 kopya = 414 KB (ölçüldü 2026-09-18). Ayrım 7-1 deseninin `abstracts/` kuralı (ITCSS'te
+Settings+Tools; Bootstrap'ta `_variables.scss` ↔ `_root.scss`).
+
+⚠ **`abstracts/`e `:root`, seçici ya da `@media` YAZMA.** Yazarsan sessizlik bozulur ve kopyalar
+geri gelir; bu SESSİZ bir kaymadır, derleme yeşil kalır. Nöbetçi tüketici tarafında:
+`dukkan/tests/test_scss_silent_tokens.php`.
+
+⚠ **Eski import yolları AYNEN çalışıyor — bu geriye dönük uyumu BOZMA.** `theme/colors-*` ve
+`base/variables` bayt bayt aynı CSS üretmeye devam ediyor; bu yüzden Bikonuvar ve Burtest'te
+tek satır değişiklik gerekmedi (ölçüldü: kabuk çıktıları 51.631 / 51.323 bayt, `cmp` eşit;
+`main.scss` 131.783 bayt, `cmp` eşit).
 
 ```
-main.scss ─┬── _colors-pri
-            ├── _colors-sec
-            ├── _colors-ter
-            ├── _colors-accent
-            ├── _colors-main ──── @use/_forward pri, sec, ter, accent
-            ├── _colors-text ──── @use colors-main
-            ├── _colors-grey ──── @use colors-main
-            └── _colors-interaction ── @use colors-main
+abstracts/_colors-{pri,sec,ter,accent}   ← yalnız $ bildirimi (sessiz)
+abstracts/_colors-main                   ← + @function tweak-alpha
+abstracts/_colors-{text,grey,interaction}
+abstracts/_breakpoints                   ← 8 adet $breakpoint-*
+abstracts/_variables                     ← toplayıcı, yukarıdakileri @forward eder
 
-_variables ─┬── @forward colors-main
-             ├── @forward colors-text
-             ├── @forward colors-grey
-             └── @forward colors-interaction
+theme/_colors-X = @forward '../abstracts/colors-X' + :root + .tc-/.tbc-   (CSS ÜRETİR)
+base/_variables = @forward theme/* + fonts + breakpoints + :where(:root)  (CSS ÜRETİR)
+main.scss       = theme/* dosyalarını doğrudan @use eder → dist bayt aynı
 ```
 
 | Dosya | İçerik |
 |-------|--------|
-| `_colors-pri.scss` | Primary renk — 5 ton (100/300/500/700/900) |
-| `_colors-sec.scss` | Secondary renk — 5 ton (100/300/500/700/900) |
-| `_colors-ter.scss` | Tertiary renk — 5 ton (100/300/500/700/900) |
-| `_colors-accent.scss` | 12 dekoratif renk × 5 ton. Compat alias: `-light` → 300, `-dark` → 700 |
-| `_colors-main.scss` | Ortak: white, black, backdrop, action, logo. @use/_forward pri, sec, ter, accent |
+| `_colors-pri.scss` | Primary renk — 5 ton (100/300/500/700/900). **Ton bildirimleri `abstracts/`te** |
+| `_colors-sec.scss` | Secondary renk — 5 ton. **Ton bildirimleri `abstracts/`te** |
+| `_colors-ter.scss` | Tertiary renk — 5 ton. **Ton bildirimleri `abstracts/`te** |
+| `_colors-accent.scss` | 12 dekoratif renk × 5 ton. Compat alias: `-light` → 300, `-dark` → 700. **Ton bildirimleri `abstracts/`te** |
+| `_colors-main.scss` | Ortak: white, black, backdrop, action, logo. **Bildirimler + `tweak-alpha()` `abstracts/`te** |
 | `_colors-text.scss` | Text (`1`–`4`) + link renkleri. Bağımlılık: `@use 'colors-main'` |
 | `_colors-grey.scss` | Grey scale (13-unit intervals, 20 steps + zero; son iki adım 910/950 13-unit pattern'ı kırar). Bkz. `docs/wiki/grey-scale.md` |
 | `_colors-interaction.scss` | safe (green), notice (blue), caution (amber), warning (orange), danger (red). Bağımlılık: `@use 'colors-main'` |
