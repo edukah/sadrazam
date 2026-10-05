@@ -30,6 +30,7 @@ Thumbs.db
 !CHANGELOG.md
 !docs/wiki/*.md
 !docs/plans/*.md
+!docs/audits/*.md
 .htaccess
 /archive
 
