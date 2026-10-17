@@ -64,6 +64,7 @@ sadrazam/
   - `is-loading` (generic loading utility)
   - `is-locked` (body scroll lock — modal, toast, slide-menu açıkken)
   - Static variants stay as BEM modifiers: `tooltip--top`, `bttn--loading` (has spinner)
+- **Grid (`.gr-row` + `.col-*-N`) — telefonda tam satır VARSAYILAN** (2026-10-17): satırın her doğrudan çocuğu, kendi `col-*-N` sınıfı devreye girene kadar satırın tamamını kaplar (`:where(.gr-row > *) { grid-column: 1 / -1 }`, özgüllük 0). `col-xs-12` YAZILMAZ — yalnız telefonda farklı pay isteniyorsa `col-xs-N`. Bu taban yokken CSS Grid payı belirlenmemiş öğeyi 12 kanaldan birine koyuyordu: `col-sm-12 col-md-6` yazılıp taban atlanınca 576px altında kutu satırın 1/12'sine sıkışıyordu (Dükkan admininde 76, Bikonuvar'da 8 yer). Nöbetçi `dukkan/tests/test_grid_full_row_default.php`.
 - **Media queries inside selectors**: `@media` sorguları (hover, breakpoint vb.) ilgili selector'ın **içine** yazılır, dışına değil. Bu, her class'ın responsive/interaction davranışını kendi tanımında tutar. Bkz. `docs/wiki/hover-media-query.md`
 - **`is-open`**: autocomplete dropdown visibility, slide-menu open state
 - Component SCSS files prefixed with `_` (partials)
