@@ -17,6 +17,7 @@ denetim-tabani-2026-10-05..main`.
 | Tarih | Pencere | Commit aralığı | Dosya | İddia → Doğrulanan | Rapor |
 |---|---|---|---|---|---|
 | 2026-10-05 | taban çizgisi | repo başı..`01a1a58` (dahil) | — | — (denetlenmiş SAYILIR — beyan) | — |
+| 2026-10-17 | Bekleyen (tek satır — ızgara tabanı, `/denetle` yedi madde) | `e1af100..c8c1fcc` | 5 | 2 → 2 (ORTA 2: F-1 düzeltme Bikonuvar/Burtest'e ulaşmıyor — ikisi bugünkü Sadrazam'a karşı derlenmiyor; F-2 ızgara öğesi iki ayrı yoldan tanınıyor) | [rapor](2026-10-17-grid-full-row-default-audit.md) |
 
 ## Bekleyen — denetlenmeden merge edilenler
 
@@ -25,4 +26,3 @@ bağlantısıyla taşınır, buradan silinir.
 
 | İşaretlendi | Kapsam | Commit aralığı (first-parent) | Merge | Neden ertelendi |
 |---|---|---|---|---|
-| 2026-10-17 | ızgara tabanı — `:where(.gr-row > *) { grid-column: 1 / -1 }` (telefonda varsayılan tam satır; `col-xs-12` yazılmayınca kutu 576px altında 1/12'ye sıkışıyordu — Dükkan admin 76 + Bikonuvar 8 yer), dist + docs/assets yenilendi (fark yalnız bu kural), `docs/grid.html` taban notu + duyarlı örneklerden `col-xs-12` çıktı, CLAUDE.md ızgara maddesi; nöbetçi Dükkan `tests/test_grid_full_row_default.php` (5, 5 mutasyon); gerçek CSS'le 358 / 600 / 800 / 1200px ölçüldü | `e1af100..c8c1fcc` | `c8c1fcc` | kullanıcı kararı: denetim toplu, sonra |
