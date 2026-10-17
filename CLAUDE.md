@@ -69,6 +69,7 @@ sadrazam/
 - **Media queries inside selectors**: `@media` sorguları (hover, breakpoint vb.) ilgili selector'ın **içine** yazılır, dışına değil. Bu, her class'ın responsive/interaction davranışını kendi tanımında tutar. Bkz. `docs/wiki/hover-media-query.md`
 - **`is-open`**: autocomplete dropdown visibility, slide-menu open state
 - Component SCSS files prefixed with `_` (partials)
+- **SCSS dosyasını yeniden adlandırmak/silmek tüketicileri kırar** (denetim F-1): Dükkan, Bikonuvar ve Burtest partial'ları `sadrazam/scss/<yol>` ile TEK TEK içe aktarıyor; ad değişince onların derlemesi durur ve biri o projeyi derleyene dek görünmez. 2026-08-01'de `layout/_grid` → `_grid_responsive` Bikonuvar ile Burtest'i 2,5 ay derlenmez bıraktı (sunulan CSS Mayıs'ta kaldı). Adı değiştiren iş, üç tüketicinin içe aktarmasını da aynı anda günceller. Nöbetçi `test/scss/consumer-imports.test.js` (kardeş dizindeki üç tüketiciyi tarar; tüketici yoksa atlar).
 - JS modules export classes with static `help()` method for console docs
 - **Console logging convention**:
   - `console.info` — only for `help()` methods (styled API docs in browser console)
