@@ -19,6 +19,16 @@
   margin-top: var(--space-10);
 }
 
+// Taban: satırın her çocuğu, sınıfı aksini söylemedikçe SATIRIN TAMAMINI kaplar (mobile-first).
+// CSS Grid'de payı belirlenmemiş öğe 12 kanaldan BİRİNE düşer: `col-sm-12 col-md-6` yazılıp
+// taban atlanınca 576px altında kutu satırın 1/12'sine sıkışıyordu (Bootstrap'te böyle bir kutu
+// kendiliğinden tam genişliktir; şablonlar o alışkanlıkla yazılmıştı). Bu yüzden `col-xs-12`
+// yazmak GEREKMEZ — yalnız telefonda farklı bir pay isteniyorsa yazılır (ör. `col-xs-6`).
+// `:where` → özgüllük 0: herhangi bir `col-*-N` kuralı, kendi kırılımında bunu ezer.
+:where(.gr-row > *) {
+  grid-column: 1 / -1;
+}
+
 // 2. Sütun sınıfı genel stilleri
 [class*="col-"] {
   width: 100%;

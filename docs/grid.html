@@ -260,6 +260,7 @@
             </table>
 
             <p class="class-ref">Grid container: <span class="code">.gr-row</span> &mdash; 12-column CSS Grid with <span class="code">gap: 1.25rem</span></p>
+            <p class="class-ref">Default: every direct child of <span class="code">.gr-row</span> spans the <strong>full row</strong> until one of its <span class="code">.col-*-N</span> classes applies &mdash; so <span class="code">.col-xs-12</span> is never needed. Write a <span class="code">.col-xs-*</span> class only for a different share on phones (e.g. <span class="code">.col-xs-6</span>). Without this default a <span class="code">.col-sm-12 .col-md-6</span> item fell into a single 1/12 track below 576px.</p>
         </div>
 
         <!-- ==================== EQUAL COLUMNS ==================== -->
@@ -418,13 +419,13 @@
             <!-- Full-width on mobile, 2-col on sm, 3-col on md, 4-col on lg -->
             <div class="row">
                 <span class="label">Responsive 4-up</span>
-                <span class="code">.col-xs-12 .col-sm-6 .col-md-4 .col-lg-3</span>
+                <span class="code">.col-sm-6 .col-md-4 .col-lg-3</span>
             </div>
             <div class="gr-row demo-grid">
-                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3"><div class="grid-cell grid-cell--blue">Item 1</div></div>
-                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3"><div class="grid-cell grid-cell--green">Item 2</div></div>
-                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3"><div class="grid-cell grid-cell--orange">Item 3</div></div>
-                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3"><div class="grid-cell grid-cell--purple">Item 4</div></div>
+                <div class="col-sm-6 col-md-4 col-lg-3"><div class="grid-cell grid-cell--blue">Item 1</div></div>
+                <div class="col-sm-6 col-md-4 col-lg-3"><div class="grid-cell grid-cell--green">Item 2</div></div>
+                <div class="col-sm-6 col-md-4 col-lg-3"><div class="grid-cell grid-cell--orange">Item 3</div></div>
+                <div class="col-sm-6 col-md-4 col-lg-3"><div class="grid-cell grid-cell--purple">Item 4</div></div>
             </div>
 
             <hr class="divider">
@@ -432,11 +433,11 @@
             <!-- Sidebar layout: full on xs, 4+8 on md, 3+9 on lg -->
             <div class="row">
                 <span class="label">Sidebar Layout</span>
-                <span class="code">.col-xs-12 .col-md-4/.col-md-8</span> then <span class="code">.col-lg-3/.col-lg-9</span>
+                <span class="code">.col-md-4/.col-md-8</span> then <span class="code">.col-lg-3/.col-lg-9</span>
             </div>
             <div class="gr-row demo-grid">
-                <div class="col-xs-12 col-md-4 col-lg-3"><div class="grid-cell grid-cell--teal">Sidebar</div></div>
-                <div class="col-xs-12 col-md-8 col-lg-9"><div class="grid-cell grid-cell--yellow">Main Content</div></div>
+                <div class="col-md-4 col-lg-3"><div class="grid-cell grid-cell--teal">Sidebar</div></div>
+                <div class="col-md-8 col-lg-9"><div class="grid-cell grid-cell--yellow">Main Content</div></div>
             </div>
 
             <hr class="divider">
@@ -444,12 +445,12 @@
             <!-- Three-column layout: stacked on xs, side-by-side on md -->
             <div class="row">
                 <span class="label">Holy Grail</span>
-                <span class="code">.col-xs-12 .col-md-3/.col-md-6/.col-md-3</span>
+                <span class="code">.col-md-3/.col-md-6/.col-md-3</span>
             </div>
             <div class="gr-row demo-grid">
-                <div class="col-xs-12 col-md-3"><div class="grid-cell grid-cell--pink">Left Nav</div></div>
-                <div class="col-xs-12 col-md-6"><div class="grid-cell grid-cell--blue">Content</div></div>
-                <div class="col-xs-12 col-md-3"><div class="grid-cell grid-cell--pink">Right Sidebar</div></div>
+                <div class="col-md-3"><div class="grid-cell grid-cell--pink">Left Nav</div></div>
+                <div class="col-md-6"><div class="grid-cell grid-cell--blue">Content</div></div>
+                <div class="col-md-3"><div class="grid-cell grid-cell--pink">Right Sidebar</div></div>
             </div>
         </div>
 
@@ -690,28 +691,28 @@
             <!-- Card grid -->
             <div class="row">
                 <span class="label">Card Grid</span>
-                <span class="code">.col-xs-12 .col-sm-6 .col-lg-3</span>
+                <span class="code">.col-sm-6 .col-lg-3</span>
             </div>
             <div class="gr-row demo-grid">
-                <div class="col-xs-12 col-sm-6 col-lg-3">
+                <div class="col-sm-6 col-lg-3">
                     <div class="grid-cell grid-cell--blue" style="min-height: 80px; flex-direction: column; gap: 4px;">
                         <i class="ph-bold ph-package" style="font-size: 1.2rem;"></i>
                         <span>Product 1</span>
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-6 col-lg-3">
+                <div class="col-sm-6 col-lg-3">
                     <div class="grid-cell grid-cell--green" style="min-height: 80px; flex-direction: column; gap: 4px;">
                         <i class="ph-bold ph-package" style="font-size: 1.2rem;"></i>
                         <span>Product 2</span>
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-6 col-lg-3">
+                <div class="col-sm-6 col-lg-3">
                     <div class="grid-cell grid-cell--orange" style="min-height: 80px; flex-direction: column; gap: 4px;">
                         <i class="ph-bold ph-package" style="font-size: 1.2rem;"></i>
                         <span>Product 3</span>
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-6 col-lg-3">
+                <div class="col-sm-6 col-lg-3">
                     <div class="grid-cell grid-cell--purple" style="min-height: 80px; flex-direction: column; gap: 4px;">
                         <i class="ph-bold ph-package" style="font-size: 1.2rem;"></i>
                         <span>Product 4</span>
@@ -724,16 +725,16 @@
             <!-- Dashboard layout -->
             <div class="row">
                 <span class="label">Dashboard</span>
-                <span class="code">.col-xs-12 .col-md-*</span>
+                <span class="code">.col-md-*</span>
             </div>
             <div class="gr-row demo-grid">
-                <div class="col-xs-12 col-md-8">
+                <div class="col-md-8">
                     <div class="grid-cell grid-cell--yellow" style="min-height: 120px; flex-direction: column; gap: 4px;">
                         <i class="ph-bold ph-chart-line" style="font-size: 1.4rem;"></i>
                         <span>Main Chart (col-md-8)</span>
                     </div>
                 </div>
-                <div class="col-xs-12 col-md-4">
+                <div class="col-md-4">
                     <div class="grid-cell grid-cell--dark" style="min-height: 120px; flex-direction: column; gap: 4px;">
                         <i class="ph-bold ph-list-bullets" style="font-size: 1.4rem;"></i>
                         <span>Stats Panel (col-md-4)</span>
@@ -741,17 +742,17 @@
                 </div>
             </div>
             <div class="gr-row demo-grid" style="margin-top: 4px;">
-                <div class="col-xs-12 col-md-4">
+                <div class="col-md-4">
                     <div class="grid-cell grid-cell--teal" style="min-height: 60px; flex-direction: column; gap: 4px;">
                         <span>Widget A (col-md-4)</span>
                     </div>
                 </div>
-                <div class="col-xs-12 col-md-4">
+                <div class="col-md-4">
                     <div class="grid-cell grid-cell--pink" style="min-height: 60px; flex-direction: column; gap: 4px;">
                         <span>Widget B (col-md-4)</span>
                     </div>
                 </div>
-                <div class="col-xs-12 col-md-4">
+                <div class="col-md-4">
                     <div class="grid-cell grid-cell--green" style="min-height: 60px; flex-direction: column; gap: 4px;">
                         <span>Widget C (col-md-4)</span>
                     </div>
@@ -778,7 +779,7 @@
                     </tr>
                     <tr>
                         <td><span class="code">.col-xs-{1-12}</span></td>
-                        <td>Column span at all screen sizes (no media query)</td>
+                        <td>Column span at all screen sizes (no media query). Not needed for full width &mdash; that is the default.</td>
                     </tr>
                     <tr>
                         <td><span class="code">.col-sm-{1-12}</span></td>
