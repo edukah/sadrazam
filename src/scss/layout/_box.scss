@@ -37,11 +37,13 @@
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.06);
 }
 
-// Grid kolonu (col-*) içindeki panelin dikey boşluğunu gr-row `gap` verir → panelin
-// kendi space-11 alt margin'i gereksiz + dar ekranda gap ile ÇİFT boşluk yapar.
-// Kolonun SON panelini sıfırla (istifli panellerde aradaki margin'ler korunur);
+// Izgara öğesi (`.gr-row`'un doğrudan çocuğu, `col-*` sınıfı olsun olmasın) içindeki panelin dikey
+// boşluğunu gr-row `gap` verir → panelin kendi space-11 alt margin'i gereksiz + dar ekranda gap ile
+// ÇİFT boşluk yapar. Öğenin SON panelini sıfırla (istifli panellerde aradaki margin'ler korunur);
 // düz-akış panelleri (content-container/form) etkilenmez → margin'leri kalır.
-.gr-row [class*="col-"] > .panel:last-child {
+// Öğe YAPIDAN tanınır (`_grid_responsive.scss`'teki tabanla aynı tanım). Seçici eskiden
+// `.gr-row [class*="col-"]` idi: col sınıfsız öğede panel sonrası boşluk 18,7 yerine 41px çıkıyordu.
+.gr-row > * > .panel:last-child {
   margin-bottom: 0;
 }
 
