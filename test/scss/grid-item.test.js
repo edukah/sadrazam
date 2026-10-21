@@ -10,8 +10,9 @@ import { fileURLToPath } from 'node:url';
  * genişlik ve öğenin son panelinin alt boşluğu öğeyi `[class*="col-"]` ile SINIFTAN tanıyordu.
  * Belge `col-xs-12`'ye gerek olmadığını söyleyince col sınıfsız çocuk meşru hâle geldi ve o
  * çocuğa iki kural uygulanmıyordu (Chrome, 358 px kap): panelden sonraki boşluk 18,7 yerine
- * 41 px, doğrudan çocuk `<img>` satır genişliği yerine 40 px. Aynı seçici satır DIŞINDA adında
- * `col-` geçen BEM sınıflarına da sızıyordu (Dükkan'da `…__col-title` gibi 39 öğe).
+ * 41 px, doğrudan çocuk `<img>` satır genişliği yerine 40 px. Aynı seçici satır DIŞINDA sınıf
+ * adında `col-` geçen öğelere de uyuyordu: Dükkan'da 39 öğe — 13'ü çekirdek CSS'li sayfada
+ * (`…__col-title` gibi; görünür etkisi yoktu), 26'sı çekirdek CSS yüklemeyen yazdırma belgesinde.
  *
  * Tüketiciler (Dükkan, Bikonuvar, Burtest) bu kuralları KAYNAKTAN derliyor; dist'i belge sitesi
  * ve paketin `style` girişi okuyor — ikisi de sınanır.
