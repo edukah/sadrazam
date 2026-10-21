@@ -29,8 +29,12 @@
   grid-column: 1 / -1;
 }
 
-// 2. Sütun sınıfı genel stilleri
-[class*="col-"] {
+// 2. Izgara öğesi genel stilleri — öğe YAPIDAN tanınır (satırın doğrudan çocuğu), tıpkı yukarıdaki
+// taban gibi: `col-*` sınıfı olmayan çocuk da aynı genişliği alır. Eskiden `[class*="col-"]` idi;
+// sınıfsız çocuğu kaçırıyordu (doğrudan çocuk `<img>` satır genişliği yerine 40px kalıyordu) ve satır
+// DIŞINDA adında `col-` geçen her sınıfa sızıyordu (`…__col-title` gibi BEM adları). Özgüllük
+// (0,1,0) bilerek eskisiyle aynı: `col-*` sınıflı öğelerde sonuç değişmez.
+.gr-row > * {
   width: 100%;
 }
 
