@@ -17,7 +17,10 @@ import { fileURLToPath } from 'node:url';
  * klonlanmışsa) o tüketicinin vakası atlanır.
  */
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
-const consumers = ['dukkan', 'bikonuvar', 'burtest'];
+// Yalnız Dükkan: Bikonuvar ve Burtest'in içe aktarmaları bugün kırık (eski `layout/grid` adı) ve düzeltmeleri
+// kendi depolarında `fix/sadrazam-import-path` dalında bekliyor — o projelerin işi ele alınınca buraya eklenir.
+// Eklenmeden önce kırmızı vermesi bu kütüphanenin testini başka projenin bekleyen işine bağlardı.
+const consumers = ['dukkan'];
 
 // Kaynak bu çalışma ağacından okunur, tüketiciler ana deponun yanından. Dal işi worktree'de yapılıyor
 // ve worktree başka bir dizinde açıldığı için `root/..` kardeş taşımıyor: vakalar sessizce atlanıyor,
