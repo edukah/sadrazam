@@ -27,6 +27,11 @@ class Document {
 
   /**
    * Redirects to the specified URL with a delay, or refreshes the page.
+   *
+   * The URL is used exactly as given; it is never decoded. A server that checked the URL
+   * (same-origin, allowed path) has checked this exact string. Decoding it here would send the
+   * browser somewhere else: `/%2F%2Fevil.example/` passes a same-origin check, but decoded it
+   * becomes `///evil.example/`, which the browser resolves to another host.
    * @param {string} url - Target URL or 'refresh'.
    * @param {number} [time=1] - Delay in milliseconds.
    */
@@ -37,13 +42,12 @@ class Document {
       if (!url || url === 'refresh') {
         window.location.reload();
       } else {
-        const decodedUrl = decodeURIComponent(url);
-        window.location.href = decodedUrl;
+        window.location.href = url;
 
         // Reload the page when only the hash changes
         const currentUrlWithoutHash = window.location.href.split('#')[0];
-        const targetUrlWithoutHash = decodedUrl.split('#')[0];
-        if (decodedUrl.includes('#') && currentUrlWithoutHash === targetUrlWithoutHash) {
+        const targetUrlWithoutHash = url.split('#')[0];
+        if (url.includes('#') && currentUrlWithoutHash === targetUrlWithoutHash) {
           window.location.reload();
         }
       }

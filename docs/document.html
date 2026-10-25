@@ -175,7 +175,7 @@
         <!-- ==================== REDIRECT ==================== -->
         <div class="section">
             <h2 class="section-title">1. redirect(url, time?)</h2>
-            <p class="section-desc">Redirects to the specified URL after a delay (in milliseconds). Pass <span class="code">'refresh'</span> or omit the URL to reload the current page. Default delay is 1ms.</p>
+            <p class="section-desc">Redirects to the specified URL after a delay (in milliseconds). Pass <span class="code">'refresh'</span> or omit the URL to reload the current page. Default delay is 1ms. The URL is used exactly as given; it is never decoded.</p>
 
             <div class="btn-row">
                 <button class="demo-btn demo-btn--primary" onclick="redirectDemo()">
@@ -306,7 +306,7 @@ Sadrazam.Document.fixedElementAdjust('.fixed-bottom-bar');
                         <td>redirect(url, time?)</td>
                         <td>url: string, time?: number (ms, default: 1)</td>
                         <td>void</td>
-                        <td>Redirects to the URL after a delay. Pass 'refresh' to reload.</td>
+                        <td>Redirects to the URL (as given, not decoded) after a delay. Pass 'refresh' to reload.</td>
                     </tr>
                     <tr>
                         <td>copyInputText(button)</td>
